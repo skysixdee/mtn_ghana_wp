@@ -129,6 +129,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
                 width: 200,
                 leadingIcon: CustomText(
                   title: resendStr,
+                  fontName: FontName.bold,
                   color: otpController.enableResend.value ? black : grey,
                 ),
                 title: otpController.leftTime.value,

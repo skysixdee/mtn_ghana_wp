@@ -1,3 +1,4 @@
+import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class GenericButton extends StatelessWidget {
     this.leadingIcon,
     this.trailingIcon,
     this.onTap,
+    this.fontName = FontName.bold,
   });
   final Widget? leadingIcon;
   final Widget? trailingIcon;
@@ -24,6 +26,7 @@ class GenericButton extends StatelessWidget {
   final double? width;
   final double height;
   final double? radius;
+  final FontName fontName;
   final EdgeInsetsGeometry? padding;
   final Function()? onTap;
   @override
@@ -46,6 +49,7 @@ class GenericButton extends StatelessWidget {
                 CustomText(
                   title: title ?? '',
                   color: textColor,
+                  fontName: fontName,
                 ),
                 trailingIcon ?? const SizedBox(),
               ],

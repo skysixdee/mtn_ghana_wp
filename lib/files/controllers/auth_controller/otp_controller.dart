@@ -48,12 +48,14 @@ class OtpController extends GetxController {
     if (!enableResend.value) {
       return;
     }
+
     if (isLoading) {
       isResendingOtp.value = true;
+      enableResend.value = true;
       await Future.delayed(Duration(seconds: 3));
       isResendingOtp.value = false;
     }
-
+    enableResend.value = false;
     _start = second;
     leftTime.value = " ${formattedTime(timeInSecond: _start)}"; //"$_start";
 
@@ -66,7 +68,7 @@ class OtpController extends GetxController {
     _timer = Timer.periodic(
       oneSec,
       (Timer timer) {
-        if (_start == 0) {
+        if (_start == 0 || _start == 1) {
           timer.cancel();
           leftTime.value = "";
           enableResend.value = true;

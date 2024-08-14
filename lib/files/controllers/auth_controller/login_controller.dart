@@ -8,7 +8,7 @@ class LoginController extends GetxController {
   RxBool enableButton = false.obs;
   RxBool isLoading = false.obs;
   RxBool displayOptScreen = false.obs;
-  int expireTime = 70;
+  int expireTime = 5;
   @override
   void onInit() {
     super.onInit();
