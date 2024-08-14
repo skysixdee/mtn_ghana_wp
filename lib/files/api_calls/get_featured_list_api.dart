@@ -7,7 +7,7 @@ import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/get_transaction_id.dart';
 import 'package:etisalat/files/utility/urls.dart';
 
-Future<FeturedModel> getFeturedListApi(String identifier,
+Future<FeturedModel> getFeaturedListApi(String identifier,
     {String pageNo = "0"}) async {
   String lang = StomreManager.language;
   String msisdn = StomreManager.msisdn;

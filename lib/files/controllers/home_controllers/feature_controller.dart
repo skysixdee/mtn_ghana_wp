@@ -26,8 +26,6 @@ class FeatureController extends GetxController {
     displayList.clear();
     isLoadingList.clear();
     isLoading.value = true;
-    await Future.delayed(const Duration(seconds: 1));
-
     if (StomreManager.other == null) {
       await getAppSetting();
     }
@@ -61,12 +59,12 @@ class FeatureController extends GetxController {
     }
     if (_listOfList[index].isNotEmpty) {
       displayList.value = _listOfList[index];
-      print("lst is not empty take value from here and display");
+      print("list is not empty take value from here and display");
       return;
     }
     isLoadingList[index] = true;
-    await Future.delayed(Duration(seconds: 5));
-    FeturedModel model = await getFeturedListApi(tabList[index].value);
+
+    FeturedModel model = await getFeaturedListApi(tabList[index].value);
     List<TuneInfo> list = model.responseMap?.recommendationSongsList ?? [];
     displayList.value = list;
     _listOfList[index] = list;
