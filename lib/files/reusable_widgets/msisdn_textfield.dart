@@ -7,24 +7,33 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class MsisdnTextfield extends StatelessWidget {
-  MsisdnTextfield(
-      {super.key,
-      this.leadingChild,
-      this.fontFamily,
-      this.maxLength = msisdnLength,
-      this.fontSize = 16,
-      this.onChange,
-      this.onSubmit,
-      this.hintText,
-      required this.controller,
-      this.textAlign = TextAlign.start});
+  MsisdnTextfield({
+    super.key,
+    this.leadingChild,
+    this.fontFamily,
+    this.maxLength = msisdnLength,
+    this.fontSize = 16,
+    this.onChange,
+    this.onSubmit,
+    this.hintText,
+    this.width,
+    required this.controller,
+    this.textAlign = TextAlign.start,
+    this.enabled = true,
+    this.obscureText = false,
+    this.trailingChild,
+  });
 
   final Widget? leadingChild;
+  final Widget? trailingChild;
   final String? fontFamily;
   final int? maxLength;
   final double? fontSize;
   final TextAlign textAlign;
   final String? hintText;
+  final bool? enabled;
+  final double? width;
+  final bool obscureText;
   final TextEditingController controller;
   final Function(String)? onChange;
   final Function(String)? onSubmit;
@@ -37,6 +46,7 @@ class MsisdnTextfield extends StatelessWidget {
       () {
         return Container(
           height: 40,
+          width: width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: black),
@@ -50,6 +60,7 @@ class MsisdnTextfield extends StatelessWidget {
                 leadingChild ?? const SizedBox(),
                 Expanded(child: textField()),
                 clearButton(),
+                trailingChild ?? const SizedBox()
               ],
             ),
           ),
@@ -63,12 +74,20 @@ class MsisdnTextfield extends StatelessWidget {
       visible: text.isNotEmpty,
       child: InkWell(
           onTap: () {
+            if (!enabled!) {
+              return;
+            }
             controller.text = '';
             text.value = '';
+            if (onChange != null) {
+              onChange!("");
+            }
           },
-          child: const Padding(
-            padding: EdgeInsets.only(left: 8, bottom: 8, top: 8, right: 0),
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 8, bottom: 8, top: 8, right: 0),
             child: Icon(
+              color: enabled! ? null : grey,
               Icons.close,
               size: 14,
             ),
@@ -78,6 +97,9 @@ class MsisdnTextfield extends StatelessWidget {
 
   TextField textField() {
     return TextField(
+      autofocus: true,
+      obscureText: obscureText,
+      enabled: enabled,
       textAlign: textAlign,
       controller: controller,
       onChanged: (v) {

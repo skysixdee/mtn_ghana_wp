@@ -14,6 +14,7 @@ class GenericButton extends StatelessWidget {
     this.radius,
     this.leadingIcon,
     this.trailingIcon,
+    this.onTap,
   });
   final Widget? leadingIcon;
   final Widget? trailingIcon;
@@ -24,10 +25,11 @@ class GenericButton extends StatelessWidget {
   final double height;
   final double? radius;
   final EdgeInsetsGeometry? padding;
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
           height: height,
           decoration: BoxDecoration(
@@ -38,6 +40,7 @@ class GenericButton extends StatelessWidget {
           child: Padding(
             padding: padding ?? const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 leadingIcon ?? const SizedBox(),
                 CustomText(
