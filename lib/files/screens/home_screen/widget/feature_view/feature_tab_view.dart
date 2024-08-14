@@ -22,45 +22,52 @@ class FeatureTabView extends StatelessWidget {
         itemCount: featureController.tabList.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return Padding(
-              padding: const EdgeInsets.only(right: 14, top: 4, bottom: 4),
-              child: InkWell(
-                onTap: () {
-                  featureController.updateTabIndex(index);
-                },
-                child: IntrinsicWidth(child: Obx(
-                  () {
-                    return Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomText(
-                          title: featureController.tabList[index].name,
-                          fontName: featureController.index.value == index
-                              ? FontName.bold
-                              : FontName.regular,
-                          color: featureController.index.value == index
-                              ? yellow
-                              : black,
-                          fontSize: 18,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(1.5),
-                            color: featureController.index.value == index
-                                ? yellow
-                                : transparent,
-                          ),
-                          height: 4,
-                        )
-                      ],
-                    );
-                  },
-                )),
-              ));
+          return tabCell(index);
         },
       ),
     );
+  }
+
+  Padding tabCell(int index) {
+    return Padding(
+        padding: const EdgeInsets.only(right: 14, top: 8, bottom: 8),
+        child: Container(
+          color: white,
+          child: InkWell(
+            onTap: () {
+              featureController.updateTabIndex(index);
+            },
+            child: IntrinsicWidth(child: Obx(
+              () {
+                return Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomText(
+                      title: featureController.tabList[index].name,
+                      fontName: featureController.index.value == index
+                          ? FontName.bold
+                          : FontName.regular,
+                      color: featureController.index.value == index
+                          ? yellow
+                          : black,
+                      fontSize: 18,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(1.5),
+                        color: featureController.index.value == index
+                            ? yellow
+                            : transparent,
+                      ),
+                      height: 3,
+                    )
+                  ],
+                );
+              },
+            )),
+          ),
+        ));
   }
 }
