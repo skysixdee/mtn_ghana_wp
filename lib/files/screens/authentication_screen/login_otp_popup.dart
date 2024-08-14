@@ -175,27 +175,28 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
   }
 
   Widget closeButton(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 22, top: 12, right: 16),
-          child: CustomText(
+    return Padding(
+      padding: const EdgeInsets.only(left: 18, right: 8, top: 8, bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomText(
             title: enterSixDigitOtpStr,
             fontName: FontName.bold,
+            fontSize: 16,
           ),
-        ),
-        GenericButton(
-          bgColor: transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          trailingIcon: const Icon(
-            Icons.close,
-          ),
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-        )
-      ],
+          GenericButton(
+            bgColor: transparent,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            trailingIcon: const Icon(
+              Icons.close,
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      ),
     );
   }
 }

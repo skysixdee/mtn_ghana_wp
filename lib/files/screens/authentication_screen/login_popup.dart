@@ -83,13 +83,13 @@ class _LoginPopupState extends State<LoginPopup> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 logo(),
-                const SizedBox(height: 12),
+                const SizedBox(height: 20),
                 title(),
                 subTitle(),
-                const SizedBox(height: 12),
+                const SizedBox(height: 20),
                 textField(),
                 errorMessage(),
-                const SizedBox(height: 14),
+                const SizedBox(height: 20),
                 requestOtpButton(context),
               ],
             ),
@@ -125,7 +125,7 @@ class _LoginPopupState extends State<LoginPopup> {
             return cont.isLoading.value
                 ? loadingIndicator(width: 150)
                 : GenericButton(
-                    bgColor: cont.enableButton.value ? yellow : grey,
+                    bgColor: cont.enableButton.value ? yellow : lightGrey,
                     title: requestotpStr,
                     onTap: () {
                       cont.onGenerateOtpButtonAction();
