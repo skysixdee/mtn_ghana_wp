@@ -1,3 +1,6 @@
+import 'package:etisalat/files/controllers/auth_controller/app_controller.dart';
+import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
+import 'package:etisalat/files/utility/colors.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:etisalat/files/screens/home_screen/home_screen.dart';
@@ -10,8 +13,10 @@ void main() async {
 }
 
 Future<void> initiateController() async {
+  AppController _ = Get.put(AppController());
   Get.lazyPut(() => LoginController());
   Get.lazyPut(() => OtpController());
+  Get.lazyPut(() => FeatureController());
   return;
 }
 
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: Material(color: white, child: const HomeScreen()),
     );
   }
 }
