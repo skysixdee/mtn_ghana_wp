@@ -55,7 +55,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   closeButton(context),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   message(),
                   const SizedBox(height: 20),
                   otpTextField(),
@@ -145,6 +145,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
     return Obx(
       () {
         return MsisdnTextfield(
+          enabled: !otpController.isLoading.value,
           leadingChild: const SizedBox(width: 50),
           trailingChild: GenericButton(
             onTap: () {
@@ -173,12 +174,12 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
     );
   }
 
-  Row closeButton(BuildContext context) {
+  Widget closeButton(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 12),
+          padding: const EdgeInsets.only(left: 22, top: 12, right: 16),
           child: CustomText(
             title: enterSixDigitOtpStr,
             fontName: FontName.bold,

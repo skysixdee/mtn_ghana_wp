@@ -29,13 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
             TextButton(
                 onPressed: () {
                   print("tapped");
-                  loginController.displayOptScreen.value = true;
+                  loginController.displayOptScreen.value = false;
                   loginController.onChangeMsidn('');
                   Get.dialog(Obx(
                     () {
                       return loginController.displayOptScreen.value
-                          ? LoginOtpPopup()
-                          : LoginPopup();
+                          ? const LoginOtpPopup()
+                          : const LoginPopup();
                     },
                   ));
                 },
