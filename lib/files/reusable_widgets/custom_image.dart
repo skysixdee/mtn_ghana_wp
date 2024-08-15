@@ -3,7 +3,6 @@ import 'package:etisalat/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 
 Widget customImage({String? url, Color gredientColor = transparent}) {
-  print("image url = ${url}");
   return Stack(
     children: [
       CachedNetworkImage(

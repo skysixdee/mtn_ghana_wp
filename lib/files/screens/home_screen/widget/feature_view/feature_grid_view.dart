@@ -27,10 +27,6 @@ class FeatureGridView extends StatelessWidget {
                 builder: (p0) {
                   return TuneCard(
                     info: cont.displayList[p0],
-                    menuList: [
-                      PopoverMenuModel("title"),
-                      PopoverMenuModel("title1")
-                    ],
                   );
                 },
               );

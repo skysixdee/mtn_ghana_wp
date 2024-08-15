@@ -21,9 +21,9 @@ class LoginController extends GetxController {
       print("object");
       return;
     }
-    print("Ssddwsfdfd");
+
     isLoading.value = true;
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     displayOptScreen.value = true;
     isLoading.value = false;
   }

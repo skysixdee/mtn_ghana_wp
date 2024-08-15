@@ -1,6 +1,11 @@
 import 'package:etisalat/files/controllers/app_controller.dart';
 import 'package:etisalat/files/controllers/banner_controller.dart';
+import 'package:etisalat/files/controllers/banner_detail_controller.dart';
+import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
+import 'package:etisalat/files/controllers/tune_search_controller.dart';
+import 'package:etisalat/files/router/router.dart';
+import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +20,15 @@ void main() async {
 
 Future<void> initiateController() async {
   AppController _ = Get.put(AppController());
-  Get.lazyPut(() => LoginController());
   Get.lazyPut(() => OtpController());
+  Get.lazyPut(() => LoginController());
   Get.lazyPut(() => BannerController());
-
   Get.lazyPut(() => FeatureController());
+  Get.lazyPut(() => TuneSearchController());
+  Get.lazyPut(() => CategoryDetailScreen());
+  Get.lazyPut(() => BannerDetailController());
+  Get.lazyPut(() => CategoryDetailController());
+
   return;
 }
 
@@ -28,14 +37,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Etisalat',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 222, 205, 18)),
         useMaterial3: true,
       ),
-      home: Material(color: white, child: const HomeScreen()),
+      routerConfig: router,
     );
   }
 }

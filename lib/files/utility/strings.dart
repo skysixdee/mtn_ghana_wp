@@ -18,3 +18,4 @@ String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
 String loginStr = "Login";
 String myAccountStr = "My Account";
+String seeMoreStr = "See More";

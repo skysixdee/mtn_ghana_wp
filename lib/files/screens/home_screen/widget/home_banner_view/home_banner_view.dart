@@ -1,11 +1,15 @@
 import 'package:etisalat/files/controllers/banner_controller.dart';
+import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
+import 'package:etisalat/files/router/route_name.dart';
+import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 
@@ -39,11 +43,18 @@ class HomeBannerView extends StatelessWidget {
   }
 
   CarouselSlider widgetList(SizingInformation si, BuildContext context) {
+    BannerDetailController bannerDetailController = Get.find();
     return CarouselSlider(
       controller: carouselSliderController,
       items: cont.banners.map((banner) {
         return InkWell(
           onTap: () {
+            bannerDetailController.getBannerDetail(
+                banner.type ?? '', banner.searchKey ?? '');
+            context.goNamed(bannerDetailRoute, queryParameters: {
+              'type': banner.type,
+              'searchKey': banner.searchKey
+            });
             //carouselSliderController.animateToPage(i);
           },
           child: Container(

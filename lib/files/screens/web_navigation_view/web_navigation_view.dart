@@ -1,22 +1,32 @@
+import 'package:etisalat/files/api_calls/get_search_tune_list_api.dart';
 import 'package:etisalat/files/controllers/app_controller.dart';
+import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
+import 'package:etisalat/files/controllers/category_detail_controller.dart';
+import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/msisdn_textfield.dart';
+import 'package:etisalat/files/router/route_name.dart';
+import 'package:etisalat/files/router/router.dart';
+import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dart';
+import 'package:etisalat/files/screens/authentication_screen/login_popup.dart';
 
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/images.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:popover/popover.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class WebNavigationView extends StatelessWidget {
   WebNavigationView({super.key});
   final AppController appController = Get.find();
+  TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,31 +38,31 @@ class WebNavigationView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(child: leftWidget()),
-            Flexible(child: rightWidget()),
+            Flexible(child: leftWidget(context)),
+            Flexible(child: rightWidget(context)),
           ],
         ),
       ),
     );
   }
 
-  Row rightWidget() {
+  Row rightWidget(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Flexible(child: SizedBox(width: 300, child: searchTextField())),
+        Flexible(child: SizedBox(width: 300, child: searchTextField(context))),
         const SizedBox(width: 16),
         loginButton(),
       ],
     );
   }
 
-  Row leftWidget() {
+  Row leftWidget(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        logoButton(),
+        logoButton(context),
         const SizedBox(width: 10),
         categoryButton(),
         const SizedBox(width: 20),
@@ -87,19 +97,21 @@ class WebNavigationView extends StatelessWidget {
     );
   }
 
-  GenericButton logoButton() {
+  GenericButton logoButton(BuildContext context) {
     return GenericButton(
       padding: EdgeInsets.zero,
       bgColor: transparent,
       height: double.infinity,
       leadingIcon: SizedBox(width: 70, child: Image.asset(logoImage)),
       onTap: () {
+        context.goNamed(homeRoute);
         print("check ");
       },
     );
   }
 
   Widget loginButton() {
+    LoginController con = Get.find();
     return GenericButton(
       bgColor: white,
       leadingIcon: const Padding(
@@ -110,18 +122,30 @@ class WebNavigationView extends StatelessWidget {
         ),
       ),
       title: loginStr,
-      onTap: () {},
+      onTap: () {
+        Get.dialog(Obx(
+          () {
+            return con.displayOptScreen.value
+                ? const LoginOtpPopup()
+                : const LoginPopup();
+          },
+        ));
+      },
     );
   }
 
-  Widget searchTextField() {
+  Widget searchTextField(BuildContext context) {
+    TuneSearchController con = Get.find();
     return CustomSearchTextfield(
-      controller: TextEditingController(),
+      controller: textEditingController,
       borderColor: white,
       onChange: (p0) {
         print("On change $p0");
       },
       onSubmit: (p0) {
+        con.getResult(p0);
+        context.goNamed(searchRoute,
+            queryParameters: {'search': p0}); //goNamed(searchRoute);
         print("on submit $p0");
       },
     );
@@ -151,6 +175,7 @@ class WebNavigationView extends StatelessWidget {
   }
 
   Future<void> categoryPopupView(BuildContext context) {
+    CategoryDetailController con = Get.find();
     return showPopover(
       arrowDyOffset: -10,
       context: context,
@@ -173,6 +198,15 @@ class WebNavigationView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return InkWell(
                     onTap: () {
+                      String key =
+                          appController.categories[index].categoryName ?? '';
+                      String catId =
+                          appController.categories[index].categoryId ?? '';
+                      context.goNamed(categoryDetailRoute, queryParameters: {
+                        'key': key,
+                        'catId': catId,
+                      });
+                      con.getCategoryDetailList(key, catId);
                       Navigator.of(context).pop();
                     },
                     child: categoryCard(index));

@@ -32,7 +32,7 @@ class FeatureTabView extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.only(right: 14, top: 8, bottom: 8),
         child: Container(
-          color: white,
+          color: transparent,
           child: InkWell(
             onTap: () {
               featureController.updateTabIndex(index);

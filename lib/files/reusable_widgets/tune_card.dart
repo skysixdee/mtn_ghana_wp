@@ -8,13 +8,14 @@ import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
 import 'package:etisalat/files/utility/colors.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class TuneCard extends StatelessWidget {
-  const TuneCard({
+  TuneCard({
     super.key,
     required this.info,
     this.bottomLeftChild,
@@ -22,9 +23,8 @@ class TuneCard extends StatelessWidget {
     this.moreButton,
     this.menuList,
     this.onMenuTap,
-    this.sendMenuCallBack = false,
   });
-  final bool sendMenuCallBack;
+
   final TuneInfo info;
   final Widget? bottomLeftChild;
   final Widget? bottomRightChild;
@@ -51,8 +51,7 @@ class TuneCard extends StatelessWidget {
               customImage(url: info.toneIdpreviewImageUrl),
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: moreButton ??
-                    _moreButton(menuList, sendMenuCallBack, onMenuTap),
+                child: moreButton ?? _moreButton(menuList, onMenuTap),
               ),
             ],
           )),
@@ -91,7 +90,7 @@ class TuneCard extends StatelessWidget {
   }
 }
 
-_moreButton(List<PopoverMenuModel>? menuList, bool sendMenuCallBack,
+_moreButton(List<PopoverMenuModel>? menuList,
     Function(PopoverMenuModel, int)? onMenuTap) {
   return ResponsiveBuilder(
     builder: (context, si) {
@@ -104,19 +103,20 @@ _moreButton(List<PopoverMenuModel>? menuList, bool sendMenuCallBack,
           size: 18,
         ),
         onTap: () {
-          if (menuList?.isEmpty ?? true) {
-            print("Menu list is empty ");
-            return;
-          }
           genericPopover(
             context,
-            menuList ?? [],
+            menuList ??
+                [
+                  PopoverMenuModel("Wishlist"),
+                  PopoverMenuModel("Share"),
+                ],
             onTap: (p0, index) {
-              print("tapped ${p0} and index =$index");
-              if (sendMenuCallBack) {
-                if (onMenuTap != null) {
-                  onMenuTap(p0, index);
-                }
+              print("tapped ${p0.title} and index =$index");
+              if (menuList == null) {
+                print("menuList is null");
+              }
+              if (onMenuTap != null) {
+                onMenuTap(p0, index);
               }
             },
           );

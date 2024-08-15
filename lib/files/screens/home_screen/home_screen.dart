@@ -25,50 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       shrinkWrap: true,
       children: [
-        WebNavigationView(key: widget.key),
-        Container(height: 8),
+        const SizedBox(height: 8),
         HomeBannerView(key: widget.key),
+        const SizedBox(height: 10),
         FeatureCategoryView(key: widget.key),
-        Container(
-          height: 300,
-          color: Colors.purple,
-        ),
-        Container(
-          height: 300,
-          color: Colors.red,
-        ),
-        Container(
-          height: 300,
-          color: Colors.yellow,
-        ),
-        Container(
-          height: 300,
-          color: Colors.purple,
-        ),
-        Container(
-          height: 300,
-          color: Colors.blue,
-        ),
-        Container(
-          height: 300,
-          color: Colors.purple,
-        ),
-        Container(
-          height: 300,
-          color: Colors.yellow,
-        ),
-        Container(
-          height: 300,
-          color: Colors.purple,
-        ),
-        Container(
-          height: 300,
-          color: Colors.blue,
-        ),
-        Container(
-          height: 300,
-          color: Colors.purple,
-        ),
       ],
     );
   }
