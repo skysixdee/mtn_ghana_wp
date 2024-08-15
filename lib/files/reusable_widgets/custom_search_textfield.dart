@@ -1,4 +1,5 @@
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -6,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class MsisdnTextfield extends StatelessWidget {
-  MsisdnTextfield({
+class CustomSearchTextfield extends StatelessWidget {
+  CustomSearchTextfield({
     super.key,
     this.leadingChild,
     this.fontFamily,
@@ -23,6 +24,8 @@ class MsisdnTextfield extends StatelessWidget {
     this.obscureText = false,
     this.trailingChild,
     this.bgColor = transparent,
+    this.borderColor = black,
+    this.hintColor = white,
   });
 
   final Widget? leadingChild;
@@ -34,6 +37,8 @@ class MsisdnTextfield extends StatelessWidget {
   final String? hintText;
   final bool? enabled;
   final Color bgColor;
+  final Color hintColor;
+  final Color borderColor;
   final double? width;
   final bool obscureText;
   final TextEditingController controller;
@@ -52,10 +57,10 @@ class MsisdnTextfield extends StatelessWidget {
           decoration: BoxDecoration(
             color: bgColor,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: black),
+            border: Border.all(color: borderColor),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.only(left: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,12 +68,33 @@ class MsisdnTextfield extends StatelessWidget {
                 leadingChild ?? const SizedBox(),
                 Expanded(child: textField()),
                 clearButton(),
-                trailingChild ?? const SizedBox()
+                trailingChild ?? searchIcons()
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget searchIcons() {
+    return Padding(
+      padding: const EdgeInsets.all(1.0),
+      child: GenericButton(
+        width: 38,
+        bgColor: white,
+        padding: EdgeInsets.zero,
+        leadingIcon: const Icon(
+          Icons.search,
+          size: 20,
+        ),
+        onTap: () {
+          if (onSubmit != null) {
+            onSubmit!(controller.text);
+            print("Search taped ${controller.text}");
+          }
+        },
+      ),
     );
   }
 
@@ -88,7 +114,7 @@ class MsisdnTextfield extends StatelessWidget {
           },
           child: Padding(
             padding:
-                const EdgeInsets.only(left: 8, bottom: 8, top: 8, right: 0),
+                const EdgeInsets.only(left: 8, bottom: 8, top: 8, right: 8),
             child: Icon(
               color: enabled! ? null : grey,
               Icons.close,
@@ -116,8 +142,8 @@ class MsisdnTextfield extends StatelessWidget {
           onSubmit!(v);
         }
       },
-      maxLength: maxLength,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      //  maxLength: maxLength,
+      //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       style: textStyle(),
       decoration: inputDecoration(),
     );
@@ -132,11 +158,11 @@ class MsisdnTextfield extends StatelessWidget {
 
   InputDecoration inputDecoration() {
     return InputDecoration(
-      hintText: hintText ?? enterMobileNumberStr,
+      hintText: hintText ?? searchPlaceHolderStr,
       hintStyle: TextStyle(
         fontFamily: fontFamily ?? FontName.regular.name,
         fontSize: fontSize! - 2,
-        color: grey,
+        color: hintColor,
       ),
       counterText: '',
       isDense: true,

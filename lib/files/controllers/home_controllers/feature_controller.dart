@@ -26,12 +26,12 @@ class FeatureController extends GetxController {
     displayList.clear();
     isLoadingList.clear();
     isLoading.value = true;
-    if (StomreManager.other == null) {
+    if (StoreManager.other == null) {
       await getAppSetting();
     }
 
     List<String> featureTabCount =
-        ((StomreManager.other?.featuredCategoryEnglish?.attribute) ?? '')
+        ((StoreManager.other?.featuredCategoryEnglish?.attribute) ?? '')
             .split("|");
     tabList.clear();
     for (var element in featureTabCount) {
@@ -39,6 +39,7 @@ class FeatureController extends GetxController {
       String value = element.split(',')[1];
       String intValue = element.split(',')[2];
       tabList.add(FeatureTabModel(name, value, intValue));
+
       isLoadingList.add(false);
       _listOfList.add([]);
     }

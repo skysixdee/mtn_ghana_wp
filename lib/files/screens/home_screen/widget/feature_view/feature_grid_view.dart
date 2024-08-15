@@ -1,10 +1,12 @@
-import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
-import 'package:etisalat/files/utility/colors.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:etisalat/files/model/popover_menu_model.dart';
+import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
 import 'package:get/get.dart';
+import 'package:flutter/widgets.dart';
+import 'package:etisalat/files/reusable_widgets/tune_card.dart';
+import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
+import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
+import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
 
 class FeatureGridView extends StatelessWidget {
   FeatureGridView({super.key});
@@ -15,18 +17,20 @@ class FeatureGridView extends StatelessWidget {
       () {
         return cont.isLoadingList[cont.index.value]
             ? loadingIndicator(height: 300)
-            : GridView.builder(
-                shrinkWrap: true,
-                itemCount: cont.displayList.length,
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10),
-                itemBuilder: (context, index) {
-                  return Container(
-                    color: yellow,
-                    child: CustomText(
-                        title: cont.displayList[index].toneName ?? ''),
+            : GenericGridView(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount:
+                    cont.displayList.length > 8 ? 7 : cont.displayList.length,
+                onTap: (p0) {
+                  print("tapped cell = ${cont.displayList[p0].toneName ?? ''}");
+                },
+                builder: (p0) {
+                  return TuneCard(
+                    info: cont.displayList[p0],
+                    menuList: [
+                      PopoverMenuModel("title"),
+                      PopoverMenuModel("title1")
+                    ],
                   );
                 },
               );

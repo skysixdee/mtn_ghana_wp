@@ -9,8 +9,8 @@ import 'package:etisalat/files/utility/urls.dart';
 
 Future<FeturedModel> getFeaturedListApi(String identifier,
     {String pageNo = "0"}) async {
-  String lang = StomreManager.language;
-  String msisdn = StomreManager.msisdn;
+  String lang = StoreManager.language;
+  String msisdn = StoreManager.msisdn;
   int tId = getTransactionId();
 
   String url =

@@ -1,9 +1,13 @@
 import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_popup.dart';
+import 'package:etisalat/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
 import 'package:etisalat/files/screens/home_screen/widget/feature_view/feature_category_view.dart';
+import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
+import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       shrinkWrap: true,
       children: [
-        FeatureCategoryView(),
+        WebNavigationView(key: widget.key),
+        Container(height: 8),
+        HomeBannerView(key: widget.key),
+        FeatureCategoryView(key: widget.key),
         Container(
           height: 300,
           color: Colors.purple,

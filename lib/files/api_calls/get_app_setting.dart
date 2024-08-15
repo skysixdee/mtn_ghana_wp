@@ -8,5 +8,5 @@ import 'package:etisalat/files/utility/urls.dart';
 getAppSetting() async {
   Map<String, dynamic> map = await NetworkManager().get(settingUrl);
   AppSettingModel appSettingModel = appSettingModelFromJson(json.encode(map));
-  StomreManager.other = appSettingModel.responseMap?.settings?.others;
+  StoreManager.other = appSettingModel.responseMap?.settings?.others;
 }

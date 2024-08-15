@@ -1,4 +1,5 @@
-import 'package:etisalat/files/controllers/auth_controller/app_controller.dart';
+import 'package:etisalat/files/controllers/app_controller.dart';
+import 'package:etisalat/files/controllers/banner_controller.dart';
 import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,8 @@ Future<void> initiateController() async {
   AppController _ = Get.put(AppController());
   Get.lazyPut(() => LoginController());
   Get.lazyPut(() => OtpController());
+  Get.lazyPut(() => BannerController());
+
   Get.lazyPut(() => FeatureController());
   return;
 }
