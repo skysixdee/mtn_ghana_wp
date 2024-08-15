@@ -108,6 +108,7 @@ _moreButton(List<PopoverMenuModel>? menuList,
             menuList ??
                 [
                   PopoverMenuModel("Wishlist"),
+                  PopoverMenuModel("Gift"),
                   PopoverMenuModel("Share"),
                 ],
             onTap: (p0, index) {

@@ -3,11 +3,11 @@ import 'package:get/get_rx/get_rx.dart';
 
 class TuneInfo {
   String? id;
-  String? contentId;
-  String? contentName;
-  String? path;
-  String? album;
-  String? artist;
+  // String? contentId;
+  // String? contentName;
+  // String? path;
+  // String? album;
+  // String? artist;
   String? msisdn;
   String? createdDate;
   String? wishListType;
@@ -31,11 +31,11 @@ class TuneInfo {
 
   TuneInfo({
     this.id,
-    this.contentId,
-    this.contentName,
-    this.path,
-    this.album,
-    this.artist,
+    // this.contentId,
+    // this.contentName,
+    // this.path,
+    // this.album,
+    // this.artist,
     this.msisdn,
     this.createdDate,
     this.wishListType,
@@ -56,11 +56,11 @@ class TuneInfo {
   factory TuneInfo.fromJson(Map<String, dynamic> json) {
     return TuneInfo(
         id: json['id'],
-        contentId: json['contentId'],
-        contentName: json['contentName'],
-        path: json['path'],
-        album: json['album'] ?? json['albumName'],
-        artist: json['artist'] ?? json['artistName'],
+        // contentId: json['contentId'],
+        // contentName: json['contentName'],
+        // path: json['path'],
+        // album: json['album'] ?? json['albumName'],
+        // artist: json['artist'] ?? json['artistName'],
         msisdn: json['msisdn'],
         createdDate: json['createdDate'],
         wishListType: json['wishListType'],

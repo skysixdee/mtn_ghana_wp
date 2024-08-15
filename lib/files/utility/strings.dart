@@ -14,8 +14,17 @@ String playStr = "Play";
 String pauseStr = "Pause";
 String buyStr = "Buy";
 String faqStr = "FAQ";
+String giftStr = "Gift";
+
+String confirmStr = "Confirm";
+String cancelStr = "Cancel";
+
 String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
 String loginStr = "Login";
+String buyTuneStr = "Buy Tune";
 String myAccountStr = "My Account";
 String seeMoreStr = "See More";
+String tuneChargeStr = "Tune Charge";
+String pleaseEnterYourMobileNumberStr = "Please enter your mobile number";
+String enterFriendMobileNumberStr = "Enter Friend's Mobile Number";
