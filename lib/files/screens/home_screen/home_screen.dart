@@ -28,11 +28,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       shrinkWrap: true,
       children: [
-        ProfileScreen()
-        // const SizedBox(height: 8),
-        // HomeBannerView(key: widget.key),
-        // const SizedBox(height: 10),
-        // FeatureCategoryView(key: widget.key),
+        GenericButton(
+          title: "Set value",
+          onTap: () {
+            StoreManager.setLoggedIn(true);
+            StoreManager.setMsisdn("0832120732");
+            StoreManager.setAccessToken("806e1e60-243d-438d-94a5-59e2e2373f93");
+            StoreManager.setRefreshToken(
+                "b1ed6f60-47a3-486e-af8a-e4389349d402");
+            StoreManager.setDeviceId("46766c37-a10b-4753-b0f8-7896efae1353");
+          },
+        ),
+        ProfileScreen(key: widget.key),
+        const SizedBox(height: 8),
+        HomeBannerView(key: widget.key),
+        const SizedBox(height: 10),
+        FeatureCategoryView(key: widget.key),
       ],
     );
   }

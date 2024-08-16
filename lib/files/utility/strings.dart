@@ -31,6 +31,7 @@ String someThingWentWrongStr = "Some thing went wrong";
 String giftStr = "Gift";
 
 String confirmStr = "Confirm";
+String editStr = "Edit";
 String cancelStr = "Cancel";
 
 String nameTuneStr = "Name Tune";

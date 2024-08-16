@@ -95,8 +95,8 @@ class NetworkManager {
       {Map<String, dynamic>? formData, Map<String, dynamic>? jsonData}) async {
     RegenerateModel mod = await regenerateTokenApi();
     if (mod.statusCode == "SC0000") {
-      StoreManager.accessToken = mod.responseMap?.accessToken ?? '';
-      StoreManager.refreshToken = mod.responseMap?.refreshToken ?? '';
+      StoreManager.setAccessToken(mod.responseMap?.accessToken ?? '');
+      StoreManager.setRefreshToken(mod.responseMap?.refreshToken ?? '');
       return post(url, formData: formData, jsonData: jsonData);
     } else {
       return catchError();
