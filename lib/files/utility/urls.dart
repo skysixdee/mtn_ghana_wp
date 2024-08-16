@@ -16,3 +16,9 @@ String categoryDetailUrl =
     'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
 String myWishistUrl =
     'https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/view-wishlist';
+String addToWishlistUrl =
+    'https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/add-to-wishlist';
+String deleteFromWishlistUrl =
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/delete-from-wishlist';
+String reGenerateTokenUrl =
+    'https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/regen-token';

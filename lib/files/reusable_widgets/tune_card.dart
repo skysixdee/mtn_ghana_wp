@@ -1,6 +1,8 @@
+import 'package:etisalat/files/api_calls/add_to_wishlist_api.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
+import 'package:etisalat/files/popup_views/gift_popup_view.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/play_button.dart';
@@ -8,10 +10,12 @@ import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
 import 'package:etisalat/files/utility/colors.dart';
+import 'package:etisalat/files/utility/strings.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class TuneCard extends StatelessWidget {
@@ -51,7 +55,7 @@ class TuneCard extends StatelessWidget {
               customImage(url: info.toneIdpreviewImageUrl),
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: moreButton ?? _moreButton(menuList, onMenuTap),
+                child: moreButton ?? _moreButton(menuList, info, onMenuTap),
               ),
             ],
           )),
@@ -90,7 +94,7 @@ class TuneCard extends StatelessWidget {
   }
 }
 
-_moreButton(List<PopoverMenuModel>? menuList,
+_moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
     Function(PopoverMenuModel, int)? onMenuTap) {
   return ResponsiveBuilder(
     builder: (context, si) {
@@ -107,14 +111,23 @@ _moreButton(List<PopoverMenuModel>? menuList,
             context,
             menuList ??
                 [
-                  PopoverMenuModel("Wishlist"),
-                  PopoverMenuModel("Gift"),
-                  PopoverMenuModel("Share"),
+                  PopoverMenuModel(wishlistStr),
+                  PopoverMenuModel(giftStr),
+                  PopoverMenuModel(shareStr),
                 ],
-            onTap: (p0, index) {
+            onTap: (p0, index) async {
               print("tapped ${p0.title} and index =$index");
               if (menuList == null) {
                 print("menuList is null");
+                if (p0.title == wishlistStr) {
+                  addToWishlistApi(info);
+                } else if (p0.title == giftStr) {
+                  await Future.delayed(const Duration(milliseconds: 200));
+                  Get.dialog(GiftPopupView(info: info));
+                  print("gift tapped");
+                } else {
+                  print("share tapped");
+                }
               }
               if (onMenuTap != null) {
                 onMenuTap(p0, index);

@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:etisalat/files/api_calls/regenerate_token_api.dart';
+import 'package:etisalat/files/model/regenerate_model.dart';
 import 'package:etisalat/files/network_manager/request_header.dart';
+import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:universal_io/io.dart';
@@ -11,12 +14,15 @@ class NetworkManager {
   Future<Map<String, dynamic>> get(String url) async {
     try {
       HttpClientRequest clientRequests = await client.getUrl(Uri.parse(url));
-      clientRequests = await requestHeader(url, clientRequests);
+
       try {
+        clientRequests = await requestHeader(url, clientRequests);
         HttpClientResponse response = await clientRequests
             .close()
             .timeout(const Duration(seconds: timeOutDuration));
-
+        if (response.statusCode == 498) {
+          return await _regenToken(url);
+        }
         final stringData = await response.transform(utf8.decoder).join();
         print("resp code is ${response.statusCode}");
         Map<String, dynamic> valueMap = json.decode(stringData);
@@ -41,7 +47,7 @@ class NetworkManager {
       {Map<String, dynamic>? formData, Map<String, dynamic>? jsonData}) async {
     try {
       HttpClientRequest clientRequests = await client.postUrl(Uri.parse(url));
-      clientRequests = await requestHeader(url, clientRequests);
+
       if (formData != null) {
         var parts = [];
         formData.forEach((key, value) {
@@ -58,10 +64,13 @@ class NetworkManager {
         clientRequests.write(jsonstringmap);
       }
       try {
+        clientRequests = await requestHeader(url, clientRequests);
         HttpClientResponse response = await clientRequests
             .close()
             .timeout(const Duration(seconds: timeOutDuration));
-
+        if (response.statusCode == 498) {
+          return await _regenToken(url, formData: formData, jsonData: jsonData);
+        } else {}
         final stringData = await response.transform(utf8.decoder).join();
         print("resp code is ${response.statusCode}");
         Map<String, dynamic> valueMap = json.decode(stringData);
@@ -78,6 +87,18 @@ class NetworkManager {
       return catchError();
     } on Error catch (e) {
       print("error1 is = ${e.toString()}");
+      return catchError();
+    }
+  }
+
+  Future<Map<String, dynamic>> _regenToken(String url,
+      {Map<String, dynamic>? formData, Map<String, dynamic>? jsonData}) async {
+    RegenerateModel mod = await regenerateTokenApi();
+    if (mod.statusCode == "SC0000") {
+      StoreManager.accessToken = mod.responseMap?.accessToken ?? '';
+      StoreManager.refreshToken = mod.responseMap?.refreshToken ?? '';
+      return post(url, formData: formData, jsonData: jsonData);
+    } else {
       return catchError();
     }
   }

@@ -9,7 +9,11 @@ class GenericGridView extends StatelessWidget {
     this.onTap,
     this.maxDisplay = 8,
     this.physics,
+    this.height = 240,
+    this.width = 220,
   });
+  final double height;
+  final double width;
   final int itemCount;
   final Widget Function(int) builder;
   final Function(int index)? onTap;
@@ -35,8 +39,9 @@ class GenericGridView extends StatelessWidget {
       itemCount: itemCount,
       physics: physics,
       shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 260,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: width, //height,
+        mainAxisExtent: height, //width,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),
@@ -56,8 +61,8 @@ class GenericGridView extends StatelessWidget {
     const double runSpacing = 14;
     const double spacing = 14;
     int listCount = itemCount;
-    double w = 220;
-    double h = 240;
+    double w = width;
+    double h = height;
 
     return SingleChildScrollView(
       physics: physics,

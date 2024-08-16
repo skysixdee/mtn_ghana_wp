@@ -5,15 +5,18 @@ import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
 import 'package:etisalat/files/reusable_widgets/msisdn_textfield.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/router/router.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_popup.dart';
+import 'package:etisalat/files/store_manager/store_manager.dart';
 
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/images.dart';
@@ -28,7 +31,13 @@ class WebNavigationView extends StatelessWidget {
   WebNavigationView({super.key});
   final AppController appController = Get.find();
   TextEditingController textEditingController = TextEditingController();
-
+  List<PopoverMenuModel> myAccountMenuList = [
+    PopoverMenuModel(myProfileStr),
+    PopoverMenuModel(myTunezStr),
+    PopoverMenuModel(myWishlistStr),
+    PopoverMenuModel(blackListStr),
+    PopoverMenuModel(logoutStr)
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,15 +96,12 @@ class WebNavigationView extends StatelessWidget {
   }
 
   GenericButton nameTuneButton(BuildContext context) {
-    MyWishlistController cont = Get.find();
     return GenericButton(
       title: nameTuneStr,
       padding: EdgeInsets.zero,
       bgColor: transparent,
       height: double.infinity,
       onTap: () {
-        cont.getWishlist();
-        context.goNamed(myWishlistRoute);
         print("check ");
       },
     );
@@ -116,24 +122,32 @@ class WebNavigationView extends StatelessWidget {
 
   Widget loginButton() {
     LoginController con = Get.find();
-    return GenericButton(
-      bgColor: white,
-      leadingIcon: const Padding(
-        padding: EdgeInsets.only(right: 4),
-        child: Icon(
-          Icons.person,
-          size: 18,
-        ),
-      ),
-      title: loginStr,
-      onTap: () {
-        Get.dialog(Obx(
-          () {
-            return con.displayOptScreen.value
-                ? const LoginOtpPopup()
-                : const LoginPopup();
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return GenericButton(
+          bgColor: white,
+          leadingIcon: const Padding(
+            padding: EdgeInsets.only(right: 4),
+            child: Icon(
+              Icons.person,
+              size: 18,
+            ),
+          ),
+          title: StoreManager.isLoggedIn ? myAccountStr : loginStr,
+          onTap: () {
+            if (StoreManager.isLoggedIn) {
+              myAccountMenu(context);
+            } else {
+              Get.dialog(Obx(
+                () {
+                  return con.displayOptScreen.value
+                      ? const LoginOtpPopup()
+                      : const LoginPopup();
+                },
+              ));
+            }
           },
-        ));
+        );
       },
     );
   }
@@ -174,6 +188,21 @@ class WebNavigationView extends StatelessWidget {
             categoryPopupView(context);
           },
         );
+      },
+    );
+  }
+
+  Future<void> myAccountMenu(BuildContext context) {
+    return genericPopover(
+      context,
+      width: 150,
+      myAccountMenuList,
+      onTap: (model, index) {
+        if (model.title == myWishlistStr) {
+          MyWishlistController con = Get.find();
+          con.getWishlist();
+          context.goNamed(myWishlistRoute);
+        }
       },
     );
   }

@@ -22,7 +22,6 @@ Widget playButton(TuneInfo info, {Function()? onTap}) {
           if (onTap != null) {
             onTap();
           }
-          Get.dialog(GiftPopupView(info: info));
         },
       );
     },

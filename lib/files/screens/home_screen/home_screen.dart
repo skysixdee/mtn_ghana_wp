@@ -7,6 +7,7 @@ import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dar
 import 'package:etisalat/files/screens/authentication_screen/login_popup.dart';
 import 'package:etisalat/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
 import 'package:etisalat/files/screens/home_screen/widget/feature_view/feature_category_view.dart';
+import 'package:etisalat/files/screens/profile_screen/profile_screen.dart';
 import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -27,10 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       shrinkWrap: true,
       children: [
-        const SizedBox(height: 8),
-        HomeBannerView(key: widget.key),
-        const SizedBox(height: 10),
-        FeatureCategoryView(key: widget.key),
+        ProfileScreen()
+        // const SizedBox(height: 8),
+        // HomeBannerView(key: widget.key),
+        // const SizedBox(height: 10),
+        // FeatureCategoryView(key: widget.key),
       ],
     );
   }

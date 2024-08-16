@@ -7,13 +7,13 @@ import 'package:flutter/widgets.dart';
 import 'package:popover/popover.dart';
 
 genericPopover(BuildContext context, List<PopoverMenuModel> menuList,
-    {Function(PopoverMenuModel, int)? onTap}) {
+    {double width = 120, Function(PopoverMenuModel, int)? onTap}) {
   showPopover(
     radius: 4,
     arrowHeight: 6,
     arrowWidth: 16,
     context: context,
-    width: 120,
+    width: width,
     bodyBuilder: (context) {
       return Row(
         mainAxisSize: MainAxisSize.min,
@@ -47,7 +47,7 @@ genericPopover(BuildContext context, List<PopoverMenuModel> menuList,
                               Flexible(
                                 child: CustomText(
                                   title: menuList[index].title,
-                                  fontName: FontName.bold,
+                                  fontName: FontName.regular,
                                 ),
                               ),
                             ],

@@ -3,10 +3,11 @@ import 'package:etisalat/files/model/category_model.dart';
 
 class StoreManager {
   static Others? other;
+  static bool isLoggedIn = true;
   static String language = 'English';
   static String msisdn = '0832120732';
   static List<Category>? categories;
-  static String accessToken = "e7e8908c-12bd-4b8c-b470-ae8078ed4ed9";
-  static bool isLoggedIn = true;
-  static String deviceId = 'a53eca74-e254-4ffd-9564-cf5c3c5b1af3';
+  static String accessToken = "884c12da-9613-4bbb-b865-ba2a2e9cfcee";
+  static String refreshToken = "7004d11a-7d1d-4808-aeb9-910e9e10283c";
+  static String deviceId = '73585278-e909-413f-ab44-55145496baec';
 }

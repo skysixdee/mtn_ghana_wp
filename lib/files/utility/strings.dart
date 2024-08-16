@@ -8,11 +8,23 @@ String enterSixDigitOtpStr = "Enter 6 digit OTP";
 String otpHasBeenSendStr = "One Time Password has been sent to";
 String enterOtpStr = "Enter Code";
 String verifyOtpStr = "Verify OTP";
-
+String listIsEmptyStr = "List is empty";
 String resendStr = "Resnd";
 String playStr = "Play";
 String pauseStr = "Pause";
 String deleteStr = "Delete";
+String contactNumberStr = "Contact Number";
+
+String wishlistStr = "Wishlist";
+
+String shareStr = "Share";
+
+String myProfileStr = "My Profile";
+String myTunezStr = "My Tunez";
+String myWishlistStr = "My Wishlist";
+String blackListStr = "Black List";
+String logoutStr = "Logout";
+String preferenceStr = "Preference*";
 String buyStr = "Buy";
 String faqStr = "FAQ";
 String someThingWentWrongStr = "Some thing went wrong";

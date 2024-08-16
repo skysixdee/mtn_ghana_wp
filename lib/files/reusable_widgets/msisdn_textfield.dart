@@ -72,7 +72,7 @@ class MsisdnTextfield extends StatelessWidget {
     );
   }
 
-  Visibility clearButton() {
+  Widget clearButton() {
     return Visibility(
       visible: text.isNotEmpty,
       child: InkWell(
@@ -86,15 +86,17 @@ class MsisdnTextfield extends StatelessWidget {
               onChange!("");
             }
           },
-          child: Padding(
-            padding:
-                const EdgeInsets.only(left: 8, bottom: 8, top: 8, right: 0),
-            child: Icon(
-              color: enabled! ? null : grey,
-              Icons.close,
-              size: 14,
-            ),
-          )),
+          child: enabled!
+              ? Padding(
+                  padding: const EdgeInsets.only(
+                      left: 8, bottom: 8, top: 8, right: 0),
+                  child: Icon(
+                    color: enabled! ? null : grey,
+                    Icons.close,
+                    size: 14,
+                  ),
+                )
+              : SizedBox()),
     );
   }
 
