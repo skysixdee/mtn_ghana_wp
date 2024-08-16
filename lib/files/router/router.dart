@@ -1,11 +1,13 @@
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
+import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/screens/banner_detail_screen/banner_detail_screen.dart';
 import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:etisalat/files/screens/home_screen/home_screen.dart';
+import 'package:etisalat/files/screens/my_wishlist_screen/my_wishlist_screen.dart';
 import 'package:etisalat/files/screens/search_screen/search_screen.dart';
 import 'package:etisalat/files/screens/see_more_screen/see_more_screen.dart';
 import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
@@ -28,6 +30,7 @@ final router = GoRouter(
         _bannerDetailShell(),
         _categoryDetailShell(),
         _seeMoreShell(),
+        _myWishlistShell(),
       ],
     ),
   ],
@@ -77,6 +80,23 @@ StatefulShellBranch _bannerDetailShell() {
           String searchKey = state.uri.queryParameters['searchKey'] ?? '';
           cont.getBannerDetail(type, searchKey);
           return BannerDetailScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _myWishlistShell() {
+  MyWishlistController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: myWishlistRoute,
+        path: myWishlistRoute,
+        builder: (context, state) {
+          //cont.getBannerDetail(type, searchKey);
+          cont.getWishlist();
+          return MyWishlistScreen();
         },
       ),
     ],

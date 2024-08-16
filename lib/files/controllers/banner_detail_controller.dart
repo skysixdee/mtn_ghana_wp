@@ -7,6 +7,7 @@ class BannerDetailController extends GetxController {
   RxBool isLoading = false.obs;
   List<TuneInfo> tuneList = [];
   getBannerDetail(String type, String searchKey) async {
+    tuneList.clear();
     if (isLoading.value) {
       return;
     }

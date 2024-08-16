@@ -108,6 +108,7 @@ class HomeBannerView extends StatelessWidget {
                   () {
                     return Container(
                       decoration: BoxDecoration(
+                        border: Border.all(color: white, width: 1.5),
                         borderRadius: BorderRadius.circular(6),
                         color: cont.selectedIndex.value == index ? red : grey,
                       ),

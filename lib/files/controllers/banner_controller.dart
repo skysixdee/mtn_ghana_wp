@@ -17,7 +17,6 @@ class BannerController extends GetxController {
   }
 
   updatedSelectedIndex(int index) {
-    print("index = $index");
     selectedIndex.value = index;
   }
 }

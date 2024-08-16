@@ -13,7 +13,7 @@ genericPopover(BuildContext context, List<PopoverMenuModel> menuList,
     arrowHeight: 6,
     arrowWidth: 16,
     context: context,
-    width: 150,
+    width: 120,
     bodyBuilder: (context) {
       return Row(
         mainAxisSize: MainAxisSize.min,

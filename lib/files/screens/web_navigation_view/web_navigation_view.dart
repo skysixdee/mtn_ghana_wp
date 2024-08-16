@@ -2,6 +2,7 @@ import 'package:etisalat/files/api_calls/get_search_tune_list_api.dart';
 import 'package:etisalat/files/controllers/app_controller.dart';
 import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
+import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
@@ -68,7 +69,7 @@ class WebNavigationView extends StatelessWidget {
         const SizedBox(width: 20),
         faqButton(),
         const SizedBox(width: 20),
-        nameTuneButton(),
+        nameTuneButton(context),
       ],
     );
   }
@@ -85,13 +86,16 @@ class WebNavigationView extends StatelessWidget {
     );
   }
 
-  GenericButton nameTuneButton() {
+  GenericButton nameTuneButton(BuildContext context) {
+    MyWishlistController cont = Get.find();
     return GenericButton(
       title: nameTuneStr,
       padding: EdgeInsets.zero,
       bgColor: transparent,
       height: double.infinity,
       onTap: () {
+        cont.getWishlist();
+        context.goNamed(myWishlistRoute);
         print("check ");
       },
     );

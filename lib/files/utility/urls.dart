@@ -1,15 +1,18 @@
+//https://callertunez.mtn.co.za
 String settingUrl =
-    'https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/settings';
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/settings';
 String featuredUrl =
-    'https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/get-recommendation-songs?';
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/get-recommendation-songs?';
 String bannerUrl =
-    'https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/banner?';
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/banner?';
 String categoryUrl =
-    'https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/categories?';
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/categories?';
 
 String searchUrl =
-    "https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?";
+    "https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?";
 String bannerDetailUrl =
-    "https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/banner-search?";
+    "https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/banner-search?";
 String categoryDetailUrl =
-    'https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
+String myWishistUrl =
+    'https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/view-wishlist';

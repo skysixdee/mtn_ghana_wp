@@ -12,8 +12,10 @@ String verifyOtpStr = "Verify OTP";
 String resendStr = "Resnd";
 String playStr = "Play";
 String pauseStr = "Pause";
+String deleteStr = "Delete";
 String buyStr = "Buy";
 String faqStr = "FAQ";
+String someThingWentWrongStr = "Some thing went wrong";
 String giftStr = "Gift";
 
 String confirmStr = "Confirm";
