@@ -4,3 +4,4 @@ const String bannerDetailRoute = "/bannerDetail";
 const String categoryDetailRoute = "/categoryDetail";
 const String seeMoreRoute = "/seeMore";
 const String myWishlistRoute = "/myWishlist";
+const String profileRoute = "/profile";

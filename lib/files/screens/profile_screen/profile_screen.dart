@@ -58,8 +58,13 @@ class ProfileScreen extends StatelessWidget {
                                           children: [
                                             profileImage(),
                                             Flexible(
-                                                child:
-                                                    deskTopMainContainer(si)),
+                                                child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                vertical: 40.0,
+                                              ),
+                                              child: deskTopMainContainer(si),
+                                            )),
                                           ],
                                         ),
                                 ),
@@ -92,40 +97,53 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget deskTopMainContainer(SizingInformation si) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        msisdnBuilder(),
-        Row(
-          children: [
-            Expanded(child: prefrenceBuilder()),
-          ],
-        ),
-        bottomButtons(si)
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          msisdnBuilder(si),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(child: prefrenceBuilder()),
+            ],
+          ),
+          const SizedBox(height: 30),
+          bottomButtons(si)
+        ],
+      ),
     );
   }
 
   Widget bottomButtons(SizingInformation si) {
     return Obx(
       () {
-        return si.isMobile
-            ? Column(
-                children: [
-                  consfirmButton(),
-                  const SizedBox(height: 8),
-                  con.enableEdit.value ? cancelButton() : SizedBox(),
-                ],
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  consfirmButton(width: 150),
-                  const SizedBox(width: 20),
-                  con.enableEdit.value ? cancelButton(width: 150) : SizedBox()
-                ],
-              );
+        return con.isUpdating.value
+            ? loadingIndicator()
+            : si.isMobile
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Column(
+                      children: [
+                        consfirmButton(),
+                        const SizedBox(height: 8),
+                        con.enableEdit.value ? cancelButton() : SizedBox(),
+                      ],
+                    ),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      consfirmButton(width: 150),
+                      const SizedBox(width: 20),
+                      con.enableEdit.value
+                          ? cancelButton(width: 150)
+                          : SizedBox()
+                    ],
+                  );
       },
     );
   }
@@ -157,14 +175,14 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget msisdnBuilder() {
+  Widget msisdnBuilder(SizingInformation si) {
     editingController.text = StoreManager.msisdn;
 
     return Row(
       children: [
         Flexible(
             child: SizedBox(
-                width: 300,
+                width: si.isMobile ? double.infinity : 300,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -174,6 +192,7 @@ class ProfileScreen extends StatelessWidget {
                       color: grey,
                       fontSize: 12,
                     ),
+                    const SizedBox(height: 4),
                     MsisdnTextfield(
                       controller: editingController,
                       enabled: false,
@@ -195,9 +214,12 @@ class ProfileScreen extends StatelessWidget {
           title: preferenceStr,
           fontName: FontName.regular,
         ),
+        const SizedBox(height: 4),
         GenericGridView(
           height: 120,
           width: 150,
+          padding: EdgeInsets.zero,
+          onlyGrid: true,
           itemCount: lst.length,
           onTap: (index) {
             con.updateChoice(lst[index].categoryId ?? '');
@@ -220,7 +242,8 @@ class ProfileScreen extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: customImage(
-                    url: lst[p0].menuImagePath, gredientColor: gredientColor),
+                    url: lst[p0].menuImagePath,
+                    gredientColor: black.withOpacity(0.4)),
               ),
               redioButton(lst, p0)
             ],

@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
+import 'package:etisalat/files/controllers/profile_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/router/route_name.dart';
@@ -8,6 +9,7 @@ import 'package:etisalat/files/screens/banner_detail_screen/banner_detail_screen
 import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:etisalat/files/screens/home_screen/home_screen.dart';
 import 'package:etisalat/files/screens/my_wishlist_screen/my_wishlist_screen.dart';
+import 'package:etisalat/files/screens/profile_screen/profile_screen.dart';
 import 'package:etisalat/files/screens/search_screen/search_screen.dart';
 import 'package:etisalat/files/screens/see_more_screen/see_more_screen.dart';
 import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
@@ -31,6 +33,7 @@ final router = GoRouter(
         _categoryDetailShell(),
         _seeMoreShell(),
         _myWishlistShell(),
+        _profileShell(),
       ],
     ),
   ],
@@ -97,6 +100,22 @@ StatefulShellBranch _myWishlistShell() {
           //cont.getBannerDetail(type, searchKey);
           cont.getWishlist();
           return MyWishlistScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _profileShell() {
+  ProfileController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: profileRoute,
+        path: profileRoute,
+        builder: (context, state) {
+          cont.getProfileDetail();
+          return ProfileScreen();
         },
       ),
     ],

@@ -7,14 +7,18 @@ class GenericGridView extends StatelessWidget {
     required this.itemCount,
     required this.builder,
     this.onTap,
+    this.onlyGrid = false,
     this.maxDisplay = 8,
     this.physics,
     this.height = 240,
     this.width = 220,
+    this.padding,
   });
   final double height;
   final double width;
   final int itemCount;
+  final bool onlyGrid;
+  final EdgeInsetsGeometry? padding;
   final Widget Function(int) builder;
   final Function(int index)? onTap;
   final int maxDisplay;
@@ -23,18 +27,20 @@ class GenericGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, si) {
-        return si.isMobile
+        return onlyGrid
             ? grid(si)
-            : itemCount <= maxDisplay
-                ? Center(child: alignedGrid(context))
-                : grid(si);
+            : si.isMobile
+                ? grid(si)
+                : itemCount <= maxDisplay
+                    ? Center(child: alignedGrid(context))
+                    : grid(si);
       },
     );
   }
 
   Widget grid(SizingInformation si) {
     return GridView.builder(
-      padding:
+      padding: padding ??
           EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30, vertical: 20),
       itemCount: itemCount,
       physics: physics,

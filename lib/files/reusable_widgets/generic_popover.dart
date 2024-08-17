@@ -38,7 +38,7 @@ genericPopover(BuildContext context, List<PopoverMenuModel> menuList,
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 8),
+                              vertical: 6, horizontal: 12),
                           child: Row(
                             children: [
                               (menuList[index].image != null)

@@ -24,3 +24,5 @@ String reGenerateTokenUrl =
     'https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/regen-token';
 String profileDetailUrl =
     "https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/get-profile-details";
+String editProfileUrl =
+    "https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/edit-profile";

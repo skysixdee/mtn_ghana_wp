@@ -33,17 +33,18 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: () {
             StoreManager.setLoggedIn(true);
             StoreManager.setMsisdn("0832120732");
-            StoreManager.setAccessToken("806e1e60-243d-438d-94a5-59e2e2373f93");
+            StoreManager.setAccessToken("7f4243a4-b7f0-43d5-a0cb-4896a56937f2");
             StoreManager.setRefreshToken(
-                "b1ed6f60-47a3-486e-af8a-e4389349d402");
-            StoreManager.setDeviceId("46766c37-a10b-4753-b0f8-7896efae1353");
+                "f55287cb-5531-45c1-943b-66948a0069d0");
+            StoreManager.setDeviceId("ab0500a0-5749-4d87-8d34-65bc3269309b");
           },
         ),
-        ProfileScreen(key: widget.key),
         const SizedBox(height: 8),
         HomeBannerView(key: widget.key),
         const SizedBox(height: 10),
         FeatureCategoryView(key: widget.key),
+        const SizedBox(height: 300),
+        const SizedBox(height: 300),
       ],
     );
   }

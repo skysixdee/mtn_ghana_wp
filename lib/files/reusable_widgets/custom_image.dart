@@ -13,10 +13,11 @@ Widget customImage(
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                image: imageProvider,
+                fit: BoxFit.cover,
+                colorFilter:
+                    const ColorFilter.mode(Colors.red, BlendMode.colorBurn),
+              ),
             ),
           ),
           placeholder: (context, url) =>

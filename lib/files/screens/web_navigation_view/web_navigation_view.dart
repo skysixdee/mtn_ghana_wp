@@ -3,6 +3,7 @@ import 'package:etisalat/files/controllers/app_controller.dart';
 import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
+import 'package:etisalat/files/controllers/profile_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
@@ -202,6 +203,10 @@ class WebNavigationView extends StatelessWidget {
           MyWishlistController con = Get.find();
           con.getWishlist();
           context.goNamed(myWishlistRoute);
+        } else if (model.title == myProfileStr) {
+          ProfileController con = Get.find();
+          con.getProfileDetail();
+          context.goNamed(profileRoute);
         }
       },
     );

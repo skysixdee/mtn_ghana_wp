@@ -33,7 +33,7 @@ String giftStr = "Gift";
 String confirmStr = "Confirm";
 String editStr = "Edit";
 String cancelStr = "Cancel";
-
+String selectAtleastOneCategoryStr = "Select atleast one category";
 String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
 String loginStr = "Login";
