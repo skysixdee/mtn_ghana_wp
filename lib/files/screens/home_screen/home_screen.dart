@@ -9,6 +9,7 @@ import 'package:etisalat/files/screens/authentication_screen/login_popup.dart';
 import 'package:etisalat/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
 import 'package:etisalat/files/screens/home_screen/widget/feature_view/feature_category_view.dart';
 import 'package:etisalat/files/screens/home_screen/widget/music_box_view.dart';
+import 'package:etisalat/files/screens/my_tune_screen/my_tune_screen.dart';
 import 'package:etisalat/files/screens/profile_screen/profile_screen.dart';
 import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
@@ -34,7 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return MyTuneScreen();
+    ListView(
       shrinkWrap: true,
       primary: true,
       children: [

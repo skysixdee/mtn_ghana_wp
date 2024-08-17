@@ -18,7 +18,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getProfileDetail();
+    //getProfileDetail();
   }
 
   getProfileDetail() async {
