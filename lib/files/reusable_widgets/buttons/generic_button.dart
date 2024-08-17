@@ -33,31 +33,40 @@ class GenericButton extends StatelessWidget {
   final Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-          height: height,
-          decoration: BoxDecoration(
-            border: Border.all(color: borderColor ?? transparent),
-            borderRadius: BorderRadius.circular(radius ?? height / 2),
-            color: bgColor,
-          ),
-          width: width,
+    return Container(
+        height: height,
+        decoration: BoxDecoration(
+          border: Border.all(color: borderColor ?? transparent),
+          borderRadius: BorderRadius.circular(radius ?? height / 2),
+          color: bgColor,
+        ),
+        width: width,
+        child: InkWell(
+          onTap: onTap,
           child: Padding(
-            padding: padding ?? const EdgeInsets.symmetric(horizontal: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                leadingIcon ?? const SizedBox(),
-                CustomText(
-                  title: title ?? '',
-                  color: textColor,
-                  fontName: fontName,
-                ),
-                trailingIcon ?? const SizedBox(),
-              ],
-            ),
-          )),
-    );
+              padding: padding ?? const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        leadingIcon ?? const SizedBox(),
+                        CustomText(
+                          title: title ?? '',
+                          color: textColor,
+                          fontName: fontName,
+                        ),
+                        trailingIcon ?? const SizedBox(),
+                      ],
+                    ),
+                  )),
+                ],
+              )),
+        ));
   }
 }
