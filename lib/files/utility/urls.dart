@@ -26,3 +26,11 @@ String profileDetailUrl =
     "https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/get-profile-details";
 String editProfileUrl =
     "https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/edit-profile";
+String packDetailUrl =
+    'https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/pack-status?';
+String nameTuneUrl =
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?';
+String musicBoxUrl =
+    "https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/music-box-search?";
+String musicBoxContextUrl =
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/music-box-contents?';

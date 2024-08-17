@@ -36,40 +36,7 @@ class ProfileScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Flexible(
-                              child: SizedBox(
-                                width: 1000,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0.0),
-                                  child: si.isMobile
-                                      ? Column(
-                                          children: [
-                                            profileImage(),
-                                            deskTopMainContainer(si),
-                                          ],
-                                        )
-                                      : Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            profileImage(),
-                                            Flexible(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                vertical: 40.0,
-                                              ),
-                                              child: deskTopMainContainer(si),
-                                            )),
-                                          ],
-                                        ),
-                                ),
-                              ),
-                            ),
+                            Flexible(child: mainContainer(si)),
                           ],
                         )
                       ],
@@ -81,17 +48,71 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
+  SizedBox mainContainer(SizingInformation si) {
+    return SizedBox(
+      width: 1000,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+        child: si.isMobile ? mobileColumn(si) : deskTopLeftWidgt(si),
+      ),
+    );
+  }
+
+  Column mobileColumn(SizingInformation si) {
+    return Column(
+      children: [
+        profileImage(),
+        deskTopMainContainer(si),
+      ],
+    );
+  }
+
+  Row deskTopLeftWidgt(SizingInformation si) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        profileImage(),
+        Flexible(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 40.0,
+          ),
+          child: deskTopMainContainer(si),
+        )),
+      ],
+    );
+  }
+
   Widget profileImage() {
     return Padding(
       padding: const EdgeInsets.all(30.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
-          color: yellow,
-        ),
-        height: 100,
-        width: 100,
-        child: const Icon(Icons.person),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: yellow,
+            ),
+            height: 100,
+            width: 100,
+            child: const Icon(Icons.person),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 6.0),
+            child: CustomText(
+              title: con.packStatusDetails?.packName ?? inActiveStr,
+              color: con.packStatusDetails?.packName == ''
+                  ? red
+                  : const Color.fromARGB(255, 14, 184, 20),
+              fontName: FontName.bold,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -108,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 20),
           Row(
             children: [
-              Expanded(child: prefrenceBuilder()),
+              Expanded(child: prefrenceBuilder(si)),
             ],
           ),
           const SizedBox(height: 30),
@@ -124,27 +145,34 @@ class ProfileScreen extends StatelessWidget {
         return con.isUpdating.value
             ? loadingIndicator()
             : si.isMobile
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: Column(
-                      children: [
-                        consfirmButton(),
-                        const SizedBox(height: 8),
-                        con.enableEdit.value ? cancelButton() : SizedBox(),
-                      ],
-                    ),
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      consfirmButton(width: 150),
-                      const SizedBox(width: 20),
-                      con.enableEdit.value
-                          ? cancelButton(width: 150)
-                          : SizedBox()
-                    ],
-                  );
+                ? bottomButtonsColumn()
+                : bottomButtonsRow();
       },
+    );
+  }
+
+  Padding bottomButtonsColumn() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: Column(
+        children: [
+          consfirmButton(),
+          const SizedBox(height: 8),
+          con.enableEdit.value ? cancelButton() : const SizedBox(),
+          const SizedBox(height: 30),
+        ],
+      ),
+    );
+  }
+
+  Row bottomButtonsRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        consfirmButton(width: 150),
+        const SizedBox(width: 20),
+        con.enableEdit.value ? cancelButton(width: 150) : SizedBox()
+      ],
     );
   }
 
@@ -204,7 +232,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget prefrenceBuilder() {
+  Widget prefrenceBuilder(SizingInformation si) {
     List<Category> lst = StoreManager.categories ?? [];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,20 +243,60 @@ class ProfileScreen extends StatelessWidget {
           fontName: FontName.regular,
         ),
         const SizedBox(height: 4),
-        GenericGridView(
-          height: 120,
-          width: 150,
-          padding: EdgeInsets.zero,
-          onlyGrid: true,
-          itemCount: lst.length,
-          onTap: (index) {
-            con.updateChoice(lst[index].categoryId ?? '');
-          },
-          builder: (p0) {
-            return preferenceCard(lst, p0);
-          },
-        )
+        si.isMobile ? customWrap() : gridView(lst)
       ],
+    );
+  }
+
+  Widget customWrap() {
+    return (StoreManager.categories == null)
+        ? const SizedBox()
+        : Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: StoreManager.categories!
+                .map((e) => categoryNameCard(e))
+                .toList(),
+          );
+  }
+
+  Widget categoryNameCard(Category e) {
+    return InkWell(
+      onTap: () {
+        con.updateChoice(e.categoryId ?? '');
+      },
+      child: Obx(
+        () {
+          bool isSelected = con.selectedCetegories.contains(e.categoryId);
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: grey),
+              color: isSelected ? yellow : white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: CustomText(title: e.categoryName ?? ''),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  GenericGridView gridView(List<Category> lst) {
+    return GenericGridView(
+      height: 120,
+      width: 150,
+      padding: EdgeInsets.zero,
+      onlyGrid: true,
+      itemCount: lst.length,
+      onTap: (index) {
+        con.updateChoice(lst[index].categoryId ?? '');
+      },
+      builder: (p0) {
+        return preferenceCard(lst, p0);
+      },
     );
   }
 

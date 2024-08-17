@@ -29,11 +29,12 @@ String buyStr = "Buy";
 String faqStr = "FAQ";
 String someThingWentWrongStr = "Some thing went wrong";
 String giftStr = "Gift";
-
+String inActiveStr = "InActive";
 String confirmStr = "Confirm";
 String editStr = "Edit";
 String cancelStr = "Cancel";
 String selectAtleastOneCategoryStr = "Select atleast one category";
+String noChangeToUpdateStr = "No change found to update";
 String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
 String loginStr = "Login";

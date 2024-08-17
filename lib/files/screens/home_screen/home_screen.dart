@@ -33,10 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: () {
             StoreManager.setLoggedIn(true);
             StoreManager.setMsisdn("0832120732");
-            StoreManager.setAccessToken("7f4243a4-b7f0-43d5-a0cb-4896a56937f2");
+            StoreManager.setAccessToken("66a64a44-9c93-47ea-951a-09f6851b61e8");
             StoreManager.setRefreshToken(
-                "f55287cb-5531-45c1-943b-66948a0069d0");
-            StoreManager.setDeviceId("ab0500a0-5749-4d87-8d34-65bc3269309b");
+                "d4d7c1f9-a187-43ca-be31-12f3c9951e05");
+            StoreManager.setDeviceId("096c3442-a697-455b-a495-adc07c158638");
           },
         ),
         const SizedBox(height: 8),

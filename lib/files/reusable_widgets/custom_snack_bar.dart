@@ -7,8 +7,16 @@ import 'package:get/get.dart';
 customSnackBar(String? message) {
   Get.snackbar("", "",
       maxWidth: 400,
-      messageText:
-          Center(child: CustomText(title: message ?? someThingWentWrongStr)),
-      backgroundColor: yellow,
+      messageText: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: yellow,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Center(
+                child: CustomText(title: message ?? someThingWentWrongStr)),
+          )),
+      backgroundColor: transparent,
       snackPosition: SnackPosition.BOTTOM);
 }

@@ -1,6 +1,8 @@
 import 'package:etisalat/files/api_calls/edit_profile_api.dart';
+import 'package:etisalat/files/api_calls/get_pack_detail_api.dart';
 import 'package:etisalat/files/api_calls/get_profile_detail_api.dart';
 import 'package:etisalat/files/model/edit_profile_model.dart';
+import 'package:etisalat/files/model/pack_detail_model.dart';
 import 'package:etisalat/files/model/profile_detail_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -12,6 +14,7 @@ class ProfileController extends GetxController {
   RxList<String> selectedCetegories = <String>[].obs;
   RxBool enableEdit = false.obs;
   GetProfileDetails? getProfileDetails;
+  PackStatusDetails? packStatusDetails;
   @override
   void onInit() {
     super.onInit();
@@ -19,8 +22,12 @@ class ProfileController extends GetxController {
   }
 
   getProfileDetail() async {
+    if (isLoading.value) {
+      return;
+    }
     isLoading.value = true;
-
+    PackDetailModel model = await getPackDetailApi();
+    packStatusDetails = model.responseMap?.packStatusDetails;
     ProfileDetailModel info = await getProfileDetailApi();
     print("inf111o ===== $info");
     String va = info.responseMap?.getProfileDetails?.categories ?? '';
@@ -55,10 +62,16 @@ class ProfileController extends GetxController {
       customSnackBar(selectAtleastOneCategoryStr);
       return;
     }
+
     enableEdit.value = !enableEdit.value;
+
     if (enableEdit.value) {
       print("edit taped $selectedCetegories");
     } else {
+      if (selectedCetegories.join(',') == getProfileDetails?.categories) {
+        customSnackBar(noChangeToUpdateStr);
+        return;
+      }
       isUpdating.value = true;
       EditProfileModel mode = await editProfileApi(selectedCetegories);
       if (mode.statusCode == 'SC0000') {
