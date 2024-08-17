@@ -10,14 +10,17 @@ class GenericGridView extends StatelessWidget {
     this.onlyGrid = false,
     this.maxDisplay = 8,
     this.physics,
-    this.height = 240,
-    this.width = 220,
+    this.cardHeight = 240,
+    this.cardWidth = 220,
     this.padding,
+    this.scrollDirection = Axis.vertical,
   });
-  final double height;
-  final double width;
+  final double cardHeight;
+
+  final double cardWidth;
   final int itemCount;
   final bool onlyGrid;
+  final Axis scrollDirection;
   final EdgeInsetsGeometry? padding;
   final Widget Function(int) builder;
   final Function(int index)? onTap;
@@ -40,14 +43,15 @@ class GenericGridView extends StatelessWidget {
 
   Widget grid(SizingInformation si) {
     return GridView.builder(
+      scrollDirection: scrollDirection,
       padding: padding ??
           EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30, vertical: 20),
       itemCount: itemCount,
       physics: physics,
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: width, //height,
-        mainAxisExtent: height, //width,
+        maxCrossAxisExtent: cardWidth, //height,
+        mainAxisExtent: cardHeight, //width,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),
@@ -67,8 +71,8 @@ class GenericGridView extends StatelessWidget {
     const double runSpacing = 14;
     const double spacing = 14;
     int listCount = itemCount;
-    double w = width;
-    double h = height;
+    double w = cardWidth;
+    double h = cardHeight;
 
     return SingleChildScrollView(
       physics: physics,

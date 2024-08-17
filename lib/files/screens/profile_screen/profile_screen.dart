@@ -286,8 +286,8 @@ class ProfileScreen extends StatelessWidget {
 
   GenericGridView gridView(List<Category> lst) {
     return GenericGridView(
-      height: 120,
-      width: 150,
+      cardHeight: 120,
+      cardWidth: 150,
       padding: EdgeInsets.zero,
       onlyGrid: true,
       itemCount: lst.length,

@@ -5,3 +5,7 @@ const String categoryDetailRoute = "/categoryDetail";
 const String seeMoreRoute = "/seeMore";
 const String myWishlistRoute = "/myWishlist";
 const String profileRoute = "/profile";
+
+const String nameTuneRoute = "/nameTune";
+const String musicBoxRoute = "/musicBox";
+const String musicBoxContentRoute = "/MusicBoxContent";

@@ -3,7 +3,9 @@ import 'package:etisalat/files/controllers/banner_controller.dart';
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
+import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
+import 'package:etisalat/files/controllers/name_tune_controller.dart';
 import 'package:etisalat/files/controllers/profile_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/router/router.dart';
@@ -32,6 +34,8 @@ Future<void> initiateController() async {
   Get.lazyPut(() => BannerController());
   Get.lazyPut(() => FeatureController());
   Get.lazyPut(() => ProfileController());
+  Get.lazyPut(() => NameTuneController());
+  Get.lazyPut(() => MusicBoxController());
   Get.lazyPut(() => TuneSearchController());
   Get.lazyPut(() => CategoryDetailScreen());
   Get.lazyPut(() => MyWishlistController());

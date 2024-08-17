@@ -1,6 +1,8 @@
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
+import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
+import 'package:etisalat/files/controllers/name_tune_controller.dart';
 import 'package:etisalat/files/controllers/profile_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/model/tune_info.dart';
@@ -8,7 +10,10 @@ import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/screens/banner_detail_screen/banner_detail_screen.dart';
 import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:etisalat/files/screens/home_screen/home_screen.dart';
+import 'package:etisalat/files/screens/music_box/music_box_content_screen.dart';
+import 'package:etisalat/files/screens/music_box/music_box_screen.dart';
 import 'package:etisalat/files/screens/my_wishlist_screen/my_wishlist_screen.dart';
+import 'package:etisalat/files/screens/name_tune_screen/name_tune_screen.dart';
 import 'package:etisalat/files/screens/profile_screen/profile_screen.dart';
 import 'package:etisalat/files/screens/search_screen/search_screen.dart';
 import 'package:etisalat/files/screens/see_more_screen/see_more_screen.dart';
@@ -34,6 +39,9 @@ final router = GoRouter(
         _seeMoreShell(),
         _myWishlistShell(),
         _profileShell(),
+        _nameTuneShell(),
+        _musicBoxShell(),
+        _musicBoxContentShell(),
       ],
     ),
   ],
@@ -116,6 +124,55 @@ StatefulShellBranch _profileShell() {
         builder: (context, state) {
           cont.getProfileDetail();
           return ProfileScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _nameTuneShell() {
+  NameTuneController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: nameTuneRoute,
+        path: nameTuneRoute,
+        builder: (context, state) {
+          cont.getNameTune();
+          return NameTuneScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _musicBoxShell() {
+  MusicBoxController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: musicBoxRoute,
+        path: musicBoxRoute,
+        builder: (context, state) {
+          return MusicBoxScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _musicBoxContentShell() {
+  MusicBoxController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: musicBoxContentRoute,
+        path: musicBoxContentRoute,
+        builder: (context, state) {
+          String type = state.uri.queryParameters['type'] ?? '';
+          String code = state.uri.queryParameters['code'] ?? '';
+          cont.getMusicBoxContent(type, code);
+          return MusicBoxContentScreen();
         },
       ),
     ],
