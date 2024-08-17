@@ -13,14 +13,14 @@ class GenericGridView extends StatelessWidget {
     this.cardHeight = 240,
     this.cardWidth = 220,
     this.padding,
-    this.scrollDirection = Axis.vertical,
+    this.scrollDirection,
   });
   final double cardHeight;
 
   final double cardWidth;
   final int itemCount;
   final bool onlyGrid;
-  final Axis scrollDirection;
+  final Axis? scrollDirection;
   final EdgeInsetsGeometry? padding;
   final Widget Function(int) builder;
   final Function(int index)? onTap;
@@ -43,7 +43,7 @@ class GenericGridView extends StatelessWidget {
 
   Widget grid(SizingInformation si) {
     return GridView.builder(
-      scrollDirection: scrollDirection,
+      scrollDirection: scrollDirection ?? Axis.vertical,
       padding: padding ??
           EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30, vertical: 20),
       itemCount: itemCount,

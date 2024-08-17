@@ -5,6 +5,7 @@ import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
+import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/router/router.dart';
@@ -30,38 +31,44 @@ class _MusicBoxViewState extends State<MusicBoxView> {
       () {
         return con.isLoadingList.value
             ? loadingIndicator()
-            : SizedBox(
-                height: 120,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          title: musicBoxStr,
-                          fontName: FontName.bold,
-                        ),
-                        GenericButton(
-                          title: seeMoreStr,
-                          textColor: red,
-                          bgColor: transparent,
-                          onTap: () {
-                            context.pushNamed(musicBoxRoute);
-                          },
-                        )
-                      ],
-                    ),
-                    Expanded(
-                      child: GenericGridView(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: con.musicBoxList.length,
-                        builder: (p0) {
-                          return TuneCard(info: con.musicBoxList[p0]);
-                        },
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        title: musicBoxStr,
+                        fontName: FontName.bold,
                       ),
-                    ),
-                  ],
-                ),
+                      GenericButton(
+                        title: seeMoreStr,
+                        textColor: red,
+                        bgColor: transparent,
+                        onTap: () {
+                          context.pushNamed(musicBoxRoute);
+                        },
+                      )
+                    ],
+                  ),
+                  Flexible(
+                    child: SizedBox(
+                        height: 220,
+                        child: ListView.builder(
+                          itemCount: con.musicBoxList.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 12.0),
+                              child: MusicBoxCard(
+                                info: con.musicBoxList[index],
+                              ),
+                            );
+                          },
+                        )),
+                  ),
+                ],
               );
       },
     );

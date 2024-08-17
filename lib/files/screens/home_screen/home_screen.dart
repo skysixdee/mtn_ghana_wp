@@ -36,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
+      primary: true,
       children: [
         GenericButton(
           title: "Set value",
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 8),
         HomeBannerView(key: widget.key),
         const SizedBox(height: 10),
-        SizedBox(height: 400, child: MusicBoxView()),
+        const MusicBoxView(),
         const SizedBox(height: 10),
         FeatureCategoryView(key: widget.key),
         const SizedBox(height: 300),

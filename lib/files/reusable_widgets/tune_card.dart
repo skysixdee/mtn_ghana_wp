@@ -24,6 +24,7 @@ class TuneCard extends StatelessWidget {
     required this.info,
     this.bottomLeftChild,
     this.bottomRightChild,
+    this.bottomButtonChild,
     this.moreButton,
     this.menuList,
     this.onMenuTap,
@@ -32,6 +33,7 @@ class TuneCard extends StatelessWidget {
   final TuneInfo info;
   final Widget? bottomLeftChild;
   final Widget? bottomRightChild;
+  final Widget? bottomButtonChild;
   final Widget? moreButton;
   final List<PopoverMenuModel>? menuList;
   final Function(PopoverMenuModel, int)? onMenuTap;
@@ -78,13 +80,15 @@ class TuneCard extends StatelessWidget {
                   maxLine: 1,
                 ),
                 const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Expanded(child: bottomLeftChild ?? playButton(info)),
-                    const SizedBox(width: 12),
-                    Expanded(child: bottomRightChild ?? buyButton(info)),
-                  ],
-                ),
+                (bottomButtonChild == null)
+                    ? Row(
+                        children: [
+                          Expanded(child: bottomLeftChild ?? playButton(info)),
+                          const SizedBox(width: 12),
+                          Expanded(child: bottomRightChild ?? buyButton(info)),
+                        ],
+                      )
+                    : bottomButtonChild!,
               ],
             ),
           ),

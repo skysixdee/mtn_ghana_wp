@@ -33,6 +33,7 @@ String inActiveStr = "InActive";
 String confirmStr = "Confirm";
 String editStr = "Edit";
 String cancelStr = "Cancel";
+String previewStr = "Preview";
 String musicBoxStr = "Music Box";
 String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";

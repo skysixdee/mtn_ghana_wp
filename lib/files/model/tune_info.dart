@@ -3,7 +3,7 @@ import 'package:get/get_rx/get_rx.dart';
 
 class TuneInfo {
   String? id;
-  // String? contentId;
+  String? type;
   // String? contentName;
   // String? path;
   // String? album;
@@ -31,7 +31,7 @@ class TuneInfo {
 
   TuneInfo({
     this.id,
-    // this.contentId,
+    this.type,
     // this.contentName,
     // this.path,
     // this.album,
@@ -56,7 +56,7 @@ class TuneInfo {
   factory TuneInfo.fromJson(Map<String, dynamic> json) {
     return TuneInfo(
         id: json['id'],
-        // contentId: json['contentId'],
+        type: json['type'],
         // contentName: json['contentName'],
         // path: json['path'],
         // album: json['album'] ?? json['albumName'],
@@ -70,11 +70,12 @@ class TuneInfo {
         downloadCount: json['downloadCount'],
         likeCount: json['likeCount'],
         previewImageUrl: json['previewImageUrl'],
-        toneId: json['toneId'] ?? json['contentId'],
+        toneId: json['toneId'] ?? json['contentId'] ?? json['toneCode'],
         toneIdStreamingUrl: json['toneIdStreamingUrl'] ?? json['path'],
         toneIdpreviewImageUrl:
             json['toneIdpreviewImageUrl'] ?? json['previewImageUrl'],
-        toneName: json['toneName'] ?? json['contentName'],
+        toneName:
+            json['toneName'] ?? json['contentName'] ?? json['channelName'],
         toneUrl: json['toneUrl'],
         price: '${json['price']}',
         expiryDate: json['expiryDate']);
