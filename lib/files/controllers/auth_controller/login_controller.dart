@@ -1,3 +1,4 @@
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:get/get.dart';
@@ -12,13 +13,13 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    print("LoginController  onInit");
+    customPrint("LoginController  onInit");
   }
 
   onGenerateOtpButtonAction() async {
     if (msisdn.isEmpty || msisdn.length < msisdnLength) {
       message.value = enterMobileNumberStr;
-      print("object");
+      customPrint("object");
       return;
     }
 

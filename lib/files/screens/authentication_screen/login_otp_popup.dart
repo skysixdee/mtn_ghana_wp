@@ -2,6 +2,7 @@ import 'package:etisalat/files/controllers/auth_controller/login_controller.dart
 import 'package:etisalat/files/controllers/auth_controller/otp_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/msisdn_textfield.dart';
@@ -93,7 +94,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
                 title: verifyOtpStr,
                 onTap: () {
                   otpController.onVerifyButtonAction();
-                  print("generate otp");
+                  customPrint("generate otp");
                 },
               );
       },

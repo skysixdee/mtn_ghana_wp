@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class OtpController extends GetxController {
   void onInit() {
     super.onInit();
     //onResentButtonAction();
-    print("OtpController onInit");
+    customPrint("OtpController onInit");
   }
 
   onVerifyButtonAction() async {
@@ -31,7 +32,7 @@ class OtpController extends GetxController {
 
       return;
     }
-    print("qwrweter");
+    customPrint("qwrweter");
 
     isLoading.value = true;
     await Future.delayed(const Duration(seconds: 2));
@@ -59,7 +60,7 @@ class OtpController extends GetxController {
     _start = second;
     leftTime.value = " ${formattedTime(timeInSecond: _start)}"; //"$_start";
 
-    print("object sky");
+    customPrint("object sky");
     startTimer();
   }
 

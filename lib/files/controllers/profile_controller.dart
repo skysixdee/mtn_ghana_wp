@@ -4,6 +4,7 @@ import 'package:etisalat/files/api_calls/get_profile_detail_api.dart';
 import 'package:etisalat/files/model/edit_profile_model.dart';
 import 'package:etisalat/files/model/pack_detail_model.dart';
 import 'package:etisalat/files/model/profile_detail_model.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:get/get.dart';
@@ -29,14 +30,14 @@ class ProfileController extends GetxController {
     PackDetailModel model = await getPackDetailApi();
     packStatusDetails = model.responseMap?.packStatusDetails;
     ProfileDetailModel info = await getProfileDetailApi();
-    print("inf111o ===== $info");
+    customPrint("inf111o ===== $info");
     String va = info.responseMap?.getProfileDetails?.categories ?? '';
     getProfileDetails = info.responseMap?.getProfileDetails;
-    print("info ===== $info");
+    customPrint("info ===== $info");
     selectedCetegories.clear();
     for (var element in va.split(',')) {
       selectedCetegories.add(element);
-      print("element ===== $element");
+      customPrint("element ===== $element");
     }
     isLoading.value = false;
   }
@@ -54,7 +55,7 @@ class ProfileController extends GetxController {
     */
     bool isContain = selectedCetegories.contains(id);
     isContain ? selectedCetegories.remove(id) : selectedCetegories.add(id);
-    print("items are = ${selectedCetegories.length}");
+    customPrint("items are = ${selectedCetegories.length}");
   }
 
   onConfirmTapButtonAction() async {
@@ -66,7 +67,7 @@ class ProfileController extends GetxController {
     enableEdit.value = !enableEdit.value;
 
     if (enableEdit.value) {
-      print("edit taped $selectedCetegories");
+      customPrint("edit taped $selectedCetegories");
     } else {
       if (selectedCetegories.join(',') == getProfileDetails?.categories) {
         customSnackBar(noChangeToUpdateStr);

@@ -1,5 +1,6 @@
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -91,7 +92,7 @@ class CustomSearchTextfield extends StatelessWidget {
         onTap: () {
           if (onSubmit != null) {
             onSubmit!(controller.text);
-            print("Search taped ${controller.text}");
+            customPrint("Search taped ${controller.text}");
           }
         },
       ),

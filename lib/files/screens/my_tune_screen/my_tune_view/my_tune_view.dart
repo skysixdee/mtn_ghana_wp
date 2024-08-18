@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
@@ -27,7 +28,7 @@ class MyTuneView extends StatelessWidget {
                     menuList: menuList,
                     bottomRightChild: settingButton(),
                     onMenuTap: (p0, p1) {
-                      print("title is = ${p0.title} and index = $p1");
+                      customPrint("title is = ${p0.title} and index = $p1");
                     },
                   );
                 },
@@ -44,7 +45,7 @@ class MyTuneView extends StatelessWidget {
         size: 15,
       ),
       onTap: () {
-        print("On Setting tap");
+        customPrint("On Setting tap");
       },
     );
   }

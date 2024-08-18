@@ -1,6 +1,7 @@
 import 'package:etisalat/files/api_calls/get_playing_tune_api.dart';
 import 'package:etisalat/files/enums/playing_card_type.dart';
 import 'package:etisalat/files/model/my_playing_tunes_model.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -34,34 +35,34 @@ class MyPlayingTuneController extends GetxController {
         if (info.customiseStartDate != '0') {
           tuneList.add(createNewList(info, PlayingCardType.none, serviceName));
           if (kDebugMode) {
-            print("none ");
+            customPrint("none ");
           }
         }
         if (info.endDayMonthly != '0') {
           tuneList
               .add(createNewList(info, PlayingCardType.monthly, serviceName));
-          print("SKY MONTHLY");
+          customPrint("SKY MONTHLY");
         }
         if (info.yearlyEndMonth != '0') {
           tuneList
               .add(createNewList(info, PlayingCardType.yearly, serviceName));
-          print("SKY YEARLY");
+          customPrint("SKY YEARLY");
         }
         if (info.startTimeWeekly == "00:00:00" &&
             info.endTimeWeekly != "00:00:00") {
           tuneList
               .add(createNewList(info, PlayingCardType.fullday, serviceName));
-          print("SKY full day ");
+          customPrint("SKY full day ");
         }
         if (info.endTimeWeekly != "00:00:00" &&
             info.startTimeWeekly != "00:00:00") {
           tuneList.add(
               createNewList(info, PlayingCardType.customTime, serviceName));
-          print("SKY Custom time base ");
+          customPrint("SKY Custom time base ");
         }
       }
     }
-    print("total new list = ${tuneList.length}");
+    customPrint("total new list = ${tuneList.length}");
     return;
   }
 

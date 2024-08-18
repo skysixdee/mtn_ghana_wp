@@ -1,4 +1,5 @@
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
@@ -38,7 +39,7 @@ class MyMusicBoxView extends StatelessWidget {
       textColor: red,
       bgColor: transparent,
       onTap: () {
-        print("delete Music box ");
+        customPrint("delete Music box ");
       },
     );
   }

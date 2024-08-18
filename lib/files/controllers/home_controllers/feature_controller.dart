@@ -4,6 +4,7 @@ import 'package:etisalat/files/model/feature_tab_model.dart';
 import 'package:etisalat/files/model/fetured_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/network_manager/network_manager.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/urls.dart';
 import 'package:get/get.dart';
@@ -55,12 +56,12 @@ class FeatureController extends GetxController {
 
   Future<void> loadTabIndex({int index = 0}) async {
     if (isLoadingList[index]) {
-      print("it is still loading");
+      customPrint("it is still loading");
       return;
     }
     if (_listOfList[index].isNotEmpty) {
       displayList.value = _listOfList[index];
-      print("list is not empty take value from here and display");
+      customPrint("list is not empty take value from here and display");
       return;
     }
     isLoadingList[index] = true;

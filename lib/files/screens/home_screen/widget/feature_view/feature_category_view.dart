@@ -1,5 +1,6 @@
 import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/router/route_name.dart';
@@ -61,7 +62,7 @@ class _FeatureCategoryViewState extends State<FeatureCategoryView> {
           onTap: () {
             context.pushNamed(seeMoreRoute,
                 extra: featureController.displayList);
-            print("See more tapped");
+            customPrint("See more tapped");
           },
         ),
       ],

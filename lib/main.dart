@@ -14,6 +14,7 @@ import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/name_tune_controller.dart';
 import 'package:etisalat/files/controllers/profile_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/router/router.dart';
 import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
@@ -44,8 +45,8 @@ Future<void> readProperties() async {
   final String value = await rootBundle.loadString('properties.json');
   final data = await json.decode(value);
   baseUrl = data['BASE_URL'];
+  customPrint("base url = $baseUrl");
   return;
-  print("base url = $baseUrl");
 }
 
 Future<void> initiateController() async {

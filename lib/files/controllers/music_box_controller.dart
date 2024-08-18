@@ -3,6 +3,7 @@ import 'package:etisalat/files/api_calls/get_music_box_content_api.dart';
 import 'package:etisalat/files/model/music_box_content_model.dart';
 import 'package:etisalat/files/model/music_box_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:get/get.dart';
 
 class MusicBoxController extends GetxController {
@@ -12,7 +13,7 @@ class MusicBoxController extends GetxController {
   List<TuneInfo> musicBoxContentList = [];
   @override
   void onInit() async {
-    print("called");
+    customPrint("called");
     super.onInit();
     getMusicBoxApi();
   }
@@ -21,7 +22,8 @@ class MusicBoxController extends GetxController {
     isLoadingList.value = true;
     MusicBoxModel model = await getMusicBoxApi();
     musicBoxList = model.responseMap?.musicBoxSearchList ?? [];
-    print("SKY==========${model.responseMap?.musicBoxSearchList?.length}");
+    customPrint(
+        "SKY==========${model.responseMap?.musicBoxSearchList?.length}");
     isLoadingList.value = false;
   }
 

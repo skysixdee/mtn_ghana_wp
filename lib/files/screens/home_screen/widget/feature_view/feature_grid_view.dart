@@ -1,5 +1,6 @@
 import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
 import 'package:get/get.dart';
 import 'package:flutter/widgets.dart';
@@ -22,7 +23,8 @@ class FeatureGridView extends StatelessWidget {
                 itemCount:
                     cont.displayList.length > 8 ? 7 : cont.displayList.length,
                 onTap: (p0) {
-                  print("tapped cell = ${cont.displayList[p0].toneName ?? ''}");
+                  customPrint(
+                      "tapped cell = ${cont.displayList[p0].toneName ?? ''}");
                 },
                 builder: (p0) {
                   return TuneCard(

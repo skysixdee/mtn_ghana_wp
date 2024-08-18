@@ -7,6 +7,7 @@ import 'package:etisalat/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/play_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
 import 'package:etisalat/files/utility/colors.dart';
@@ -120,17 +121,17 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
                   PopoverMenuModel(shareStr),
                 ],
             onTap: (p0, index) async {
-              print("tapped ${p0.title} and index =$index");
+              customPrint("tapped ${p0.title} and index =$index");
               if (menuList == null) {
-                print("menuList is null");
+                customPrint("menuList is null");
                 if (p0.title == wishlistStr) {
                   addToWishlistApi(info);
                 } else if (p0.title == giftStr) {
                   await Future.delayed(const Duration(milliseconds: 200));
                   Get.dialog(GiftPopupView(info: info));
-                  print("gift tapped");
+                  customPrint("gift tapped");
                 } else {
-                  print("share tapped");
+                  customPrint("share tapped");
                 }
               }
               if (onMenuTap != null) {

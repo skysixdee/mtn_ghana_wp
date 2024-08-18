@@ -10,6 +10,7 @@ import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
@@ -92,7 +93,7 @@ class WebNavigationView extends StatelessWidget {
       bgColor: transparent,
       height: double.infinity,
       onTap: () {
-        print("check ");
+        customPrint("check ");
       },
     );
   }
@@ -107,7 +108,7 @@ class WebNavigationView extends StatelessWidget {
       onTap: () {
         con.getNameTune();
         context.goNamed(nameTuneRoute);
-        print("check ");
+        customPrint("check ");
       },
     );
   }
@@ -120,7 +121,7 @@ class WebNavigationView extends StatelessWidget {
       leadingIcon: SizedBox(width: 70, child: Image.asset(logoImage)),
       onTap: () {
         context.goNamed(homeRoute);
-        print("check ");
+        customPrint("check ");
       },
     );
   }
@@ -163,13 +164,13 @@ class WebNavigationView extends StatelessWidget {
       controller: textEditingController,
       borderColor: white,
       onChange: (p0) {
-        print("On change $p0");
+        customPrint("On change $p0");
       },
       onSubmit: (p0) {
         con.getResult(p0);
         context.goNamed(searchRoute,
             queryParameters: {'search': p0}); //goNamed(searchRoute);
-        print("on submit $p0");
+        customPrint("on submit $p0");
       },
     );
   }

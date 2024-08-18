@@ -8,6 +8,7 @@ import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/popup_views/gift_popup_view.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_popup.dart';
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: "Set value",
           onTap: () {
             Map<String, dynamic> map1 = loginJson.map((k, v) {
-              print("key == $k");
+              customPrint("key == $k");
               if (k == 'accessToken') {
                 StoreManager.setAccessToken(v as String);
               }
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               return MapEntry(v, k);
             });
-            print("map 1 ====== $map1");
+            customPrint("map 1 ====== $map1");
           },
         ),
         const SizedBox(height: 8),

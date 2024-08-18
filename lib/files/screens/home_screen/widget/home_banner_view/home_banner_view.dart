@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/banner_controller.dart';
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/router/route_name.dart';
@@ -102,7 +103,7 @@ class HomeBannerView extends StatelessWidget {
                 onTap: () {
                   cont.selectedIndex.value = index;
                   carouselSliderController.animateToPage(index);
-                  print("tapped $index");
+                  customPrint("tapped $index");
                 },
                 child: Obx(
                   () {
