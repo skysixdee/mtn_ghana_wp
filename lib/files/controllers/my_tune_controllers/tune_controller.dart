@@ -11,7 +11,7 @@ class TuneController {
 
   makeApiCall() {
     myTuneController.getMyTune();
-    boxController.getMyMusicBoxTune();
+    //boxController.getMyMusicBoxTune();
     playingTuneController.getPlayingTune();
   }
 }

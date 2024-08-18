@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:etisalat/files/controllers/app_controller.dart';
 import 'package:etisalat/files/controllers/banner_controller.dart';
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
@@ -15,20 +17,35 @@ import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/router/router.dart';
 import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/colors.dart';
+import 'package:etisalat/files/utility/constants.dart';
+import 'package:flutter/services.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:etisalat/files/screens/home_screen/home_screen.dart';
+
 import 'package:etisalat/files/controllers/auth_controller/otp_controller.dart';
 import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 late SharedPreferences prefs;
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
+  await readProperties();
   prefs = await SharedPreferences.getInstance();
   StoreManager.initValues();
+
   await initiateController();
   runApp(const MyApp());
+}
+
+Future<void> readProperties() async {
+  final String value = await rootBundle.loadString('properties.json');
+  final data = await json.decode(value);
+  baseUrl = data['BASE_URL'];
+  return;
+  print("base url = $baseUrl");
 }
 
 Future<void> initiateController() async {

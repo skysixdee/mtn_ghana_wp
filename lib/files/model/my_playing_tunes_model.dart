@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:etisalat/files/enums/playing_card_type.dart';
+
 MyPlayingTunesModel myPlayingTunesModelFromJson(String str) =>
     MyPlayingTunesModel.fromJson(json.decode(str));
 
@@ -176,6 +178,7 @@ class ToneDetail {
   String? toneIdpreviewImageUrl;
   String? isShuffle;
   String? serviceName;
+  PlayingCardType? playingCardType;
 
   ToneDetail({
     this.toneId,
@@ -209,7 +212,8 @@ class ToneDetail {
     this.toneIdStreamingUrl,
     this.toneIdpreviewImageUrl,
     this.isShuffle,
-    String? serviceName,
+    this.serviceName,
+    this.playingCardType = PlayingCardType.none,
   });
 
   factory ToneDetail.fromJson(Map<String, dynamic> json) => ToneDetail(

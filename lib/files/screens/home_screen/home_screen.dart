@@ -93,13 +93,13 @@ class _HomeScreenState extends State<HomeScreen> {
 Map<String, dynamic> loginJson = {
   "respDesc": "Login Check Success",
   "srvType": "CHECKPASSWORD",
-  "userIdEnc": "209-72-252-145-121-240-173-222",
-  "userName": "0832120732",
-  "accessToken": "f6797333-537a-4a60-bc14-6e3838653038",
-  "userId": "268",
-  "deviceId": "506e7f1b-2db6-4ca4-b020-040b43253844",
-  "clientTxnId": "215361588",
-  "msisdn": "0832120732",
-  "txnId": "69435156356308",
-  "refreshToken": "49210184-d013-4f0a-96ef-6737f64ed06f"
+  "userIdEnc": "204-89-4-246-217-163-118-248",
+  "userName": "09420784096",
+  "accessToken": "55441bee-7057-42e4-9ba6-b0ee509ab015",
+  "userId": "7997",
+  "deviceId": "da65f8a4-c89d-41d7-ac07-8dc376b8b1cf",
+  "clientTxnId": "638921051",
+  "msisdn": "09420784096",
+  "txnId": "48435161925348",
+  "refreshToken": "afa4ad44-5b7e-4113-8344-90a13cde3bc5"
 };

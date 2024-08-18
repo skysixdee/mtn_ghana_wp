@@ -25,8 +25,13 @@ class NetworkManager {
         }
         final stringData = await response.transform(utf8.decoder).join();
         print("resp code is $url \n ${response.statusCode}\n");
-        Map<String, dynamic> valueMap = json.decode(stringData);
-        return valueMap;
+        try {
+          Map<String, dynamic> valueMap = json.decode(stringData);
+          return valueMap;
+        } catch (e) {
+          print("error5 is = ${e.toString()}");
+          return catchError();
+        }
       } catch (e) {
         print("error4 is = ${e.toString()}");
         return catchError();
@@ -73,8 +78,13 @@ class NetworkManager {
         } else {}
         final stringData = await response.transform(utf8.decoder).join();
         print("resp code is $url \n ${response.statusCode}\n");
-        Map<String, dynamic> valueMap = json.decode(stringData);
-        return valueMap;
+        try {
+          Map<String, dynamic> valueMap = json.decode(stringData);
+          return valueMap;
+        } catch (e) {
+          print("error5 is = ${e.toString()}");
+          return catchError();
+        }
       } catch (e) {
         print("error4 is = ${e.toString()}");
         return catchError();

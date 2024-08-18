@@ -38,14 +38,10 @@ class PlayingTuneCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          title: info.toneName,
-          fontName: FontName.bold,
-        ),
-        CustomText(
-          title: info.artistName,
-          color: grey,
-        ),
+        CustomText(title: info.toneName, fontName: FontName.bold),
+        CustomText(title: info.artistName, color: grey),
+        CustomText(title: "${info.playingCardType?.name}"),
+        CustomText(title: "${info.serviceName}"),
       ],
     );
   }

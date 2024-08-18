@@ -3,7 +3,7 @@ const int msisdnLength = 10;
 const int otpLength = 6;
 const int timeOutDuration = 20;
 const int pagePerCount = 20;
-
+String baseUrl = '';
 //=========================
 const int channelId = 4;
 const String versionCode = '7.0';

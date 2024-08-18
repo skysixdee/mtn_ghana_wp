@@ -17,9 +17,9 @@ class PlayingTuneView extends StatelessWidget {
         return con.isLoading.value
             ? loadingIndicator()
             : GenericGridView(
-                itemCount: con.toneDetails.length,
+                itemCount: con.tuneList.length,
                 builder: (p0) {
-                  return PlayingTuneCard(info: con.toneDetails[p0].first);
+                  return PlayingTuneCard(info: con.tuneList[p0]);
                 },
               );
       },
