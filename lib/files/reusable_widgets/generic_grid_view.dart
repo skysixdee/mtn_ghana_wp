@@ -56,13 +56,9 @@ class GenericGridView extends StatelessWidget {
         crossAxisSpacing: 10,
       ),
       itemBuilder: (context, index) {
-        return InkWell(
-            onTap: () {
-              if (onTap != null) {
-                onTap!(index);
-              }
-            },
-            child: builder(index));
+        return (onTap != null)
+            ? InkWell(onTap: onTap!(index), child: builder(index))
+            : builder(index);
       },
     );
   }

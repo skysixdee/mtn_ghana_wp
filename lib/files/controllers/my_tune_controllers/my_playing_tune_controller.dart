@@ -14,6 +14,7 @@ class MyPlayingTuneController extends GetxController {
     //toneDetails.clear();
     isLoading.value = true;
     MyPlayingTunesModel model = await getMyPlayingTuneApi();
+    print("model = $model");
     int len = model.responseMap?.listToneApk?.length ?? 0;
     await craeteCardList(len, model);
     isLoading.value = false;
@@ -24,6 +25,7 @@ class MyPlayingTuneController extends GetxController {
     for (var i = 0; i < len; i++) {
       PlayingListToneApk? listToneApk = model.responseMap?.listToneApk?[i];
       String serviceName = listToneApk?.serviceName ?? '';
+      String bParty = listToneApk?.msisdnB ?? '';
 
       List<ToneDetail> lst = listToneApk?.toneDetails ?? [];
 
@@ -33,31 +35,32 @@ class MyPlayingTuneController extends GetxController {
         ToneDetail info = lst.first;
         isShuffleOn.value = (info.isShuffle == "T") ? true : false;
         if (info.customiseStartDate != '0') {
-          tuneList.add(createNewList(info, PlayingCardType.none, serviceName));
+          tuneList.add(
+              createNewList(info, PlayingCardType.none, serviceName, bParty));
           if (kDebugMode) {
             customPrint("none ");
           }
         }
         if (info.endDayMonthly != '0') {
-          tuneList
-              .add(createNewList(info, PlayingCardType.monthly, serviceName));
+          tuneList.add(createNewList(
+              info, PlayingCardType.monthly, serviceName, bParty));
           customPrint("SKY MONTHLY");
         }
         if (info.yearlyEndMonth != '0') {
-          tuneList
-              .add(createNewList(info, PlayingCardType.yearly, serviceName));
+          tuneList.add(
+              createNewList(info, PlayingCardType.yearly, serviceName, bParty));
           customPrint("SKY YEARLY");
         }
         if (info.startTimeWeekly == "00:00:00" &&
             info.endTimeWeekly != "00:00:00") {
-          tuneList
-              .add(createNewList(info, PlayingCardType.fullday, serviceName));
+          tuneList.add(createNewList(
+              info, PlayingCardType.fullday, serviceName, bParty));
           customPrint("SKY full day ");
         }
         if (info.endTimeWeekly != "00:00:00" &&
             info.startTimeWeekly != "00:00:00") {
-          tuneList.add(
-              createNewList(info, PlayingCardType.customTime, serviceName));
+          tuneList.add(createNewList(
+              info, PlayingCardType.customTime, serviceName, bParty));
           customPrint("SKY Custom time base ");
         }
       }
@@ -66,10 +69,11 @@ class MyPlayingTuneController extends GetxController {
     return;
   }
 
-  ToneDetail createNewList(
-      ToneDetail info, PlayingCardType type, String serviceName) {
+  ToneDetail createNewList(ToneDetail info, PlayingCardType type,
+      String serviceName, String bParty) {
     ToneDetail inf = ToneDetail();
     inf.playingCardType = type;
+    inf.bParty = bParty;
     inf.albumName = info.albumName;
     inf.artistName = info.artistName;
     inf.createdDate = info.createdDate;

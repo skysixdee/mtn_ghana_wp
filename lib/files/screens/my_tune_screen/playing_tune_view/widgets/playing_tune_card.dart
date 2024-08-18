@@ -1,13 +1,21 @@
+import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/enums/playing_card_type.dart';
 import 'package:etisalat/files/model/my_playing_tunes_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/screens/my_tune_screen/playing_tune_view/widgets/day_repeat_view.dart';
+import 'package:etisalat/files/screens/my_tune_screen/playing_tune_view/widgets/monthly_repeat_view.dart';
 import 'package:etisalat/files/utility/colors.dart';
+import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class PlayingTuneCard extends StatelessWidget {
-  const PlayingTuneCard({super.key, required this.info});
+  PlayingTuneCard({super.key, required this.info});
+  final MyPlayingTuneController con = Get.find();
   final ToneDetail info;
   @override
   Widget build(BuildContext context) {
@@ -21,11 +29,46 @@ class PlayingTuneCard extends StatelessWidget {
           ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(child: image()),
-          tuneInfo(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: infoBuilder(),
+          ),
         ],
       ),
+    );
+  }
+
+  Column infoBuilder() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        tuneInfo(),
+        verticalDivider(),
+        statusWidget(),
+        verticalDivider(),
+        timeWidget(),
+        verticalDivider(),
+        repeatView(),
+      ],
+    );
+  }
+
+  Widget repeatView() {
+    return ((info.playingCardType == PlayingCardType.none) ||
+            (info.playingCardType == PlayingCardType.monthly) ||
+            (info.playingCardType == PlayingCardType.yearly))
+        ? const MonthlyRepeatView()
+        : DayRepeatView(info: info);
+  }
+
+  Widget verticalDivider() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Container(height: 1, color: lightGrey),
     );
   }
 
@@ -34,15 +77,198 @@ class PlayingTuneCard extends StatelessWidget {
   }
 
   Widget tuneInfo() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: nameAndArtist()),
+        const SizedBox(width: 8),
+        playButton(),
+        const SizedBox(width: 6),
+        deleteButton(),
+      ],
+    );
+  }
+
+  Widget playButton() {
+    return Container(
+      height: 34,
+      width: 34,
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(17), color: yellow),
+      child: const Icon(
+        Icons.play_arrow_rounded,
+        color: white,
+      ),
+    );
+  }
+
+  Widget deleteButton() {
+    return Container(
+      height: 34,
+      width: 34,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(17),
+          border: Border.all(color: red)),
+      child: const Icon(
+        Icons.delete_forever_outlined,
+        color: red,
+        size: 20,
+      ),
+    );
+  }
+
+  Column nameAndArtist() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(title: info.toneName, fontName: FontName.bold),
-        CustomText(title: info.artistName, color: grey),
-        CustomText(title: "${info.playingCardType?.name}"),
-        CustomText(title: "${info.serviceName}"),
+        CustomText(title: info.toneName, fontName: FontName.bold, maxLine: 1),
+        CustomText(title: info.artistName, color: grey, maxLine: 1),
       ],
     );
+  }
+
+  Widget statusWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        textColumn(statusStr, con.isShuffleOn.value ? shuffleStr : activeStr),
+        textColumn(callerStr, serviceName(),
+            crossAxisAlignment: CrossAxisAlignment.center),
+        textColumn(playAtStr, playAt(),
+            crossAxisAlignment: CrossAxisAlignment.end),
+      ],
+    );
+  }
+
+  Widget timeWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        textColumn(startTimeStr, fromDate(info)),
+        textColumn(endTimeStr, toDate(info),
+            crossAxisAlignment: CrossAxisAlignment.end),
+      ],
+    );
+  }
+
+  String serviceName() {
+    if (info.serviceName == 'AllCaller') {
+      return allStr;
+    } else if (info.serviceName == 'SpecialCallerSetting') {
+      return info.bParty ?? '';
+    } else {
+      return "Check Here";
+    }
+  }
+
+  String playAt() {
+    if (info.playingCardType == PlayingCardType.customTime) {
+      return customTimeStr;
+    } else if (info.playingCardType == PlayingCardType.fullday) {
+      return fullDayStr;
+    } else if (info.playingCardType == PlayingCardType.monthly) {
+      return monthlyStr;
+    } else if (info.playingCardType == PlayingCardType.yearly) {
+      return yearlyStr;
+    } else {
+      return noneStr;
+    }
+  }
+
+  Widget textColumn(
+    String title,
+    String subTitle, {
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start,
+  }) {
+    return Column(
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
+      children: [
+        CustomText(
+          title: title,
+          color: grey,
+        ),
+        CustomText(
+          title: subTitle,
+        ),
+      ],
+    );
+  }
+
+  String fromDate(ToneDetail info1) {
+    if (info1.playingCardType == PlayingCardType.yearly) {
+      return "${info1.yearlyStartDay}/${info1.yearlyStartMonth}, ${getCustomTime(info1.yearlyStartTime ?? "")}";
+    } else if (info1.playingCardType == PlayingCardType.monthly) {
+      return "${getDayOfSuffix(int.parse(info1.startDayMonthly ?? '0'))}, ${getCustomTime(info1.startTimeMonthly ?? "")}";
+    } else if (info1.playingCardType == PlayingCardType.none) {
+      return "${customDate(info1.customiseStartDate ?? "")}, ${getCustomTime(info1.customiseStartTime ?? "")}";
+    } else if (info1.playingCardType == PlayingCardType.fullday) {
+      return "00:00";
+    } else {
+      return getCustomTime(info1.startTimeWeekly ?? "");
+    }
+  }
+
+  String toDate(ToneDetail info) {
+    ToneDetail? info1 = info; //toneDetails?.first;
+
+    if (info1.playingCardType == PlayingCardType.yearly) {
+      return "${info1.yearlyEndDay}/${info1.yearlyEndMonth}, ${getCustomTime(info1.yearlyEndTime ?? "")}";
+    } else if (info1.playingCardType == PlayingCardType.monthly) {
+      return "${getDayOfSuffix(int.parse(info1.endDayMonthly ?? '0'))}, ${getCustomTime(info1.endTimeMonthly ?? "")}";
+    } else if (info1.playingCardType == PlayingCardType.none) {
+      return "${customDate(info1.customiseEndDate ?? "")}, ${getCustomTime(info1.customiseEndTime ?? "")}";
+    } else if (info1.playingCardType == PlayingCardType.fullday) {
+      return "23:59";
+    } else {
+      return getCustomTime(info1.endTimeWeekly ?? "");
+    }
+  }
+
+  String getDayOfSuffix(int dayNum) {
+    if (!(dayNum >= 1 && dayNum <= 31)) {
+      throw Exception('Invalid day of month');
+    }
+
+    if (dayNum >= 11 && dayNum <= 13) {
+      return '${dayNum}th Day';
+    }
+
+    switch (dayNum % 10) {
+      case 1:
+        return '${dayNum}st Day';
+      case 2:
+        return '${dayNum}nd Day';
+      case 3:
+        return '${dayNum}rd Day';
+      default:
+        return '${dayNum}th Day';
+    }
+  }
+
+  String getCustomTime(String time) {
+    List<String> list = time.split(":");
+    return "${list[0]}:${list[1]}";
+  }
+
+  int repeatYearlySelectedType(ToneDetail info) {
+    ToneDetail? info1 = info; //.toneDetails?.first;
+    if (info1.playingCardType == PlayingCardType.monthly) {
+      return 1;
+    } else if (info1.playingCardType == PlayingCardType.yearly) {
+      return 2;
+    } else if (info1.playingCardType == PlayingCardType.none) {
+      return 0;
+    } else {
+      return -1;
+    }
+  }
+
+  String customDate(String date) {
+    List<String> lst = date.split('-');
+    return "${lst[2]}/${lst[1]}/${lst[0]}";
   }
 }

@@ -178,6 +178,7 @@ class ToneDetail {
   String? toneIdpreviewImageUrl;
   String? isShuffle;
   String? serviceName;
+  String? bParty;
   PlayingCardType? playingCardType;
 
   ToneDetail({
@@ -213,6 +214,7 @@ class ToneDetail {
     this.toneIdpreviewImageUrl,
     this.isShuffle,
     this.serviceName,
+    this.bParty,
     this.playingCardType = PlayingCardType.none,
   });
 

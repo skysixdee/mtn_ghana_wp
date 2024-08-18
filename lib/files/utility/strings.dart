@@ -19,6 +19,25 @@ String wishlistStr = "Wishlist";
 
 String shareStr = "Share";
 
+String shuffleStr = "Shuffle";
+String activeStr = "Active";
+String allCallerStr = "AllCaller";
+String fullDayStr = "Full Day";
+String startTimeStr = "StartTime";
+String endTimeStr = "End Time";
+
+String noneStr = "None";
+String monthlyStr = "Monthly";
+String yearlyStr = "Yearly";
+String customTimeStr = "Custom Time";
+
+String allStr = "All";
+String specialStr = "Special";
+
+String statusStr = "Status";
+String callerStr = "Callers";
+String playAtStr = "Play at";
+
 String myProfileStr = "My Profile";
 String myTunezStr = "My Tunez";
 String myWishlistStr = "My Wishlist";

@@ -40,7 +40,7 @@ class MyTuneView extends StatelessWidget {
   Widget settingButton() {
     return GenericButton(
       title: settingStr,
-      leadingIcon: Icon(
+      leadingIcon: const Icon(
         Icons.settings,
         size: 15,
       ),
