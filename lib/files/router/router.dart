@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/music_box_controller.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/name_tune_controller.dart';
 import 'package:etisalat/files/controllers/profile_controller.dart';
@@ -12,6 +13,7 @@ import 'package:etisalat/files/screens/category_detail_screen/category_detail_sc
 import 'package:etisalat/files/screens/home_screen/home_screen.dart';
 import 'package:etisalat/files/screens/music_box/music_box_content_screen.dart';
 import 'package:etisalat/files/screens/music_box/music_box_screen.dart';
+import 'package:etisalat/files/screens/my_tune_screen/my_tune_screen.dart';
 import 'package:etisalat/files/screens/my_wishlist_screen/my_wishlist_screen.dart';
 import 'package:etisalat/files/screens/name_tune_screen/name_tune_screen.dart';
 import 'package:etisalat/files/screens/profile_screen/profile_screen.dart';
@@ -39,6 +41,7 @@ final router = GoRouter(
         _seeMoreShell(),
         _myWishlistShell(),
         _profileShell(),
+        _myTuneShell(),
         _nameTuneShell(),
         _musicBoxShell(),
         _musicBoxContentShell(),
@@ -207,6 +210,22 @@ StatefulShellBranch _seeMoreShell() {
         builder: (context, state) {
           List<TuneInfo> lst = state.extra as List<TuneInfo>;
           return SeeMoreScreen(list: lst);
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _myTuneShell() {
+  TuneController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: myTunesRoute,
+        path: myTunesRoute,
+        builder: (context, state) {
+          cont.makeApiCall();
+          return const MyTuneScreen();
         },
       ),
     ],

@@ -211,6 +211,8 @@ class WebNavigationView extends StatelessWidget {
           ProfileController con = Get.find();
           con.getProfileDetail();
           context.goNamed(profileRoute);
+        } else if (model.title == myTunezStr) {
+          context.goNamed(myTunesRoute);
         }
       },
     );

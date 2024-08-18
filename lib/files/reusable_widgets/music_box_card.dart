@@ -12,9 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class MusicBoxCard extends StatelessWidget {
-  const MusicBoxCard({super.key, required this.info});
+  const MusicBoxCard({super.key, required this.info, this.rightButton});
   final TuneInfo info;
-
+  final Widget? rightButton;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -57,7 +57,7 @@ class MusicBoxCard extends StatelessWidget {
                         title: previewStr,
                         leadingIcon: const Icon(Icons.visibility),
                       ),
-                      buyButton(info)
+                      rightButton ?? buyButton(info)
                     ],
                   ),
                 ],

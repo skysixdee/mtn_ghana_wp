@@ -13,10 +13,13 @@ class MyTuneScreen extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       primary: true,
-      children: const [
-        MyTuneHeaderView(),
+      children: [
+        const MyTuneHeaderView(),
+        const SizedBox(height: 20),
         PlayingTuneView(),
+        const SizedBox(height: 20),
         MyTuneView(),
+        const SizedBox(height: 20),
         MyMusicBoxView()
       ],
     );

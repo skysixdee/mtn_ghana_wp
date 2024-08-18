@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
+import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class MusicBoxScreen extends StatelessWidget {
             : GenericGridView(
                 itemCount: con.musicBoxList.length,
                 builder: (p0) {
-                  return TuneCard(info: con.musicBoxList[p0]);
+                  return MusicBoxCard(info: con.musicBoxList[p0]);
                 },
               );
       },

@@ -39,6 +39,7 @@ String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";
 String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
+String settingStr = "Setting";
 String loginStr = "Login";
 String buyTuneStr = "Buy Tune";
 String myAccountStr = "My Account";

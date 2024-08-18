@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:etisalat/files/api_calls/get_my_music_box_api.dart';
+import 'package:etisalat/files/api_calls/get_my_tune_api.dart';
+import 'package:etisalat/files/api_calls/get_playing_tune_api.dart';
 import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
 import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
@@ -41,14 +46,35 @@ class _HomeScreenState extends State<HomeScreen> {
       primary: true,
       children: [
         GenericButton(
+          title: "make api call",
+          onTap: () {
+            getMyMusicBoxApi();
+            getMyTuneApi();
+            getMyPlayingTuneApi();
+          },
+        ),
+        GenericButton(
           title: "Set value",
           onTap: () {
-            StoreManager.setLoggedIn(true);
-            StoreManager.setMsisdn("0832120732");
-            StoreManager.setAccessToken("66a64a44-9c93-47ea-951a-09f6851b61e8");
-            StoreManager.setRefreshToken(
-                "d4d7c1f9-a187-43ca-be31-12f3c9951e05");
-            StoreManager.setDeviceId("096c3442-a697-455b-a495-adc07c158638");
+            Map<String, dynamic> map1 = loginJson.map((k, v) {
+              print("key == $k");
+              if (k == 'accessToken') {
+                StoreManager.setAccessToken(v as String);
+              }
+              if (k == 'refreshToken') {
+                StoreManager.setRefreshToken(v as String);
+              }
+              if (k == 'deviceId') {
+                StoreManager.setDeviceId(v as String);
+              }
+              if (k == 'msisdn') {
+                StoreManager.setMsisdn(v as String);
+                StoreManager.setLoggedIn(true);
+              }
+
+              return MapEntry(v, k);
+            });
+            print("map 1 ====== $map1");
           },
         ),
         const SizedBox(height: 8),
@@ -63,3 +89,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+Map<String, dynamic> loginJson = {
+  "respDesc": "Login Check Success",
+  "srvType": "CHECKPASSWORD",
+  "userIdEnc": "209-72-252-145-121-240-173-222",
+  "userName": "0832120732",
+  "accessToken": "4e476a89-35fb-46c9-b414-5733323fa1af",
+  "userId": "268",
+  "deviceId": "19c13264-c867-4826-8b82-b907ab3922b4",
+  "clientTxnId": "578556083",
+  "msisdn": "0832120732",
+  "txnId": "69435135374975",
+  "refreshToken": "a7d997ef-5abe-48b9-99c1-cf4b176029e9"
+};

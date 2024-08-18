@@ -34,3 +34,10 @@ String musicBoxUrl =
     "https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/music-box-search?";
 String musicBoxContextUrl =
     'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/music-box-contents?';
+
+String myTunesUrl =
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/list-tones?';
+String playingTuneUrl =
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/list-tones';
+String myMusicBoxUrl =
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/list-tones';

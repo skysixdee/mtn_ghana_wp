@@ -4,6 +4,10 @@ import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
 import 'package:etisalat/files/controllers/music_box_controller.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/my_music_box_controller.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/name_tune_controller.dart';
 import 'package:etisalat/files/controllers/profile_controller.dart';
@@ -29,17 +33,22 @@ void main() async {
 
 Future<void> initiateController() async {
   AppController _ = Get.put(AppController());
+
+  Get.lazyPut(() => TuneController());
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => LoginController());
+  Get.lazyPut(() => MyTuneController());
   Get.lazyPut(() => BannerController());
   Get.lazyPut(() => FeatureController());
   Get.lazyPut(() => ProfileController());
   Get.lazyPut(() => NameTuneController());
   Get.lazyPut(() => MusicBoxController());
+  Get.lazyPut(() => MyMusicBoxController());
   Get.lazyPut(() => TuneSearchController());
   Get.lazyPut(() => CategoryDetailScreen());
   Get.lazyPut(() => MyWishlistController());
   Get.lazyPut(() => BannerDetailController());
+  Get.lazyPut(() => MyPlayingTuneController());
   Get.lazyPut(() => CategoryDetailController());
 
   return;
