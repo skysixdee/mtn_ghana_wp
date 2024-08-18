@@ -95,11 +95,11 @@ Map<String, dynamic> loginJson = {
   "srvType": "CHECKPASSWORD",
   "userIdEnc": "209-72-252-145-121-240-173-222",
   "userName": "0832120732",
-  "accessToken": "4e476a89-35fb-46c9-b414-5733323fa1af",
+  "accessToken": "f6797333-537a-4a60-bc14-6e3838653038",
   "userId": "268",
-  "deviceId": "19c13264-c867-4826-8b82-b907ab3922b4",
-  "clientTxnId": "578556083",
+  "deviceId": "506e7f1b-2db6-4ca4-b020-040b43253844",
+  "clientTxnId": "215361588",
   "msisdn": "0832120732",
-  "txnId": "69435135374975",
-  "refreshToken": "a7d997ef-5abe-48b9-99c1-cf4b176029e9"
+  "txnId": "69435156356308",
+  "refreshToken": "49210184-d013-4f0a-96ef-6737f64ed06f"
 };

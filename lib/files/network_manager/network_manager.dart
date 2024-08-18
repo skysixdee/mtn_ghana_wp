@@ -24,7 +24,7 @@ class NetworkManager {
           return await _regenToken(url);
         }
         final stringData = await response.transform(utf8.decoder).join();
-        print("resp code is ${response.statusCode}");
+        print("resp code is $url \n ${response.statusCode}\n");
         Map<String, dynamic> valueMap = json.decode(stringData);
         return valueMap;
       } catch (e) {
@@ -72,7 +72,7 @@ class NetworkManager {
           return await _regenToken(url, formData: formData, jsonData: jsonData);
         } else {}
         final stringData = await response.transform(utf8.decoder).join();
-        print("resp code is ${response.statusCode}");
+        print("resp code is $url \n ${response.statusCode}\n");
         Map<String, dynamic> valueMap = json.decode(stringData);
         return valueMap;
       } catch (e) {
