@@ -10,11 +10,12 @@ Widget customImage(
         borderRadius: BorderRadius.circular(cornerRadius),
         child: CachedNetworkImage(
           imageUrl: url ?? '',
+          fit: BoxFit.cover,
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: imageProvider,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
           ),

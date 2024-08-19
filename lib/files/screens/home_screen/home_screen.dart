@@ -49,37 +49,38 @@ class _HomeScreenState extends State<HomeScreen> {
         shrinkWrap: true,
         primary: true,
         children: [
-          GenericButton(
-            title: "make api call",
-            onTap: () {
-              getMyMusicBoxApi();
-              getMyTuneApi();
-              getMyPlayingTuneApi();
-            },
-          ),
-          GenericButton(
-            title: "Set value",
-            onTap: () {
-              Map<String, dynamic> map1 = loginJson.map((k, v) {
-                customPrint("key == $k");
-                if (k == 'accessToken') {
-                  StoreManager.setAccessToken(v as String);
-                }
-                if (k == 'refreshToken') {
-                  StoreManager.setRefreshToken(v as String);
-                }
-                if (k == 'deviceId') {
-                  StoreManager.setDeviceId(v as String);
-                }
-                if (k == 'msisdn') {
-                  StoreManager.setMsisdn(v as String);
-                  StoreManager.setLoggedIn(true);
-                }
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 38.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GenericButton(
+                  title: "Login",
+                  onTap: () {
+                    Map<String, dynamic> map1 = loginJson.map((k, v) {
+                      customPrint("key == $k");
+                      if (k == 'accessToken') {
+                        StoreManager.setAccessToken(v as String);
+                      }
+                      if (k == 'refreshToken') {
+                        StoreManager.setRefreshToken(v as String);
+                      }
+                      if (k == 'deviceId') {
+                        StoreManager.setDeviceId(v as String);
+                      }
+                      if (k == 'msisdn') {
+                        StoreManager.setMsisdn(v as String);
+                        StoreManager.setLoggedIn(true);
+                      }
 
-                return MapEntry(v, k);
-              });
-              customPrint("map 1 ====== $map1");
-            },
+                      return MapEntry(v, k);
+                    });
+                    customPrint("map 1 ====== $map1");
+                  },
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 8),
           HomeBannerView(key: widget.key),

@@ -14,6 +14,7 @@ import 'package:etisalat/files/screens/home_screen/home_screen.dart';
 import 'package:etisalat/files/screens/music_box/music_box_content_screen.dart';
 import 'package:etisalat/files/screens/music_box/music_box_screen.dart';
 import 'package:etisalat/files/screens/my_tune_screen/my_tune_screen.dart';
+import 'package:etisalat/files/screens/my_tune_setting_screen/my_tune_setting_screen.dart';
 import 'package:etisalat/files/screens/my_wishlist_screen/my_wishlist_screen.dart';
 import 'package:etisalat/files/screens/name_tune_screen/name_tune_screen.dart';
 import 'package:etisalat/files/screens/profile_screen/profile_screen.dart';
@@ -47,6 +48,7 @@ final router = GoRouter(
         _nameTuneShell(),
         _musicBoxShell(),
         _musicBoxContentShell(),
+        _myTuneSettingShell(),
       ],
     ),
   ],
@@ -243,6 +245,21 @@ StatefulShellBranch _myTuneShell() {
         builder: (context, state) {
           cont.makeApiCall();
           return const MyTuneScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _myTuneSettingShell() {
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: myTunesSettingRoute,
+        path: myTunesSettingRoute,
+        builder: (context, state) {
+          TuneInfo info = state.extra as TuneInfo;
+          return MyTuneSettingScreen(info: info);
         },
       ),
     ],

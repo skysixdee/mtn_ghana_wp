@@ -1,14 +1,17 @@
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
+import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class MyTuneView extends StatelessWidget {
   MyTuneView({super.key});
@@ -26,7 +29,7 @@ class MyTuneView extends StatelessWidget {
                   return TuneCard(
                     info: con.tuneList[p0],
                     menuList: menuList,
-                    bottomRightChild: settingButton(),
+                    bottomRightChild: settingButton(context, p0),
                     onMenuTap: (p0, p1) {
                       customPrint("title is = ${p0.title} and index = $p1");
                     },
@@ -37,14 +40,16 @@ class MyTuneView extends StatelessWidget {
     );
   }
 
-  Widget settingButton() {
+  Widget settingButton(BuildContext contex, int index) {
     return GenericButton(
       title: settingStr,
+      bgColor: yellow,
       leadingIcon: const Icon(
         Icons.settings,
         size: 15,
       ),
       onTap: () {
+        contex.goNamed(myTunesSettingRoute, extra: con.tuneList[index]);
         customPrint("On Setting tap");
       },
     );

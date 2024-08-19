@@ -10,15 +10,20 @@ String enterOtpStr = "Enter Code";
 String verifyOtpStr = "Verify OTP";
 String listIsEmptyStr = "List is empty";
 String resendStr = "Resnd";
+String selectTimeTypeStr = "Select time type";
 String playStr = "Play";
 String pauseStr = "Pause";
 String deleteStr = "Delete";
 String contactNumberStr = "Contact Number";
 
 String wishlistStr = "Wishlist";
-
+String whomYouWantToPlayItStr = 'Whom you want to play it?';
+String specialCallerStr = 'Special Caller';
+String whenYouWantToPlayItStr = 'When you want to play it?';
 String shareStr = "Share";
-
+String repeatStr = 'Repeat';
+String selectDateAndTimeStr = 'Select Date & Time';
+String selectTimeStr = 'Select Time';
 String shuffleStr = "Shuffle";
 String activeStr = "Active";
 String allCallerStr = "AllCaller";
