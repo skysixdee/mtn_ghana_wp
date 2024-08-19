@@ -104,6 +104,8 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
   return ResponsiveBuilder(
     builder: (context, si) {
       return GenericButton(
+        borderColor: black,
+        bgColor: white,
         width: 30,
         height: 30,
         padding: EdgeInsets.zero,

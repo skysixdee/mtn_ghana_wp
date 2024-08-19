@@ -15,8 +15,6 @@ Widget customImage(
               image: DecorationImage(
                 image: imageProvider,
                 fit: BoxFit.cover,
-                colorFilter:
-                    const ColorFilter.mode(Colors.red, BlendMode.colorBurn),
               ),
             ),
           ),

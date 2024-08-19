@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
 Widget dayRepeatView(ToneDetail info) {
-  List<String> days = ['S', 'M', 'T', 'W', 'Th', 'F', 'S'];
+  List<String> days = ['', 'S', 'M', 'T', 'W', 'Th', 'F', 'S'];
   return SizedBox(
     height: 30,
     child: ListView.builder(
-      itemCount: days.length,
+      itemCount: days.length - 1,
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(right: 4.0),
-          child: _dayButton(index, info, days[index]),
+          child: _dayButton(index + 1, info, days[index + 1]),
         );
       },
     ),

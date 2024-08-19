@@ -19,6 +19,7 @@ import 'package:etisalat/files/screens/my_tune_screen/my_tune_screen.dart';
 import 'package:etisalat/files/screens/profile_screen/profile_screen.dart';
 import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
+import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,51 +43,54 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return //MyTuneScreen();
-        ListView(
-      shrinkWrap: true,
-      primary: true,
-      children: [
-        GenericButton(
-          title: "make api call",
-          onTap: () {
-            getMyMusicBoxApi();
-            getMyTuneApi();
-            getMyPlayingTuneApi();
-          },
-        ),
-        GenericButton(
-          title: "Set value",
-          onTap: () {
-            Map<String, dynamic> map1 = loginJson.map((k, v) {
-              customPrint("key == $k");
-              if (k == 'accessToken') {
-                StoreManager.setAccessToken(v as String);
-              }
-              if (k == 'refreshToken') {
-                StoreManager.setRefreshToken(v as String);
-              }
-              if (k == 'deviceId') {
-                StoreManager.setDeviceId(v as String);
-              }
-              if (k == 'msisdn') {
-                StoreManager.setMsisdn(v as String);
-                StoreManager.setLoggedIn(true);
-              }
+        Material(
+      color: white,
+      child: ListView(
+        shrinkWrap: true,
+        primary: true,
+        children: [
+          GenericButton(
+            title: "make api call",
+            onTap: () {
+              getMyMusicBoxApi();
+              getMyTuneApi();
+              getMyPlayingTuneApi();
+            },
+          ),
+          GenericButton(
+            title: "Set value",
+            onTap: () {
+              Map<String, dynamic> map1 = loginJson.map((k, v) {
+                customPrint("key == $k");
+                if (k == 'accessToken') {
+                  StoreManager.setAccessToken(v as String);
+                }
+                if (k == 'refreshToken') {
+                  StoreManager.setRefreshToken(v as String);
+                }
+                if (k == 'deviceId') {
+                  StoreManager.setDeviceId(v as String);
+                }
+                if (k == 'msisdn') {
+                  StoreManager.setMsisdn(v as String);
+                  StoreManager.setLoggedIn(true);
+                }
 
-              return MapEntry(v, k);
-            });
-            customPrint("map 1 ====== $map1");
-          },
-        ),
-        const SizedBox(height: 8),
-        HomeBannerView(key: widget.key),
-        const SizedBox(height: 10),
-        const MusicBoxView(),
-        const SizedBox(height: 10),
-        FeatureCategoryView(key: widget.key),
-        const SizedBox(height: 300),
-        const SizedBox(height: 300),
-      ],
+                return MapEntry(v, k);
+              });
+              customPrint("map 1 ====== $map1");
+            },
+          ),
+          const SizedBox(height: 8),
+          HomeBannerView(key: widget.key),
+          const SizedBox(height: 10),
+          const MusicBoxView(),
+          const SizedBox(height: 10),
+          FeatureCategoryView(key: widget.key),
+          const SizedBox(height: 300),
+          const SizedBox(height: 300),
+        ],
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:etisalat/files/reusable_widgets/empty_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -30,13 +31,15 @@ class GenericGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, si) {
-        return onlyGrid
-            ? grid(si)
-            : si.isMobile
+        return itemCount == 0
+            ? (emptyListWidget())
+            : onlyGrid
                 ? grid(si)
-                : itemCount <= maxDisplay
-                    ? Center(child: alignedGrid(context))
-                    : grid(si);
+                : si.isMobile
+                    ? grid(si)
+                    : itemCount <= maxDisplay
+                        ? Center(child: alignedGrid(context))
+                        : grid(si);
       },
     );
   }
@@ -52,8 +55,8 @@ class GenericGridView extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: cardWidth, //height,
         mainAxisExtent: cardHeight, //width,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
+        mainAxisSpacing: si.isMobile ? 10 : 20,
+        crossAxisSpacing: si.isMobile ? 10 : 20,
       ),
       itemBuilder: (context, index) {
         return (onTap != null)
