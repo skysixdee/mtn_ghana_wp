@@ -61,8 +61,8 @@ class PlayingTuneCard extends StatelessWidget {
     return ((info.playingCardType == PlayingCardType.none) ||
             (info.playingCardType == PlayingCardType.monthly) ||
             (info.playingCardType == PlayingCardType.yearly))
-        ? const MonthlyRepeatView()
-        : DayRepeatView(info: info);
+        ? monthlyRepeatView(info)
+        : dayRepeatView(info);
   }
 
   Widget verticalDivider() {

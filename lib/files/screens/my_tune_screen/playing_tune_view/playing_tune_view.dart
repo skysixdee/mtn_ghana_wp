@@ -17,6 +17,7 @@ class PlayingTuneView extends StatelessWidget {
         return con.isLoading.value
             ? loadingIndicator()
             : GenericGridView(
+                physics: const NeverScrollableScrollPhysics(),
                 cardWidth: 335,
                 cardHeight: 340,
                 itemCount: con.tuneList.length,

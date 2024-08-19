@@ -30,14 +30,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 late SharedPreferences prefs;
+late AppController appCont;
+late BuildContext globalContext;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
   await readProperties();
   prefs = await SharedPreferences.getInstance();
-  StoreManager.initValues();
 
   await initiateController();
+  StoreManager.initValues();
   runApp(const MyApp());
 }
 
@@ -50,7 +52,7 @@ Future<void> readProperties() async {
 }
 
 Future<void> initiateController() async {
-  AppController _ = Get.put(AppController());
+  appCont = Get.put(AppController());
 
   Get.lazyPut(() => TuneController());
   Get.lazyPut(() => OtpController());

@@ -24,6 +24,7 @@ import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/images.dart';
 import 'package:etisalat/files/utility/strings.dart';
+import 'package:etisalat/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -130,28 +131,32 @@ class WebNavigationView extends StatelessWidget {
     LoginController con = Get.find();
     return ResponsiveBuilder(
       builder: (context, si) {
-        return GenericButton(
-          bgColor: white,
-          leadingIcon: const Padding(
-            padding: EdgeInsets.only(right: 4),
-            child: Icon(
-              Icons.person,
-              size: 18,
-            ),
-          ),
-          title: StoreManager.isLoggedIn ? myAccountStr : loginStr,
-          onTap: () {
-            if (StoreManager.isLoggedIn) {
-              myAccountMenu(context);
-            } else {
-              Get.dialog(Obx(
-                () {
-                  return con.displayOptScreen.value
-                      ? const LoginOtpPopup()
-                      : const LoginPopup();
-                },
-              ));
-            }
+        return Obx(
+          () {
+            return GenericButton(
+              bgColor: white,
+              leadingIcon: const Padding(
+                padding: EdgeInsets.only(right: 4),
+                child: Icon(
+                  Icons.person,
+                  size: 18,
+                ),
+              ),
+              title: appCont.isLoggedIn.value ? myAccountStr : loginStr,
+              onTap: () {
+                if (StoreManager.isLoggedIn) {
+                  myAccountMenu(context);
+                } else {
+                  Get.dialog(Obx(
+                    () {
+                      return con.displayOptScreen.value
+                          ? const LoginOtpPopup()
+                          : const LoginPopup();
+                    },
+                  ));
+                }
+              },
+            );
           },
         );
       },
@@ -214,6 +219,8 @@ class WebNavigationView extends StatelessWidget {
           context.goNamed(profileRoute);
         } else if (model.title == myTunezStr) {
           context.goNamed(myTunesRoute);
+        } else if (model.title == logoutStr) {
+          StoreManager.logout();
         }
       },
     );

@@ -20,6 +20,8 @@ import 'package:etisalat/files/screens/profile_screen/profile_screen.dart';
 import 'package:etisalat/files/screens/search_screen/search_screen.dart';
 import 'package:etisalat/files/screens/see_more_screen/see_more_screen.dart';
 import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
+import 'package:etisalat/files/store_manager/store_manager.dart';
+import 'package:etisalat/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -48,6 +50,21 @@ final router = GoRouter(
       ],
     ),
   ],
+  redirect: (context, state) {
+    print("sky name = ${state.fullPath}");
+    print("sky name = ${state.name}");
+    String path = state.fullPath ?? '';
+    if (!StoreManager.isLoggedIn) {
+      if (path == profileRoute ||
+          path == myTunesRoute ||
+          path == myWishlistRoute) {
+        return '/';
+      } else {
+        return null;
+      }
+    }
+    return null;
+  },
   errorPageBuilder: (context, state) {
     return MaterialPage(child: errorWidget(context, state));
   },
@@ -233,6 +250,7 @@ StatefulShellBranch _myTuneShell() {
 }
 
 Widget navBuilder(context, state, navigationShell) {
+  globalContext = context;
   return GetMaterialApp(
     debugShowCheckedModeBanner: false,
     home: Material(

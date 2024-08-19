@@ -1,6 +1,8 @@
 import 'package:etisalat/files/model/app_setting_model.dart';
 import 'package:etisalat/files/model/category_model.dart';
+import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/main.dart';
+import 'package:go_router/go_router.dart';
 
 const String _accessToken = 'access_token';
 const String _refreshToken = 'refresh_token';
@@ -28,6 +30,7 @@ class StoreManager {
     refreshToken = prefs.getString(_refreshToken) ?? '';
     deviceId = prefs.getString(_deviceId) ?? '';
     language = isEnglish ? "English" : "Burmese";
+    appCont.isLoggedIn.value = isLoggedIn;
   }
 
   static setMsisdn(String value) {
@@ -38,6 +41,7 @@ class StoreManager {
   static setLoggedIn(bool value) {
     prefs.setBool(_isLoggedIn, value);
     isLoggedIn = value;
+    appCont.isLoggedIn.value = isLoggedIn;
   }
 
   static setLanguageEnglish(bool value) {
@@ -59,5 +63,18 @@ class StoreManager {
   static setDeviceId(String value) {
     prefs.setString(_deviceId, value);
     deviceId = value;
+  }
+
+  static logout() {
+    setMsisdn('');
+    setLoggedIn(false);
+    setAccessToken('');
+    setRefreshToken('');
+    setDeviceId('');
+    appCont.isLoggedIn.value = false;
+    //globalContext.goNamed(homeRoute);
+    //globalContext.pushReplacement(homeRoute);
+    GoRouter.of(globalContext)
+        .pushReplacement(homeRoute); //clearStackAndNavigate('login')
   }
 }
