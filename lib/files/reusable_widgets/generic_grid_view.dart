@@ -1,0 +1,98 @@
+import 'package:etisalat/files/reusable_widgets/empty_list_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+class GenericGridView extends StatelessWidget {
+  const GenericGridView({
+    super.key,
+    required this.itemCount,
+    required this.builder,
+    this.onTap,
+    this.onlyGrid = false,
+    this.maxDisplay = 8,
+    this.physics,
+    this.cardHeight = 240,
+    this.cardWidth = 220,
+    this.padding,
+    this.scrollDirection,
+  });
+  final double cardHeight;
+
+  final double cardWidth;
+  final int itemCount;
+  final bool onlyGrid;
+  final Axis? scrollDirection;
+  final EdgeInsetsGeometry? padding;
+  final Widget Function(int) builder;
+  final Function(int index)? onTap;
+  final int maxDisplay;
+  final ScrollPhysics? physics;
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return itemCount == 0
+            ? (emptyListWidget())
+            : onlyGrid
+                ? grid(si)
+                : si.isMobile
+                    ? grid(si)
+                    : itemCount <= maxDisplay
+                        ? Center(child: alignedGrid(context))
+                        : grid(si);
+      },
+    );
+  }
+
+  Widget grid(SizingInformation si) {
+    return GridView.builder(
+      scrollDirection: scrollDirection ?? Axis.vertical,
+      padding: padding ??
+          EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30, vertical: 20),
+      itemCount: itemCount,
+      physics: physics,
+      shrinkWrap: true,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: cardWidth, //height,
+        mainAxisExtent: cardHeight, //width,
+        mainAxisSpacing: si.isMobile ? 10 : 20,
+        crossAxisSpacing: si.isMobile ? 10 : 20,
+      ),
+      itemBuilder: (context, index) {
+        return (onTap != null)
+            ? InkWell(onTap: onTap!(index), child: builder(index))
+            : builder(index);
+      },
+    );
+  }
+
+  Widget alignedGrid(BuildContext context) {
+    const double runSpacing = 14;
+    const double spacing = 14;
+    int listCount = itemCount;
+    double w = cardWidth;
+    double h = cardHeight;
+
+    return SingleChildScrollView(
+      physics: physics,
+      child: Wrap(
+        runSpacing: runSpacing,
+        spacing: spacing,
+        alignment: WrapAlignment.center,
+        children: List.generate(listCount, (index) {
+          return SizedBox(
+              height: h,
+              width: w,
+              child: InkWell(
+                onTap: () {
+                  if (onTap != null) {
+                    onTap!(index);
+                  }
+                },
+                child: builder(index),
+              ));
+        }),
+      ),
+    );
+  }
+}

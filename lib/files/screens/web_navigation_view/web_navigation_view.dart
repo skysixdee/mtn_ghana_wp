@@ -1,0 +1,298 @@
+import 'package:etisalat/files/api_calls/get_search_tune_list_api.dart';
+import 'package:etisalat/files/controllers/app_controller.dart';
+import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
+import 'package:etisalat/files/controllers/category_detail_controller.dart';
+import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
+import 'package:etisalat/files/controllers/name_tune_controller.dart';
+import 'package:etisalat/files/controllers/profile_controller.dart';
+import 'package:etisalat/files/controllers/tune_search_controller.dart';
+import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/model/popover_menu_model.dart';
+import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_image.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
+import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
+import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
+import 'package:etisalat/files/reusable_widgets/msisdn_textfield.dart';
+import 'package:etisalat/files/router/route_name.dart';
+import 'package:etisalat/files/router/router.dart';
+import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dart';
+import 'package:etisalat/files/screens/authentication_screen/login_popup.dart';
+import 'package:etisalat/files/store_manager/store_manager.dart';
+
+import 'package:etisalat/files/utility/colors.dart';
+import 'package:etisalat/files/utility/images.dart';
+import 'package:etisalat/files/utility/strings.dart';
+import 'package:etisalat/main.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:popover/popover.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+class WebNavigationView extends StatelessWidget {
+  WebNavigationView({super.key});
+  final AppController appController = Get.find();
+  TextEditingController textEditingController = TextEditingController();
+  List<PopoverMenuModel> myAccountMenuList = [
+    PopoverMenuModel(myProfileStr),
+    PopoverMenuModel(myTunezStr),
+    PopoverMenuModel(myWishlistStr),
+    PopoverMenuModel(blackListStr),
+    PopoverMenuModel(logoutStr)
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 70,
+      color: yellow,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(child: leftWidget(context)),
+            Flexible(child: rightWidget(context)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Row rightWidget(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Flexible(child: SizedBox(width: 300, child: searchTextField(context))),
+        const SizedBox(width: 16),
+        loginButton(),
+      ],
+    );
+  }
+
+  Row leftWidget(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        logoButton(context),
+        const SizedBox(width: 10),
+        categoryButton(),
+        const SizedBox(width: 20),
+        faqButton(),
+        const SizedBox(width: 20),
+        nameTuneButton(context),
+      ],
+    );
+  }
+
+  GenericButton faqButton() {
+    return GenericButton(
+      title: faqStr,
+      padding: EdgeInsets.zero,
+      bgColor: transparent,
+      height: double.infinity,
+      onTap: () {
+        customPrint("check ");
+      },
+    );
+  }
+
+  GenericButton nameTuneButton(BuildContext context) {
+    NameTuneController con = Get.find();
+    return GenericButton(
+      title: nameTuneStr,
+      padding: EdgeInsets.zero,
+      bgColor: transparent,
+      height: double.infinity,
+      onTap: () {
+        con.getNameTune();
+        context.goNamed(nameTuneRoute);
+        customPrint("check ");
+      },
+    );
+  }
+
+  GenericButton logoButton(BuildContext context) {
+    return GenericButton(
+      padding: EdgeInsets.zero,
+      bgColor: transparent,
+      height: double.infinity,
+      leadingIcon: SizedBox(width: 70, child: Image.asset(logoImage)),
+      onTap: () {
+        context.goNamed(homeRoute);
+        customPrint("check ");
+      },
+    );
+  }
+
+  Widget loginButton() {
+    LoginController con = Get.find();
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Obx(
+          () {
+            return GenericButton(
+              bgColor: white,
+              leadingIcon: const Padding(
+                padding: EdgeInsets.only(right: 4),
+                child: Icon(
+                  Icons.person,
+                  size: 18,
+                ),
+              ),
+              title: appCont.isLoggedIn.value ? myAccountStr : loginStr,
+              onTap: () {
+                if (StoreManager.isLoggedIn) {
+                  myAccountMenu(context);
+                } else {
+                  Get.dialog(Obx(
+                    () {
+                      return con.displayOptScreen.value
+                          ? const LoginOtpPopup()
+                          : const LoginPopup();
+                    },
+                  ));
+                }
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget searchTextField(BuildContext context) {
+    TuneSearchController con = Get.find();
+    return CustomSearchTextfield(
+      controller: textEditingController,
+      borderColor: white,
+      onChange: (p0) {
+        customPrint("On change $p0");
+      },
+      onSubmit: (p0) {
+        con.getResult(p0);
+        context.goNamed(searchRoute,
+            queryParameters: {'search': p0}); //goNamed(searchRoute);
+        customPrint("on submit $p0");
+      },
+    );
+  }
+
+  ResponsiveBuilder categoryButton() {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return GenericButton(
+          height: double.infinity,
+          bgColor: transparent,
+          title: tunesStr,
+          trailingIcon: Padding(
+            padding: const EdgeInsets.only(left: 4, top: 4.0),
+            child: Image.asset(
+              arrowDownPng,
+              color: black,
+              height: 7,
+            ),
+          ),
+          onTap: () {
+            categoryPopupView(context);
+          },
+        );
+      },
+    );
+  }
+
+  Future<void> myAccountMenu(BuildContext context) {
+    return genericPopover(
+      context,
+      width: 150,
+      myAccountMenuList,
+      onTap: (model, index) {
+        if (model.title == myWishlistStr) {
+          MyWishlistController con = Get.find();
+          con.getWishlist();
+          context.goNamed(myWishlistRoute);
+        } else if (model.title == myProfileStr) {
+          ProfileController con = Get.find();
+          con.getProfileDetail();
+          context.goNamed(profileRoute);
+        } else if (model.title == myTunezStr) {
+          context.goNamed(myTunesRoute);
+        } else if (model.title == logoutStr) {
+          StoreManager.logout();
+        }
+      },
+    );
+  }
+
+  Future<void> categoryPopupView(BuildContext context) {
+    CategoryDetailController con = Get.find();
+    return showPopover(
+      arrowDyOffset: -10,
+      context: context,
+      backgroundColor: white,
+      bodyBuilder: (context) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: white,
+            ),
+            height: 180,
+            child: ListView.builder(
+              padding: const EdgeInsets.all(2),
+              scrollDirection: Axis.horizontal,
+              itemCount: appController
+                  .categories.length, //StoreManager.categories?.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return InkWell(
+                    onTap: () {
+                      String key =
+                          appController.categories[index].categoryName ?? '';
+                      String catId =
+                          appController.categories[index].categoryId ?? '';
+                      context.goNamed(categoryDetailRoute, queryParameters: {
+                        'key': key,
+                        'catId': catId,
+                      });
+                      con.getCategoryDetailList(key, catId);
+                      Navigator.of(context).pop();
+                    },
+                    child: categoryCard(index));
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Padding categoryCard(int index) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 2),
+      child: Container(
+        width: 180,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: white,
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            customImage(
+                url: appController.categories[index].menuImagePath,
+                gredientColor: gredientColor),
+            CustomText(
+              title: appController.categories[index].categoryName ?? '',
+              color: white,
+              fontName: FontName.bold,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
