@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:etisalat/files/enums/time_type.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,9 +12,13 @@ class SelectableRepeatSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35,
-      child: con.timeTpe.value == TimeType.timeAndDate
-          ? monthlyRepeat()
-          : daysRepeat(),
+      child: Obx(
+        () {
+          return con.timeTpe.value == TimeType.timeAndDate
+              ? monthlyRepeat()
+              : daysRepeat();
+        },
+      ),
     );
   }
 
@@ -26,6 +31,7 @@ class SelectableRepeatSectionView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: GenericButton(
+            bgColor: white,
             radius: 4,
             title: con.repeatMonthly[index],
           ),
@@ -43,6 +49,7 @@ class SelectableRepeatSectionView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: GenericButton(
+            bgColor: white,
             radius: 4,
             title: con.repeatDays[index],
           ),

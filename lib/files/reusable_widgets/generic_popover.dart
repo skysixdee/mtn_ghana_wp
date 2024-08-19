@@ -8,8 +8,11 @@ import 'package:flutter/widgets.dart';
 import 'package:popover/popover.dart';
 
 genericPopover(BuildContext context, List<PopoverMenuModel> menuList,
-    {double width = 120, Function(PopoverMenuModel, int)? onTap}) {
+    {double width = 120,
+    Color? barrierColor,
+    Function(PopoverMenuModel, int)? onTap}) {
   showPopover(
+    barrierColor: barrierColor ?? Color(0x80000000),
     radius: 4,
     arrowHeight: 6,
     arrowWidth: 16,

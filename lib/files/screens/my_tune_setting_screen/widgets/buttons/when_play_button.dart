@@ -1,23 +1,60 @@
+import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/screens/my_tune_setting_screen/widgets/buttons/when_popover.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
-Widget whenPlayButton() {
-  return GenericButton(
-    padding: const EdgeInsets.only(left: 10),
-    radius: 2,
-    height: 50,
-    bgColor: white,
-    title: selectTimeTypeStr,
-    fontName: FontName.bold,
-    trailingIcon: const Padding(
-      padding: EdgeInsets.only(left: 50.0, right: 10),
-      child: Icon(Icons.arrow_drop_down_rounded),
-    ),
-    onTap: () {
-      print("====== selectTimeTypeStr");
-    },
-  );
+class WhenPlayButton extends StatelessWidget {
+  WhenPlayButton({super.key});
+  final MyTuneSettingController con = Get.find();
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context1, constraints) {
+        return ResponsiveBuilder(
+          builder: (context, si) {
+            return Obx(
+              () {
+                return InkWell(
+                  onTap: () {
+                    whenPopover(context1, con);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: white,
+                    ),
+                    width: 200,
+                    height: 50,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            title: con.timeTypeTitle.value,
+                            fontName: FontName.bold,
+                          ),
+                          const Icon(Icons.arrow_drop_down_rounded)
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
+    );
+  }
 }
+// Widget whenPlayButton() {
+//   return 
+// }

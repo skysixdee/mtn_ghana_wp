@@ -44,31 +44,43 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
       body: ResponsiveBuilder(
         builder: (context, si) {
           return si.isMobile
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: ListView(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          tuneImage(),
-                        ],
-                      ),
-                      mainContaner(si),
-                    ],
-                  ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    tuneImage(),
-                    Flexible(
-                        child: SizedBox(width: 650, child: mainContaner(si)))
-                  ],
-                );
+              ? mobileMainContainer(si)
+              : desktopMainContainer(si);
         },
+      ),
+    );
+  }
+
+  Widget desktopMainContainer(SizingInformation si) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          tuneImage(),
+          const SizedBox(width: 30),
+          Flexible(child: SizedBox(width: 700, child: mainContaner(si)))
+        ],
+      ),
+    );
+  }
+
+  Padding mobileMainContainer(SizingInformation si) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: ListView(
+        children: [
+          const SizedBox(height: 40),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              tuneImage(),
+            ],
+          ),
+          mainContaner(si),
+        ],
       ),
     );
   }
@@ -92,7 +104,7 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
         ),
         CustomText(
           title: widget.info.albumName ?? '',
-          color: grey,
+          color: myTuneScreenBgColor,
         ),
       ],
     );
@@ -108,40 +120,52 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              whomSelectionView(),
-              whenPlaySection(si),
-              repeatContainerView(),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                child: whomSelectionView(),
+              ),
+              Container(
+                color: myTuneScreenBgColor,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    children: [
+                      whenPlaySection(si),
+                      repeatContainerView(),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
         const SizedBox(height: 10),
-        bottomButtons()
+        bottomButtons(),
+        const SizedBox(height: 30),
       ],
     );
   }
 
   Widget repeatContainerView() {
-    return Container(
-      color: grey,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: Row(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomText(
-                  title: repeatStr,
-                  fontSize: 12,
-                ),
-                const SizedBox(height: 4),
-                SelectableRepeatSectionView()
-              ],
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Row(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomText(
+                title: repeatStr,
+                fontSize: 12,
+              ),
+              const SizedBox(height: 4),
+              SelectableRepeatSectionView()
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -164,7 +188,7 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
           radius: 4,
           bgColor: white,
           title: cancelStr,
-          borderColor: grey,
+          borderColor: myTuneScreenBgColor,
           onTap: () {},
         )
       ],
@@ -172,26 +196,23 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
   }
 
   Widget whenPlaySection(SizingInformation si) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30.0),
-        child: MediaQuery.of(context).size.width < 800
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(width: 220, child: whenPlayButton()),
-                  SizedBox(height: 10),
-                  timeButtons(),
-                ],
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [whenPlayButton(), timeButtons()],
-              ),
-      ),
-      color: grey,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 30.0),
+      child: MediaQuery.of(context).size.width < 800
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(width: 220, child: WhenPlayButton()),
+                SizedBox(height: 10),
+                timeButtons(),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [WhenPlayButton(), timeButtons()],
+            ),
     );
   }
 

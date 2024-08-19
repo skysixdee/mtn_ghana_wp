@@ -7,6 +7,7 @@ const yellow = Color.fromRGBO(254, 195, 10, 1);
 const red = Colors.red;
 const green = Color.fromARGB(255, 11, 130, 15);
 const grey = Colors.grey;
+const myTuneScreenBgColor = Color.fromRGBO(210, 208, 208, 1);
 const lightGrey = Color.fromARGB(255, 233, 233, 233);
 const transparent = Colors.transparent;
 const white = Colors.white;

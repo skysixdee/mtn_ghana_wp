@@ -28,7 +28,7 @@ String shuffleStr = "Shuffle";
 String activeStr = "Active";
 String allCallerStr = "AllCaller";
 String fullDayStr = "Full Day";
-String startTimeStr = "StartTime";
+String startTimeStr = "Start Time";
 String endTimeStr = "End Time";
 
 String noneStr = "None";
