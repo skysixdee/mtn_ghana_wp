@@ -11,6 +11,7 @@ Widget emptyListWidget({String? message}) {
       CustomText(
         title: message ?? listIsEmptyStr,
         fontName: FontName.bold,
+        fontSize: 18,
       ),
     ],
   );
