@@ -2,7 +2,7 @@ import 'package:etisalat/files/controllers/auth_controller/login_controller.dart
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/country_code.dart';
-import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
+import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 
@@ -141,7 +141,7 @@ class _LoginPopupState extends State<LoginPopup> {
   Widget textField() {
     return Obx(
       () {
-        return CustomSearchTextfield(
+        return CustomTextfield(
           trailingChild: const SizedBox(width: 4),
           enabled: !cont.isLoading.value,
           controller: controller,

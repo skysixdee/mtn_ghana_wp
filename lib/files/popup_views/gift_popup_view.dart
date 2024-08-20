@@ -3,7 +3,7 @@ import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/country_code.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
-import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
+import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 
 import 'package:etisalat/files/store_manager/store_manager.dart';
@@ -108,7 +108,7 @@ class _GiftPopupViewState extends State<GiftPopupView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(title: enterFriendMobileNumberStr),
-        CustomSearchTextfield(
+        CustomTextfield(
           hintText: enterFriendMobileNumberStr,
           controller: textEditingController,
           leadingChild: countryCode(),

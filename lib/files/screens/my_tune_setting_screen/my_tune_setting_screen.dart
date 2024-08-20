@@ -3,7 +3,7 @@ import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
-import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
+import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
 import 'package:etisalat/files/router/route_name.dart';
@@ -142,7 +142,7 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
                     CustomText(
                       title: enterFriendMobileNumberStr,
                     ),
-                    CustomSearchTextfield(
+                    CustomTextfield(
                       isNumericTextField: true,
                       maxLength: msisdnLength,
                       width: 400,

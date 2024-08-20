@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class CustomSearchTextfield extends StatelessWidget {
-  CustomSearchTextfield({
+class CustomTextfield extends StatelessWidget {
+  CustomTextfield({
     super.key,
     this.leadingChild,
     this.fontFamily,

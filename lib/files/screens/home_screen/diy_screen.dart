@@ -1,6 +1,6 @@
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
-import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
+import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -22,27 +22,33 @@ class DiyScreen extends StatelessWidget {
                   fontSize: 25,
                   fontName: FontName.bold,
                 )),
-                SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: CustomText(
-                title:shareYourSongStr,
-                   
+                title: shareYourSongStr,
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             myTuneSearchField(),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             audioSearchField(),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             submitButton(),
           ],
         ));
   }
 
-
- Widget myTuneSearchField() {
+  Widget myTuneSearchField() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -52,13 +58,15 @@ class DiyScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 25.0),
               child: CustomText(
                 title: nameOfTuneStr,
-                fontSize: 12,color: grey,
+                fontSize: 12,
+                color: grey,
               )),
           Padding(
-              padding:
-                  const EdgeInsets.only(left: 20, right: 40, top: 10, bottom: 10),
-              child: CustomSearchTextfield(width: 250,
-              trailingChild: SizedBox(),
+              padding: const EdgeInsets.only(
+                  left: 20, right: 40, top: 10, bottom: 10),
+              child: CustomTextfield(
+                width: 250,
+                trailingChild: SizedBox(),
                 controller: TextEditingController(text: " "),
               )),
         ],
@@ -66,50 +74,49 @@ class DiyScreen extends StatelessWidget {
     );
   }
 
-  
- Widget audioSearchField() {
+  Widget audioSearchField() {
     return Center(
-            child: Container(
-              width: 300,
-              decoration: BoxDecoration(
-                border: Border.all(color:grey),
-                borderRadius: BorderRadius.circular(9),
-              ),
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                   Text(
-                    fileNameStr,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8, horizontal: 16),
-                    decoration: BoxDecoration(
-                      color:yellow,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child:  Text(
-                replaceStr,
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
+      child: Container(
+        width: 300,
+        decoration: BoxDecoration(
+          border: Border.all(color: grey),
+          borderRadius: BorderRadius.circular(9),
+        ),
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              fileNameStr,
+              style: TextStyle(
+                fontSize: 16,
               ),
             ),
-          );
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              decoration: BoxDecoration(
+                color: yellow,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                replaceStr,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
- Widget submitButton() {
+  Widget submitButton() {
     return Center(
-      child: GenericButton(width: 100,
+      child: GenericButton(
+        width: 100,
         title: submitStr,
-        bgColor:yellow,
+        bgColor: yellow,
         textColor: white,
       ),
     );

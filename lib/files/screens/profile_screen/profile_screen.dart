@@ -4,7 +4,7 @@ import 'package:etisalat/files/model/category_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/country_code.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
-import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
+import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
@@ -222,7 +222,7 @@ class ProfileScreen extends StatelessWidget {
                       fontSize: 12,
                     ),
                     const SizedBox(height: 4),
-                    CustomSearchTextfield(
+                    CustomTextfield(
                       clearIcon: const SizedBox(),
                       controller: editingController,
                       trailingChild: const SizedBox(),

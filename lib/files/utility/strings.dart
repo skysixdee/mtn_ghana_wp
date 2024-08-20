@@ -16,7 +16,6 @@ String pauseStr = "Pause";
 String deleteStr = "Delete";
 String contactNumberStr = "Contact Number";
 
-
 String remainderBenfitsStr = 'A Remainder full of benefits';
 String letYourCallersStr =
     'Let your callers listen to Adhan when they call you at prayer times. Remind them that it\n'
@@ -32,15 +31,13 @@ String fileNameStr = "filename.map3";
 String replaceStr = "Replace";
 String submitStr = "Submit";
 
-String wishlistStr = "Wishlist";
 String shareStr = "Share";
 String subscribeStr = "Subscribe";
-=======
-String wishlistStr = "Wishlist";
+
 String whomYouWantToPlayItStr = 'Whom you want to play it?';
 String specialCallerStr = 'Special Caller';
 String whenYouWantToPlayItStr = 'When you want to play it?';
-String shareStr = "Share";
+
 String repeatStr = 'Repeat';
 String selectDateAndTimeStr = 'Select Date & Time';
 String selectTimeStr = 'Select Time';
@@ -67,6 +64,7 @@ String playAtStr = "Play at";
 String myProfileStr = "My Profile";
 String myTunezStr = "My Tunez";
 String myWishlistStr = "My Wishlist";
+String wishlistStr = "Wishlist";
 String blackListStr = "Black List";
 String logoutStr = "Logout";
 String preferenceStr = "Preference*";
