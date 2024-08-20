@@ -8,10 +8,15 @@ import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/popup_views/gift_popup_view.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_popup.dart';
+import 'package:etisalat/files/banners/bottombannerview.dart';
+import 'package:etisalat/files/banners/expressbannerview.dart';
+import 'package:etisalat/files/screens/home_screen/diy_screen.dart';
+import 'package:etisalat/files/screens/home_screen/remainder_screen.dart';
 import 'package:etisalat/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
 import 'package:etisalat/files/screens/home_screen/widget/feature_view/feature_category_view.dart';
 import 'package:etisalat/files/screens/home_screen/widget/music_box_view.dart';
@@ -57,6 +62,33 @@ class _HomeScreenState extends State<HomeScreen> {
               getMyPlayingTuneApi();
             },
           ),
+          // CustomSearchTextfield(controller: TextEditingController(),
+          // trailingChild: SizedBox(
+
+          // ),),
+       //   GenericButton(title: "hvv",leadingIcon: ,)
+       GenericButton(
+        title:" DiyScreen",
+        onTap: (){
+          Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DiyScreen()),
+                        );
+        
+          RemainderScreen();
+        },
+       ),
+        GenericButton(
+        title:"RemainderScreen",
+        onTap: (){
+          Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => RemainderScreen()),
+                        );
+        
+         
+        },
+       ),
           GenericButton(
             title: "Set value",
             onTap: () {
@@ -89,6 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
           FeatureCategoryView(key: widget.key),
           const SizedBox(height: 300),
           const SizedBox(height: 300),
+          BottomExpressBanner(),
+      BottomBannerView(),
         ],
       ),
     );
