@@ -11,3 +11,5 @@ const myTuneScreenBgColor = Color.fromRGBO(210, 208, 208, 1);
 const lightGrey = Color.fromARGB(255, 233, 233, 233);
 const transparent = Colors.transparent;
 const white = Colors.white;
+const pink = Colors.pink;
+

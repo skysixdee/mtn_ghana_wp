@@ -16,6 +16,26 @@ String pauseStr = "Pause";
 String deleteStr = "Delete";
 String contactNumberStr = "Contact Number";
 
+
+String remainderBenfitsStr = 'A Remainder full of benefits';
+String letYourCallersStr =
+    'Let your callers listen to Adhan when they call you at prayer times. Remind them that it\n'
+    'is time to pray with some of the most beautiful Adhan.Between each prayer times your,\n'
+    'default tone will be playing.';
+
+String doItYourselfStr = "Do It Yourself";
+String shareYourSongStr =
+    'Share your own song or audio message with your callers before you pick up the phone.\n'
+    'This is Caller Tunes Karaoke.Record, Upload & Play \n';
+String nameOfTuneStr = "Name of the tune*";
+String fileNameStr = "filename.map3";
+String replaceStr = "Replace";
+String submitStr = "Submit";
+
+String wishlistStr = "Wishlist";
+String shareStr = "Share";
+String subscribeStr = "Subscribe";
+=======
 String wishlistStr = "Wishlist";
 String whomYouWantToPlayItStr = 'Whom you want to play it?';
 String specialCallerStr = 'Special Caller';
@@ -24,6 +44,7 @@ String shareStr = "Share";
 String repeatStr = 'Repeat';
 String selectDateAndTimeStr = 'Select Date & Time';
 String selectTimeStr = 'Select Time';
+
 String shuffleStr = "Shuffle";
 String activeStr = "Active";
 String allCallerStr = "AllCaller";
@@ -71,3 +92,7 @@ String seeMoreStr = "See More";
 String tuneChargeStr = "Tune Charge";
 String pleaseEnterYourMobileNumberStr = "Please enter your mobile number";
 String enterFriendMobileNumberStr = "Enter Friend's Mobile Number";
+
+String privacyPolicyStr = "Privacy Policy";
+String termsAndConditions = "Terms and conditions";
+String copyrightStr = "@2020 copyRight. All rights reserved";
