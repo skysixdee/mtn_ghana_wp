@@ -1,4 +1,5 @@
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
+import 'package:etisalat/files/enums/caller_type.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
@@ -33,14 +34,13 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
   late MyTuneSettingController con;
   @override
   void initState() {
-    con = Get.put(MyTuneSettingController());
+    con = Get.find();
     print("initState MyTuneSettingController");
     super.initState();
   }
 
   @override
   void dispose() {
-    Get.delete<MyTuneSettingController>();
     print("Disposed MyTuneSettingController");
     super.dispose();
   }
@@ -126,7 +126,11 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          color: lightGrey,
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: lightGrey,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -138,20 +142,7 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     whomSelectionView(con),
-                    const SizedBox(height: 20),
-                    CustomText(
-                      title: enterFriendMobileNumberStr,
-                    ),
-                    CustomTextfield(
-                      isNumericTextField: true,
-                      maxLength: msisdnLength,
-                      width: 400,
-                      radius: 4,
-                      hintColor: grey,
-                      hintText: enterFriendMobileNumberStr,
-                      controller: TextEditingController(),
-                      trailingChild: const SizedBox(),
-                    )
+                    textFieldWidget(),
                   ],
                 ),
               ),
@@ -187,6 +178,34 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
     );
   }
 
+  Widget textFieldWidget() {
+    return Obx(
+      () {
+        return Visibility(
+          visible: con.callerType.value == CallerType.dedicated,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              CustomText(title: enterFriendMobileNumberStr),
+              CustomTextfield(
+                isNumericTextField: true,
+                maxLength: msisdnLength,
+                width: 300,
+                radius: 4,
+                hintColor: grey,
+                hintText: enterFriendMobileNumberStr,
+                controller: TextEditingController(),
+                trailingChild: const SizedBox(),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Widget repeatContainerView() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -219,7 +238,9 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
           radius: 4,
           bgColor: yellow,
           title: confirmStr,
-          onTap: () {},
+          onTap: () {
+            con.onConfirmButtonTap();
+          },
         ),
         const SizedBox(width: 10),
         GenericButton(

@@ -9,6 +9,7 @@ import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/my_music_box_controller.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/name_tune_controller.dart';
@@ -67,7 +68,9 @@ Future<void> initiateController() async {
   Get.lazyPut(() => TuneSearchController());
   Get.lazyPut(() => CategoryDetailScreen());
   Get.lazyPut(() => MyWishlistController());
+
   Get.lazyPut(() => BannerDetailController());
+  Get.lazyPut(() => MyTuneSettingController());
   Get.lazyPut(() => MyPlayingTuneController());
   Get.lazyPut(() => CategoryDetailController());
 

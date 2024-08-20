@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/music_box_controller.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/name_tune_controller.dart';
@@ -252,6 +253,7 @@ StatefulShellBranch _myTuneShell() {
 }
 
 StatefulShellBranch _myTuneSettingShell() {
+  MyTuneSettingController con = Get.find();
   return StatefulShellBranch(
     routes: <RouteBase>[
       GoRoute(
@@ -259,6 +261,7 @@ StatefulShellBranch _myTuneSettingShell() {
         path: myTunesSettingRoute,
         builder: (context, state) {
           TuneInfo info = state.extra as TuneInfo;
+          con.resetValue();
           return MyTuneSettingScreen(info: info);
         },
       ),

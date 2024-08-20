@@ -37,7 +37,7 @@ Widget toTimeButton(MyTuneSettingController con) {
                 ],
               ),
               onTap: () {
-                print("start time tapped");
+                con.toPicker();
               },
             );
     },

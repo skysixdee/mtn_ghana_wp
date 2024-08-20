@@ -13,6 +13,7 @@ Widget playButton(TuneInfo info, {Function()? onTap}) {
   return ResponsiveBuilder(
     builder: (context, si) {
       return GenericButton(
+        padding: EdgeInsets.zero,
         borderColor: red,
         bgColor: white,
         fontName: si.isMobile ? FontName.regular : FontName.bold,

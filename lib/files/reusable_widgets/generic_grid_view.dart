@@ -12,7 +12,7 @@ class GenericGridView extends StatelessWidget {
     this.maxDisplay = 8,
     this.physics,
     this.cardHeight = 240,
-    this.cardWidth = 220,
+    this.cardWidth = 200,
     this.padding,
     this.scrollDirection,
   });
@@ -62,12 +62,9 @@ class GenericGridView extends StatelessWidget {
   }
 
   SliverGridDelegate sliver(SizingInformation si, BuildContext context) {
-    // double cellCount = MediaQuery.of(context).size.width / 250;
-    // return SliverGridDelegateWithFixedCrossAxisCount(
-    //     mainAxisExtent: 250, crossAxisCount: cellCount.toInt());
     return SliverGridDelegateWithMaxCrossAxisExtent(
-      maxCrossAxisExtent: cardWidth, //height,
-      mainAxisExtent: cardHeight, //width,
+      maxCrossAxisExtent: cardWidth + 40, //height,
+      childAspectRatio: 0.7,
       mainAxisSpacing: si.isMobile ? 10 : 20,
       crossAxisSpacing: si.isMobile ? 10 : 20,
     );
@@ -78,7 +75,6 @@ class GenericGridView extends StatelessWidget {
     const double spacing = 14;
     int listCount = itemCount;
     double w = cardWidth;
-    double h = cardHeight;
 
     return SingleChildScrollView(
       physics: physics,
@@ -88,15 +84,17 @@ class GenericGridView extends StatelessWidget {
         alignment: WrapAlignment.center,
         children: List.generate(listCount, (index) {
           return SizedBox(
-              height: h,
               width: w,
-              child: InkWell(
-                onTap: () {
-                  if (onTap != null) {
-                    onTap!(index);
-                  }
-                },
-                child: builder(index),
+              child: AspectRatio(
+                aspectRatio: 0.75,
+                child: InkWell(
+                  onTap: () {
+                    if (onTap != null) {
+                      onTap!(index);
+                    }
+                  },
+                  child: builder(index),
+                ),
               ));
         }),
       ),

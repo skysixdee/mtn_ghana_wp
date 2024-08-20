@@ -11,6 +11,7 @@ import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/time_date_picker.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_popup.dart';
 import 'package:etisalat/files/banners/bottombannerview.dart';
@@ -88,6 +89,25 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
 
+          const SizedBox(height: 20),
+
+          Row(
+            children: [
+              GenericButton(
+                title: " Open Time",
+                onTap: () {
+                  Get.dialog(barrierDismissible: true, timeDatePicker(true));
+                },
+              ),
+              GenericButton(
+                title: " Open Calender",
+                onTap: () {
+                  Get.dialog(barrierDismissible: true, timeDatePicker(false));
+                },
+              ),
+            ],
+          ),
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 38.0),
             child: Row(
@@ -127,8 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
           const MusicBoxView(),
           const SizedBox(height: 10),
           FeatureCategoryView(key: widget.key),
-          const SizedBox(height: 300),
-          const SizedBox(height: 300),
+          const SizedBox(height: 30),
+
           BottomExpressBanner(),
           BottomBannerView(),
         ],

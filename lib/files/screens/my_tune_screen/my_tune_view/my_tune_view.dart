@@ -1,4 +1,5 @@
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
@@ -49,6 +50,8 @@ class MyTuneView extends StatelessWidget {
         size: 15,
       ),
       onTap: () {
+        MyTuneSettingController settingCon = Get.find();
+        settingCon.resetValue();
         contex.goNamed(myTunesSettingRoute, extra: con.tuneList[index]);
         customPrint("On Setting tap");
       },
