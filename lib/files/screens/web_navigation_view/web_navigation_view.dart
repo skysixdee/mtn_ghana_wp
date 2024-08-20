@@ -14,7 +14,7 @@ import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
-import 'package:etisalat/files/reusable_widgets/msisdn_textfield.dart';
+
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/router/router.dart';
 import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dart';
@@ -166,6 +166,8 @@ class WebNavigationView extends StatelessWidget {
   Widget searchTextField(BuildContext context) {
     TuneSearchController con = Get.find();
     return CustomSearchTextfield(
+      addSearchIcon: true,
+      hintColor: white,
       controller: textEditingController,
       borderColor: white,
       onChange: (p0) {

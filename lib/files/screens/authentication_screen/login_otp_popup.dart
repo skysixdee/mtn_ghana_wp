@@ -2,10 +2,11 @@ import 'package:etisalat/files/controllers/auth_controller/login_controller.dart
 import 'package:etisalat/files/controllers/auth_controller/otp_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
-import 'package:etisalat/files/reusable_widgets/msisdn_textfield.dart';
+
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -146,7 +147,8 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
   Obx otpTextField() {
     return Obx(
       () {
-        return MsisdnTextfield(
+        return CustomSearchTextfield(
+          isNumericTextField: true,
           enabled: !otpController.isLoading.value,
           leadingChild: const SizedBox(width: 50),
           trailingChild: GenericButton(
@@ -154,7 +156,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
               otpController.secureOtp.value = !otpController.secureOtp.value;
             },
             bgColor: transparent,
-            padding: const EdgeInsets.only(left: 12),
+            padding: const EdgeInsets.only(left: 6, right: 8),
             leadingIcon: Icon(otpController.secureOtp.value
                 ? Icons.visibility
                 : Icons.visibility_off),

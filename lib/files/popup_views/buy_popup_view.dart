@@ -3,8 +3,9 @@ import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/country_code.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
+import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/msisdn_textfield.dart';
+
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/constants.dart';
@@ -104,9 +105,11 @@ class _BuyPopupViewState extends State<BuyPopupView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(title: pleaseEnterYourMobileNumberStr),
-        MsisdnTextfield(
+        CustomSearchTextfield(
           controller: textEditingController,
           leadingChild: countryCode(),
+          isNumericTextField: true,
+          maxLength: msisdnLength,
         )
       ],
     );
