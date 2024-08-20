@@ -34,17 +34,17 @@ class GenericGridView extends StatelessWidget {
         return itemCount == 0
             ? (emptyListWidget())
             : onlyGrid
-                ? grid(si)
+                ? grid(si, context)
                 : si.isMobile
-                    ? grid(si)
+                    ? grid(si, context)
                     : itemCount <= maxDisplay
                         ? Center(child: alignedGrid(context))
-                        : grid(si);
+                        : grid(si, context);
       },
     );
   }
 
-  Widget grid(SizingInformation si) {
+  Widget grid(SizingInformation si, BuildContext contex) {
     return GridView.builder(
       scrollDirection: scrollDirection ?? Axis.vertical,
       padding: padding ??
@@ -52,17 +52,24 @@ class GenericGridView extends StatelessWidget {
       itemCount: itemCount,
       physics: physics,
       shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: cardWidth, //height,
-        mainAxisExtent: cardHeight, //width,
-        mainAxisSpacing: si.isMobile ? 10 : 20,
-        crossAxisSpacing: si.isMobile ? 10 : 20,
-      ),
+      gridDelegate: sliver(si, contex),
       itemBuilder: (context, index) {
         return (onTap != null)
             ? InkWell(onTap: onTap!(index), child: builder(index))
             : builder(index);
       },
+    );
+  }
+
+  SliverGridDelegate sliver(SizingInformation si, BuildContext context) {
+    // double cellCount = MediaQuery.of(context).size.width / 250;
+    // return SliverGridDelegateWithFixedCrossAxisCount(
+    //     mainAxisExtent: 250, crossAxisCount: cellCount.toInt());
+    return SliverGridDelegateWithMaxCrossAxisExtent(
+      maxCrossAxisExtent: cardWidth, //height,
+      mainAxisExtent: cardHeight, //width,
+      mainAxisSpacing: si.isMobile ? 10 : 20,
+      crossAxisSpacing: si.isMobile ? 10 : 20,
     );
   }
 

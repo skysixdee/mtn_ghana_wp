@@ -10,10 +10,12 @@ String enterOtpStr = "Enter Code";
 String verifyOtpStr = "Verify OTP";
 String listIsEmptyStr = "List is empty";
 String resendStr = "Resnd";
+String selectTimeTypeStr = "Select time type";
 String playStr = "Play";
 String pauseStr = "Pause";
 String deleteStr = "Delete";
 String contactNumberStr = "Contact Number";
+
 
 String remainderBenfitsStr = 'A Remainder full of benefits';
 String letYourCallersStr =
@@ -33,11 +35,21 @@ String submitStr = "Submit";
 String wishlistStr = "Wishlist";
 String shareStr = "Share";
 String subscribeStr = "Subscribe";
+=======
+String wishlistStr = "Wishlist";
+String whomYouWantToPlayItStr = 'Whom you want to play it?';
+String specialCallerStr = 'Special Caller';
+String whenYouWantToPlayItStr = 'When you want to play it?';
+String shareStr = "Share";
+String repeatStr = 'Repeat';
+String selectDateAndTimeStr = 'Select Date & Time';
+String selectTimeStr = 'Select Time';
+
 String shuffleStr = "Shuffle";
 String activeStr = "Active";
 String allCallerStr = "AllCaller";
 String fullDayStr = "Full Day";
-String startTimeStr = "StartTime";
+String startTimeStr = "Start Time";
 String endTimeStr = "End Time";
 
 String noneStr = "None";

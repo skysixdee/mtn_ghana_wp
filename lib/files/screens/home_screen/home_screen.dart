@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         shrinkWrap: true,
         primary: true,
         children: [
+
           GenericButton(
             title: "make api call",
             onTap: () {
@@ -108,10 +109,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   StoreManager.setLoggedIn(true);
                 }
 
-                return MapEntry(v, k);
-              });
-              customPrint("map 1 ====== $map1");
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 38.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GenericButton(
+                  title: "Login",
+                  onTap: () {
+                    Map<String, dynamic> map1 = loginJson.map((k, v) {
+                      customPrint("key == $k");
+                      if (k == 'accessToken') {
+                        StoreManager.setAccessToken(v as String);
+                      }
+                      if (k == 'refreshToken') {
+                        StoreManager.setRefreshToken(v as String);
+                      }
+                      if (k == 'deviceId') {
+                        StoreManager.setDeviceId(v as String);
+                      }
+                      if (k == 'msisdn') {
+                        StoreManager.setMsisdn(v as String);
+                        StoreManager.setLoggedIn(true);
+                      }
+
+
+                      return MapEntry(v, k);
+                    });
+                    customPrint("map 1 ====== $map1");
+                  },
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 8),
           HomeBannerView(key: widget.key),
@@ -134,11 +164,11 @@ Map<String, dynamic> loginJson = {
   "srvType": "CHECKPASSWORD",
   "userIdEnc": "204-89-4-246-217-163-118-248",
   "userName": "09420784096",
-  "accessToken": "55441bee-7057-42e4-9ba6-b0ee509ab015",
+  "accessToken": "a532f9ab-411f-4ccd-a5e2-7e6e0ab5eb13",
   "userId": "7997",
-  "deviceId": "da65f8a4-c89d-41d7-ac07-8dc376b8b1cf",
-  "clientTxnId": "638921051",
+  "deviceId": "0191212",
+  "clientTxnId": "21042020",
   "msisdn": "09420784096",
-  "txnId": "48435161925348",
-  "refreshToken": "afa4ad44-5b7e-4113-8344-90a13cde3bc5"
+  "txnId": "48435298602877",
+  "refreshToken": "e8b4144e-fd85-449e-81b9-bd63723d8b4e"
 };

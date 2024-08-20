@@ -13,7 +13,7 @@ class CustomSearchTextfield extends StatelessWidget {
     super.key,
     this.leadingChild,
     this.fontFamily,
-    this.maxLength = msisdnLength,
+    this.maxLength,
     this.fontSize = 16,
     this.onChange,
     this.onSubmit,
@@ -26,7 +26,11 @@ class CustomSearchTextfield extends StatelessWidget {
     this.trailingChild,
     this.bgColor = transparent,
     this.borderColor = black,
-    this.hintColor = white,
+    this.hintColor = grey,
+    this.radius,
+    this.isNumericTextField = false,
+    this.clearIcon,
+    this.addSearchIcon = false,
   });
 
   final Widget? leadingChild;
@@ -38,91 +42,103 @@ class CustomSearchTextfield extends StatelessWidget {
   final String? hintText;
   final bool? enabled;
   final Color bgColor;
+  final bool addSearchIcon;
   final Color hintColor;
   final Color borderColor;
   final double? width;
+  final double? radius;
   final bool obscureText;
   final TextEditingController controller;
   final Function(String)? onChange;
   final Function(String)? onSubmit;
   final RxString text = ''.obs;
+  final bool isNumericTextField;
+  final Widget? clearIcon;
 
   @override
   Widget build(BuildContext context) {
     text.value = controller.text;
-    return Obx(
-      () {
-        return Container(
-          height: 40,
-          width: width,
-          decoration: BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: borderColor),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                leadingChild ?? const SizedBox(),
-                Expanded(child: textField()),
-                clearButton(),
-                trailingChild ?? searchIcons()
-              ],
-            ),
-          ),
-        );
-      },
+    return Container(
+      height: 40,
+      width: width,
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(radius ?? 20),
+        border: Border.all(color: borderColor),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            leadingChild ?? const SizedBox(),
+            Expanded(child: textField()),
+            clearButton(),
+            trailingChild ?? searchIcons()
+          ],
+        ),
+      ),
     );
+    // Obx(
+    //   () {
+    //     return
+    //   },
+    // );
   }
 
   Widget searchIcons() {
-    return Padding(
-      padding: const EdgeInsets.all(1.0),
-      child: GenericButton(
-        width: 38,
-        bgColor: white,
-        padding: EdgeInsets.zero,
-        leadingIcon: const Icon(
-          Icons.search,
-          size: 20,
-        ),
-        onTap: () {
-          if (onSubmit != null) {
-            onSubmit!(controller.text);
-            customPrint("Search taped ${controller.text}");
-          }
-        },
-      ),
-    );
+    return addSearchIcon
+        ? Padding(
+            padding: const EdgeInsets.all(1.0),
+            child: GenericButton(
+              width: 38,
+              bgColor: white,
+              padding: EdgeInsets.zero,
+              leadingIcon: const Icon(
+                Icons.search,
+                size: 20,
+              ),
+              onTap: () {
+                if (onSubmit != null) {
+                  onSubmit!(controller.text);
+                  customPrint("Search taped ${controller.text}");
+                }
+              },
+            ),
+          )
+        : const SizedBox(width: 4);
   }
 
-  Visibility clearButton() {
-    return Visibility(
-      visible: text.isNotEmpty,
-      child: InkWell(
-          onTap: () {
-            if (!enabled!) {
-              return;
-            }
-            controller.text = '';
-            text.value = '';
-            if (onChange != null) {
-              onChange!("");
-            }
+  Widget clearButton() {
+    return clearIcon ??
+        Obx(
+          () {
+            return Visibility(
+              visible: text.isNotEmpty,
+              child: InkWell(
+                  onTap: () {
+                    if (!enabled!) {
+                      return;
+                    }
+                    controller.text = '';
+                    text.value = '';
+                    if (onChange != null) {
+                      onChange!("");
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 8, bottom: 8, top: 8, right: 8),
+                    child: Icon(
+                      color: enabled! ? null : grey,
+                      Icons.close,
+                      size: 14,
+                    ),
+                  )),
+            );
           },
-          child: Padding(
-            padding:
-                const EdgeInsets.only(left: 8, bottom: 8, top: 8, right: 8),
-            child: Icon(
-              color: enabled! ? null : grey,
-              Icons.close,
-              size: 14,
-            ),
-          )),
-    );
+        );
   }
 
   TextField textField() {
@@ -143,8 +159,9 @@ class CustomSearchTextfield extends StatelessWidget {
           onSubmit!(v);
         }
       },
-      //  maxLength: maxLength,
-      //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      maxLength: maxLength,
+      inputFormatters:
+          isNumericTextField ? [FilteringTextInputFormatter.digitsOnly] : null,
       style: textStyle(),
       decoration: inputDecoration(),
     );

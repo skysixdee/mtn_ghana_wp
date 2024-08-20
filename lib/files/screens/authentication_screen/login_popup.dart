@@ -2,9 +2,10 @@ import 'package:etisalat/files/controllers/auth_controller/login_controller.dart
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/country_code.dart';
+import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
-import 'package:etisalat/files/reusable_widgets/msisdn_textfield.dart';
+
 import 'package:etisalat/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/constants.dart';
@@ -140,9 +141,13 @@ class _LoginPopupState extends State<LoginPopup> {
   Widget textField() {
     return Obx(
       () {
-        return MsisdnTextfield(
+        return CustomSearchTextfield(
+          trailingChild: const SizedBox(width: 4),
           enabled: !cont.isLoading.value,
           controller: controller,
+          hintText: enterMobileNumberStr,
+          isNumericTextField: true,
+          maxLength: msisdnLength,
           leadingChild: countryCode(),
           onChange: (p0) {
             cont.onChangeMsidn(p0);

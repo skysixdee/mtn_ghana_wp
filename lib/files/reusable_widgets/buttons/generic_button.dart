@@ -18,6 +18,7 @@ class GenericButton extends StatelessWidget {
     this.onTap,
     this.fontName = FontName.bold,
     this.borderColor,
+    this.fontSize,
   });
   final Widget? leadingIcon;
   final Widget? trailingIcon;
@@ -29,6 +30,7 @@ class GenericButton extends StatelessWidget {
   final double height;
   final double? radius;
   final FontName fontName;
+  final double? fontSize;
   final EdgeInsetsGeometry? padding;
   final Function()? onTap;
   @override
@@ -60,6 +62,7 @@ class GenericButton extends StatelessWidget {
                           title: title ?? '',
                           color: textColor,
                           fontName: fontName,
+                          fontSize: fontSize,
                         ),
                         trailingIcon ?? const SizedBox(),
                       ],
