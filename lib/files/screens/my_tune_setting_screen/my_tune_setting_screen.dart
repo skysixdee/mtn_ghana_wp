@@ -3,18 +3,23 @@ import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
+import 'package:etisalat/files/reusable_widgets/custom_search_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
+import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/screens/my_tune_setting_screen/widgets/buttons/from_time_button.dart';
 import 'package:etisalat/files/screens/my_tune_setting_screen/widgets/buttons/to_time_button.dart';
 import 'package:etisalat/files/screens/my_tune_setting_screen/widgets/buttons/when_play_button.dart';
 import 'package:etisalat/files/screens/my_tune_setting_screen/widgets/selectable_repeat_section_view.dart';
 import 'package:etisalat/files/screens/my_tune_setting_screen/widgets/whom_selection_view.dart';
 import 'package:etisalat/files/utility/colors.dart';
+import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:etisalat/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class MyTuneSettingScreen extends StatefulWidget {
@@ -29,12 +34,14 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
   @override
   void initState() {
     con = Get.put(MyTuneSettingController());
+    print("initState MyTuneSettingController");
     super.initState();
   }
 
   @override
   void dispose() {
-    Get.delete<MyTuneSettingScreen>();
+    Get.delete<MyTuneSettingController>();
+    print("Disposed MyTuneSettingController");
     super.dispose();
   }
 
@@ -43,9 +50,12 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
     return Scaffold(
       body: ResponsiveBuilder(
         builder: (context, si) {
-          return si.isMobile
-              ? mobileMainContainer(si)
-              : desktopMainContainer(si);
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: si.isMobile
+                ? mobileMainContainer(si)
+                : desktopMainContainer(si),
+          );
         },
       ),
     );
@@ -123,15 +133,45 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-                child: whomSelectionView(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    whomSelectionView(con),
+                    const SizedBox(height: 20),
+                    CustomText(
+                      title: enterFriendMobileNumberStr,
+                    ),
+                    CustomSearchTextfield(
+                      isNumericTextField: true,
+                      maxLength: msisdnLength,
+                      width: 400,
+                      radius: 4,
+                      hintColor: grey,
+                      hintText: enterFriendMobileNumberStr,
+                      controller: TextEditingController(),
+                      trailingChild: const SizedBox(),
+                    )
+                  ],
+                ),
               ),
               Container(
                 color: myTuneScreenBgColor,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 20),
+                      CustomText(
+                        title: whenYouWantToPlayItStr,
+                        fontName: FontName.bold,
+                        fontSize: 14,
+                      ),
+                      const SizedBox(height: 8),
                       whenPlaySection(si),
+                      const SizedBox(height: 20),
                       repeatContainerView(),
                     ],
                   ),
@@ -189,39 +229,38 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
           bgColor: white,
           title: cancelStr,
           borderColor: myTuneScreenBgColor,
-          onTap: () {},
+          onTap: () {
+            context.goNamed(myTunesRoute);
+          },
         )
       ],
     );
   }
 
   Widget whenPlaySection(SizingInformation si) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30.0),
-      child: MediaQuery.of(context).size.width < 800
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(width: 220, child: WhenPlayButton()),
-                SizedBox(height: 10),
-                timeButtons(),
-              ],
-            )
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [WhenPlayButton(), timeButtons()],
-            ),
-    );
+    return MediaQuery.of(context).size.width < 1000
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(width: 220, child: WhenPlayButton()),
+              const SizedBox(height: 10),
+              timeButtons(),
+            ],
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [WhenPlayButton(), timeButtons()],
+          );
   }
 
   Row timeButtons() {
     return Row(
       children: [
-        fromTimeButton(),
+        fromTimeButton(con),
         const SizedBox(width: 10),
-        toTimeButton(),
+        toTimeButton(con),
       ],
     );
   }

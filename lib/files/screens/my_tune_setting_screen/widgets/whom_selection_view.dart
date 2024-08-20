@@ -1,9 +1,12 @@
+import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
+import 'package:etisalat/files/enums/caller_type.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-Widget whomSelectionView() {
+Widget whomSelectionView(MyTuneSettingController con) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -17,26 +20,41 @@ Widget whomSelectionView() {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Icon(Icons.radio_button_checked, size: 16),
-              CustomText(
-                title: allCallerStr,
-              )
-            ],
-          ),
+          InkWell(
+              onTap: () => con.updateCallerType(CallerType.allCaller),
+              child: _radioButton(con, CallerType.allCaller, allCallerStr)),
           const SizedBox(width: 40),
-          Row(
-            children: [
-              const Icon(
-                Icons.radio_button_off,
-                size: 16,
-              ),
-              CustomText(title: specialCallerStr)
-            ],
-          )
+          InkWell(
+              onTap: () => con.updateCallerType(CallerType.dedicated),
+              child: _radioButton(con, CallerType.dedicated, specialCallerStr)),
         ],
       ),
     ],
+  );
+}
+
+Widget _radioButton(
+    MyTuneSettingController con, CallerType type, String title) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 12.0),
+    child: Obx(
+      () {
+        return Row(
+          children: [
+            Icon(
+                con.callerType.value == type
+                    ? Icons.radio_button_checked
+                    : Icons.radio_button_off,
+                size: 18),
+            CustomText(
+              title: title,
+              fontName: con.callerType.value == type
+                  ? FontName.bold
+                  : FontName.regular,
+            )
+          ],
+        );
+      },
+    ),
   );
 }

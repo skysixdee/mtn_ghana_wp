@@ -13,7 +13,7 @@ class CustomSearchTextfield extends StatelessWidget {
     super.key,
     this.leadingChild,
     this.fontFamily,
-    this.maxLength = msisdnLength,
+    this.maxLength,
     this.fontSize = 16,
     this.onChange,
     this.onSubmit,
@@ -27,6 +27,8 @@ class CustomSearchTextfield extends StatelessWidget {
     this.bgColor = transparent,
     this.borderColor = black,
     this.hintColor = white,
+    this.radius,
+    this.isNumericTextField = false,
   });
 
   final Widget? leadingChild;
@@ -41,11 +43,13 @@ class CustomSearchTextfield extends StatelessWidget {
   final Color hintColor;
   final Color borderColor;
   final double? width;
+  final double? radius;
   final bool obscureText;
   final TextEditingController controller;
   final Function(String)? onChange;
   final Function(String)? onSubmit;
   final RxString text = ''.obs;
+  final bool isNumericTextField;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +61,7 @@ class CustomSearchTextfield extends StatelessWidget {
           width: width,
           decoration: BoxDecoration(
             color: bgColor,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(radius ?? 20),
             border: Border.all(color: borderColor),
           ),
           child: Padding(
@@ -143,8 +147,9 @@ class CustomSearchTextfield extends StatelessWidget {
           onSubmit!(v);
         }
       },
-      //  maxLength: maxLength,
-      //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      maxLength: maxLength,
+      inputFormatters:
+          isNumericTextField ? [FilteringTextInputFormatter.digitsOnly] : null,
       style: textStyle(),
       decoration: inputDecoration(),
     );

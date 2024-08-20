@@ -35,7 +35,7 @@ String musicBoxUrl =
 String musicBoxContextUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/music-box-contents?';
 
-String myTunesUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones?';
+String myTunesUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones';
 String playingTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones';
 String myMusicBoxUrl =

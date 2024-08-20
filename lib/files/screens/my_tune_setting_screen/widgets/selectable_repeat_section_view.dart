@@ -1,5 +1,7 @@
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
+import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/enums/time_type.dart';
+import 'package:etisalat/files/model/repeat_day_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +16,9 @@ class SelectableRepeatSectionView extends StatelessWidget {
       height: 35,
       child: Obx(
         () {
-          return con.timeTpe.value == TimeType.timeAndDate
+          return con.timeType.value == TimeType.timeAndDate
               ? monthlyRepeat()
-              : daysRepeat();
+              : daysRepeat(MediaQuery.of(context).size.width < 1000);
         },
       ),
     );
@@ -30,30 +32,50 @@ class SelectableRepeatSectionView extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(right: 8.0),
-          child: GenericButton(
-            bgColor: white,
-            radius: 4,
-            title: con.repeatMonthly[index],
+          child: Obx(
+            () {
+              return GenericButton(
+                bgColor:
+                    con.repeatMonthly[index].isSelected.value ? yellow : white,
+                radius: 4,
+                title: con.repeatMonthly[index].title,
+                onTap: () {
+                  con.updateMonthlySelection(con.repeatMonthly[index]);
+                  // repeatMonthly[index].isSelected.value =
+                  //     !con.repeatMonthly[index].isSelected.value;
+                },
+              );
+            },
           ),
         );
       },
     );
   }
 
-  Widget daysRepeat() {
+  Widget daysRepeat(bool isSort) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: con.repeatDays.length,
+      itemCount: con.repeatDaysF.length,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(right: 8.0),
-          child: GenericButton(
-            bgColor: white,
-            radius: 4,
-            title: con.repeatDays[index],
-          ),
-        );
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Obx(
+              () {
+                RepeatDayModel info = con.repeatDaysF[index];
+                return GenericButton(
+                  bgColor:
+                      con.repeatDaysF[index].isSelected.value ? yellow : white,
+                  radius: 4,
+                  fontSize: isSort ? 12 : 11,
+                  title: isSort ? info.titleSort : info.titleFull,
+                  onTap: () {
+                    con.repeatDaysF[index].isSelected.value =
+                        !con.repeatDaysF[index].isSelected.value;
+                  },
+                );
+              },
+            ));
       },
     );
   }
