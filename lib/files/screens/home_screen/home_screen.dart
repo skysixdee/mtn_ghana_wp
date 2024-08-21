@@ -96,13 +96,13 @@ class _HomeScreenState extends State<HomeScreen> {
               GenericButton(
                 title: " Open Time",
                 onTap: () {
-                  Get.dialog(barrierDismissible: true, timeDatePicker(true));
+                  Get.dialog(barrierDismissible: true, TimeDatePicker());
                 },
               ),
               GenericButton(
                 title: " Open Calender",
                 onTap: () {
-                  Get.dialog(barrierDismissible: true, timeDatePicker(false));
+                  Get.dialog(barrierDismissible: true, TimeDatePicker());
                 },
               ),
             ],

@@ -30,7 +30,8 @@ String nameOfTuneStr = "Name of the tune*";
 String fileNameStr = "filename.map3";
 String replaceStr = "Replace";
 String submitStr = "Submit";
-
+String minuteStr = "Minute";
+String hourStr = "Hour";
 String shareStr = "Share";
 String subscribeStr = "Subscribe";
 

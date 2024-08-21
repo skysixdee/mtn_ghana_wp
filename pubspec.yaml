@@ -49,6 +49,7 @@ dependencies:
   url_strategy: ^0.3.0
   
   syncfusion_flutter_calendar: ^26.2.10
+  numberpicker: ^2.1.2
   
 
 dev_dependencies:
