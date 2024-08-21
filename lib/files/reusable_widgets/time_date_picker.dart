@@ -19,7 +19,7 @@ class TimeDatePicker extends StatelessWidget {
         child: ResponsiveBuilder(
           builder: (context, si) {
             return Container(
-              width: si.isMobile ? 300 : null,
+              //width: si.isMobile ? 300 : null,
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
@@ -31,7 +31,7 @@ class TimeDatePicker extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   dateAndTimeContainer(si),
-                  customDivider(si),
+                  //  customDivider(si),
                   _bottomButtons(context)
                 ],
               ),
@@ -105,7 +105,7 @@ class TimeDatePicker extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Flexible(child: SizedBox(child: _calender())),
-              SizedBox(width: 220, child: _timePicker()),
+              _timePicker(),
             ],
           );
   }
@@ -196,7 +196,7 @@ class TimeDatePicker extends StatelessWidget {
 
   Widget customNumberPicker(int value, Function(int) onSelected, int max) {
     return NumberPicker(
-        textStyle: TextStyle(fontFamily: FontName.regular.name, color: black),
+        textStyle: TextStyle(fontFamily: FontName.regular.name, color: grey),
         selectedTextStyle: TextStyle(
             fontFamily: FontName.bold.name, color: yellow, fontSize: 18),
         itemHeight: 35,
