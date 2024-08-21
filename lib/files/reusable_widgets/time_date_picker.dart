@@ -4,12 +4,32 @@ import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class TimeDatePicker extends StatelessWidget {
-  const TimeDatePicker({super.key});
+class TimeDatePicker extends StatefulWidget {
+  TimeDatePicker(
+      {super.key, this.dateTime, this.onConfirm, this.onlyTime = false});
+  final DateTime? dateTime;
+  final bool onlyTime;
+  final Function(DateTime)? onConfirm;
+  DateTime localDateTime = DateTime.now();
+  final RxInt pickedHour = 0.obs;
+  final RxInt pickedMinute = 0.obs;
+  @override
+  State<TimeDatePicker> createState() => _TimeDatePickerState();
+}
+
+class _TimeDatePickerState extends State<TimeDatePicker> {
+  @override
+  void initState() {
+    widget.localDateTime = widget.dateTime ?? DateTime.now();
+    widget.pickedHour.value = widget.localDateTime.hour;
+    widget.pickedMinute.value = widget.localDateTime.minute;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +39,6 @@ class TimeDatePicker extends StatelessWidget {
         child: ResponsiveBuilder(
           builder: (context, si) {
             return Container(
-              //width: si.isMobile ? 300 : null,
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
@@ -87,6 +106,12 @@ class TimeDatePicker extends StatelessWidget {
       bgColor: yellow,
       fontName: FontName.regular,
       title: confirmStr,
+      onTap: () {
+        print("date is ${widget.localDateTime}");
+        if (widget.onConfirm != null) {
+          widget.onConfirm!(widget.localDateTime);
+        }
+      },
     );
   }
 
@@ -97,14 +122,16 @@ class TimeDatePicker extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _calender(),
+              widget.onlyTime ? const SizedBox() : _calender(),
               _timePicker(),
             ],
           )
         : Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Flexible(child: SizedBox(child: _calender())),
+              widget.onlyTime
+                  ? const SizedBox()
+                  : Flexible(child: SizedBox(child: _calender())),
               _timePicker(),
             ],
           );
@@ -117,28 +144,24 @@ class TimeDatePicker extends StatelessWidget {
       decoration: BoxDecoration(border: Border.all(color: lightGrey)),
       child: SfCalendar(
         cellBorderColor: lightGrey,
-        headerStyle: CalendarHeaderStyle(
-          textStyle: TextStyle(
-              color: black, fontSize: 16, fontFamily: FontName.bold.name),
-          textAlign: TextAlign.center,
-        ),
-        viewHeaderStyle: ViewHeaderStyle(
-            dayTextStyle: TextStyle(fontFamily: FontName.semiBold.name),
-            dateTextStyle:
-                TextStyle(color: black, fontFamily: FontName.bold.name)),
+        headerStyle: headerStyle(),
+        viewHeaderStyle: viewHeaderStyle(),
         monthViewSettings: _monthCellDecoration(),
-        selectionDecoration: BoxDecoration(
-            border: Border.all(color: yellow, width: 2),
-            borderRadius: BorderRadius.circular(4)),
-        initialSelectedDate: DateTime.now(),
-        onSelectionChanged: (calendarSelectionDetails) {
-          print(
-              "calendarSelectionDetails === ${calendarSelectionDetails.date}");
+        selectionDecoration: dateSectionDecoration(),
+        initialSelectedDate: widget.localDateTime,
+        onSelectionChanged: (csd) {
+          widget.localDateTime = DateTime(
+            csd.date?.year ?? 0,
+            csd.date?.month ?? 0,
+            csd.date?.day ?? 0,
+            widget.localDateTime.hour,
+            widget.localDateTime.minute,
+          );
         },
         todayTextStyle: TextStyle(color: black, fontFamily: FontName.bold.name),
         firstDayOfWeek: 7,
         view: CalendarView.month,
-        initialDisplayDate: DateTime.now(),
+        initialDisplayDate: widget.localDateTime,
         todayHighlightColor: yellow,
         showDatePickerButton: true,
         showCurrentTimeIndicator: true,
@@ -147,6 +170,30 @@ class TimeDatePicker extends StatelessWidget {
         maxDate: DateTime(2080, 03, 05, 10, 0, 0),
       ),
     );
+  }
+
+  CalendarHeaderStyle headerStyle() {
+    return CalendarHeaderStyle(
+      textStyle:
+          TextStyle(color: black, fontSize: 16, fontFamily: FontName.bold.name),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  ViewHeaderStyle viewHeaderStyle() {
+    return ViewHeaderStyle(
+        dayTextStyle: TextStyle(fontFamily: FontName.semiBold.name),
+        dateTextStyle: dateTextStyle());
+  }
+
+  TextStyle dateTextStyle() =>
+      TextStyle(color: black, fontFamily: FontName.bold.name);
+
+  BoxDecoration dateSectionDecoration() {
+    return BoxDecoration(
+        color: yellow.withOpacity(0.3),
+        border: Border.all(color: red, width: 3),
+        borderRadius: BorderRadius.circular(4));
   }
 
   MonthViewSettings _monthCellDecoration() {
@@ -163,42 +210,80 @@ class TimeDatePicker extends StatelessWidget {
   }
 
   Widget _timePicker() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 28.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomText(title: hourStr, fontName: FontName.bold),
-              _hourPicker(20, (value) => print("_hourPicker")),
-            ],
-          ),
-          Column(
-            children: [
-              CustomText(title: minuteStr, fontName: FontName.bold),
-              _minutePicker(20, (value) => print("_minutePicker")),
-            ],
-          ),
-        ],
+    return SizedBox(
+      width: widget.onlyTime ? 300 : null,
+      height: widget.onlyTime ? 200 : null,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 28.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            hourBuilder(),
+            minuteBuilder(),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _hourPicker(int value, Function(int) onSelected) {
-    return customNumberPicker(value, onSelected, 23);
+  Column minuteBuilder() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        CustomText(title: minuteStr, fontName: FontName.bold),
+        Obx(
+          () {
+            return customNumberPicker(widget.pickedMinute.value, 59, (value) {
+              print("_minutePicker");
+              widget.pickedMinute.value = value;
+              widget.localDateTime = DateTime(
+                  widget.localDateTime.year,
+                  widget.localDateTime.month,
+                  widget.localDateTime.day,
+                  widget.localDateTime.hour,
+                  value);
+            });
+          },
+        ),
+      ],
+    );
   }
 
-  Widget _minutePicker(int value, Function(int) onSelected) {
-    return customNumberPicker(value, onSelected, 59);
+  Column hourBuilder() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        CustomText(title: hourStr, fontName: FontName.bold),
+        Obx(
+          () {
+            return customNumberPicker(
+              widget.pickedHour.value,
+              23,
+              (value) {
+                print("_hourPicker");
+                widget.pickedHour.value = value;
+                widget.localDateTime = DateTime(
+                  widget.localDateTime.year,
+                  widget.localDateTime.month,
+                  widget.localDateTime.day,
+                  value,
+                  widget.localDateTime.minute,
+                );
+              },
+            );
+          },
+        ),
+      ],
+    );
   }
 
-  Widget customNumberPicker(int value, Function(int) onSelected, int max) {
+  Widget customNumberPicker(int value, int max, Function(int) onSelected) {
     return NumberPicker(
         textStyle: TextStyle(fontFamily: FontName.regular.name, color: grey),
         selectedTextStyle: TextStyle(
-            fontFamily: FontName.bold.name, color: yellow, fontSize: 18),
+            fontFamily: FontName.bold.name, color: black, fontSize: 18),
         itemHeight: 35,
         itemCount: 3,
         value: value,

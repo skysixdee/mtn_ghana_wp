@@ -40,6 +40,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   LoginController loginController = Get.find();
   MusicBoxController musicBoxController = Get.find();
+  DateTime p0 = DateTime.now();
   @override
   void initState() {
     musicBoxController.getMusicBox();
@@ -96,13 +97,27 @@ class _HomeScreenState extends State<HomeScreen> {
               GenericButton(
                 title: " Open Time",
                 onTap: () {
-                  Get.dialog(barrierDismissible: true, TimeDatePicker());
+                  Get.dialog(
+                      barrierDismissible: true,
+                      TimeDatePicker(
+                          dateTime: p0,
+                          onConfirm: (p0) {
+                            this.p0 = p0;
+                          },
+                          onlyTime: true));
                 },
               ),
               GenericButton(
                 title: " Open Calender",
                 onTap: () {
-                  Get.dialog(barrierDismissible: true, TimeDatePicker());
+                  Get.dialog(
+                      barrierDismissible: true,
+                      TimeDatePicker(
+                        dateTime: p0,
+                        onConfirm: (p0) {
+                          this.p0 = p0;
+                        },
+                      ));
                 },
               ),
             ],
