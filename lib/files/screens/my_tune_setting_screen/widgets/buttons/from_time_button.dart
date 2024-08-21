@@ -27,12 +27,14 @@ Widget fromTimeButton(MyTuneSettingController con) {
                     color: grey,
                     fontSize: 12,
                   ),
-                  CustomText(
-                    title: con.timeType.value == TimeType.time
-                        ? '07:53'
-                        : '19/08/2024, 07:53',
-                    fontSize: 12,
-                    fontName: FontName.bold,
+                  Obx(
+                    () {
+                      return CustomText(
+                        title: con.startTimeStr.value,
+                        fontSize: 12,
+                        fontName: FontName.bold,
+                      );
+                    },
                   ),
                 ],
               ),

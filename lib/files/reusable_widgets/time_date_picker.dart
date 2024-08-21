@@ -25,7 +25,7 @@ class TimeDatePicker extends StatefulWidget {
 class _TimeDatePickerState extends State<TimeDatePicker> {
   @override
   void initState() {
-    widget.localDateTime = widget.dateTime ?? DateTime.now();
+    widget.localDateTime = (widget.dateTime ?? DateTime.now());
     widget.pickedHour.value = widget.localDateTime.hour;
     widget.pickedMinute.value = widget.localDateTime.minute;
     super.initState();
@@ -92,7 +92,7 @@ class _TimeDatePickerState extends State<TimeDatePicker> {
       fontName: FontName.regular,
       borderColor: lightGrey,
       title: cancelStr,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       onTap: () {
         Navigator.of(context).pop();
       },
@@ -107,10 +107,10 @@ class _TimeDatePickerState extends State<TimeDatePicker> {
       fontName: FontName.regular,
       title: confirmStr,
       onTap: () {
-        print("date is ${widget.localDateTime}");
         if (widget.onConfirm != null) {
           widget.onConfirm!(widget.localDateTime);
         }
+        Navigator.of(context).pop();
       },
     );
   }
@@ -166,7 +166,7 @@ class _TimeDatePickerState extends State<TimeDatePicker> {
         showDatePickerButton: true,
         showCurrentTimeIndicator: true,
         showNavigationArrow: true,
-        minDate: DateTime(2021, 03, 05, 10, 0, 0),
+        minDate: DateTime.now(),
         maxDate: DateTime(2080, 03, 05, 10, 0, 0),
       ),
     );

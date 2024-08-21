@@ -2,21 +2,28 @@ import 'package:etisalat/files/api_calls/get_playing_tune_api.dart';
 import 'package:etisalat/files/enums/playing_card_type.dart';
 import 'package:etisalat/files/model/my_playing_tunes_model.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
+import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class MyPlayingTuneController extends GetxController {
   RxBool isLoading = false.obs;
-  //List<List<ToneDetail>> toneDetails = [];
+  RxString message = ''.obs;
   List<ToneDetail> tuneList = [];
   RxBool isShuffleOn = false.obs;
   getPlayingTune() async {
-    //toneDetails.clear();
+    message.value = '';
     isLoading.value = true;
     MyPlayingTunesModel model = await getMyPlayingTuneApi();
     print("model = $model");
-    int len = model.responseMap?.listToneApk?.length ?? 0;
-    await craeteCardList(len, model);
+    if (model.statusCode == 'SC0000') {
+      int len = model.responseMap?.listToneApk?.length ?? 0;
+      await craeteCardList(len, model);
+      message.value = tuneList.isEmpty ? listIsEmptyStr : '';
+    } else {
+      message.value = model.message ?? someThingWentWrongStr;
+    }
+
     isLoading.value = false;
   }
 

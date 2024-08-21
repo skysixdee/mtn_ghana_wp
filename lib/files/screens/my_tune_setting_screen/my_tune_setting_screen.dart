@@ -3,9 +3,11 @@ import 'package:etisalat/files/enums/caller_type.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/country_code.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/screens/my_tune_setting_screen/widgets/buttons/from_time_button.dart';
@@ -32,9 +34,11 @@ class MyTuneSettingScreen extends StatefulWidget {
 
 class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
   late MyTuneSettingController con;
+  TextEditingController textEditingController = TextEditingController();
   @override
   void initState() {
     con = Get.find();
+    textEditingController.text = con.msisdn;
     print("initState MyTuneSettingController");
     super.initState();
   }
@@ -47,18 +51,23 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ResponsiveBuilder(
-        builder: (context, si) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: si.isMobile
-                ? mobileMainContainer(si)
-                : desktopMainContainer(si),
-          );
-        },
-      ),
-    );
+    return Scaffold(body: Obx(
+      () {
+        return AbsorbPointer(
+          absorbing: con.isLoading.value,
+          child: ResponsiveBuilder(
+            builder: (context, si) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: si.isMobile
+                    ? mobileMainContainer(si)
+                    : desktopMainContainer(si),
+              );
+            },
+          ),
+        );
+      },
+    ));
   }
 
   Widget desktopMainContainer(SizingInformation si) {
@@ -96,27 +105,30 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
   }
 
   Widget tuneImage() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(
-          height: 200,
-          width: 200,
-          child: customImage(
-              url: widget.info.toneIdpreviewImageUrl, cornerRadius: 4),
-        ),
-        const SizedBox(height: 4),
-        CustomText(
-          title: widget.info.toneName ?? '',
-          fontName: FontName.bold,
-        ),
-        CustomText(
-          title: widget.info.albumName ?? '',
-          color: myTuneScreenBgColor,
-        ),
-      ],
+    return SizedBox(
+      width: 200,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 200,
+            width: 200,
+            child: customImage(
+                url: widget.info.toneIdpreviewImageUrl, cornerRadius: 4),
+          ),
+          const SizedBox(height: 4),
+          CustomText(
+            title: widget.info.toneName ?? '',
+            fontName: FontName.bold,
+          ),
+          CustomText(
+            title: widget.info.albumName ?? '',
+            color: myTuneScreenBgColor,
+          ),
+        ],
+      ),
     );
   }
 
@@ -172,7 +184,11 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
           ),
         ),
         const SizedBox(height: 10),
-        bottomButtons(),
+        Obx(
+          () {
+            return con.isLoading.value ? loadingIndicator() : bottomButtons();
+          },
+        ),
         const SizedBox(height: 30),
       ],
     );
@@ -192,12 +208,19 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
               CustomTextfield(
                 isNumericTextField: true,
                 maxLength: msisdnLength,
+                onChange: (p0) {
+                  con.msisdn = p0;
+                },
+                onSubmit: (p0) {
+                  con.msisdn = p0;
+                },
                 width: 300,
                 radius: 4,
                 hintColor: grey,
                 hintText: enterFriendMobileNumberStr,
-                controller: TextEditingController(),
+                controller: textEditingController,
                 trailingChild: const SizedBox(),
+                leadingChild: countryCode(),
               ),
             ],
           ),

@@ -1,3 +1,4 @@
+import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -15,7 +16,11 @@ customSnackBar(String? message) {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Center(
-                child: CustomText(title: message ?? someThingWentWrongStr)),
+                child: CustomText(
+              title: message ?? someThingWentWrongStr,
+              textAlign: TextAlign.center,
+              fontName: FontName.bold,
+            )),
           )),
       backgroundColor: transparent,
       snackPosition: SnackPosition.BOTTOM);

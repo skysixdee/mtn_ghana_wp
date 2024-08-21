@@ -33,6 +33,10 @@ String submitStr = "Submit";
 String minuteStr = "Minute";
 String hourStr = "Hour";
 String shareStr = "Share";
+String selectAtleasrOneDayStr =
+    "Please select Repeat(Weekly days) is mandatory.";
+String timeDifferenceErrorStr =
+    'Start Time cannot be greater than or equal to End Time';
 String subscribeStr = "Subscribe";
 
 String whomYouWantToPlayItStr = 'Whom you want to play it?';
