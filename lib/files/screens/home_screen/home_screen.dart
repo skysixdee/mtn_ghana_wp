@@ -8,6 +8,7 @@ import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/popup_views/gift_popup_view.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
@@ -97,6 +98,18 @@ class _HomeScreenState extends State<HomeScreen> {
               GenericButton(
                 title: " Open Time",
                 onTap: () {
+                  openAlertPopup(
+                    heading: "Heading",
+                    message:
+                        "https://ringtune.mpt.com.mm/apigw/Middleware/api/adapter/v1/crbt/settings",
+                    onPrimary: () {
+                      print("Primary call back");
+                    },
+                    onSecondry: () {
+                      print("Secondry call back");
+                    },
+                  );
+                  return;
                   Get.dialog(
                       barrierDismissible: true,
                       TimeDatePicker(

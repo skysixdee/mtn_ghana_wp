@@ -32,6 +32,7 @@ String replaceStr = "Replace";
 String submitStr = "Submit";
 String minuteStr = "Minute";
 String hourStr = "Hour";
+String okCStr = "OK";
 String shareStr = "Share";
 String selectAtleasrOneDayStr =
     "Please select Repeat(Weekly days) is mandatory.";
