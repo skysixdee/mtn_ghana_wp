@@ -1,6 +1,7 @@
 import 'package:etisalat/files/api_calls/get_playing_tune_api.dart';
 import 'package:etisalat/files/enums/playing_card_type.dart';
 import 'package:etisalat/files/model/my_playing_tunes_model.dart';
+import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/foundation.dart';
@@ -116,5 +117,15 @@ class MyPlayingTuneController extends GetxController {
     inf.yearlyStartMonth = info.yearlyStartMonth;
     inf.yearlyStartTime = info.yearlyStartTime;
     return inf;
+  }
+
+  deleteTune(ToneDetail detail) {
+    openAlertPopup(
+      message: deletePlayingTuneMessageStr,
+      secondryBtnTitle: cancelStr,
+      onPrimary: () {
+        print("Delete tone name ===== ${detail.toneName}");
+      },
+    );
   }
 }

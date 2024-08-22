@@ -51,69 +51,74 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Obx(
-      () {
-        return AbsorbPointer(
-          absorbing: con.isLoading.value,
-          child: ResponsiveBuilder(
-            builder: (context, si) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: si.isMobile
-                    ? mobileMainContainer(si)
-                    : desktopMainContainer(si),
-              );
-            },
-          ),
-        );
-      },
-    ));
+    return Scaffold(
+        backgroundColor: white,
+        body: Obx(
+          () {
+            return AbsorbPointer(
+              absorbing: con.isLoading.value,
+              child: ResponsiveBuilder(
+                builder: (context, si) {
+                  return Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30),
+                    child: si.isMobile
+                        ? mobileMainContainer(si)
+                        : desktopMainContainer(si),
+                  );
+                },
+              ),
+            );
+          },
+        ));
   }
 
   Widget desktopMainContainer(SizingInformation si) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          tuneImage(),
-          const SizedBox(width: 30),
-          Flexible(child: SizedBox(width: 700, child: mainContaner(si)))
-        ],
-      ),
-    );
-  }
-
-  Padding mobileMainContainer(SizingInformation si) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: ListView(
         children: [
-          const SizedBox(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              tuneImage(),
+              tuneImage(si),
+              const SizedBox(width: 30),
+              Flexible(child: SizedBox(width: 700, child: mainContaner(si)))
             ],
           ),
-          mainContaner(si),
         ],
       ),
     );
   }
 
-  Widget tuneImage() {
+  Widget mobileMainContainer(SizingInformation si) {
+    return ListView(
+      children: [
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            tuneImage(si),
+          ],
+        ),
+        const SizedBox(height: 20),
+        mainContaner(si),
+      ],
+    );
+  }
+
+  Widget tuneImage(SizingInformation si) {
     return SizedBox(
-      width: 200,
+      width: si.isMobile ? 150 : 200,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            height: 200,
+            height: si.isMobile ? 150 : 200,
             width: 200,
             child: customImage(
                 url: widget.info.toneIdpreviewImageUrl, cornerRadius: 4),
@@ -183,7 +188,7 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
         Obx(
           () {
             return con.isLoading.value ? loadingIndicator() : bottomButtons();
@@ -257,7 +262,7 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
       children: [
         GenericButton(
           width: 150,
-          height: 35,
+          height: 40,
           radius: 4,
           bgColor: yellow,
           title: confirmStr,
@@ -265,9 +270,9 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
             con.onConfirmButtonTap();
           },
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 16),
         GenericButton(
-          height: 35,
+          height: 40,
           width: 150,
           radius: 4,
           bgColor: white,

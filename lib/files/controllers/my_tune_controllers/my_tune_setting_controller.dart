@@ -1,3 +1,4 @@
+import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:get/get.dart';
 import 'package:etisalat/files/enums/time_type.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -100,13 +101,13 @@ class MyTuneSettingController extends GetxController {
       return false;
     }
     if (!isValidTimeDifference()) {
-      customSnackBar(timeDifferenceErrorStr);
+      //customSnackBar(timeDifferenceErrorStr);
       popupAlert(timeDifferenceErrorStr);
       return false;
     }
     if (callerType.value == CallerType.dedicated) {
       if (msisdn.isEmpty) {
-        customSnackBar(enterFriendMobileNumberStr);
+        //customSnackBar(enterFriendMobileNumberStr);
         popupAlert(enterFriendMobileNumberStr);
         return false;
       }
@@ -142,7 +143,7 @@ class MyTuneSettingController extends GetxController {
         }
       }
       if (!isSelected) {
-        customSnackBar(selectAtleasrOneDayStr);
+        //customSnackBar(selectAtleasrOneDayStr);
         popupAlert(selectAtleasrOneDayStr);
         return false;
       }
@@ -152,6 +153,7 @@ class MyTuneSettingController extends GetxController {
 
   popupAlert(String message) {
     print("pop up alert $message");
+    openAlertPopup(message: message);
     //Get.dialog(genericPopover(context, menuList))
   }
 

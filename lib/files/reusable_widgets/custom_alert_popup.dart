@@ -9,9 +9,10 @@ import 'package:get/get.dart';
 
 openAlertPopup(
     {String? heading,
-    String? message,
+    required String message,
     String? primaryBtnTitle,
     String? secondryBtnTitle,
+    Color? secondryTitleColor,
     Function()? onPrimary,
     Function()? onSecondry}) {
   Get.dialog(
@@ -20,26 +21,29 @@ openAlertPopup(
         message: message,
         primaryBtnTitle: primaryBtnTitle,
         secondryBtnTitle: secondryBtnTitle,
+        secondryTitleColor: secondryTitleColor,
         onPrimary: onPrimary,
         onSecondry: onSecondry,
       ),
-      barrierDismissible: true);
+      barrierDismissible: false);
 }
 
 class _CustomAlertPopup extends StatelessWidget {
   const _CustomAlertPopup({
     super.key,
     this.heading,
-    this.message,
+    required this.message,
     this.primaryBtnTitle,
     this.secondryBtnTitle,
     this.onPrimary,
     this.onSecondry,
+    this.secondryTitleColor,
   });
   final String? heading;
-  final String? message;
+  final String message;
   final String? primaryBtnTitle;
   final String? secondryBtnTitle;
+  final Color? secondryTitleColor;
   final Function()? onPrimary;
   final Function()? onSecondry;
   @override
@@ -62,9 +66,10 @@ class _CustomAlertPopup extends StatelessWidget {
               header(context),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: CustomText(
                   title: message,
+                  fontSize: 16,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -92,13 +97,14 @@ class _CustomAlertPopup extends StatelessWidget {
     return secondryBtnTitle == null
         ? GenericButton(
             height: 45,
+            fontSize: 16,
             bgColor: transparent,
             title: primaryBtnTitle ?? okCStr,
             onTap: () {
               if (onPrimary != null) {
-                Navigator.of(context).pop();
                 onPrimary!();
               }
+              Navigator.of(context).pop();
             },
           )
         : SizedBox(
@@ -107,13 +113,15 @@ class _CustomAlertPopup extends StatelessWidget {
               children: [
                 Expanded(
                   child: GenericButton(
+                    fontSize: 16,
+                    textColor: secondryTitleColor ?? red,
                     title: secondryBtnTitle,
                     bgColor: transparent,
                     onTap: () {
                       if (onSecondry != null) {
-                        Navigator.of(context).pop();
                         onSecondry!();
                       }
+                      Navigator.of(context).pop();
                     },
                   ),
                 ),
@@ -129,13 +137,14 @@ class _CustomAlertPopup extends StatelessWidget {
                 ),
                 Expanded(
                   child: GenericButton(
+                    fontSize: 16,
                     title: primaryBtnTitle ?? okCStr,
                     bgColor: transparent,
                     onTap: () {
                       if (onPrimary != null) {
-                        Navigator.of(context).pop();
                         onPrimary!();
                       }
+                      Navigator.of(context).pop();
                     },
                   ),
                 ),

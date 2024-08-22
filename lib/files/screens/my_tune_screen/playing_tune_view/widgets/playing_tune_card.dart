@@ -2,6 +2,7 @@ import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_c
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/enums/playing_card_type.dart';
 import 'package:etisalat/files/model/my_playing_tunes_model.dart';
+import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/screens/my_tune_screen/playing_tune_view/widgets/day_repeat_view.dart';
@@ -104,17 +105,20 @@ class PlayingTuneCard extends StatelessWidget {
   }
 
   Widget deleteButton() {
-    return Container(
-      height: 34,
+    return GenericButton(
+      bgColor: white,
       width: 34,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(17),
-          border: Border.all(color: red)),
-      child: const Icon(
+      height: 34,
+      borderColor: red,
+      padding: EdgeInsets.zero,
+      leadingIcon: const Icon(
         Icons.delete_forever_outlined,
         color: red,
         size: 20,
       ),
+      onTap: () {
+        con.deleteTune(info);
+      },
     );
   }
 

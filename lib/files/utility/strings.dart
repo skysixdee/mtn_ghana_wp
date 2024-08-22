@@ -33,6 +33,10 @@ String submitStr = "Submit";
 String minuteStr = "Minute";
 String hourStr = "Hour";
 String okCStr = "OK";
+String deletePlayingTuneMessageStr =
+    "Deleting the tune will be removed from current playlist.";
+String deleteMyTuneMessageStr =
+    "Deleting the tune will be removed from my tune and also from current playlist, You have to buy gain to set the tune.";
 String shareStr = "Share";
 String selectAtleasrOneDayStr =
     "Please select Repeat(Weekly days) is mandatory.";

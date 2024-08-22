@@ -129,7 +129,7 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
                 if (p0.title == wishlistStr) {
                   addToWishlistApi(info);
                 } else if (p0.title == giftStr) {
-                  await Future.delayed(const Duration(milliseconds: 200));
+                  await Future.delayed(const Duration(milliseconds: 300));
                   Get.dialog(GiftPopupView(info: info));
                   customPrint("gift tapped");
                 } else {
@@ -137,6 +137,7 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
                 }
               }
               if (onMenuTap != null) {
+                await Future.delayed(const Duration(milliseconds: 300));
                 onMenuTap(p0, index);
               }
             },
