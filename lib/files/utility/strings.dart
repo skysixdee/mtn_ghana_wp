@@ -33,6 +33,7 @@ String submitStr = "Submit";
 String minuteStr = "Minute";
 String hourStr = "Hour";
 String okCStr = "OK";
+String invalidPackNameStr = "Invalid pack name.";
 String deletePlayingTuneMessageStr =
     "Deleting the tune will be removed from current playlist.";
 String deleteMyTuneMessageStr =

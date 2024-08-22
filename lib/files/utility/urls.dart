@@ -40,3 +40,8 @@ String playingTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones';
 String myMusicBoxUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones';
+
+String tuneSettingFulldayUrl =
+    '$baseUrl/security/Middleware/api/adapter/v1/crbt/time-based-setting-for-already-activated';
+String tuneSettingDedicatedUrl =
+    '$baseUrl/security/Middleware/api/adapter/v1/crbt/dedicated-user-tone-addition-with-time-setting';

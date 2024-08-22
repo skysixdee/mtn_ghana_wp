@@ -16,6 +16,7 @@ class StoreManager {
   static bool isLoggedIn = true;
   static bool isEnglish = true;
   static String language = 'English';
+  static String languageCode = '0';
   static String msisdn = '0832120732';
   static List<Category>? categories;
   static String accessToken = "884c12da-9613-4bbb-b865-ba2a2e9cfcee";

@@ -267,7 +267,7 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
           bgColor: yellow,
           title: confirmStr,
           onTap: () {
-            con.onConfirmButtonTap();
+            con.onConfirmButtonTap(widget.info);
           },
         ),
         const SizedBox(width: 16),
