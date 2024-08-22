@@ -73,9 +73,6 @@ class StoreManager {
     setRefreshToken('');
     setDeviceId('');
     appCont.isLoggedIn.value = false;
-    //globalContext.goNamed(homeRoute);
-    //globalContext.pushReplacement(homeRoute);
-    GoRouter.of(globalContext)
-        .pushReplacement(homeRoute); //clearStackAndNavigate('login')
+    globalContext.goNamed(homeRoute);
   }
 }

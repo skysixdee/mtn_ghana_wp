@@ -14,6 +14,7 @@ class MyTuneScreen extends StatelessWidget {
       shrinkWrap: true,
       primary: true,
       children: [
+        const SizedBox(height: 1),
         const MyTuneHeaderView(),
         const SizedBox(height: 20),
         PlayingTuneView(),

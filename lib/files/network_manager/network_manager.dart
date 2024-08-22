@@ -4,10 +4,14 @@ import 'dart:convert';
 import 'package:etisalat/files/api_calls/regenerate_token_api.dart';
 import 'package:etisalat/files/model/regenerate_model.dart';
 import 'package:etisalat/files/network_manager/request_header.dart';
+import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
+import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
+import 'package:etisalat/main.dart';
+import 'package:go_router/go_router.dart';
 import 'package:universal_io/io.dart';
 
 class NetworkManager {
@@ -23,6 +27,9 @@ class NetworkManager {
             .timeout(const Duration(seconds: timeOutDuration));
         if (response.statusCode == 498) {
           return await _regenToken(url);
+        }
+        if (response.statusCode == 401) {
+          StoreManager.logout();
         }
         final stringData = await response.transform(utf8.decoder).join();
         customPrint("resp code is $url \n ${response.statusCode}\n");
@@ -76,7 +83,10 @@ class NetworkManager {
             .timeout(const Duration(seconds: timeOutDuration));
         if (response.statusCode == 498) {
           return await _regenToken(url, formData: formData, jsonData: jsonData);
-        } else {}
+        }
+        if (response.statusCode == 401) {
+          StoreManager.logout();
+        }
         final stringData = await response.transform(utf8.decoder).join();
         customPrint("resp code is $url \n ${response.statusCode}\n");
         try {
