@@ -1,5 +1,6 @@
 import 'package:etisalat/files/api_calls/tune_setting_api/tune_setting_dedicated_api.dart';
 import 'package:etisalat/files/api_calls/tune_setting_api/tune_setting_fullday_api.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/model/tune_setting_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
@@ -14,15 +15,15 @@ import 'package:etisalat/files/reusable_widgets/time_date_picker.dart';
 
 class MyTuneSettingController extends GetxController {
   List<RepeatDayModel> repeatDaysF = [
-    RepeatDayModel('SUNDAY', 'S'),
-    RepeatDayModel('MONDAY', 'M'),
-    RepeatDayModel('TUESDAY', 'T'),
-    RepeatDayModel('WEDNESDAY', 'W'),
-    RepeatDayModel('THURSDAY', 'Th'),
-    RepeatDayModel('FRIDAY', 'F'),
-    RepeatDayModel('SATURDAY', 'S'),
+    RepeatDayModel('SUNDAY', 'S', false),
+    RepeatDayModel('MONDAY', 'M', false),
+    RepeatDayModel('TUESDAY', 'T', false),
+    RepeatDayModel('WEDNESDAY', 'W', false),
+    RepeatDayModel('THURSDAY', 'Th', false),
+    RepeatDayModel('FRIDAY', 'F', false),
+    RepeatDayModel('SATURDAY', 'S', false),
   ];
-
+  MyPlayingTuneController playingTuneController = Get.find();
   List<RepeatMonthlyModel> repeatMonthly = [
     RepeatMonthlyModel(noneStr, isSelected: true),
     RepeatMonthlyModel(monthlyStr),
@@ -36,20 +37,20 @@ class MyTuneSettingController extends GetxController {
   DateTime endDate = DateTime.now();
   RxString startTimeStr = ''.obs;
   RxString endTimeStr = ''.obs;
-
+  Function()? onSuccess;
   String msisdn = '';
   String packName = '';
   late TuneInfo info;
   resetValue() {
     packName = '';
     repeatDaysF = [
-      RepeatDayModel('SUNDAY', 'S'),
-      RepeatDayModel('MONDAY', 'M'),
-      RepeatDayModel('TUESDAY', 'T'),
-      RepeatDayModel('WEDNESDAY', 'W'),
-      RepeatDayModel('THURSDAY', 'Th'),
-      RepeatDayModel('FRIDAY', 'F'),
-      RepeatDayModel('SATURDAY', 'S'),
+      RepeatDayModel('SUNDAY', 'S', false),
+      RepeatDayModel('MONDAY', 'M', false),
+      RepeatDayModel('TUESDAY', 'T', false),
+      RepeatDayModel('WEDNESDAY', 'W', false),
+      RepeatDayModel('THURSDAY', 'Th', false),
+      RepeatDayModel('FRIDAY', 'F', false),
+      RepeatDayModel('SATURDAY', 'S', false),
     ];
 
     repeatMonthly = [
@@ -228,12 +229,12 @@ class MyTuneSettingController extends GetxController {
   Future<String> getSelectedDays() async {
     List<String> daysList = [];
     print("Day count ======= ${repeatDaysF.length}");
-    for (var i = 1; i <= (repeatDaysF.length - 1); i++) {
+    for (var i = 0; i < (repeatDaysF.length); i++) {
       print("repeatDaysF1 ======= ${i}");
       print("repeatDaysF2 ======= ${repeatDaysF[i].isSelected}");
 
       if (repeatDaysF[i].isSelected.value) {
-        daysList.add("$i");
+        daysList.add("${i + 1}");
       }
     }
 
@@ -259,6 +260,7 @@ class MyTuneSettingController extends GetxController {
     TuneSettingModel model = await fulldayApi(days, info.toneId ?? '');
 
     if (model.statusCode == "SC0000") {
+      onSucessApiCall();
     } else {
       customSnackBar(model.message);
     }
@@ -273,6 +275,7 @@ class MyTuneSettingController extends GetxController {
         await fulldayTimeBaseApi(days, info.toneId ?? '', startDate, endDate);
 
     if (model.statusCode == "SC0000") {
+      onSucessApiCall();
     } else {
       customSnackBar(model.message);
     }
@@ -295,6 +298,7 @@ class MyTuneSettingController extends GetxController {
     }
 
     if (model.statusCode == "SC0000") {
+      onSucessApiCall();
     } else {
       customSnackBar(model.message);
     }
@@ -308,6 +312,7 @@ class MyTuneSettingController extends GetxController {
     TuneSettingModel model =
         await fulldayDedicatedApi(info.toneId ?? '', msisdn, packName, days);
     if (model.statusCode == "SC0000") {
+      onSucessApiCall();
     } else {
       customSnackBar(model.message);
     }
@@ -321,6 +326,7 @@ class MyTuneSettingController extends GetxController {
     TuneSettingModel model = await fulldayTimeBaseDedicatedApi(
         info.toneId ?? '', msisdn, packName, days, startDate, endDate);
     if (model.statusCode == "SC0000") {
+      onSucessApiCall();
     } else {
       customSnackBar(model.message);
     }
@@ -342,10 +348,23 @@ class MyTuneSettingController extends GetxController {
           info.toneId ?? '', msisdn, packName, startDate, endDate);
     }
     if (model.statusCode == "SC0000") {
+      onSucessApiCall();
     } else {
       customSnackBar(model.message);
     }
     isLoading.value = false;
     print("Time and date base Dedicated setting");
+  }
+
+  onSucessApiCall() {
+    openAlertPopup(
+      message: tuneIsLiveStr,
+      onPrimary: () {
+        playingTuneController.getPlayingTune();
+        if (onSuccess != null) {
+          onSuccess!();
+        }
+      },
+    );
   }
 }

@@ -64,8 +64,9 @@ class MyTuneView extends StatelessWidget {
       ),
       onTap: () {
         MyTuneSettingController settingCon = Get.find();
-        settingCon.resetValue();
+
         contex.goNamed(myTunesSettingRoute, extra: con.tuneList[index]);
+        settingCon.resetValue();
         customPrint("On Setting tap");
       },
     );

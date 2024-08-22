@@ -1,5 +1,8 @@
+import 'package:etisalat/files/api_calls/dedicated_tune_delete_api.dart';
+import 'package:etisalat/files/api_calls/delete_from_shuffle_api.dart';
 import 'package:etisalat/files/api_calls/get_playing_tune_api.dart';
 import 'package:etisalat/files/enums/playing_card_type.dart';
+import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/my_playing_tunes_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
@@ -10,7 +13,7 @@ import 'package:get/get.dart';
 class MyPlayingTuneController extends GetxController {
   RxBool isLoading = false.obs;
   RxString message = ''.obs;
-  List<ToneDetail> tuneList = [];
+  RxList<ToneDetail> tuneList = <ToneDetail>[].obs;
   RxBool isShuffleOn = false.obs;
   getPlayingTune() async {
     message.value = '';
@@ -124,8 +127,40 @@ class MyPlayingTuneController extends GetxController {
       message: deletePlayingTuneMessageStr,
       secondryBtnTitle: cancelStr,
       onPrimary: () {
+        if (detail.serviceName == 'SpecialCallerSetting') {
+          _deleteDedicatedTune(detail);
+        } else {
+          _deleteAllCallerTune(detail);
+        }
         print("Delete tone name ===== ${detail.toneName}");
       },
     );
+  }
+
+  _deleteDedicatedTune(ToneDetail info) async {
+    GenericModel model = await dedicatedTuneDeleteApi(
+        info.bParty ?? '', info.toneId ?? '', getTimeType(info));
+    if (model.statusCode == 'SC0000') {
+      tuneList.remove(info);
+    }
+    print("Dedicated deleted");
+  }
+
+  _deleteAllCallerTune(ToneDetail info) {
+    deleteFromShuffleApi(info.toneId ?? '', getTimeType(info));
+    print("AllCaller deleted");
+  }
+
+  getTimeType(ToneDetail info) {
+    if (info.serviceName == "AllCaller" ||
+        info.serviceName == "SpecialCallerSetting") {
+      return info.playingCardType == PlayingCardType.yearly
+          ? "4"
+          : (info.playingCardType == PlayingCardType.monthly ? "3" : "7");
+    } else {
+      print("please check time type her and return valid it ");
+      return "1";
+    }
+    // timeType
   }
 }

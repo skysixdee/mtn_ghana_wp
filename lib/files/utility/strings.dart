@@ -31,6 +31,7 @@ String fileNameStr = "filename.map3";
 String replaceStr = "Replace";
 String submitStr = "Submit";
 String minuteStr = "Minute";
+String tuneIsLiveStr = "Your Tune is live now.";
 String hourStr = "Hour";
 String okCStr = "OK";
 String invalidPackNameStr = "Invalid pack name.";

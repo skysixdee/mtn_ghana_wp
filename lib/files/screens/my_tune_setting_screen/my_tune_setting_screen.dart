@@ -268,6 +268,10 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
           title: confirmStr,
           onTap: () {
             con.onConfirmButtonTap(widget.info);
+            con.onSuccess = () {
+              //Navigator.of(context).pop();
+              context.goNamed(myTunesRoute);
+            };
           },
         ),
         const SizedBox(width: 16),

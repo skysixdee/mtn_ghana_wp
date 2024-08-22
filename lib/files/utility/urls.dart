@@ -45,3 +45,7 @@ String tuneSettingFulldayUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/time-based-setting-for-already-activated';
 String tuneSettingDedicatedUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/dedicated-user-tone-addition-with-time-setting';
+String deleteFromShuffleUrl =
+    '$baseUrl/security/Middleware/api/adapter/v1/crbt/delete-from-shuffle';
+String deleteDedicatedTuneUrl =
+    '$baseUrl/security/Middleware/api/adapter/v1/crbt/delete-dedication';
