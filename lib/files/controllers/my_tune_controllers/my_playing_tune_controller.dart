@@ -152,11 +152,36 @@ class MyPlayingTuneController extends GetxController {
   }
 
   getTimeType(ToneDetail info) {
-    if (info.serviceName == "AllCaller" ||
-        info.serviceName == "SpecialCallerSetting") {
-      return info.playingCardType == PlayingCardType.yearly
-          ? "4"
-          : (info.playingCardType == PlayingCardType.monthly ? "3" : "7");
+    PlayingCardType? type = info.playingCardType;
+
+    if (info.serviceName == "AllCaller") {
+      if (type == PlayingCardType.yearly) {
+        return '4';
+      } else if (type == PlayingCardType.monthly) {
+        return "3";
+      } else if (type == PlayingCardType.none) {
+        return "7";
+      } else if (type == PlayingCardType.fullday) {
+        print("Retrun time type for fullday and for All Caller");
+      } else if (type == PlayingCardType.customTime) {
+        print("Retrun time type for customTime and for All Caller");
+      } else {
+        print("please check card type here");
+      }
+    } else if (info.serviceName == "SpecialCallerSetting") {
+      if (type == PlayingCardType.yearly) {
+        return '4';
+      } else if (type == PlayingCardType.monthly) {
+        return "3";
+      } else if (type == PlayingCardType.none) {
+        return "7";
+      } else if (type == PlayingCardType.fullday) {
+        print("Retrun time type for fullday and for SpecialCallerSetting");
+      } else if (type == PlayingCardType.customTime) {
+        print("Retrun time type for customTime and for SpecialCallerSetting");
+      } else {
+        print("please check card type here");
+      }
     } else {
       print("please check time type her and return valid it ");
       return "1";
