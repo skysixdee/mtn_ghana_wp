@@ -19,6 +19,7 @@ class FeatureGridView extends StatelessWidget {
         return cont.isLoadingList[cont.index.value]
             ? loadingIndicator(height: 300)
             : GenericGridView(
+                padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount:
                     cont.displayList.length > 8 ? 7 : cont.displayList.length,
@@ -28,6 +29,7 @@ class FeatureGridView extends StatelessWidget {
                 },
                 builder: (p0) {
                   return TuneCard(
+                    tuneList: cont.displayList,
                     info: cont.displayList[p0],
                   );
                 },

@@ -23,7 +23,7 @@ class NavigationHeaderView extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: titleList.length,
                     scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
+                    shrinkWrap: false,
                     itemBuilder: (context, index) {
                       return GenericButton(
                         padding: const EdgeInsets.only(right: 4),
@@ -43,14 +43,16 @@ class NavigationHeaderView extends StatelessWidget {
                                   size: 14,
                                 ),
                         ),
-                        onTap: () {
-                          if (index == (titleList.length - 1)) {
-                            return;
-                          }
-                          if (titleList[index].routeName != null) {
-                            context.goNamed(titleList[index].routeName!);
-                          }
-                        },
+                        onTap: (index == (titleList.length - 1))
+                            ? null
+                            : () {
+                                if (index == (titleList.length - 1)) {
+                                  return;
+                                }
+                                if (titleList[index].routeName != null) {
+                                  context.goNamed(titleList[index].routeName!);
+                                }
+                              },
                       );
                     },
                   ),

@@ -38,7 +38,9 @@ class _SearchScreenState extends State<SearchScreen> {
             : GenericGridView(
                 itemCount: controller.tuneList.length,
                 builder: (p0) {
-                  return TuneCard(info: controller.tuneList[p0]);
+                  return TuneCard(
+                      info: controller.tuneList[p0],
+                      tuneList: controller.tuneList);
                 },
               );
       },

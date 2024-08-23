@@ -28,6 +28,7 @@ class MyWishlistScreen extends StatelessWidget {
                       return TuneCard(
                         info: con.tuneList[p0],
                         menuList: popoverMenu,
+                        tuneList: con.tuneList,
                         onMenuTap: (p0, p1) {
                           con.deleteFromWishlist(con.tuneList[p1]);
                           customPrint("Title = ${p0.title} and index = $p1");

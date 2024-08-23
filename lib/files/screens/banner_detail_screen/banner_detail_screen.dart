@@ -18,7 +18,8 @@ class BannerDetailScreen extends StatelessWidget {
             : GenericGridView(
                 itemCount: con.tuneList.length,
                 builder: (p0) {
-                  return TuneCard(info: con.tuneList[p0]);
+                  return TuneCard(
+                      info: con.tuneList[p0], tuneList: con.tuneList);
                 },
               );
       },

@@ -12,6 +12,7 @@ import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class FeatureCategoryView extends StatefulWidget {
   const FeatureCategoryView({super.key});
@@ -30,22 +31,32 @@ class _FeatureCategoryViewState extends State<FeatureCategoryView> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return featureController.isLoading.value
-            ? loadingIndicator(height: 300)
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(child: FeatureTabView()),
-                  const SizedBox(height: 10),
-                  FeatureGridView(),
-                  const SizedBox(height: 10),
-                  seeMoreButton()
-                ],
-              );
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Container(
+          color: white,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 25),
+            child: Obx(
+              () {
+                return featureController.isLoading.value
+                    ? loadingIndicator(height: 300)
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(child: FeatureTabView()),
+                          const SizedBox(height: 10),
+                          Flexible(child: FeatureGridView()),
+                          const SizedBox(height: 10),
+                          seeMoreButton()
+                        ],
+                      );
+              },
+            ),
+          ),
+        );
       },
     );
   }
@@ -61,7 +72,12 @@ class _FeatureCategoryViewState extends State<FeatureCategoryView> {
           bgColor: transparent,
           onTap: () {
             context.pushNamed(seeMoreRoute,
+                queryParameters: {
+                  'name': featureController
+                      .tabList[featureController.index.value].name
+                },
                 extra: featureController.displayList);
+
             customPrint("See more tapped");
           },
         ),

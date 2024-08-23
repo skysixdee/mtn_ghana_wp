@@ -82,7 +82,7 @@ Future<void> initiateController() async {
   Get.lazyPut(() => MusicBoxController());
   Get.lazyPut(() => MyMusicBoxController());
   Get.lazyPut(() => TuneSearchController());
-  Get.lazyPut(() => CategoryDetailScreen());
+  Get.lazyPut(() => CategoryDetailController());
   Get.lazyPut(() => MyWishlistController());
 
   Get.lazyPut(() => BannerDetailController());

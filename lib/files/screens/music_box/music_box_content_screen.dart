@@ -19,6 +19,7 @@ class MusicBoxContentScreen extends StatelessWidget {
                 itemCount: con.musicBoxContentList.length,
                 builder: (p0) {
                   return TuneCard(
+                    tuneList: con.musicBoxList,
                     moreButton: const SizedBox(),
                     info: con.musicBoxContentList[p0],
                     bottomButtonChild: playButton(con.musicBoxContentList[p0]),

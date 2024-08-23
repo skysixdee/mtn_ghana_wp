@@ -8,17 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-Widget buyButton(TuneInfo info) {
+Widget buyButton(TuneInfo info, {EdgeInsetsGeometry? padding}) {
   return ResponsiveBuilder(
     builder: (context, si) {
-      return GenericButton(
-        title: buyStr,
-        fontName: si.isMobile ? FontName.regular : FontName.bold,
-        leadingIcon: const Icon(Icons.card_travel, size: 16),
-        bgColor: yellow,
-        onTap: () {
-          Get.dialog(BuyPopupView(info: info));
-        },
+      return Padding(
+        padding: padding ?? EdgeInsets.zero,
+        child: GenericButton(
+          padding: padding,
+          title: buyStr,
+          fontName: si.isMobile ? FontName.regular : FontName.bold,
+          leadingIcon: const Icon(Icons.card_travel, size: 16),
+          bgColor: yellow,
+          onTap: () {
+            Get.dialog(BuyPopupView(info: info));
+          },
+        ),
       );
     },
   );

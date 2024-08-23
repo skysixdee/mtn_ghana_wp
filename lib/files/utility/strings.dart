@@ -79,6 +79,7 @@ String customTimeStr = "Custom Time";
 
 String allStr = "All";
 String specialStr = "Special";
+String homeStr = 'Home';
 
 String statusStr = "Status";
 String callerStr = "Callers";

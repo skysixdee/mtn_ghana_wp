@@ -12,6 +12,7 @@ import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/screens/banner_detail_screen/banner_detail_screen.dart';
 import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:etisalat/files/screens/home_screen/home_screen.dart';
+import 'package:etisalat/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
 import 'package:etisalat/files/screens/music_box/music_box_content_screen.dart';
 import 'package:etisalat/files/screens/music_box/music_box_screen.dart';
 import 'package:etisalat/files/screens/my_tune_screen/my_tune_screen.dart';
@@ -50,6 +51,7 @@ final router = GoRouter(
         _musicBoxShell(),
         _musicBoxContentShell(),
         _myTuneSettingShell(),
+        // _mobileTunePreviewShell(),
       ],
     ),
   ],
@@ -213,7 +215,9 @@ StatefulShellBranch _categoryDetailShell() {
           String key = state.uri.queryParameters['key'] ?? '';
           String catId = state.uri.queryParameters['catId'] ?? '';
           cont.getCategoryDetailList(key, catId);
-          return CategoryDetailScreen();
+          return CategoryDetailScreen(
+            name: key,
+          );
         },
       ),
     ],
@@ -229,7 +233,11 @@ StatefulShellBranch _seeMoreShell() {
         path: seeMoreRoute,
         builder: (context, state) {
           List<TuneInfo> lst = state.extra as List<TuneInfo>;
-          return SeeMoreScreen(list: lst);
+          String name = state.uri.queryParameters['name'] ?? '';
+          return SeeMoreScreen(
+            list: lst,
+            name: name,
+          );
         },
       ),
     ],
@@ -278,6 +286,22 @@ StatefulShellBranch _myTuneSettingShell() {
     ],
   );
 }
+
+// StatefulShellBranch _mobileTunePreviewShell() {
+//   return StatefulShellBranch(
+//     routes: <RouteBase>[
+//       GoRoute(
+//         name: mobileTunePreviewRoute,
+//         path: mobileTunePreviewRoute,
+//         builder: (context, state) {
+//           TuneInfo tuneInfo = state.extra as TuneInfo;
+
+//           return MobileTunePreviewSceen(tuneInfo: TuneInfo());
+//         },
+//       ),
+//     ],
+//   );
+// }
 
 Widget navBuilder(context, state, navigationShell) {
   globalContext = context;

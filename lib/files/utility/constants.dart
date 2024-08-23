@@ -6,7 +6,7 @@ const int pagePerCount = 20;
 String baseUrl = '';
 //=========================
 const int channelId = 4;
-const String versionCode = '7.0';
+const String versionCode = "1.2"; //'7.0';
 const String appVersion = '1.0.6';
 const String appId =
     "com.sixdee.mtnza_rbt_portal"; //'com.sixdee.oml_rbt_portal';

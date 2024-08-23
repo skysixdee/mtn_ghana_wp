@@ -20,8 +20,6 @@ passwordValidationApi(String msisdn, String securityCounter) async {
     "encryptedPassword": encryptedPassword,
     "versionCode": versionCode,
   };
-  Map<String, dynamic> jsonResp = await NetworkManager()
-      .post(passwordValidateUrl, formData: jsonData, addInHeader: [
-    {'languageId': StoreManager.languageCode}
-  ]);
+  Map<String, dynamic> jsonResp =
+      await NetworkManager().post(passwordValidateUrl, formData: jsonData);
 }

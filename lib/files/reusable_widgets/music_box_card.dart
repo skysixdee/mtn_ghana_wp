@@ -22,48 +22,53 @@ class MusicBoxCard extends StatelessWidget {
         context.goNamed(musicBoxContentRoute,
             queryParameters: {'type': info.type, 'code': info.toneId});
       },
-      child: Container(
-        width: 220,
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            color: white,
-            boxShadow: const [
-              BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
-            ]),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-                child: Container(
-                    color: yellow,
-                    child: customImage(url: info.previewImageUrl))),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomText(
-                    title: info.toneName ?? '',
-                    fontName: FontName.bold,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GenericButton(
-                        padding: EdgeInsets.zero,
-                        bgColor: transparent,
-                        title: previewStr,
-                        leadingIcon: const Icon(Icons.visibility),
-                      ),
-                      rightButton ?? buyButton(info)
-                    ],
-                  ),
-                ],
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Container(
+          width: 220,
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: white,
+              boxShadow: const [
+                BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+              ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                  child: Container(
+                      color: yellow,
+                      child: customImage(
+                          url: info.previewImageUrl,
+                          toneName: info.toneName ?? ''))),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CustomText(
+                      title: info.toneName ?? '',
+                      fontName: FontName.bold,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GenericButton(
+                          padding: EdgeInsets.zero,
+                          bgColor: transparent,
+                          title: previewStr,
+                          leadingIcon: const Icon(Icons.visibility),
+                        ),
+                        rightButton ?? buyButton(info)
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -39,6 +39,7 @@ class MyTuneView extends StatelessWidget {
                       return TuneCard(
                         info: con.tuneApkList[p0].toneDetails?.first ??
                             TuneInfo(),
+                        tuneList: con.tuneApkList[p0].toneDetails ?? [],
                         menuList: menuList,
                         bottomRightChild: settingButton(context, si, p0),
                         onMenuTap: (p0, p1) {
