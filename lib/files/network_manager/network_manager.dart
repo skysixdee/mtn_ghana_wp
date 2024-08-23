@@ -16,10 +16,21 @@ import 'package:universal_io/io.dart';
 
 class NetworkManager {
   final client = HttpClient();
-  Future<Map<String, dynamic>> get(String url) async {
+  Future<Map<String, dynamic>> get(String url,
+      {List<Map<String, dynamic>>? addInHeader}) async {
     try {
       HttpClientRequest clientRequests = await client.getUrl(Uri.parse(url));
-
+      if (addInHeader != null) {
+        for (Map<String, dynamic> element in addInHeader) {
+          Map<String, dynamic> abc = element.map(
+            (key, value) {
+              clientRequests.headers.set(key, value, preserveHeaderCase: true);
+              return MapEntry(key, value);
+            },
+          );
+          print("==== $abc");
+        }
+      }
       try {
         clientRequests = await requestHeader(url, clientRequests);
         HttpClientResponse response = await clientRequests
@@ -56,11 +67,15 @@ class NetworkManager {
     }
   }
 
-  Future<Map<String, dynamic>> post(String url,
-      {Map<String, dynamic>? formData, Map<String, dynamic>? jsonData}) async {
+  Future<Map<String, dynamic>> post(
+    String url, {
+    Map<String, dynamic>? formData,
+    Map<String, dynamic>? jsonData,
+    List<Map<String, dynamic>>? addInHeader,
+  }) async {
     try {
       HttpClientRequest clientRequests = await client.postUrl(Uri.parse(url));
-
+//addInHeader
       if (formData != null) {
         var parts = [];
         formData.forEach((key, value) {
@@ -68,6 +83,17 @@ class NetworkManager {
         });
 
         clientRequests.write(parts.join('&'));
+      }
+      if (addInHeader != null) {
+        for (Map<String, dynamic> element in addInHeader) {
+          Map<String, dynamic> abc = element.map(
+            (key, value) {
+              clientRequests.headers.set(key, value, preserveHeaderCase: true);
+              return MapEntry(key, value);
+            },
+          );
+          print("==== $abc");
+        }
       }
       if (jsonData != null) {
         clientRequests.headers

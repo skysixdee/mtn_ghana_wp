@@ -1,3 +1,6 @@
+import 'package:etisalat/files/api_calls/authorization/generate_otp_api.dart';
+import 'package:etisalat/files/api_calls/authorization/subscriber_validation_api.dart';
+import 'package:etisalat/files/model/subscriber_validation_model.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -24,8 +27,19 @@ class LoginController extends GetxController {
     }
 
     isLoading.value = true;
-    await Future.delayed(const Duration(seconds: 1));
-    displayOptScreen.value = true;
+    SubscriberValidationModel model = await susbcriberValidationApi(msisdn);
+    if (model.statusCode == 'SC0000') {
+      SubscriberValidationModel genModel = await generateOtpApi(msisdn);
+      if (genModel.statusCode == 'SC0000') {
+        displayOptScreen.value = true;
+      } else {
+        message.value = model.message ?? someThingWentWrongStr;
+      }
+      //displayOptScreen.value = true;
+    } else {
+      message.value = model.message ?? someThingWentWrongStr;
+    }
+
     isLoading.value = false;
   }
 

@@ -14,8 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginOtpPopup extends StatefulWidget {
-  const LoginOtpPopup({super.key});
-
+  const LoginOtpPopup({super.key, required this.msisdn});
+  final String msisdn;
   @override
   State<LoginOtpPopup> createState() => _LoginOtpPopupState();
 }
@@ -28,7 +28,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
   void initState() {
     Get.lazyPut(() => OtpController());
     otpController = Get.find();
-    otpController.onResentButtonAction(
+    otpController.onResentButtonAction(widget.msisdn,
         second: loginController.expireTime, isLoading: false);
     super.initState();
   }
@@ -94,7 +94,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
                     otpController.enableVerifyButton.value ? yellow : lightGrey,
                 title: verifyOtpStr,
                 onTap: () {
-                  otpController.onVerifyButtonAction();
+                  otpController.onVerifyButtonAction(widget.msisdn);
                   customPrint("generate otp");
                 },
               );
@@ -136,7 +136,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
                 ),
                 title: otpController.leftTime.value,
                 onTap: () {
-                  otpController.onResentButtonAction(
+                  otpController.onResentButtonAction(widget.msisdn,
                       second: loginController.expireTime);
                 },
               );
@@ -171,7 +171,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
             otpController.onChangeOtp(p0);
           },
           onSubmit: (p0) {
-            otpController.onVerifyButtonAction();
+            otpController.onVerifyButtonAction(widget.msisdn);
           },
         );
       },

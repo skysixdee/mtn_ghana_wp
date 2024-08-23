@@ -52,3 +52,14 @@ String deleteDedicatedTuneUrl =
 
 String shuffleEnableDisableUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/shuffle-activation-deactivation';
+
+String subscriberValidationUrl =
+    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation';
+String generateOtpUrl =
+    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/generate-otp';
+String confirmOtpUrl =
+    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/confirm-otp';
+String passwordValidateUrl =
+    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/password-validation';
+String securityTokenUrl =
+    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/security-token';

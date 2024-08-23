@@ -148,10 +148,11 @@ class WebNavigationView extends StatelessWidget {
                 if (StoreManager.isLoggedIn) {
                   myAccountMenu(context);
                 } else {
+                  con.displayOptScreen.value = false;
                   Get.dialog(Obx(
                     () {
                       return con.displayOptScreen.value
-                          ? const LoginOtpPopup()
+                          ? LoginOtpPopup(msisdn: con.msisdn)
                           : const LoginPopup();
                     },
                   ));

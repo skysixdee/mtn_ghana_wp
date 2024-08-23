@@ -1,5 +1,9 @@
 import 'dart:async';
 
+import 'package:etisalat/files/api_calls/authorization/confirm_otp_api.dart';
+import 'package:etisalat/files/api_calls/authorization/generate_otp_api.dart';
+import 'package:etisalat/files/model/confirm_otp_model.dart';
+import 'package:etisalat/files/model/subscriber_validation_model.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -26,7 +30,7 @@ class OtpController extends GetxController {
     customPrint("OtpController onInit");
   }
 
-  onVerifyButtonAction() async {
+  onVerifyButtonAction(String msisdn) async {
     if (otp.isEmpty || otp.length < otpLength) {
       message.value = enterOtpStr;
 
@@ -36,6 +40,11 @@ class OtpController extends GetxController {
 
     isLoading.value = true;
     await Future.delayed(const Duration(seconds: 2));
+    ConfirmOtpModel confirmOtpModel = await confirmOtpApi(msisdn, otp);
+    if (confirmOtpModel.statusCode == 'SC0000') {
+    } else {
+      message.value = confirmOtpModel.message ?? someThingWentWrongStr;
+    }
     isLoading.value = false;
   }
 
@@ -45,7 +54,8 @@ class OtpController extends GetxController {
     enableVerifyButton.value = value.length >= otpLength;
   }
 
-  onResentButtonAction({int second = 0, bool isLoading = true}) async {
+  onResentButtonAction(String msisdn,
+      {int second = 0, bool isLoading = true}) async {
     if (!enableResend.value) {
       return;
     }
@@ -53,7 +63,13 @@ class OtpController extends GetxController {
     if (isLoading) {
       isResendingOtp.value = true;
       enableResend.value = true;
-      await Future.delayed(Duration(seconds: 3));
+      SubscriberValidationModel model = await generateOtpApi(msisdn);
+      if (model.statusCode == 'SC0000') {
+      } else {
+        message.value = model.message ?? someThingWentWrongStr;
+      }
+      //await Future.delayed(Duration(seconds: 3));
+      //confirmOtpApi();
       isResendingOtp.value = false;
     }
     enableResend.value = false;
