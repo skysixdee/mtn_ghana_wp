@@ -17,14 +17,14 @@ class StoreManager {
   static bool isEnglish = true;
   static String language = 'English';
   static String languageCode = '0';
-  static String msisdn = '0832120732';
+  static String msisdn = '0';
   static List<Category>? categories;
   static String accessToken = "884c12da-9613-4bbb-b865-ba2a2e9cfcee";
   static String refreshToken = "7004d11a-7d1d-4808-aeb9-910e9e10283c";
   static String deviceId = '73585278-e909-413f-ab44-55145496baec';
 
   static initValues() {
-    msisdn = prefs.getString(_msisdn) ?? '';
+    msisdn = prefs.getString(_msisdn) ?? '0';
     isLoggedIn = prefs.getBool(_isLoggedIn) ?? false;
     isEnglish = prefs.getBool(_language) ?? true;
     accessToken = prefs.getString(_accessToken) ?? '';
@@ -67,7 +67,7 @@ class StoreManager {
   }
 
   static logout() {
-    setMsisdn('');
+    setMsisdn('0');
     setLoggedIn(false);
     setAccessToken('');
     setRefreshToken('');

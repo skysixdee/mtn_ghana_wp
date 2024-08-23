@@ -8,15 +8,15 @@ import 'package:get/get.dart';
 
 class MyTuneController extends GetxController {
   RxBool isLoading = false.obs;
-  List<TuneInfo> tuneList = [];
+  List<ListToneApk> tuneApkList = [];
   RxString message = ''.obs;
   getMyTune() async {
     isLoading.value = true;
     message.value = '';
     MyTunesModel model = await getMyTuneApi();
     if (model.statusCode == 'SC0000') {
-      tuneList = model.responseMap?.listToneApk?.first.toneDetails ?? [];
-      message.value = tuneList.isEmpty ? listIsEmptyStr : '';
+      tuneApkList = model.responseMap?.listToneApk ?? [];
+      message.value = tuneApkList.isEmpty ? listIsEmptyStr : '';
     } else {
       message.value = model.message ?? '';
     }

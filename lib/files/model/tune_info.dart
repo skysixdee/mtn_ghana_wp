@@ -23,6 +23,7 @@ class TuneInfo {
   String? previewImageUrl;
   String? downloadCount;
   String? likeCount;
+  String? status;
   String? toneIdStreamingUrl;
   String? toneIdpreviewImageUrl;
   RxBool? isLiked = false.obs;
@@ -51,6 +52,7 @@ class TuneInfo {
     this.toneName,
     this.toneUrl,
     this.price,
+    this.status,
     this.expiryDate,
   });
   factory TuneInfo.fromJson(Map<String, dynamic> json) {
@@ -77,6 +79,7 @@ class TuneInfo {
         toneName:
             json['toneName'] ?? json['contentName'] ?? json['channelName'],
         toneUrl: json['toneUrl'],
+        status: json['status'],
         price: '${json['price']}',
         expiryDate: json['expiryDate']);
   }

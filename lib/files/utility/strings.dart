@@ -36,7 +36,8 @@ String hourStr = "Hour";
 
 String setYourTuneStr = "Set your tunes";
 String customiseYourTuneStr = "Customise your tunes";
-
+String inactiveSettingMessageStr =
+    'You cannot access advanced settings for Non-Active tunes!';
 String okCStr = "OK";
 String invalidPackNameStr = "Invalid pack name.";
 String deletePlayingTuneMessageStr =

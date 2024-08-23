@@ -2,6 +2,7 @@ import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controlle
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
+import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
@@ -31,15 +32,18 @@ class MyTuneView extends StatelessWidget {
                 ? loadingIndicator()
                 : GenericGridView(
                     cardWidth: 250,
-                    itemCount: con.tuneList.length,
+                    itemCount: con.tuneApkList.length,
                     builder: (p0) {
                       return TuneCard(
-                        info: con.tuneList[p0],
+                        info: con.tuneApkList[p0].toneDetails?.first ??
+                            TuneInfo(),
                         menuList: menuList,
                         bottomRightChild: settingButton(context, si, p0),
                         onMenuTap: (p0, p1) {
                           if (p0.title == deleteStr) {
-                            con.deleteTune(con.tuneList[p1]);
+                            con.deleteTune(
+                                con.tuneApkList[p1].toneDetails?.first ??
+                                    TuneInfo());
                           }
                           customPrint("title is = ${p0.title} and index = $p1");
                         },
@@ -57,16 +61,24 @@ class MyTuneView extends StatelessWidget {
       fontName: si.isMobile ? FontName.regular : FontName.bold,
       padding: EdgeInsets.zero,
       title: settingStr,
-      bgColor: yellow,
+      bgColor: con.tuneApkList[index].toneDetails?.first.status == "A"
+          ? yellow
+          : lightGrey,
       leadingIcon: const Icon(
         Icons.settings,
         size: 15,
       ),
       onTap: () {
-        MyTuneSettingController settingCon = Get.find();
+        if (con.tuneApkList[index].toneDetails?.first.status == "A") {
+          MyTuneSettingController settingCon = Get.find();
 
-        contex.goNamed(myTunesSettingRoute, extra: con.tuneList[index]);
-        settingCon.resetValue();
+          contex.goNamed(myTunesSettingRoute,
+              extra: con.tuneApkList[index].toneDetails?.first ?? TuneInfo());
+          settingCon.resetValue();
+        } else {
+          openAlertPopup(message: inactiveSettingMessageStr);
+        }
+
         customPrint("On Setting tap");
       },
     );

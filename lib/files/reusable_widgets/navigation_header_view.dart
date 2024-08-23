@@ -1,0 +1,62 @@
+import 'package:etisalat/files/model/navigation_header_model.dart';
+import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
+import 'package:etisalat/files/utility/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+class NavigationHeaderView extends StatelessWidget {
+  const NavigationHeaderView({super.key, required this.titleList});
+  final List<NavigationHeaderModel> titleList;
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return si.isMobile
+            ? const SizedBox()
+            : Container(
+                color: lightGrey,
+                height: 50,
+                child: Padding(
+                  padding: EdgeInsets.only(left: si.isMobile ? 8.0 : 30),
+                  child: ListView.builder(
+                    itemCount: titleList.length,
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return GenericButton(
+                        padding: const EdgeInsets.only(right: 4),
+                        bgColor: transparent,
+                        textColor:
+                            index == (titleList.length - 1) ? black : grey,
+                        title: titleList[index].name,
+                        trailingIcon: Padding(
+                          padding: const EdgeInsets.only(top: 3.0),
+                          child: (index == (titleList.length - 1))
+                              ? const SizedBox()
+                              : Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  color: index == (titleList.length - 1)
+                                      ? black
+                                      : grey,
+                                  size: 14,
+                                ),
+                        ),
+                        onTap: () {
+                          if (index == (titleList.length - 1)) {
+                            return;
+                          }
+                          if (titleList[index].routeName != null) {
+                            context.goNamed(titleList[index].routeName!);
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ),
+              );
+      },
+    );
+  }
+}

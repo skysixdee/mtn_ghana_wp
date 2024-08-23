@@ -5,6 +5,7 @@ import 'package:etisalat/files/enums/playing_card_type.dart';
 import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/my_playing_tunes_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/foundation.dart';
@@ -127,12 +128,12 @@ class MyPlayingTuneController extends GetxController {
       message: deletePlayingTuneMessageStr,
       secondryBtnTitle: cancelStr,
       onPrimary: () {
+        print("Delete tone name ===== ${detail.toneName}");
         if (detail.serviceName == 'SpecialCallerSetting') {
           _deleteDedicatedTune(detail);
         } else {
           _deleteAllCallerTune(detail);
         }
-        print("Delete tone name ===== ${detail.toneName}");
       },
     );
   }
@@ -142,19 +143,29 @@ class MyPlayingTuneController extends GetxController {
         info.bParty ?? '', info.toneId ?? '', getTimeType(info));
     if (model.statusCode == 'SC0000') {
       tuneList.remove(info);
+    } else {
+      customSnackBar(model.message);
     }
     print("Dedicated deleted");
   }
 
-  _deleteAllCallerTune(ToneDetail info) {
-    deleteFromShuffleApi(info.toneId ?? '', getTimeType(info));
+  _deleteAllCallerTune(ToneDetail info) async {
+    GenericModel model =
+        await deleteFromShuffleApi(info.toneId ?? '', getTimeType(info));
+    if (model.statusCode == 'SC0000') {
+      tuneList.remove(info);
+    } else {
+      customSnackBar(model.message);
+    }
+
     print("AllCaller deleted");
   }
 
   getTimeType(ToneDetail info) {
     PlayingCardType? type = info.playingCardType;
 
-    if (info.serviceName == "AllCaller") {
+    if (info.serviceName == "AllCaller" ||
+        info.serviceName == "SpecialCallerSetting") {
       if (type == PlayingCardType.yearly) {
         return '4';
       } else if (type == PlayingCardType.monthly) {
@@ -162,23 +173,9 @@ class MyPlayingTuneController extends GetxController {
       } else if (type == PlayingCardType.none) {
         return "7";
       } else if (type == PlayingCardType.fullday) {
-        print("Retrun time type for fullday and for All Caller");
+        return "2";
       } else if (type == PlayingCardType.customTime) {
-        print("Retrun time type for customTime and for All Caller");
-      } else {
-        print("please check card type here");
-      }
-    } else if (info.serviceName == "SpecialCallerSetting") {
-      if (type == PlayingCardType.yearly) {
-        return '4';
-      } else if (type == PlayingCardType.monthly) {
-        return "3";
-      } else if (type == PlayingCardType.none) {
-        return "7";
-      } else if (type == PlayingCardType.fullday) {
-        print("Retrun time type for fullday and for SpecialCallerSetting");
-      } else if (type == PlayingCardType.customTime) {
-        print("Retrun time type for customTime and for SpecialCallerSetting");
+        return "2";
       } else {
         print("please check card type here");
       }
@@ -189,3 +186,21 @@ class MyPlayingTuneController extends GetxController {
     // timeType
   }
 }
+
+/*
+else if (info.serviceName == "SpecialCallerSetting") {
+      if (type == PlayingCardType.yearly) {
+        return '4';
+      } else if (type == PlayingCardType.monthly) {
+        return "3";
+      } else if (type == PlayingCardType.none) {
+        return "7";
+      } else if (type == PlayingCardType.fullday) {
+        return "2";
+      } else if (type == PlayingCardType.customTime) {
+        return "2";
+      } else {
+        print("please check card type here");
+      }
+    } 
+*/

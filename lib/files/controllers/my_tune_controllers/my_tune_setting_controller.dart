@@ -1,6 +1,8 @@
+import 'package:etisalat/files/api_calls/get_pack_detail_api.dart';
 import 'package:etisalat/files/api_calls/tune_setting_api/tune_setting_dedicated_api.dart';
 import 'package:etisalat/files/api_calls/tune_setting_api/tune_setting_fullday_api.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
+import 'package:etisalat/files/model/pack_detail_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/model/tune_setting_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
@@ -116,6 +118,15 @@ class MyTuneSettingController extends GetxController {
       return false;
     }
     if (callerType.value == CallerType.dedicated) {
+      if (packName.isEmpty) {
+        PackDetailModel packDetailModel = await getPackDetailApi();
+        packName =
+            (packDetailModel.responseMap?.packStatusDetails?.packName ?? '');
+      }
+      if (packName.isEmpty) {
+        openAlertPopup(message: invalidPackNameStr);
+        return;
+      }
       if (msisdn.isEmpty) {
         //customSnackBar(enterFriendMobileNumberStr);
         popupAlert(enterFriendMobileNumberStr);
