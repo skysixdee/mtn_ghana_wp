@@ -55,6 +55,7 @@ dependencies:
   basic_utils: ^5.7.0
   pointycastle: ^3.9.1
   encrypt: ^5.0.3
+  just_audio: ^0.9.37
   
 
 dev_dependencies:

@@ -1,3 +1,5 @@
+import 'package:etisalat/files/controllers/mobile_tune_preview_cotroller.dart';
+import 'package:etisalat/files/controllers/player_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/buy_button.dart';
@@ -23,10 +25,23 @@ class MobileTunePreviewSceen extends StatefulWidget {
 
 class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
   int playingIndex = 0;
+  late MobileTunePreviewCotroller con;
+  PlayerController pCont = Get.find();
   @override
   void initState() {
+    print("init MobileTunePreviewCotroller");
+    con = Get.put(MobileTunePreviewCotroller());
+
     playingIndex = widget.tuneList.indexOf(widget.tuneInfo);
+    con.customInit(playingIndex, widget.tuneList);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    print("dispose MobileTunePreviewCotroller");
+    Get.delete<MobileTunePreviewCotroller>();
+    super.dispose();
   }
 
   @override
@@ -43,14 +58,13 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
                     child: Stack(
                       alignment: Alignment.topRight,
                       children: [
-                        customImage(url: widget.tuneInfo.toneIdpreviewImageUrl),
+                        Obx(() {
+                          return customImage(url: con.imageName.value);
+                        }),
                         closeButton(context)
                       ],
                     )),
-                Expanded(
-                    child: SizedBox(
-                  child: tuneInfoBuilder(),
-                )),
+                Expanded(child: tuneInfoBuilder()),
                 SizedBox(height: 150, child: bottomBuilder()),
                 bottomButtons(),
               ],
@@ -67,8 +81,10 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         playerButtonbuilder(),
-        buyButton(widget.tuneInfo,
-            padding: const EdgeInsets.symmetric(horizontal: 30)),
+        Obx(() {
+          return buyButton(con.currentTuneDetail.value,
+              padding: const EdgeInsets.symmetric(horizontal: 30));
+        }),
       ],
     );
   }
@@ -110,55 +126,93 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        GenericButton(
-          bgColor: white,
-          height: 40,
-          width: 40,
-          borderColor: grey,
-          padding: EdgeInsets.zero,
-          leadingIcon: Icon(Icons.skip_previous),
-        ),
-        GenericButton(
-          bgColor: white,
-          height: 40,
-          width: 40,
-          borderColor: grey,
-          padding: EdgeInsets.zero,
-          leadingIcon: Icon(Icons.play_arrow_rounded),
-          onTap: () {
-            print("playing index is $playingIndex");
+        Obx(
+          () {
+            return GenericButton(
+              bgColor: white,
+              height: 40,
+              width: 40,
+              borderColor: con.enablePreviousButton.value ? black : lightGrey,
+              padding: EdgeInsets.zero,
+              leadingIcon: Icon(
+                Icons.skip_previous,
+                color: con.enablePreviousButton.value ? yellow : lightGrey,
+              ),
+              onTap: () {
+                con.previoustButtonTap(pCont);
+              },
+            );
           },
         ),
         GenericButton(
           bgColor: white,
-          height: 40,
-          width: 40,
-          borderColor: grey,
+          height: 65,
+          width: 65,
+          borderColor: black,
           padding: EdgeInsets.zero,
-          leadingIcon: Icon(Icons.skip_next),
+          leadingIcon: Obx(
+            () {
+              return Icon(
+                pCont.playingToneId.value == con.currentTuneDetail.value.toneId
+                    ? Icons.pause
+                    : Icons.play_arrow_rounded,
+                color: yellow,
+              );
+            },
+          ),
+          onTap: () {
+            print("playing index is $playingIndex");
+            con.isPlaying.value = !con.isPlaying.value;
+            pCont.playUrl(con.currentTuneDetail.value);
+          },
+        ),
+        Obx(
+          () {
+            return GenericButton(
+              bgColor: white,
+              height: 40,
+              width: 40,
+              borderColor: con.enableNextButton.value ? black : lightGrey,
+              padding: EdgeInsets.zero,
+              leadingIcon: Icon(
+                Icons.skip_next,
+                color: con.enableNextButton.value ? yellow : lightGrey,
+              ),
+              onTap: () {
+                con.nextButtonTap(pCont);
+              },
+            );
+          },
         )
       ],
     );
   }
 
   Widget tuneInfoBuilder() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        CustomText(
-          title: widget.tuneInfo.toneName ?? '',
-          fontName: FontName.bold,
-          fontSize: 18,
-          textAlign: TextAlign.center,
-        ),
-        CustomText(
-          title: widget.tuneInfo.artistName ?? '',
-          textAlign: TextAlign.center,
-          fontName: FontName.regular,
-          color: grey,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Obx(
+        () {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomText(
+                title: con.tuneName.value,
+                fontName: FontName.bold,
+                fontSize: 18,
+                textAlign: TextAlign.center,
+              ),
+              CustomText(
+                title: con.artistName.value,
+                textAlign: TextAlign.center,
+                fontName: FontName.regular,
+                color: grey,
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 

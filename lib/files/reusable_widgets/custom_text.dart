@@ -7,7 +7,7 @@ class CustomText extends StatelessWidget {
   final double? fontSize;
   final int? maxLine;
   final Color color;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
   final FontName fontName;
   const CustomText({
     super.key,

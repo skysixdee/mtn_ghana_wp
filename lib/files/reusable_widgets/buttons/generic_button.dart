@@ -1,3 +1,4 @@
+import 'package:etisalat/files/common/custom_audio_player.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/utility/colors.dart';
@@ -19,7 +20,9 @@ class GenericButton extends StatelessWidget {
     this.fontName = FontName.bold,
     this.borderColor,
     this.fontSize,
+    this.isStopPlay = false,
   });
+  final bool isStopPlay;
   final Widget? leadingIcon;
   final Widget? trailingIcon;
   final String? title;
@@ -44,7 +47,14 @@ class GenericButton extends StatelessWidget {
         ),
         width: width,
         child: InkWell(
-          onTap: onTap,
+          onTap: () {
+            if (onTap != null) {
+              onTap!();
+            }
+            if (!isStopPlay) {
+              CustomAudioPlayer.instance.stop();
+            }
+          },
           child: Padding(
               padding: padding ?? const EdgeInsets.symmetric(horizontal: 12),
               child: Column(

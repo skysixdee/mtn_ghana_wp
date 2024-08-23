@@ -15,6 +15,7 @@ import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_c
 import 'package:etisalat/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/name_tune_controller.dart';
+import 'package:etisalat/files/controllers/player_controller.dart';
 import 'package:etisalat/files/controllers/profile_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
@@ -69,11 +70,13 @@ Future<void> readProperties() async {
 }
 
 Future<void> initiateController() async {
-  appCont = Get.put(AppController());
+  Get.lazyPut(() => AppController());
+  appCont = Get.find(); //put(AppController());
 
   Get.lazyPut(() => TuneController());
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => LoginController());
+  Get.lazyPut(() => PlayerController());
   Get.lazyPut(() => MyTuneController());
   Get.lazyPut(() => BannerController());
   Get.lazyPut(() => FeatureController());
