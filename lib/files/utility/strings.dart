@@ -33,6 +33,7 @@ String submitStr = "Submit";
 String minuteStr = "Minute";
 String tuneIsLiveStr = "Your Tune is live now.";
 String hourStr = "Hour";
+String cusrrentlyPlayigToStr = "Currently playing to my callers";
 
 String setYourTuneStr = "Set your tunes";
 String customiseYourTuneStr = "Customise your tunes";
@@ -58,9 +59,14 @@ String whenYouWantToPlayItStr = 'When you want to play it?';
 String repeatStr = 'Repeat';
 String selectDateAndTimeStr = 'Select Date & Time';
 String selectTimeStr = 'Select Time';
-
+String howToPlaySelctedStr = 'How to play selected Tunez to your callers';
+String howToPlayMusicBixStr = 'How to play MusicBox';
+String myMusicBoxStr = 'My MusicBox';
+String learnMoreStr = "learn more";
 String shuffleStr = "Shuffle";
+String myTunezStr = "My Tunez";
 String activeStr = "Active";
+String activeTunezStr = "Active Tunez";
 String allCallerStr = "AllCaller";
 String fullDayStr = "Full Day";
 String startTimeStr = "Start Time";
@@ -79,7 +85,7 @@ String callerStr = "Callers";
 String playAtStr = "Play at";
 
 String myProfileStr = "My Profile";
-String myTunezStr = "My Tunez";
+
 String myWishlistStr = "My Wishlist";
 String wishlistStr = "Wishlist";
 String blackListStr = "Black List";
@@ -92,6 +98,9 @@ String giftStr = "Gift";
 String inActiveStr = "InActive";
 String confirmStr = "Confirm";
 String editStr = "Edit";
+String doYouWantToEnableShuffleStr = 'Do you want to enable shuffle?';
+String disableShuffleMessageStr =
+    'Your shuffle will be disabled and your callers will only listen to the latest tune.Your advanced settings will remain unaffected';
 String cancelStr = "Cancel";
 String previewStr = "Preview";
 String musicBoxStr = "Music Box";
@@ -111,3 +120,7 @@ String enterFriendMobileNumberStr = "Enter Friend's Mobile Number";
 String privacyPolicyStr = "Privacy Policy";
 String termsAndConditions = "Terms and conditions";
 String copyrightStr = "@2020 copyRight. All rights reserved";
+String myMusicBoxPopupMessageStr =
+    'Enble the shuffle button to add musicbox in playlist.';
+String myTunePopupMessageStr =
+    """1. Select one tune to play it for the full day to all your callers.\n\n2.To play a tune to a specific callers , use advanced settings option.""";

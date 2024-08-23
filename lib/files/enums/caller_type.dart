@@ -1,1 +1,1 @@
-enum CallerType { allCaller, dedicated }
+enum CallerType { allCaller, dedicated, shuffle }

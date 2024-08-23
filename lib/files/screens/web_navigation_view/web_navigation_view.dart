@@ -2,6 +2,7 @@ import 'package:etisalat/files/api_calls/get_search_tune_list_api.dart';
 import 'package:etisalat/files/controllers/app_controller.dart';
 import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
+import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/name_tune_controller.dart';
 import 'package:etisalat/files/controllers/profile_controller.dart';
@@ -220,6 +221,8 @@ class WebNavigationView extends StatelessWidget {
           con.getProfileDetail();
           context.goNamed(profileRoute);
         } else if (model.title == myTunezStr) {
+          MyTuneController con = Get.find();
+          con.getMyTune();
           context.goNamed(myTunesRoute);
         } else if (model.title == logoutStr) {
           StoreManager.logout();

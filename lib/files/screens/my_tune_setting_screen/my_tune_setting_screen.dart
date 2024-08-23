@@ -26,19 +26,22 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class MyTuneSettingScreen extends StatefulWidget {
-  const MyTuneSettingScreen({super.key, required this.info});
+  const MyTuneSettingScreen(
+      {super.key, required this.info, required this.packName});
   final TuneInfo info;
+  final String packName;
   @override
-  State<MyTuneSettingScreen> createState() => _MyTuneSettingScreen1State();
+  State<MyTuneSettingScreen> createState() => _MyTuneSettingScreenState();
 }
 
-class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
+class _MyTuneSettingScreenState extends State<MyTuneSettingScreen> {
   late MyTuneSettingController con;
   TextEditingController textEditingController = TextEditingController();
   @override
   void initState() {
     con = Get.find();
     textEditingController.text = con.msisdn;
+    con.packName = widget.packName;
     print("initState MyTuneSettingController");
     super.initState();
   }
@@ -283,7 +286,7 @@ class _MyTuneSettingScreen1State extends State<MyTuneSettingScreen> {
           title: cancelStr,
           borderColor: myTuneScreenBgColor,
           onTap: () {
-            context.goNamed(myTunesRoute);
+            context.goNamed(myTunesRoute, extra: false);
           },
         )
       ],

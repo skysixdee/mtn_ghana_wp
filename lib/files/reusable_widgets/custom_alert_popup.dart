@@ -13,6 +13,7 @@ openAlertPopup(
     String? primaryBtnTitle,
     String? secondryBtnTitle,
     Color? secondryTitleColor,
+    final TextAlign? textAlign,
     Function()? onPrimary,
     Function()? onSecondry}) {
   Get.dialog(
@@ -24,6 +25,7 @@ openAlertPopup(
         secondryTitleColor: secondryTitleColor,
         onPrimary: onPrimary,
         onSecondry: onSecondry,
+        textAlign: textAlign,
       ),
       barrierDismissible: false);
 }
@@ -38,7 +40,9 @@ class _CustomAlertPopup extends StatelessWidget {
     this.onPrimary,
     this.onSecondry,
     this.secondryTitleColor,
+    this.textAlign,
   });
+  final TextAlign? textAlign;
   final String? heading;
   final String message;
   final String? primaryBtnTitle;
@@ -49,37 +53,40 @@ class _CustomAlertPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Material(
-        color: transparent,
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            color: white,
-          ),
-          width: popupWidth,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              header(context),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-                child: CustomText(
-                  title: message,
-                  fontSize: 16,
-                  textAlign: TextAlign.center,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Material(
+          color: transparent,
+          child: Container(
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: white,
+            ),
+            width: popupWidth,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                header(context),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                  child: CustomText(
+                    title: message,
+                    fontSize: 16,
+                    textAlign: textAlign ?? TextAlign.center,
+                  ),
                 ),
-              ),
-              Column(
-                children: [
-                  verticatDivider(),
-                  bottomButtons(context),
-                ],
-              ),
-            ],
+                Column(
+                  children: [
+                    verticatDivider(),
+                    bottomButtons(context),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

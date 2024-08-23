@@ -32,7 +32,7 @@ class GenericGridView extends StatelessWidget {
     return ResponsiveBuilder(
       builder: (context, si) {
         return itemCount == 0
-            ? (emptyListWidget())
+            ? (emptyListWidget(height: si.isMobile ? 100 : 200))
             : onlyGrid
                 ? grid(si, context)
                 : si.isMobile

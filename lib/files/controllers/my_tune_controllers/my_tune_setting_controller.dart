@@ -44,7 +44,6 @@ class MyTuneSettingController extends GetxController {
   String packName = '';
   late TuneInfo info;
   resetValue() {
-    packName = '';
     repeatDaysF = [
       RepeatDayModel('SUNDAY', 'S', false),
       RepeatDayModel('MONDAY', 'M', false),
@@ -118,11 +117,6 @@ class MyTuneSettingController extends GetxController {
       return false;
     }
     if (callerType.value == CallerType.dedicated) {
-      if (packName.isEmpty) {
-        PackDetailModel packDetailModel = await getPackDetailApi();
-        packName =
-            (packDetailModel.responseMap?.packStatusDetails?.packName ?? '');
-      }
       if (packName.isEmpty) {
         openAlertPopup(message: invalidPackNameStr);
         return;

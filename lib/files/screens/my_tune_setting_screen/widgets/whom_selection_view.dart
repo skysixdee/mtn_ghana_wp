@@ -27,6 +27,10 @@ Widget whomSelectionView(MyTuneSettingController con) {
           InkWell(
               onTap: () => con.updateCallerType(CallerType.dedicated),
               child: _radioButton(con, CallerType.dedicated, specialCallerStr)),
+          const SizedBox(width: 40),
+          InkWell(
+              onTap: () => con.updateCallerType(CallerType.shuffle),
+              child: _radioButton(con, CallerType.dedicated, specialCallerStr)),
         ],
       ),
     ],

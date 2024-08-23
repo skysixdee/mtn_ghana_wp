@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
@@ -71,9 +73,14 @@ class MyTuneView extends StatelessWidget {
       onTap: () {
         if (con.tuneApkList[index].toneDetails?.first.status == "A") {
           MyTuneSettingController settingCon = Get.find();
+          TuneInfo info =
+              con.tuneApkList[index].toneDetails?.first ?? TuneInfo();
 
-          contex.goNamed(myTunesSettingRoute,
-              extra: con.tuneApkList[index].toneDetails?.first ?? TuneInfo());
+          contex.pushNamed(
+            myTunesSettingRoute,
+            extra: info,
+            queryParameters: {'packName': con.packName},
+          );
           settingCon.resetValue();
         } else {
           openAlertPopup(message: inactiveSettingMessageStr);

@@ -42,7 +42,7 @@ class NetworkManager {
         }
       } catch (e) {
         customPrint("error4 is = ${e.toString()}");
-        return catchError();
+        return catchError(message: e.toString());
       }
     } on SocketException catch (e) {
       customPrint("error3 is = ${e.toString()}");
@@ -98,13 +98,13 @@ class NetworkManager {
         }
       } catch (e) {
         customPrint("error4 is = ${e.toString()}");
-        return catchError();
+        return catchError(message: e.toString());
       }
     } on SocketException catch (e) {
       customPrint("error3 is = ${e.toString()}");
       return catchError();
     } on TimeoutException catch (e) {
-      customPrint("error2 is = ${e.toString()}");
+      customPrint("error2 is = ${e.message}");
       return catchError();
     } on Error catch (e) {
       customPrint("error1 is = ${e.toString()}");
@@ -124,7 +124,7 @@ class NetworkManager {
     }
   }
 
-  Map<String, dynamic> catchError() {
+  Map<String, dynamic> catchError({String message = ''}) {
     String someThingWrong = someThingWentWrongStr;
     Map<String, dynamic> valueMap =
         json.decode("""{"message":"$someThingWrong"}""");

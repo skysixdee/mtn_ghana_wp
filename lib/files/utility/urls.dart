@@ -49,3 +49,6 @@ String deleteFromShuffleUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/delete-from-shuffle';
 String deleteDedicatedTuneUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/delete-dedication';
+
+String shuffleEnableDisableUrl =
+    '$baseUrl/security/Middleware/api/adapter/v1/crbt/shuffle-activation-deactivation';

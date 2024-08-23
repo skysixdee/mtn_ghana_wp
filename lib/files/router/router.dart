@@ -244,8 +244,13 @@ StatefulShellBranch _myTuneShell() {
         name: myTunesRoute,
         path: myTunesRoute,
         builder: (context, state) {
-          cont.makeApiCall();
-          return const MyTuneScreen();
+          bool? isReload = state.extra as bool?;
+          print(" extra = param = $isReload");
+          if (isReload ?? true) {
+            cont.makeApiCall();
+          }
+
+          return MyTuneScreen();
         },
       ),
     ],
@@ -261,8 +266,13 @@ StatefulShellBranch _myTuneSettingShell() {
         path: myTunesSettingRoute,
         builder: (context, state) {
           TuneInfo info = state.extra as TuneInfo;
+          String packName = state.uri.queryParameters['packName'] ?? '';
+
           con.resetValue();
-          return MyTuneSettingScreen(info: info);
+          return MyTuneSettingScreen(
+            info: info,
+            packName: packName,
+          );
         },
       ),
     ],
