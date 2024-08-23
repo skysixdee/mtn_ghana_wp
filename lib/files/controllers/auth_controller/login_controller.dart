@@ -19,6 +19,15 @@ class LoginController extends GetxController {
     customPrint("LoginController  onInit");
   }
 
+  resetValue() {
+    message.value = '';
+    msisdn = '';
+    enableButton.value = false;
+    isLoading.value = false;
+    displayOptScreen.value = false;
+    expireTime = 5;
+  }
+
   onGenerateOtpButtonAction() async {
     if (msisdn.isEmpty || msisdn.length < msisdnLength) {
       message.value = enterMobileNumberStr;

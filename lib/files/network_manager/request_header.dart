@@ -21,7 +21,8 @@ Future<HttpClientRequest> requestHeader(
   request.headers.set('appId', appId, preserveHeaderCase: true);
   request.headers.set('os', os, preserveHeaderCase: true);
   request.headers.set('Accept', 'application/json', preserveHeaderCase: true);
-  request.headers.set('languageId', 'en', preserveHeaderCase: true);
+  request.headers
+      .set('languageId', StoreManager.languageCode, preserveHeaderCase: true);
 
   return request;
 }

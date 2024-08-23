@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:etisalat/files/api_calls/authorization/auto_login_api.dart';
+import 'package:etisalat/files/common/aes_enc_dec.dart';
 import 'package:etisalat/files/controllers/app_controller.dart';
 import 'package:etisalat/files/controllers/banner_controller.dart';
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
@@ -41,7 +43,21 @@ void main() async {
 
   await initiateController();
   StoreManager.initValues();
+  fetchUriData();
   runApp(const MyApp());
+}
+
+fetchUriData() {
+  var uri = Uri.parse(Uri.base.toString());
+  if (uri.hasQuery) {
+    uri.queryParameters.forEach((k, v) {
+      if (k == 'token') {
+        print("toekn is ");
+        String decryptedMsdidn = aesDecryption(v.replaceAll(" ", "+"));
+        autoLoginApi(decryptedMsdidn);
+      }
+    });
+  }
 }
 
 Future<void> readProperties() async {

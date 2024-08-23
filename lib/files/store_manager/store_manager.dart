@@ -16,7 +16,8 @@ class StoreManager {
   static bool isLoggedIn = true;
   static bool isEnglish = true;
   static String language = 'English';
-  static String languageCode = '0';
+  static String languageCode = '1';
+  static String languageSort = 'en';
   static String msisdn = '0';
   static List<Category>? categories;
   static String accessToken = "884c12da-9613-4bbb-b865-ba2a2e9cfcee";
@@ -32,6 +33,8 @@ class StoreManager {
     deviceId = prefs.getString(_deviceId) ?? '';
     language = isEnglish ? "English" : "Burmese";
     appCont.isLoggedIn.value = isLoggedIn;
+    languageCode = isEnglish ? '1' : '0';
+    languageSort = isEnglish ? 'en' : 'br';
   }
 
   static setMsisdn(String value) {
@@ -48,7 +51,10 @@ class StoreManager {
   static setLanguageEnglish(bool value) {
     prefs.setBool(_language, value);
     language = value ? 'English' : "Burmese";
+
     isEnglish = value;
+    languageCode = isEnglish ? '1' : '0';
+    languageSort = isEnglish ? 'en' : 'br';
   }
 
   static setAccessToken(String value) {
