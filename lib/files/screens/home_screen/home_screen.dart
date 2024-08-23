@@ -57,118 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
         shrinkWrap: true,
         primary: true,
         children: [
-          GenericButton(
-            title: "make api call",
-            onTap: () {
-              getMyMusicBoxApi();
-              getMyTuneApi();
-              getMyPlayingTuneApi();
-            },
-          ),
-          // CustomSearchTextfield(controller: TextEditingController(),
-          // trailingChild: SizedBox(
-
-          // ),),
-          //   GenericButton(title: "hvv",leadingIcon: ,)
-          GenericButton(
-            title: " DiyScreen",
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DiyScreen()),
-              );
-
-              RemainderScreen();
-            },
-          ),
-          GenericButton(
-            title: "RemainderScreen",
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RemainderScreen()),
-              );
-            },
-          ),
-
-          const SizedBox(height: 20),
-
-          Row(
-            children: [
-              GenericButton(
-                title: " Open Time",
-                onTap: () {
-                  openAlertPopup(
-                    heading: "Heading",
-                    message:
-                        "https://ringtune.mpt.com.mm/apigw/Middleware/api/adapter/v1/crbt/settings",
-                    onPrimary: () {
-                      print("Primary call back");
-                    },
-                    onSecondry: () {
-                      print("Secondry call back");
-                    },
-                  );
-                  return;
-                  Get.dialog(
-                      barrierDismissible: true,
-                      TimeDatePicker(
-                          dateTime: p0,
-                          onConfirm: (p0) {
-                            this.p0 = p0;
-                          },
-                          onlyTime: true));
-                },
-              ),
-              GenericButton(
-                title: " Open Calender",
-                onTap: () {
-                  Get.dialog(
-                      barrierDismissible: true,
-                      TimeDatePicker(
-                        dateTime: p0,
-                        onConfirm: (p0) {
-                          this.p0 = p0;
-                        },
-                      ));
-                },
-              ),
-            ],
-          ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 38.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                GenericButton(
-                  title: "Login",
-                  onTap: () {
-                    Map<String, dynamic> map1 = loginJson.map((k, v) {
-                      customPrint("key == $k");
-                      if (k == 'accessToken') {
-                        StoreManager.setAccessToken(v as String);
-                      }
-                      if (k == 'refreshToken') {
-                        StoreManager.setRefreshToken(v as String);
-                      }
-                      if (k == 'deviceId') {
-                        StoreManager.setDeviceId(v as String);
-                      }
-                      if (k == 'msisdn') {
-                        StoreManager.setMsisdn(v as String);
-                        StoreManager.setLoggedIn(true);
-                      }
-
-                      return MapEntry(v, k);
-                    });
-                    customPrint("map 1 ====== $map1");
-                  },
-                ),
-              ],
-            ),
-          ),
+          tempWidget(),
           const SizedBox(height: 8),
           HomeBannerView(key: widget.key),
           const SizedBox(height: 10),
@@ -176,9 +65,72 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 10),
           FeatureCategoryView(key: widget.key),
           const SizedBox(height: 30),
-
           BottomExpressBanner(),
-          BottomBannerView(),
+          const BottomBannerView(),
+        ],
+      ),
+    );
+  }
+
+  Padding tempWidget() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          GenericButton(
+            title: " Open Time",
+            onTap: () {
+              openAlertPopup(
+                heading: "Heading",
+                message:
+                    "https://ringtune.mpt.com.mm/apigw/Middleware/api/adapter/v1/crbt/settings",
+                onPrimary: () {
+                  print("Primary call back");
+                },
+                onSecondry: () {
+                  print("Secondry call back");
+                },
+              );
+            },
+          ),
+          GenericButton(
+            title: " Open Calender",
+            onTap: () {
+              Get.dialog(
+                  barrierDismissible: true,
+                  TimeDatePicker(
+                    dateTime: p0,
+                    onConfirm: (p0) {
+                      this.p0 = p0;
+                    },
+                  ));
+            },
+          ),
+          GenericButton(
+            title: "Login",
+            onTap: () {
+              Map<String, dynamic> map1 = loginJson.map((k, v) {
+                customPrint("key == $k");
+                if (k == 'accessToken') {
+                  StoreManager.setAccessToken(v as String);
+                }
+                if (k == 'refreshToken') {
+                  StoreManager.setRefreshToken(v as String);
+                }
+                if (k == 'deviceId') {
+                  StoreManager.setDeviceId(v as String);
+                }
+                if (k == 'msisdn') {
+                  StoreManager.setMsisdn(v as String);
+                  StoreManager.setLoggedIn(true);
+                }
+
+                return MapEntry(v, k);
+              });
+              customPrint("map 1 ====== $map1");
+            },
+          ),
         ],
       ),
     );
