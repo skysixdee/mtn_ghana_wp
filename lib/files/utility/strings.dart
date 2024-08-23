@@ -33,6 +33,10 @@ String submitStr = "Submit";
 String minuteStr = "Minute";
 String tuneIsLiveStr = "Your Tune is live now.";
 String hourStr = "Hour";
+
+String setYourTuneStr = "Set your tunes";
+String customiseYourTuneStr = "Customise your tunes";
+
 String okCStr = "OK";
 String invalidPackNameStr = "Invalid pack name.";
 String deletePlayingTuneMessageStr =

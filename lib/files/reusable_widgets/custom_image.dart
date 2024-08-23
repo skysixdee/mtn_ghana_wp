@@ -3,19 +3,22 @@ import 'package:etisalat/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 
 Widget customImage(
-    {String? url, Color gredientColor = transparent, double cornerRadius = 0}) {
+    {String? url,
+    Color gredientColor = transparent,
+    double cornerRadius = 0,
+    BoxFit? fit}) {
   return Stack(
     children: [
       ClipRRect(
         borderRadius: BorderRadius.circular(cornerRadius),
         child: CachedNetworkImage(
           imageUrl: url ?? '',
-          fit: BoxFit.cover,
+          fit: fit ?? BoxFit.cover,
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: imageProvider,
-                fit: BoxFit.fill,
+                fit: fit ?? BoxFit.cover,
               ),
             ),
           ),

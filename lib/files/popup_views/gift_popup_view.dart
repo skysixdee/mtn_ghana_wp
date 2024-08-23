@@ -1,5 +1,6 @@
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/tune_info.dart';
+import 'package:etisalat/files/popup_views/popup_tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/country_code.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
@@ -53,11 +54,7 @@ class _GiftPopupViewState extends State<GiftPopupView> {
                               ? CrossAxisAlignment.center
                               : CrossAxisAlignment.start,
                           children: [
-                            tuneImage(),
-                            const SizedBox(height: 20),
-                            tuneDetail(si),
-                            const SizedBox(height: 10),
-                            tuneCharge(si),
+                            popupToneDetailAndCharge(widget.info, si),
                             const SizedBox(height: 20),
                             msisdnTextFieldBuilder(si),
                             const SizedBox(height: 20),
@@ -72,35 +69,6 @@ class _GiftPopupViewState extends State<GiftPopupView> {
             },
           ),
         ));
-  }
-
-  Widget tuneDetail(SizingInformation si) {
-    return Column(
-      crossAxisAlignment:
-          si.isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-      children: [
-        CustomText(title: widget.info.toneName ?? ''),
-        CustomText(
-          title: widget.info.artistName ?? '',
-          color: grey,
-        ),
-      ],
-    );
-  }
-
-  Widget tuneCharge(SizingInformation si) {
-    String price = StoreManager.other?.tonePrice?.attribute ?? '';
-    return Column(
-      crossAxisAlignment:
-          si.isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-      children: [
-        CustomText(title: tuneChargeStr),
-        CustomText(
-          title: price,
-          color: grey,
-        ),
-      ],
-    );
   }
 
   Widget msisdnTextFieldBuilder(SizingInformation si) {
@@ -151,14 +119,6 @@ class _GiftPopupViewState extends State<GiftPopupView> {
     return GenericButton(
       title: confirmStr,
       bgColor: yellow,
-    );
-  }
-
-  Widget tuneImage() {
-    return SizedBox(
-      height: 150,
-      child:
-          customImage(url: widget.info.toneIdpreviewImageUrl, cornerRadius: 8),
     );
   }
 
