@@ -71,7 +71,9 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
                       alignment: Alignment.topRight,
                       children: [
                         Obx(() {
-                          return customImage(url: con.imageName.value);
+                          return customImage(
+                              url: con.imageName.value,
+                              gredientColor: gredientColor);
                         }),
                         closeButton(context)
                       ],
