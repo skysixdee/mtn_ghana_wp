@@ -238,8 +238,8 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
         ),
         GenericButton(
           bgColor: white,
-          height: 65,
-          width: 65,
+          height: 55,
+          width: 55,
           borderColor: black,
           padding: EdgeInsets.zero,
           leadingIcon: Obx(
