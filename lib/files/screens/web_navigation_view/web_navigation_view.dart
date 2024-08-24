@@ -167,15 +167,18 @@ class WebNavigationView extends StatelessWidget {
 
   Widget searchTextField(BuildContext context) {
     TuneSearchController con = Get.find();
+    textEditingController.text = con.searchedText;
     return CustomTextfield(
       addSearchIcon: true,
       hintColor: white,
       controller: textEditingController,
       borderColor: white,
       onChange: (p0) {
+        con.searchedText = p0;
         customPrint("On change $p0");
       },
       onSubmit: (p0) {
+        con.searchedText = p0;
         con.getResult(p0);
         context.goNamed(searchRoute,
             queryParameters: {'search': p0}); //goNamed(searchRoute);

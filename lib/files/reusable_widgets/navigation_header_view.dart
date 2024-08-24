@@ -7,8 +7,10 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class NavigationHeaderView extends StatelessWidget {
-  const NavigationHeaderView({super.key, required this.titleList});
+  const NavigationHeaderView({super.key, required this.titleList, this.onTap});
   final List<NavigationHeaderModel> titleList;
+  final Function(int)? onTap;
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
@@ -50,7 +52,12 @@ class NavigationHeaderView extends StatelessWidget {
                                   return;
                                 }
                                 if (titleList[index].routeName != null) {
-                                  context.goNamed(titleList[index].routeName!);
+                                  if (onTap != null) {
+                                    onTap!(index);
+                                  } else {
+                                    context.goNamed(titleList[index].routeName!,
+                                        extra: titleList[index].extra);
+                                  }
                                 }
                               },
                       );

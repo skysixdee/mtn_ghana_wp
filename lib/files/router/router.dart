@@ -1,3 +1,4 @@
+import 'package:etisalat/files/controllers/artists_tune_controller.dart';
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/music_box_controller.dart';
@@ -20,6 +21,7 @@ import 'package:etisalat/files/screens/my_tune_setting_screen/my_tune_setting_sc
 import 'package:etisalat/files/screens/my_wishlist_screen/my_wishlist_screen.dart';
 import 'package:etisalat/files/screens/name_tune_screen/name_tune_screen.dart';
 import 'package:etisalat/files/screens/profile_screen/profile_screen.dart';
+import 'package:etisalat/files/screens/search_screen/artists_tune_screen.dart';
 import 'package:etisalat/files/screens/search_screen/search_screen.dart';
 import 'package:etisalat/files/screens/see_more_screen/see_more_screen.dart';
 import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
@@ -51,6 +53,7 @@ final router = GoRouter(
         _musicBoxShell(),
         _musicBoxContentShell(),
         _myTuneSettingShell(),
+        _artistsTuneShell()
         //_mobileTunePreviewShell(),
       ],
     ),
@@ -259,6 +262,23 @@ StatefulShellBranch _myTuneShell() {
           }
 
           return MyTuneScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _artistsTuneShell() {
+  ArtistsTuneController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: artistTuneRoute,
+        path: artistTuneRoute,
+        builder: (context, state) {
+          String artistName = state.uri.queryParameters['artistName'] ?? '';
+          cont.getArtistsTune(artistName);
+          return ArtistsTuneScreen(artistName: artistName);
         },
       ),
     ],

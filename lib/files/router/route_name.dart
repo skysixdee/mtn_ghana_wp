@@ -10,4 +10,5 @@ const String myTunesSettingRoute = "/myTunesSetting";
 const String nameTuneRoute = "/nameTune";
 const String musicBoxRoute = "/musicBox";
 const String musicBoxContentRoute = "/musicBoxContent";
+const String artistTuneRoute = "/artistsTune";
 const String mobileTunePreviewRoute = "/mobileTunePreview";

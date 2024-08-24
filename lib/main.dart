@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:etisalat/files/api_calls/authorization/auto_login_api.dart';
 import 'package:etisalat/files/common/aes_enc_dec.dart';
 import 'package:etisalat/files/controllers/app_controller.dart';
+import 'package:etisalat/files/controllers/artists_tune_controller.dart';
 import 'package:etisalat/files/controllers/banner_controller.dart';
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
@@ -85,14 +86,15 @@ Future<void> initiateController() async {
   Get.lazyPut(() => MusicBoxController());
   Get.lazyPut(() => MyMusicBoxController());
   Get.lazyPut(() => TuneSearchController());
-  Get.lazyPut(() => CategoryDetailController());
+
   Get.lazyPut(() => MyWishlistController());
+  Get.lazyPut(() => ArtistsTuneController());
 
   Get.lazyPut(() => BannerDetailController());
   Get.lazyPut(() => MyTuneSettingController());
   Get.lazyPut(() => MyPlayingTuneController());
   Get.lazyPut(() => CategoryDetailController());
-
+  Get.lazyPut(() => CategoryDetailController());
   return;
 }
 

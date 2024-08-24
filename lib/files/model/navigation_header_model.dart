@@ -1,5 +1,6 @@
 class NavigationHeaderModel {
   String name;
   String? routeName;
-  NavigationHeaderModel(this.name, this.routeName);
+  Object? extra;
+  NavigationHeaderModel(this.name, this.routeName, {this.extra});
 }

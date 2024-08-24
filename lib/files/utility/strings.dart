@@ -82,6 +82,8 @@ String twitterStr = "Twetter";
 String allStr = "All";
 String specialStr = "Special";
 String homeStr = 'Home';
+String searchStr = 'Search';
+String searchedResultForStr = 'searched result for ';
 String thisFeatureIsAvailableForLoggedinStr =
     "This feature is available for loggedin user";
 String statusStr = "Status";
@@ -112,6 +114,7 @@ String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";
 String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
+String artistStr = "Artist";
 String settingStr = "Setting";
 String loginStr = "Login";
 String buyTuneStr = "Buy Tune";

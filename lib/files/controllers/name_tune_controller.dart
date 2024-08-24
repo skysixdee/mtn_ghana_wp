@@ -8,6 +8,9 @@ class NameTuneController extends GetxController {
   List<TuneInfo> tuneList = [];
 
   getNameTune() async {
+    if (isLoading.value) {
+      return;
+    }
     isLoading.value = true;
     NameTuneModel model = await getNameTuneApi();
     tuneList = model.responseMap?.songList ?? [];

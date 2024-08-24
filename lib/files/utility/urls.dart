@@ -63,3 +63,5 @@ String passwordValidateUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/password-validation';
 String securityTokenUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/security-token';
+String artistTuneSearchUrl =
+    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/search-tone?';

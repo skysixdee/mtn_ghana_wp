@@ -1,3 +1,5 @@
+import 'package:etisalat/files/api_calls/get_banner_category_api.dart';
+import 'package:etisalat/files/model/artist_tune_list_model.dart';
 import 'package:get/get.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/model/banner_detail_model.dart';
@@ -12,8 +14,15 @@ class BannerDetailController extends GetxController {
       return;
     }
     isLoading.value = true;
-    BannerDetailModel model = await getBannerDetailApi(type, searchKey);
-    tuneList = model.responseMap?.searchList ?? [];
+    if (type == 'Category') {
+      ArtistTuneListModel artistTuneListModel =
+          await getBannerCategoryApi(type, searchKey);
+      tuneList = artistTuneListModel.responseMap?.searchList ?? [];
+    } else {
+      BannerDetailModel model = await getBannerDetailApi(type, searchKey);
+      tuneList = model.responseMap?.searchList ?? [];
+    }
+
     isLoading.value = false;
   }
 }
