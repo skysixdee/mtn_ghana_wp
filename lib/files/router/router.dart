@@ -51,7 +51,7 @@ final router = GoRouter(
         _musicBoxShell(),
         _musicBoxContentShell(),
         _myTuneSettingShell(),
-        // _mobileTunePreviewShell(),
+        //_mobileTunePreviewShell(),
       ],
     ),
   ],
@@ -294,9 +294,11 @@ StatefulShellBranch _myTuneSettingShell() {
 //         name: mobileTunePreviewRoute,
 //         path: mobileTunePreviewRoute,
 //         builder: (context, state) {
-//           TuneInfo tuneInfo = state.extra as TuneInfo;
-
-//           return MobileTunePreviewSceen(tuneInfo: TuneInfo());
+//           Map<String, dynamic> map = state.extra as Map<String, dynamic>;
+//           TuneInfo tuneInfo = map['tuneInfo'] as TuneInfo;
+//           List<TuneInfo> tuneList = map['tuneList'] as List<TuneInfo>;
+//           return MobileTunePreviewSceen(
+//               tuneInfo: tuneInfo, tuneList: tuneList); //(tuneInfo: TuneInfo());
 //         },
 //       ),
 //     ],

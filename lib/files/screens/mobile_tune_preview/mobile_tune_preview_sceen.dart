@@ -1,10 +1,18 @@
+import 'package:etisalat/files/api_calls/add_to_wishlist_api.dart';
+import 'package:etisalat/files/api_calls/delete_from_wishlist_api.dart';
 import 'package:etisalat/files/controllers/mobile_tune_preview_cotroller.dart';
+import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/player_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
+import 'package:etisalat/files/popup_views/gift_popup_view.dart';
+import 'package:etisalat/files/popup_views/social_sharing_popup.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
+import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/colors.dart';
@@ -16,8 +24,12 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 class MobileTunePreviewSceen extends StatefulWidget {
   const MobileTunePreviewSceen(
-      {super.key, required this.tuneInfo, required this.tuneList});
+      {super.key,
+      required this.tuneInfo,
+      required this.tuneList,
+      this.isWishlist = false});
   final TuneInfo tuneInfo;
+  final bool isWishlist;
   final List<TuneInfo> tuneList;
   @override
   State<MobileTunePreviewSceen> createState() => _MobileTunePreviewSceenState();
@@ -95,14 +107,92 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
       color: lightGrey,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          button(wishlistStr, wishlistPng),
-          button(deleteStr, wishlistPng),
-          button(shareStr, wishlistPng),
-          button(giftStr, giftPng),
-        ],
+        children: widget.isWishlist
+            ? bottomButtonWishlistChildren
+            : bottomButtonNonWishlistChildren,
       ),
     );
+  }
+
+  List<Widget> get bottomButtonWishlistChildren {
+    return [
+      button(
+        deleteStr,
+        widget: const Icon(
+          Icons.delete,
+          size: 18,
+          color: red,
+        ),
+        onTap: () async {
+          if (StoreManager.isLoggedIn) {
+            MyWishlistController wCont = Get.find();
+            wCont.deleteFromWishlist(con.currentTuneDetail.value);
+          } else {
+            openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+          }
+        },
+      ),
+      button(
+        shareStr,
+        widget: const Icon(
+          Icons.share,
+          size: 18,
+          color: red,
+        ),
+        onTap: () {
+          Get.dialog(SocialSharingPopup(info: con.currentTuneDetail.value));
+        },
+      ),
+      button(
+        giftStr,
+        image: giftPng,
+        onTap: () {
+          if (StoreManager.isLoggedIn) {
+            Get.dialog(GiftPopupView(info: con.currentTuneDetail.value));
+          } else {
+            openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+          }
+        },
+      ),
+    ];
+  }
+
+  List<Widget> get bottomButtonNonWishlistChildren {
+    return [
+      button(
+        wishlistStr,
+        image: wishlistPng,
+        onTap: () {
+          if (StoreManager.isLoggedIn) {
+            addToWishlistApi(con.currentTuneDetail.value);
+          } else {
+            openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+          }
+        },
+      ),
+      button(
+        shareStr,
+        widget: const Icon(
+          Icons.share,
+          size: 18,
+          color: red,
+        ),
+        onTap: () {
+          Get.dialog(SocialSharingPopup(info: con.currentTuneDetail.value));
+        },
+      ),
+      button(
+        giftStr,
+        image: giftPng,
+        onTap: () {
+          if (StoreManager.isLoggedIn) {
+            Get.dialog(GiftPopupView(info: con.currentTuneDetail.value));
+          } else {
+            openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+          }
+        },
+      ),
+    ];
   }
 
   Widget closeButton(BuildContext context) {
@@ -216,20 +306,28 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
     );
   }
 
-  Widget button(String title, String image) {
-    return SizedBox(
-      height: 60,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            image,
-            height: 15,
-          ),
-          CustomText(title: title),
-        ],
+  Widget button(String title,
+      {String? image, Widget? widget, Function()? onTap}) {
+    return InkWell(
+      onTap: () {
+        (onTap != null) ? onTap() : print("object");
+      },
+      child: SizedBox(
+        height: 60,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            widget ??
+                Image.asset(
+                  image ?? '',
+                  height: 15,
+                  color: red,
+                ),
+            CustomText(title: title),
+          ],
+        ),
       ),
     );
   }

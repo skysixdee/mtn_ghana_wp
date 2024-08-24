@@ -76,11 +76,14 @@ String noneStr = "None";
 String monthlyStr = "Monthly";
 String yearlyStr = "Yearly";
 String customTimeStr = "Custom Time";
-
+String shareOnStr = "Share On";
+String facebookStr = "FaceBook";
+String twitterStr = "Twetter";
 String allStr = "All";
 String specialStr = "Special";
 String homeStr = 'Home';
-
+String thisFeatureIsAvailableForLoggedinStr =
+    "This feature is available for loggedin user";
 String statusStr = "Status";
 String callerStr = "Callers";
 String playAtStr = "Play at";

@@ -34,9 +34,13 @@ class TuneCard extends StatelessWidget {
     this.menuList,
     this.onMenuTap,
     required this.tuneList,
+    this.isWishlist = false,
+    this.enbaleToPreview = true,
   });
 
   final TuneInfo info;
+  final bool isWishlist;
+  final bool enbaleToPreview;
   final List<TuneInfo> tuneList;
   final Widget? bottomLeftChild;
   final Widget? bottomRightChild;
@@ -50,14 +54,22 @@ class TuneCard extends StatelessWidget {
     return ResponsiveBuilder(
       builder: (context, si) {
         return si.isMobile
-            ? InkWell(
-                onTap: () {
-                  Get.dialog(Material(
-                      child: MobileTunePreviewSceen(
-                          tuneInfo: info, tuneList: tuneList)));
-                  //context.goNamed(mobileTunePreviewRoute, extra: info);
-                },
-                child: mainContainer(si))
+            ? enbaleToPreview
+                ? InkWell(
+                    onTap: () {
+                      Get.dialog(Material(
+                          child: MobileTunePreviewSceen(
+                              isWishlist: isWishlist,
+                              tuneInfo: info,
+                              tuneList: tuneList)));
+                      // Map<String, dynamic> map = {
+                      //   'tuneInfo': info,
+                      //   'tuneList': tuneList
+                      // };
+                      // context.pushNamed(mobileTunePreviewRoute, extra: map);
+                    },
+                    child: mainContainer(si))
+                : mainContainer(si)
             : mainContainer(si);
       },
     );
