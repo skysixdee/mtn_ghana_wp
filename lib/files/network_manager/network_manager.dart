@@ -1,18 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:etisalat/files/api_calls/regenerate_token_api.dart';
-import 'package:etisalat/files/model/regenerate_model.dart';
-import 'package:etisalat/files/network_manager/request_header.dart';
-import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/router/route_name.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/strings.dart';
-import 'package:etisalat/main.dart';
-import 'package:go_router/go_router.dart';
 import 'package:universal_io/io.dart';
+import 'package:etisalat/files/utility/strings.dart';
+import 'package:etisalat/files/utility/constants.dart';
+import 'package:etisalat/files/model/regenerate_model.dart';
+import 'package:etisalat/files/store_manager/store_manager.dart';
+import 'package:etisalat/files/api_calls/regenerate_token_api.dart';
+import 'package:etisalat/files/reusable_widgets/print_custom.dart';
+import 'package:etisalat/files/network_manager/request_header.dart';
 
 class NetworkManager {
   final client = HttpClient();
@@ -79,7 +74,8 @@ class NetworkManager {
       if (formData != null) {
         var parts = [];
         formData.forEach((key, value) {
-          parts.add('$key=' '$value');
+          parts.add('${Uri.encodeQueryComponent(key)}='
+              '${Uri.encodeQueryComponent("$value")}');
         });
 
         clientRequests.write(parts.join('&'));

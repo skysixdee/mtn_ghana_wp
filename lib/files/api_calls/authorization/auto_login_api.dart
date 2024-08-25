@@ -1,6 +1,7 @@
 import 'package:etisalat/files/api_calls/authorization/password_validation_api.dart';
 import 'package:etisalat/files/api_calls/authorization/security_token_api.dart';
 import 'package:etisalat/files/api_calls/authorization/subscriber_validation_api.dart';
+import 'package:etisalat/files/model/password_validation_model.dart';
 import 'package:etisalat/files/model/security_token_model.dart';
 import 'package:etisalat/files/model/subscriber_validation_model.dart';
 
@@ -10,7 +11,7 @@ autoLoginApi(String msisdn) async {
   if (subscriberValidationModel.statusCode == 'SC0000') {
     SecurityTokenModel tokenModel = await getSecurityTokenApi();
     if (tokenModel.statusCode == 'SC0000') {
-      passwordValidationApi(
+      PasswordValidationModel model = await passwordValidationApi(
           msisdn, tokenModel.responseMap?.securityCounter ?? '');
     }
   }

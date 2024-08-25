@@ -15,12 +15,14 @@ class GenericGridView extends StatelessWidget {
     this.cardWidth = 200,
     this.padding,
     this.scrollDirection,
+    this.childAspectRatio,
   });
   final double cardHeight;
 
   final double cardWidth;
   final int itemCount;
   final bool onlyGrid;
+  final double? childAspectRatio;
   final Axis? scrollDirection;
   final EdgeInsetsGeometry? padding;
   final Widget Function(int) builder;
@@ -64,7 +66,7 @@ class GenericGridView extends StatelessWidget {
   SliverGridDelegate sliver(SizingInformation si, BuildContext context) {
     return SliverGridDelegateWithMaxCrossAxisExtent(
       maxCrossAxisExtent: cardWidth + 40, //height,
-      childAspectRatio: 0.7,
+      childAspectRatio: childAspectRatio ?? 0.7,
       mainAxisSpacing: si.isMobile ? 10 : 20,
       crossAxisSpacing: si.isMobile ? 10 : 20,
     );

@@ -287,10 +287,11 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  GenericGridView gridView(List<Category> lst) {
+  Widget gridView(List<Category> lst) {
     return GenericGridView(
       cardHeight: 120,
-      cardWidth: 150,
+      cardWidth: 110,
+      childAspectRatio: 1.2,
       padding: EdgeInsets.zero,
       onlyGrid: true,
       itemCount: lst.length,
@@ -308,16 +309,28 @@ class ProfileScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: customImage(
-                    url: lst[p0].menuImagePath,
-                    gredientColor: black.withOpacity(0.4)),
-              ),
-              redioButton(lst, p0)
-            ],
+          child: Obx(
+            () {
+              return InkWell(
+                onTap: con.enableEdit.value
+                    ? () {
+                        con.updateChoice(lst[p0].categoryId ?? '');
+                        print("object");
+                      }
+                    : null,
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: customImage(
+                          url: lst[p0].menuImagePath,
+                          gredientColor: black.withOpacity(0.4)),
+                    ),
+                    redioButton(lst, p0)
+                  ],
+                ),
+              );
+            },
           ),
         ),
         const SizedBox(height: 2),
@@ -333,7 +346,8 @@ class ProfileScreen extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: Obx(
         () {
-          return con.selectedCetegories.contains(lst[p0].categoryId)
+          bool isSel = con.selectedCetegories.contains(lst[p0].categoryId);
+          return isSel
               ? const Icon(
                   Icons.radio_button_checked,
                   color: yellow,
