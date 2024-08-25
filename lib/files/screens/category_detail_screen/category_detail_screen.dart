@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
@@ -11,11 +12,14 @@ import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:number_paginator/number_paginator.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
   CategoryDetailScreen({super.key, required this.name});
   final String name;
   final CategoryDetailController con = Get.find();
+  NumberPaginatorController numberPaginatorController =
+      NumberPaginatorController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,6 +56,7 @@ class CategoryDetailScreen extends StatelessWidget {
           Obx(
             () {
               return numberPagination(
+                numberPaginatorController: numberPaginatorController,
                 totalCount: con.totalTuneCount.value,
                 onTap: (p0) {
                   con.loadMoreData(p0);

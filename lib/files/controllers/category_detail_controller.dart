@@ -10,6 +10,7 @@ class CategoryDetailController extends GetxController {
   String _key = '';
   String _catId = '';
   getCategoryDetailList(String key, String catId) async {
+    totalTuneCount.value = 0;
     _key = key;
     _catId = catId;
     if (isLoading.value) {

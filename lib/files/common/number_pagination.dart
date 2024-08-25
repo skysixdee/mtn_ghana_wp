@@ -8,15 +8,19 @@ import 'package:number_paginator/number_paginator.dart';
 
 class NumberPagination extends StatefulWidget {
   const NumberPagination(
-      {super.key, required this.totalItem, required this.tappedIndex});
+      {super.key,
+      required this.totalItem,
+      required this.tappedIndex,
+      this.numberPaginatorController});
   final int totalItem;
   final Function(int) tappedIndex;
+  final NumberPaginatorController?
+      numberPaginatorController; // = NumberPaginatorController();
   @override
   _NumberPaginationState createState() => _NumberPaginationState();
 }
 
 class _NumberPaginationState extends State<NumberPagination> {
-  NumberPaginatorController controller = NumberPaginatorController();
   int _numPages = 0;
   //int _currentPage = 0;
   @override
@@ -39,7 +43,8 @@ class _NumberPaginationState extends State<NumberPagination> {
           buttonUnselectedForegroundColor: black,
           buttonSelectedBackgroundColor: black,
         ),
-        controller: controller,
+        controller:
+            widget.numberPaginatorController ?? NumberPaginatorController(),
         numberPages: _numPages,
         onPageChange: (int index) {
           widget.tappedIndex(index);
