@@ -28,24 +28,27 @@ class _NumberPaginationState extends State<NumberPagination> {
 
   @override
   Widget build(BuildContext context) {
-    return NumberPaginator(
-      config: NumberPaginatorUIConfig(
-        height: 40,
-        buttonPadding: const EdgeInsets.all(0),
-        buttonTextStyle:
-            TextStyle(fontFamily: FontName.bold.name, fontSize: 12),
-        buttonUnselectedForegroundColor: black,
-        buttonSelectedBackgroundColor: yellow,
+    return Container(
+      color: yellow,
+      child: NumberPaginator(
+        config: NumberPaginatorUIConfig(
+          height: 40,
+          buttonPadding: const EdgeInsets.all(0),
+          buttonTextStyle: TextStyle(
+              fontFamily: FontName.bold.name, fontSize: 12, color: white),
+          buttonUnselectedForegroundColor: black,
+          buttonSelectedBackgroundColor: black,
+        ),
+        controller: controller,
+        numberPages: _numPages,
+        onPageChange: (int index) {
+          widget.tappedIndex(index);
+          setState(() {
+            //_currentPage = index;
+            customPrint("Page tapped $index");
+          });
+        },
       ),
-      controller: controller,
-      numberPages: _numPages,
-      onPageChange: (int index) {
-        widget.tappedIndex(index);
-        setState(() {
-          //_currentPage = index;
-          customPrint("Page tapped $index");
-        });
-      },
     );
   }
 }

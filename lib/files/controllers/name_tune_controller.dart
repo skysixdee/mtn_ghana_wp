@@ -6,11 +6,20 @@ import 'package:get/get.dart';
 class NameTuneController extends GetxController {
   RxBool isLoading = false.obs;
   List<TuneInfo> tuneList = [];
-
+  RxInt totalToneCount = 0.obs;
   getNameTune() async {
+    totalToneCount.value = 0;
     if (isLoading.value) {
       return;
     }
+    isLoading.value = true;
+    NameTuneModel model = await getNameTuneApi();
+    tuneList = model.responseMap?.songList ?? [];
+    totalToneCount.value = model.responseMap?.songTotalCount ?? 0;
+    isLoading.value = false;
+  }
+
+  loadMoreData(int index) async {
     isLoading.value = true;
     NameTuneModel model = await getNameTuneApi();
     tuneList = model.responseMap?.songList ?? [];
