@@ -28,10 +28,11 @@ genericPopover(BuildContext context, List<PopoverMenuModel> menuList,
                 itemCount: menuList.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return InkWell(onTap: () {
+                  return InkWell(onTap: () async {
                     if (onTap != null) {
-                      onTap(menuList[index], index);
                       Navigator.of(context).pop();
+                      await Future.delayed(const Duration(milliseconds: 300));
+                      onTap(menuList[index], index);
                     }
                   }, child: CustomOnHover(
                     builder: (isHovered) {

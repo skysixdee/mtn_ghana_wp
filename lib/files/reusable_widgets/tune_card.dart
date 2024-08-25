@@ -4,9 +4,11 @@ import 'package:etisalat/files/enums/custpm_screen_type.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/popup_views/gift_popup_view.dart';
+import 'package:etisalat/files/popup_views/social_sharing_popup.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/play_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
@@ -14,6 +16,7 @@ import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
 
 import 'package:etisalat/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
+import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/strings.dart';
 
@@ -171,13 +174,24 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
               if (menuList == null) {
                 customPrint("menuList is null");
                 if (p0.title == wishlistStr) {
-                  addToWishlistApi(info);
+                  if (StoreManager.isLoggedIn) {
+                    addToWishlistApi(info);
+                  } else {
+                    openAlertPopup(
+                        message: thisFeatureIsAvailableForLoggedinStr);
+                  }
                 } else if (p0.title == giftStr) {
-                  await Future.delayed(const Duration(milliseconds: 300));
-                  Get.dialog(GiftPopupView(info: info));
+                  if (StoreManager.isLoggedIn) {
+                    Get.dialog(GiftPopupView(info: info));
+                  } else {
+                    openAlertPopup(
+                        message: thisFeatureIsAvailableForLoggedinStr);
+                  }
+
                   customPrint("gift tapped");
                 } else {
                   customPrint("share tapped");
+                  Get.dialog(SocialSharingPopup(info: info));
                 }
               }
               if (onMenuTap != null) {
