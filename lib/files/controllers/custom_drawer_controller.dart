@@ -1,0 +1,24 @@
+import 'package:etisalat/files/model/drawer_model.dart';
+import 'package:etisalat/files/router/route_name.dart';
+import 'package:etisalat/files/utility/strings.dart';
+import 'package:get/get.dart';
+
+class CustomDrawerController extends GetxController {
+  List<DrawerModel> loggedInDrawerMenu = [
+    DrawerModel(profileStr, profileRoute),
+    DrawerModel(myTunezStr, myTunesRoute),
+    DrawerModel(myWishlistStr, myWishlistRoute),
+    DrawerModel(tunezStr, '', isContainSubMenu: true),
+    DrawerModel(nameTuneStr, nameTuneRoute),
+    DrawerModel(blackListStr, blackListRoute),
+    DrawerModel(faqStr, faqRoute),
+    DrawerModel(logoutStr, logoutStr),
+  ];
+  List<DrawerModel> nonLoggedInDrawerMenu = [
+    DrawerModel(tunezStr, tunezStr, isContainSubMenu: true),
+    DrawerModel(nameTuneStr, nameTuneRoute),
+    DrawerModel(faqStr, faqRoute),
+    DrawerModel(loginStr, loginStr),
+  ];
+  RxBool isSubMenuOpened = false.obs;
+}

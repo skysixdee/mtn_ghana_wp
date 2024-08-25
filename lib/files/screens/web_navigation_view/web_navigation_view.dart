@@ -45,19 +45,25 @@ class WebNavigationView extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      color: yellow,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(child: leftWidget(context)),
-            Flexible(child: rightWidget(context)),
-          ],
-        ),
-      ),
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return (si.isTablet || si.isMobile)
+            ? const SizedBox()
+            : Container(
+                height: 70,
+                color: yellow,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(child: leftWidget(context)),
+                      Flexible(child: rightWidget(context)),
+                    ],
+                  ),
+                ),
+              );
+      },
     );
   }
 

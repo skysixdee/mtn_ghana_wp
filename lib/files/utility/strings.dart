@@ -65,6 +65,7 @@ String myMusicBoxStr = 'My MusicBox';
 String learnMoreStr = "learn more";
 String shuffleStr = "Shuffle";
 String myTunezStr = "My Tunez";
+String tunezStr = "Tunez";
 String activeStr = "Active";
 String activeTunezStr = "Active Tunez";
 String allCallerStr = "AllCaller";
@@ -90,12 +91,15 @@ String statusStr = "Status";
 String callerStr = "Callers";
 String playAtStr = "Play at";
 
+String profileStr = "Profile";
+
 String myProfileStr = "My Profile";
 
 String myWishlistStr = "My Wishlist";
 String wishlistStr = "Wishlist";
 String blackListStr = "Black List";
 String logoutStr = "Logout";
+
 String preferenceStr = "Preference*";
 String buyStr = "Buy";
 String faqStr = "FAQ";

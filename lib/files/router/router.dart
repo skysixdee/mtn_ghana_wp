@@ -13,6 +13,7 @@ import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/screens/banner_detail_screen/banner_detail_screen.dart';
 import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:etisalat/files/screens/home_screen/home_screen.dart';
+import 'package:etisalat/files/screens/mobile_drawer_screen/mobile_drawer_screen.dart';
 import 'package:etisalat/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
 import 'package:etisalat/files/screens/music_box/music_box_content_screen.dart';
 import 'package:etisalat/files/screens/music_box/music_box_screen.dart';
@@ -26,10 +27,12 @@ import 'package:etisalat/files/screens/search_screen/search_screen.dart';
 import 'package:etisalat/files/screens/see_more_screen/see_more_screen.dart';
 import 'package:etisalat/files/screens/web_navigation_view/web_navigation_view.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
+import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey = GlobalKey<NavigatorState>();
@@ -328,16 +331,25 @@ StatefulShellBranch _myTuneSettingShell() {
 Widget navBuilder(context, state, navigationShell) {
   globalContext = context;
   return GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Material(
-      child: Column(
-        children: [
-          WebNavigationView(),
-          Expanded(child: navigationShell),
-        ],
-      ),
-    ),
-  );
+      debugShowCheckedModeBanner: false,
+      home: ResponsiveBuilder(
+        builder: (context, si) {
+          return Scaffold(
+            appBar: (si.isMobile || si.isTablet)
+                ? AppBar(backgroundColor: yellow)
+                : null,
+            endDrawer: MobileDrawerScreen(),
+            body: Material(
+              child: Column(
+                children: [
+                  WebNavigationView(),
+                  Expanded(child: navigationShell),
+                ],
+              ),
+            ),
+          );
+        },
+      ));
 }
 
 Widget errorWidget(BuildContext context, GoRouterState state) {
