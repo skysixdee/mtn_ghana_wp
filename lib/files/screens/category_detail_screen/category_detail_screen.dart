@@ -1,12 +1,11 @@
 import 'package:etisalat/files/common/number_pagination.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/model/navigation_header_model.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
+
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
-import 'package:etisalat/files/reusable_widgets/number_pagination_view.dart';
+
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/utility/colors.dart';
@@ -58,9 +57,7 @@ class CategoryDetailScreen extends StatelessWidget {
             () {
               return numberPagination(
                 totalCount: con.totalTuneCount.value,
-                onTap: (p0) {
-                  con.loadMoreData(p0);
-                },
+                onTap: (p0) => con.loadMoreData(p0),
               );
             },
           )

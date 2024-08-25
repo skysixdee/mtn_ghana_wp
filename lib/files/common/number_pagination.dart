@@ -16,9 +16,7 @@ Widget numberPagination(
       numberPaginatorController: numberPaginatorController,
       totalItem: totalCount,
       tappedIndex: (index) {
-        //if (onTap != null) {
         onTap(index * pagePerCount);
-        //}
       },
     ),
   );

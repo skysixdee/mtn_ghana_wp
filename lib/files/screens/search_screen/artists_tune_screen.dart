@@ -65,9 +65,7 @@ class _ArtistsTuneScreenState extends State<ArtistsTuneScreen> {
       () {
         return numberPagination(
           totalCount: con.totalToneCount.value,
-          onTap: (p0) {
-            con.loadMoreData(p0);
-          },
+          onTap: (p0) => con.loadMoreData(p0),
         );
       },
     );

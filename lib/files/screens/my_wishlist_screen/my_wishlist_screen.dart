@@ -26,6 +26,7 @@ class MyWishlistScreen extends StatelessWidget {
                     itemCount: con.tuneList.length,
                     builder: (p0) {
                       return TuneCard(
+                        isWishlist: true,
                         info: con.tuneList[p0],
                         menuList: popoverMenu,
                         tuneList: con.tuneList,

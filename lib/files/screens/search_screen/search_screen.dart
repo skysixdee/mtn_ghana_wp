@@ -69,9 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: [
                   numberPagination(
                     totalCount: controller.totalTuneCount.value,
-                    onTap: (p0) {
-                      controller.leadMoreData(p0);
-                    },
+                    onTap: (p0) => controller.leadMoreData(p0),
                   ),
                   controller.selectedIndex.value == 0
                       ? const SizedBox()

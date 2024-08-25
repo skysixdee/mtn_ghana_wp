@@ -4,7 +4,7 @@ import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
-import 'package:etisalat/files/reusable_widgets/number_pagination_view.dart';
+
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/utility/colors.dart';
@@ -54,10 +54,7 @@ class NameTuneScreen extends StatelessWidget {
             () {
               return numberPagination(
                 totalCount: con.totalToneCount.value,
-                onTap: (p0) {
-                  print("tapped index is ${p0}");
-                  con.loadMoreData(p0);
-                },
+                onTap: (p0) => con.loadMoreData(p0),
               );
             },
           ),
