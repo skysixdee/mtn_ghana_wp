@@ -21,7 +21,7 @@ class NameTuneController extends GetxController {
 
   loadMoreData(int index) async {
     isLoading.value = true;
-    NameTuneModel model = await getNameTuneApi();
+    NameTuneModel model = await getNameTuneApi(pageNo: index);
     tuneList = model.responseMap?.songList ?? [];
     isLoading.value = false;
   }

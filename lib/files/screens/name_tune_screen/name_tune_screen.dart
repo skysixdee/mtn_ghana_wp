@@ -55,6 +55,7 @@ class NameTuneScreen extends StatelessWidget {
               return numberPagination(
                 totalCount: con.totalToneCount.value,
                 onTap: (p0) {
+                  print("tapped index is ${p0}");
                   con.loadMoreData(p0);
                 },
               );

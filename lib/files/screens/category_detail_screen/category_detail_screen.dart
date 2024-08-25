@@ -1,3 +1,4 @@
+import 'package:etisalat/files/common/number_pagination.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
@@ -56,7 +57,6 @@ class CategoryDetailScreen extends StatelessWidget {
           Obx(
             () {
               return numberPagination(
-                numberPaginatorController: numberPaginatorController,
                 totalCount: con.totalTuneCount.value,
                 onTap: (p0) {
                   con.loadMoreData(p0);

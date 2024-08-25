@@ -24,6 +24,7 @@ class ArtistsTuneController extends GetxController {
   loadMoreData(int index) async {
     isLoading.value = true;
     ArtistTuneListModel model = await getArtistTuneListApi(_key, pageNo: index);
+    tuneList = model.responseMap?.searchList ?? [];
     isLoading.value = false;
   }
 }

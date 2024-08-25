@@ -67,13 +67,15 @@ class _SearchScreenState extends State<SearchScreen> {
             () {
               return Stack(
                 children: [
-                  numberPagination(),
+                  numberPagination(
+                    totalCount: controller.totalTuneCount.value,
+                    onTap: (p0) {
+                      controller.leadMoreData(p0);
+                    },
+                  ),
                   controller.selectedIndex.value == 0
                       ? const SizedBox()
-                      : Container(
-                          height: 40,
-                          color: white,
-                        )
+                      : Container(height: 40, color: white)
                 ],
               );
             },
@@ -83,22 +85,13 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget numberPagination() {
-    return Obx(
-      () {
-        return Visibility(
-          visible: (controller.totalTuneCount.value > pagePerCount),
-          child: NumberPagination(
-            totalItem: controller.totalTuneCount.value,
-            tappedIndex: (value) {
-              controller.leadMoreData(value);
-              print("tapped index");
-            },
-          ),
-        );
-      },
-    );
-  }
+  // Widget pagination() {
+  //   return Obx(
+  //     () {
+  //       return
+  //     },
+  //   );
+  // }
 
   Widget grid() {
     return Obx(

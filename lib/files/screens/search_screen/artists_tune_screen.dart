@@ -54,24 +54,20 @@ class _ArtistsTuneScreenState extends State<ArtistsTuneScreen> {
               },
             ),
           ),
-          numberPagination(),
+          pagination(),
         ],
       ),
     );
   }
 
-  Widget numberPagination() {
+  Widget pagination() {
     return Obx(
       () {
-        return Visibility(
-          visible: (con.totalToneCount.value > pagePerCount),
-          child: NumberPagination(
-            totalItem: con.totalToneCount.value,
-            tappedIndex: (value) {
-              con.loadMoreData(value);
-              print("tapped index");
-            },
-          ),
+        return numberPagination(
+          totalCount: con.totalToneCount.value,
+          onTap: (p0) {
+            con.loadMoreData(p0);
+          },
         );
       },
     );

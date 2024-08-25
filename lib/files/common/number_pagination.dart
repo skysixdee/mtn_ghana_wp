@@ -6,8 +6,26 @@ import 'package:flutter/material.dart';
 
 import 'package:number_paginator/number_paginator.dart';
 
-class NumberPagination extends StatefulWidget {
-  const NumberPagination(
+Widget numberPagination(
+    {required int totalCount,
+    NumberPaginatorController? numberPaginatorController,
+    required Function(int) onTap}) {
+  return Visibility(
+    visible: (totalCount > pagePerCount),
+    child: _NumberPagination(
+      numberPaginatorController: numberPaginatorController,
+      totalItem: totalCount,
+      tappedIndex: (index) {
+        //if (onTap != null) {
+        onTap(index * pagePerCount);
+        //}
+      },
+    ),
+  );
+}
+
+class _NumberPagination extends StatefulWidget {
+  const _NumberPagination(
       {super.key,
       required this.totalItem,
       required this.tappedIndex,
@@ -20,7 +38,7 @@ class NumberPagination extends StatefulWidget {
   _NumberPaginationState createState() => _NumberPaginationState();
 }
 
-class _NumberPaginationState extends State<NumberPagination> {
+class _NumberPaginationState extends State<_NumberPagination> {
   int _numPages = 0;
   //int _currentPage = 0;
   @override
