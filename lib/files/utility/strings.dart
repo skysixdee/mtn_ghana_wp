@@ -99,7 +99,8 @@ String myWishlistStr = "My Wishlist";
 String wishlistStr = "Wishlist";
 String blackListStr = "Black List";
 String logoutStr = "Logout";
-
+String enterNameStr = "Enter Name";
+String enterTexttoSearchStr = "Please enter text to search";
 String preferenceStr = "Preference*";
 String buyStr = "Buy";
 String faqStr = "FAQ";

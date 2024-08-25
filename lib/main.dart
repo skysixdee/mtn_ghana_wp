@@ -67,6 +67,8 @@ Future<void> readProperties() async {
   final String value = await rootBundle.loadString('properties.json');
   final data = await json.decode(value);
   baseUrl = data['BASE_URL'];
+  nameTuneCategoryId = data['NAME_TUNE_CAT_ID'];
+
   customPrint("base url = $baseUrl");
   return;
 }

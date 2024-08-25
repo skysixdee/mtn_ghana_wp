@@ -28,7 +28,7 @@ class FeatureController extends GetxController {
     isLoadingList.clear();
     isLoading.value = true;
     if (StoreManager.other == null) {
-      await getAppSetting();
+      await getAppSettingApi();
     }
 
     List<String> featureTabCount =
