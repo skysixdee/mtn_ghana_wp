@@ -1,14 +1,13 @@
-import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:etisalat/files/enums/custpm_screen_type.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
-import 'package:etisalat/files/reusable_widgets/custom_empty_list_view.dart';
+import 'package:etisalat/files/reusable_widgets/tune_card.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
-import 'package:etisalat/files/reusable_widgets/tune_card.dart';
-import 'package:etisalat/files/utility/strings.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:etisalat/files/reusable_widgets/custom_empty_list_view.dart';
 
 class MyWishlistScreen extends StatelessWidget {
   MyWishlistScreen({super.key});
@@ -26,7 +25,7 @@ class MyWishlistScreen extends StatelessWidget {
                     itemCount: con.tuneList.length,
                     builder: (p0) {
                       return TuneCard(
-                        isWishlist: true,
+                        customScreenType: CustomScreenType.wishlist,
                         info: con.tuneList[p0],
                         menuList: popoverMenu,
                         tuneList: con.tuneList,

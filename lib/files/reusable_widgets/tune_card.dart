@@ -1,5 +1,6 @@
 import 'package:etisalat/files/api_calls/add_to_wishlist_api.dart';
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/enums/custpm_screen_type.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/popup_views/gift_popup_view.dart';
@@ -7,20 +8,19 @@ import 'package:etisalat/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/play_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
-import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
+
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
-import 'package:etisalat/files/router/route_name.dart';
+
 import 'package:etisalat/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/strings.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:responsive_builder/responsive_builder.dart';
 
 class TuneCard extends StatelessWidget {
@@ -34,13 +34,12 @@ class TuneCard extends StatelessWidget {
     this.menuList,
     this.onMenuTap,
     required this.tuneList,
-    this.isWishlist = false,
-    this.enbaleToPreview = true,
+    this.customScreenType = CustomScreenType.normal,
   });
 
   final TuneInfo info;
-  final bool isWishlist;
-  final bool enbaleToPreview;
+  final CustomScreenType customScreenType;
+
   final List<TuneInfo> tuneList;
   final Widget? bottomLeftChild;
   final Widget? bottomRightChild;
@@ -53,29 +52,36 @@ class TuneCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, si) {
-        return si.isMobile
-            ? enbaleToPreview
-                ? InkWell(
-                    onTap: () {
-                      Get.dialog(Material(
-                          child: MobileTunePreviewSceen(
-                              isWishlist: isWishlist,
-                              tuneInfo: info,
-                              tuneList: tuneList)));
-                      // Map<String, dynamic> map = {
-                      //   'tuneInfo': info,
-                      //   'tuneList': tuneList
-                      // };
-                      // context.pushNamed(mobileTunePreviewRoute, extra: map);
-                    },
-                    child: mainContainer(si))
-                : mainContainer(si)
-            : mainContainer(si);
+        return laodWidget(si);
       },
     );
   }
 
-  Container mainContainer(SizingInformation si) {
+  Widget laodWidget(SizingInformation si) {
+    if (si.isMobile) {
+      if (customScreenType == CustomScreenType.musicContent) {
+        return mainContainer(si);
+      } else {
+        return InkWell(
+          onTap: () {
+            Get.dialog(
+              Material(
+                child: MobileTunePreviewSceen(
+                    customScreenType: customScreenType,
+                    tuneInfo: info,
+                    tuneList: tuneList),
+              ),
+            );
+          },
+          child: mainContainer(si),
+        );
+      }
+    } else {
+      return mainContainer(si);
+    }
+  }
+
+  Widget mainContainer(SizingInformation si) {
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(

@@ -1,7 +1,9 @@
 import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
+import 'package:etisalat/files/controllers/player_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/enums/playing_card_type.dart';
 import 'package:etisalat/files/model/my_playing_tunes_model.dart';
+import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
@@ -17,6 +19,7 @@ import 'package:get/get.dart';
 class PlayingTuneCard extends StatelessWidget {
   PlayingTuneCard({super.key, required this.info});
   final MyPlayingTuneController con = Get.find();
+  PlayerController pCont = Get.find();
   final ToneDetail info;
   @override
   Widget build(BuildContext context) {
@@ -92,16 +95,44 @@ class PlayingTuneCard extends StatelessWidget {
   }
 
   Widget playButton() {
-    return Container(
-      height: 34,
-      width: 34,
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(17), color: yellow),
-      child: const Icon(
-        Icons.play_arrow_rounded,
-        color: white,
-      ),
+    return Obx(
+      () {
+        return GenericButton(
+          isStopPlay: false,
+          padding: EdgeInsets.zero,
+          bgColor: yellow,
+          height: 34,
+          width: 34,
+          radius: 17,
+          leadingIcon: Icon(
+            pCont.playingToneId.value == info.toneId
+                ? Icons.pause
+                : Icons.play_arrow_rounded,
+            size: pCont.playingToneId.value == info.toneId ? 20 : 22,
+            color: white,
+          ),
+          onTap: () {
+            TuneInfo inf = TuneInfo(
+                toneIdStreamingUrl: info.toneIdStreamingUrl ?? "",
+                toneId: info.toneId);
+            print("info.toneUrl ${inf.toneUrl}");
+            print("info.toneIdStreamingUrl ${inf.toneIdStreamingUrl}");
+            pCont.playUrl(inf);
+          },
+        );
+      },
     );
+    // Container(
+    //   height: 34,
+    //   width: 34,
+    //   decoration:
+    //       BoxDecoration(borderRadius: BorderRadius.circular(17), color: yellow),
+    //   child:
+    //const Icon(
+    //     Icons.play_arrow_rounded,
+    //     color: white,
+    //   ),
+    // );
   }
 
   Widget deleteButton() {

@@ -1,4 +1,0 @@
-enum ScreenName {
-  musicContent,
-  wishlist,
-}

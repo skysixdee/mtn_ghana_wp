@@ -1,8 +1,10 @@
 import 'package:etisalat/files/api_calls/add_to_wishlist_api.dart';
 import 'package:etisalat/files/api_calls/delete_from_wishlist_api.dart';
+import 'package:etisalat/files/api_calls/delete_mytune_api.dart';
 import 'package:etisalat/files/controllers/mobile_tune_preview_cotroller.dart';
 import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/player_controller.dart';
+import 'package:etisalat/files/enums/custpm_screen_type.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
@@ -23,13 +25,14 @@ import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class MobileTunePreviewSceen extends StatefulWidget {
-  const MobileTunePreviewSceen(
-      {super.key,
-      required this.tuneInfo,
-      required this.tuneList,
-      this.isWishlist = false});
+  const MobileTunePreviewSceen({
+    super.key,
+    required this.tuneInfo,
+    required this.tuneList,
+    required this.customScreenType,
+  });
   final TuneInfo tuneInfo;
-  final bool isWishlist;
+  final CustomScreenType customScreenType;
   final List<TuneInfo> tuneList;
   @override
   State<MobileTunePreviewSceen> createState() => _MobileTunePreviewSceenState();
@@ -109,7 +112,7 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
       color: lightGrey,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: widget.isWishlist
+        children: widget.customScreenType == CustomScreenType.wishlist
             ? bottomButtonWishlistChildren
             : bottomButtonNonWishlistChildren,
       ),
@@ -127,8 +130,11 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
         ),
         onTap: () async {
           if (StoreManager.isLoggedIn) {
-            MyWishlistController wCont = Get.find();
-            wCont.deleteFromWishlist(con.currentTuneDetail.value);
+            if (widget.customScreenType == CustomScreenType.myTune) {
+              con.deleteMyTune();
+            } else {
+              con.deleteTuneFromWishlist();
+            }
           } else {
             openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
           }

@@ -40,8 +40,8 @@ class MusicBoxCard extends StatelessWidget {
                   child: Container(
                       color: yellow,
                       child: customImage(
-                          url: info.previewImageUrl,
-                          toneName: info.toneName ?? ''))),
+                          url: info.toneIdpreviewImageUrl,
+                          toneName: info.previewImageUrl ?? ''))),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(

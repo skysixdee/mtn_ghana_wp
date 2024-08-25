@@ -46,7 +46,8 @@ class MyTuneView extends StatelessWidget {
                           if (p0.title == deleteStr) {
                             con.deleteTune(
                                 con.tuneApkList[p1].toneDetails?.first ??
-                                    TuneInfo());
+                                    TuneInfo(),
+                                p1);
                           }
                           customPrint("title is = ${p0.title} and index = $p1");
                         },

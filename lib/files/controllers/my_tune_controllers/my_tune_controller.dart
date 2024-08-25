@@ -1,5 +1,7 @@
+import 'package:etisalat/files/api_calls/delete_mytune_api.dart';
 import 'package:etisalat/files/api_calls/get_my_tune_api.dart';
 import 'package:etisalat/files/api_calls/get_pack_detail_api.dart';
+import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/my_tunes_model.dart';
 import 'package:etisalat/files/model/pack_detail_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
@@ -11,7 +13,7 @@ import 'package:get/get.dart';
 
 class MyTuneController extends GetxController {
   RxBool isLoading = false.obs;
-  List<ListToneApk> tuneApkList = [];
+  RxList<ListToneApk> tuneApkList = <ListToneApk>[].obs;
   RxString message = ''.obs;
   String packName = '';
   getMyTune() async {
@@ -23,7 +25,7 @@ class MyTuneController extends GetxController {
     message.value = '';
     MyTunesModel model = await getMyTuneApi();
     if (model.statusCode == 'SC0000') {
-      tuneApkList = model.responseMap?.listToneApk ?? [];
+      tuneApkList.value = model.responseMap?.listToneApk ?? [];
       message.value = tuneApkList.isEmpty ? listIsEmptyStr : '';
     } else {
       message.value = model.message ?? '';
@@ -33,13 +35,22 @@ class MyTuneController extends GetxController {
     isLoading.value = false;
   }
 
-  deleteTune(TuneInfo info) async {
+  deleteTune(TuneInfo info, int index) async {
     print("fsddgdfgfdgdfgdf");
     openAlertPopup(
       message: deleteMyTuneMessageStr,
       primaryBtnTitle: confirmStr,
       secondryBtnTitle: cancelStr,
-      onPrimary: () {
+      onPrimary: () async {
+        GenericModel model = await deleteMyTuneApi(info.toneId ?? '', packName);
+        if (model.statusCode == 'SC0000') {
+          tuneApkList.removeAt(index);
+          // for (var element in tuneApkList) {
+          //   element.toneDetails?.contains(info);
+          // }
+        } else {
+          customSnackBar(model.message);
+        }
         customPrint("deleteing tune name ${info.toneName}");
       },
     );

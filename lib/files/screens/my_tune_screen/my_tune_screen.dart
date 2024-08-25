@@ -34,8 +34,8 @@ class MyTuneScreen extends StatelessWidget {
               const SizedBox(height: 1),
               const MyTuneHeaderView(),
               NavigationHeaderView(titleList: [
-                NavigationHeaderModel("Home", homeRoute),
-                NavigationHeaderModel("NameTune", nameTuneRoute)
+                NavigationHeaderModel(homeStr, homeRoute),
+                NavigationHeaderModel(myTunezStr, nameTuneRoute)
               ]),
               const SizedBox(height: 1),
               playingTuneHeader(si),
