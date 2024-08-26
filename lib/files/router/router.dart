@@ -1,5 +1,6 @@
 import 'package:etisalat/files/controllers/artists_tune_controller.dart';
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
+import 'package:etisalat/files/controllers/blacklist_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
@@ -11,6 +12,8 @@ import 'package:etisalat/files/controllers/tune_search_controller.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/screens/banner_detail_screen/banner_detail_screen.dart';
+import 'package:etisalat/files/screens/blacklist_screen/blacklist_screen.dart';
+import 'package:etisalat/files/screens/blacklist_screen/create_blacklist_screen.dart';
 import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:etisalat/files/screens/home_screen/home_screen.dart';
 import 'package:etisalat/files/screens/mobile_drawer_screen/mobile_drawer_screen.dart';
@@ -56,7 +59,9 @@ final router = GoRouter(
         _musicBoxShell(),
         _musicBoxContentShell(),
         _myTuneSettingShell(),
-        _artistsTuneShell()
+        _artistsTuneShell(),
+        _blackListShell(),
+        _createBlackListShell(),
         //_mobileTunePreviewShell(),
       ],
     ),
@@ -304,6 +309,36 @@ StatefulShellBranch _myTuneSettingShell() {
             info: info,
             packName: packName,
           );
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _blackListShell() {
+  BlacklistController bCont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: blackListRoute,
+        path: blackListRoute,
+        builder: (context, state) {
+          bCont.getList();
+          return BlacklistScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _createBlackListShell() {
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: createBlackListRoute,
+        path: createBlackListRoute,
+        builder: (context, state) {
+          return CreateBlacklistScreen();
         },
       ),
     ],

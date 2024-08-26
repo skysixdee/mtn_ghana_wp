@@ -128,6 +128,8 @@ String myAccountStr = "My Account";
 String seeMoreStr = "See More";
 String tuneChargeStr = "Tune Charge";
 String boxChargeStr = "Box Charge";
+String deleteBlackListConfirmMessageStr =
+    "Are you sure you want to delete this blacklist?";
 String enterValidMsisdnStr = "Please enter valid msisdn.";
 String pleaseEnterYourMobileNumberStr = "Please enter your mobile number";
 String enterFriendMobileNumberStr = "Enter Friend's Mobile Number";
@@ -139,3 +141,9 @@ String myMusicBoxPopupMessageStr =
     'Enble the shuffle button to add musicbox in playlist.';
 String myTunePopupMessageStr =
     """1. Select one tune to play it for the full day to all your callers.\n\n2.To play a tune to a specific callers , use advanced settings option.""";
+
+String howToCreateBlacklistStr = 'How to create a blacklist?';
+
+String createBlacklistStr = 'Create a Blacklist';
+String blacklistLearnMoreStr =
+    'Want to keep certain people from hearing your callertune? Just add their numbers to your Blacklist, and they won’t hear your ringback tunes anymore. It’s that simple!';

@@ -21,8 +21,10 @@ class GenericButton extends StatelessWidget {
     this.borderColor,
     this.fontSize,
     this.isStopPlay = false,
+    this.enable = true,
   });
   final bool isStopPlay;
+  final bool enable;
   final Widget? leadingIcon;
   final Widget? trailingIcon;
   final String? title;
@@ -48,6 +50,9 @@ class GenericButton extends StatelessWidget {
         width: width,
         child: InkWell(
           onTap: () {
+            if (!enable) {
+              return;
+            }
             if (onTap != null) {
               onTap!();
             }
@@ -56,7 +61,7 @@ class GenericButton extends StatelessWidget {
             }
           },
           child: Padding(
-              padding: padding ?? const EdgeInsets.symmetric(horizontal: 12),
+              padding: padding ?? const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,

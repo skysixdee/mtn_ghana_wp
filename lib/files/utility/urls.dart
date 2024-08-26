@@ -72,3 +72,9 @@ String setToneUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/set-tone";
 String sendGiftUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/send-gift";
 String searchNameTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones';
+String getBlackListUrl =
+    '$baseUrl/security/Middleware/api/adapter/v1/crbt/view-black-list';
+String createBlackListUrl =
+    '$baseUrl/security/Middleware/api/adapter/v1/crbt/add-to-black-list';
+String deleteBlacklistUrl =
+    "$baseUrl/security/Middleware/api/adapter/v1/crbt/remove-from-black-list";

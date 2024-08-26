@@ -6,6 +6,7 @@ import 'package:etisalat/files/controllers/app_controller.dart';
 import 'package:etisalat/files/controllers/artists_tune_controller.dart';
 import 'package:etisalat/files/controllers/banner_controller.dart';
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
+import 'package:etisalat/files/controllers/blacklist_controller.dart';
 import 'package:etisalat/files/controllers/buy_tune_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/custom_drawer_controller.dart';
@@ -83,6 +84,7 @@ Future<void> initiateController() async {
 //Get.lazyPut(() => PlayerController());
   PlayerController _playCon = Get.put(PlayerController());
 
+  Get.lazyPut(() => BlacklistController());
   Get.lazyPut(() => GiftController());
   Get.lazyPut(() => BuyTuneController());
   Get.lazyPut(() => TuneController());
