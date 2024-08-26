@@ -25,6 +25,7 @@ Widget customImage(
       ClipRRect(
         borderRadius: BorderRadius.circular(cornerRadius),
         child: CachedNetworkImage(
+          //imageUrl: 'https://picsum.photos/id/70/300/100',
           imageUrl: url ?? '',
           fit: fit ?? BoxFit.cover,
           imageBuilder: (context, imageProvider) => Container(
