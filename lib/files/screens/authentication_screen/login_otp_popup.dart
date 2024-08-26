@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
 import 'package:etisalat/files/controllers/auth_controller/otp_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
@@ -14,8 +15,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginOtpPopup extends StatefulWidget {
-  const LoginOtpPopup({super.key, required this.msisdn});
+  const LoginOtpPopup({
+    super.key,
+    required this.msisdn,
+    this.info,
+  });
   final String msisdn;
+  final TuneInfo? info;
+
   @override
   State<LoginOtpPopup> createState() => _LoginOtpPopupState();
 }
@@ -28,6 +35,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
   void initState() {
     Get.lazyPut(() => OtpController());
     otpController = Get.find();
+    otpController.info = widget.info;
     otpController.onResentButtonAction(widget.msisdn,
         second: loginController.expireTime, isLoading: false);
     super.initState();
@@ -41,6 +49,8 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
 
   @override
   Widget build(BuildContext context) {
+    otpController.otp = '';
+    textEditingController.text = otpController.otp;
     return Center(
       child: Material(
         color: transparent,
@@ -96,6 +106,9 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
                 onTap: () {
                   otpController.onVerifyButtonAction(widget.msisdn);
                   customPrint("generate otp");
+                  otpController.onSuccess = () {
+                    Navigator.of(context).pop();
+                  };
                 },
               );
       },
@@ -172,6 +185,9 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
           },
           onSubmit: (p0) {
             otpController.onVerifyButtonAction(widget.msisdn);
+            otpController.onSuccess = () {
+              Navigator.of(context).pop();
+            };
           },
         );
       },

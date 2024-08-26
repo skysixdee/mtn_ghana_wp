@@ -16,7 +16,7 @@ class StoreManager {
   static bool isLoggedIn = true;
   static bool isEnglish = true;
   static String language = 'English';
-  static String languageCode = '1';
+  static String languageCode = '0';
   static String languageSort = 'en';
   static String msisdn = '0';
   static List<Category>? categories;
@@ -33,7 +33,7 @@ class StoreManager {
     deviceId = prefs.getString(_deviceId) ?? '0191212';
     language = isEnglish ? "English" : "Burmese";
     appCont.isLoggedIn.value = isLoggedIn;
-    languageCode = isEnglish ? '1' : '0';
+    languageCode = isEnglish ? '0' : '1';
     languageSort = isEnglish ? 'en' : 'br';
   }
 

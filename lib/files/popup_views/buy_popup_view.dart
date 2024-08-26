@@ -1,3 +1,4 @@
+import 'package:etisalat/files/controllers/buy_tune_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/popup_views/popup_tune_info.dart';
@@ -6,12 +7,15 @@ import 'package:etisalat/files/reusable_widgets/country_code.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/error_message_widget.dart';
+import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class BuyPopupView extends StatefulWidget {
@@ -24,6 +28,13 @@ class BuyPopupView extends StatefulWidget {
 
 class _BuyPopupViewState extends State<BuyPopupView> {
   TextEditingController textEditingController = TextEditingController();
+  BuyTuneController con = Get.find();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -60,8 +71,15 @@ class _BuyPopupViewState extends State<BuyPopupView> {
                             StoreManager.isLoggedIn
                                 ? const SizedBox()
                                 : msisdnTextFieldBuilder(si),
+                            errorMessage(),
                             const SizedBox(height: 20),
-                            buttonsBuilder(si),
+                            Obx(
+                              () {
+                                return con.isLoading.value
+                                    ? loadingIndicator()
+                                    : buttonsBuilder(si);
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -74,16 +92,35 @@ class _BuyPopupViewState extends State<BuyPopupView> {
         ));
   }
 
+  Widget errorMessage() {
+    return Obx(
+      () {
+        return errorMessageBuilder(message: con.message.value);
+      },
+    );
+  }
+
   Widget msisdnTextFieldBuilder(SizingInformation si) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(title: pleaseEnterYourMobileNumberStr),
-        CustomTextfield(
-          controller: textEditingController,
-          leadingChild: countryCode(),
-          isNumericTextField: true,
-          maxLength: msisdnLength,
+        Obx(
+          () {
+            return CustomTextfield(
+              enabled: !con.isLoading.value,
+              controller: textEditingController,
+              leadingChild: countryCode(),
+              isNumericTextField: true,
+              maxLength: msisdnLength,
+              onChange: (p0) {
+                con.updateMsisdn(p0);
+              },
+              onSubmit: (p0) {
+                con.onConfirmButtonAction(widget.info);
+              },
+            );
+          },
         )
       ],
     );
@@ -121,6 +158,9 @@ class _BuyPopupViewState extends State<BuyPopupView> {
     return GenericButton(
       title: confirmStr,
       bgColor: yellow,
+      onTap: () {
+        con.onConfirmButtonAction(widget.info);
+      },
     );
   }
 

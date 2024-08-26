@@ -128,6 +128,7 @@ String myAccountStr = "My Account";
 String seeMoreStr = "See More";
 String tuneChargeStr = "Tune Charge";
 String boxChargeStr = "Box Charge";
+String enterValidMsisdnStr = "Please enter valid msisdn.";
 String pleaseEnterYourMobileNumberStr = "Please enter your mobile number";
 String enterFriendMobileNumberStr = "Enter Friend's Mobile Number";
 

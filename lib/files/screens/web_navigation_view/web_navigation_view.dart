@@ -158,7 +158,9 @@ class WebNavigationView extends StatelessWidget {
                   Get.dialog(Obx(
                     () {
                       return con.displayOptScreen.value
-                          ? LoginOtpPopup(msisdn: con.msisdn)
+                          ? LoginOtpPopup(
+                              msisdn: con.msisdn,
+                            )
                           : const LoginPopup();
                     },
                   ));

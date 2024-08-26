@@ -1,3 +1,4 @@
+import 'package:etisalat/files/controllers/gift_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/popup_views/popup_tune_info.dart';
@@ -6,12 +7,17 @@ import 'package:etisalat/files/reusable_widgets/country_code.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/error_message_widget.dart';
+import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
+import 'package:etisalat/files/router/router.dart';
 
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class GiftPopupView extends StatefulWidget {
@@ -24,6 +30,15 @@ class GiftPopupView extends StatefulWidget {
 
 class _GiftPopupViewState extends State<GiftPopupView> {
   TextEditingController textEditingController = TextEditingController();
+  late GiftController con;
+  @override
+  void initState() {
+    Get.lazyPut(() => GiftController());
+    con = Get.find();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -57,8 +72,18 @@ class _GiftPopupViewState extends State<GiftPopupView> {
                             popupToneDetailAndCharge(widget.info, si, false),
                             const SizedBox(height: 20),
                             msisdnTextFieldBuilder(si),
+                            Obx(
+                              () {
+                                return errorMessageBuilder(
+                                    message: con.messsage.value);
+                              },
+                            ),
                             const SizedBox(height: 20),
-                            buttonsBuilder(si),
+                            Obx(() {
+                              return con.isLoading.value
+                                  ? loadingIndicator()
+                                  : buttonsBuilder(si);
+                            }),
                           ],
                         ),
                       ),
@@ -76,12 +101,26 @@ class _GiftPopupViewState extends State<GiftPopupView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(title: enterFriendMobileNumberStr),
-        CustomTextfield(
-          hintText: enterFriendMobileNumberStr,
-          controller: textEditingController,
-          leadingChild: countryCode(),
-          maxLength: msisdnLength,
-          isNumericTextField: true,
+        Obx(
+          () {
+            return CustomTextfield(
+              enabled: !con.isLoading.value,
+              hintText: enterFriendMobileNumberStr,
+              controller: textEditingController,
+              leadingChild: countryCode(),
+              maxLength: msisdnLength,
+              isNumericTextField: true,
+              onChange: (p0) {
+                con.updateMsisdn(p0);
+              },
+              onSubmit: (p0) {
+                con.onConfirmButtonAction(widget.info);
+                con.onDismiss = () {
+                  Navigator.pop(context);
+                };
+              },
+            );
+          },
         )
       ],
     );
@@ -119,6 +158,12 @@ class _GiftPopupViewState extends State<GiftPopupView> {
     return GenericButton(
       title: confirmStr,
       bgColor: yellow,
+      onTap: () {
+        con.onConfirmButtonAction(widget.info);
+        con.onDismiss = () {
+          Navigator.pop(context);
+        };
+      },
     );
   }
 

@@ -67,6 +67,8 @@ String artistTuneSearchUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
 String deleteMyTuneUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/delete-tone";
+String setToneUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/set-tone";
 
+String sendGiftUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/send-gift";
 String searchNameTuneUrl =
-    'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones';
+    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones';

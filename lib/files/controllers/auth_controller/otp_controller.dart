@@ -2,8 +2,17 @@ import 'dart:async';
 
 import 'package:etisalat/files/api_calls/authorization/confirm_otp_api.dart';
 import 'package:etisalat/files/api_calls/authorization/generate_otp_api.dart';
+import 'package:etisalat/files/api_calls/authorization/password_validation_api.dart';
+import 'package:etisalat/files/api_calls/authorization/security_token_api.dart';
+import 'package:etisalat/files/api_calls/get_search_tune_list_api.dart';
+import 'package:etisalat/files/api_calls/set_tone_api.dart';
 import 'package:etisalat/files/model/confirm_otp_model.dart';
+import 'package:etisalat/files/model/generic_model.dart';
+import 'package:etisalat/files/model/password_validation_model.dart';
+import 'package:etisalat/files/model/security_token_model.dart';
 import 'package:etisalat/files/model/subscriber_validation_model.dart';
+import 'package:etisalat/files/model/tune_info.dart';
+import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
@@ -22,11 +31,12 @@ class OtpController extends GetxController {
 
   late Timer _timer;
   int _start = 0;
-
+  TuneInfo? info;
+  Function()? onSuccess;
   @override
   void onInit() {
     super.onInit();
-    //onResentButtonAction();
+    otp = '';
     customPrint("OtpController onInit");
   }
 
@@ -39,11 +49,58 @@ class OtpController extends GetxController {
     customPrint("qwrweter");
 
     isLoading.value = true;
-    await Future.delayed(const Duration(seconds: 2));
+
     ConfirmOtpModel confirmOtpModel = await confirmOtpApi(msisdn, otp);
     if (confirmOtpModel.statusCode == 'SC0000') {
+      getSecurityToken(msisdn);
     } else {
-      message.value = confirmOtpModel.message ?? someThingWentWrongStr;
+      message.value = confirmOtpModel.message;
+      isLoading.value = false;
+    }
+  }
+
+  getSecurityToken(String msisdn) async {
+    SecurityTokenModel securityTokenModel = await getSecurityTokenApi();
+    if (securityTokenModel.statusCode == 'SC0000') {
+      passwordValidation(
+          msisdn, securityTokenModel.responseMap?.securityCounter ?? '');
+    } else {
+      message.value = someThingWentWrongStr;
+      isLoading.value = false;
+    }
+  }
+
+  passwordValidation(String msisdn, String securityCounter) async {
+    PasswordValidationModel passwordValidationModel =
+        await passwordValidationApi(msisdn, securityCounter);
+    if (passwordValidationModel.statusCode == 'SC0000') {
+      if (info != null) {
+        buyTune();
+      } else {
+        if (onSuccess != null) {
+          onSuccess!();
+        }
+      }
+    } else {
+      message.value = someThingWentWrongStr;
+      isLoading.value = false;
+    }
+  }
+
+  buyTune() async {
+    GenericModel model =
+        await setToneApi(info?.toneId ?? '', info?.toneName ?? '');
+    if (model.statusCode == "SC0000") {
+      openAlertPopup(
+        message: model.message ?? '',
+        onPrimary: () {
+          if (onSuccess != null) {
+            onSuccess!();
+          }
+        },
+      );
+    } else {
+      message.value = model.message ?? someThingWentWrongStr;
     }
     isLoading.value = false;
   }

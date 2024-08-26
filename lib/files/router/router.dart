@@ -77,7 +77,7 @@ final router = GoRouter(
     return null;
   },
   errorPageBuilder: (context, state) {
-    return MaterialPage(child: errorWidget(context, state));
+    return MaterialPage(child: _errorWidget(context, state));
   },
 );
 StatefulShellBranch _homeShell() {
@@ -352,7 +352,7 @@ Widget navBuilder(context, state, navigationShell) {
       ));
 }
 
-Widget errorWidget(BuildContext context, GoRouterState state) {
+Widget _errorWidget(BuildContext context, GoRouterState state) {
   return const Scaffold(
     body: Center(
       child: Text(

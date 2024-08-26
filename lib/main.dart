@@ -6,8 +6,10 @@ import 'package:etisalat/files/controllers/app_controller.dart';
 import 'package:etisalat/files/controllers/artists_tune_controller.dart';
 import 'package:etisalat/files/controllers/banner_controller.dart';
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
+import 'package:etisalat/files/controllers/buy_tune_controller.dart';
 import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/controllers/custom_drawer_controller.dart';
+import 'package:etisalat/files/controllers/gift_controller.dart';
 import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
 import 'package:etisalat/files/controllers/music_box_controller.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/my_music_box_controller.dart';
@@ -78,7 +80,11 @@ Future<void> readProperties() async {
 Future<void> initiateController() async {
   Get.lazyPut(() => AppController());
   appCont = Get.find(); //put(AppController());
+//Get.lazyPut(() => PlayerController());
+  PlayerController _playCon = Get.put(PlayerController());
 
+  Get.lazyPut(() => GiftController());
+  Get.lazyPut(() => BuyTuneController());
   Get.lazyPut(() => TuneController());
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => LoginController());
