@@ -103,6 +103,7 @@ class _CustomAlertPopup extends StatelessWidget {
   Widget bottomButtons(BuildContext context) {
     return secondryBtnTitle == null
         ? GenericButton(
+            radius: 0,
             height: 45,
             fontSize: 16,
             bgColor: transparent,
@@ -162,7 +163,7 @@ class _CustomAlertPopup extends StatelessWidget {
 
   Widget header(BuildContext context) {
     return Container(
-      color: lightGrey,
+      color: yellow,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -6,7 +6,7 @@ import 'package:etisalat/files/model/my_tunes_model.dart';
 import 'package:etisalat/files/model/pack_detail_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
+import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:get/get.dart';
@@ -29,7 +29,7 @@ class MyTuneController extends GetxController {
       message.value = tuneApkList.isEmpty ? listIsEmptyStr : '';
     } else {
       message.value = model.message ?? '';
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
 
     isLoading.value = false;
@@ -49,7 +49,7 @@ class MyTuneController extends GetxController {
           //   element.toneDetails?.contains(info);
           // }
         } else {
-          customSnackBar(model.message);
+          snackBar(model.message);
         }
         customPrint("deleteing tune name ${info.toneName}");
       },

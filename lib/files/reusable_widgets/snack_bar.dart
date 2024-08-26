@@ -5,7 +5,7 @@ import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-customSnackBar(String? message) {
+snackBar(String? message) {
   Get.snackbar("", "",
       maxWidth: 400,
       messageText: Container(

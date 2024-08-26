@@ -5,7 +5,7 @@ import 'package:etisalat/files/api_calls/get_blacklist_api.dart';
 import 'package:etisalat/files/model/blackList_model.dart';
 import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
+import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:get/get.dart';
 
@@ -36,9 +36,9 @@ class BlacklistController extends GetxController {
     GenericModel model = await deleteBlackListApi(info.bPartyMsisdn ?? '');
     if (model.statusCode == 'SC0000') {
       list.remove(info);
-      customSnackBar(model.message);
+      snackBar(model.message);
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
     info.isDeleting.value = false;
   }

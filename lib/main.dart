@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:etisalat/files/api_calls/authorization/auto_login_api.dart';
+import 'package:etisalat/files/api_calls/create_blaclist_controller.dart';
 import 'package:etisalat/files/common/aes_enc_dec.dart';
 import 'package:etisalat/files/controllers/app_controller.dart';
 import 'package:etisalat/files/controllers/artists_tune_controller.dart';
@@ -84,7 +85,6 @@ Future<void> initiateController() async {
 //Get.lazyPut(() => PlayerController());
   PlayerController _playCon = Get.put(PlayerController());
 
-  Get.lazyPut(() => BlacklistController());
   Get.lazyPut(() => GiftController());
   Get.lazyPut(() => BuyTuneController());
   Get.lazyPut(() => TuneController());
@@ -100,7 +100,8 @@ Future<void> initiateController() async {
   Get.lazyPut(() => MyMusicBoxController());
   Get.lazyPut(() => TuneSearchController());
   Get.lazyPut(() => CustomDrawerController());
-
+  Get.lazyPut(() => CreateBlaclistController());
+  Get.lazyPut(() => BlacklistController());
   Get.lazyPut(() => MyWishlistController());
   Get.lazyPut(() => ArtistsTuneController());
 

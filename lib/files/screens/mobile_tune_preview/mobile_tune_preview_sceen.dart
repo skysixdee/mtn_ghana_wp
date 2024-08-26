@@ -14,7 +14,7 @@ import 'package:etisalat/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
-import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
+import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/colors.dart';

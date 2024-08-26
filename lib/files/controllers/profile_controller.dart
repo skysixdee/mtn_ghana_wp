@@ -5,7 +5,7 @@ import 'package:etisalat/files/model/edit_profile_model.dart';
 import 'package:etisalat/files/model/pack_detail_model.dart';
 import 'package:etisalat/files/model/profile_detail_model.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
+import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:get/get.dart';
 
@@ -60,7 +60,7 @@ class ProfileController extends GetxController {
 
   onConfirmTapButtonAction() async {
     if (selectedCetegories.isEmpty) {
-      customSnackBar(selectAtleastOneCategoryStr);
+      snackBar(selectAtleastOneCategoryStr);
       return;
     }
 
@@ -70,7 +70,7 @@ class ProfileController extends GetxController {
       customPrint("edit taped $selectedCetegories");
     } else {
       if (selectedCetegories.join(',') == getProfileDetails?.categories) {
-        customSnackBar(noChangeToUpdateStr);
+        snackBar(noChangeToUpdateStr);
         return;
       }
       isUpdating.value = true;
@@ -78,7 +78,7 @@ class ProfileController extends GetxController {
       if (mode.statusCode == 'SC0000') {
         getProfileDetails?.categories = '';
         getProfileDetails?.categories = selectedCetegories.join(',');
-        customSnackBar(mode.message);
+        snackBar(mode.message);
       } else {
         for (var element in (getProfileDetails?.categories ?? '').split(',')) {
           selectedCetegories.add(element);

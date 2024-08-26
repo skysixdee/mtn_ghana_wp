@@ -8,7 +8,7 @@ import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/my_music_box_model.dart';
 import 'package:etisalat/files/model/pack_detail_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
+import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
 import 'package:get/get.dart';
 
 class MobileTunePreviewCotroller extends GetxController {
@@ -91,7 +91,7 @@ class MobileTunePreviewCotroller extends GetxController {
         myCon.tuneApkList[i].toneDetails?.remove(currentTuneDetail.value);
       }
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
   }
 
@@ -103,7 +103,7 @@ class MobileTunePreviewCotroller extends GetxController {
       wCont.tuneList.remove(currentTuneDetail.value);
       tuneList.remove(currentTuneDetail.value);
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
   }
 }

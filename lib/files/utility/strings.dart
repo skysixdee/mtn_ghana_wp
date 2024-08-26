@@ -15,7 +15,11 @@ String playStr = "Play";
 String pauseStr = "Pause";
 String deleteStr = "Delete";
 String contactNumberStr = "Contact Number";
-
+String nameStr = "Name";
+String mobileNumberStr = "Mobile  Number";
+String addStr = "Add";
+String removeStr = "Remove";
+String blockStr = "Block";
 String remainderBenfitsStr = 'A Remainder full of benefits';
 String letYourCallersStr =
     'Let your callers listen to Adhan when they call you at prayer times. Remind them that it\n'

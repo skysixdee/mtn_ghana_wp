@@ -6,7 +6,7 @@ import 'package:etisalat/files/enums/playing_card_type.dart';
 import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/my_playing_tunes_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
+import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:etisalat/files/utility/urls.dart';
@@ -50,7 +50,7 @@ class MyPlayingTuneController extends GetxController {
           isShuffleOn.value = !isShuffleOn.value;
           getPlayingTune();
         } else {
-          customSnackBar(model.message);
+          snackBar(model.message);
         }
         switchingShuffle.value = false;
       },
@@ -169,7 +169,7 @@ class MyPlayingTuneController extends GetxController {
     if (model.statusCode == 'SC0000') {
       tuneList.remove(info);
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
     print("Dedicated deleted");
   }
@@ -180,7 +180,7 @@ class MyPlayingTuneController extends GetxController {
     if (model.statusCode == 'SC0000') {
       tuneList.remove(info);
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
 
     print("AllCaller deleted");

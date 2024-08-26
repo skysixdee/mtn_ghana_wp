@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/network_manager/network_manager.dart';
-import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
+import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:etisalat/files/utility/urls.dart';
@@ -27,9 +27,9 @@ Future<void> addToWishlistApi(TuneInfo info) async {
   GenericModel model = genericModelFromJson(json.encode(result));
   if (model.statusCode == 'SC0000') {
     String mess = "${info.toneName} is " + "${model.message}";
-    customSnackBar(mess);
+    snackBar(mess);
   } else {
-    customSnackBar(model.message);
+    snackBar(model.message);
   }
   return;
 }

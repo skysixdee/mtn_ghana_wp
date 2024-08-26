@@ -4,7 +4,7 @@ import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/model/wishlist_model.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
+import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
 import 'package:get/get.dart';
 
 class MyWishlistController extends GetxController {
@@ -25,9 +25,9 @@ class MyWishlistController extends GetxController {
     GenericModel model = await deleteFromWishlistApi(info);
     if (model.statusCode == "SC0000") {
       String ms = "${info.toneName} deleted " + "${model.message}fully";
-      customSnackBar(ms);
+      snackBar(ms);
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
     tuneList.remove(info);
   }

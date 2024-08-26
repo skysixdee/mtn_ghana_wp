@@ -12,7 +12,7 @@ import 'package:etisalat/files/utility/strings.dart';
 import 'package:etisalat/files/enums/caller_type.dart';
 import 'package:etisalat/files/model/repeat_day_model.dart';
 import 'package:etisalat/files/model/repeat_monthly_model.dart';
-import 'package:etisalat/files/reusable_widgets/custom_snack_bar.dart';
+import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
 import 'package:etisalat/files/reusable_widgets/time_date_picker.dart';
 
 class MyTuneSettingController extends GetxController {
@@ -267,7 +267,7 @@ class MyTuneSettingController extends GetxController {
     if (model.statusCode == "SC0000") {
       onSucessApiCall();
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
     isLoading.value = false;
     print("Full day All Caller setting");
@@ -282,7 +282,7 @@ class MyTuneSettingController extends GetxController {
     if (model.statusCode == "SC0000") {
       onSucessApiCall();
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
     isLoading.value = false;
     print("Time base  All Caller setting");
@@ -305,7 +305,7 @@ class MyTuneSettingController extends GetxController {
     if (model.statusCode == "SC0000") {
       onSucessApiCall();
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
     isLoading.value = false;
     print("Time And Date base  All Caller setting");
@@ -319,7 +319,7 @@ class MyTuneSettingController extends GetxController {
     if (model.statusCode == "SC0000") {
       onSucessApiCall();
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
     isLoading.value = false;
     print("Full day Dedicated setting");
@@ -333,7 +333,7 @@ class MyTuneSettingController extends GetxController {
     if (model.statusCode == "SC0000") {
       onSucessApiCall();
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
     isLoading.value = false;
     print("Time base Dedicated setting");
@@ -355,7 +355,7 @@ class MyTuneSettingController extends GetxController {
     if (model.statusCode == "SC0000") {
       onSucessApiCall();
     } else {
-      customSnackBar(model.message);
+      snackBar(model.message);
     }
     isLoading.value = false;
     print("Time and date base Dedicated setting");
