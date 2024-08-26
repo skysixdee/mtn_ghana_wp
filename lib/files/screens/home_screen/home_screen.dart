@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
         shrinkWrap: true,
         primary: true,
         children: [
-          tempWidget(),
           const SizedBox(height: 8),
           HomeBannerView(key: widget.key),
           const SizedBox(height: 20),
@@ -50,53 +49,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-  Padding tempWidget() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          GenericButton(
-            title: "Login",
-            onTap: () {
-              Map<String, dynamic> map1 = loginJson.map((k, v) {
-                customPrint("key == $k");
-                if (k == 'accessToken') {
-                  StoreManager.setAccessToken(v as String);
-                }
-                if (k == 'refreshToken') {
-                  StoreManager.setRefreshToken(v as String);
-                }
-                if (k == 'deviceId') {
-                  StoreManager.setDeviceId(v as String);
-                }
-                if (k == 'msisdn') {
-                  StoreManager.setMsisdn(v as String);
-                  StoreManager.setLoggedIn(true);
-                }
-
-                return MapEntry(v, k);
-              });
-              customPrint("map 1 ====== $map1");
-            },
-          ),
-        ],
-      ),
-    );
-  }
 }
-
-Map<String, dynamic> loginJson = {
-  "respDesc": "Login Check Success",
-  "srvType": "CHECKPASSWORD",
-  "userIdEnc": "209-72-252-145-121-240-173-222",
-  "userName": "0832120732",
-  "accessToken": "d5b6de58-6837-4cd3-bac5-df3afc01ff50",
-  "userId": "268",
-  "deviceId": "87c13c09-2b0f-4198-afe1-53688c114b6b",
-  "clientTxnId": "772085134",
-  "msisdn": "0832120732",
-  "txnId": "95435759397332",
-  "refreshToken": "95edd40e-7a62-412b-9f7b-5750c3e9f0e9"
-};

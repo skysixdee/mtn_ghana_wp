@@ -15,9 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class BuyPopupView extends StatefulWidget {
-  const BuyPopupView({super.key, required this.info});
+  const BuyPopupView({super.key, required this.info, this.isMusicBox = false});
   final TuneInfo info;
-
+  final bool isMusicBox;
   @override
   State<BuyPopupView> createState() => _BuyPopupViewState();
 }
@@ -54,9 +54,12 @@ class _BuyPopupViewState extends State<BuyPopupView> {
                               ? CrossAxisAlignment.center
                               : CrossAxisAlignment.start,
                           children: [
-                            popupToneDetailAndCharge(widget.info, si),
-                            const SizedBox(height: 20),
-                            msisdnTextFieldBuilder(si),
+                            popupToneDetailAndCharge(
+                                widget.info, si, widget.isMusicBox),
+                            SizedBox(height: StoreManager.isLoggedIn ? 0 : 20),
+                            StoreManager.isLoggedIn
+                                ? const SizedBox()
+                                : msisdnTextFieldBuilder(si),
                             const SizedBox(height: 20),
                             buttonsBuilder(si),
                           ],
@@ -130,7 +133,9 @@ class _BuyPopupViewState extends State<BuyPopupView> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomText(
-                title: buyTuneStr, fontName: FontName.bold, fontSize: 18),
+                title: widget.isMusicBox ? buyBoxStr : buyTuneStr,
+                fontName: FontName.bold,
+                fontSize: 18),
             GenericButton(
               padding: EdgeInsets.zero,
               height: 35,

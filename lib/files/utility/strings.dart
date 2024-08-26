@@ -123,9 +123,11 @@ String artistStr = "Artist";
 String settingStr = "Setting";
 String loginStr = "Login";
 String buyTuneStr = "Buy Tune";
+String buyBoxStr = "Buy Box";
 String myAccountStr = "My Account";
 String seeMoreStr = "See More";
 String tuneChargeStr = "Tune Charge";
+String boxChargeStr = "Box Charge";
 String pleaseEnterYourMobileNumberStr = "Please enter your mobile number";
 String enterFriendMobileNumberStr = "Enter Friend's Mobile Number";
 

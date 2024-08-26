@@ -89,14 +89,16 @@ class GenericGridView extends StatelessWidget {
               width: w,
               child: AspectRatio(
                 aspectRatio: 0.75,
-                child: InkWell(
-                  onTap: () {
-                    if (onTap != null) {
-                      onTap!(index);
-                    }
-                  },
-                  child: builder(index),
-                ),
+                child: (onTap != null)
+                    ? InkWell(
+                        onTap: () {
+                          if (onTap != null) {
+                            onTap!(index);
+                          }
+                        },
+                        child: builder(index),
+                      )
+                    : builder(index),
               ));
         }),
       ),

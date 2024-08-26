@@ -15,6 +15,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class PlayingTuneCard extends StatelessWidget {
   PlayingTuneCard({super.key, required this.info});
@@ -45,28 +46,32 @@ class PlayingTuneCard extends StatelessWidget {
     );
   }
 
-  Column infoBuilder() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        tuneInfo(),
-        verticalDivider(),
-        statusWidget(),
-        verticalDivider(),
-        timeWidget(),
-        verticalDivider(),
-        repeatView(),
-      ],
+  Widget infoBuilder() {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            tuneInfo(si),
+            verticalDivider(),
+            statusWidget(si),
+            verticalDivider(),
+            timeWidget(si),
+            verticalDivider(),
+            repeatView(si),
+          ],
+        );
+      },
     );
   }
 
-  Widget repeatView() {
+  Widget repeatView(SizingInformation si) {
     return ((info.playingCardType == PlayingCardType.none) ||
             (info.playingCardType == PlayingCardType.monthly) ||
             (info.playingCardType == PlayingCardType.yearly))
-        ? monthlyRepeatView(info)
-        : dayRepeatView(info);
+        ? monthlyRepeatView(info, si)
+        : dayRepeatView(info, si);
   }
 
   Widget verticalDivider() {
@@ -80,12 +85,12 @@ class PlayingTuneCard extends StatelessWidget {
     return customImage(url: info.toneIdpreviewImageUrl);
   }
 
-  Widget tuneInfo() {
+  Widget tuneInfo(SizingInformation si) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(child: nameAndArtist()),
+        Expanded(child: nameAndArtist(si)),
         const SizedBox(width: 8),
         playButton(),
         const SizedBox(width: 6),
@@ -153,7 +158,7 @@ class PlayingTuneCard extends StatelessWidget {
     );
   }
 
-  Column nameAndArtist() {
+  Column nameAndArtist(SizingInformation si) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,25 +169,26 @@ class PlayingTuneCard extends StatelessWidget {
     );
   }
 
-  Widget statusWidget() {
+  Widget statusWidget(SizingInformation si) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        textColumn(statusStr, con.isShuffleOn.value ? shuffleStr : activeStr),
-        textColumn(callerStr, serviceName(),
+        textColumn(
+            statusStr, con.isShuffleOn.value ? shuffleStr : activeStr, si),
+        textColumn(callerStr, serviceName(), si,
             crossAxisAlignment: CrossAxisAlignment.center),
-        textColumn(playAtStr, playAt(),
+        textColumn(playAtStr, playAt(), si,
             crossAxisAlignment: CrossAxisAlignment.end),
       ],
     );
   }
 
-  Widget timeWidget() {
+  Widget timeWidget(SizingInformation si) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        textColumn(startTimeStr, fromDate(info)),
-        textColumn(endTimeStr, toDate(info),
+        textColumn(startTimeStr, fromDate(info), si),
+        textColumn(endTimeStr, toDate(info), si,
             crossAxisAlignment: CrossAxisAlignment.end),
       ],
     );
@@ -214,7 +220,8 @@ class PlayingTuneCard extends StatelessWidget {
 
   Widget textColumn(
     String title,
-    String subTitle, {
+    String subTitle,
+    SizingInformation si, {
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
     CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start,
   }) {

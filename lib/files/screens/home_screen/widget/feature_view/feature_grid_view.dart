@@ -23,10 +23,10 @@ class FeatureGridView extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount:
                     cont.displayList.length > 8 ? 7 : cont.displayList.length,
-                onTap: (p0) {
-                  customPrint(
-                      "tapped cell = ${cont.displayList[p0].toneName ?? ''}");
-                },
+                // onTap: (p0) {
+                //   customPrint(
+                //       "tapped cell = ${cont.displayList[p0].toneName ?? ''}");
+                // },
                 builder: (p0) {
                   return TuneCard(
                     tuneList: cont.displayList,

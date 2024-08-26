@@ -4,11 +4,13 @@ import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
 import 'package:etisalat/files/utility/colors.dart';
+import 'package:etisalat/files/utility/constants.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-Widget popupToneDetailAndCharge(TuneInfo info, SizingInformation si) {
+Widget popupToneDetailAndCharge(
+    TuneInfo info, SizingInformation si, bool isMusicBox) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment:
@@ -18,7 +20,7 @@ Widget popupToneDetailAndCharge(TuneInfo info, SizingInformation si) {
       const SizedBox(height: 20),
       _tuneDetail(info, si),
       const SizedBox(height: 10),
-      _tuneCharge(si)
+      _tuneCharge(si, isMusicBox)
     ],
   );
 }
@@ -52,14 +54,15 @@ Widget _tuneImage(
   );
 }
 
-Widget _tuneCharge(SizingInformation si) {
+Widget _tuneCharge(SizingInformation si, bool isMusicBox) {
   //String price = StoreManager.other?.tonePrice?.attribute ?? '';
-  String price = StoreManager.other?.mcPriceEnglish?.attribute ?? '';
+  // String price = StoreManager.other?.mcPriceEnglish?.attribute ?? '';
+  String price = isMusicBox ? musicBoxPrice : tuneChargePrice;
   return Column(
     crossAxisAlignment:
         si.isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
     children: [
-      CustomText(title: tuneChargeStr),
+      CustomText(title: isMusicBox ? boxChargeStr : tuneChargeStr),
       CustomText(
         title: price,
         color: grey,

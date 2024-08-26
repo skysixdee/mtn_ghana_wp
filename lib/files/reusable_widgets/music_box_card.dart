@@ -61,7 +61,7 @@ class MusicBoxCard extends StatelessWidget {
                           title: previewStr,
                           leadingIcon: const Icon(Icons.visibility),
                         ),
-                        rightButton ?? buyButton(info)
+                        rightButton ?? buyButton(info, isMusicBox: true)
                       ],
                     ),
                   ],

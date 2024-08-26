@@ -68,6 +68,8 @@ Future<void> readProperties() async {
   final data = await json.decode(value);
   baseUrl = data['BASE_URL'];
   nameTuneCategoryId = data['NAME_TUNE_CAT_ID'];
+  musicBoxPrice = data['BOX_CHARGE'];
+  tuneChargePrice = data['TUNE_CHARGE'];
 
   customPrint("base url = $baseUrl");
   return;

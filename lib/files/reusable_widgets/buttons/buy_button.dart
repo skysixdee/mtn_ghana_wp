@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-Widget buyButton(TuneInfo info, {EdgeInsetsGeometry? padding}) {
+Widget buyButton(TuneInfo info,
+    {EdgeInsetsGeometry? padding, bool isMusicBox = false}) {
   return ResponsiveBuilder(
     builder: (context, si) {
       return Padding(
@@ -20,7 +21,10 @@ Widget buyButton(TuneInfo info, {EdgeInsetsGeometry? padding}) {
           leadingIcon: const Icon(Icons.card_travel, size: 16),
           bgColor: yellow,
           onTap: () {
-            Get.dialog(BuyPopupView(info: info));
+            Get.dialog(BuyPopupView(
+              info: info,
+              isMusicBox: isMusicBox,
+            ));
           },
         ),
       );

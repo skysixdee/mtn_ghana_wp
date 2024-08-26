@@ -1,4 +1,6 @@
 {
     "BASE_URL": "https://callertunez.mtn.co.za",
-    "NAME_TUNE_CAT_ID":"115"
+    "NAME_TUNE_CAT_ID":"115",
+    "TUNE_CHARGE":"R5/Month with 1st day FREE",
+    "BOX_CHARGE":"R5/Week with 1st day FREE"
 }

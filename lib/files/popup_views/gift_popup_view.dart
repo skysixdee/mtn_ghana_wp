@@ -54,7 +54,7 @@ class _GiftPopupViewState extends State<GiftPopupView> {
                               ? CrossAxisAlignment.center
                               : CrossAxisAlignment.start,
                           children: [
-                            popupToneDetailAndCharge(widget.info, si),
+                            popupToneDetailAndCharge(widget.info, si, false),
                             const SizedBox(height: 20),
                             msisdnTextFieldBuilder(si),
                             const SizedBox(height: 20),

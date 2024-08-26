@@ -1,6 +1,7 @@
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class CustomText extends StatelessWidget {
   final String? title;
@@ -34,3 +35,20 @@ class CustomText extends StatelessWidget {
           );
   }
 }
+/*
+
+ResponsiveBuilder(
+            builder: (context, si) {
+              return Text(
+                title ?? '',
+                maxLines: maxLine,
+                textAlign: textAlign,
+                style: TextStyle(
+                  color: color,
+                  fontSize: (fontSize ?? 14) * (si.isMobile ? 0.85 : 1),
+                  fontFamily: fontName.name,
+                ),
+              );
+            },
+          );
+*/

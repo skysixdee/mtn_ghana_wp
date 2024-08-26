@@ -5,6 +5,8 @@ const int timeOutDuration = 20;
 const int pagePerCount = 20;
 String baseUrl = '';
 String nameTuneCategoryId = '';
+String musicBoxPrice = '';
+String tuneChargePrice = '';
 //=========================
 const int channelId = 4;
 const String versionCode = '7.0';
