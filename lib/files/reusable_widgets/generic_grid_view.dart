@@ -1,3 +1,5 @@
+/*
+
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/empty_list_widget.dart';
@@ -54,3 +56,5 @@ class GenericGridView extends StatelessWidget {
     return tuneGridView(itemCount, cardWidth, padding, builder: builder);
   }
 }
+
+*/

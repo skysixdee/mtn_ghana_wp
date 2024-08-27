@@ -34,7 +34,6 @@ class CategoryDetailScreen extends StatelessWidget {
                 return con.isLoading.value
                     ? loadingIndicator()
                     : GenericScrollView(
-                        collapsedHeight: 56,
                         sliverAppBar: getNavigationView(name),
                         // NavigationHeaderView(titleList: [
                         //   NavigationHeaderModel(homeStr, homeRoute),

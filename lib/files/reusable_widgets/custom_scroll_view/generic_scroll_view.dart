@@ -18,13 +18,13 @@ class GenericScrollView extends StatelessWidget {
     this.scrollDirection,
     this.padding,
     this.onTap,
-    this.maxDisplay = 8,
+    this.maxDisplay = 12,
     this.physics,
     this.sliverAppBarHeight = 0,
     this.sliverAppBar,
     this.sliverToBoxAdapter,
     this.pinnedAppBar = true,
-    this.collapsedHeight = 56,
+    this.collapsedHeight = 51,
     this.isLoading = false,
   });
   final double cardHeight;
@@ -32,7 +32,7 @@ class GenericScrollView extends StatelessWidget {
   final Widget? sliverAppBar;
   final Widget? sliverToBoxAdapter;
   final double cardWidth;
-  final double? collapsedHeight;
+  final double collapsedHeight;
   final int itemCount;
   final bool pinnedAppBar;
   final bool onlyGrid;
@@ -104,6 +104,7 @@ class GenericScrollView extends StatelessWidget {
     return SliverAppBar(
       backgroundColor: white,
       collapsedHeight: collapsedHeight,
+      toolbarHeight: collapsedHeight - 1,
       pinned: pinnedAppBar,
       expandedHeight: (sliverAppBar != null) ? sliverAppBarHeight : 0,
       flexibleSpace: (sliverAppBar != null) ? sliverAppBar : const SizedBox(),
@@ -125,8 +126,11 @@ class GenericScrollView extends StatelessWidget {
       sliver: itemCount <= 0
           ? _emptyMessage()
           : SliverToBoxAdapter(
-              child:
-                  tuneGridView(itemCount, cardWidth, padding, builder: builder),
+              child: tuneGridView(
+                  itemCount: itemCount,
+                  cardWidth: cardWidth,
+                  padding: padding,
+                  builder: builder),
             ),
     );
   }

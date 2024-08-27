@@ -1,4 +1,5 @@
 import 'package:etisalat/files/controllers/music_box_controller.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
@@ -13,14 +14,13 @@ class MusicBoxScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        return con.isLoadingList.value
-            ? loadingIndicator()
-            : GenericGridView(
-                itemCount: con.musicBoxList.length,
-                builder: (p0) {
-                  return MusicBoxCard(info: con.musicBoxList[p0]);
-                },
-              );
+        return GenericScrollView(
+          isLoading: con.isLoadingList.value,
+          itemCount: con.musicBoxList.length,
+          builder: (p0) {
+            return MusicBoxCard(info: con.musicBoxList[p0]);
+          },
+        );
       },
     );
   }

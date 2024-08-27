@@ -7,6 +7,9 @@ import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/align_grid_combine_view.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
+import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
@@ -30,32 +33,58 @@ class MyTuneView extends StatelessWidget {
       builder: (context, si) {
         return Obx(
           () {
-            return con.isLoading.value
-                ? loadingIndicator()
-                : GenericGridView(
-                    cardWidth: 250,
-                    itemCount: con.tuneApkList.length,
-                    builder: (p0) {
-                      return TuneCard(
-                        info: con.tuneApkList[p0].toneDetails?.first ??
-                            TuneInfo(),
-                        tuneList: con.tuneApkList[p0].toneDetails ?? [],
-                        menuList: menuList,
-                        bottomRightChild: settingButton(context, si, p0),
-                        onMenuTap: (p0, p1) {
-                          if (p0.title == deleteStr) {
-                            con.deleteTune(
-                                con.tuneApkList[p1].toneDetails?.first ??
-                                    TuneInfo(),
-                                p1);
-                          }
-                          customPrint("title is = ${p0.title} and index = $p1");
-                        },
-                      );
+            return alignGridCombineView(
+                isLoading: con.isLoading.value,
+                context: context,
+                listCount: con.tuneApkList.length,
+                cardWidth: 250,
+                padding: null,
+                builder: (p0) {
+                  return TuneCard(
+                    info: con.tuneApkList[p0].toneDetails?.first ?? TuneInfo(),
+                    tuneList: con.tuneApkList[p0].toneDetails ?? [],
+                    menuList: menuList,
+                    bottomRightChild: settingButton(context, si, p0),
+                    onMenuTap: (p0, p1) {
+                      if (p0.title == deleteStr) {
+                        con.deleteTune(
+                            con.tuneApkList[p1].toneDetails?.first ??
+                                TuneInfo(),
+                            p1);
+                      }
+                      customPrint("title is = ${p0.title} and index = $p1");
                     },
                   );
+                },
+                onTap: (p1) => {});
           },
         );
+        // Obx(
+        //   () {
+        //     return GenericScrollView(
+        //       isLoading: con.isLoading.value,
+        //       cardWidth: 250,
+        //       itemCount: con.tuneApkList.length,
+        //       builder: (p0) {
+        //         return
+        // TuneCard(
+        //           info: con.tuneApkList[p0].toneDetails?.first ?? TuneInfo(),
+        //           tuneList: con.tuneApkList[p0].toneDetails ?? [],
+        //           menuList: menuList,
+        //           bottomRightChild: settingButton(context, si, p0),
+        //           onMenuTap: (p0, p1) {
+        //             if (p0.title == deleteStr) {
+        //               con.deleteTune(
+        //                   con.tuneApkList[p1].toneDetails?.first ?? TuneInfo(),
+        //                   p1);
+        //             }
+        //             customPrint("title is = ${p0.title} and index = $p1");
+        //           },
+        //         );
+        //       },
+        //     );
+        //   },
+        // );
       },
     );
   }

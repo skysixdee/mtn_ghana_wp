@@ -1,4 +1,6 @@
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/align_grid_combine_view.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
@@ -16,17 +18,29 @@ class MyMusicBoxView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        return con.isLoading.value
-            ? loadingIndicator()
-            : GenericGridView(
-                itemCount: con.tuneList.length,
-                builder: (p0) {
-                  return MusicBoxCard(
-                    info: con.tuneList[p0],
-                    rightButton: deleteButton(),
-                  );
-                },
+        return alignGridCombineView(
+            isLoading: con.isLoading.value,
+            context: context,
+            listCount: con.tuneList.length,
+            cardWidth: 220,
+            padding: null,
+            builder: (p0) {
+              return MusicBoxCard(
+                info: con.tuneList[p0],
+                rightButton: deleteButton(),
               );
+            },
+            onTap: (p1) => {});
+        // GenericScrollView(
+        //   isLoading: con.isLoading.value,
+        //   itemCount: con.tuneList.length,
+        //   builder: (p0) {
+        //     return MusicBoxCard(
+        //       info: con.tuneList[p0],
+        //       rightButton: deleteButton(),
+        //     );
+        //   },
+        // );
       },
     );
   }

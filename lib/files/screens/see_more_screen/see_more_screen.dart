@@ -1,5 +1,6 @@
 import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
@@ -21,7 +22,7 @@ class SeeMoreScreen extends StatelessWidget {
         children: [
           getNavigationView(name),
           Expanded(
-            child: GenericGridView(
+            child: GenericScrollView(
               itemCount: list.length,
               builder: (index) {
                 return TuneCard(

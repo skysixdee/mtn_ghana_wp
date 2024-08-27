@@ -18,7 +18,7 @@ Widget buyButton(TuneInfo info,
       return Padding(
         padding: padding ?? EdgeInsets.zero,
         child: GenericButton(
-          padding: padding,
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 2),
           title: buyStr,
           fontName: si.isMobile ? FontName.regular : FontName.bold,
           leadingIcon: const Icon(Icons.card_travel, size: 16),

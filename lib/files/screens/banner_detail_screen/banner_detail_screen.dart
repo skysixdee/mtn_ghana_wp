@@ -1,5 +1,6 @@
 import 'package:etisalat/files/controllers/banner_detail_controller.dart';
 import 'package:etisalat/files/model/popover_menu_model.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
@@ -13,15 +14,13 @@ class BannerDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        return con.isLoading.value
-            ? loadingIndicator()
-            : GenericGridView(
-                itemCount: con.tuneList.length,
-                builder: (p0) {
-                  return TuneCard(
-                      info: con.tuneList[p0], tuneList: con.tuneList);
-                },
-              );
+        return GenericScrollView(
+          isLoading: con.isLoading.value,
+          itemCount: con.tuneList.length,
+          builder: (p0) {
+            return TuneCard(info: con.tuneList[p0], tuneList: con.tuneList);
+          },
+        );
       },
     );
   }

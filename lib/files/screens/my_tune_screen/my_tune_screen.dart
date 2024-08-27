@@ -38,8 +38,8 @@ class MyTuneScreen extends StatelessWidget {
                 ),
               ),
               SliverAppBar(
-                toolbarHeight: 50,
-                backgroundColor: red,
+                toolbarHeight: si.isMobile ? 0 : 50,
+                //backgroundColor: red,
                 pinned: true,
                 flexibleSpace: getNavigationView(myTunezStr),
               ),

@@ -1,5 +1,7 @@
 import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
+import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
 import 'package:get/get.dart';
@@ -14,11 +16,14 @@ class FeatureGridView extends StatelessWidget {
   final FeatureController cont = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Obx(
+    return CustomText(
+      title: "",
+    );
+    Obx(
       () {
         return cont.isLoadingList[cont.index.value]
             ? loadingIndicator(height: 300)
-            : GenericGridView(
+            : GenericScrollView(
                 padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount:
