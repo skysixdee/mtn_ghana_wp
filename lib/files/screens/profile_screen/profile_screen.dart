@@ -4,6 +4,8 @@ import 'package:etisalat/files/model/category_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/country_code.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
@@ -288,13 +290,10 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget gridView(List<Category> lst) {
-    return GenericGridView(
-      cardHeight: 120,
-      cardWidth: 110,
-      childAspectRatio: 1.2,
-      padding: EdgeInsets.zero,
-      onlyGrid: true,
+    return tuneGridView(
       itemCount: lst.length,
+      aspectRatio: 1.2,
+      cardWidth: 120,
       onTap: (index) {
         con.updateChoice(lst[index].categoryId ?? '');
       },
@@ -302,6 +301,20 @@ class ProfileScreen extends StatelessWidget {
         return preferenceCard(lst, p0);
       },
     );
+    // GenericScrollView(
+    //   cardHeight: 120,
+    //   cardWidth: 110,
+    //   childAspectRatio: 1.2,
+    //   padding: EdgeInsets.zero,
+    //   onlyGrid: true,
+    //   itemCount: lst.length,
+    //   onTap: (index) {
+    //     con.updateChoice(lst[index].categoryId ?? '');
+    //   },
+    //   builder: (p0) {
+    //     return preferenceCard(lst, p0);
+    //   },
+    // );
   }
 
   Widget preferenceCard(List<Category> lst, int p0) {

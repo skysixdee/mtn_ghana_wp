@@ -1,22 +1,19 @@
-import 'package:etisalat/files/common/number_pagination.dart';
-import 'package:etisalat/files/controllers/tune_search_controller.dart';
-import 'package:etisalat/files/enums/fonts.dart';
-import 'package:etisalat/files/model/navigation_header_model.dart';
-import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
-import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
-import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
-import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
-import 'package:etisalat/files/reusable_widgets/tune_card.dart';
-import 'package:etisalat/files/router/route_name.dart';
-import 'package:etisalat/files/router/router.dart';
-import 'package:etisalat/files/utility/colors.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/strings.dart';
-import 'package:flutter/material.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/utility/colors.dart';
+import 'package:etisalat/files/utility/strings.dart';
+import 'package:etisalat/files/router/route_name.dart';
+import 'package:etisalat/files/common/number_pagination.dart';
+import 'package:etisalat/files/reusable_widgets/tune_card.dart';
+import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
+import 'package:etisalat/files/controllers/tune_search_controller.dart';
+import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
+import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 
 class SearchScreen extends StatefulWidget {
   SearchScreen({super.key, required this.searchKey});
@@ -36,77 +33,85 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: white,
-      child: Column(
-        children: [
-          Expanded(
-            child: Obx(
-              () {
-                return controller.isLoading.value
-                    ? loadingIndicator()
-                    : Column(
-                        children: [
-                          getNavigationView(
-                              "$searchedResultForStr -> ${(widget.searchKey).toUpperCase()}"),
-                          // NavigationHeaderView(titleList: [
-                          //   NavigationHeaderModel(homeStr, homeRoute),
-                          //   NavigationHeaderModel(
-                          //       "$searchedResultForStr -> ${(widget.searchKey).toUpperCase()}",
-                          //       homeRoute)
-                          // ]),
-                          Container(height: 1, color: white),
-                          topTab(),
-                          Expanded(
-                            child: controller.selectedIndex.value == 0
-                                ? grid()
-                                : artistNameList(),
-                          ),
-                        ],
-                      );
-              },
-            ),
-          ),
-          Obx(
-            () {
-              return Stack(
-                children: [
-                  numberPagination(
-                    totalCount: controller.totalTuneCount.value,
-                    onTap: (p0) => controller.leadMoreData(p0),
+        color: white,
+        child: Column(
+          children: [
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  sliverNavigation(),
+                  sliverAppBar(),
+                  SliverToBoxAdapter(
+                    child: Obx(
+                      () {
+                        return controller.selectedIndex.value == 0
+                            ? grid()
+                            : artistNameList();
+                      },
+                    ),
                   ),
-                  controller.selectedIndex.value == 0
-                      ? const SizedBox()
-                      : Container(height: 40, color: white)
                 ],
-              );
-            },
-          ),
+              ),
+            ),
+            _loadMore()
+          ],
+        ));
+  }
+
+  SliverToBoxAdapter sliverNavigation() {
+    return SliverToBoxAdapter(
+      child: getNavigationView(
+          "$searchedResultForStr -> ${(widget.searchKey).toUpperCase()}"),
+    );
+  }
+
+  SliverAppBar sliverAppBar() {
+    return SliverAppBar(
+      backgroundColor: yellow,
+      pinned: true,
+      toolbarHeight: 41,
+      flexibleSpace: Column(
+        children: [
+          Container(height: 1, color: white),
+          topTab(),
         ],
       ),
     );
   }
 
-  // Widget pagination() {
-  //   return Obx(
-  //     () {
-  //       return
-  //     },
-  //   );
-  // }
+  Widget _loadMore() {
+    return Obx(
+      () {
+        return Stack(
+          children: [
+            numberPagination(
+              totalCount: controller.totalTuneCount.value,
+              onTap: (p0) => controller.leadMoreData(p0),
+            ),
+            controller.selectedIndex.value == 0
+                ? const SizedBox()
+                : Container(height: 40, color: white)
+          ],
+        );
+      },
+    );
+  }
 
   Widget grid() {
     return Obx(
       () {
-        return controller.isLoadingMore.value
-            ? loadingIndicator()
-            : GenericGridView(
-                itemCount: controller.tuneList.length,
-                builder: (p0) {
-                  return TuneCard(
-                      info: controller.tuneList[p0],
-                      tuneList: controller.tuneList);
-                },
-              );
+        return tuneGridView(
+          isLoading:
+              (controller.isLoading.value || controller.isLoadingMore.value),
+          itemCount: controller.tuneList.length,
+          onTap: (p0) {
+            controller.leadMoreData(p0);
+          },
+          builder: (p0) {
+            return TuneCard(
+                info: controller.tuneList[p0], tuneList: controller.tuneList);
+          },
+        );
       },
     );
   }
@@ -195,6 +200,7 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               Expanded(
                   child: GenericButton(
+                padding: EdgeInsets.zero,
                 radius: 0,
                 title: tunesStr,
                 bgColor:
@@ -209,6 +215,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               Expanded(
                   child: GenericButton(
+                padding: EdgeInsets.zero,
                 radius: 0,
                 title: artistStr,
                 bgColor:
