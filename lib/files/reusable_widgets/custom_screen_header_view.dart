@@ -22,14 +22,14 @@ class CustomScreenHeaderView extends StatelessWidget {
       builder: (context, sizingInformation) {
         return Container(
           height: height,
-          color: Colors.teal,
+          color: grey,
           child: Stack(
             alignment: Alignment.centerRight,
             children: [
               Image.asset(
                 width: double.infinity,
                 height: double.infinity,
-                nameTuneHeaderPng,
+                imageName,
                 fit: BoxFit.fill,
               ),
               ovalShape(sizingInformation),
