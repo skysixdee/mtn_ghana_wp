@@ -1,3 +1,5 @@
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/empty_list_widget.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/utility/colors.dart';
@@ -81,8 +83,8 @@ class GenericScrollView extends StatelessWidget {
           EdgeInsets.symmetric(
               horizontal: si.isMobile ? 8 : 25, vertical: si.isMobile ? 8 : 20),
       sliver: SliverToBoxAdapter(
-        child: alignedGrid(context),
-      ),
+          child: alignedGrid(
+              context, itemCount, cardWidth, physics, builder, onTap)),
     );
   }
 
@@ -122,55 +124,10 @@ class GenericScrollView extends StatelessWidget {
               horizontal: si.isMobile ? 8 : 25, vertical: si.isMobile ? 8 : 20),
       sliver: itemCount <= 0
           ? _emptyMessage()
-          : SliverGrid(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: cardWidth + 40, //height,
-                childAspectRatio: childAspectRatio ?? 0.7,
-                mainAxisSpacing: si.isMobile ? 10 : 20,
-                crossAxisSpacing: si.isMobile ? 10 : 20,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return (onTap != null)
-                      ? InkWell(onTap: onTap!(index), child: builder(index))
-                      : builder(index);
-                },
-                childCount: itemCount,
-              ),
+          : SliverToBoxAdapter(
+              child:
+                  tuneGridView(itemCount, cardWidth, padding, builder: builder),
             ),
-    );
-  }
-
-  Widget alignedGrid(BuildContext context) {
-    const double runSpacing = 14;
-    const double spacing = 14;
-    int listCount = itemCount;
-    double w = cardWidth;
-
-    return SingleChildScrollView(
-      physics: physics,
-      child: Wrap(
-        runSpacing: runSpacing,
-        spacing: spacing,
-        alignment: WrapAlignment.center,
-        children: List.generate(listCount, (index) {
-          return SizedBox(
-              width: w,
-              child: AspectRatio(
-                aspectRatio: 0.75,
-                child: (onTap != null)
-                    ? InkWell(
-                        onTap: () {
-                          if (onTap != null) {
-                            onTap!(index);
-                          }
-                        },
-                        child: builder(index),
-                      )
-                    : builder(index),
-              ));
-        }),
-      ),
     );
   }
 }

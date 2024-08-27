@@ -1,5 +1,5 @@
 import 'package:etisalat/files/reusable_widgets/custom_screen_header_view.dart';
-import 'package:etisalat/files/reusable_widgets/generic_scroll_view.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
 import 'package:etisalat/files/utility/strings.dart';

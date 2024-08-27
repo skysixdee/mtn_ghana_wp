@@ -2,7 +2,7 @@ import 'package:etisalat/files/common/number_pagination.dart';
 import 'package:etisalat/files/controllers/artists_tune_controller.dart';
 import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
-import 'package:etisalat/files/reusable_widgets/generic_scroll_view.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
