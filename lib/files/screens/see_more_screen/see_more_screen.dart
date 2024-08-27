@@ -1,6 +1,7 @@
 import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
+import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
 import 'package:etisalat/files/router/route_name.dart';
@@ -18,10 +19,7 @@ class SeeMoreScreen extends StatelessWidget {
       color: white,
       child: Column(
         children: [
-          NavigationHeaderView(titleList: [
-            NavigationHeaderModel(homeStr, homeRoute),
-            NavigationHeaderModel(name, homeRoute)
-          ]),
+          getNavigationView(name),
           Expanded(
             child: GenericGridView(
               itemCount: list.length,

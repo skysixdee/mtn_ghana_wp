@@ -2,6 +2,7 @@ import 'package:etisalat/files/common/number_pagination.dart';
 import 'package:etisalat/files/controllers/name_tune_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/navigation_header_model.dart';
+import 'package:etisalat/files/reusable_widgets/custom_screen_header_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
@@ -31,17 +32,7 @@ class NameTuneScreen extends StatelessWidget {
           Expanded(child: Obx(
             () {
               return GenericScrollView(
-                sliverToBoxAdapter: Container(
-                    color: red,
-                    child: const Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 28.0, vertical: 80),
-                        child: CustomText(
-                          title: "fewrewtrewrewr",
-                        ),
-                      ),
-                    )),
+                sliverToBoxAdapter: const CustomScreenHeaderView(),
                 collapsedHeight: 131,
                 isLoading: con.isLoading.value,
                 sliverAppBar: Column(

@@ -4,6 +4,7 @@ import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
 import 'package:etisalat/files/router/route_name.dart';
@@ -33,10 +34,11 @@ class MyTuneScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 1),
               const MyTuneHeaderView(),
-              NavigationHeaderView(titleList: [
-                NavigationHeaderModel(homeStr, homeRoute),
-                NavigationHeaderModel(myTunezStr, nameTuneRoute)
-              ]),
+              getNavigationView(myTunezStr),
+              // NavigationHeaderView(titleList: [
+              //   NavigationHeaderModel(homeStr, homeRoute),
+              //   NavigationHeaderModel(myTunezStr, nameTuneRoute)
+              // ]),
               const SizedBox(height: 1),
               playingTuneHeader(si),
               SizedBox(height: si.isMobile ? 20 : 30),

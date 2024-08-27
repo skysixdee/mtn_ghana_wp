@@ -3,6 +3,8 @@ import 'package:etisalat/files/controllers/category_detail_controller.dart';
 import 'package:etisalat/files/model/navigation_header_model.dart';
 
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
+import 'package:etisalat/files/reusable_widgets/generic_scroll_view.dart';
+import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
 
@@ -31,24 +33,20 @@ class CategoryDetailScreen extends StatelessWidget {
               () {
                 return con.isLoading.value
                     ? loadingIndicator()
-                    : Column(
-                        children: [
-                          NavigationHeaderView(titleList: [
-                            NavigationHeaderModel(homeStr, homeRoute),
-                            NavigationHeaderModel(name, nameTuneRoute),
-                          ]),
-                          Expanded(
-                            child: GenericGridView(
-                              itemCount: con.tuneList.length,
-                              builder: (p0) {
-                                return TuneCard(
-                                  info: con.tuneList[p0],
-                                  tuneList: con.tuneList,
-                                );
-                              },
-                            ),
-                          ),
-                        ],
+                    : GenericScrollView(
+                        collapsedHeight: 56,
+                        sliverAppBar: getNavigationView(name),
+                        // NavigationHeaderView(titleList: [
+                        //   NavigationHeaderModel(homeStr, homeRoute),
+                        //   NavigationHeaderModel(name, nameTuneRoute),
+                        // ]),
+                        itemCount: con.tuneList.length,
+                        builder: (p0) {
+                          return TuneCard(
+                            info: con.tuneList[p0],
+                            tuneList: con.tuneList,
+                          );
+                        },
                       );
               },
             ),

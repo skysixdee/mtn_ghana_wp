@@ -4,6 +4,7 @@ import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/popup_views/popup_tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/country_code.dart';
+import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/custom_image.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
@@ -160,6 +161,9 @@ class _BuyPopupViewState extends State<BuyPopupView> {
       bgColor: yellow,
       onTap: () {
         con.onConfirmButtonAction(widget.info);
+        con.onSuccess = () {
+          Navigator.of(context).pop();
+        };
       },
     );
   }

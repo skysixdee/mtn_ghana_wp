@@ -1,3 +1,8 @@
+import 'package:etisalat/files/reusable_widgets/custom_screen_header_view.dart';
+import 'package:etisalat/files/reusable_widgets/generic_scroll_view.dart';
+import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
+import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
+import 'package:etisalat/files/utility/strings.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:etisalat/files/enums/custpm_screen_type.dart';
@@ -17,25 +22,24 @@ class MyWishlistScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        return con.isLoading.value
-            ? loadingIndicator()
-            : con.tuneList.isEmpty
-                ? customEmptyListView()
-                : GenericGridView(
-                    itemCount: con.tuneList.length,
-                    builder: (p0) {
-                      return TuneCard(
-                        customScreenType: CustomScreenType.wishlist,
-                        info: con.tuneList[p0],
-                        menuList: popoverMenu,
-                        tuneList: con.tuneList,
-                        onMenuTap: (p0, p1) {
-                          con.deleteFromWishlist(con.tuneList[p1]);
-                          customPrint("Title = ${p0.title} and index = $p1");
-                        },
-                      );
-                    },
-                  );
+        return GenericScrollView(
+          sliverToBoxAdapter: CustomScreenHeaderView(),
+          sliverAppBar: getNavigationView(wishlistStr),
+          isLoading: con.isLoading.value,
+          itemCount: con.tuneList.length,
+          builder: (p0) {
+            return TuneCard(
+              customScreenType: CustomScreenType.wishlist,
+              info: con.tuneList[p0],
+              menuList: popoverMenu,
+              tuneList: con.tuneList,
+              onMenuTap: (p0, p1) {
+                con.deleteFromWishlist(con.tuneList[p1]);
+                customPrint("Title = ${p0.title} and index = $p1");
+              },
+            );
+          },
+        );
       },
     );
   }

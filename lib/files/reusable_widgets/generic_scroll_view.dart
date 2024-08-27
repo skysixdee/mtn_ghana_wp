@@ -22,7 +22,7 @@ class GenericScrollView extends StatelessWidget {
     this.sliverAppBar,
     this.sliverToBoxAdapter,
     this.pinnedAppBar = true,
-    this.collapsedHeight = 68,
+    this.collapsedHeight = 56,
     this.isLoading = false,
   });
   final double cardHeight;
@@ -54,14 +54,35 @@ class GenericScrollView extends StatelessWidget {
               ? [
                   sliverToBoxAdapterBuilder(),
                   sliverAppBarBuilder(),
-                  isLoading ? _loadingIndicator() : sliverGridBuilder(si),
+                  isLoading ? _loadingIndicator() : checkListType(context, si),
                 ]
               : [
                   sliverToBoxAdapterBuilder(),
-                  isLoading ? _loadingIndicator() : sliverGridBuilder(si),
+                  isLoading ? _loadingIndicator() : checkListType(context, si),
                 ],
         );
       },
+    );
+  }
+
+  Widget checkListType(BuildContext context, SizingInformation si) {
+    if (onlyGrid) {
+      return sliverGridBuilder(si);
+    } else if (itemCount < maxDisplay) {
+      return sliverAlign(context, si);
+    } else {
+      return sliverGridBuilder(si);
+    }
+  }
+
+  Widget sliverAlign(BuildContext context, SizingInformation si) {
+    return SliverPadding(
+      padding: padding ??
+          EdgeInsets.symmetric(
+              horizontal: si.isMobile ? 8 : 25, vertical: si.isMobile ? 8 : 20),
+      sliver: SliverToBoxAdapter(
+        child: alignedGrid(context),
+      ),
     );
   }
 
@@ -79,6 +100,7 @@ class GenericScrollView extends StatelessWidget {
 
   SliverAppBar sliverAppBarBuilder() {
     return SliverAppBar(
+      backgroundColor: white,
       collapsedHeight: collapsedHeight,
       pinned: pinnedAppBar,
       expandedHeight: (sliverAppBar != null) ? sliverAppBarHeight : 0,
@@ -116,6 +138,39 @@ class GenericScrollView extends StatelessWidget {
                 childCount: itemCount,
               ),
             ),
+    );
+  }
+
+  Widget alignedGrid(BuildContext context) {
+    const double runSpacing = 14;
+    const double spacing = 14;
+    int listCount = itemCount;
+    double w = cardWidth;
+
+    return SingleChildScrollView(
+      physics: physics,
+      child: Wrap(
+        runSpacing: runSpacing,
+        spacing: spacing,
+        alignment: WrapAlignment.center,
+        children: List.generate(listCount, (index) {
+          return SizedBox(
+              width: w,
+              child: AspectRatio(
+                aspectRatio: 0.75,
+                child: (onTap != null)
+                    ? InkWell(
+                        onTap: () {
+                          if (onTap != null) {
+                            onTap!(index);
+                          }
+                        },
+                        child: builder(index),
+                      )
+                    : builder(index),
+              ));
+        }),
+      ),
     );
   }
 }

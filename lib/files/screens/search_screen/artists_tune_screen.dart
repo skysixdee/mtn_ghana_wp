@@ -2,6 +2,7 @@ import 'package:etisalat/files/common/number_pagination.dart';
 import 'package:etisalat/files/controllers/artists_tune_controller.dart';
 import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
+import 'package:etisalat/files/reusable_widgets/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
@@ -30,27 +31,19 @@ class _ArtistsTuneScreenState extends State<ArtistsTuneScreen> {
           Expanded(
             child: Obx(
               () {
-                return con.isLoading.value
-                    ? loadingIndicator()
-                    : Column(
-                        children: [
-                          NavigationHeaderView(titleList: [
-                            NavigationHeaderModel(homeStr, homeRoute),
-                            NavigationHeaderModel(searchStr, searchRoute),
-                            NavigationHeaderModel(widget.artistName, homeRoute)
-                          ]),
-                          Expanded(
-                            child: GenericGridView(
-                              itemCount: con.tuneList.length,
-                              builder: (p0) {
-                                return TuneCard(
-                                    info: con.tuneList[p0],
-                                    tuneList: con.tuneList);
-                              },
-                            ),
-                          ),
-                        ],
-                      );
+                return GenericScrollView(
+                  isLoading: con.isLoading.value,
+                  sliverAppBar: NavigationHeaderView(titleList: [
+                    NavigationHeaderModel(homeStr, homeRoute),
+                    NavigationHeaderModel(searchStr, searchRoute),
+                    NavigationHeaderModel(widget.artistName, homeRoute)
+                  ]),
+                  itemCount: con.tuneList.length,
+                  builder: (p0) {
+                    return TuneCard(
+                        info: con.tuneList[p0], tuneList: con.tuneList);
+                  },
+                );
               },
             ),
           ),

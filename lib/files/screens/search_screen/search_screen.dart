@@ -5,6 +5,7 @@ import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
+import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
@@ -45,12 +46,14 @@ class _SearchScreenState extends State<SearchScreen> {
                     ? loadingIndicator()
                     : Column(
                         children: [
-                          NavigationHeaderView(titleList: [
-                            NavigationHeaderModel(homeStr, homeRoute),
-                            NavigationHeaderModel(
-                                "$searchedResultForStr -> ${(widget.searchKey).toUpperCase()}",
-                                homeRoute)
-                          ]),
+                          getNavigationView(
+                              "$searchedResultForStr -> ${(widget.searchKey).toUpperCase()}"),
+                          // NavigationHeaderView(titleList: [
+                          //   NavigationHeaderModel(homeStr, homeRoute),
+                          //   NavigationHeaderModel(
+                          //       "$searchedResultForStr -> ${(widget.searchKey).toUpperCase()}",
+                          //       homeRoute)
+                          // ]),
                           Container(height: 1, color: white),
                           topTab(),
                           Expanded(
