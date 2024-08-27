@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/align_grid_combine_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
@@ -18,9 +19,9 @@ class PlayingTuneView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        return alignGridCombineView(
-            context: context,
-            listCount: con.tuneList.length,
+        return CombinedGrid(
+            itemCount: con.tuneList.length,
+            isLoading: con.isLoading.value,
             cardWidth: 280,
             aspectRatio: 0.6,
             padding: null,

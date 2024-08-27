@@ -2,6 +2,7 @@ import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/align_grid_combine_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
@@ -18,12 +19,13 @@ class FeatureGridView extends StatelessWidget {
   final FeatureController cont = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: alignGridCombineView(
-            context: context,
-            listCount:
+    return Center(child: Obx(
+      () {
+        return CombinedGrid(
+            isLoading: cont.isLoadingList[cont.index.value],
+            itemCount:
                 cont.displayList.length > 8 ? 7 : cont.displayList.length,
-            cardWidth: 175,
+            // cardWidth: 175,
             padding: null,
             builder: (p0) {
               return TuneCard(
@@ -31,7 +33,9 @@ class FeatureGridView extends StatelessWidget {
                 info: cont.displayList[p0],
               );
             },
-            onTap: (p1) {}));
+            onTap: (p1) {});
+      },
+    ));
     //   alignedGrid(
     //       context,
     //       aspectRatio: 0.65,

@@ -8,6 +8,7 @@ import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/align_grid_combine_view.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
@@ -33,11 +34,10 @@ class MyTuneView extends StatelessWidget {
       builder: (context, si) {
         return Obx(
           () {
-            return alignGridCombineView(
+            return CombinedGrid(
                 isLoading: con.isLoading.value,
-                context: context,
-                listCount: con.tuneApkList.length,
-                cardWidth: 250,
+                itemCount: con.tuneApkList.length,
+                //cardWidth: 200,
                 padding: null,
                 builder: (p0) {
                   return TuneCard(

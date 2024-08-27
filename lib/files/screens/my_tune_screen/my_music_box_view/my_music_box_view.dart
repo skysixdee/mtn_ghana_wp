@@ -1,5 +1,6 @@
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/align_grid_combine_view.dart';
+import 'package:etisalat/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
@@ -18,10 +19,9 @@ class MyMusicBoxView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        return alignGridCombineView(
+        return CombinedGrid(
             isLoading: con.isLoading.value,
-            context: context,
-            listCount: con.tuneList.length,
+            itemCount: con.tuneList.length,
             cardWidth: 220,
             padding: null,
             builder: (p0) {

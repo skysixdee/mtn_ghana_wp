@@ -69,7 +69,7 @@ class HomeBannerView extends StatelessWidget {
 
   CarouselOptions carousalOption(SizingInformation si, BuildContext context) {
     return CarouselOptions(
-      height: si.isMobile ? 220 : (MediaQuery.of(context).size.width * 0.35),
+      height: si.isMobile ? 160 : (MediaQuery.of(context).size.width * 0.35),
       aspectRatio: 16 / 9,
       viewportFraction: 0.90,
       initialPage: cont.selectedIndex.value,

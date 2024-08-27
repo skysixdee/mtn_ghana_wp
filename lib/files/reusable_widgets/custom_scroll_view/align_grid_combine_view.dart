@@ -3,7 +3,7 @@ import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_vie
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
 
-Widget alignGridCombineView({
+Widget alignGridCombineView1({
   required BuildContext context,
   required int listCount,
   required double cardWidth,
