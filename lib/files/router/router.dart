@@ -378,7 +378,10 @@ Widget navBuilder(context, state, navigationShell) {
               child: Column(
                 children: [
                   WebNavigationView(),
-                  Expanded(child: navigationShell),
+                  Expanded(
+                      child: Scaffold(
+                    body: navigationShell,
+                  )),
                 ],
               ),
             ),

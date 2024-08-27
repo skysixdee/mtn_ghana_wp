@@ -5,6 +5,7 @@ import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
 import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
+import 'package:etisalat/files/reusable_widgets/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
 
@@ -27,37 +28,43 @@ class NameTuneScreen extends StatelessWidget {
       color: white,
       child: Column(
         children: [
-          searchNameTuneBuilder(),
-          Container(height: 1, color: white),
-          Expanded(
-            child: Obx(
-              () {
-                textEditingController.text = con.searchedName;
-                return con.isLoading.value
-                    ? loadingIndicator()
-                    : Column(
-                        children: [
-                          NavigationHeaderView(titleList: [
-                            NavigationHeaderModel(homeStr, homeRoute),
-                            NavigationHeaderModel(nameTuneStr, nameTuneRoute),
-                          ]),
-                          Expanded(
-                            child: GenericGridView(
-                              itemCount: con.tuneList.length,
-                              builder: (p0) {
-                                return TuneCard(
-                                  info: con.tuneList[p0],
-                                  moreButton: const SizedBox(),
-                                  tuneList: con.tuneList,
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      );
-              },
-            ),
-          ),
+          Expanded(child: Obx(
+            () {
+              return GenericScrollView(
+                sliverToBoxAdapter: Container(
+                    color: red,
+                    child: const Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 28.0, vertical: 80),
+                        child: CustomText(
+                          title: "fewrewtrewrewr",
+                        ),
+                      ),
+                    )),
+                collapsedHeight: 131,
+                isLoading: con.isLoading.value,
+                sliverAppBar: Column(
+                  children: [
+                    searchNameTuneBuilder(),
+                    Container(height: 1, color: white),
+                    NavigationHeaderView(titleList: [
+                      NavigationHeaderModel(homeStr, homeRoute),
+                      NavigationHeaderModel(nameTuneStr, nameTuneRoute),
+                    ]),
+                  ],
+                ),
+                itemCount: con.tuneList.length,
+                builder: (p0) {
+                  return TuneCard(
+                    info: con.tuneList[p0],
+                    moreButton: const SizedBox(),
+                    tuneList: con.tuneList,
+                  );
+                },
+              );
+            },
+          )),
           Obx(
             () {
               return numberPagination(
