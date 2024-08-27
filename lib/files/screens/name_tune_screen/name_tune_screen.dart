@@ -32,7 +32,7 @@ class NameTuneScreen extends StatelessWidget {
           Expanded(child: Obx(
             () {
               return GenericScrollView(
-                sliverToBoxAdapter: const CustomScreenHeaderView(),
+                sliverToBoxAdapter: CustomScreenHeaderView(),
                 collapsedHeight: 131,
                 isLoading: con.isLoading.value,
                 sliverAppBar: Column(

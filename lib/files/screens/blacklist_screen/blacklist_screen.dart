@@ -31,7 +31,7 @@ class BlacklistScreen extends StatelessWidget {
                 return GenericScrollView(
                   isLoading: con.isLoading.value,
                   collapsedHeight: 150,
-                  sliverToBoxAdapter: const CustomScreenHeaderView(),
+                  sliverToBoxAdapter: CustomScreenHeaderView(),
                   sliverAppBar: Column(
                     children: [
                       headerView(context, si),

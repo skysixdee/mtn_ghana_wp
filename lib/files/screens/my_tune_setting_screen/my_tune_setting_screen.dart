@@ -60,20 +60,22 @@ class _MyTuneSettingScreenState extends State<MyTuneSettingScreen> {
           () {
             return AbsorbPointer(
               absorbing: con.isLoading.value,
-              child: ResponsiveBuilder(
-                builder: (context, si) {
-                  return Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30),
-                    child: si.isMobile
-                        ? mobileMainContainer(si)
-                        : desktopMainContainer(si),
-                  );
-                },
-              ),
+              child: mainResponsiveBuilder(),
             );
           },
         ));
+  }
+
+  Widget mainResponsiveBuilder() {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30),
+          child:
+              si.isMobile ? mobileMainContainer(si) : desktopMainContainer(si),
+        );
+      },
+    );
   }
 
   Widget desktopMainContainer(SizingInformation si) {

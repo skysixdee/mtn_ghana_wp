@@ -3,6 +3,7 @@ import 'package:etisalat/files/enums/fonts.dart';
 import 'package:etisalat/files/model/navigation_header_model.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:etisalat/files/reusable_widgets/custom_screen_header_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
@@ -28,40 +29,56 @@ class MyTuneScreen extends StatelessWidget {
       color: white,
       child: ResponsiveBuilder(
         builder: (context, si) {
-          return ListView(
-            shrinkWrap: true,
-            primary: true,
-            children: [
-              const SizedBox(height: 1),
-              const MyTuneHeaderView(),
-              getNavigationView(myTunezStr),
-              // NavigationHeaderView(titleList: [
-              //   NavigationHeaderModel(homeStr, homeRoute),
-              //   NavigationHeaderModel(myTunezStr, nameTuneRoute)
-              // ]),
-              const SizedBox(height: 1),
-              playingTuneHeader(si),
-              SizedBox(height: si.isMobile ? 20 : 30),
-              PlayingTuneView(),
-              const SizedBox(height: 20),
-              myTuneHeader(si, activeTunezStr, howToPlaySelctedStr, () {
-                openAlertPopup(
-                    message: myTunePopupMessageStr, textAlign: TextAlign.left);
-              }),
-              SizedBox(height: si.isMobile ? 20 : 30),
-              MyTuneView(),
-              const SizedBox(height: 20),
-              myTuneHeader(si, myMusicBoxStr, howToPlayMusicBixStr, () {
-                openAlertPopup(
-                  message: myMusicBoxPopupMessageStr,
-                );
-              }),
-              SizedBox(height: si.isMobile ? 20 : 30),
-              MyMusicBoxView()
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: CustomScreenHeaderView(
+                  child: const MyTuneHeaderView(),
+                  height: 300,
+                ),
+              ),
+              SliverAppBar(
+                toolbarHeight: 50,
+                backgroundColor: red,
+                pinned: true,
+                flexibleSpace: getNavigationView(myTunezStr),
+              ),
+              SliverToBoxAdapter(
+                child: listView(si),
+              ),
             ],
-          );
+          ); //listView(si);
         },
       ),
+    );
+  }
+
+  ListView listView(SizingInformation si) {
+    return ListView(
+      shrinkWrap: true,
+      primary: true,
+      children: [
+        //getNavigationView(myTunezStr),
+        const SizedBox(height: 1),
+        playingTuneHeader(si),
+        SizedBox(height: si.isMobile ? 20 : 30),
+        PlayingTuneView(),
+        const SizedBox(height: 20),
+        myTuneHeader(si, activeTunezStr, howToPlaySelctedStr, () {
+          openAlertPopup(
+              message: myTunePopupMessageStr, textAlign: TextAlign.left);
+        }),
+        SizedBox(height: si.isMobile ? 20 : 30),
+        MyTuneView(),
+        const SizedBox(height: 20),
+        myTuneHeader(si, myMusicBoxStr, howToPlayMusicBixStr, () {
+          openAlertPopup(
+            message: myMusicBoxPopupMessageStr,
+          );
+        }),
+        SizedBox(height: si.isMobile ? 20 : 30),
+        MyMusicBoxView()
+      ],
     );
   }
 

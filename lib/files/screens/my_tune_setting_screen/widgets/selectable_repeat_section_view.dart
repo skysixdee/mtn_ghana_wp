@@ -64,10 +64,11 @@ class SelectableRepeatSectionView extends StatelessWidget {
               () {
                 RepeatDayModel info = con.repeatDaysF[index];
                 return GenericButton(
+                  padding: EdgeInsets.symmetric(horizontal: isSort ? 16 : 8),
                   bgColor:
                       con.repeatDaysF[index].isSelected.value ? yellow : white,
                   radius: 4,
-                  fontSize: isSort ? 12 : 11,
+                  fontSize: isSort ? 12 : 12,
                   title: isSort ? info.titleSort : info.titleFull,
                   onTap: () {
                     con.repeatDaysF[index].isSelected.value =
