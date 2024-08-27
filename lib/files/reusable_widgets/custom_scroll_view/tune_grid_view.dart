@@ -8,7 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 Widget tuneGridView({
   required int itemCount,
   EdgeInsetsGeometry? padding,
-  double? cardWidth,
+  double cardWidth = 180,
   Axis? scrollDirection,
   bool isLoading = false,
   ScrollPhysics? physics,
@@ -40,9 +40,9 @@ Widget tuneGridView({
 }
 
 SliverGridDelegate _sliver(SizingInformation si, BuildContext context,
-    double? cardWidth, double? childAspectRatio) {
+    double cardWidth, double? childAspectRatio) {
   return SliverGridDelegateWithMaxCrossAxisExtent(
-    maxCrossAxisExtent: (cardWidth ?? 200) + 40, //height,
+    maxCrossAxisExtent: (cardWidth) + 40, //height,
     childAspectRatio: childAspectRatio ?? 0.7,
     mainAxisSpacing: si.isMobile ? 10 : 20,
     crossAxisSpacing: si.isMobile ? 10 : 20,

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
 import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
@@ -7,14 +5,10 @@ import 'package:etisalat/files/model/popover_menu_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/align_grid_combine_view.dart';
+
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
 import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
-import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
+
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/utility/colors.dart';

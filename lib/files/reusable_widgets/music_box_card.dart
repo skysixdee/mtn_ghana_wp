@@ -66,12 +66,16 @@ class MusicBoxCard extends StatelessWidget {
                           title: previewStr,
                           leadingIcon: const Icon(Icons.visibility),
                         ),
-                        SizedBox(
-                          width: 100,
-                          child: rightButton ??
-                              buyButton(info,
-                                  isMusicBox: true,
-                                  padding: EdgeInsets.symmetric(horizontal: 8)),
+                        const SizedBox(width: 8),
+                        Flexible(
+                          child: SizedBox(
+                            width: 80,
+                            child: rightButton ??
+                                buyButton(info,
+                                    isMusicBox: true,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 0)),
+                          ),
                         )
                       ],
                     ),

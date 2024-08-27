@@ -29,8 +29,14 @@ class CombinedGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return itemCount < 8
-        ? alignedGrid(context, itemCount, cardWidth, physics, builder, onTap,
-            isLoading: isLoading, aspectRatio: aspectRatio)
+        ? alignedGrid(
+            itemCount: itemCount,
+            cardWidth: cardWidth,
+            physics: physics,
+            builder: builder,
+            onTap: onTap,
+            isLoading: isLoading,
+            aspectRatio: aspectRatio)
         : tuneGridView(
             itemCount: itemCount,
             padding: padding,

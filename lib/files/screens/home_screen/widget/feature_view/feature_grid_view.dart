@@ -1,16 +1,10 @@
-import 'package:etisalat/files/model/popover_menu_model.dart';
-import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/align_grid_combine_view.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter/widgets.dart';
 import 'package:etisalat/files/reusable_widgets/tune_card.dart';
-import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
+
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
 

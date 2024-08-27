@@ -1,14 +1,8 @@
 import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/align_grid_combine_view.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
+
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/generic_grid_view.dart';
-import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/screens/my_tune_screen/playing_tune_view/widgets/playing_tune_card.dart';
-import 'package:etisalat/files/utility/colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

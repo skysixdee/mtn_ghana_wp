@@ -11,8 +11,7 @@ class GenericScrollView extends StatelessWidget {
     super.key,
     required this.builder,
     required this.itemCount,
-    this.cardHeight = 240,
-    this.cardWidth = 200,
+    this.cardWidth = 180,
     this.onlyGrid = false,
     this.childAspectRatio,
     this.scrollDirection,
@@ -27,7 +26,7 @@ class GenericScrollView extends StatelessWidget {
     this.collapsedHeight = 51,
     this.isLoading = false,
   });
-  final double cardHeight;
+
   final double? sliverAppBarHeight;
   final Widget? sliverAppBar;
   final Widget? sliverToBoxAdapter;
@@ -84,7 +83,11 @@ class GenericScrollView extends StatelessWidget {
               horizontal: si.isMobile ? 8 : 25, vertical: si.isMobile ? 8 : 20),
       sliver: SliverToBoxAdapter(
           child: alignedGrid(
-              context, itemCount, cardWidth, physics, builder, onTap)),
+              itemCount: itemCount,
+              cardWidth: cardWidth,
+              physics: physics,
+              builder: builder,
+              onTap: onTap)),
     );
   }
 

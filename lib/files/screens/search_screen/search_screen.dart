@@ -111,7 +111,6 @@ class _SearchScreenState extends State<SearchScreen> {
             return TuneCard(
                 info: controller.tuneList[p0], tuneList: controller.tuneList);
           },
-          cardWidth: null,
         );
       },
     );
