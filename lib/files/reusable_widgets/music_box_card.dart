@@ -19,13 +19,18 @@ class MusicBoxCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.goNamed(musicBoxContentRoute,
-            queryParameters: {'type': info.type, 'code': info.toneId});
+        context.goNamed(musicBoxContentRoute, queryParameters: {
+          'type': info.type,
+          'code': info.toneId,
+          'toneName': info.toneName,
+          'toneId': info.toneId,
+          'imgUrl': info.toneIdpreviewImageUrl,
+        });
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: Container(
-          width: 220,
+          width: 240,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
@@ -61,7 +66,13 @@ class MusicBoxCard extends StatelessWidget {
                           title: previewStr,
                           leadingIcon: const Icon(Icons.visibility),
                         ),
-                        rightButton ?? buyButton(info, isMusicBox: true)
+                        SizedBox(
+                          width: 100,
+                          child: rightButton ??
+                              buyButton(info,
+                                  isMusicBox: true,
+                                  padding: EdgeInsets.symmetric(horizontal: 8)),
+                        )
                       ],
                     ),
                   ],

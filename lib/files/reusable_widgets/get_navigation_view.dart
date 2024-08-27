@@ -4,9 +4,12 @@ import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 
-Widget getNavigationView(String title) {
-  return NavigationHeaderView(titleList: [
-    NavigationHeaderModel(homeStr, homeRoute),
-    NavigationHeaderModel(title, title)
-  ]);
+Widget getNavigationView(String title, {Widget? rightButton}) {
+  return NavigationHeaderView(
+    titleList: [
+      NavigationHeaderModel(homeStr, homeRoute),
+      NavigationHeaderModel(title, title),
+    ],
+    rightButton: rightButton,
+  );
 }

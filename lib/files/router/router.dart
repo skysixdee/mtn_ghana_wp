@@ -207,8 +207,15 @@ StatefulShellBranch _musicBoxContentShell() {
         builder: (context, state) {
           String type = state.uri.queryParameters['type'] ?? '';
           String code = state.uri.queryParameters['code'] ?? '';
+          String toneName = state.uri.queryParameters['toneName'] ?? '';
+          String toneId = state.uri.queryParameters['toneId'] ?? '';
+          String imgUrl = state.uri.queryParameters['imgUrl'] ?? '';
           cont.getMusicBoxContent(type, code);
-          return MusicBoxContentScreen();
+          return MusicBoxContentScreen(
+            toneName: toneName,
+            toneid: toneId,
+            imgUrl: imgUrl,
+          );
         },
       ),
     ],
