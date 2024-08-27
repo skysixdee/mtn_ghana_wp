@@ -14,6 +14,7 @@ import 'package:etisalat/files/reusable_widgets/tune_card.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/utility/colors.dart';
 import 'package:etisalat/files/utility/constants.dart';
+import 'package:etisalat/files/utility/images.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,11 @@ class NameTuneScreen extends StatelessWidget {
           Expanded(child: Obx(
             () {
               return GenericScrollView(
-                sliverToBoxAdapter: CustomScreenHeaderView(),
+                sliverToBoxAdapter: CustomScreenHeaderView(
+                  imageName: nameTuneHeaderPng,
+                  title: nameTuneStr,
+                  subTitle: nameTuneSubtitleOvalStr,
+                ),
                 collapsedHeight: 131,
                 isLoading: con.isLoading.value,
                 sliverAppBar: Column(

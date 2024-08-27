@@ -14,6 +14,7 @@ import 'package:etisalat/files/screens/my_tune_screen/my_music_box_view/my_music
 import 'package:etisalat/files/screens/my_tune_screen/my_tune_view/my_tune_view.dart';
 import 'package:etisalat/files/screens/my_tune_screen/playing_tune_view/playing_tune_view.dart';
 import 'package:etisalat/files/utility/colors.dart';
+import 'package:etisalat/files/utility/images.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,9 +33,16 @@ class MyTuneScreen extends StatelessWidget {
           return CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: CustomScreenHeaderView(
-                  child: const MyTuneHeaderView(),
-                  height: 300,
+                child: Stack(
+                  children: [
+                    CustomScreenHeaderView(
+                      imageName: myTuneHeaderPng,
+                      title: setYourTuneStr,
+                      subTitle: customiseYourTuneStr,
+                      height: 300,
+                    ),
+                    // const MyTuneHeaderView(),
+                  ],
                 ),
               ),
               SliverAppBar(

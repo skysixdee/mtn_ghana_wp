@@ -2,6 +2,7 @@ import 'package:etisalat/files/reusable_widgets/custom_screen_header_view.dart';
 import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
 import 'package:etisalat/files/reusable_widgets/navigation_header_view.dart';
+import 'package:etisalat/files/utility/images.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,11 @@ class MyWishlistScreen extends StatelessWidget {
     return Obx(
       () {
         return GenericScrollView(
-          sliverToBoxAdapter: CustomScreenHeaderView(),
+          sliverToBoxAdapter: CustomScreenHeaderView(
+            imageName: nameTuneHeaderPng,
+            title: "title here",
+            subTitle: 'Sub title here',
+          ),
           sliverAppBar: getNavigationView(wishlistStr),
           isLoading: con.isLoading.value,
           itemCount: con.tuneList.length,

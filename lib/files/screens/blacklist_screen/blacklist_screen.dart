@@ -11,6 +11,7 @@ import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
 import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/utility/colors.dart';
+import 'package:etisalat/files/utility/images.dart';
 import 'package:etisalat/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,11 @@ class BlacklistScreen extends StatelessWidget {
                 return GenericScrollView(
                   isLoading: con.isLoading.value,
                   collapsedHeight: 150,
-                  sliverToBoxAdapter: CustomScreenHeaderView(),
+                  sliverToBoxAdapter: CustomScreenHeaderView(
+                    imageName: nameTuneHeaderPng,
+                    title: blackListStr,
+                    subTitle: createBlacklistStr,
+                  ),
                   sliverAppBar: Column(
                     children: [
                       headerView(context, si),

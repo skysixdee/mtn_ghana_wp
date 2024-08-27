@@ -132,6 +132,8 @@ String myAccountStr = "My Account";
 String seeMoreStr = "See More";
 String tuneChargeStr = "Tune Charge";
 String boxChargeStr = "Box Charge";
+String nameTuneSubtitleOvalStr =
+    "This could add a personalized touch to the calling experiance";
 String deleteBlackListConfirmMessageStr =
     "Are you sure you want to delete this blacklist?";
 String enterValidMsisdnStr = "Please enter valid msisdn.";
