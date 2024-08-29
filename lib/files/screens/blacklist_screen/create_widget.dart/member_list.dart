@@ -81,28 +81,37 @@ Widget listCard(CreateBlacklistModel info, CreateBlaclistController cCont,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
-                  title: info.name,
-                  fontSize: 16,
-                ),
-                CustomText(
-                  title: info.msisdn,
-                  fontSize: 16,
-                ),
-                GenericButton(
-                  bgColor: transparent,
-                  padding: EdgeInsets.zero,
-                  width: 40,
-                  height: 45,
-                  leadingIcon: Icon(
-                    Icons.close,
-                    size: 18,
+                Container(
+                  color: red,
+                  child: CustomText(
+                    title: info.name,
+                    fontSize: 16,
                   ),
-                  onTap: () {
-                    cCont.deleteMember(info);
-                  },
+                ),
+                Expanded(
+                  child: Container(
+                    color: yellow,
+                    child: Center(
+                      child: CustomText(
+                        textAlign: TextAlign.center,
+                        title: info.msisdn,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 180,
+                  child: GenericButton(
+                    padding: EdgeInsets.zero,
+                    width: 40,
+                    height: 45,
+                    leadingIcon: const Icon(Icons.close, size: 18),
+                    onTap: () {
+                      cCont.deleteMember(info);
+                    },
+                  ),
                 )
               ],
             ),

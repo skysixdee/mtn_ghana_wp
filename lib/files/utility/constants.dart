@@ -7,6 +7,10 @@ String baseUrl = '';
 String nameTuneCategoryId = '';
 String musicBoxPrice = '';
 String tuneChargePrice = '';
+String expressMoodMessage = '';
+String termsAndConditionUrl = '';
+String privacyPolicyUrl = '';
+
 //=========================
 const int channelId = 4;
 const String versionCode = '7.0';
