@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:etisalat/files/common/rsa_encryption.dart';
+import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
 import 'package:etisalat/files/model/password_validation_model.dart';
 import 'package:etisalat/files/network_manager/network_manager.dart';
 import 'package:etisalat/files/store_manager/store_manager.dart';
@@ -28,12 +29,15 @@ Future<PasswordValidationModel> passwordValidationApi(
   PasswordValidationModel passwordValidationModel =
       PasswordValidationModel.fromJson(jsonResp);
   if (passwordValidationModel.statusCode == 'SC0000') {
+    loginSuccessfulEvent(msisdn);
     ResponseMap? info = passwordValidationModel.responseMap;
     StoreManager.setAccessToken(info?.accessToken ?? '');
     StoreManager.setDeviceId(info?.deviceId ?? '');
     StoreManager.setRefreshToken(info?.refreshToken ?? '');
     StoreManager.setMsisdn(msisdn);
     StoreManager.setLoggedIn(true);
+    loginSuccessfulEvent(msisdn);
+    homePageHeFootPrintEvent(msisdn);
   }
   return passwordValidationModel;
 }

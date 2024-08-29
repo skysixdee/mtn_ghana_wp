@@ -1,5 +1,6 @@
 import 'package:etisalat/files/controllers/buy_tune_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/popup_views/buy_popup_view.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
@@ -13,6 +14,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 Widget buyButton(TuneInfo info,
     {EdgeInsetsGeometry? padding, bool isMusicBox = false}) {
   BuyTuneController bCont = Get.find();
+  buyClickEvent(info);
   return ResponsiveBuilder(
     builder: (context, si) {
       return Padding(

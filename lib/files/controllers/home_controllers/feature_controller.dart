@@ -1,5 +1,6 @@
 import 'package:etisalat/files/api_calls/get_app_setting.dart';
 import 'package:etisalat/files/api_calls/get_featured_list_api.dart';
+import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
 import 'package:etisalat/files/model/feature_tab_model.dart';
 import 'package:etisalat/files/model/fetured_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
@@ -65,7 +66,8 @@ class FeatureController extends GetxController {
       return;
     }
     isLoadingList[index] = true;
-
+    homePageCategoryBrowseEvent(
+        tabList[index].name, tabList[index].intValue, tabList[index].value);
     FeturedModel model = await getFeaturedListApi(tabList[index].value);
     List<TuneInfo> list = model.responseMap?.recommendationSongsList ?? [];
     displayList.value = list;

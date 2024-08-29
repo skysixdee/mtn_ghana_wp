@@ -9,7 +9,9 @@ import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
 import 'package:etisalat/files/controllers/name_tune_controller.dart';
 import 'package:etisalat/files/controllers/profile_controller.dart';
 import 'package:etisalat/files/controllers/tune_search_controller.dart';
+import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
 import 'package:etisalat/files/model/tune_info.dart';
+import 'package:etisalat/files/reusable_widgets/custom_text.dart';
 import 'package:etisalat/files/router/route_name.dart';
 import 'package:etisalat/files/screens/banner_detail_screen/banner_detail_screen.dart';
 import 'package:etisalat/files/screens/blacklist_screen/blacklist_screen.dart';
@@ -62,6 +64,7 @@ final router = GoRouter(
         _artistsTuneShell(),
         _blackListShell(),
         _createBlackListShell(),
+        _faqShell(),
         //_mobileTunePreviewShell(),
       ],
     ),
@@ -92,6 +95,7 @@ StatefulShellBranch _homeShell() {
         name: homeRoute,
         path: homeRoute,
         builder: (context, state) {
+          homePageBrowseEvent();
           return const HomeScreen();
         },
       ),
@@ -108,6 +112,7 @@ StatefulShellBranch _searchShell() {
         path: searchRoute,
         builder: (context, state) {
           String key1 = state.uri.queryParameters['search'] ?? '';
+          homePageSearchClickEvent(key1);
           return SearchScreen(searchKey: key1);
         },
       ),
@@ -125,6 +130,7 @@ StatefulShellBranch _bannerDetailShell() {
         builder: (context, state) {
           String type = state.uri.queryParameters['type'] ?? '';
           String searchKey = state.uri.queryParameters['searchKey'] ?? '';
+          homePageBannerClickEvent(searchKey);
           cont.getBannerDetail(type, searchKey);
           return BannerDetailScreen();
         },
@@ -233,6 +239,7 @@ StatefulShellBranch _categoryDetailShell() {
           String key = state.uri.queryParameters['key'] ?? '';
           String catId = state.uri.queryParameters['catId'] ?? '';
           cont.getCategoryDetailList(key, catId);
+          menuCategoryClickEvent(catId, key);
           return CategoryDetailScreen(
             name: key,
           );
@@ -294,6 +301,26 @@ StatefulShellBranch _artistsTuneShell() {
           String artistName = state.uri.queryParameters['artistName'] ?? '';
           cont.getArtistsTune(artistName);
           return ArtistsTuneScreen(artistName: artistName);
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _faqShell() {
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: faqRoute,
+        path: faqRoute,
+        builder: (context, state) {
+          menuFaqClickEvent();
+          return Container(
+            color: red,
+            child: CustomText(
+              title: "FAQ SCREEN",
+            ),
+          );
         },
       ),
     ],

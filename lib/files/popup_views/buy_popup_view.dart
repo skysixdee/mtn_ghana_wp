@@ -1,5 +1,6 @@
 import 'package:etisalat/files/controllers/buy_tune_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/popup_views/popup_tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
@@ -151,6 +152,12 @@ class _BuyPopupViewState extends State<BuyPopupView> {
       borderColor: grey,
       onTap: () {
         Navigator.of(context).pop();
+
+        if (StoreManager.isLoggedIn) {
+          loggedUserBuyWithdrawEvent(widget.info);
+        } else {
+          buyClickWithdrawEvent(widget.info);
+        }
       },
     );
   }
@@ -188,6 +195,11 @@ class _BuyPopupViewState extends State<BuyPopupView> {
               leadingIcon: const Icon(Icons.close),
               onTap: () {
                 Navigator.of(context).pop();
+                if (StoreManager.isLoggedIn) {
+                  loggedUserBuyWithdrawEvent(widget.info);
+                } else {
+                  buyClickWithdrawEvent(widget.info);
+                }
               },
             )
           ],

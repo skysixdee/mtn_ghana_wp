@@ -1,4 +1,5 @@
 import 'package:etisalat/files/common/custom_audio_player.dart';
+import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
@@ -26,6 +27,7 @@ class PlayerController extends GetxController {
       });
 
       await play();
+      tunePlayClickEvent(info);
     }
   }
 

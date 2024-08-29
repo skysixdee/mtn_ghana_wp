@@ -1,6 +1,7 @@
 import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
 import 'package:etisalat/files/controllers/auth_controller/otp_controller.dart';
 import 'package:etisalat/files/enums/fonts.dart';
+import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
 import 'package:etisalat/files/model/tune_info.dart';
 import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
@@ -213,6 +214,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
             ),
             onTap: () {
               Navigator.of(context).pop();
+              buyOTPWithdrawEvent(widget.info ?? TuneInfo());
             },
           )
         ],

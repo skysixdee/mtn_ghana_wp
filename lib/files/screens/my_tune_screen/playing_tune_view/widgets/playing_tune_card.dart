@@ -118,8 +118,12 @@ class PlayingTuneCard extends StatelessWidget {
           ),
           onTap: () {
             TuneInfo inf = TuneInfo(
-                toneIdStreamingUrl: info.toneIdStreamingUrl ?? "",
-                toneId: info.toneId);
+              toneIdStreamingUrl: info.toneIdStreamingUrl ?? "",
+              toneId: info.toneId,
+              artistName: info.albumName,
+              albumName: info.albumName,
+              categoryId: '',
+            );
             print("info.toneUrl ${inf.toneUrl}");
             print("info.toneIdStreamingUrl ${inf.toneIdStreamingUrl}");
             pCont.playUrl(inf);

@@ -1,6 +1,7 @@
 import 'package:etisalat/files/api_calls/authorization/generate_otp_api.dart';
 import 'package:etisalat/files/api_calls/authorization/subscriber_validation_api.dart';
 import 'package:etisalat/files/api_calls/set_tone_api.dart';
+import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
 import 'package:etisalat/files/model/generic_model.dart';
 import 'package:etisalat/files/model/subscriber_validation_model.dart';
 import 'package:etisalat/files/model/tune_info.dart';
@@ -58,6 +59,9 @@ class BuyTuneController extends GetxController {
           }
         },
       );
+      buySuccessfulEvent(
+          TuneInfo(toneId: info.toneId, toneName: info.toneName));
+      purchaseEvent(TuneInfo(toneId: info.toneId, toneName: info.toneName));
     } else {
       message.value = model.message ?? someThingWentWrongStr;
     }

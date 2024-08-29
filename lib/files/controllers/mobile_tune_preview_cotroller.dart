@@ -75,6 +75,7 @@ class MobileTunePreviewCotroller extends GetxController {
     tuneName.value = inf.toneName ?? '';
     artistName.value = inf.artistName ?? '';
     imageName.value = inf.toneIdpreviewImageUrl ?? inf.previewImageUrl ?? '';
+
     con.playUrl(currentTuneDetail.value);
   }
 
