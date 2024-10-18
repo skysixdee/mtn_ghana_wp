@@ -1,0 +1,325 @@
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
+import 'package:mtn_ghana_wp/files/enums/caller_type.dart';
+import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/country_code.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/music_box_card.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_setting_screen/widgets/buttons/from_time_button.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_setting_screen/widgets/buttons/to_time_button.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_setting_screen/widgets/buttons/when_play_button.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_setting_screen/widgets/selectable_repeat_section_view.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_setting_screen/widgets/whom_selection_view.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/main.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:go_router/go_router.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+class MyTuneSettingScreen extends StatefulWidget {
+  const MyTuneSettingScreen(
+      {super.key, required this.info, required this.packName});
+  final TuneInfo info;
+  final String packName;
+  @override
+  State<MyTuneSettingScreen> createState() => _MyTuneSettingScreenState();
+}
+
+class _MyTuneSettingScreenState extends State<MyTuneSettingScreen> {
+  late MyTuneSettingController con;
+  TextEditingController textEditingController = TextEditingController();
+  @override
+  void initState() {
+    con = Get.find();
+    textEditingController.text = con.msisdn;
+    con.packName = widget.packName;
+    print("initState MyTuneSettingController");
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    print("Disposed MyTuneSettingController");
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: white,
+        body: Obx(
+          () {
+            return AbsorbPointer(
+              absorbing: con.isLoading.value,
+              child: mainResponsiveBuilder(),
+            );
+          },
+        ));
+  }
+
+  Widget mainResponsiveBuilder() {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30),
+          child:
+              si.isMobile ? mobileMainContainer(si) : desktopMainContainer(si),
+        );
+      },
+    );
+  }
+
+  Widget desktopMainContainer(SizingInformation si) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: ListView(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              tuneImage(si),
+              const SizedBox(width: 30),
+              Flexible(child: SizedBox(width: 700, child: mainContaner(si)))
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget mobileMainContainer(SizingInformation si) {
+    return ListView(
+      children: [
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            tuneImage(si),
+          ],
+        ),
+        const SizedBox(height: 20),
+        mainContaner(si),
+      ],
+    );
+  }
+
+  Widget tuneImage(SizingInformation si) {
+    return SizedBox(
+      width: si.isMobile ? 150 : 200,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: si.isMobile ? 150 : 200,
+            width: 200,
+            child: customImage(
+                url: widget.info.toneIdpreviewImageUrl, cornerRadius: 4),
+          ),
+          const SizedBox(height: 4),
+          CustomText(
+            title: widget.info.toneName ?? '',
+            fontName: FontName.bold,
+          ),
+          CustomText(
+            title: widget.info.albumName ?? '',
+            color: myTuneScreenBgColor,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget mainContaner(SizingInformation si) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: lightGrey,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    whomSelectionView(con),
+                    textFieldWidget(),
+                  ],
+                ),
+              ),
+              Container(
+                color: myTuneScreenBgColor,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      CustomText(
+                        title: whenYouWantToPlayItStr,
+                        fontName: FontName.bold,
+                        fontSize: 14,
+                      ),
+                      const SizedBox(height: 8),
+                      whenPlaySection(si),
+                      const SizedBox(height: 20),
+                      repeatContainerView(),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        Obx(
+          () {
+            return con.isLoading.value ? loadingIndicator() : bottomButtons();
+          },
+        ),
+        const SizedBox(height: 30),
+      ],
+    );
+  }
+
+  Widget textFieldWidget() {
+    return Obx(
+      () {
+        return Visibility(
+          visible: con.callerType.value == CallerType.dedicated,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              CustomText(title: enterFriendMobileNumberStr),
+              CustomTextfield(
+                isNumericTextField: true,
+                maxLength: msisdnLength,
+                onChange: (p0) {
+                  con.msisdn = p0;
+                },
+                onSubmit: (p0) {
+                  con.msisdn = p0;
+                },
+                width: 300,
+                radius: 4,
+                hintColor: grey,
+                hintText: enterFriendMobileNumberStr,
+                controller: textEditingController,
+                trailingChild: const SizedBox(),
+                leadingChild: countryCode(),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget repeatContainerView() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Row(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomText(
+                title: repeatStr,
+                fontSize: 12,
+              ),
+              const SizedBox(height: 4),
+              SelectableRepeatSectionView()
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget bottomButtons() {
+    return Row(
+      children: [
+        GenericButton(
+          width: 150,
+          height: 40,
+          radius: 4,
+          bgColor: yellow,
+          title: confirmStr,
+          onTap: () {
+            con.onConfirmButtonTap(widget.info);
+            con.onSuccess = () {
+              //Navigator.of(context).pop();
+              context.goNamed(myTunesRoute);
+            };
+          },
+        ),
+        const SizedBox(width: 16),
+        GenericButton(
+          height: 40,
+          width: 150,
+          radius: 4,
+          bgColor: white,
+          title: cancelStr,
+          borderColor: myTuneScreenBgColor,
+          onTap: () {
+            context.goNamed(myTunesRoute, extra: false);
+          },
+        )
+      ],
+    );
+  }
+
+  Widget whenPlaySection(SizingInformation si) {
+    return MediaQuery.of(context).size.width < 1000
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(width: 220, child: WhenPlayButton()),
+              const SizedBox(height: 10),
+              timeButtons(),
+            ],
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [WhenPlayButton(), timeButtons()],
+          );
+  }
+
+  Row timeButtons() {
+    return Row(
+      children: [
+        fromTimeButton(con),
+        const SizedBox(width: 10),
+        toTimeButton(con),
+      ],
+    );
+  }
+}

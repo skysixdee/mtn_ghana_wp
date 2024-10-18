@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WD3DPF7J');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) VVVVVVVV remove from bottom to Google tag manager-->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JQHZHTNKVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JQHZHTNKVZ',);
+</script>
+
+
+
+<!-- Google tag (gtag.js) ^^^^^^^^^^ Remove Above Google tag manager -->
+
   <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
@@ -14,6 +37,74 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
+    <!-- loading indicator ==========VVVVVVVVVVV============= -->
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>mtn_ghana_wp</title>
+  <!-- <script defer src="index.dart.js" type="application/javascript"></script> -->
+
+  <style>
+
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 1.1em solid rgba(255, 255, 0, 0.208);
+      border-right: 1.1em solid rgba(255, 255, 0, 0.508);
+      border-bottom: 1.1em solid rgba(255, 255, 0, 0.708);
+      border-left: 1.1em solid #ffe100;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+    
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loading">
+    <div class="loader"></div>
+  </div>
+
+  <!-- <script src="main.dart.js" type="application/javascript"></script> -->
+</body>
+
+</html>
+
+
+
+<!-- loading indicator above =========^^^^^^========== -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
