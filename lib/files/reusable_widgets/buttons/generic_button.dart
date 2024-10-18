@@ -1,7 +1,7 @@
-import 'package:etisalat/files/common/custom_audio_player.dart';
-import 'package:etisalat/files/enums/fonts.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
+import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 
 class GenericButton extends StatelessWidget {

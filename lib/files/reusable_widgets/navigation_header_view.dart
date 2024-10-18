@@ -1,7 +1,7 @@
-import 'package:etisalat/files/model/navigation_header_model.dart';
-import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
-import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
-import 'package:etisalat/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/model/navigation_header_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/music_box_card.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';

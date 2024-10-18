@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/reusable_widgets/tune_card.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/tune_card.dart';
 
 CategoryDetailModel categoryDetailModelFromJson(String str) =>
     CategoryDetailModel.fromJson(json.decode(str));

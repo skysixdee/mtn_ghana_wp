@@ -1,41 +1,41 @@
 import 'dart:convert';
 
-import 'package:etisalat/files/api_calls/authorization/auto_login_api.dart';
-import 'package:etisalat/files/api_calls/create_blaclist_controller.dart';
-import 'package:etisalat/files/common/aes_enc_dec.dart';
-import 'package:etisalat/files/controllers/app_controller.dart';
-import 'package:etisalat/files/controllers/artists_tune_controller.dart';
-import 'package:etisalat/files/controllers/banner_controller.dart';
-import 'package:etisalat/files/controllers/banner_detail_controller.dart';
-import 'package:etisalat/files/controllers/blacklist_controller.dart';
-import 'package:etisalat/files/controllers/buy_tune_controller.dart';
-import 'package:etisalat/files/controllers/category_detail_controller.dart';
-import 'package:etisalat/files/controllers/custom_drawer_controller.dart';
-import 'package:etisalat/files/controllers/gift_controller.dart';
-import 'package:etisalat/files/controllers/home_controllers/feature_controller.dart';
-import 'package:etisalat/files/controllers/music_box_controller.dart';
-import 'package:etisalat/files/controllers/my_tune_controllers/my_music_box_controller.dart';
-import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
-import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
-import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
-import 'package:etisalat/files/controllers/my_tune_controllers/tune_controller.dart';
-import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
-import 'package:etisalat/files/controllers/name_tune_controller.dart';
-import 'package:etisalat/files/controllers/player_controller.dart';
-import 'package:etisalat/files/controllers/profile_controller.dart';
-import 'package:etisalat/files/controllers/tune_search_controller.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/router/router.dart';
-import 'package:etisalat/files/screens/category_detail_screen/category_detail_screen.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/api_calls/authorization/auto_login_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/create_blaclist_controller.dart';
+import 'package:mtn_ghana_wp/files/common/aes_enc_dec.dart';
+import 'package:mtn_ghana_wp/files/controllers/app_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/artists_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/banner_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/banner_detail_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/blacklist_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/buy_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/category_detail_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/custom_drawer_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/gift_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/home_controllers/feature_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/music_box_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_music_box_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/router/router.dart';
+import 'package:mtn_ghana_wp/files/screens/category_detail_screen/category_detail_screen.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import 'package:etisalat/files/controllers/auth_controller/otp_controller.dart';
-import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/auth_controller/otp_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -124,7 +124,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Etisalat',
+      title: 'mtn_ghana_wp',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 222, 205, 18)),

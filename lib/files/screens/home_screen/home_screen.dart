@@ -1,12 +1,12 @@
-import 'package:etisalat/files/reusable_widgets/web_footer_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/web_footer_view.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:etisalat/files/utility/colors.dart';
-import 'package:etisalat/files/controllers/music_box_controller.dart';
-import 'package:etisalat/files/screens/home_screen/widget/music_box_view.dart';
-import 'package:etisalat/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
-import 'package:etisalat/files/screens/home_screen/widget/feature_view/feature_category_view.dart';
-import 'package:etisalat/files/screens/home_screen/widget/express_info_view/express_info_view.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/controllers/music_box_controller.dart';
+import 'package:mtn_ghana_wp/files/screens/home_screen/widget/music_box_view.dart';
+import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
+import 'package:mtn_ghana_wp/files/screens/home_screen/widget/feature_view/feature_category_view.dart';
+import 'package:mtn_ghana_wp/files/screens/home_screen/widget/express_info_view/express_info_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

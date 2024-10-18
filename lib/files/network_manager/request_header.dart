@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
 
 Future<HttpClientRequest> requestHeader(
     String url, HttpClientRequest request) async {

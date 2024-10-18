@@ -1,14 +1,14 @@
-import 'package:etisalat/files/api_calls/delete_from_wishlist_api.dart';
-import 'package:etisalat/files/api_calls/delete_mytune_api.dart';
-import 'package:etisalat/files/api_calls/get_pack_detail_api.dart';
-import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
-import 'package:etisalat/files/controllers/my_wishlist_controller.dart';
-import 'package:etisalat/files/controllers/player_controller.dart';
-import 'package:etisalat/files/model/generic_model.dart';
-import 'package:etisalat/files/model/my_music_box_model.dart';
-import 'package:etisalat/files/model/pack_detail_model.dart';
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
+import 'package:mtn_ghana_wp/files/api_calls/delete_from_wishlist_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/delete_mytune_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/model/my_music_box_model.dart';
+import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:get/get.dart';
 
 class MobileTunePreviewCotroller extends GetxController {

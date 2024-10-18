@@ -1,19 +1,19 @@
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:etisalat/files/enums/fonts.dart';
-import 'package:etisalat/files/utility/colors.dart';
-import 'package:etisalat/files/utility/strings.dart';
-import 'package:etisalat/files/router/route_name.dart';
-import 'package:etisalat/files/common/number_pagination.dart';
-import 'package:etisalat/files/reusable_widgets/tune_card.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
-import 'package:etisalat/files/controllers/tune_search_controller.dart';
-import 'package:etisalat/files/reusable_widgets/get_navigation_view.dart';
-import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
+import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/files/common/number_pagination.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/tune_card.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
+import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 
 class SearchScreen extends StatefulWidget {
   SearchScreen({super.key, required this.searchKey});

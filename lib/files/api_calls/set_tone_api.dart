@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:etisalat/files/api_calls/get_pack_detail_api.dart';
-import 'package:etisalat/files/model/generic_model.dart';
-import 'package:etisalat/files/model/pack_detail_model.dart';
-import 'package:etisalat/files/network_manager/network_manager.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/get_transaction_id.dart';
-import 'package:etisalat/files/utility/urls.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
+import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<GenericModel> setToneApi(String toneId, String toneName) async {
   String packName = await _getPackName();

@@ -1,9 +1,9 @@
-import 'package:etisalat/files/api_calls/get_music_box_api.dart';
-import 'package:etisalat/files/api_calls/get_music_box_content_api.dart';
-import 'package:etisalat/files/model/music_box_content_model.dart';
-import 'package:etisalat/files/model/music_box_model.dart';
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_music_box_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_music_box_content_api.dart';
+import 'package:mtn_ghana_wp/files/model/music_box_content_model.dart';
+import 'package:mtn_ghana_wp/files/model/music_box_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:get/get.dart';
 
 class MusicBoxController extends GetxController {

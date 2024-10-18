@@ -1,14 +1,14 @@
-import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 
-import 'package:etisalat/files/reusable_widgets/music_box_card.dart';
-import 'package:etisalat/files/utility/colors.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/music_box_card.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:etisalat/files/controllers/my_tune_controllers/my_music_box_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_music_box_controller.dart';
 
 class MyMusicBoxView extends StatelessWidget {
   MyMusicBoxView({super.key});

@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:etisalat/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 
 BannerDetailModel bannerDetailModelFromJson(String str) =>
     BannerDetailModel.fromJson(json.decode(str));

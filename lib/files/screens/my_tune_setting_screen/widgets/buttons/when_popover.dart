@@ -1,8 +1,8 @@
-import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_controller.dart';
-import 'package:etisalat/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
-import 'package:etisalat/files/model/popover_menu_model.dart';
-import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
+import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 
 whenPopover(

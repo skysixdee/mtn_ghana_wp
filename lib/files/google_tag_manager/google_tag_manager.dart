@@ -1,5 +1,5 @@
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:google_tag_manager/google_tag_manager.dart' as gtm;
 
 loggedUserBuyWithdrawEvent(TuneInfo info) {

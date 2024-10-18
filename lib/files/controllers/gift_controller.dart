@@ -1,9 +1,9 @@
-import 'package:etisalat/files/api_calls/send_gift_api.dart';
-import 'package:etisalat/files/model/generic_model.dart';
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/api_calls/send_gift_api.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 
 class GiftController extends GetxController {

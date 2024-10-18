@@ -1,6 +1,6 @@
-import 'package:etisalat/files/api_calls/get_search_tune_list_api.dart';
-import 'package:etisalat/files/model/search_result_model.dart';
-import 'package:etisalat/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_search_tune_list_api.dart';
+import 'package:mtn_ghana_wp/files/model/search_result_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:get/get.dart';
 
 class TuneSearchController extends GetxController {

@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:etisalat/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 
 NameTuneModel nameTuneModelFromJson(String str) =>
     NameTuneModel.fromJson(json.decode(str));

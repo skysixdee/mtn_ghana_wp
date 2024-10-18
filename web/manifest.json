@@ -1,6 +1,6 @@
 {
-    "name": "etisalat",
-    "short_name": "etisalat",
+    "name": "mtn_ghana_wp",
+    "short_name": "mtn_ghana_wp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

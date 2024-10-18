@@ -1,15 +1,15 @@
-import 'package:etisalat/files/api_calls/dedicated_tune_delete_api.dart';
-import 'package:etisalat/files/api_calls/delete_from_shuffle_api.dart';
-import 'package:etisalat/files/api_calls/get_playing_tune_api.dart';
-import 'package:etisalat/files/api_calls/shuffle_enable_disable_api.dart';
-import 'package:etisalat/files/enums/playing_card_type.dart';
-import 'package:etisalat/files/model/generic_model.dart';
-import 'package:etisalat/files/model/my_playing_tunes_model.dart';
-import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/utility/strings.dart';
-import 'package:etisalat/files/utility/urls.dart';
+import 'package:mtn_ghana_wp/files/api_calls/dedicated_tune_delete_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/delete_from_shuffle_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_playing_tune_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/shuffle_enable_disable_api.dart';
+import 'package:mtn_ghana_wp/files/enums/playing_card_type.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/model/my_playing_tunes_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 

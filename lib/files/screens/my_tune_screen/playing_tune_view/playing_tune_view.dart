@@ -1,7 +1,7 @@
-import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
 
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
-import 'package:etisalat/files/screens/my_tune_screen/playing_tune_view/widgets/playing_tune_card.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/widgets/playing_tune_card.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

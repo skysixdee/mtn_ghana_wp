@@ -1,19 +1,19 @@
-import 'package:etisalat/files/api_calls/get_pack_detail_api.dart';
-import 'package:etisalat/files/api_calls/tune_setting_api/tune_setting_dedicated_api.dart';
-import 'package:etisalat/files/api_calls/tune_setting_api/tune_setting_fullday_api.dart';
-import 'package:etisalat/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
-import 'package:etisalat/files/model/pack_detail_model.dart';
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/model/tune_setting_model.dart';
-import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/tune_setting_api/tune_setting_dedicated_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/tune_setting_api/tune_setting_fullday_api.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/model/tune_setting_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:get/get.dart';
-import 'package:etisalat/files/enums/time_type.dart';
-import 'package:etisalat/files/utility/strings.dart';
-import 'package:etisalat/files/enums/caller_type.dart';
-import 'package:etisalat/files/model/repeat_day_model.dart';
-import 'package:etisalat/files/model/repeat_monthly_model.dart';
-import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
-import 'package:etisalat/files/reusable_widgets/time_date_picker.dart';
+import 'package:mtn_ghana_wp/files/enums/time_type.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/enums/caller_type.dart';
+import 'package:mtn_ghana_wp/files/model/repeat_day_model.dart';
+import 'package:mtn_ghana_wp/files/model/repeat_monthly_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/time_date_picker.dart';
 
 class MyTuneSettingController extends GetxController {
   List<RepeatDayModel> repeatDaysF = [

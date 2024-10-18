@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:universal_io/io.dart';
-import 'package:etisalat/files/utility/strings.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/model/regenerate_model.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/api_calls/regenerate_token_api.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/network_manager/request_header.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/model/regenerate_model.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/api_calls/regenerate_token_api.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/network_manager/request_header.dart';
 
 class NetworkManager {
   final client = HttpClient();

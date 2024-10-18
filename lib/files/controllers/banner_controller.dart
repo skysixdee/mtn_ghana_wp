@@ -1,5 +1,5 @@
-import 'package:etisalat/files/api_calls/get_banner_api.dart';
-import 'package:etisalat/files/model/banner_model.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_banner_api.dart';
+import 'package:mtn_ghana_wp/files/model/banner_model.dart';
 import 'package:get/get.dart';
 
 class BannerController extends GetxController {

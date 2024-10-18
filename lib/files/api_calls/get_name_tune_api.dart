@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:etisalat/files/model/name_tune_model.dart';
-import 'package:etisalat/files/network_manager/network_manager.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/urls.dart';
+import 'package:mtn_ghana_wp/files/model/name_tune_model.dart';
+import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<NameTuneModel> getNameTuneApi({int pageNo = 0}) async {
   String url =

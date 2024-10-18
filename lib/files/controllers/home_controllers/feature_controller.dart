@@ -1,13 +1,13 @@
-import 'package:etisalat/files/api_calls/get_app_setting.dart';
-import 'package:etisalat/files/api_calls/get_featured_list_api.dart';
-import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
-import 'package:etisalat/files/model/feature_tab_model.dart';
-import 'package:etisalat/files/model/fetured_model.dart';
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/network_manager/network_manager.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/urls.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_app_setting.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_featured_list_api.dart';
+import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
+import 'package:mtn_ghana_wp/files/model/feature_tab_model.dart';
+import 'package:mtn_ghana_wp/files/model/fetured_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 import 'package:get/get.dart';
 
 class FeatureController extends GetxController {

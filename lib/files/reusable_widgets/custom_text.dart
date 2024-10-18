@@ -1,5 +1,5 @@
-import 'package:etisalat/files/enums/fonts.dart';
-import 'package:etisalat/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 

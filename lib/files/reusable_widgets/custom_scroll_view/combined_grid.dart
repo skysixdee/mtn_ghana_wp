@@ -1,5 +1,5 @@
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:flutter/material.dart';
 
 class CombinedGrid extends StatelessWidget {

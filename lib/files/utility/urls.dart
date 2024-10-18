@@ -1,5 +1,5 @@
 //$baseUrl
-import 'package:etisalat/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
 
 String settingUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/settings';
 String featuredUrl =

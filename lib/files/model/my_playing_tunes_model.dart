@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:etisalat/files/enums/playing_card_type.dart';
+import 'package:mtn_ghana_wp/files/enums/playing_card_type.dart';
 
 MyPlayingTunesModel myPlayingTunesModelFromJson(String str) =>
     MyPlayingTunesModel.fromJson(json.decode(str));

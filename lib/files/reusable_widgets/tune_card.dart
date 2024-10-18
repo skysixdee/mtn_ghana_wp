@@ -1,24 +1,24 @@
-import 'package:etisalat/files/api_calls/add_to_wishlist_api.dart';
-import 'package:etisalat/files/enums/fonts.dart';
-import 'package:etisalat/files/enums/custpm_screen_type.dart';
-import 'package:etisalat/files/model/popover_menu_model.dart';
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/popup_views/gift_popup_view.dart';
-import 'package:etisalat/files/popup_views/social_sharing_popup.dart';
-import 'package:etisalat/files/reusable_widgets/buttons/buy_button.dart';
-import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
-import 'package:etisalat/files/reusable_widgets/buttons/play_button.dart';
-import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/reusable_widgets/custom_image.dart';
+import 'package:mtn_ghana_wp/files/api_calls/add_to_wishlist_api.dart';
+import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/enums/custpm_screen_type.dart';
+import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/popup_views/gift_popup_view.dart';
+import 'package:mtn_ghana_wp/files/popup_views/social_sharing_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/play_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/generic_popover.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
 
-import 'package:etisalat/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/colors.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 import 'package:flutter/material.dart';
 

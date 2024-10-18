@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:etisalat/files/utility/colors.dart';
-import 'package:etisalat/files/model/my_playing_tunes_model.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/model/my_playing_tunes_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 Widget dayRepeatView(ToneDetail info, SizingInformation si) {

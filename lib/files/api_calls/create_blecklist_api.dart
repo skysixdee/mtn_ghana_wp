@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:etisalat/files/model/create_blcklist_model.dart';
-import 'package:etisalat/files/model/generic_model.dart';
-import 'package:etisalat/files/network_manager/network_manager.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/get_transaction_id.dart';
-import 'package:etisalat/files/utility/urls.dart';
+import 'package:mtn_ghana_wp/files/model/create_blcklist_model.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<GenericModel> createBlackListApi(List<CreateBlacklistModel> list) async {
   List<Map<String, dynamic>> memberDetailList = [];

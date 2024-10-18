@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:etisalat/files/model/wishlist_model.dart';
-import 'package:etisalat/files/network_manager/network_manager.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/urls.dart';
+import 'package:mtn_ghana_wp/files/model/wishlist_model.dart';
+import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 import 'package:flutter/material.dart';
 
 Future<WishlistModel> getWishlistApi() async {

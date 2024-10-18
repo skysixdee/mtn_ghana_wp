@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:etisalat/files/model/app_setting_model.dart';
+import 'package:mtn_ghana_wp/files/model/app_setting_model.dart';
 
 PasswordValidationModel passwordValidationModelFromJson(String str) =>
     PasswordValidationModel.fromJson(json.decode(str));

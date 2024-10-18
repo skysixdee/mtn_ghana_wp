@@ -1,6 +1,6 @@
-import 'package:etisalat/files/model/drawer_model.dart';
-import 'package:etisalat/files/router/route_name.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/model/drawer_model.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 
 class CustomDrawerController extends GetxController {

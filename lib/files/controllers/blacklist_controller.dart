@@ -1,12 +1,12 @@
 import 'dart:ui';
 
-import 'package:etisalat/files/api_calls/delete_blacklist_api.dart';
-import 'package:etisalat/files/api_calls/get_blacklist_api.dart';
-import 'package:etisalat/files/model/blackList_model.dart';
-import 'package:etisalat/files/model/generic_model.dart';
-import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/api_calls/delete_blacklist_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_blacklist_api.dart';
+import 'package:mtn_ghana_wp/files/model/blackList_model.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 
 class BlacklistController extends GetxController {

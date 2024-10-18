@@ -1,8 +1,8 @@
-import 'package:etisalat/files/enums/playing_card_type.dart';
-import 'package:etisalat/files/model/my_playing_tunes_model.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/utility/colors.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/enums/playing_card_type.dart';
+import 'package:mtn_ghana_wp/files/model/my_playing_tunes_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 

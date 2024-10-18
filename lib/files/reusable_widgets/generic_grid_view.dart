@@ -1,8 +1,8 @@
 /*
 
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
-import 'package:etisalat/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
-import 'package:etisalat/files/reusable_widgets/empty_list_widget.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/empty_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 

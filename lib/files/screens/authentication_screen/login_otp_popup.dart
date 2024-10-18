@@ -1,17 +1,17 @@
-import 'package:etisalat/files/controllers/auth_controller/login_controller.dart';
-import 'package:etisalat/files/controllers/auth_controller/otp_controller.dart';
-import 'package:etisalat/files/enums/fonts.dart';
-import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/reusable_widgets/buttons/generic_button.dart';
-import 'package:etisalat/files/reusable_widgets/custom_textfield.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/reusable_widgets/custom_text.dart';
-import 'package:etisalat/files/reusable_widgets/loading_indicator.dart';
+import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/auth_controller/otp_controller.dart';
+import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 
-import 'package:etisalat/files/utility/colors.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

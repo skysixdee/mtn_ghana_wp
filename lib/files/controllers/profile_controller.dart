@@ -1,12 +1,12 @@
-import 'package:etisalat/files/api_calls/edit_profile_api.dart';
-import 'package:etisalat/files/api_calls/get_pack_detail_api.dart';
-import 'package:etisalat/files/api_calls/get_profile_detail_api.dart';
-import 'package:etisalat/files/model/edit_profile_model.dart';
-import 'package:etisalat/files/model/pack_detail_model.dart';
-import 'package:etisalat/files/model/profile_detail_model.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/api_calls/edit_profile_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_profile_detail_api.dart';
+import 'package:mtn_ghana_wp/files/model/edit_profile_model.dart';
+import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
+import 'package:mtn_ghana_wp/files/model/profile_detail_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {

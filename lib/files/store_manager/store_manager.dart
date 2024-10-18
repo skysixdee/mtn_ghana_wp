@@ -1,7 +1,7 @@
-import 'package:etisalat/files/model/app_setting_model.dart';
-import 'package:etisalat/files/model/category_model.dart';
-import 'package:etisalat/files/router/route_name.dart';
-import 'package:etisalat/main.dart';
+import 'package:mtn_ghana_wp/files/model/app_setting_model.dart';
+import 'package:mtn_ghana_wp/files/model/category_model.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/main.dart';
 import 'package:go_router/go_router.dart';
 
 const String _accessToken = 'access_token';

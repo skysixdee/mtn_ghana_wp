@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:etisalat/files/model/subscriber_validation_model.dart';
-import 'package:etisalat/files/network_manager/network_manager.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/get_transaction_id.dart';
-import 'package:etisalat/files/utility/urls.dart';
+import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
+import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<SubscriberValidationModel> susbcriberValidationApi(String msisdn) async {
   Map<String, dynamic> jsonData = {

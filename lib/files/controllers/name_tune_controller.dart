@@ -1,12 +1,12 @@
-import 'package:etisalat/files/api_calls/get_name_tune_api.dart';
-import 'package:etisalat/files/api_calls/search_nametune_api.dart';
-import 'package:etisalat/files/model/artist_tune_list_model.dart';
-import 'package:etisalat/files/model/name_tune_model.dart';
-import 'package:etisalat/files/model/search_result_model.dart';
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/reusable_widgets/snack_bar.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_name_tune_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/search_nametune_api.dart';
+import 'package:mtn_ghana_wp/files/model/artist_tune_list_model.dart';
+import 'package:mtn_ghana_wp/files/model/name_tune_model.dart';
+import 'package:mtn_ghana_wp/files/model/search_result_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 
 class NameTuneController extends GetxController {

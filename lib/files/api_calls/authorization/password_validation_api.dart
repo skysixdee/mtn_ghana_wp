@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:etisalat/files/common/rsa_encryption.dart';
-import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
-import 'package:etisalat/files/model/password_validation_model.dart';
-import 'package:etisalat/files/network_manager/network_manager.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/get_transaction_id.dart';
-import 'package:etisalat/files/utility/urls.dart';
+import 'package:mtn_ghana_wp/files/common/rsa_encryption.dart';
+import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
+import 'package:mtn_ghana_wp/files/model/password_validation_model.dart';
+import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<PasswordValidationModel> passwordValidationApi(
     String msisdn, String securityCounter) async {

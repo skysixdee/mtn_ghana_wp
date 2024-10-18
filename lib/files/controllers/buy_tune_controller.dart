@@ -1,14 +1,14 @@
-import 'package:etisalat/files/api_calls/authorization/generate_otp_api.dart';
-import 'package:etisalat/files/api_calls/authorization/subscriber_validation_api.dart';
-import 'package:etisalat/files/api_calls/set_tone_api.dart';
-import 'package:etisalat/files/google_tag_manager/google_tag_manager.dart';
-import 'package:etisalat/files/model/generic_model.dart';
-import 'package:etisalat/files/model/subscriber_validation_model.dart';
-import 'package:etisalat/files/model/tune_info.dart';
-import 'package:etisalat/files/reusable_widgets/custom_alert_popup.dart';
-import 'package:etisalat/files/store_manager/store_manager.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/api_calls/authorization/generate_otp_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/authorization/subscriber_validation_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
+import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 
 class BuyTuneController extends GetxController {

@@ -1,9 +1,9 @@
-import 'package:etisalat/files/api_calls/authorization/generate_otp_api.dart';
-import 'package:etisalat/files/api_calls/authorization/subscriber_validation_api.dart';
-import 'package:etisalat/files/model/subscriber_validation_model.dart';
-import 'package:etisalat/files/reusable_widgets/print_custom.dart';
-import 'package:etisalat/files/utility/constants.dart';
-import 'package:etisalat/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/api_calls/authorization/generate_otp_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/authorization/subscriber_validation_api.dart';
+import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
