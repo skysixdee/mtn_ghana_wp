@@ -1,4 +1,4 @@
-package com.example.etisalat
+package com.example.mtn_ghana_wp
 
 import io.flutter.embedding.android.FlutterActivity
 

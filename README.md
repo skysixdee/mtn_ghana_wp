@@ -1,4 +1,4 @@
-# etisalat
+# mtn_ghana_wp
 
 A new Flutter project.
 
