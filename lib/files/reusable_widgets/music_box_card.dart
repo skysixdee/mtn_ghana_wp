@@ -43,7 +43,7 @@ class MusicBoxCard extends StatelessWidget {
             children: [
               Expanded(
                   child: Container(
-                      color: yellow,
+                      color: lightGrey,
                       child: customImage(
                           url: info.toneIdpreviewImageUrl,
                           toneName: info.previewImageUrl ?? ''))),
