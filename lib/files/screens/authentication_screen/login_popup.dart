@@ -148,7 +148,7 @@ class _LoginPopupState extends State<LoginPopup> {
           hintText: enterMobileNumberStr,
           isNumericTextField: true,
           maxLength: msisdnLength,
-          leadingChild: countryCode(),
+          leadingChild: countryCodeWidget(),
           onChange: (p0) {
             cont.onChangeMsidn(p0);
           },

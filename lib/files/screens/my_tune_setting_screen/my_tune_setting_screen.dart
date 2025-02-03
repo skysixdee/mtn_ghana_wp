@@ -230,7 +230,7 @@ class _MyTuneSettingScreenState extends State<MyTuneSettingScreen> {
                 hintText: enterFriendMobileNumberStr,
                 controller: textEditingController,
                 trailingChild: const SizedBox(),
-                leadingChild: countryCode(),
+                leadingChild: countryCodeWidget(),
               ),
             ],
           ),

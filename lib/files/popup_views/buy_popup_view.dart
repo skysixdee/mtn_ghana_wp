@@ -112,7 +112,7 @@ class _BuyPopupViewState extends State<BuyPopupView> {
             return CustomTextfield(
               enabled: !con.isLoading.value,
               controller: textEditingController,
-              leadingChild: countryCode(),
+              leadingChild: countryCodeWidget(),
               isNumericTextField: true,
               maxLength: msisdnLength,
               onChange: (p0) {

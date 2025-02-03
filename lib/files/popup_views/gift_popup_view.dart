@@ -107,7 +107,7 @@ class _GiftPopupViewState extends State<GiftPopupView> {
               enabled: !con.isLoading.value,
               hintText: enterFriendMobileNumberStr,
               controller: textEditingController,
-              leadingChild: countryCode(),
+              leadingChild: countryCodeWidget(),
               maxLength: msisdnLength,
               isNumericTextField: true,
               onChange: (p0) {

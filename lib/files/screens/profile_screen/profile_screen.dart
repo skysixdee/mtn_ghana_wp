@@ -230,7 +230,7 @@ class ProfileScreen extends StatelessWidget {
                       controller: editingController,
                       trailingChild: const SizedBox(),
                       enabled: false,
-                      leadingChild: countryCode(),
+                      leadingChild: countryCodeWidget(),
                     ),
                   ],
                 ))),
