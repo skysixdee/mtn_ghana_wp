@@ -1,6 +1,7 @@
 {
-    "BASE_URL": "https://callertunez.mtn.co.za",
+    "BASE_URL": "https://callertunezDN.mtn.com.gh",
     "NAME_TUNE_CAT_ID":"115",
+    "COUNTRY_CODE":"+91 - ",
     "TUNE_CHARGE":"R5/Month with 1st day FREE",
     "BOX_CHARGE":"R5/Week with 1st day FREE",
     "TERMS_AND_CONDITION_URL":"https://callertunez.mtn.co.za/home/terms-and-conditions/content/mtn-play-callertunez",

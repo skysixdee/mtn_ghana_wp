@@ -10,7 +10,7 @@ String tuneChargePrice = '';
 String expressMoodMessage = '';
 String termsAndConditionUrl = '';
 String privacyPolicyUrl = '';
-
+String countryCode = '';
 //=========================
 const int channelId = 4;
 const String versionCode = '7.0';

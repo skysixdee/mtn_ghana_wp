@@ -75,10 +75,9 @@ Future<void> readProperties() async {
   musicBoxPrice = data['BOX_CHARGE'];
   tuneChargePrice = data['TUNE_CHARGE'];
   expressMoodMessage = data['EXPRESS_MOOD_MESSAGE'];
-
   termsAndConditionUrl = data['TERMS_AND_CONDITION_URL'];
   privacyPolicyUrl = data['PRIVACY_POLICY'];
-
+  countryCode = data['COUNTRY_CODE'];
   customPrint("base url = $baseUrl");
   return;
 }
