@@ -1,6 +1,6 @@
 const double popupWidth = 400;
-const int msisdnLength = 10;
-const int otpLength = 6;
+int msisdnLength =9; //10;
+int otpLength = 4;//6;
 const int timeOutDuration = 20;
 const int pagePerCount = 20;
 String baseUrl = '';

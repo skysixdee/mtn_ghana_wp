@@ -78,6 +78,8 @@ Future<void> readProperties() async {
   termsAndConditionUrl = data['TERMS_AND_CONDITION_URL'];
   privacyPolicyUrl = data['PRIVACY_POLICY'];
   countryCode = data['COUNTRY_CODE'];
+  msisdnLength=data["MSISDN_LENGTH"];
+  otpLength=data["OTP_LENGTH"];
   customPrint("base url = $baseUrl");
   return;
 }

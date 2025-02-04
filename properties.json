@@ -1,6 +1,8 @@
 {
-    "BASE_URL": "https://callertunezDN.mtn.com.gh",
+    "BASE_URL": "https://callertuneztest.mtn.com.gh",
     "NAME_TUNE_CAT_ID":"115",
+    "MSISDN_LENGTH":9,
+    "OTP_LENGTH":4,
     "COUNTRY_CODE":"+91 - ",
     "TUNE_CHARGE":"R5/Month with 1st day FREE",
     "BOX_CHARGE":"R5/Week with 1st day FREE",
