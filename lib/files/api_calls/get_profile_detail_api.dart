@@ -11,7 +11,7 @@ Future<ProfileDetailModel> getProfileDetailApi() async {
     "clientTxnId": getTransactionId(),
     "aPartyMsisdn": StoreManager.msisdn,
     "identifier": "GetUserDetails",
-    "language": StoreManager.language,
+    "language": StoreManager.selectedLanguage,
   };
   Map<String, dynamic> jsonMap =
       await NetworkManager().post(profileDetailUrl, formData: map);

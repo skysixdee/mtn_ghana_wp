@@ -7,7 +7,7 @@ import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<MyPlayingTunesModel> getMyPlayingTuneApi({int pageNo = 0}) async {
-  String lag = StoreManager.language;
+  String lag = StoreManager.selectedLanguage;
   String msisdn = StoreManager.msisdn;
   String url =
       "$playingTuneUrl?language=$lag&msisdn=$msisdn&startIndex=$pageNo&endIndex=$pagePerCount&rbtMode=0";

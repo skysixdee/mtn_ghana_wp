@@ -12,7 +12,7 @@ Future<EditProfileModel> editProfileApi(List<String> categories) async {
     "identifier": "UpdateUserName",
     "aPartyMsisdn": StoreManager.msisdn,
     "servType": 'UPDATE_USER_NAME',
-    "language": StoreManager.language,
+    "language": StoreManager.selectedLanguage,
     "name": StoreManager.msisdn,
   };
   Map<String, dynamic> map = {
@@ -20,7 +20,7 @@ Future<EditProfileModel> editProfileApi(List<String> categories) async {
     "identifier": "UpdateCategories",
     "aPartyMsisdn": StoreManager.msisdn,
     "servType": 'UPDATE_CATAGORIES',
-    "language": StoreManager.language,
+    "language": StoreManager.selectedLanguage,
     "categoryId": categories.join(','),
   };
   Map<String, dynamic> jsonMap =

@@ -19,7 +19,7 @@ Future<void> addToWishlistApi(TuneInfo info) async {
     "album": info.albumName,
     "artist": info.artistName,
     "price": info.price,
-    "language": StoreManager.language,
+    "language": StoreManager.selectedLanguage,
     "wishlistType": "1",
   };
   Map<String, dynamic> result =

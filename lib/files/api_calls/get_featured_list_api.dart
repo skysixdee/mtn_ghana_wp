@@ -9,7 +9,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<FeturedModel> getFeaturedListApi(String identifier,
     {String pageNo = "0"}) async {
-  String lang = StoreManager.language;
+  String lang = StoreManager.selectedLanguage;
   String msisdn = StoreManager.msisdn;
   int tId = getTransactionId();
 

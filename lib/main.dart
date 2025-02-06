@@ -79,7 +79,9 @@ Future<void> readProperties() async {
   privacyPolicyUrl = data['PRIVACY_POLICY'];
   countryCode = data['COUNTRY_CODE'];
   msisdnLength=data["MSISDN_LENGTH"];
+  otpTimeLimit=data["OTP_TIME_LIMIT"];
   otpLength=data["OTP_LENGTH"];
+  faqUrl = data['FAQ_URL'];
   customPrint("base url = $baseUrl");
   return;
 }

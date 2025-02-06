@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 Future<WishlistModel> getWishlistApi() async {
   Map<String, dynamic> formData = {
     "msisdn": StoreManager.msisdn,
-    "language": StoreManager.language,
+    "language": StoreManager.selectedLanguage,
     "identifier": "ViewWishListItems",
     "wishlistType": "1",
   };

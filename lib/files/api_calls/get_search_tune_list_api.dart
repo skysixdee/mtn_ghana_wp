@@ -8,7 +8,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<SearchResultModel> getSearchedTuneListApi(String key,
     {int pageNo = 0}) async {
-  String lang = StoreManager.language;
+  String lang = StoreManager.selectedLanguage;
   String url =
       "${searchUrl}language=$lang&sortBy=Order_By&perPageCount=$pagePerCount&searchLanguage=$lang&searchKey=$key&pageNo=$pageNo";
   Map<String, dynamic> map = await NetworkManager().get(url);

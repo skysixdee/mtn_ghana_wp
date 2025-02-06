@@ -88,21 +88,22 @@ class WebNavigationView extends StatelessWidget {
         const SizedBox(width: 10),
         categoryButton(),
         const SizedBox(width: 20),
-        faqButton(),
+        faqButton(context),
         const SizedBox(width: 20),
         nameTuneButton(context),
       ],
     );
   }
 
-  GenericButton faqButton() {
+  GenericButton faqButton(BuildContext context) {
     return GenericButton(
       title: faqStr,
       padding: EdgeInsets.zero,
       bgColor: transparent,
       height: double.infinity,
       onTap: () {
-        customPrint("check ");
+        customPrint("check FAQQQQ");
+        context.goNamed(faqRoute);
       },
     );
   }

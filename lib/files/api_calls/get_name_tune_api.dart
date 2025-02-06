@@ -8,7 +8,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<NameTuneModel> getNameTuneApi({int pageNo = 0}) async {
   String url =
-      '${nameTuneUrl}language=${StoreManager.language}&categoryId=115&pageNo=$pageNo&perPageCount=$pagePerCount&searchLanguage=${StoreManager.language}';
+      '${nameTuneUrl}language=${StoreManager.selectedLanguage}&categoryId=115&pageNo=$pageNo&perPageCount=$pagePerCount&searchLanguage=${StoreManager.selectedLanguage}';
   Map<String, dynamic> map = await NetworkManager().get(url);
   return nameTuneModelFromJson(json.encode(map));
 }

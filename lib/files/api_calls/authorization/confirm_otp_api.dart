@@ -9,7 +9,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 Future<ConfirmOtpModel> confirmOtpApi(String msisdn, String otp) async {
   Map<String, dynamic> formData = {
     "msisdn": msisdn,
-    "language": StoreManager.language,
+    "language": StoreManager.selectedLanguage,
     "otp": otp
   };
   Map<String, dynamic> jsonResp =

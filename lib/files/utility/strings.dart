@@ -153,3 +153,13 @@ String howToCreateBlacklistStr = 'How to create a blacklist?';
 String createBlacklistStr = 'Create a Blacklist';
 String blacklistLearnMoreStr =
     'Want to keep certain people from hearing your callertune? Just add their numbers to your Blacklist, and they won’t hear your ringback tunes anymore. It’s that simple!';
+
+String faqCStr = "FAQ";
+String howCanIHelpYouStr = "How Can I Help You";
+String faqFailerStr = 'Failed to load FAQ';
+
+String failedToLoadTermsAndConditionsStr='Failed to load terms and conditions';
+String failedToLoadTermsAndConditionsWithStatusCodeStr="Failed to load terms with status code:";
+String termsAndConditionsStr='Terms and Conditions';
+String noTermsAndConditionsAvailableStr='No terms and conditions available';
+String noValidTermsAndConditionsFoundStr='No valid terms and conditions found';

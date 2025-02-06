@@ -130,7 +130,7 @@ class OtpController extends GetxController {
       isResendingOtp.value = false;
     }
     enableResend.value = false;
-    _start = second;
+    _start =otpTimeLimit; //second;
     leftTime.value = " ${formattedTime(timeInSecond: _start)}"; //"$_start";
 
     customPrint("object sky");

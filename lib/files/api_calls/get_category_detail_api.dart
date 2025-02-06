@@ -8,7 +8,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<CategoryDetailModel> getCategoryDetailApi(String key, String catId,
     {int pageNo = 0}) async {
-  String lang = StoreManager.language;
+  String lang = StoreManager.selectedLanguage;
 
   String url =
       '${categoryDetailUrl}language=$lang&sortBy=Order_By&alignBy=ASC&searchLanguage=$lang?searchKey=$key&genreDetailUrl&perPageCount=$pagePerCount&categoryId=$catId&pageNo=$pageNo';

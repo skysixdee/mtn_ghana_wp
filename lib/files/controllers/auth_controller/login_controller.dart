@@ -1,5 +1,10 @@
 import 'package:mtn_ghana_wp/files/api_calls/authorization/generate_otp_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/authorization/new_user_registration_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/authorization/security_token_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/subscriber_validation_api.dart';
+import 'package:mtn_ghana_wp/files/model/get_security_token_model.dart';
+import 'package:mtn_ghana_wp/files/model/newUserRegistrationModel.dart';
+import 'package:mtn_ghana_wp/files/model/security_token_model.dart';
 import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -38,15 +43,36 @@ class LoginController extends GetxController {
     isLoading.value = true;
     SubscriberValidationModel model = await susbcriberValidationApi(msisdn);
     if (model.statusCode == 'SC0000') {
-      SubscriberValidationModel genModel = await generateOtpApi(msisdn);
+      if(model.responseMap?.respCode=="SC0000"){
+        SubscriberValidationModel genModel = await generateOtpApi(msisdn);
       if (genModel.statusCode == 'SC0000') {
         displayOptScreen.value = true;
       } else {
         message.value = model.message ?? someThingWentWrongStr;
+        isLoading.value=false;
+      }
+      }else if(model.responseMap?.respCode=="100"){ //new user
+        SecurityTokenModel model = await getSecurityTokenApi();
+
+        if(model.statusCode=="SC0000"){
+          NewUserRegistrationModel respo =
+        await newUserRegistration(msisdn, model.responseMap?.securityCounter??"");
+        if(respo.statusCode=="SC0000"){
+          displayOptScreen.value=true;
+        }else{
+          message.value = someThingWentWrongStr;
+          isLoading.value=false;
+        }
+        }
+        //getSecurityToken(false, true);
+      }else{
+         message.value = model.message ?? someThingWentWrongStr;
+         isLoading.value=false;
       }
       //displayOptScreen.value = true;
     } else {
       message.value = model.message ?? someThingWentWrongStr;
+      isLoading.value=false;
     }
 
     isLoading.value = false;
@@ -57,4 +83,6 @@ class LoginController extends GetxController {
     msisdn = value;
     enableButton.value = value.length >= msisdnLength;
   }
+  
+   
 }

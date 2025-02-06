@@ -6,7 +6,7 @@ import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<BannerModel> getBannerApi() async {
-  String url = '$bannerUrl${StoreManager.language}';
+  String url = '$bannerUrl${StoreManager.selectedLanguage}';
   Map<String, dynamic> map = await NetworkManager().get(url);
   return bannerModelFromJson(json.encode(map));
 }

@@ -15,7 +15,7 @@ class StoreManager {
   static Others? other;
   static bool isLoggedIn = true;
   static bool isEnglish = true;
-  static String language = 'English';
+  static String selectedLanguage = 'English';
   static String languageCode = '0';
   static String languageSort = 'en';
   static String msisdn = '0';
@@ -31,7 +31,7 @@ class StoreManager {
     accessToken = prefs.getString(_accessToken) ?? '';
     refreshToken = prefs.getString(_refreshToken) ?? '';
     deviceId = prefs.getString(_deviceId) ?? '0191212';
-    language = isEnglish ? "English" : "Burmese";
+    selectedLanguage = isEnglish ? "English" : "Burmese";
     appCont.isLoggedIn.value = isLoggedIn;
     languageCode = isEnglish ? '0' : '1';
     languageSort = isEnglish ? 'en' : 'br';
@@ -50,7 +50,7 @@ class StoreManager {
 
   static setLanguageEnglish(bool value) {
     prefs.setBool(_language, value);
-    language = value ? 'English' : "Burmese";
+    selectedLanguage = value ? 'English' : "Burmese";
 
     isEnglish = value;
     languageCode = isEnglish ? '1' : '0';

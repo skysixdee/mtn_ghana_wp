@@ -17,6 +17,7 @@ import 'package:mtn_ghana_wp/files/screens/banner_detail_screen/banner_detail_sc
 import 'package:mtn_ghana_wp/files/screens/blacklist_screen/blacklist_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/blacklist_screen/create_blacklist_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/category_detail_screen/category_detail_screen.dart';
+import 'package:mtn_ghana_wp/files/screens/faq_screen/faq_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/home_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mobile_drawer_screen/mobile_drawer_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
@@ -30,6 +31,7 @@ import 'package:mtn_ghana_wp/files/screens/profile_screen/profile_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/search_screen/artists_tune_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/search_screen/search_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/see_more_screen/see_more_screen.dart';
+import 'package:mtn_ghana_wp/files/screens/terms_and_condition_screen/terms_and_conditions_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/web_navigation_view/web_navigation_view.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -65,6 +67,7 @@ final router = GoRouter(
         _blackListShell(),
         _createBlackListShell(),
         _faqShell(),
+        _termsAndConditionsShell(),
         //_mobileTunePreviewShell(),
       ],
     ),
@@ -314,13 +317,22 @@ StatefulShellBranch _faqShell() {
         name: faqRoute,
         path: faqRoute,
         builder: (context, state) {
-          menuFaqClickEvent();
-          return Container(
-            color: red,
-            child: CustomText(
-              title: "FAQ SCREEN",
-            ),
-          );
+          //menuFaqClickEvent();
+          return FaqScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _termsAndConditionsShell() {
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: termsAndConditionsRoute,
+        path: termsAndConditionsRoute,
+        builder: (context, state) {
+          return TermsAndConditionsScreen();
         },
       ),
     ],

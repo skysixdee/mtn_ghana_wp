@@ -8,7 +8,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<SubscriberValidationModel> susbcriberValidationApi(String msisdn) async {
   Map<String, dynamic> jsonData = {
-    "language": StoreManager.language,
+    "language": StoreManager.selectedLanguage,
     "clientTxnId": getTransactionId(),
     "type": "CheckMsisdnSendOTP",
   };

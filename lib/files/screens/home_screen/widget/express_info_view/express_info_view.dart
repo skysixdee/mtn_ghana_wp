@@ -57,7 +57,8 @@ class ExpressInfoView extends StatelessWidget {
       list.add(CustomText(
         title: messages[i],
         fontName: i == 0 ? FontName.bold : FontName.regular,
-        fontSize: i == 0 ? (si.isMobile ? 20 : 40) : (si.isMobile ? 14 : 30),
+        fontSize: i == 0 ? (si.isMobile ? 18 : 25) : (si.isMobile ? 14 : 20),
+        // fontSize: i == 0 ? (si.isMobile ? 20 : 40) : (si.isMobile ? 14 : 30),
       ));
     }
     return Column(

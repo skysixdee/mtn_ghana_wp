@@ -8,7 +8,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<ArtistTuneListModel> getArtistTuneListApi(String key,
     {int pageNo = 0}) async {
-  String lag = StoreManager.language;
+  String lag = StoreManager.selectedLanguage;
   String url =
       '${artistTuneSearchUrl}language=$lag&artistKey=$key&sortBy=Order_By&alignBy=ASC&pageNo=$pageNo&searchLanguage=$key&perPageCount=$pagePerCount';
   Map<String, dynamic> jsonResp = await NetworkManager().get(url);

@@ -1,7 +1,9 @@
+import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/url_launcher.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -25,7 +27,7 @@ class WebFooterView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(children: [privacyPolicyButton()]),
-                Row(children: [termsAndConditionButton()]),
+                Row(children: [termsAndConditionButton(context)]),
                 const SizedBox(height: 8),
                 Container(height: 1, color: white),
                 const SizedBox(height: 8),
@@ -55,7 +57,7 @@ class WebFooterView extends StatelessWidget {
     );
   }
 
-  GenericButton termsAndConditionButton() {
+  GenericButton termsAndConditionButton(BuildContext context) {
     return GenericButton(
       padding: EdgeInsets.zero,
       height: 22,
@@ -64,7 +66,8 @@ class WebFooterView extends StatelessWidget {
       title: termsAndConditions,
       textColor: white,
       onTap: () {
-        customLaunchUrl(termsAndConditionUrl);
+        context.goNamed(termsAndConditionsRoute);
+        //customLaunchUrl(termsAndConditionUrl);
       },
     );
   }

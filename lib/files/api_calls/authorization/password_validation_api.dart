@@ -18,7 +18,7 @@ Future<PasswordValidationModel> passwordValidationApi(
   Map<String, dynamic> jsonData = {
     "type": "ValidateDetails",
     "msisdn": msisdn,
-    "languageId": StoreManager.languageCode,
+    "language": StoreManager.selectedLanguage,
     "clientTxnId": getTransactionId(),
     "securityCounter": securityCounter,
     "encryptedPassword": encryptedPassword,

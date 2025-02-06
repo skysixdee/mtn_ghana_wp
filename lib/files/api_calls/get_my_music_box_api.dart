@@ -7,7 +7,7 @@ import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<MyMusicBoxModel> getMyMusicBoxApi({int pageNo = 0}) async {
-  String lag = StoreManager.language;
+  String lag = StoreManager.selectedLanguage;
   String msisdn = StoreManager.msisdn;
   String url =
       "$myMusicBoxUrl?language=$lag&msisdn=$msisdn&startIndex=$pageNo&endIndex=$pagePerCount&rbtMode=300";

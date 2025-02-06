@@ -10,7 +10,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<SearchResultModel> searchNameTuneApi(String key,
     {int pageNo = 0}) async {
-  String lang = StoreManager.language;
+  String lang = StoreManager.selectedLanguage;
   // if (StoreManager.other == null) {
   //   await getAppSettingApi();
   // }

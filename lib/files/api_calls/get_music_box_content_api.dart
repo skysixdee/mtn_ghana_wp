@@ -9,7 +9,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 Future<MusicBoxContentModel> getMusicBoxContentApi(String type, String code,
     {int pageNo = 0}) async {
   String url =
-      '${musicBoxContextUrl}language=${StoreManager.language}&pageNo=$pageNo&perPageCount=$pagePerCount&type=$type&toneCode=$code';
+      '${musicBoxContextUrl}language=${StoreManager.selectedLanguage}&pageNo=$pageNo&perPageCount=$pagePerCount&type=$type&toneCode=$code';
   Map<String, dynamic> map = await NetworkManager().get(url);
   return musicBoxContentModelFromJson(json.encode(map));
 }
