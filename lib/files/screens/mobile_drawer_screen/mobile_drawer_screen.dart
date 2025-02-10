@@ -1,3 +1,4 @@
+import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/category_detail_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/custom_drawer_controller.dart';
 import 'package:mtn_ghana_wp/files/model/drawer_model.dart';
@@ -5,8 +6,11 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart'
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup.dart';
+import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_popup.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,7 +46,21 @@ class MobileDrawerScreen extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).pop();
-        context.goNamed(menuList[index].routeName);
+        if (menuList[index].routeName == loginStr) {
+          LoginController con = Get.find();
+          con.resetValue();
+          Get.dialog(Obx(
+            () {
+              return con.displayOptScreen.value
+                  ? LoginOtpPopup(
+                      msisdn: con.msisdn,
+                    )
+                  : const LoginPopup();
+            },
+          ));
+        } else {
+          context.goNamed(menuList[index].routeName);
+        }
       },
       child: Container(
         height: 50,

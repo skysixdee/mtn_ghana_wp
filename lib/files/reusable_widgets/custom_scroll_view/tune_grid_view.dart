@@ -1,3 +1,5 @@
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/empty_list_widget.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,21 +22,24 @@ Widget tuneGridView({
     builder: (context, si) {
       return isLoading
           ? loadingIndicator(height: 300)
-          : GridView.builder(
-              scrollDirection: scrollDirection ?? Axis.vertical,
-              padding: padding ??
-                  EdgeInsets.symmetric(
-                      horizontal: si.isMobile ? 8 : 30, vertical: 20),
-              itemCount: itemCount,
-              physics: physics,
-              shrinkWrap: true,
-              gridDelegate: _sliver(si, context, cardWidth, aspectRatio),
-              itemBuilder: (context, index) {
-                return (onTap != null)
-                    ? InkWell(onTap: () => onTap(index), child: builder(index))
-                    : builder(index);
-              },
-            );
+          : itemCount <= 0
+              ? SizedBox(height: 300, child: emptyListWidget())
+              : GridView.builder(
+                  scrollDirection: scrollDirection ?? Axis.vertical,
+                  padding: padding ??
+                      EdgeInsets.symmetric(
+                          horizontal: si.isMobile ? 8 : 30, vertical: 20),
+                  itemCount: itemCount,
+                  physics: physics,
+                  shrinkWrap: true,
+                  gridDelegate: _sliver(si, context, cardWidth, aspectRatio),
+                  itemBuilder: (context, index) {
+                    return (onTap != null)
+                        ? InkWell(
+                            onTap: () => onTap(index), child: builder(index))
+                        : builder(index);
+                  },
+                );
     },
   );
 }

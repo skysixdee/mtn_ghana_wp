@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class NameTuneController extends GetxController {
   RxBool isLoading = false.obs;
-  List<TuneInfo> tuneList = [];
+  RxList<TuneInfo> tuneList = <TuneInfo>[].obs;
   RxInt totalToneCount = 0.obs;
   String searchedName = '';
   bool isSearch = false;
@@ -24,7 +24,7 @@ class NameTuneController extends GetxController {
     }
     isLoading.value = true;
     NameTuneModel model = await getNameTuneApi();
-    tuneList = model.responseMap?.songList ?? [];
+    tuneList.value = model.responseMap?.songList ?? [];
     totalToneCount.value = model.responseMap?.songTotalCount ?? 0;
     isLoading.value = false;
   }
@@ -32,7 +32,7 @@ class NameTuneController extends GetxController {
   loadMoreData(int index) async {
     isLoading.value = true;
     NameTuneModel model = await getNameTuneApi(pageNo: index);
-    tuneList = model.responseMap?.songList ?? [];
+    tuneList.value = model.responseMap?.songList ?? [];
     isLoading.value = false;
   }
 
@@ -48,7 +48,7 @@ class NameTuneController extends GetxController {
     isLoading.value = true;
     SearchResultModel model = await searchNameTuneApi(key);
     totalToneCount.value = model.responseMap?.songTotalCount ?? 0;
-    tuneList = model.responseMap?.songList ?? [];
+    tuneList.value = model.responseMap?.songList ?? [];
     isLoading.value = false;
   }
 
@@ -56,7 +56,7 @@ class NameTuneController extends GetxController {
     isLoading.value = true;
     SearchResultModel model =
         await searchNameTuneApi(searchedName, pageNo: index);
-    tuneList = model.responseMap?.songList ?? [];
+    tuneList.value = model.responseMap?.songList ?? [];
 
     isLoading.value = false;
   }

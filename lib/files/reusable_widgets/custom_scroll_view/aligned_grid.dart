@@ -1,3 +1,4 @@
+import 'package:mtn_ghana_wp/files/reusable_widgets/empty_list_widget.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,26 +23,28 @@ Widget alignedGrid(
         builder: (context, si) {
           return isLoading
               ? loadingIndicator(height: 300)
-              : Wrap(
-                  runSpacing: si.isMobile ? 8 : runSpacing,
-                  spacing: si.isMobile ? 8 : spacing,
-                  alignment: WrapAlignment.center,
-                  children: List.generate(itemCount, (index) {
-                    return SizedBox(
-                        width: cardWidth,
-                        child: AspectRatio(
-                          aspectRatio: aspectRatio,
-                          child: (onTap != null)
-                              ? InkWell(
-                                  onTap: () {
-                                    onTap(index);
-                                  },
-                                  child: builder(index),
-                                )
-                              : builder(index),
-                        ));
-                  }),
-                );
+              : itemCount <= 0
+                  ? SizedBox(height: 300, child: emptyListWidget())
+                  : Wrap(
+                      runSpacing: si.isMobile ? 8 : runSpacing,
+                      spacing: si.isMobile ? 8 : spacing,
+                      alignment: WrapAlignment.center,
+                      children: List.generate(itemCount, (index) {
+                        return SizedBox(
+                            width: cardWidth,
+                            child: AspectRatio(
+                              aspectRatio: aspectRatio,
+                              child: (onTap != null)
+                                  ? InkWell(
+                                      onTap: () {
+                                        onTap(index);
+                                      },
+                                      child: builder(index),
+                                    )
+                                  : builder(index),
+                            ));
+                      }),
+                    );
         },
       ));
 }
