@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_tone_price_api.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/model/get_tone_price_model.dart';
 import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
@@ -28,11 +30,20 @@ Future<GenericModel> setToneApi(String toneId, String toneName) async {
 
 Future<String> _getPackName() async {
   String packName = '';
-  PackDetailModel packDetailModel = await getPackDetailApi();
-  if (packDetailModel.statusCode == 'SC0000') {
-    packName = packDetailModel.responseMap?.packStatusDetails?.packName ?? '';
+  GetTonePriceModel getTonePriceModel= await getTonePriceApi();
+  if (getTonePriceModel.statusCode == 'SC0000') {
+    packName = getTonePriceModel.responseMap.responseDetails[0].packName;
     return packName;
   } else {
     return '';
   }
+  //PackDetailModel packDetailModel = await getPackDetailApi();
+  // if (packDetailModel.statusCode == 'SC0000') {
+  //   packName = packDetailModel.responseMap?.packStatusDetails?.packName ?? '';
+  //   return packName;
+  // } else {
+  //   return '';
+  // }
+
+  
 }
