@@ -1,6 +1,7 @@
 import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/category_detail_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/custom_drawer_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/model/drawer_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
@@ -47,6 +48,7 @@ class MobileDrawerScreen extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pop();
         if (menuList[index].routeName == loginStr) {
+          //print("loginnnnnnnnnnnnnnn");
           LoginController con = Get.find();
           con.resetValue();
           Get.dialog(Obx(
@@ -58,8 +60,20 @@ class MobileDrawerScreen extends StatelessWidget {
                   : const LoginPopup();
             },
           ));
-        } else {
-          context.goNamed(menuList[index].routeName);
+        } else if(menuList[index].title == logoutStr){
+          //print("logoutttttttttttttttttttttttttttttt");
+          StoreManager.logout();
+          //context.goNamed(homeRoute);
+          // context.goNamed(menuList[index].routeName);
+        }else if(menuList[index].title == homeStr){
+          //print("homeeeeeeeeeeeeeee");
+          context.goNamed(homeRoute);
+        }else if(menuList[index].title == nameTuneStr){
+        NameTuneController con = Get.find();
+        con.getNameTune();
+        context.goNamed(nameTuneRoute);
+        }else if(menuList[index].title == faqStr){
+          context.goNamed(faqRoute);
         }
       },
       child: Container(

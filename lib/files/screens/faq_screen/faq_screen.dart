@@ -27,6 +27,7 @@ class FaqScreen extends StatelessWidget {
                   fontSize: si.isMobile ? 30 : 55,
                 ),
               ),
+              
               Center(
                 child: CustomText(
                   title: howCanIHelpYouStr,

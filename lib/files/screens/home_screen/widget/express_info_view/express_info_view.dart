@@ -42,11 +42,11 @@ class ExpressInfoView extends StatelessWidget {
   Widget leftImage() {
     return Stack(children: [
       Opacity(
-          opacity: 0.8, child: Image.asset(expressPng, color: Colors.black)),
+          opacity: 0.8, child: Image.asset(expressPng, color: Colors.black,height: 230,)),
       ClipRect(
           child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: Image.asset(expressPng)))
+              child: Image.asset(expressPng,height: 230)))
     ]);
   }
 

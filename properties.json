@@ -1,13 +1,14 @@
 {
     "BASE_URL": "https://callertuneztest.mtn.com.gh",
-    "FAQ_URL": "https://callertuneztest.mtn.com.gh/ghana/assets/languages/English/FAQ.json",
+    "FAQ_URL": "https://callertuneztest.mtn.com.gh/ghana/faq/FAQ.json",
     "NAME_TUNE_CAT_ID":"115",
     "MSISDN_LENGTH":9,
     "OTP_TIME_LIMIT":30,
     "OTP_LENGTH":6,
     "COUNTRY_CODE":"+233 - ",
     "TUNE_CHARGE":"0.50 GHC for 30 days (Callertunes Subscription Charges will also apply)",
-    "BOX_CHARGE":"R5/Week with 1st day FREE",   "TERMS_AND_CONDITION_URL":"https://callertuneztest.mtn.com.gh/ghana/assets/languages/English/TermsConditions.json",
+    "BOX_CHARGE":"R5/Week with 1st day FREE",   
+    "TERMS_AND_CONDITION_URL":"https://callertuneztest.mtn.com.gh/ghana/assets/languages/English/TermsConditions.json",
     "PRIVACY_POLICY":"https://callertunez.mtn.co.gh/home/help/content/privacy-policy",
     "EXPRESS_MOOD_MESSAGE":"Express Your Mood\n• Let your caller share your mood by setting funky ring back tones.\n• Tone is 50 Pesewas and valid for 30 days.\n• Monthly subscription fee of 70 Pesewas for 30 days.\n• Subscription will be renewed after 30 days.\n• * Fallback charges may apply."
 }

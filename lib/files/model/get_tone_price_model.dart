@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-GetTonePriceModel getTonePriceModelFromJson(String str) => GetTonePriceModel.fromJson(json.decode(str));
+GetTonePriceModell getTonePriceModelFromJson(String str) => GetTonePriceModell.fromJson(json.decode(str));
 
-String getTonePriceModelToJson(GetTonePriceModel data) => json.encode(data.toJson());
+String getTonePriceModelToJson(GetTonePriceModell data) => json.encode(data.toJson());
 
-class GetTonePriceModel {
-    GetTonePriceModel({
+class GetTonePriceModell {
+    GetTonePriceModell({
         required this.responseMap,
         required this.message,
         required this.respTime,
@@ -17,7 +17,7 @@ class GetTonePriceModel {
     String respTime;
     String statusCode;
 
-    factory GetTonePriceModel.fromJson(Map<String, dynamic> json) => GetTonePriceModel(
+    factory GetTonePriceModell.fromJson(Map<String, dynamic> json) => GetTonePriceModell(
         responseMap: ResponseMap.fromJson(json["responseMap"]),
         message: json["message"],
         respTime: json["respTime"],

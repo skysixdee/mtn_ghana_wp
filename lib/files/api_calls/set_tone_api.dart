@@ -30,7 +30,7 @@ Future<GenericModel> setToneApi(String toneId, String toneName) async {
 
 Future<String> _getPackName() async {
   String packName = '';
-  GetTonePriceModel getTonePriceModel= await getTonePriceApi();
+  GetTonePriceModell getTonePriceModel= await getTonePriceApi();
   if (getTonePriceModel.statusCode == 'SC0000') {
     packName = getTonePriceModel.responseMap.responseDetails[0].packName;
     return packName;
