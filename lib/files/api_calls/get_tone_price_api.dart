@@ -8,14 +8,14 @@ import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
-Future<GetTonePriceModell> getTonePriceApi() async {
+Future<GetTonePriceModell> getTonePriceApi(String toneId) async {
   Map<String, dynamic> jsonData = {
     "language": StoreManager.languageCode,
     "serviceId": "1",
     "clientTxnId": getTransactionId(),
     "aPartyMsisdn": StoreManager.msisdn,
     "bPartyMsisdnList": "",
-    "toneId": "6641481",
+    "toneId": toneId,
     "validationIdentifier": "3",
     "channelId": channelId
   };

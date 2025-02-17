@@ -12,7 +12,7 @@ import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<GenericModel> setToneApi(String toneId, String toneName) async {
-  String packName = await _getPackName();
+  String packName = await _getPackName(toneId);
   Map<String, dynamic> jsomData = {
     'clientTxnId': getTransactionId(),
     'language': StoreManager.languageCode,
@@ -28,9 +28,10 @@ Future<GenericModel> setToneApi(String toneId, String toneName) async {
   return genericModelFromJson(json.encode(jsonResp));
 }
 
-Future<String> _getPackName() async {
+Future<String> _getPackName(String toneId) async {
+
   String packName = '';
-  GetTonePriceModell getTonePriceModel= await getTonePriceApi();
+  GetTonePriceModell getTonePriceModel= await getTonePriceApi(toneId);
   if (getTonePriceModel.statusCode == 'SC0000') {
     packName = getTonePriceModel.responseMap.responseDetails[0].packName;
     return packName;
