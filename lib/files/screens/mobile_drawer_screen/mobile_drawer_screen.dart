@@ -76,6 +76,12 @@ class MobileDrawerScreen extends StatelessWidget {
           context.goNamed(faqRoute);
         }else if(menuList[index].title ==profileStr){
           context.goNamed(profileRoute);
+        }else if(menuList[index].title ==myTunezStr){
+          context.goNamed(myTunesRoute);
+        }else if(menuList[index].title ==myWishlistStr){
+          context.goNamed(myWishlistRoute);
+        }else if(menuList[index].title ==blackListStr){
+          context.goNamed(blackListRoute);
         }
       },
       child: Container(
