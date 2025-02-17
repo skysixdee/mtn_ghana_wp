@@ -21,5 +21,5 @@ Future<GetTonePriceModell> getTonePriceApi(String toneId) async {
   };
   Map<String, dynamic> jsonResp =
       await NetworkManager().post(getTonePriceUrl, formData: jsonData);
-  return getTonePriceModelFromJson(json.encode(jsonResp));
+  return getTonePriceModellFromJson(json.encode(jsonResp));
 }

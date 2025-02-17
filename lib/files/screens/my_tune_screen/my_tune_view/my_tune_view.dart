@@ -39,14 +39,14 @@ class MyTuneView extends StatelessWidget {
                     tuneList: con.tuneApkList[p0].toneDetails ?? [],
                     menuList: menuList,
                     bottomRightChild: settingButton(context, si, p0),
-                    onMenuTap: (p0, p1) {
-                      if (p0.title == deleteStr) {
+                    onMenuTap: (p2, p1) {
+                      if (p2.title == deleteStr) {
                         con.deleteTune(
-                            con.tuneApkList[p1].toneDetails?.first ??
+                            con.tuneApkList[p0].toneDetails?.first ??
                                 TuneInfo(),
-                            p1);
+                            p0);
                       }
-                      customPrint("title is = ${p0.title} and index = $p1");
+                      customPrint("title is = ${p2.title} and index = $p1");
                     },
                   );
                 },
