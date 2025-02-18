@@ -79,3 +79,4 @@ String createBlackListUrl =
 String deleteBlacklistUrl =
     "$baseUrl/security/Middleware/api/adapter/v1/crbt/remove-from-black-list";
 String getTonePriceUrl="$baseUrl/security/Middleware/api/adapter/v1/crbt/get-tone-price";
+String buyMusicChannelUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/buy-music-channel";
