@@ -20,9 +20,11 @@ class LoginOtpPopup extends StatefulWidget {
     super.key,
     required this.msisdn,
     this.info,
+    required this.isMusicBox,
   });
   final String msisdn;
   final TuneInfo? info;
+  final bool isMusicBox;
 
   @override
   State<LoginOtpPopup> createState() => _LoginOtpPopupState();
@@ -105,7 +107,8 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
                     otpController.enableVerifyButton.value ? yellow : lightGrey,
                 title: verifyOtpStr,
                 onTap: () {
-                  otpController.onVerifyButtonAction(widget.msisdn);
+                  otpController.onVerifyButtonAction(
+                      widget.msisdn, widget.isMusicBox);
                   customPrint("generate otp");
                   otpController.onSuccess = () {
                     Navigator.of(context).pop();
@@ -185,7 +188,8 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
             otpController.onChangeOtp(p0);
           },
           onSubmit: (p0) {
-            otpController.onVerifyButtonAction(widget.msisdn);
+            otpController.onVerifyButtonAction(
+                widget.msisdn, widget.isMusicBox);
             otpController.onSuccess = () {
               Navigator.of(context).pop();
             };

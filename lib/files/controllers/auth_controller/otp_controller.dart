@@ -4,6 +4,7 @@ import 'package:mtn_ghana_wp/files/api_calls/authorization/confirm_otp_api.dart'
 import 'package:mtn_ghana_wp/files/api_calls/authorization/generate_otp_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/password_validation_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/security_token_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/buy_music_channel_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_search_tune_list_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
 import 'package:mtn_ghana_wp/files/model/confirm_otp_model.dart';
@@ -32,6 +33,7 @@ class OtpController extends GetxController {
   late Timer _timer;
   int _start = 0;
   TuneInfo? info;
+  bool isMusicBox = false;
   Function()? onSuccess;
   @override
   void onInit() {
@@ -40,12 +42,13 @@ class OtpController extends GetxController {
     customPrint("OtpController onInit");
   }
 
-  onVerifyButtonAction(String msisdn) async {
+  onVerifyButtonAction(String msisdn, bool isMusicBox) async {
     if (otp.isEmpty || otp.length < otpLength) {
       message.value = enterOtpStr;
 
       return;
     }
+    this.isMusicBox = isMusicBox;
     customPrint("qwrweter");
 
     isLoading.value = true;
@@ -75,7 +78,11 @@ class OtpController extends GetxController {
         await passwordValidationApi(msisdn, securityCounter);
     if (passwordValidationModel.statusCode == 'SC0000') {
       if (info != null) {
-        buyTune();
+        if (isMusicBox) {
+          buyMusicBox(info ?? TuneInfo());
+        } else {
+          buyTune();
+        }
       } else {
         if (onSuccess != null) {
           onSuccess!();
@@ -90,6 +97,24 @@ class OtpController extends GetxController {
   buyTune() async {
     GenericModel model =
         await setToneApi(info?.toneId ?? '', info?.toneName ?? '');
+    if (model.statusCode == "SC0000") {
+      openAlertPopup(
+        message: model.message ?? '',
+        onPrimary: () {
+          if (onSuccess != null) {
+            onSuccess!();
+          }
+        },
+      );
+    } else {
+      message.value = model.message ?? someThingWentWrongStr;
+    }
+    isLoading.value = false;
+  }
+
+  buyMusicBox(TuneInfo info) async {
+    isLoading.value = true;
+    GenericModel model = await buyMusicChannelApi(info.toneId ?? '');
     if (model.statusCode == "SC0000") {
       openAlertPopup(
         message: model.message ?? '',
@@ -130,7 +155,7 @@ class OtpController extends GetxController {
       isResendingOtp.value = false;
     }
     enableResend.value = false;
-    _start =otpTimeLimit; //second;
+    _start = otpTimeLimit; //second;
     leftTime.value = " ${formattedTime(timeInSecond: _start)}"; //"$_start";
 
     customPrint("object sky");

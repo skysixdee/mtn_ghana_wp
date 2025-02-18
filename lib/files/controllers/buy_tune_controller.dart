@@ -1,5 +1,6 @@
 import 'package:mtn_ghana_wp/files/api_calls/authorization/generate_otp_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/subscriber_validation_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/buy_music_channel_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
@@ -17,6 +18,7 @@ class BuyTuneController extends GetxController {
   RxString message = ''.obs;
   RxBool displayOptScreen = false.obs;
   Function()? onSuccess;
+  bool isMusicBox = false;
   resetValue() {
     msisdn = '';
     isLoading.value = false;
@@ -24,11 +26,16 @@ class BuyTuneController extends GetxController {
     displayOptScreen.value = false;
   }
 
-  onConfirmButtonAction(TuneInfo info) async {
+  onConfirmButtonAction(TuneInfo info, {bool isMusicBox = false}) async {
     displayOptScreen.value = false;
+    this.isMusicBox = isMusicBox;
     message.value = '';
     if (StoreManager.isLoggedIn) {
-      buyTone(info);
+      if (isMusicBox) {
+        buyMusicBox(info);
+      } else {
+        buyTone(info);
+      }
     } else {
       if (msisdn.isEmpty) {
         message.value = pleaseEnterYourMobileNumberStr;
@@ -50,6 +57,32 @@ class BuyTuneController extends GetxController {
     isLoading.value = true;
     GenericModel model =
         await setToneApi(info.toneId ?? '', info.toneName ?? '');
+    if (model.statusCode == 'SC0000') {
+      openAlertPopup(
+        message: model.message ?? '',
+        onPrimary: () {
+          if (onSuccess != null) {
+            onSuccess!();
+          }
+        },
+      );
+      buySuccessfulEvent(
+          TuneInfo(toneId: info.toneId, toneName: info.toneName));
+      purchaseEvent(TuneInfo(toneId: info.toneId, toneName: info.toneName));
+    } else {
+      message.value = model.message ?? someThingWentWrongStr;
+    }
+    isLoading.value = false;
+  }
+
+  // buyMusicBox(TuneInfo info) {
+  //   isLoading.value = true;
+  //   buyMusicChannelApi(info.toneId ?? '');
+  // }
+
+  buyMusicBox(TuneInfo info) async {
+    isLoading.value = true;
+    GenericModel model = await buyMusicChannelApi(info.toneId ?? '');
     if (model.statusCode == 'SC0000') {
       openAlertPopup(
         message: model.message ?? '',

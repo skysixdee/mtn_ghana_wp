@@ -104,7 +104,6 @@ class WebNavigationView extends StatelessWidget {
       bgColor: transparent,
       height: double.infinity,
       onTap: () {
-        
         customPrint("check FAQQQQ");
         context.goNamed(faqRoute);
       },
@@ -165,6 +164,7 @@ class WebNavigationView extends StatelessWidget {
                       return con.displayOptScreen.value
                           ? LoginOtpPopup(
                               msisdn: con.msisdn,
+                              isMusicBox: false,
                             )
                           : const LoginPopup();
                     },

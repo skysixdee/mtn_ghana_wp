@@ -56,31 +56,32 @@ class MobileDrawerScreen extends StatelessWidget {
               return con.displayOptScreen.value
                   ? LoginOtpPopup(
                       msisdn: con.msisdn,
+                      isMusicBox: false,
                     )
                   : const LoginPopup();
             },
           ));
-        } else if(menuList[index].title == logoutStr){
+        } else if (menuList[index].title == logoutStr) {
           //print("logoutttttttttttttttttttttttttttttt");
           StoreManager.logout();
           //context.goNamed(homeRoute);
           // context.goNamed(menuList[index].routeName);
-        }else if(menuList[index].title == homeStr){
+        } else if (menuList[index].title == homeStr) {
           //print("homeeeeeeeeeeeeeee");
           context.goNamed(homeRoute);
-        }else if(menuList[index].title == nameTuneStr){
-        NameTuneController con = Get.find();
-        con.getNameTune();
-        context.goNamed(nameTuneRoute);
-        }else if(menuList[index].title == faqStr){
+        } else if (menuList[index].title == nameTuneStr) {
+          NameTuneController con = Get.find();
+          con.getNameTune();
+          context.goNamed(nameTuneRoute);
+        } else if (menuList[index].title == faqStr) {
           context.goNamed(faqRoute);
-        }else if(menuList[index].title ==profileStr){
+        } else if (menuList[index].title == profileStr) {
           context.goNamed(profileRoute);
-        }else if(menuList[index].title ==myTunezStr){
+        } else if (menuList[index].title == myTunezStr) {
           context.goNamed(myTunesRoute);
-        }else if(menuList[index].title ==myWishlistStr){
+        } else if (menuList[index].title == myWishlistStr) {
           context.goNamed(myWishlistRoute);
-        }else if(menuList[index].title ==blackListStr){
+        } else if (menuList[index].title == blackListStr) {
           context.goNamed(blackListRoute);
         }
       },

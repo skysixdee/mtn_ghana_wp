@@ -43,36 +43,37 @@ class LoginController extends GetxController {
     isLoading.value = true;
     SubscriberValidationModel model = await susbcriberValidationApi(msisdn);
     if (model.statusCode == 'SC0000') {
-      if(model.responseMap?.respCode=="SC0000"){
+      if (model.responseMap?.respCode == "SC0000") {
         SubscriberValidationModel genModel = await generateOtpApi(msisdn);
-      if (genModel.statusCode == 'SC0000') {
-        displayOptScreen.value = true;
-      } else {
-        message.value = model.message ?? someThingWentWrongStr;
-        isLoading.value=false;
-      }
-      }else if(model.responseMap?.respCode=="100"){ //new user
+        if (genModel.statusCode == 'SC0000') {
+          displayOptScreen.value = true;
+        } else {
+          message.value = model.message ?? someThingWentWrongStr;
+          isLoading.value = false;
+        }
+      } else if (model.responseMap?.respCode == "100") {
+        //new user
         SecurityTokenModel model = await getSecurityTokenApi();
 
-        if(model.statusCode=="SC0000"){
-          NewUserRegistrationModel respo =
-        await newUserRegistration(msisdn, model.responseMap?.securityCounter??"");
-        if(respo.statusCode=="SC0000"){
-          displayOptScreen.value=true;
-        }else{
-          message.value = someThingWentWrongStr;
-          isLoading.value=false;
-        }
+        if (model.statusCode == "SC0000") {
+          NewUserRegistrationModel respo = await newUserRegistration(
+              msisdn, model.responseMap?.securityCounter ?? "");
+          if (respo.statusCode == "SC0000") {
+            displayOptScreen.value = true;
+          } else {
+            message.value = someThingWentWrongStr;
+            isLoading.value = false;
+          }
         }
         //getSecurityToken(false, true);
-      }else{
-         message.value = model.message ?? someThingWentWrongStr;
-         isLoading.value=false;
+      } else {
+        message.value = model.message ?? someThingWentWrongStr;
+        isLoading.value = false;
       }
       //displayOptScreen.value = true;
     } else {
       message.value = model.message ?? someThingWentWrongStr;
-      isLoading.value=false;
+      isLoading.value = false;
     }
 
     isLoading.value = false;
@@ -83,6 +84,4 @@ class LoginController extends GetxController {
     msisdn = value;
     enableButton.value = value.length >= msisdnLength;
   }
-  
-   
 }

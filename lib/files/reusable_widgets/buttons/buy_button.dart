@@ -33,6 +33,7 @@ Widget buyButton(TuneInfo info,
                     ? LoginOtpPopup(
                         msisdn: bCont.msisdn,
                         info: info,
+                        isMusicBox: bCont.isMusicBox,
                       )
                     : BuyPopupView(
                         info: info,

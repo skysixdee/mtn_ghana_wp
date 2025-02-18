@@ -16,7 +16,7 @@ Future<GenericModel> buyMusicChannelApi(String toneId) async {
     "language": StoreManager.languageCode,
     "serviceId": "1",
     "priority": "0",
-    "paymentMode": " "
+    "paymentMode": ""
   };
   Map<String, dynamic> jsonResp =
       await NetworkManager().post(buyMusicChannelUrl, formData: jsonData);

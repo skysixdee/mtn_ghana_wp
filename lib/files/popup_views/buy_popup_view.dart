@@ -119,7 +119,8 @@ class _BuyPopupViewState extends State<BuyPopupView> {
                 con.updateMsisdn(p0);
               },
               onSubmit: (p0) {
-                con.onConfirmButtonAction(widget.info);
+                con.onConfirmButtonAction(widget.info,
+                    isMusicBox: widget.isMusicBox);
               },
             );
           },
@@ -167,7 +168,7 @@ class _BuyPopupViewState extends State<BuyPopupView> {
       title: confirmStr,
       bgColor: yellow,
       onTap: () {
-        con.onConfirmButtonAction(widget.info);
+        con.onConfirmButtonAction(widget.info, isMusicBox: widget.isMusicBox);
         con.onSuccess = () {
           Navigator.of(context).pop();
         };
