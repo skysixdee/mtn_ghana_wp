@@ -14,7 +14,7 @@ Future<GenericModel> buyMusicChannelApi(String toneId) async {
     "toneId": toneId,
     "channelId": channelId,
     "language": StoreManager.languageCode,
-    "serviceId": "1",
+    "serviceId": "7",
     "priority": "0",
     "paymentMode": ""
   };
