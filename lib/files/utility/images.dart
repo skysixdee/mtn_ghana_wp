@@ -9,3 +9,4 @@ const giftPng = 'assets/pngs/gift.png';
 
 const facebookPng = 'assets/pngs/facebook.png';
 const twitterPng = 'assets/pngs/twitter_icon.png';
+const defaultImagePng = 'assets/pngs/defaultImage.png';
