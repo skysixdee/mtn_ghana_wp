@@ -7,7 +7,8 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<PackDetailModel> getPackDetailApi() async {
   String url =
-      "${packDetailUrl}msisdn=${StoreManager.msisdn}&language=${StoreManager.selectedLanguage}";
+       "${packDetailUrl}msisdn=${StoreManager.msisdn}&language=${StoreManager.languageCode}";
+      //"${packDetailUrl}msisdn=${StoreManager.msisdn}&language=${StoreManager.selectedLanguage}";
   Map<String, dynamic> map = await NetworkManager().get(url);
   return packDetailModelFromJson(json.encode(map));
 }
