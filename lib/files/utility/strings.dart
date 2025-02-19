@@ -136,6 +136,8 @@ String nameTuneSubtitleOvalStr =
     "This could add a personalized touch to the calling experiance";
 String deleteBlackListConfirmMessageStr =
     "Are you sure you want to delete this blacklist?";
+String areYouSureWantToDeleteThisMusicBoxStr =
+    "Are you sure you want to delete this music box?";
 String enterValidMsisdnStr = "Please enter valid msisdn.";
 String pleaseEnterYourMobileNumberStr = "Please enter your mobile number";
 String enterFriendMobileNumberStr = "Enter Friend's Mobile Number";
@@ -158,8 +160,11 @@ String faqCStr = "FAQ";
 String howCanIHelpYouStr = "How Can I Help You";
 String faqFailerStr = 'Failed to load FAQ';
 
-String failedToLoadTermsAndConditionsStr='Failed to load terms and conditions';
-String failedToLoadTermsAndConditionsWithStatusCodeStr="Failed to load terms with status code:";
-String termsAndConditionsStr='Terms and Conditions';
-String noTermsAndConditionsAvailableStr='No terms and conditions available';
-String noValidTermsAndConditionsFoundStr='No valid terms and conditions found';
+String failedToLoadTermsAndConditionsStr =
+    'Failed to load terms and conditions';
+String failedToLoadTermsAndConditionsWithStatusCodeStr =
+    "Failed to load terms with status code:";
+String termsAndConditionsStr = 'Terms and Conditions';
+String noTermsAndConditionsAvailableStr = 'No terms and conditions available';
+String noValidTermsAndConditionsFoundStr =
+    'No valid terms and conditions found';

@@ -29,6 +29,7 @@ class TuneInfo {
   RxBool? isLiked = false.obs;
   bool? isPlaying = false;
   RxBool? isLiking = false.obs;
+  RxBool isDeleting = false.obs;
 
   TuneInfo({
     this.id,

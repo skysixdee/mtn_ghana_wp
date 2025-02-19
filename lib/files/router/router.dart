@@ -1,3 +1,4 @@
+import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
 import 'package:mtn_ghana_wp/files/controllers/artists_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/banner_detail_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/blacklist_controller.dart';
@@ -23,6 +24,7 @@ import 'package:mtn_ghana_wp/files/screens/mobile_drawer_screen/mobile_drawer_sc
 import 'package:mtn_ghana_wp/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
 import 'package:mtn_ghana_wp/files/screens/music_box/music_box_content_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/music_box/music_box_screen.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_screen/my_music_box_view/my_music_box_content.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/my_tune_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_setting_screen/my_tune_setting_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/my_wishlist_screen/my_wishlist_screen.dart';
@@ -62,6 +64,7 @@ final router = GoRouter(
         _nameTuneShell(),
         _musicBoxShell(),
         _musicBoxContentShell(),
+        _myMusicBoxContentShell(),
         _myTuneSettingShell(),
         _artistsTuneShell(),
         _blackListShell(),
@@ -73,6 +76,7 @@ final router = GoRouter(
     ),
   ],
   redirect: (context, state) {
+    CustomAudioPlayer.instance.stop();
     print("sky name = ${state.fullPath}");
     print("sky name = ${state.name}");
     String path = state.fullPath ?? '';
@@ -221,6 +225,31 @@ StatefulShellBranch _musicBoxContentShell() {
           String imgUrl = state.uri.queryParameters['imgUrl'] ?? '';
           cont.getMusicBoxContent(type, code);
           return MusicBoxContentScreen(
+            toneName: toneName,
+            toneid: toneId,
+            imgUrl: imgUrl,
+          );
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _myMusicBoxContentShell() {
+  MusicBoxController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: myMusicBoxContentRoute,
+        path: myMusicBoxContentRoute,
+        builder: (context, state) {
+          String type = state.uri.queryParameters['type'] ?? '';
+          String code = state.uri.queryParameters['code'] ?? '';
+          String toneName = state.uri.queryParameters['toneName'] ?? '';
+          String toneId = state.uri.queryParameters['toneId'] ?? '';
+          String imgUrl = state.uri.queryParameters['imgUrl'] ?? '';
+          cont.getMusicBoxContent(type, code);
+          return MyMusicBoxContent(
             toneName: toneName,
             toneid: toneId,
             imgUrl: imgUrl,

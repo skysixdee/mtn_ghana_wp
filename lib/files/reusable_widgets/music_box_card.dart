@@ -12,20 +12,29 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class MusicBoxCard extends StatelessWidget {
-  const MusicBoxCard({super.key, required this.info, this.rightButton});
+  const MusicBoxCard(
+      {super.key,
+      required this.info,
+      this.rightButton,
+      this.leftButton,
+      this.isMyMusicBox = false});
   final TuneInfo info;
   final Widget? rightButton;
+  final Widget? leftButton;
+  final bool isMyMusicBox;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.goNamed(musicBoxContentRoute, queryParameters: {
-          'type': info.type,
-          'code': info.toneId,
-          'toneName': info.toneName,
-          'toneId': info.toneId,
-          'imgUrl': info.toneIdpreviewImageUrl,
-        });
+        context.goNamed(
+            isMyMusicBox ? myMusicBoxContentRoute : musicBoxContentRoute,
+            queryParameters: {
+              'type': info.type,
+              'code': info.toneId,
+              'toneName': info.toneName,
+              'toneId': info.toneId,
+              'imgUrl': info.toneIdpreviewImageUrl,
+            });
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
@@ -60,16 +69,31 @@ class MusicBoxCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GenericButton(
-                          padding: EdgeInsets.zero,
-                          bgColor: transparent,
-                          title: previewStr,
-                          leadingIcon: const Icon(Icons.visibility),
-                        ),
-                        const SizedBox(width: 8),
+                        leftButton ??
+                            GenericButton(
+                              padding: EdgeInsets.zero,
+                              bgColor: transparent,
+                              title: previewStr,
+                              leadingIcon: const Icon(Icons.visibility),
+                              onTap: () {
+                                context.goNamed(
+                                    isMyMusicBox
+                                        ? myMusicBoxContentRoute
+                                        : musicBoxContentRoute,
+                                    queryParameters: {
+                                      'type': info.type,
+                                      'code': info.toneId,
+                                      'toneName': info.toneName,
+                                      'toneId': info.toneId,
+                                      'imgUrl': info.toneIdpreviewImageUrl,
+                                    });
+                                print("view all tune in music box");
+                              },
+                            ),
+                        const SizedBox(width: 20),
                         Flexible(
                           child: SizedBox(
-                            width: 80,
+                            //width: 80,
                             child: rightButton ??
                                 buyButton(info,
                                     isMusicBox: true,

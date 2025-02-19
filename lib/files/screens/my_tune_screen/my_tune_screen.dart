@@ -85,7 +85,8 @@ class MyTuneScreen extends StatelessWidget {
           );
         }),
         SizedBox(height: si.isMobile ? 20 : 30),
-        MyMusicBoxView()
+        MyMusicBoxView(),
+        SizedBox(height: si.isMobile ? 20 : 50),
       ],
     );
   }

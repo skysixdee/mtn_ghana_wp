@@ -4,12 +4,14 @@ import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 
-Widget getNavigationView(String title, {Widget? rightButton}) {
+Widget getNavigationView(String title,
+    {Widget? rightButton, List<NavigationHeaderModel>? navList}) {
   return NavigationHeaderView(
-    titleList: [
-      NavigationHeaderModel(homeStr, homeRoute),
-      NavigationHeaderModel(title, title),
-    ],
+    titleList: navList ??
+        [
+          NavigationHeaderModel(homeStr, homeRoute),
+          NavigationHeaderModel(title, title),
+        ],
     rightButton: rightButton,
   );
 }
