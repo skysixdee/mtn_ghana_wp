@@ -40,7 +40,7 @@ Widget customImage(
           placeholder: (context, url) =>
               const Center(child: CircularProgressIndicator()),
           errorWidget: (context, url, error) =>
-              Center(child: Image.asset(defaultImagePng)
+              Center(child: Image.asset(defaultImagePng, fit:BoxFit.fill, height:double.infinity, width:double.infinity)
                   //     CustomText(
                   //   title: title,
                   //   fontName: FontName.bold,

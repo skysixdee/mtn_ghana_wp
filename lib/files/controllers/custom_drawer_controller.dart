@@ -10,15 +10,15 @@ class CustomDrawerController extends GetxController {
     DrawerModel(myTunezStr, myTunesRoute),
     DrawerModel(myWishlistStr, myWishlistRoute),
     DrawerModel(tunezStr, '', isContainSubMenu: true),
-    DrawerModel(nameTuneStr, nameTuneRoute),
-    DrawerModel(blackListStr, blackListRoute),
+    // DrawerModel(nameTuneStr, nameTuneRoute),
+    // DrawerModel(blackListStr, blackListRoute),
     DrawerModel(faqStr, faqRoute),
     DrawerModel(logoutStr, logoutStr),
   ];
   List<DrawerModel> nonLoggedInDrawerMenu = [
     DrawerModel(homeStr, homeRoute),
     DrawerModel(tunezStr, tunezStr, isContainSubMenu: true),
-    DrawerModel(nameTuneStr, nameTuneRoute),
+    //DrawerModel(nameTuneStr, nameTuneRoute),
     DrawerModel(faqStr, faqRoute),
     DrawerModel(loginStr, loginStr),
   ];

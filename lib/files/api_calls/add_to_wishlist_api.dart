@@ -14,7 +14,7 @@ Future<void> addToWishlistApi(TuneInfo info) async {
     "msisdn": StoreManager.msisdn,
     "contentId": info.toneId,
     "contentName": info.toneName,
-    "path": info.toneIdpreviewImageUrl,
+    "path": info.toneIdStreamingUrl,
     "previewImage": info.toneIdpreviewImageUrl,
     "album": info.albumName,
     "artist": info.artistName,

@@ -43,7 +43,7 @@ class WebNavigationView extends StatelessWidget {
     PopoverMenuModel(myProfileStr),
     PopoverMenuModel(myTunezStr),
     PopoverMenuModel(myWishlistStr),
-    PopoverMenuModel(blackListStr),
+    //PopoverMenuModel(blackListStr),
     PopoverMenuModel(logoutStr)
   ];
   @override
@@ -91,8 +91,8 @@ class WebNavigationView extends StatelessWidget {
         categoryButton(),
         const SizedBox(width: 20),
         faqButton(context),
-        const SizedBox(width: 20),
-        nameTuneButton(context),
+        // const SizedBox(width: 20),
+        // nameTuneButton(context),
       ],
     );
   }
