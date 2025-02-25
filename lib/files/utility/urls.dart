@@ -68,7 +68,8 @@ String artistTuneSearchUrl =
 String deleteMyTuneUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/delete-tone";
 String setToneUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/set-tone";
-
+String addToneToShuffleUrl =
+    "$baseUrl/security/Middleware/api/adapter/v1/crbt/add-tone-to-shuffle";
 String sendGiftUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/send-gift";
 String searchNameTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones';
@@ -78,5 +79,7 @@ String createBlackListUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/add-to-black-list';
 String deleteBlacklistUrl =
     "$baseUrl/security/Middleware/api/adapter/v1/crbt/remove-from-black-list";
-String getTonePriceUrl="$baseUrl/security/Middleware/api/adapter/v1/crbt/get-tone-price";
-String buyMusicChannelUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/buy-music-channel";
+String getTonePriceUrl =
+    "$baseUrl/security/Middleware/api/adapter/v1/crbt/get-tone-price";
+String buyMusicChannelUrl =
+    "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/buy-music-channel";

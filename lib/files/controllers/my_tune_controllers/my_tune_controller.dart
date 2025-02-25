@@ -17,6 +17,9 @@ class MyTuneController extends GetxController {
   RxString message = ''.obs;
   String packName = '';
   getMyTune() async {
+    if (isLoading.value) {
+      return;
+    }
     isLoading.value = true;
     if (packName.isEmpty) {
       PackDetailModel packDetailModel = await getPackDetailApi();

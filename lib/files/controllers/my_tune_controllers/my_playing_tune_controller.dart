@@ -1,13 +1,17 @@
 import 'package:mtn_ghana_wp/files/api_calls/dedicated_tune_delete_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/delete_from_shuffle_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_my_music_box_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_playing_tune_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/shuffle_enable_disable_api.dart';
 import 'package:mtn_ghana_wp/files/enums/playing_card_type.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/model/my_music_box_model.dart';
 import 'package:mtn_ghana_wp/files/model/my_playing_tunes_model.dart';
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_screen/my_music_box_view/my_music_box_content.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 import 'package:flutter/foundation.dart';
@@ -18,11 +22,16 @@ class MyPlayingTuneController extends GetxController {
   RxString message = ''.obs;
   RxList<ToneDetail> tuneList = <ToneDetail>[].obs;
   RxBool isShuffleOn = false.obs;
+  List<TuneInfo> musicList = [];
   RxBool switchingShuffle = false.obs;
 
   getPlayingTune() async {
+    if (isLoading.value) {
+      return;
+    }
     message.value = '';
     isLoading.value = true;
+    musicList = await _getMusicBox();
     MyPlayingTunesModel model = await getMyPlayingTuneApi();
     print("model = $model");
     if (model.statusCode == 'SC0000') {
@@ -34,6 +43,15 @@ class MyPlayingTuneController extends GetxController {
     }
 
     isLoading.value = false;
+  }
+
+  Future<List<TuneInfo>> _getMusicBox() async {
+    List<TuneInfo> tuneList1 = [];
+    MyMusicBoxModel model = await getMyMusicBoxApi();
+    if (model.statusCode == 'SC0000') {
+      tuneList1 = model.responseMap?.listToneApk?.first.toneDetails ?? [];
+    }
+    return tuneList1;
   }
 
   enabelDispableShuffle() async {

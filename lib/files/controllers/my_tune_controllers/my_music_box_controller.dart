@@ -1,3 +1,5 @@
+import 'package:mtn_ghana_wp/files/api_calls/add_to_shuffle_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/add_to_wishlist_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/delete_mytune_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_my_music_box_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
@@ -22,6 +24,10 @@ class MyMusicBoxController extends GetxController {
     }
 
     isLoading.value = false;
+  }
+
+  addToShuffle(String toneId) async {
+    addToShuffleApi(toneId);
   }
 
   deleteMyMusicBox(TuneInfo info) async {

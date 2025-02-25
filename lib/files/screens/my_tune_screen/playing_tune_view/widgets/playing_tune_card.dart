@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
@@ -7,6 +8,7 @@ import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/widgets/day_repeat_view.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/widgets/monthly_repeat_view.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -53,7 +55,7 @@ class PlayingTuneCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            tuneInfo(si),
+            tuneInfo(si, context),
             verticalDivider(),
             statusWidget(si),
             verticalDivider(),
@@ -85,17 +87,47 @@ class PlayingTuneCard extends StatelessWidget {
     return customImage(url: info.toneIdpreviewImageUrl);
   }
 
-  Widget tuneInfo(SizingInformation si) {
+  Widget tuneInfo(SizingInformation si, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(child: nameAndArtist(si)),
         const SizedBox(width: 8),
-        playButton(),
+        con.musicList.any((v) => v.toneId == info.toneId)
+            //info.toneId == 'MUSICCHANNEL'
+            ? previewButton(context)
+            : playButton(),
         const SizedBox(width: 6),
+        //info.serviceName == 'MUSICCHANNEL'
         deleteButton(),
+        // con.musicList.any((v) => v.toneId == info.toneId)
+        //     ? const SizedBox()
+        //     : deleteButton(),
       ],
+    );
+  }
+
+  Widget previewButton(BuildContext context) {
+    return GenericButton(
+      height: 36,
+      width: 36,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      //title: previewStr,
+      leadingIcon: const Icon(
+        Icons.visibility,
+        size: 16,
+      ),
+      onTap: () {
+        print("tapped previewButton ===${info.toneId}");
+        context.goNamed(myMusicBoxContentRoute, queryParameters: {
+          'type': "",
+          'code': info.toneId,
+          'toneName': info.toneName,
+          'toneId': info.toneId,
+          'imgUrl': info.toneIdpreviewImageUrl,
+        });
+      },
     );
   }
 

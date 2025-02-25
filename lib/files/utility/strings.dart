@@ -101,6 +101,7 @@ String myProfileStr = "My Profile";
 
 String myWishlistStr = "My Wishlist";
 String wishlistStr = "Wishlist";
+String addToShuffleStr = "Add to shuffle";
 String blackListStr = "Black List";
 String logoutStr = "Logout";
 String enterNameStr = "Enter Name";
