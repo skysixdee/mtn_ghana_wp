@@ -25,10 +25,11 @@ class MyWishlistController extends GetxController {
     GenericModel model = await deleteFromWishlistApi(info);
     if (model.statusCode == "SC0000") {
       String ms = "${info.toneName} deleted " + "${model.message}fully";
+      tuneList.remove(info);
       snackBar(ms);
     } else {
       snackBar(model.message);
     }
-    tuneList.remove(info);
+    
   }
 }

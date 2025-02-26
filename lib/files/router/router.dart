@@ -311,9 +311,9 @@ StatefulShellBranch _myTuneShell() {
         builder: (context, state) {
           bool? isReload = state.extra as bool?;
           print(" extra = param = $isReload");
-          if (isReload ?? true) {
+          //if (isReload ?? true) {
             cont.makeApiCall();
-          }
+          //}
 
           return MyTuneScreen();
         },

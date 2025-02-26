@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.
 import 'package:mtn_ghana_wp/files/controllers/blacklist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/category_detail_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
@@ -238,8 +239,10 @@ class WebNavigationView extends StatelessWidget {
           con.getProfileDetail();
           context.goNamed(profileRoute);
         } else if (model.title == myTunezStr) {
-          MyTuneController con = Get.find();
-          con.getMyTune();
+          // MyTuneController con = Get.find();
+          // con.getMyTune();
+          TuneController cont=Get.find();
+          cont.makeApiCall();
           context.goNamed(myTunesRoute);
         } else if (model.title == blackListStr) {
           BlacklistController bCont = Get.find();

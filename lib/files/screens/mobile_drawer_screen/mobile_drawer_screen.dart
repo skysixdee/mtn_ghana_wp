@@ -1,6 +1,8 @@
 import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/category_detail_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/custom_drawer_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/model/drawer_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
@@ -78,6 +80,8 @@ class MobileDrawerScreen extends StatelessWidget {
         } else if (menuList[index].title == profileStr) {
           context.goNamed(profileRoute);
         } else if (menuList[index].title == myTunezStr) {
+          TuneController cont=Get.find();
+          cont.makeApiCall();
           context.goNamed(myTunesRoute);
         } else if (menuList[index].title == myWishlistStr) {
           context.goNamed(myWishlistRoute);
