@@ -11,15 +11,16 @@ import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
-Future<GenericModel> setToneApi(String toneId, String toneName) async {
-  String packName = await _getPackName(toneId);
+Future<GenericModel> setToneApi(String toneId, String toneName,
+    {String? packName}) async {
+  String packN = packName ?? await _getPackName(toneId);
   Map<String, dynamic> jsomData = {
     'clientTxnId': getTransactionId(),
     'language': StoreManager.languageCode,
     'msisdn': StoreManager.msisdn,
     'toneId': toneId,
     'toneName': toneName,
-    'packName': packName,
+    'packName': packN,
     'username': StoreManager.msisdn,
     'channelId': channelId,
   };

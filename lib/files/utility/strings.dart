@@ -55,7 +55,8 @@ String selectAtleasrOneDayStr =
 String timeDifferenceErrorStr =
     'Start Time cannot be greater than or equal to End Time';
 String subscribeStr = "Subscribe";
-
+String subscriptionPlanStr = "Subscription Plan";
+String unSubscribeStr = "Unsubscribe";
 String whomYouWantToPlayItStr = 'Whom you want to play it?';
 String specialCallerStr = 'Special Caller';
 String whenYouWantToPlayItStr = 'When you want to play it?';
@@ -169,3 +170,6 @@ String termsAndConditionsStr = 'Terms and Conditions';
 String noTermsAndConditionsAvailableStr = 'No terms and conditions available';
 String noValidTermsAndConditionsFoundStr =
     'No valid terms and conditions found';
+String chooseSubscriptionPlanStr = 'Choose your subscription plan.';
+String youShouldSubscribeAPlanStr =
+    'You should subscribe a plan before you buy or gift tunes.\nWhat is subscription?';

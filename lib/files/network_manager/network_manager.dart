@@ -74,8 +74,12 @@ class NetworkManager {
       if (formData != null) {
         var parts = [];
         formData.forEach((key, value) {
-          parts.add('${Uri.encodeQueryComponent(key)}='
-              '${Uri.encodeQueryComponent("$value")}');
+          // parts.add('${Uri.encodeQueryComponent(key)}='
+          //     '${Uri.encodeQueryComponent("$value")}');
+          // parts.add('$key='
+          //     "$value");
+          parts.add(
+              '${Uri.encodeQueryComponent(key)}=${Uri.encodeQueryComponent(value.toString())}');
         });
 
         clientRequests.write(parts.join('&'));

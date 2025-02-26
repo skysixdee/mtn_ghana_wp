@@ -1,16 +1,23 @@
+import 'package:flutter/widgets.dart';
+import 'package:mtn_ghana_wp/files/api_calls/delete_mytune_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/edit_profile_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_profile_detail_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
 import 'package:mtn_ghana_wp/files/model/edit_profile_model.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/model/profile_detail_model.dart';
+import 'package:mtn_ghana_wp/files/popup_views/subscription_plans_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   RxBool isLoading = false.obs;
+  RxBool isSubscribing = false.obs;
   RxBool isUpdating = false.obs;
   RxList<String> selectedCetegories = <String>[].obs;
   RxBool enableEdit = false.obs;
@@ -94,5 +101,44 @@ class ProfileController extends GetxController {
     for (var element in (getProfileDetails?.categories ?? '').split(',')) {
       selectedCetegories.add(element);
     }
+  }
+
+  subscribeButtonAction() async {
+    Get.dialog(Center(
+      child: SubscriptionPlansView(
+        onConfirm: (item) async {
+          isSubscribing.value = true;
+          String defaultToneId =
+              StoreManager.other?.defaultTone?.attribute ?? '';
+
+          GenericModel model =
+              await setToneApi(defaultToneId, '', packName: item.title);
+          if (model.statusCode == 'SC0000') {
+            getProfileDetail();
+          } else {
+            snackBar(model.message);
+          }
+
+          isSubscribing.value = false;
+          print("selected item is ${item.value}");
+          print("selected item is ${item.title}");
+        },
+      ),
+    ));
+    print("subscribeButtonAction");
+  }
+
+  unSubscribeButtonAction() async {
+    isSubscribing.value = true;
+    GenericModel model =
+        await deleteMyTuneApi("", packStatusDetails?.packName ?? '');
+    if (model.statusCode == 'SC0000') {
+      getProfileDetail();
+    } else {
+      snackBar(model.message);
+    }
+
+    isSubscribing.value = false;
+    print("unSubscribeButtonAction");
   }
 }

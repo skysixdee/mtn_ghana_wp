@@ -106,18 +106,79 @@ class ProfileScreen extends StatelessWidget {
             width: 100,
             child: const Icon(Icons.person),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 6.0),
-            child: CustomText(
-              title: con.packStatusDetails?.packName ?? inActiveStr,
-              color: con.packStatusDetails?.packName == ''
-                  ? red
-                  : const Color.fromARGB(255, 14, 184, 20),
-              fontName: FontName.bold,
-            ),
-          )
+          const SizedBox(height: 20),
+          status(),
+          subscriptionPlanWidget(),
+          const SizedBox(height: 8),
+          subscribeAndUnSubscribeButton()
         ],
       ),
+    );
+  }
+
+  Widget subscriptionPlanWidget() {
+    return con.packStatusDetails?.packName == null
+        ? const SizedBox(height: 12)
+        : Padding(
+            padding: const EdgeInsets.only(bottom: 12, top: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomText(title: "$subscriptionPlanStr : "),
+                CustomText(
+                  title: con.packStatusDetails?.packName ?? 'rwerwe',
+                  fontName: FontName.bold,
+                ),
+              ],
+            ),
+          );
+  }
+
+  Widget status() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomText(
+          title: "$statusStr : ",
+          //fontName: FontName.bold,
+        ),
+        //const SizedBox(height: 4),
+        CustomText(
+          title:
+              con.packStatusDetails?.packName == null ? inActiveStr : activeStr,
+          color: con.packStatusDetails?.packName == null
+              ? red
+              : const Color.fromARGB(255, 14, 184, 20),
+          fontName: FontName.bold,
+        )
+      ],
+    );
+  }
+
+  Widget subscribeAndUnSubscribeButton() {
+    return Obx(
+      () {
+        return con.isSubscribing.value
+            ? loadingIndicator()
+            : GenericButton(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                title: con.packStatusDetails?.packName == null
+                    ? subscribeStr
+                    : unSubscribeStr,
+                bgColor: con.packStatusDetails?.packName == null ? green : red,
+                textColor: white,
+                onTap: () {
+                  if (con.packStatusDetails?.packName == null) {
+                    con.subscribeButtonAction();
+                  } else {
+                    con.unSubscribeButtonAction();
+                  }
+                  print("tapped");
+                },
+              );
+      },
     );
   }
 
@@ -137,7 +198,7 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 30),
-          bottomButtons(si)
+          //bottomButtons(si)
         ],
       ),
     );
@@ -240,7 +301,8 @@ class ProfileScreen extends StatelessWidget {
 
   Widget prefrenceBuilder(SizingInformation si) {
     List<Category> lst = StoreManager.categories ?? [];
-    return Column(
+    return SizedBox();
+    Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
