@@ -43,7 +43,7 @@ class NetworkManager {
           Map<String, dynamic> valueMap = json.decode(stringData);
           return valueMap;
         } catch (e) {
-          customPrint("error5 is = ${e.toString()}");
+          customPrint("error5 is = ${e.toString()}\n and strin is $stringData");
           return catchError();
         }
       } catch (e) {
@@ -119,7 +119,7 @@ class NetworkManager {
           Map<String, dynamic> valueMap = json.decode(stringData);
           return valueMap;
         } catch (e) {
-          customPrint("error5 is = ${e.toString()}");
+          customPrint("error5 is = ${e.toString()}\n and strin is $stringData");
           return catchError();
         }
       } catch (e) {
