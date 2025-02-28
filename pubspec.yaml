@@ -58,6 +58,7 @@ dependencies:
   just_audio: ^0.9.37
   number_paginator: ^0.4.1
   google_tag_manager: ^0.1.0
+  local_session_timeout: ^3.2.0
   
 
 dev_dependencies:

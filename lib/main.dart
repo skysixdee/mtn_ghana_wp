@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:go_router/go_router.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/auto_login_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/create_blaclist_controller.dart';
 import 'package:mtn_ghana_wp/files/common/aes_enc_dec.dart';
@@ -24,7 +26,9 @@ import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/router/router.dart';
 import 'package:mtn_ghana_wp/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
@@ -36,6 +40,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mtn_ghana_wp/files/controllers/auth_controller/otp_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -77,10 +82,11 @@ Future<void> readProperties() async {
   expressMoodMessage = data['EXPRESS_MOOD_MESSAGE'];
   termsAndConditionUrl = data['TERMS_AND_CONDITION_URL'];
   privacyPolicyUrl = data['PRIVACY_POLICY'];
+  sessionLogOutTimeInMinute = data['SESSION_LOGOUT_TIME_IN_MINUTE'];
   countryCode = data['COUNTRY_CODE'];
-  msisdnLength=data["MSISDN_LENGTH"];
-  otpTimeLimit=data["OTP_TIME_LIMIT"];
-  otpLength=data["OTP_LENGTH"];
+  msisdnLength = data["MSISDN_LENGTH"];
+  otpTimeLimit = data["OTP_TIME_LIMIT"];
+  otpLength = data["OTP_LENGTH"];
   faqUrl = data['FAQ_URL'];
   customPrint("base url = $baseUrl");
   return;
@@ -125,15 +131,47 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'mtn_ghana_wp',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 222, 205, 18)),
-        useMaterial3: true,
+    final sessionConfig = SessionConfig(
+        invalidateSessionForAppLostFocus:
+            Duration(minutes: sessionLogOutTimeInMinute),
+        invalidateSessionForUserInactivity:
+            Duration(minutes: sessionLogOutTimeInMinute));
+
+    sessionConfig.stream.listen((SessionTimeoutState timeoutEvent) {
+      if (timeoutEvent == SessionTimeoutState.userInactivityTimeout) {
+        sessionLogoutTime();
+      } else if (timeoutEvent == SessionTimeoutState.appFocusTimeout) {
+        sessionLogoutTime();
+      }
+    });
+    return SessionTimeoutManager(
+      sessionConfig: sessionConfig,
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: 'mtn_ghana_wp',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 222, 205, 18)),
+          useMaterial3: true,
+        ),
+        routerConfig: router,
       ),
-      routerConfig: router,
     );
+  }
+
+  void sessionLogoutTime() {
+    print("Hello shiv poup1");
+    if (StoreManager.isLoggedIn) {
+      openAlertPopup(
+        message: sessionExpiredStr,
+        primaryBtnTitle: okCStr,
+        onPrimary: () {
+          print("Hello shiv poup");
+          if (Get.context != null) {
+            Get.context!.goNamed(homeRoute);
+          }
+        },
+      );
+    }
   }
 }

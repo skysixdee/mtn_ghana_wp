@@ -174,5 +174,9 @@ String chooseSubscriptionPlanStr = 'Choose your subscription plan.';
 String youShouldSubscribeAPlanStr =
     'You should subscribe a plan before you buy or gift tunes.\nWhat is subscription?';
 String youAreNotAActiveSubscriberStr = 'Your are not an active RBT subscriber';
-String unSubscribeMessageStr="All your tunes and settings will be removed from the system.";
-String unSubscribeSuccessfulMessageStr="Sorry to see you go. Your request is being processed. You will be notified shortly via sms.";
+String unSubscribeMessageStr =
+    "All your tunes and settings will be removed from the system.";
+String unSubscribeSuccessfulMessageStr =
+    "Sorry to see you go. Your request is being processed. You will be notified shortly via sms.";
+const sessionExpiredStr =
+    'Session expired.\n You will be logged out and redirected to Home page.';

@@ -5,6 +5,7 @@
     "MSISDN_LENGTH":9,
     "OTP_TIME_LIMIT":30,
     "OTP_LENGTH":6,
+    "SESSION_LOGOUT_TIME_IN_MINUTE":1,
     "COUNTRY_CODE":"+233 - ",
     "TUNE_CHARGE":"0.50 GHC for 30 days (Callertunes Subscription Charges will also apply)",
     "BOX_CHARGE":"R5/Week with 1st day FREE",   
