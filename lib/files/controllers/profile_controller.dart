@@ -9,6 +9,7 @@ import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/model/profile_detail_model.dart';
 import 'package:mtn_ghana_wp/files/popup_views/subscription_plans_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
@@ -129,16 +130,28 @@ class ProfileController extends GetxController {
   }
 
   unSubscribeButtonAction() async {
-    isSubscribing.value = true;
+    openAlertPopup(
+      message: unSubscribeMessageStr,
+      primaryBtnTitle: confirmStr,
+      secondryBtnTitle: cancelStr,
+      onPrimary: () async{
+        isSubscribing.value = true;
     GenericModel model =
         await deleteMyTuneApi("", packStatusDetails?.packName ?? '');
     if (model.statusCode == 'SC0000') {
-      getProfileDetail();
+      openAlertPopup(message: unSubscribeSuccessfulMessageStr,
+      onPrimary: () {
+        getProfileDetail();
+      },);
+      
     } else {
       snackBar(model.message);
     }
 
     isSubscribing.value = false;
+      },
+    );
+    
     print("unSubscribeButtonAction");
   }
 }

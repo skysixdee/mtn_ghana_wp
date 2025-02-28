@@ -15,12 +15,13 @@ import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class MyMusicBoxController extends GetxController {
   RxBool isLoading = false.obs;
-  List<TuneInfo> tuneList = [];
+  List<ListToneApk> tuneList = [];
+  List<ListToneApk>? listToneApk;
   getMyMusicBoxTune() async {
     isLoading.value = true;
     MyMusicBoxModel model = await getMyMusicBoxApi();
     if (model.statusCode == 'SC0000') {
-      tuneList = model.responseMap?.listToneApk?.first.toneDetails ?? [];
+      tuneList = model.responseMap?.listToneApk?? [];
     }
 
     isLoading.value = false;

@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/api_calls/delete_mytune_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_my_tune_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
@@ -10,6 +11,8 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
+
+import '../../router/route_name.dart';
 
 class MyTuneController extends GetxController {
   RxBool isLoading = false.obs;
@@ -25,6 +28,21 @@ class MyTuneController extends GetxController {
       PackDetailModel packDetailModel = await getPackDetailApi();
       packName = packDetailModel.responseMap?.packStatusDetails?.packName ?? '';
     }
+    if (packName.isEmpty) {
+      //genericPopover(context, menuList)
+      if (Get.context != null) {
+        openAlertPopup(
+          message: youAreNotAActiveSubscriberStr,
+          onPrimary: () {
+            Get.context!.goNamed(homeRoute);
+          },
+        );
+
+        //efwrwe
+      }
+      isLoading.value = false;
+      return;
+    }
     message.value = '';
     MyTunesModel model = await getMyTuneApi();
     if (model.statusCode == 'SC0000') {
@@ -37,6 +55,27 @@ class MyTuneController extends GetxController {
 
     isLoading.value = false;
   }
+  // getMyTune() async {
+  //   if (isLoading.value) {
+  //     return;
+  //   }
+  //   isLoading.value = true;
+  //   if (packName.isEmpty) {
+  //     PackDetailModel packDetailModel = await getPackDetailApi();
+  //     packName = packDetailModel.responseMap?.packStatusDetails?.packName ?? '';
+  //   }
+  //   message.value = '';
+  //   MyTunesModel model = await getMyTuneApi();
+  //   if (model.statusCode == 'SC0000') {
+  //     tuneApkList.value = model.responseMap?.listToneApk ?? [];
+  //     message.value = tuneApkList.isEmpty ? listIsEmptyStr : '';
+  //   } else {
+  //     message.value = model.message ?? '';
+  //     snackBar(model.message);
+  //   }
+
+  //   isLoading.value = false;
+  // }
 
   deleteTune(TuneInfo info, int index) async {
     print("fsddgdfgfdgdfgdf");
