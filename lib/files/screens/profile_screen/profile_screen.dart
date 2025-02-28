@@ -56,17 +56,18 @@ class ProfileScreen extends StatelessWidget {
     return SizedBox(
       width: 1000,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0.0),
-        child: si.isMobile ? mobileColumn(si) : deskTopLeftWidgt(si),
-      ),
+          padding: const EdgeInsets.symmetric(horizontal: 0.0),
+          child: mobileColumn(
+              si) //si.isMobile ? mobileColumn(si) : deskTopLeftWidgt(si),
+          ),
     );
   }
 
   Column mobileColumn(SizingInformation si) {
     return Column(
       children: [
-        profileImage(),
-        deskTopMainContainer(si),
+        profileImage(si),
+        //deskTopMainContainer(si),
       ],
     );
   }
@@ -77,19 +78,19 @@ class ProfileScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        profileImage(),
-        Flexible(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 40.0,
-          ),
-          child: deskTopMainContainer(si),
-        )),
+        profileImage(si),
+        // Flexible(
+        //     child: Padding(
+        //   padding: const EdgeInsets.symmetric(
+        //     vertical: 40.0,
+        //   ),
+        //   child: deskTopMainContainer(si),
+        // )),
       ],
     );
   }
 
-  Widget profileImage() {
+  Widget profileImage(SizingInformation si) {
     return Padding(
       padding: const EdgeInsets.all(30.0),
       child: Column(
@@ -107,6 +108,7 @@ class ProfileScreen extends StatelessWidget {
             child: const Icon(Icons.person),
           ),
           const SizedBox(height: 20),
+          SizedBox(width: 250, child: deskTopMainContainer(si)),
           status(),
           subscriptionPlanWidget(),
           const SizedBox(height: 8),
@@ -163,6 +165,7 @@ class ProfileScreen extends StatelessWidget {
         return con.isSubscribing.value
             ? loadingIndicator()
             : GenericButton(
+                width: 250,
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 title: con.packStatusDetails?.packName == null
                     ? subscribeStr
@@ -184,7 +187,7 @@ class ProfileScreen extends StatelessWidget {
 
   Widget deskTopMainContainer(SizingInformation si) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 30),
+      padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -197,7 +200,7 @@ class ProfileScreen extends StatelessWidget {
               Expanded(child: prefrenceBuilder(si)),
             ],
           ),
-          const SizedBox(height: 30),
+          //const SizedBox(height: 30),
           //bottomButtons(si)
         ],
       ),
