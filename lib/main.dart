@@ -167,6 +167,7 @@ class MyApp extends StatelessWidget {
         primaryBtnTitle: okCStr,
         onPrimary: () {
           print("Hello shiv poup");
+          StoreManager.logout();
           if (Get.context != null) {
             Get.context!.goNamed(homeRoute);
           }
