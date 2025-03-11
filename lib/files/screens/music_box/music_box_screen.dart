@@ -22,7 +22,10 @@ class MusicBoxScreen extends StatelessWidget {
           isLoading: con.isLoadingList.value,
           itemCount: con.musicBoxList.length,
           builder: (p0) {
-            return MusicBoxCard(info: con.musicBoxList[p0]);
+            return MusicBoxCard(
+              info: con.musicBoxList[p0],
+              index: p0,
+            );
           },
         );
       },

@@ -7,6 +7,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +18,9 @@ class MusicBoxCard extends StatelessWidget {
       required this.info,
       this.rightButton,
       this.leftButton,
-      this.isMyMusicBox = false});
+      this.isMyMusicBox = false,
+      required this.index});
+  final int index;
   final TuneInfo info;
   final Widget? rightButton;
   final Widget? leftButton;
@@ -54,6 +57,7 @@ class MusicBoxCard extends StatelessWidget {
                   child: Container(
                       color: lightGrey,
                       child: customImage(
+                          //imageName: 'assets/pngs/music_box_$index.png',
                           url: info.toneIdpreviewImageUrl,
                           toneName: info.previewImageUrl ?? ''))),
               Padding(

@@ -7,6 +7,7 @@ import 'package:mtn_ghana_wp/files/utility/images.dart';
 
 Widget customImage(
     {String? url,
+    String? imageName,
     Color gredientColor = transparent,
     double cornerRadius = 0,
     BoxFit? fit,
@@ -25,29 +26,41 @@ Widget customImage(
     children: [
       ClipRRect(
         borderRadius: BorderRadius.circular(cornerRadius),
-        child: CachedNetworkImage(
-          //imageUrl: 'https://picsum.photos/id/70/300/100',
-          imageUrl: url ?? '',
-          fit: fit ?? BoxFit.cover,
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: imageProvider,
+        child: imageName != null
+            ? Center(
+                child: Image.asset(
+                  height: double.maxFinite,
+                  width: double.maxFinite,
+                  imageName,
+                  fit: BoxFit.fill,
+                ),
+              )
+            : CachedNetworkImage(
+                //imageUrl: 'https://picsum.photos/id/70/300/100',
+                imageUrl: url ?? '',
                 fit: fit ?? BoxFit.cover,
-              ),
-            ),
-          ),
-          placeholder: (context, url) =>
-              const Center(child: CircularProgressIndicator()),
-          errorWidget: (context, url, error) =>
-              Center(child: Image.asset(defaultImagePng, fit:BoxFit.fill, height:double.infinity, width:double.infinity)
-                  //     CustomText(
-                  //   title: title,
-                  //   fontName: FontName.bold,
-                  //   fontSize: 20,
-                  // )
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: fit ?? BoxFit.cover,
+                    ),
                   ),
-        ),
+                ),
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Center(
+                    child: Image.asset(defaultImagePng,
+                        fit: BoxFit.fill,
+                        height: double.infinity,
+                        width: double.infinity)
+                    //     CustomText(
+                    //   title: title,
+                    //   fontName: FontName.bold,
+                    //   fontSize: 20,
+                    // )
+                    ),
+              ),
       ),
       Container(color: gredientColor)
     ],

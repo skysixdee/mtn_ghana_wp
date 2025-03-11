@@ -73,6 +73,7 @@ class _MusicBoxViewState extends State<MusicBoxView> {
                                     padding: const EdgeInsets.only(right: 12.0),
                                     child: MusicBoxCard(
                                       info: con.musicBoxList[index],
+                                      index: index,
                                     ),
                                   );
                                 },

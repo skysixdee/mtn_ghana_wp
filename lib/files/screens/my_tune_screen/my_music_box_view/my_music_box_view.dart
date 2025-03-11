@@ -34,12 +34,15 @@ class MyMusicBoxView extends StatelessWidget {
                 alignment: Alignment.topRight,
                 children: [
                   MusicBoxCard(
+                    index: p0,
                     isMyMusicBox: true,
-                    info: con.tuneList[p0].toneDetails?.first??TuneInfo(),
-                    leftButton: previewButton(context, con.tuneList[p0].toneDetails?.first??TuneInfo()),
-                    rightButton: deleteButton(con.tuneList[p0].toneDetails?.first??TuneInfo()),
+                    info: con.tuneList[p0].toneDetails?.first ?? TuneInfo(),
+                    leftButton: previewButton(context,
+                        con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
+                    rightButton: deleteButton(
+                        con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
                   ),
-                  moreButton(con.tuneList[p0].toneDetails?.first??TuneInfo()),
+                  moreButton(con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
                 ],
               );
             },
