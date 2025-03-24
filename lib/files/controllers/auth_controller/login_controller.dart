@@ -17,6 +17,7 @@ class LoginController extends GetxController {
   RxBool enableButton = false.obs;
   RxBool isLoading = false.obs;
   bool isNewUser = false;
+  String securityToken='';
   RxBool displayOptScreen = false.obs;
   int expireTime = 5;
   @override
@@ -62,6 +63,7 @@ class LoginController extends GetxController {
           NewUserRegistrationModel respo = await newUserRegistration(
               msisdn, model.responseMap?.securityCounter ?? "");
           if (respo.statusCode == "SC0000") {
+            securityToken=respo.responseMap.secToc??"";
             displayOptScreen.value = true;
           } else {
             message.value = someThingWentWrongStr;

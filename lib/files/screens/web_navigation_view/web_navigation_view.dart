@@ -164,6 +164,7 @@ class WebNavigationView extends StatelessWidget {
                     () {
                       return con.displayOptScreen.value
                           ? LoginOtpPopup(
+                              securityToken: con.securityToken,
                               isNewUser: con.isNewUser,
                               msisdn: con.msisdn,
                               isMusicBox: false,

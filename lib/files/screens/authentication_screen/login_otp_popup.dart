@@ -22,11 +22,13 @@ class LoginOtpPopup extends StatefulWidget {
     required this.msisdn,
     this.info,
     required this.isMusicBox,
+    required this.securityToken,
   });
   final bool isNewUser;
   final String msisdn;
   final TuneInfo? info;
   final bool isMusicBox;
+  final String securityToken;
 
   @override
   State<LoginOtpPopup> createState() => _LoginOtpPopupState();
@@ -129,11 +131,12 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
         return Visibility(
             visible: otpController.message.isNotEmpty,
             child: Padding(
-              padding: const EdgeInsets.only(top: 6),
+              padding: const EdgeInsets.only(top: 6,left:20, right:20),
               child: CustomText(
                 title: otpController.message.value,
                 color: red,
                 fontSize: 12,
+                textAlign: TextAlign.center,
                 fontName: FontName.regular,
               ),
             ));
