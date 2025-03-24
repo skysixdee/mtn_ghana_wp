@@ -16,6 +16,7 @@ class BuyTuneController extends GetxController {
   String msisdn = '';
   RxBool isLoading = false.obs;
   RxString message = ''.obs;
+  bool isNewUser = false;
   RxBool displayOptScreen = false.obs;
   Function()? onSuccess;
   bool isMusicBox = false;

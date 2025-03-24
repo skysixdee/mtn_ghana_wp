@@ -31,6 +31,7 @@ Widget buyButton(TuneInfo info,
               () {
                 return bCont.displayOptScreen.value
                     ? LoginOtpPopup(
+                        isNewUser: bCont.isNewUser,
                         msisdn: bCont.msisdn,
                         info: info,
                         isMusicBox: bCont.isMusicBox,

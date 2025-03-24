@@ -164,6 +164,7 @@ class WebNavigationView extends StatelessWidget {
                     () {
                       return con.displayOptScreen.value
                           ? LoginOtpPopup(
+                              isNewUser: con.isNewUser,
                               msisdn: con.msisdn,
                               isMusicBox: false,
                             )
@@ -241,7 +242,7 @@ class WebNavigationView extends StatelessWidget {
         } else if (model.title == myTunezStr) {
           // MyTuneController con = Get.find();
           // con.getMyTune();
-          TuneController cont=Get.find();
+          TuneController cont = Get.find();
           cont.makeApiCall();
           context.goNamed(myTunesRoute);
         } else if (model.title == blackListStr) {

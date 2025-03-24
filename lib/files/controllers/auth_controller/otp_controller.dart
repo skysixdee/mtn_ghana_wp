@@ -6,9 +6,11 @@ import 'package:mtn_ghana_wp/files/api_calls/authorization/password_validation_a
 import 'package:mtn_ghana_wp/files/api_calls/authorization/security_token_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/buy_music_channel_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_search_tune_list_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/otp_check_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
 import 'package:mtn_ghana_wp/files/model/confirm_otp_model.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/model/new_user_otp_check_model.dart';
 import 'package:mtn_ghana_wp/files/model/password_validation_model.dart';
 import 'package:mtn_ghana_wp/files/model/security_token_model.dart';
 import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
@@ -29,7 +31,7 @@ class OtpController extends GetxController {
   RxBool enableResend = true.obs;
   RxString leftTime = ''.obs;
   RxBool enableVerifyButton = false.obs;
-
+  bool isNewUser = false;
   late Timer _timer;
   int _start = 0;
   TuneInfo? info;
@@ -42,7 +44,8 @@ class OtpController extends GetxController {
     customPrint("OtpController onInit");
   }
 
-  onVerifyButtonAction(String msisdn, bool isMusicBox) async {
+  onVerifyButtonAction(String msisdn, bool isMusicBox, bool isNewUser) async {
+    this.isNewUser = isNewUser;
     if (otp.isEmpty || otp.length < otpLength) {
       message.value = enterOtpStr;
 
@@ -52,13 +55,29 @@ class OtpController extends GetxController {
     customPrint("qwrweter");
 
     isLoading.value = true;
-
-    ConfirmOtpModel confirmOtpModel = await confirmOtpApi(msisdn, otp);
-    if (confirmOtpModel.statusCode == 'SC0000') {
-      getSecurityToken(msisdn);
+    if (isNewUser) {
+      SecurityTokenModel securityTokenModel = await getSecurityTokenApi();
+      if (securityTokenModel.statusCode == 'SC0000') {
+        NewUserCheckOtpModel newUserCheckOtpModel = await otpCheckApi(
+            otp, msisdn, securityTokenModel.responseMap?.securityCounter ?? '');
+        if (newUserCheckOtpModel.statusCode == 'SC0000') {
+          getSecurityToken(msisdn);
+        } else {
+          message.value = newUserCheckOtpModel.responseMap?.respDesc ?? '';
+          isLoading.value = false;
+        }
+      } else {
+        message.value = someThingWentWrongStr;
+        isLoading.value = false;
+      }
     } else {
-      message.value = confirmOtpModel.message;
-      isLoading.value = false;
+      ConfirmOtpModel confirmOtpModel = await confirmOtpApi(msisdn, otp);
+      if (confirmOtpModel.statusCode == 'SC0000') {
+        getSecurityToken(msisdn);
+      } else {
+        message.value = confirmOtpModel.message;
+        isLoading.value = false;
+      }
     }
   }
 

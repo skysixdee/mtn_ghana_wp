@@ -57,6 +57,7 @@ class MobileDrawerScreen extends StatelessWidget {
             () {
               return con.displayOptScreen.value
                   ? LoginOtpPopup(
+                      isNewUser: con.isNewUser,
                       msisdn: con.msisdn,
                       isMusicBox: false,
                     )
@@ -80,7 +81,7 @@ class MobileDrawerScreen extends StatelessWidget {
         } else if (menuList[index].title == profileStr) {
           context.goNamed(profileRoute);
         } else if (menuList[index].title == myTunezStr) {
-          TuneController cont=Get.find();
+          TuneController cont = Get.find();
           cont.makeApiCall();
           context.goNamed(myTunesRoute);
         } else if (menuList[index].title == myWishlistStr) {

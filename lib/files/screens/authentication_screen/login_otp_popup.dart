@@ -18,10 +18,12 @@ import 'package:get/get.dart';
 class LoginOtpPopup extends StatefulWidget {
   const LoginOtpPopup({
     super.key,
+    required this.isNewUser,
     required this.msisdn,
     this.info,
     required this.isMusicBox,
   });
+  final bool isNewUser;
   final String msisdn;
   final TuneInfo? info;
   final bool isMusicBox;
@@ -37,7 +39,9 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
   @override
   void initState() {
     Get.lazyPut(() => OtpController());
+
     otpController = Get.find();
+    otpController.isNewUser = widget.isNewUser;
     otpController.info = widget.info;
     otpController.onResentButtonAction(widget.msisdn,
         second: loginController.expireTime, isLoading: false);
@@ -108,7 +112,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
                 title: verifyOtpStr,
                 onTap: () {
                   otpController.onVerifyButtonAction(
-                      widget.msisdn, widget.isMusicBox);
+                      widget.msisdn, widget.isMusicBox, widget.isNewUser);
                   customPrint("generate otp");
                   otpController.onSuccess = () {
                     Navigator.of(context).pop();
@@ -189,7 +193,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
           },
           onSubmit: (p0) {
             otpController.onVerifyButtonAction(
-                widget.msisdn, widget.isMusicBox);
+                widget.msisdn, widget.isMusicBox, widget.isNewUser);
             otpController.onSuccess = () {
               Navigator.of(context).pop();
             };

@@ -16,6 +16,7 @@ class LoginController extends GetxController {
   String msisdn = '';
   RxBool enableButton = false.obs;
   RxBool isLoading = false.obs;
+  bool isNewUser = false;
   RxBool displayOptScreen = false.obs;
   int expireTime = 5;
   @override
@@ -25,6 +26,7 @@ class LoginController extends GetxController {
   }
 
   resetValue() {
+    isNewUser = false;
     message.value = '';
     msisdn = '';
     enableButton.value = false;
@@ -39,7 +41,7 @@ class LoginController extends GetxController {
       customPrint("object");
       return;
     }
-
+    isNewUser = false;
     isLoading.value = true;
     SubscriberValidationModel model = await susbcriberValidationApi(msisdn);
     if (model.statusCode == 'SC0000') {
@@ -56,6 +58,7 @@ class LoginController extends GetxController {
         SecurityTokenModel model = await getSecurityTokenApi();
 
         if (model.statusCode == "SC0000") {
+          isNewUser = true;
           NewUserRegistrationModel respo = await newUserRegistration(
               msisdn, model.responseMap?.securityCounter ?? "");
           if (respo.statusCode == "SC0000") {
