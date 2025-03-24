@@ -36,6 +36,7 @@ class OtpController extends GetxController {
   int _start = 0;
   TuneInfo? info;
   bool isMusicBox = false;
+  String securityToken = '';
   Function()? onSuccess;
   @override
   void onInit() {
@@ -56,18 +57,12 @@ class OtpController extends GetxController {
 
     isLoading.value = true;
     if (isNewUser) {
-      SecurityTokenModel securityTokenModel = await getSecurityTokenApi();
-      if (securityTokenModel.statusCode == 'SC0000') {
-        NewUserCheckOtpModel newUserCheckOtpModel = await otpCheckApi(
-            otp, msisdn, securityTokenModel.responseMap?.securityCounter ?? '');
-        if (newUserCheckOtpModel.statusCode == 'SC0000') {
-          getSecurityToken(msisdn);
-        } else {
-          message.value = newUserCheckOtpModel.responseMap?.respDesc ?? '';
-          isLoading.value = false;
-        }
+      NewUserCheckOtpModel newUserCheckOtpModel =
+          await otpCheckApi(otp, msisdn, securityToken);
+      if (newUserCheckOtpModel.statusCode == 'SC0000') {
+        getSecurityToken(msisdn);
       } else {
-        message.value = someThingWentWrongStr;
+        message.value = newUserCheckOtpModel.responseMap?.respDesc ?? '';
         isLoading.value = false;
       }
     } else {

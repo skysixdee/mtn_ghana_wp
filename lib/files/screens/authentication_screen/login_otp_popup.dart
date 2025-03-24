@@ -45,6 +45,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
     otpController = Get.find();
     otpController.isNewUser = widget.isNewUser;
     otpController.info = widget.info;
+    otpController.securityToken = widget.securityToken;
     otpController.onResentButtonAction(widget.msisdn,
         second: loginController.expireTime, isLoading: false);
     super.initState();
@@ -131,7 +132,7 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
         return Visibility(
             visible: otpController.message.isNotEmpty,
             child: Padding(
-              padding: const EdgeInsets.only(top: 6,left:20, right:20),
+              padding: const EdgeInsets.only(top: 6, left: 20, right: 20),
               child: CustomText(
                 title: otpController.message.value,
                 color: red,
