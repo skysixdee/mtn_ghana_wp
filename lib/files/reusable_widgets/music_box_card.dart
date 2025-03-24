@@ -48,7 +48,7 @@ class MusicBoxCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
               color: white,
               boxShadow: const [
-                BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+                BoxShadow(color: lightGrey, blurRadius: 3,  spreadRadius: 1)
               ]),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +57,7 @@ class MusicBoxCard extends StatelessWidget {
                   child: Container(
                       color: lightGrey,
                       child: customImage(
-                          //imageName: 'assets/pngs/music_box_$index.png',
+                          imageName: 'assets/pngs/music_box_$index.png',
                           url: info.toneIdpreviewImageUrl,
                           toneName: info.previewImageUrl ?? ''))),
               Padding(
