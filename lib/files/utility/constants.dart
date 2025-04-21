@@ -9,6 +9,7 @@ String nameTuneCategoryId = '';
 String musicBoxPrice = '';
 String tuneChargePrice = '';
 String expressMoodMessage = '';
+String fallBackCharge='';
 String termsAndConditionUrl = '';
 String privacyPolicyUrl = '';
 int sessionLogOutTimeInMinute = 10;

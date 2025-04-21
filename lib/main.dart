@@ -80,6 +80,7 @@ Future<void> readProperties() async {
   musicBoxPrice = data['BOX_CHARGE'];
   tuneChargePrice = data['TUNE_CHARGE'];
   expressMoodMessage = data['EXPRESS_MOOD_MESSAGE'];
+  fallBackCharge=data['FALL_BACK_CHARGE'];
   termsAndConditionUrl = data['TERMS_AND_CONDITION_URL'];
   privacyPolicyUrl = data['PRIVACY_POLICY'];
   sessionLogOutTimeInMinute = data['SESSION_LOGOUT_TIME_IN_MINUTE'];

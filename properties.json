@@ -11,7 +11,9 @@
     "BOX_CHARGE":"R5/Week with 1st day FREE",   
     "TERMS_AND_CONDITION_URL":"https://callertuneztest.mtn.com.gh/ghana/assets/languages/English/TermsConditions.json",
     "PRIVACY_POLICY":"https://callertunez.mtn.co.gh/home/help/content/privacy-policy",
-    "EXPRESS_MOOD_MESSAGE":"Express Your Mood\n• Let your caller share your mood by setting funky ring back tones.\n• Tone is 50 Pesewas and valid for 30 days.\n• Monthly subscription fee of 70 Pesewas for 30 days.\n• Subscription will be renewed after 30 days.\n• * Fallback charges may apply."
+    "EXPRESS_MOOD_MESSAGE":"Express Your Mood\n• Let your caller share your mood by setting funky ring back tones.\n• Tone is 50 Pesewas and valid for 30 days.\n• Monthly subscription fee of 70 Pesewas for 30 days.\n• Subscription will be renewed after 30 days.\n• Fallback charges will apply with the below prices and validity periods: ",
+    "FALL_BACK_CHARGE":"\t \t* GHS 0.22 valid for 7 days.\n \t * GHS 0.32 valid for 8 days. \n \t * GHS 0.38 valid for 10 days. \n \t * GHS 0.49 valid for 14 days. \n \t * GHS 0.65 valid for 20 days."
+
 }
 
 

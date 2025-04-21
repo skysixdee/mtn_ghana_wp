@@ -42,29 +42,71 @@ class ExpressInfoView extends StatelessWidget {
   Widget leftImage() {
     return Stack(children: [
       Opacity(
-          opacity: 0.8, child: Image.asset(expressPng, color: Colors.black,height: 230,)),
+          opacity: 0.8,
+          child: Image.asset(
+            expressPng,
+            color: Colors.black,
+            height: 230,
+          )),
       ClipRect(
           child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: Image.asset(expressPng,height: 230)))
+              child: Image.asset(expressPng, height: 230)))
     ]);
   }
 
   Widget rightMessage(SizingInformation si) {
-    List<String> messages = expressMoodMessage.split('\n');
+    List<String> expressLines = expressMoodMessage.split('\n');
+    List<String> fallbackLines = fallBackCharge.split('\n');
+
     List<Widget> list = <Widget>[];
-    for (var i = 0; i < messages.length; i++) {
+
+    for (var i = 0; i < expressLines.length; i++) {
       list.add(CustomText(
-        title: messages[i],
+        title: expressLines[i],
         fontName: i == 0 ? FontName.bold : FontName.regular,
         fontSize: i == 0 ? (si.isMobile ? 18 : 25) : (si.isMobile ? 14 : 20),
-        // fontSize: i == 0 ? (si.isMobile ? 20 : 40) : (si.isMobile ? 14 : 30),
+        //fontSize: i == 0 ? (si.isMobile ? 14 : 20) : (si.isMobile ? 10 : 15),
       ));
     }
+
+    for (var i = 0; i < fallbackLines.length; i++) {
+      list.add(
+        Padding(
+          padding: EdgeInsets.only(left: si.isMobile ? 12 : 20),
+          child: CustomText(
+            title: fallbackLines[i].trim(),
+            fontName: FontName.regular,
+            fontSize: si.isMobile ? 10 : 15,
+          ),
+        ),
+      );
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: list,
     );
   }
+
+  // Widget rightMessage(SizingInformation si) {
+  //   List<String> messages = expressMoodMessage.split('\n');
+
+  //   List<Widget> list = <Widget>[];
+  //   for (var i = 0; i < messages.length; i++) {
+  //     list.add(CustomText(
+  //       title: messages[i],
+  //       fontName: i == 0 ? FontName.bold : FontName.regular,
+  //       fontSize: i == 0 ? (si.isMobile ? 14 : 20) : (si.isMobile ? 10 : 15),
+  //       //fontSize: i == 0 ? (si.isMobile ? 18 : 25) : (si.isMobile ? 14 : 20),
+  //       // fontSize: i == 0 ? (si.isMobile ? 20 : 40) : (si.isMobile ? 14 : 30),
+  //     ));
+  //   }
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.start,
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: list,
+  //   );
+  // }
 }
