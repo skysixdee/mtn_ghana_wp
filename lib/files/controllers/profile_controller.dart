@@ -103,14 +103,14 @@ class ProfileController extends GetxController {
       selectedCetegories.add(element);
     }
   }
-
+  
   subscribeButtonAction() async {
     Get.dialog(Center(
       child: SubscriptionPlansView(
         onConfirm: (item) async {
           isSubscribing.value = true;
-          String defaultToneId =
-              StoreManager.other?.defaultTone?.attribute ?? '';
+          String defaultToneId = '';//default tone from setting api
+              //StoreManager.other?.defaultTone?.attribute ?? '';
 
           GenericModel model =
               await setToneApi(defaultToneId, '', packName: item.title);

@@ -412,7 +412,7 @@ class ProfileScreen extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: customImage(
-                          url: lst[p0].menuImagePath,
+                          url: lst[p0].menuImage,
                           gredientColor: black.withOpacity(0.4)),
                     ),
                     redioButton(lst, p0)

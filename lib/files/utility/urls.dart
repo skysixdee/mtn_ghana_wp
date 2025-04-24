@@ -8,6 +8,7 @@ String bannerUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/banner?';
 String categoryUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/categories?';
 
+
 String searchUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?";
 String bannerDetailUrl =
@@ -85,3 +86,10 @@ String buyMusicChannelUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/buy-music-channel";
 String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
+
+//----------------------selfcare api url--------------------------
+String categoryScUrl="http://10.0.14.4:5892/selfcare/get-category-list?";
+String bannerScUrl="http://10.0.14.4:5892/selfcare/get-banner-list?";
+String advancedSearchScUrl="http://10.0.14.4:8090/advanced-search";
+String bannerDetailScUrl="http://10.0.14.4:5892/selfcare/get-banner-details?";
+String settingScUrl="http://10.0.13.19:9093/setting-service/settings";

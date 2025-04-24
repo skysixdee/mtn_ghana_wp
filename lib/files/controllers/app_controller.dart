@@ -12,8 +12,8 @@ class AppController extends GetxController {
   void onInit() async {
     super.onInit();
     getAppSettingApi();
-    CategoryModel categoryModel = await getCategoryApi();
-    StoreManager.categories = categoryModel.responseMap?.categories ?? [];
-    categories.value = categoryModel.responseMap?.categories ?? [];
+    CategoryModel categoryModel = await getCategoryScApi();
+    StoreManager.categories = categoryModel.responseMap?.categoryList ?? [];
+    categories.value = categoryModel.responseMap?.categoryList ?? [];
   }
 }

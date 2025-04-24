@@ -62,8 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const SizedBox(height: 8),
               HomeBannerView(key: widget.key),
-              const SizedBox(height: 20),
-              const MusicBoxView(),
+              // const SizedBox(height: 20),
+              // const MusicBoxView(),
               const SizedBox(height: 30),
               FeatureCategoryView(key: widget.key),
               const SizedBox(height: 30),

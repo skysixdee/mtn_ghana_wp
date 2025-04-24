@@ -19,8 +19,10 @@ class BannerDetailController extends GetxController {
           await getBannerCategoryApi(type, searchKey);
       tuneList = artistTuneListModel.responseMap?.searchList ?? [];
     } else {
-      BannerDetailModel model = await getBannerDetailApi(type, searchKey);
-      tuneList = model.responseMap?.searchList ?? [];
+      BannerDetailModel model = await getBannerDetailScApi(type, searchKey);
+      //tuneList = model.responseMap?.searchList ?? [];
+      tuneList = model.responseMap?.bannerDetails ?? [];
+      print("_______________Gokul_________:${tuneList}");
     }
 
     isLoading.value = false;

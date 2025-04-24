@@ -4,15 +4,15 @@ import 'package:get/get.dart';
 
 class BannerController extends GetxController {
   RxInt selectedIndex = 0.obs;
-  List<Banner> banners = [];
+  List<BannerList> banners = [];
   RxBool isLoading = false.obs;
   @override
   void onInit() async {
     super.onInit();
     isLoading.value = true;
-    BannerModel model = await getBannerApi();
-    banners = model.responseMap?.banners ?? [];
-
+    BannerModel model = await getBannerScApi();
+    banners = model.responseMap?.bannerList ?? [];
+    print("________gokul________:${banners}");
     isLoading.value = false;
   }
 

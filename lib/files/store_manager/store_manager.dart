@@ -12,7 +12,7 @@ const String _language = 'language';
 const String _isLoggedIn = 'is_logged_in';
 
 class StoreManager {
-  static Others? other;
+  static AppSettingModel? other;
   static bool isLoggedIn = true;
   static bool isEnglish = true;
   static String selectedLanguage = 'English';

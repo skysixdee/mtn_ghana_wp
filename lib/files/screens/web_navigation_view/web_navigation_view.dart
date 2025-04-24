@@ -314,7 +314,7 @@ class WebNavigationView extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             customImage(
-                url: appController.categories[index].menuImagePath,
+                url: appController.categories[index].menuImage,
                 gredientColor: gredientColor),
             CustomText(
               title: appController.categories[index].categoryName ?? '',

@@ -124,7 +124,7 @@ class Settings {
         "others": others?.toJson(),
       };
 }
-/*
+
 class Others {
     AboutAppurlBurmese? featuredCategoryEnglish;
     AboutAppurlBurmese? featuredCategoryBurmese;
@@ -396,4 +396,3 @@ class AboutAppurlBurmese {
         "attribute": attribute,
     };
 }
-*/
