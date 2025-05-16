@@ -93,3 +93,5 @@ String bannerScUrl="http://10.0.14.4:5892/selfcare/get-banner-list?";
 String advancedSearchScUrl="http://10.0.14.4:8090/advanced-search";
 String bannerDetailScUrl="http://10.0.14.4:5892/selfcare/get-banner-details?";
 String settingScUrl="http://10.0.13.19:9093/setting-service/settings";
+String addToneToShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/add-tone-to-shufflelist";
+String deleteFromShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/delete-tone-from-shufflelist";

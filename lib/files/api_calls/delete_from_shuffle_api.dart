@@ -26,3 +26,20 @@ Future<GenericModel> deleteFromShuffleApi(
       await NetworkManager().post(deleteFromShuffleUrl, formData: jsomForm);
   return genericModelFromJson(json.encode(map));
 }
+
+
+Future<GenericModel> deleteFromShuffleScApi(
+    String contentId, String timeType) async {
+  Map<String, dynamic> jsomForm = {
+    "transactionId": getTransactionId(),
+    "featureId" : 1,
+    "msisdn": StoreManager.msisdn,
+    "channelId": channelId,
+    "contentIdlist": [
+      {"contentId": contentId}
+    ]
+  };
+  Map<String, dynamic> map =
+      await NetworkManager().post(deleteFromShuffleScUrl, jsonData: jsomForm);
+  return genericModelFromJson(json.encode(map));
+}

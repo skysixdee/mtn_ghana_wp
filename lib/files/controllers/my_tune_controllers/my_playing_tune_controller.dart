@@ -194,7 +194,7 @@ class MyPlayingTuneController extends GetxController {
 
   _deleteAllCallerTune(ToneDetail info) async {
     GenericModel model =
-        await deleteFromShuffleApi(info.toneId ?? '', getTimeType(info));
+        await deleteFromShuffleScApi(info.toneId ?? '', getTimeType(info));
     if (model.statusCode == 'SC0000') {
       tuneList.remove(info);
     } else {

@@ -28,7 +28,7 @@ class MyMusicBoxController extends GetxController {
   }
 
   addToShuffle(String toneId) async {
-    addToShuffleApi(toneId);
+    addToShuffleScApi(toneId);
   }
 
   deleteMyMusicBox(TuneInfo info) async {
