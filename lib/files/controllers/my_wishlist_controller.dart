@@ -15,7 +15,7 @@ class MyWishlistController extends GetxController {
       return;
     }
     isLoading.value = true;
-    WishlistModel model = await getWishlistApi();
+    WishlistModel model = await getWishlistScApi();
     tuneList.value = model.responseMap?.toneDetailsList ?? [];
     isLoading.value = false;
   }

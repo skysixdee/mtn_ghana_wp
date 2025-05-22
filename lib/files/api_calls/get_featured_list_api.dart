@@ -33,7 +33,7 @@ Future<AdvancedSearchModal> advancedSearchScApi(
     "filter": "Content",
     "filterPref": "custom",
     "locale": "en",
-    "searchKey":["SKY"],
+    "searchKey":[""],
     "categoryId": [catId], //[StoreManager.categories]
   };
   Map<String, dynamic> map = await NetworkManager().post(advancedSearchScUrl,

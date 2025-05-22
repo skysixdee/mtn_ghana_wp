@@ -1,3 +1,4 @@
+import 'package:mtn_ghana_wp/files/api_calls/category_search_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_app_setting.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_featured_list_api.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
@@ -72,7 +73,8 @@ class FeatureController extends GetxController {
     //FeturedModel model = await getFeaturedListApi(tabList[index].value);
     //List<TuneInfo> list = model.responseMap?.recommendationSongsList ?? [];
     AdvancedSearchModal model =
-          await advancedSearchScApi(tabList[index].intValue);
+            await categorySearchApi(tabList[index].intValue);
+          //await advancedSearchScApi(tabList[index].intValue);
     List<TuneInfo> list = model.responseMap?.toneList ?? [];
     displayList.value = list;
     _listOfList[index] = list;

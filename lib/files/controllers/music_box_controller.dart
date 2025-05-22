@@ -15,10 +15,11 @@ class MusicBoxController extends GetxController {
   void onInit() async {
     customPrint("called");
     super.onInit();
-    getMusicBoxApi();
+   // getMusicBoxApi();
   }
 
   getMusicBox() async {
+    return 
     isLoadingList.value = true;
     MusicBoxModel model = await getMusicBoxApi();
     musicBoxList = model.responseMap?.musicBoxSearchList ?? [];
@@ -28,6 +29,7 @@ class MusicBoxController extends GetxController {
   }
 
   getMusicBoxContent(String type, String code) async {
+    return 
     isLoadingContent.value = true;
     MusicBoxContentModel model = await getMusicBoxContentApi(type, code);
     musicBoxContentList = model.responseMap?.searchList ?? [];

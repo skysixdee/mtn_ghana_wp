@@ -1,20 +1,19 @@
 //$baseUrl
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 
-String settingUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/settings';
-String featuredUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/get-recommendation-songs?';
-String bannerUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/banner?';
 String categoryUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/categories?';
-
-
-String searchUrl =
-    "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?";
+String bannerUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/banner?';
+String featuredUrl =
+    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/get-recommendation-songs?';
 String bannerDetailUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/banner-search?";
-String categoryDetailUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
+String settingUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/settings';
+String addToneToShuffleUrl =
+    "$baseUrl/security/Middleware/api/adapter/v1/crbt/add-tone-to-shuffle";
+String deleteFromShuffleUrl =
+    '$baseUrl/security/Middleware/api/adapter/v1/crbt/delete-from-shuffle';
+
 String myWishistUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/view-wishlist';
 String addToWishlistUrl =
@@ -46,8 +45,7 @@ String tuneSettingFulldayUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/time-based-setting-for-already-activated';
 String tuneSettingDedicatedUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/dedicated-user-tone-addition-with-time-setting';
-String deleteFromShuffleUrl =
-    '$baseUrl/security/Middleware/api/adapter/v1/crbt/delete-from-shuffle';
+
 String deleteDedicatedTuneUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/delete-dedication';
 
@@ -69,8 +67,7 @@ String artistTuneSearchUrl =
 String deleteMyTuneUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/delete-tone";
 String setToneUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/set-tone";
-String addToneToShuffleUrl =
-    "$baseUrl/security/Middleware/api/adapter/v1/crbt/add-tone-to-shuffle";
+
 String sendGiftUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/send-gift";
 String searchNameTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones';
@@ -87,6 +84,13 @@ String buyMusicChannelUrl =
 String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
+//-------------------------didn't find--------------------------
+String searchUrl =
+    "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?";
+String categoryDetailUrl =
+    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
+
+
 //----------------------selfcare api url--------------------------
 String categoryScUrl="http://10.0.14.4:5892/selfcare/get-category-list?";
 String bannerScUrl="http://10.0.14.4:5892/selfcare/get-banner-list?";
@@ -95,3 +99,7 @@ String bannerDetailScUrl="http://10.0.14.4:5892/selfcare/get-banner-details?";
 String settingScUrl="http://10.0.13.19:9093/setting-service/settings";
 String addToneToShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/add-tone-to-shufflelist";
 String deleteFromShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/delete-tone-from-shufflelist";
+String myWishistScUrl =
+    '$baseUrl/selfcare/wishlist-service/get-wishlist';
+
+String categorySearchScUrl="http://10.0.14.4:8091/selfcare/category-search";    

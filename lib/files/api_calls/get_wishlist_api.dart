@@ -17,3 +17,14 @@ Future<WishlistModel> getWishlistApi() async {
       await NetworkManager().post(myWishistUrl, formData: formData);
   return wishlistModelFromJson(json.encode(map));
 }
+
+Future<WishlistModel> getWishlistScApi() async {
+  Map<String, dynamic> jsonData = {
+    "msisdn": StoreManager.msisdn,
+    "type": 1,
+    "languageCode": StoreManager.languageCode,
+  };
+  Map<String, dynamic> map =
+      await NetworkManager().post(myWishistScUrl, jsonData: jsonData);
+  return wishlistModelFromJson(json.encode(map));
+}

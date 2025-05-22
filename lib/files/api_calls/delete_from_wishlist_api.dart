@@ -20,3 +20,17 @@ Future<GenericModel> deleteFromWishlistApi(TuneInfo info) async {
       await NetworkManager().post(deleteFromWishlistUrl, formData: map);
   return genericModelFromJson(json.encode(mapJso));
 }
+
+
+Future<GenericModel> deleteFromWishlistScApi(TuneInfo info) async {
+  Map<String, dynamic> map = {
+    "msisdn": StoreManager.msisdn,
+    "contentId": "${info.id}",
+    "languageCode": "English",
+    "clientTxnId": getTransactionId(),
+    "wishlistType": "1",
+  };
+  Map<String, dynamic> mapJso =
+      await NetworkManager().post(deleteFromWishlistUrl, formData: map);
+  return genericModelFromJson(json.encode(mapJso));
+}
