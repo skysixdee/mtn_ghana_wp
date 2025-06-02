@@ -2,6 +2,7 @@ import 'package:mtn_ghana_wp/files/api_calls/authorization/generate_otp_api.dart
 import 'package:mtn_ghana_wp/files/api_calls/authorization/new_user_registration_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/security_token_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/subscriber_validation_api.dart';
+import 'package:mtn_ghana_wp/files/model/generate_otp_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/get_security_token_model.dart';
 import 'package:mtn_ghana_wp/files/model/newUserRegistrationModel.dart';
 import 'package:mtn_ghana_wp/files/model/security_token_model.dart';
@@ -44,17 +45,17 @@ class LoginController extends GetxController {
     }
     isNewUser = false;
     isLoading.value = true;
-    SubscriberValidationModel model = await susbcriberValidationApi(msisdn);
-    if (model.statusCode == 'SC0000') {
-      if (model.responseMap?.respCode == "SC0000") {
-        SubscriberValidationModel genModel = await generateOtpApi(msisdn);
-        if (genModel.statusCode == 'SC0000') {
+    //SubscriberValidationModel model = await susbcriberValidationApi(msisdn);
+    //if (model.statusCode == 'SC0000') {
+      // if (model.responseMap?.respCode == "SC0000") {
+        GenerateOtpScModel genModel = await generateOtpScApi(msisdn);
+        if (genModel.respCode ==1000) {
           displayOptScreen.value = true;
         } else {
-          message.value = model.message ?? someThingWentWrongStr;
+          message.value = genModel.message ?? someThingWentWrongStr;
           isLoading.value = false;
         }
-      } else if (model.responseMap?.respCode == "100") {
+      //} else if (model.responseMap?.respCode == "100") {
         //new user
         SecurityTokenModel model = await getSecurityTokenApi();
 
@@ -71,15 +72,15 @@ class LoginController extends GetxController {
           }
         }
         //getSecurityToken(false, true);
-      } else {
-        message.value = model.message ?? someThingWentWrongStr;
-        isLoading.value = false;
-      }
+      // } else {
+      //   message.value = model.message ?? someThingWentWrongStr;
+      //   isLoading.value = false;
+      // }
       //displayOptScreen.value = true;
-    } else {
-      message.value = model.message ?? someThingWentWrongStr;
-      isLoading.value = false;
-    }
+    // } else {
+    //   message.value = model.message ?? someThingWentWrongStr;
+    //   isLoading.value = false;
+    // }
 
     isLoading.value = false;
   }

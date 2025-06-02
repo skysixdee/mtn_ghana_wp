@@ -85,7 +85,7 @@ class MobileTunePreviewCotroller extends GetxController {
         packDetailModel.responseMap?.packStatusDetails?.packName ?? '';
     MyTuneController myCon = Get.find();
     GenericModel model =
-        await deleteMyTuneApi(currentTuneDetail.value.toneId ?? '', packName);
+        await deleteMyTuneScApi(currentTuneDetail.value.toneId ?? '', packName);
     if (model.statusCode == 'SC0000') {
       tuneList.contains(currentTuneDetail.value);
       for (var i = 0; i < myCon.tuneApkList.length; i++) {

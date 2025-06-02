@@ -15,7 +15,7 @@ class ArtistsTuneController extends GetxController {
       return;
     }
     isLoading.value = true;
-    ArtistTuneListModel model = await getArtistTuneListApi(key);
+    ArtistTuneListModel model = await getArtistTuneListScApi(key);
     tuneList = model.responseMap?.searchList ?? [];
     totalToneCount.value = model.responseMap?.totalCount ?? 0;
     isLoading.value = false;
@@ -23,7 +23,7 @@ class ArtistsTuneController extends GetxController {
 
   loadMoreData(int index) async {
     isLoading.value = true;
-    ArtistTuneListModel model = await getArtistTuneListApi(_key, pageNo: index);
+    ArtistTuneListModel model = await getArtistTuneListScApi(_key, pageNo: index);
     tuneList = model.responseMap?.searchList ?? [];
     isLoading.value = false;
   }

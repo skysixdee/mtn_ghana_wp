@@ -13,7 +13,8 @@ Future<CategoryModel> getCategoryApi() async {
 }
 
 Future<CategoryModel> getCategoryScApi() async {
-  String url = "${categoryScUrl}languageCode=${StoreManager.languageSort}&categoryValue=4";
+  String url = categoryScUrl;
+  //"${categoryScUrl}languageCode=${StoreManager.languageSort}&categoryValue=4";
   Map<String, int> header = {"transId": getTransactionId()};
   Map<String, dynamic> map =
       await NetworkManager().get(url, addInHeader: [header]);

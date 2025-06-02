@@ -182,7 +182,7 @@ class MyPlayingTuneController extends GetxController {
   }
 
   _deleteDedicatedTune(ToneDetail info) async {
-    GenericModel model = await dedicatedTuneDeleteApi(
+    GenericModel model = await dedicatedTuneDeleteScApi(
         info.bParty ?? '', info.toneId ?? '', getTimeType(info));
     if (model.statusCode == 'SC0000') {
       tuneList.remove(info);

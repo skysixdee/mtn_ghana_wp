@@ -16,3 +16,13 @@ Future<ConfirmOtpModel> confirmOtpApi(String msisdn, String otp) async {
       await NetworkManager().post(confirmOtpUrl, formData: formData);
   return confirmOtpModelFromJson(json.encode(jsonResp));
 }
+
+Future<ConfirmOtpModel> confirmOtpScApi(String msisdn, String encryptedOtp) async {
+  Map<String, dynamic> jsonData = {
+    "msisdn": msisdn,
+    "encryptedOtp": encryptedOtp
+  };
+  Map<String, dynamic> jsonResp =
+      await NetworkManager().post(confirmOtpScUrl, jsonData: jsonData);
+  return confirmOtpModelFromJson(json.encode(jsonResp));
+}

@@ -8,7 +8,9 @@ import 'package:mtn_ghana_wp/files/api_calls/buy_music_channel_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_search_tune_list_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/otp_check_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
+import 'package:mtn_ghana_wp/files/en_de_cryptor/otp_en_de_cryptor.dart' show AesEnDeCryptor;
 import 'package:mtn_ghana_wp/files/model/confirm_otp_model.dart';
+import 'package:mtn_ghana_wp/files/model/generate_otp_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/new_user_otp_check_model.dart';
 import 'package:mtn_ghana_wp/files/model/password_validation_model.dart';
@@ -66,7 +68,8 @@ class OtpController extends GetxController {
         isLoading.value = false;
       }
     } else {
-      ConfirmOtpModel confirmOtpModel = await confirmOtpApi(msisdn, otp);
+      String encOtp = AesEnDeCryptor().aesEnc(otp);
+      ConfirmOtpModel confirmOtpModel = await confirmOtpScApi(msisdn, encOtp);
       if (confirmOtpModel.statusCode == 'SC0000') {
         getSecurityToken(msisdn);
       } else {
@@ -159,8 +162,8 @@ class OtpController extends GetxController {
     if (isLoading) {
       isResendingOtp.value = true;
       enableResend.value = true;
-      SubscriberValidationModel model = await generateOtpApi(msisdn);
-      if (model.statusCode == 'SC0000') {
+      GenerateOtpScModel model = await generateOtpScApi(msisdn);
+      if (model.respCode ==1000) {
       } else {
         message.value = model.message ?? someThingWentWrongStr;
       }

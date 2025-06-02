@@ -6,9 +6,10 @@ import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
-Future<GenericModel> sendGiftfApi(
+Future<GenericModel> sendGiftApi(
     String bPartyMsisdn, String toneId, String toneName) async {
   String packName = await _getPackName();
   Map<String, dynamic> jsonData = {
@@ -34,3 +35,23 @@ Future<String> _getPackName() async {
     return '';
   }
 }
+
+Future<GenericModel> sendGiftScApi(
+    String bPartyMsisdn, String toneId, String toneName) async {
+  Map<String, dynamic> jsonData = {
+     "transactionId": getTransactionId(),
+    "featureId": 1,
+    "msisdn": StoreManager.msisdn,
+    "contentId": toneId,
+    "contentType": 1,
+    "languageCode": StoreManager.languageSort,
+    "channelId": channelId,
+    "userData": "some data",
+    "bmsisdn":bPartyMsisdn,
+  };
+  Map<String, dynamic> jsonResp =
+      await NetworkManager().post(sendGiftScUrl, jsonData: jsonData);
+  return genericModelFromJson(json.encode(jsonResp));
+}
+
+

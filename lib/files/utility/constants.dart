@@ -5,6 +5,7 @@ int otpLength = 4; //6;
 const int timeOutDuration = 20;
 const int pagePerCount = 20;
 String baseUrl = '';
+String authBaseUrl = '';
 String nameTuneCategoryId = '';
 String musicBoxPrice = '';
 String tuneChargePrice = '';

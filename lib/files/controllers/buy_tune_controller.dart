@@ -3,6 +3,7 @@ import 'package:mtn_ghana_wp/files/api_calls/authorization/subscriber_validation
 import 'package:mtn_ghana_wp/files/api_calls/buy_music_channel_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
+import 'package:mtn_ghana_wp/files/model/generate_otp_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
@@ -115,8 +116,8 @@ class BuyTuneController extends GetxController {
   }
 
   _generateOtp(String msisnd) async {
-    SubscriberValidationModel genModel = await generateOtpApi(msisdn);
-    if (genModel.statusCode == 'SC0000') {
+    GenerateOtpScModel genModel = await generateOtpScApi(msisdn);
+    if (genModel.respCode == 1000) {
       print("generateOtpApi $genModel");
       displayOptScreen.value = true;
       message.value = genModel.message ?? someThingWentWrongStr;

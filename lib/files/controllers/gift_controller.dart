@@ -27,7 +27,7 @@ class GiftController extends GetxController {
   sendGift(TuneInfo info) async {
     isLoading.value = true;
     GenericModel model =
-        await sendGiftfApi(bPrtyMsisdn, info.toneId ?? '', info.toneName ?? '');
+        await sendGiftScApi(bPrtyMsisdn, info.toneId ?? '', info.toneName ?? '');
     if (model.statusCode == 'SC0000') {
       openAlertPopup(
         message: model.message ?? '',

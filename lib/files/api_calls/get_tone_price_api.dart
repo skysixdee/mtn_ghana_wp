@@ -23,3 +23,18 @@ Future<GetTonePriceModell> getTonePriceApi(String toneId) async {
       await NetworkManager().post(getTonePriceUrl, formData: jsonData);
   return getTonePriceModellFromJson(json.encode(jsonResp));
 }
+
+
+Future<GetTonePriceModell> getTonePriceScApi(String toneId) async {
+  Map<String, dynamic> jsonData = {
+    "transactionId": getTransactionId(),
+    "featureId": "1",
+    "channelId": channelId,
+    "languageCode":StoreManager.languageCode,
+    "msisdn": StoreManager.msisdn
+
+  };
+  Map<String, dynamic> jsonResp =
+      await NetworkManager().post(getTonePriceScUrl, jsonData: jsonData);
+  return getTonePriceModellFromJson(json.encode(jsonResp));
+}

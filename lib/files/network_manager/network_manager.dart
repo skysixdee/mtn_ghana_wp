@@ -96,8 +96,8 @@ class NetworkManager {
         }
       }
       if (jsonData != null) {
-        clientRequests.headers
-            .set('Content-Type', 'application/json', preserveHeaderCase: true);
+        // clientRequests.headers
+        //     .set('Content-Type', 'application/json', preserveHeaderCase: true);
         String jsonstringmap = json.encode(jsonData);
         customPrint("customPrint formed data $jsonstringmap");
         clientRequests.write(jsonstringmap);

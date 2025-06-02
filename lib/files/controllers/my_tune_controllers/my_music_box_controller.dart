@@ -41,7 +41,7 @@ class MyMusicBoxController extends GetxController {
         print("delete music box api perform here");
         PackDetailModel packDetailModel = await getPackDetailApi();
         if (packDetailModel.statusCode == 'SC0000') {
-          GenericModel genericModel = await deleteMyTuneApi(info.toneId ?? '',
+          GenericModel genericModel = await deleteMyTuneScApi(info.toneId ?? '',
               packDetailModel.responseMap?.packStatusDetails?.packName ?? '');
           info.isDeleting.value = false;
           if (genericModel.statusCode == 'SC0000') {

@@ -41,6 +41,7 @@ import 'package:flutter/material.dart';
 import 'package:mtn_ghana_wp/files/controllers/auth_controller/otp_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -76,6 +77,7 @@ Future<void> readProperties() async {
   final String value = await rootBundle.loadString('properties.json');
   final data = await json.decode(value);
   baseUrl = data['BASE_URL'];
+  authBaseUrl = data['AUTH_BASE_URL'];
   nameTuneCategoryId = data['NAME_TUNE_CAT_ID'];
   musicBoxPrice = data['BOX_CHARGE'];
   tuneChargePrice = data['TUNE_CHARGE'];
@@ -89,6 +91,10 @@ Future<void> readProperties() async {
   otpTimeLimit = data["OTP_TIME_LIMIT"];
   otpLength = data["OTP_LENGTH"];
   faqUrl = data['FAQ_URL'];
+  settingScUrl= data["SETTING_URL"];
+  categoryScUrl=data["GET_CATEGORY_LIST_URL"];
+  bannerScUrl=data["GET_BANNER_LIST_URL"];
+  categorySearchScUrl=data["CATEGORY_SEARCH_URL"];
   customPrint("base url = $baseUrl");
   return;
 }
