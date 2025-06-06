@@ -16,7 +16,10 @@ Future<AdvancedSearchModal> categorySearchApi(String categoryId, {int pageNo=0})
 
 };
 Map<String, dynamic> jsonResponse=await 
-NetworkManager().post(categorySearchScUrl, jsonData: jsonRequest);
+NetworkManager().post(
+ categorySearchScUrl, 
+ //"https://run.mocky.io/v3/3c31c197-f3db-43ed-833f-bd279ad93791",
+jsonData: jsonRequest);
 AdvancedSearchModal advancedSearchModal=AdvancedSearchModal.fromJson(jsonResponse);
 
 return advancedSearchModal;

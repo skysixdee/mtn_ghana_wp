@@ -72,6 +72,8 @@ class NetworkManager {
       HttpClientRequest clientRequests = await client.postUrl(Uri.parse(url));
 //addInHeader
       if (formData != null) {
+        clientRequests.headers.set('Content-Type', 'application/x-www-form-urlencoded',
+      preserveHeaderCase: true);
         var parts = [];
         formData.forEach((key, value) {
           // parts.add('${Uri.encodeQueryComponent(key)}='
@@ -96,8 +98,8 @@ class NetworkManager {
         }
       }
       if (jsonData != null) {
-        // clientRequests.headers
-        //     .set('Content-Type', 'application/json', preserveHeaderCase: true);
+        clientRequests.headers
+            .set('Content-Type', 'application/json', preserveHeaderCase: true);
         String jsonstringmap = json.encode(jsonData);
         customPrint("customPrint formed data $jsonstringmap");
         clientRequests.write(jsonstringmap);

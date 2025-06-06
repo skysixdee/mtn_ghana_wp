@@ -48,7 +48,7 @@ class MusicBoxCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
               color: white,
               boxShadow: const [
-                BoxShadow(color: lightGrey, blurRadius: 3,  spreadRadius: 1)
+                BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
               ]),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,40 +69,60 @@ class MusicBoxCard extends StatelessWidget {
                     CustomText(
                       title: info.toneName ?? '',
                       fontName: FontName.bold,
+                      fontSize: 16,
                     ),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        leftButton ??
-                            GenericButton(
-                              padding: EdgeInsets.zero,
-                              bgColor: transparent,
-                              title: previewStr,
-                              leadingIcon: const Icon(Icons.visibility),
-                              onTap: () {
-                                context.goNamed(
-                                    isMyMusicBox
-                                        ? myMusicBoxContentRoute
-                                        : musicBoxContentRoute,
-                                    queryParameters: {
-                                      'type': info.type,
-                                      'code': info.toneId,
-                                      'toneName': info.toneName,
-                                      'toneId': info.toneId,
-                                      'imgUrl': info.toneIdpreviewImageUrl,
-                                    });
-                                print("view all tune in music box");
-                              },
-                            ),
+                        SizedBox(
+                          height: 36,
+                          child: InkWell(
+                            hoverColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                                    context.goNamed(
+                                      isMyMusicBox
+                                          ? myMusicBoxContentRoute
+                                          : musicBoxContentRoute,
+                                      queryParameters: {
+                                        'type': info.type,
+                                        'code': info.toneId,
+                                        'toneName': info.toneName,
+                                        'toneId': info.toneId,
+                                        'imgUrl': info.toneIdpreviewImageUrl,
+                                      },
+                                    );
+                                    print("view all tune in music box");
+                                  },
+                            child: leftButton ??
+                                OutlinedButton.icon(
+                                  onPressed: null,
+                                  icon: const Icon(Icons.visibility, size: 16, color: black,),
+                                  label: CustomText(
+                                    title: previewStr,
+                                    //fontName: FontName.bold,
+                                  ),
+                                  style: OutlinedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 0),
+                                    side: const BorderSide(color: black),
+                                    foregroundColor: black,
+                                  ),
+                                ),
+                          ),
+                        ),
                         const SizedBox(width: 20),
                         Flexible(
                           child: SizedBox(
+                            height:36,
                             //width: 80,
                             child: rightButton ??
                                 buyButton(info,
                                     isMusicBox: true,
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 0)),
+                                        horizontal: 0, vertical: 0)),
                           ),
                         )
                       ],

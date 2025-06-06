@@ -265,26 +265,27 @@ class WebNavigationView extends StatelessWidget {
       backgroundColor: white,
       bodyBuilder: (context) {
         return Padding(
-          padding: const EdgeInsets.only(right: 0),
+          padding: const EdgeInsets.only(right:5, left:5),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(8),
               color: white,
             ),
-            height: 180,
+            height: 350,
+            width:220,
             child: ListView.builder(
-              padding: const EdgeInsets.all(2),
-              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(vertical:4),
+              scrollDirection: Axis.vertical,
               itemCount: appController
-                  .categories.length, //StoreManager.categories?.length,
+                  .categoriesMw.length, //StoreManager.categories?.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return InkWell(
                     onTap: () {
                       String key =
-                          appController.categories[index].categoryName ?? '';
+                          appController.categoriesMw[index].categoryName ?? '';
                       String catId =
-                          appController.categories[index].categoryId ?? '';
+                          appController.categoriesMw[index].categoryId ?? '';
                       context.goNamed(categoryDetailRoute, queryParameters: {
                         'key': key,
                         'catId': catId,
@@ -303,25 +304,43 @@ class WebNavigationView extends StatelessWidget {
 
   Padding categoryCard(int index) {
     return Padding(
-      padding: const EdgeInsets.only(right: 2),
+      padding: const EdgeInsets.symmetric(vertical: 2.5),
       child: Container(
+        height:80,
         width: 180,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(8),
           color: white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+            )
+          ]
         ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            customImage(
-                url: appController.categories[index].menuImage,
-                gredientColor: gredientColor),
-            CustomText(
-              title: appController.categories[index].categoryName ?? '',
-              color: white,
-              fontName: FontName.bold,
-            ),
-          ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              customImage(
+                  url: appController.categoriesMw[index].menuImagePath,
+                  gredientColor: gredientColor),
+              Container(
+                color: Colors.black.withOpacity(0.4), // dark overlay for better text visibility
+              alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal:8),
+                  child: CustomText(
+                    title: appController.categoriesMw[index].categoryName ?? '',
+                    color: white,
+                    fontName: FontName.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

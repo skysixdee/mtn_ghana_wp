@@ -67,9 +67,10 @@ class _FeatureCategoryViewState extends State<FeatureCategoryView> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         GenericButton(
-          textColor: red,
+          textColor: black,
           title: seeMoreStr,
-          bgColor: transparent,
+          bgColor: Colors.transparent,
+          borderColor:  grey,
           onTap: () {
             context.pushNamed(seeMoreRoute,
                 queryParameters: {

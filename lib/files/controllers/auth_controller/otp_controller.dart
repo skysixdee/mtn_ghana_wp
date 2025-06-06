@@ -10,6 +10,7 @@ import 'package:mtn_ghana_wp/files/api_calls/otp_check_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
 import 'package:mtn_ghana_wp/files/en_de_cryptor/otp_en_de_cryptor.dart' show AesEnDeCryptor;
 import 'package:mtn_ghana_wp/files/model/confirm_otp_model.dart';
+import 'package:mtn_ghana_wp/files/model/confirm_otp_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/generate_otp_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/new_user_otp_check_model.dart';
@@ -19,6 +20,7 @@ import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
@@ -49,9 +51,8 @@ class OtpController extends GetxController {
 
   onVerifyButtonAction(String msisdn, bool isMusicBox, bool isNewUser) async {
     this.isNewUser = isNewUser;
-    if (otp.isEmpty || otp.length < otpLength) {
+    if (otp.isEmpty || otp.length<otpLength) {
       message.value = enterOtpStr;
-
       return;
     }
     this.isMusicBox = isMusicBox;
@@ -69,14 +70,25 @@ class OtpController extends GetxController {
       }
     } else {
       String encOtp = AesEnDeCryptor().aesEnc(otp);
-      ConfirmOtpModel confirmOtpModel = await confirmOtpScApi(msisdn, encOtp);
-      if (confirmOtpModel.statusCode == 'SC0000') {
-        getSecurityToken(msisdn);
+      ConfirmOtpScModel confirmOtpModel = await confirmOtpScApi(msisdn, encOtp);
+      if (confirmOtpModel.respCode == 0) {
+        print("Successfully LoggedIn..........");
+        onSuccessLogin(confirmOtpModel, msisdn);
+        onSuccess!();
+        //getSecurityToken(msisdn);
       } else {
-        message.value = confirmOtpModel.message;
+        message.value = confirmOtpModel.message??someThingWentWrongStr;
         isLoading.value = false;
       }
     }
+  }
+
+  onSuccessLogin(ConfirmOtpScModel model, String msisdn) {
+    StoreManager.setAccessToken(model.accessToken ?? '');
+    //StoreManager.setDeviceId(model.deviceId ?? '');
+    StoreManager.setRefreshToken(model.refreshToken ?? '');
+    StoreManager.setMsisdn(msisdn);
+    StoreManager.setLoggedIn(true);
   }
 
   getSecurityToken(String msisdn) async {

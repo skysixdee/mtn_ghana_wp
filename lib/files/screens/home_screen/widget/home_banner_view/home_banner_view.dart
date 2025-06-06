@@ -17,6 +17,7 @@ import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 class HomeBannerView extends StatelessWidget {
   HomeBannerView({super.key});
   final BannerController cont = Get.find();
+  
   CarouselSliderController carouselSliderController =
       CarouselSliderController();
   @override
@@ -47,7 +48,7 @@ class HomeBannerView extends StatelessWidget {
     BannerDetailController bannerDetailController = Get.find();
     return CarouselSlider(
       controller: carouselSliderController,
-      items: cont.banners.map((banner) {
+      items: cont.banners.map((banner) {  //cont.banners.map((banner) {
         return InkWell(
           onTap: () {
             bannerDetailController.getBannerDetail(
@@ -94,7 +95,7 @@ class HomeBannerView extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: cont.banners.length,
+        itemCount:cont.banners.length,
         itemBuilder: (context, index) {
           return Center(
             child: Padding(

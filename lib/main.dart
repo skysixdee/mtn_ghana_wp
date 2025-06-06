@@ -95,6 +95,7 @@ Future<void> readProperties() async {
   categoryScUrl=data["GET_CATEGORY_LIST_URL"];
   bannerScUrl=data["GET_BANNER_LIST_URL"];
   categorySearchScUrl=data["CATEGORY_SEARCH_URL"];
+  myWishistScUrl=data["MY_WISHLIST_URL"];
   customPrint("base url = $baseUrl");
   return;
 }
@@ -173,8 +174,8 @@ class MyApp extends StatelessWidget {
         message: sessionExpiredStr,
         primaryBtnTitle: okCStr,
         onPrimary: () {
-          print("Hello shiv poup");
-          StoreManager.logout();
+          print("Hello shiv popup");
+         StoreManager.logout();
           if (Get.context != null) {
             Get.context!.goNamed(homeRoute);
           }

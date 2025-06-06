@@ -19,7 +19,7 @@ Widget playButton(TuneInfo info, {Function()? onTap}) {
           return GenericButton(
             isStopPlay: false,
             padding: EdgeInsets.zero,
-            borderColor: red,
+            borderColor:black, //red,
             bgColor: white,
             fontName: si.isMobile ? FontName.regular : FontName.bold,
             leadingIcon: Icon(

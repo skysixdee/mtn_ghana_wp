@@ -13,7 +13,7 @@ class FeatureGridView extends StatelessWidget {
   final FeatureController cont = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Center(child: Obx(
+    return Obx(
       () {
         return CombinedGrid(
             isLoading: cont.isLoadingList[cont.index.value],
@@ -29,7 +29,7 @@ class FeatureGridView extends StatelessWidget {
             },
             onTap: (p1) {});
       },
-    ));
+    );
     //   alignedGrid(
     //       context,
     //       aspectRatio: 0.65,

@@ -51,10 +51,11 @@ class _MusicBoxViewState extends State<MusicBoxView> {
                                 fontSize: si.isMobile ? 16 : 20,
                               ),
                               GenericButton(
+                                textColor: black,
                                 title: seeMoreStr,
-                                textColor: red,
+                                bgColor: Colors.transparent,
+                                borderColor: grey,
                                 fontSize: si.isMobile ? 12 : 14,
-                                bgColor: transparent,
                                 onTap: () {
                                   context.pushNamed(musicBoxRoute);
                                 },

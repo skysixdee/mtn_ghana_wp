@@ -50,19 +50,20 @@ class FeatureTabView extends StatelessWidget {
                           ? FontName.bold
                           : FontName.regular,
                       color: featureController.index.value == index
-                          ? yellow
-                          : black,
-                      fontSize: 18,
+                          ?black //yellow
+                          :darkGrey,// black,
+                      fontSize: 20,
                     ),
-                    Container(
+                    featureController.index.value == index? Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(1.5),
-                        color: featureController.index.value == index
-                            ? yellow
-                            : transparent,
+                        color: black
+                        // featureController.index.value == index
+                        //     ? black//yellow
+                        //     : grey//transparent,
                       ),
                       height: 3,
-                    )
+                    ):const SizedBox()
                   ],
                 );
               },

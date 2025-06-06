@@ -132,7 +132,7 @@ class MobileDrawerScreen extends StatelessWidget {
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: StoreManager.categories?.length ?? 0,
+                      itemCount: StoreManager.categoriess?.length ?? 0,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.only(top: 2.0, left: 60),
@@ -153,8 +153,8 @@ class MobileDrawerScreen extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pop();
         CategoryDetailController con = Get.find();
-        String key = StoreManager.categories?[index].categoryName ?? '';
-        String catId = StoreManager.categories?[index].categoryId ?? '';
+        String key = StoreManager.categoriess?[index].categoryName ?? '';
+        String catId = StoreManager.categoriess?[index].categoryId ?? '';
         context.goNamed(categoryDetailRoute, queryParameters: {
           'key': key,
           'catId': catId,
@@ -171,7 +171,7 @@ class MobileDrawerScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomText(
-                    title: '${StoreManager.categories?[index].categoryName}',
+                    title: '${StoreManager.categoriess?[index].categoryName}',
                     fontSize: 16,
                   ),
                 ],

@@ -1,17 +1,17 @@
 {
     "CATEGORY_SEARCH_URL":"http://10.0.14.4:8091/selfcare/category-search",
-    "GET_CATEGORY_LIST_URL":"http://10.0.14.4:5892/selfcare/get-category-list?languageCode=en&categoryValue=4",
+    "GET_CATEGORY_LIST_URL":"http://10.0.13.19:9093/apigw/Middleware/api/adapter/v1/crbt/categories?English",
     "GET_BANNER_LIST_URL":"http://10.0.14.4:5892/selfcare/get-banner-list?channelId=2&languageCode=en",
     "SETTING_URL":"http://10.0.13.19:9093/setting-service/settings",
     "BASE_URL": "http://10.0.13.19:9093",
     "AUTH_BASE_URL":"http://10.0.13.19:9092",
-    
+    "MY_WISHLIST_URL":"http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist",
     
     "FAQ_URL": "http://10.0.13.19:9093/ghana/faq/FAQ.json",
     "NAME_TUNE_CAT_ID":"115",
     "MSISDN_LENGTH":9,
     "OTP_TIME_LIMIT":30,
-    "OTP_LENGTH":6,
+    "OTP_LENGTH":4,
     "SESSION_LOGOUT_TIME_IN_MINUTE":1,
     "COUNTRY_CODE":"+233 - ",
     "TUNE_CHARGE":"0.50 GHC for 30 days (Callertunes Subscription Charges will also apply)",

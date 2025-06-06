@@ -53,6 +53,7 @@ String nameTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?';
 String musicBoxUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/music-box-search?";
+    //"https://mytune.atom.com.mm/apigw/Middleware/api/adapter/v1/crbt/music-box-search?";
 String musicBoxContextUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/music-box-contents?';
 String myMusicBoxUrl =
@@ -95,7 +96,7 @@ String categoryScUrl="";
 String bannerScUrl="";
 String categorySearchScUrl="";
 
-String myTunesScUrl="http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
+String myTunesScUrl="http://10.0.10.33:8082/selfcare/subscriber-management/list-tones";//"http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
 String deleteDedicatedTuneScUrl =
     'http://10.135.64.101:51012/selfcare/subscriber-management/delete-dedication';
 String artistTuneSearchScUrl= "http://10.135.64.101:53008/selfcare/artist-search";
@@ -104,8 +105,7 @@ String sendGiftScUrl="http://10.135.64.101:51009/selfcare/subscriber-management/
 String getTonePriceScUrl="http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price";
 
 //--------------------------from old selfcare document--------------------------
-String myWishistScUrl = 
-    '$baseUrl/selfcare/wishlist-service/get-wishlist';
+String myWishistScUrl = "";
 String generateOtpScUrl =
     '$authBaseUrl/auth-service/selfcare/auth/otp';
 String confirmOtpScUrl =

@@ -41,7 +41,8 @@ class CategoryDetailScreen extends StatelessWidget {
                         // ]),
                         itemCount: con.tuneList.length,
                         builder: (p0) {
-                          return TuneCard(
+                          return 
+                          TuneCard(
                             info: con.tuneList[p0],
                             tuneList: con.tuneList,
                           );

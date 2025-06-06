@@ -27,11 +27,10 @@ class FaqScreen extends StatelessWidget {
                   fontSize: si.isMobile ? 30 : 55,
                 ),
               ),
-              
               Center(
                 child: CustomText(
-                  title: howCanIHelpYouStr,
-                  color: grey,
+                  title: howCanWeHelpYouStr,
+                  color: darkGrey,
                   fontSize: si.isMobile ? 16 : 20,
                 ),
               ),
@@ -84,41 +83,48 @@ class FaqItem extends StatelessWidget {
   Obx cards(FaqList faqItem, SizingInformation si) {
     return Obx(() {
       return Card(
-        elevation: 0,
+        elevation: 4, // Increased elevation for visible shadow
+        shadowColor: const Color.fromARGB(255, 188, 186, 186)
+            .withOpacity(0.3), // Optional: tweak shadow color and opacity
+
         color: white,
         margin:
             EdgeInsets.symmetric(vertical: 8, horizontal: si.isMobile ? 2 : 16),
         child: Column(
           children: [
-            ListTile(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Icon(
-                  //   faqController.isExpanded[index] == true
-                  //       ? Icons.play_arrow_outlined
-                  //       : Icons.play_arrow,
-                  // ),
-                  SizedBox(width: 4),
-                  Expanded(
-                      child: Text(
-                    faqItem.question ?? '',
-                    style: TextStyle(
-                        fontFamily: FontName.regular.name,
-                        fontWeight: FontWeight.bold,
-                        fontSize: si.isMobile ? 13 : 18),
-                  )),
-                  Icon(
-                    faqController.isExpanded[index] == true
-                        ? Icons.remove
-                        : Icons.add,
-                    size: si.isMobile ? 18 : 22,
-                  ),
-                ],
-              ),
+            InkWell(
+              hoverColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               onTap: () {
                 faqController.toggleExpansion(index);
               },
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(width: 4),
+                    Expanded(
+                      child: Text(
+                        faqItem.question ?? '',
+                        style: TextStyle(
+                          fontFamily: FontName.regular.name,
+                          fontWeight: FontWeight.bold,
+                          fontSize: si.isMobile ? 13 : 18,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      faqController.isExpanded[index] == true
+                          ? Icons.remove
+                          : Icons.add,
+                      size: si.isMobile ? 18 : 22,
+                    ),
+                  ],
+                ),
+              ),
             ),
             if (faqController.isExpanded[index] == true)
               Padding(

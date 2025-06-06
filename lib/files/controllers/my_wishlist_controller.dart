@@ -15,10 +15,30 @@ class MyWishlistController extends GetxController {
       return;
     }
     isLoading.value = true;
+     try {
+    print("GOkul");
     WishlistModel model = await getWishlistScApi();
-    tuneList.value = model.responseMap?.toneDetailsList ?? [];
+    print("Vivek");
+
+    tuneList.value = model.wishlist ?? [];
+    print("Get Wishlist============= ${tuneList.value}");
+  } catch (e, stackTrace) {
+    print("Error in getWishlist: $e");
+    print("StackTrace: $stackTrace");
+    snackBar("Something went wrong while fetching wishlist");
+  } finally {
     isLoading.value = false;
   }
+}
+  //   print("GOkul");
+  //   WishlistModel model = await getWishlistScApi();
+  //   print("Vivek");
+  //   tuneList.value = model.wishlist ?? [];
+    
+  //   print("Get Wishlist============= ${tuneList.value}");
+  //   //model.responseMap?.toneDetailsList ?? [];
+  //   isLoading.value = false;
+  // }
 
   deleteFromWishlist(TuneInfo info) async {
     customPrint("delete ${info.toneName}");

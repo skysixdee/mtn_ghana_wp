@@ -2,6 +2,7 @@ String signInToYourAccountStr = 'Sign In to Your Account';
 String enterNumberToAuthenticateStr =
     "Please enter your mobile number in order to authenticate";
 String enterMobileNumberStr = "Enter Mobile Number";
+String doNotInclude0atTheStartMObileNoStr='Do not include 0 at the start of your mobile number.';
 String searchPlaceHolderStr = "Search for more";
 String requestotpStr = "Request OTP";
 String enterSixDigitOtpStr = "Enter 6 digit OTP";
@@ -159,7 +160,7 @@ String blacklistLearnMoreStr =
     'Want to keep certain people from hearing your callertune? Just add their numbers to your Blacklist, and they won’t hear your ringback tunes anymore. It’s that simple!';
 
 String faqCStr = "FAQ";
-String howCanIHelpYouStr = "How Can I Help You";
+String howCanWeHelpYouStr = "How Can We Help You";
 String faqFailerStr = 'Failed to load FAQ';
 
 String failedToLoadTermsAndConditionsStr =

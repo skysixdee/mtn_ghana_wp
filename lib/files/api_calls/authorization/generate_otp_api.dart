@@ -16,7 +16,7 @@ Future<SubscriberValidationModel> generateOtpApi(String msisdn) async {
 
 Future<GenerateOtpScModel> generateOtpScApi(String msisdn) async {
   Map<String, dynamic> jsonData = {
-    "msisdn": msisdn,
+    "msisdn": msisdn,//"98987654327",
     'transactionId': getTransactionId(),
     "type": "web",  //"sms"to send otp to user // "web" to get otp in response
   };

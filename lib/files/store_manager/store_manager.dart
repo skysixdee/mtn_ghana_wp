@@ -1,5 +1,6 @@
 import 'package:mtn_ghana_wp/files/model/app_setting_model.dart';
 import 'package:mtn_ghana_wp/files/model/category_model.dart';
+import 'package:mtn_ghana_wp/files/model/category_mw_model.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/main.dart';
 import 'package:go_router/go_router.dart';
@@ -19,7 +20,8 @@ class StoreManager {
   static String languageCode = '2';
   static String languageSort = 'en';
   static String msisdn = '0';
-  static List<Category>? categories;
+  static List<Category>? categoriess;
+  static List<CategoryMw>? categoriesMw;
   static String accessToken = "";
   static String refreshToken = "";
   static String deviceId = '0191212';
