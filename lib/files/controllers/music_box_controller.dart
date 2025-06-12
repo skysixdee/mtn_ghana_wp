@@ -2,7 +2,8 @@ import 'package:mtn_ghana_wp/files/api_calls/get_music_box_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_music_box_content_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_my_tune_api.dart';
 import 'package:mtn_ghana_wp/files/model/music_box_content_model.dart';
-import 'package:mtn_ghana_wp/files/model/music_box_model.dart';
+import 'package:mtn_ghana_wp/files/model/music_box_mw_model.dart';
+import 'package:mtn_ghana_wp/files/model/music_box_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/my_tunes_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
@@ -25,15 +26,13 @@ class MusicBoxController extends GetxController {
   getMusicBoxx() async {
     //return 
     isLoadingList.value = true;
-    MusicBoxModel model = await getMusicBoxApi();
-    musicBoxList = model.responseMap?.musicBoxSearchList ?? [];
-    customPrint(
-        "GOKULHARI==========${model.responseMap?.musicBoxSearchList?.length}");
+    // MusicBoxMwModel model = await getMusicBoxApi();
+    // musicBoxList = model.responseMap?.musicBoxSearchList ?? [];
+    // customPrint("GOKULHARI==========${model.responseMap?.musicBoxSearchList?.length}");
     
-    // MyTunesModel model = await getMyTuneScApi();
-    // musicBoxList=model.responseMap?.listToneApk ?? [];
-  //  MusicBoxModel model = await getMyTuneScApi();
-  //   musicBoxList=model.responseMap?.musicBoxSearchList ?? [];
+    MusicBoxScModel model = await getMusicBoxScApi();
+    musicBoxList=model.tonelist ?? [];
+     print("MusicboxList===============${musicBoxList}");
     isLoadingList.value = false;
   } 
 

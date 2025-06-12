@@ -265,27 +265,26 @@ class WebNavigationView extends StatelessWidget {
       backgroundColor: white,
       bodyBuilder: (context) {
         return Padding(
-          padding: const EdgeInsets.only(right:5, left:5),
+          padding: const EdgeInsets.only(right: 0),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(4),
               color: white,
             ),
-            height: 350,
-            width:220,
+            width: 210,
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical:4),
+              padding: const EdgeInsets.all(2),
               scrollDirection: Axis.vertical,
               itemCount: appController
-                  .categoriesMw.length, //StoreManager.categories?.length,
+                  .categories.length, //StoreManager.categories?.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return InkWell(
                     onTap: () {
                       String key =
-                          appController.categoriesMw[index].categoryName ?? '';
+                          appController.categories[index].categoryName ?? '';
                       String catId =
-                          appController.categoriesMw[index].categoryId ?? '';
+                          appController.categories[index].categoryId ?? '';
                       context.goNamed(categoryDetailRoute, queryParameters: {
                         'key': key,
                         'catId': catId,
@@ -302,46 +301,41 @@ class WebNavigationView extends StatelessWidget {
     );
   }
 
-  Padding categoryCard(int index) {
+ Padding categoryCard(int index) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2.5),
+      padding: const EdgeInsets.all(2),
       child: Container(
-        height:80,
-        width: 180,
+        width: 80,
+        height: 45,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(4),
           color: white,
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-            blurRadius: 4,
-            offset: Offset(0, 2),
-            )
-          ]
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              customImage(
-                  url: appController.categoriesMw[index].menuImagePath,
-                  gredientColor: gredientColor),
-              Container(
-                color: Colors.black.withOpacity(0.4), // dark overlay for better text visibility
-              alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:8),
-                  child: CustomText(
-                    title: appController.categoriesMw[index].categoryName ?? '',
-                    color: white,
-                    fontName: FontName.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
+        child: Stack(
+          children: [
+            customImage(
+                url: appController.categories[index].menuImagePath,
+                gredientColor: gredientColor),
+            //     CustomText(
+            //       title: appController.categories[index].categoryName ?? '',
+            //       color: white,
+            //       fontName: FontName.bold,
+            //     ),
+          ],
         ),
+        // Column(
+        //   //alignment: Alignment.center,
+        //   children: [
+        //     customImage(
+        //         url: appController.categories[index].menuImagePath,
+        //         gredientColor: gredientColor),
+        //     CustomText(
+        //       title: appController.categories[index].categoryName ?? '',
+        //       color: white,
+        //       fontName: FontName.bold,
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }

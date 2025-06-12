@@ -6,16 +6,30 @@ import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 
 import 'package:get/get.dart';
 
+// class AppController extends GetxController {
+//   RxList<Category> categories = <Category>[].obs;
+//   RxList<CategoryMw> categoriesMw = <CategoryMw>[].obs;
+//   RxBool isLoggedIn = false.obs;
+//   @override
+//   void onInit() async {
+//     super.onInit();
+//     getAppSettingApi();
+//     CategoryMwModel categoryModel = await getCategoryApi();
+//     StoreManager.categoriesMw = categoryModel.responseMap?.categories ?? [];
+//     categoriesMw.value = categoryModel.responseMap?.categories ?? [];
+//   }
+// }
+
 class AppController extends GetxController {
   RxList<Category> categories = <Category>[].obs;
-  RxList<CategoryMw> categoriesMw = <CategoryMw>[].obs;
   RxBool isLoggedIn = false.obs;
   @override
   void onInit() async {
     super.onInit();
     getAppSettingApi();
-    CategoryMwModel categoryModel = await getCategoryApi();
-    StoreManager.categoriesMw = categoryModel.responseMap?.categories ?? [];
-    categoriesMw.value = categoryModel.responseMap?.categories ?? [];
+    CategoryModel categoryModel = await getCategoryScApi();
+    StoreManager.categories = categoryModel.responseMap?.categories ?? [];
+    print("SKY list =${StoreManager.categories?.length}");
+    categories.value = categoryModel.responseMap?.categories ?? [];
   }
 }

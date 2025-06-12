@@ -20,8 +20,8 @@ class StoreManager {
   static String languageCode = '2';
   static String languageSort = 'en';
   static String msisdn = '0';
-  static List<Category>? categoriess;
-  static List<CategoryMw>? categoriesMw;
+  static List<Category>? categories;
+ // static List<CategoryMw>? categoriesMw;
   static String accessToken = "";
   static String refreshToken = "";
   static String deviceId = '0191212';

@@ -29,6 +29,7 @@ String generateOtpUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/generate-otp';
 String confirmOtpUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/confirm-otp';
+String categoryMwUrl="";
 
 //-------------------------couldn't find--------------------------
 String searchUrl =
@@ -92,11 +93,11 @@ String bannerDetailScUrl="http://10.0.14.4:5892/selfcare/get-banner-details?";
 String addToneToShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/add-tone-to-shufflelist";
 String deleteFromShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/delete-tone-from-shufflelist";
 String settingScUrl= "";
-String categoryScUrl="";
+String categoryScUrl="http://10.0.14.4:5892/selfcare/get-category-list?languageCode=en&categoryValue=4";
 String bannerScUrl="";
 String categorySearchScUrl="";
 
-String myTunesScUrl="http://10.0.10.33:8082/selfcare/subscriber-management/list-tones";//"http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
+String getMusicBoxScUrl="http://10.0.10.33:8081/selfcare/subscriber-management/list-tones";//"http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
 String deleteDedicatedTuneScUrl =
     'http://10.135.64.101:51012/selfcare/subscriber-management/delete-dedication';
 String artistTuneSearchScUrl= "http://10.135.64.101:53008/selfcare/artist-search";

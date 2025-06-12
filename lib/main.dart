@@ -92,7 +92,7 @@ Future<void> readProperties() async {
   otpLength = data["OTP_LENGTH"];
   faqUrl = data['FAQ_URL'];
   settingScUrl= data["SETTING_URL"];
-  categoryScUrl=data["GET_CATEGORY_LIST_URL"];
+  categoryMwUrl=data["GET_CATEGORY_LIST_URL"];
   bannerScUrl=data["GET_BANNER_LIST_URL"];
   categorySearchScUrl=data["CATEGORY_SEARCH_URL"];
   myWishistScUrl=data["MY_WISHLIST_URL"];

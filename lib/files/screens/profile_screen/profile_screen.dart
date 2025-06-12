@@ -303,7 +303,7 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget prefrenceBuilder(SizingInformation si) {
-    List<Category> lst = StoreManager.categoriess ?? [];
+    List<Category> lst = StoreManager.categories ?? [];
     return SizedBox();
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -320,12 +320,12 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget customWrap() {
-    return (StoreManager.categoriess == null)
+    return (StoreManager.categories == null)
         ? const SizedBox()
         : Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: StoreManager.categoriess!
+            children: StoreManager.categories!
                 .map((e) => categoryNameCard(e))
                 .toList(),
           );
@@ -412,7 +412,7 @@ class ProfileScreen extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: customImage(
-                          url: lst[p0].menuImage,
+                          url: lst[p0].menuImagePath,
                           gredientColor: black.withOpacity(0.4)),
                     ),
                     redioButton(lst, p0)

@@ -96,80 +96,96 @@
 //
 //     final categoryModel = categoryModelFromJson(jsonString);
 
+// // To parse this JSON data, do
+//
+//     final categoryModel = categoryModelFromJson(jsonString);
+
+// To parse this JSON data, do
+//
+//     final categoryModel = categoryModelFromJson(jsonString);
+
 import 'dart:convert';
 
-CategoryModel categoryModelFromJson(String str) => CategoryModel.fromJson(json.decode(str));
+CategoryModel categoryModelFromJson(String str) =>
+    CategoryModel.fromJson(json.decode(str));
 
 String categoryModelToJson(CategoryModel data) => json.encode(data.toJson());
 
 class CategoryModel {
-    String? respCode;
-    String? message;
-    ResponseMap? responseMap;
+  ResponseMap? responseMap;
+  String? message;
+  String? respTime;
+  String? statusCode;
 
-    CategoryModel({
-        this.respCode,
-        this.message,
-        this.responseMap,
-    });
+  CategoryModel({
+    this.responseMap,
+    this.message,
+    this.respTime,
+    this.statusCode,
+  });
 
-    factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
-        respCode: json["respCode"],
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
+        responseMap: json["responseMap"] == null
+            ? null
+            : ResponseMap.fromJson(json["responseMap"]),
         message: json["message"],
-        responseMap: json["responseMap"] == null ? null : ResponseMap.fromJson(json["responseMap"]),
-    );
+        respTime: json["respTime"],
+        statusCode: json["statusCode"],
+      );
 
-    Map<String, dynamic> toJson() => {
-        "respCode": respCode,
-        "message": message,
+  Map<String, dynamic> toJson() => {
         "responseMap": responseMap?.toJson(),
-    };
+        "message": message,
+        "respTime": respTime,
+        "statusCode": statusCode,
+      };
 }
 
 class ResponseMap {
-    List<Category>? categoryList;
+  List<Category>? categories;
 
-    ResponseMap({
-        this.categoryList,
-    });
+  ResponseMap({
+    this.categories,
+  });
 
-    factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
-        categoryList: json["categoryList"] == null ? [] : List<Category>.from(json["categoryList"]!.map((x) => Category.fromJson(x))),
-    );
+  factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
+        categories: json["categories"] == null
+            ? []
+            : List<Category>.from(
+                json["categories"]!.map((x) => Category.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
-        "categoryList": categoryList == null ? [] : List<dynamic>.from(categoryList!.map((x) => x.toJson())),
-    };
+  Map<String, dynamic> toJson() => {
+        "categories": categories == null
+            ? []
+            : List<dynamic>.from(categories!.map((x) => x.toJson())),
+      };
 }
 
 class Category {
-    String? language;
-    String? categoryId;
-    String? menuId;
-    String? categoryName;
-    String? menuImage;
+  String? categoryId;
+  String? categoryName;
+  String? menuImagePath;
+  String? language;
 
-    Category({
-        this.language,
-        this.categoryId,
-        this.menuId,
-        this.categoryName,
-        this.menuImage,
-    });
+  Category({
+    this.categoryId,
+    this.categoryName,
+    this.menuImagePath,
+    this.language,
+  });
 
-    factory Category.fromJson(Map<String, dynamic> json) => Category(
-        language: json["language"],
-        categoryId: json["categoryID"],
-        menuId: json["menuID"],
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        categoryId: json["categoryId"],
         categoryName: json["categoryName"],
-        menuImage: json["menuImage"],
-    );
+        menuImagePath: json["menuImagePath"],
+        language: json["language"],
+      );
 
-    Map<String, dynamic> toJson() => {
-        "language": language,
-        "categoryID": categoryId,
-        "menuID": menuId,
+  Map<String, dynamic> toJson() => {
+        "categoryId": categoryId,
         "categoryName": categoryName,
-        "menuImage": menuImage,
-    };
+        "menuImagePath": menuImagePath,
+        "language": language,
+      };
 }
