@@ -29,7 +29,7 @@ String generateOtpUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/generate-otp';
 String confirmOtpUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/confirm-otp';
-String categoryMwUrl="";
+String categoryMwUrl = "";
 
 //-------------------------couldn't find--------------------------
 String searchUrl =
@@ -54,7 +54,7 @@ String nameTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?';
 String musicBoxUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/music-box-search?";
-    //"https://mytune.atom.com.mm/apigw/Middleware/api/adapter/v1/crbt/music-box-search?";
+//"https://mytune.atom.com.mm/apigw/Middleware/api/adapter/v1/crbt/music-box-search?";
 String musicBoxContextUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/music-box-contents?';
 String myMusicBoxUrl =
@@ -65,8 +65,9 @@ String tuneSettingDedicatedUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/dedicated-user-tone-addition-with-time-setting';
 String shuffleEnableDisableUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/shuffle-activation-deactivation';
-String subscriberValidationUrl ="http://10.135.64.104:8021/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation";
-    //'$baseUrl/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation';
+String subscriberValidationUrl =
+    "http://10.135.64.104:8021/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation";
+//'$baseUrl/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation';
 
 String passwordValidateUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/password-validation';
@@ -86,30 +87,35 @@ String buyMusicChannelUrl =
 String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
-
 //----------------------selfcare api url--------------------------
-String advancedSearchScUrl="http://10.0.14.4:8090/advanced-search";
-String bannerDetailScUrl="http://10.0.14.4:5892/selfcare/get-banner-details?";
-String addToneToShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/add-tone-to-shufflelist";
-String deleteFromShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/delete-tone-from-shufflelist";
-String settingScUrl= "";
+String advancedSearchScUrl = "http://10.0.14.4:8090/advanced-search";
+String bannerDetailScUrl = "http://10.0.14.4:5892/selfcare/get-banner-details?";
+String addToneToShuffleScUrl =
+    "http://10.135.64.101:51004/selfcare/setting-service/add-tone-to-shufflelist";
+String deleteFromShuffleScUrl =
+    "http://10.135.64.101:51004/selfcare/setting-service/delete-tone-from-shufflelist";
+String settingScUrl = "";
 
-String getBannerListScUrl="";
-String categorySearchScUrl="";
+String getBannerListScUrl = "";
+String categorySearchScUrl = "";
 
-String getMusicBoxScUrl="http://10.0.10.33:8081/selfcare/subscriber-management/list-tones";//"http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
+String getMusicBoxScUrl =
+    ''; //"http://10.0.10.33:8081/selfcare/subscriber-management/list-tones";//"http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
 String deleteDedicatedTuneScUrl =
     'http://10.135.64.101:51012/selfcare/subscriber-management/delete-dedication';
-String artistTuneSearchScUrl= "http://10.135.64.101:53008/selfcare/artist-search";
-String deleteMyTuneScUrl="http://10.135.64.101:51012/selfcare/subscriber-management/delete-tone";
-String sendGiftScUrl="http://10.135.64.101:51009/selfcare/subscriber-management/gift-tone";
-String getTonePriceScUrl="http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price";
+String artistTuneSearchScUrl =
+    "http://10.135.64.101:53008/selfcare/artist-search";
+String deleteMyTuneScUrl =
+    "http://10.135.64.101:51012/selfcare/subscriber-management/delete-tone";
+String sendGiftScUrl =
+    "http://10.135.64.101:51009/selfcare/subscriber-management/gift-tone";
+String getTonePriceScUrl =
+    "http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price";
 
 //--------------------------from old selfcare document--------------------------
-String getCategoryScUrl="http://10.0.14.4:5892/selfcare/get-category-list?languageCode=en&categoryValue=4";
+String getCategoryScUrl =
+    "http://10.0.14.4:5892/selfcare/get-category-list?languageCode=en&categoryValue=4";
 
 String myWishistScUrl = "";
-String generateOtpScUrl =
-    '$authBaseUrl/auth-service/selfcare/auth/otp';
-String confirmOtpScUrl =
-    '$authBaseUrl/auth-service/selfcare/auth/token';
+String generateOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/otp';
+String confirmOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/token';

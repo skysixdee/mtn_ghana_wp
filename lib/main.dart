@@ -82,7 +82,7 @@ Future<void> readProperties() async {
   musicBoxPrice = data['BOX_CHARGE'];
   tuneChargePrice = data['TUNE_CHARGE'];
   expressMoodMessage = data['EXPRESS_MOOD_MESSAGE'];
-  fallBackCharge=data['FALL_BACK_CHARGE'];
+  fallBackCharge = data['FALL_BACK_CHARGE'];
   termsAndConditionUrl = data['TERMS_AND_CONDITION_URL'];
   privacyPolicyUrl = data['PRIVACY_POLICY'];
   sessionLogOutTimeInMinute = data['SESSION_LOGOUT_TIME_IN_MINUTE'];
@@ -91,12 +91,14 @@ Future<void> readProperties() async {
   otpTimeLimit = data["OTP_TIME_LIMIT"];
   otpLength = data["OTP_LENGTH"];
   faqUrl = data['FAQ_URL'];
-  settingScUrl= data["SETTING_URL"];
-  categoryMwUrl=data["GET_CATEGORY_LIST_URL"];
-  
-  getBannerListScUrl=data["GET_BANNER_LIST_URL"];
-  categorySearchScUrl=data["CATEGORY_SEARCH_URL"];
-  myWishistScUrl=data["MY_WISHLIST_URL"];
+  getMusicBoxScUrl = data['LIST_TONE_URL'];
+
+  settingScUrl = data["SETTING_URL"];
+  categoryMwUrl = data["GET_CATEGORY_LIST_URL"];
+  getCategoryScUrl = data['GET_CATEGORY_LIST_URL'];
+  getBannerListScUrl = data["GET_BANNER_LIST_URL"];
+  categorySearchScUrl = data["CATEGORY_SEARCH_URL"];
+  myWishistScUrl = data["MY_WISHLIST_URL"];
   customPrint("base url = $baseUrl");
   return;
 }
@@ -176,7 +178,7 @@ class MyApp extends StatelessWidget {
         primaryBtnTitle: okCStr,
         onPrimary: () {
           print("Hello shiv popup");
-         StoreManager.logout();
+          StoreManager.logout();
           if (Get.context != null) {
             Get.context!.goNamed(homeRoute);
           }

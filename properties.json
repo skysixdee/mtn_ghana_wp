@@ -6,6 +6,7 @@
     "SETTING_URL":"http://10.0.13.19:9093/setting-service/settings",
     "BASE_URL": "http://10.0.13.19:9093",
     "AUTH_BASE_URL":"http://10.0.13.19:9092",
+    
     "MY_WISHLIST_URL":"http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist",
     
     "FAQ_URL": "http://10.0.13.19:9093/ghana/faq/FAQ.json",
