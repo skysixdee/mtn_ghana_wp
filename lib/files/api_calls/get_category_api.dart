@@ -22,7 +22,7 @@ Future<CategoryModel> getCategoryApi() async {
 
 //----------sc api--------------------
 Future<CategoryModel> getCategoryScApi() async {
-  String url ="${categoryScUrl}?languageCode=${StoreManager.languageSort}&categoryValue=4"; 
+  String url ="${getCategoryScUrl}?languageCode=${StoreManager.languageSort}&categoryValue=4"; 
   //"http://10.0.14.4:5892/selfcare/get-category-list?languageCode=en&categoryValue=4";
   
   //"${categoryScUrl}languageCode=${StoreManager.languageSort}&categoryValue=4";

@@ -13,7 +13,7 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 // }
 
 Future<BannerModel> getBannerScApi() async {
-  String url = bannerScUrl;
+  String url = getBannerListScUrl;
   //"${bannerScUrl}channelId=2&languageCode=${StoreManager.languageSort}";
     Map<String, int> header = {"transId": getTransactionId()};
   Map<String, dynamic> response =

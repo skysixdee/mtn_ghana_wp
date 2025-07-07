@@ -93,7 +93,8 @@ Future<void> readProperties() async {
   faqUrl = data['FAQ_URL'];
   settingScUrl= data["SETTING_URL"];
   categoryMwUrl=data["GET_CATEGORY_LIST_URL"];
-  bannerScUrl=data["GET_BANNER_LIST_URL"];
+  
+  getBannerListScUrl=data["GET_BANNER_LIST_URL"];
   categorySearchScUrl=data["CATEGORY_SEARCH_URL"];
   myWishistScUrl=data["MY_WISHLIST_URL"];
   customPrint("base url = $baseUrl");

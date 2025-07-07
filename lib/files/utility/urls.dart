@@ -93,8 +93,8 @@ String bannerDetailScUrl="http://10.0.14.4:5892/selfcare/get-banner-details?";
 String addToneToShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/add-tone-to-shufflelist";
 String deleteFromShuffleScUrl="http://10.135.64.101:51004/selfcare/setting-service/delete-tone-from-shufflelist";
 String settingScUrl= "";
-String categoryScUrl="http://10.0.14.4:5892/selfcare/get-category-list?languageCode=en&categoryValue=4";
-String bannerScUrl="";
+
+String getBannerListScUrl="";
 String categorySearchScUrl="";
 
 String getMusicBoxScUrl="http://10.0.10.33:8081/selfcare/subscriber-management/list-tones";//"http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
@@ -106,6 +106,8 @@ String sendGiftScUrl="http://10.135.64.101:51009/selfcare/subscriber-management/
 String getTonePriceScUrl="http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price";
 
 //--------------------------from old selfcare document--------------------------
+String getCategoryScUrl="http://10.0.14.4:5892/selfcare/get-category-list?languageCode=en&categoryValue=4";
+
 String myWishistScUrl = "";
 String generateOtpScUrl =
     '$authBaseUrl/auth-service/selfcare/auth/otp';
