@@ -1,7 +1,7 @@
 {
-    "CATEGORY_SEARCH_URL":"http://10.0.14.4:8091/selfcare/sky/category-search",
-    "GET_CATEGORY_LIST_URL":"http://10.0.13.19:9093/apigw/sky/api/adapter/v1/crbt/categories?English",
-    "GET_BANNER_LIST_URL":"http://10.0.14.4:5892/selfcare/sky/get-banner-list?channelId=2&languageCode=en",
+    "CATEGORY_SEARCH_URL":"http://10.0.14.4:8091/selfcare/category-search",
+    
+    "GET_BANNER_LIST_URL":"http://10.0.14.4:5892/selfcare/get-banner-list",
     "MUSIC_BOX_TONE_LIST_URL":"http://10.0.14.4:8091/selfcare/subscriber-management/musicbox/list-tones",
     "SETTING_URL":"http://10.0.13.19:9093/setting-service/settings",
     "MUSIC_BOX_LIST_URL":"http://10.0.14.4:8091/selfcare/subscriber-management/musicbox/list-tones",

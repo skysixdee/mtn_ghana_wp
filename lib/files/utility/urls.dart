@@ -98,7 +98,7 @@ String settingScUrl = "";
 
 String getBannerListScUrl = "";
 String categorySearchScUrl = "";
-String getMusicBoxListUrl="";
+String getMusicBoxListUrl = "";
 String getMusicBoxToneListUrl =
     ''; //"http://10.0.10.33:8081/selfcare/subscriber-management/list-tones";//"http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
 String deleteDedicatedTuneScUrl =
@@ -113,8 +113,6 @@ String getTonePriceScUrl =
     "http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price";
 
 //--------------------------from old selfcare document--------------------------
-String getCategoryScUrl =
-    "http://10.0.14.4:5892/selfcare/get-category-list?languageCode=en&categoryValue=4";
 
 String myWishistScUrl = "";
 String generateOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/otp';

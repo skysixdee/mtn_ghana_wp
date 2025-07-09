@@ -92,11 +92,11 @@ Future<void> readProperties() async {
   otpLength = data["OTP_LENGTH"];
   faqUrl = data['FAQ_URL'];
   getMusicBoxToneListUrl = data['MUSIC_BOX_TONE_LIST_URL'];
-  getMusicBoxListUrl= data["MUSIC_BOX_LIST_URL"];
+  getMusicBoxListUrl = data["MUSIC_BOX_LIST_URL"];
 
   settingScUrl = data["SETTING_URL"];
-  categoryMwUrl = data["GET_CATEGORY_LIST_URL"];
-  getCategoryScUrl = data['GET_CATEGORY_LIST_URL'];
+  //categoryMwUrl = data["GET_CATEGORY_LIST_URL"];
+
   getBannerListScUrl = data["GET_BANNER_LIST_URL"];
   categorySearchScUrl = data["CATEGORY_SEARCH_URL"];
   myWishistScUrl = data["MY_WISHLIST_URL"];
