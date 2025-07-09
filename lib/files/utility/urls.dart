@@ -98,8 +98,8 @@ String settingScUrl = "";
 
 String getBannerListScUrl = "";
 String categorySearchScUrl = "";
-
-String getMusicBoxScUrl =
+String getMusicBoxListUrl="";
+String getMusicBoxToneListUrl =
     ''; //"http://10.0.10.33:8081/selfcare/subscriber-management/list-tones";//"http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
 String deleteDedicatedTuneScUrl =
     'http://10.135.64.101:51012/selfcare/subscriber-management/delete-dedication';

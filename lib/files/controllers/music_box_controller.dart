@@ -40,7 +40,7 @@ class MusicBoxController extends GetxController {
     //return 
     isLoadingContent.value = true;
     MusicBoxContentModel model = await getMusicBoxContentApi(type, code);
-    musicBoxContentList = model.responseMap?.searchList ?? [];
+    musicBoxContentList = model.tonelist??[];
     isLoadingContent.value = false;
   }
 }

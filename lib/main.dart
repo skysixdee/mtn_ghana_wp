@@ -91,7 +91,8 @@ Future<void> readProperties() async {
   otpTimeLimit = data["OTP_TIME_LIMIT"];
   otpLength = data["OTP_LENGTH"];
   faqUrl = data['FAQ_URL'];
-  getMusicBoxScUrl = data['LIST_TONE_URL'];
+  getMusicBoxToneListUrl = data['MUSIC_BOX_TONE_LIST_URL'];
+  getMusicBoxListUrl= data["MUSIC_BOX_LIST_URL"];
 
   settingScUrl = data["SETTING_URL"];
   categoryMwUrl = data["GET_CATEGORY_LIST_URL"];

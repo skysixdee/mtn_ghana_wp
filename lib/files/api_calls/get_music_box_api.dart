@@ -18,15 +18,16 @@ Future<MusicBoxScModel> getMusicBoxScApi({int pageNo = 0}) async {
   
    Map<String, dynamic> jsonData = {
      "transactionId": getTransactionId(), //4564336682,
-    "featureId": 1,
-    "msisdn":StoreManager.msisdn, //"9239198010",
+    // "featureId": 1,
+    // "msisdn":"9239198010",//"9239198010",//StoreManager.msisdn, 
     "languageCode":StoreManager.languageSort,
-    "channelId": 2,//channelId, 
-    "serviceId":"musicbox" 
+    "musicBoxId":"musicBoxId"
+   // "channelId": 2,//channelId, 
+    //"serviceId":"musicbox" 
   };
   Map<String, dynamic> map = await NetworkManager().post(
-    //"http://10.0.10.33:8082/selfcare/subscriber-management/list-tones",
-    getMusicBoxScUrl,
+   // "http://10.0.10.33:8082/selfcare/subscriber-management/list-tones",
+    getMusicBoxToneListUrl,
       jsonData:jsonData); //mockyapi:'https://run.mocky.io/v3/3c30486a-4291-4667-b575-ce6a66e3105b'
   return musicBoxModelScFromJson(json.encode(map));
 
