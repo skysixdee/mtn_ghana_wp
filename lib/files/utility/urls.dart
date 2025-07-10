@@ -9,8 +9,7 @@ String categoryMwUrl = "";
 //-------------------------couldn't find--------------------------
 String searchUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?";
-String categoryDetailUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
+
 String myWishistUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/view-wishlist';
 
@@ -63,7 +62,8 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
-
+String categoryDetailUrl = "";
+//'http://10.135.64.101:53007/selfcare/category-search';
 String myTunesUrl = '';
 
 String playingTuneUrl = '';

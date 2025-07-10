@@ -18,8 +18,8 @@ class CategoryDetailController extends GetxController {
     }
     isLoading.value = true;
     CategoryDetailModel model = await getCategoryDetailApi(key, catId);
-    tuneList = model.responseMap?.searchList ?? [];
-    totalTuneCount.value = model.responseMap?.totalCount ?? 0;
+    tuneList = model.responseMap?.toneList ?? [];
+    //totalTuneCount.value = model.responseMap?.t ?? 0;
     isLoading.value = false;
   }
 
@@ -27,7 +27,7 @@ class CategoryDetailController extends GetxController {
     isLoading.value = true;
     CategoryDetailModel model =
         await getCategoryDetailApi(_key, _catId, pageNo: index);
-    tuneList = model.responseMap?.searchList ?? [];
+    tuneList = model.responseMap?.toneList ?? [];
     isLoading.value = false;
   }
 }

@@ -8,10 +8,16 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<CategoryDetailModel> getCategoryDetailApi(String key, String catId,
     {int pageNo = 0}) async {
-  String lang = StoreManager.selectedLanguage;
-
-  String url =
-      '${categoryDetailUrl}language=$lang&sortBy=Order_By&alignBy=ASC&searchLanguage=$lang?searchKey=$key&genreDetailUrl&perPageCount=$pagePerCount&categoryId=$catId&pageNo=$pageNo';
-  Map<String, dynamic> map = await NetworkManager().get(url);
+  Map<String, dynamic> reqPacket = {
+    "sortBy": "OrderBy",
+    "pageNo": pageNo,
+    "perPageCount": pagePerCount,
+    "locale": StoreManager.languageCode,
+    "categoryId": [catId]
+  };
+  String url = categorySearchScUrl;
+  //'${categoryDetailUrl}language=$lang&sortBy=Order_By&alignBy=ASC&searchLanguage=$lang?searchKey=$key&genreDetailUrl&perPageCount=$pagePerCount&categoryId=$catId&pageNo=$pageNo';
+  Map<String, dynamic> map =
+      await NetworkManager().post(url, jsonData: reqPacket);
   return categoryDetailModelFromJson(json.encode(map));
 }
