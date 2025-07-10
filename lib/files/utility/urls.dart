@@ -1,11 +1,6 @@
 //$baseUrl
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 
-String categoryUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/categories?';
-String bannerUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/banner?';
-String featuredUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/get-recommendation-songs?';
 String bannerDetailUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/banner-search?";
 String settingUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/settings';
@@ -38,8 +33,7 @@ String categoryDetailUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
 String myWishistUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/view-wishlist';
-String addToWishlistUrl =
-    '$baseUrl/security/Middleware/api/adapter/v1/crbt/add-to-wishlist';
+
 String deleteFromWishlistUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/delete-from-wishlist';
 String reGenerateTokenUrl =
@@ -88,6 +82,7 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
+String addToWishlistUrl = "";
 
 String setToneUrl = "";
 

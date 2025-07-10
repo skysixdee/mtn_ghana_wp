@@ -10,17 +10,19 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<void> addToWishlistApi(TuneInfo info) async {
   Map<String, dynamic> map = {
-    "identifier": "AddToWishList",
     "msisdn": StoreManager.msisdn,
     "contentId": info.toneId,
-    "contentName": info.toneName,
-    "path": info.toneIdStreamingUrl,
+    "contentPath": info.toneIdStreamingUrl,
     "previewImage": info.toneIdpreviewImageUrl,
-    "album": info.albumName,
-    "artist": info.artistName,
+    "contentName_L1": info.toneName,
+    "album_L1": info.albumName,
+    "artist_L1": info.artistName,
+    "contentName_L2": info.toneName,
+    "album_L2": info.albumName,
+    "artist_L2": info.artistName,
     "price": info.price,
-    "language": StoreManager.selectedLanguage,
-    "wishlistType": "1",
+    "languageCode": StoreManager.languageSort,
+    "type": 1,
   };
   Map<String, dynamic> result =
       await NetworkManager().post(addToWishlistUrl, formData: map);
