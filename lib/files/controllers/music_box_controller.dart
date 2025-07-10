@@ -13,7 +13,7 @@ class MusicBoxController extends GetxController {
   RxBool isLoadingList = false.obs;
   RxBool isLoadingContent = false.obs;
   //List<ListToneApk> musicBoxList = [];
-  List<TuneInfo> musicBoxList = [];
+  List<MusicBoxList> musicBoxList = [];
   List<TuneInfo> musicBoxContentList = [];
   @override
   void onInit() async {
@@ -24,23 +24,23 @@ class MusicBoxController extends GetxController {
   }
 
   getMusicBoxx() async {
-    //return 
+    //return
     isLoadingList.value = true;
     // MusicBoxMwModel model = await getMusicBoxApi();
     // musicBoxList = model.responseMap?.musicBoxSearchList ?? [];
     // customPrint("GOKULHARI==========${model.responseMap?.musicBoxSearchList?.length}");
-    
-    MusicBoxScModel model = await getMusicBoxScApi();
-    musicBoxList=model.tonelist ?? [];
-     print("MusicboxList===============${musicBoxList}");
-    isLoadingList.value = false;
-  } 
 
-  getMusicBoxContent(String type, String code) async {
-    //return 
+    MusicBoxScModel model = await getMusicBoxScApi();
+    musicBoxList = model.musicBoxList ?? [];
+    print("MusicboxList===============${musicBoxList}");
+    isLoadingList.value = false;
+  }
+
+  getMusicBoxContent(String id) async {
+    //return
     isLoadingContent.value = true;
-    MusicBoxContentModel model = await getMusicBoxContentApi(type, code);
-    musicBoxContentList = model.tonelist??[];
+    MusicBoxContentModel model = await getMusicBoxContentApi(id);
+    musicBoxContentList = model.tonelist ?? [];
     isLoadingContent.value = false;
   }
 }

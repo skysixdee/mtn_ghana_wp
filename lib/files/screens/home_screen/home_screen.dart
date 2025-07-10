@@ -1,3 +1,4 @@
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/web_footer_view.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
               HomeBannerView(key: widget.key),
               const SizedBox(height: 20),
-               const MusicBoxView(),
+              const MusicBoxView(),
               const SizedBox(height: 30),
               FeatureCategoryView(key: widget.key),
               const SizedBox(height: 30),

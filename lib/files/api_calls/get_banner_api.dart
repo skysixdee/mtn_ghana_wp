@@ -15,9 +15,8 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 Future<BannerModel> getBannerScApi() async {
   String url = getBannerListScUrl;
   //"${bannerScUrl}channelId=2&languageCode=${StoreManager.languageSort}";
-    Map<String, int> header = {"transId": getTransactionId()};
-  Map<String, dynamic> response =
-      await NetworkManager().get(url, addInHeader: [header]);
+  //  Map<String, int> header = {"transId": getTransactionId()};
+  Map<String, dynamic> response = await NetworkManager().get(url);
   BannerModel model = BannerModel.fromJson(response);
   return model;
 }

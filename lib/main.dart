@@ -99,6 +99,7 @@ Future<void> readProperties() async {
 
   getBannerListScUrl = data["GET_BANNER_LIST_URL"];
   categorySearchScUrl = data["CATEGORY_SEARCH_URL"];
+  getCategoryListUrl = data['GET_CATEGORY_LIST_URL'];
   myWishistScUrl = data["MY_WISHLIST_URL"];
   customPrint("base url = $baseUrl");
   return;

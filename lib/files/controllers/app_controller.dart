@@ -28,8 +28,8 @@ class AppController extends GetxController {
     super.onInit();
     getAppSettingApi();
     CategoryModel categoryModel = await getCategoryScApi();
-    StoreManager.categories = categoryModel.responseMap?.categories ?? [];
+    StoreManager.categories = categoryModel.responseMap?.categoryList ?? [];
     print("SKY list =${StoreManager.categories?.length}");
-    categories.value = categoryModel.responseMap?.categories ?? [];
+    categories.value = categoryModel.responseMap?.categoryList ?? [];
   }
 }

@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 
@@ -33,15 +34,18 @@ class MyMusicBoxView extends StatelessWidget {
               return Stack(
                 alignment: Alignment.topRight,
                 children: [
-                  MusicBoxCard(
-                    index: p0,
-                    isMyMusicBox: true,
-                    info: con.tuneList[p0].toneDetails?.first ?? TuneInfo(),
-                    leftButton: previewButton(context,
-                        con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
-                    rightButton: deleteButton(
-                        con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
+                  CustomText(
+                    title: 'My Music box card',
                   ),
+                  // MusicBoxCard(
+                  //   index: p0,
+                  //   isMyMusicBox: true,
+                  //   info: con.tuneList[p0].toneDetails?.first ?? TuneInfo(),
+                  //   leftButton: previewButton(context,
+                  //       con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
+                  //   rightButton: deleteButton(
+                  //       con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
+                  // ),
                   moreButton(con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
                 ],
               );

@@ -6,20 +6,19 @@ import 'package:mtn_ghana_wp/files/model/navigation_header_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/play_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/tune_card.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class MyMusicBoxContent extends StatelessWidget {
-  MyMusicBoxContent(
-      {super.key,
-      required this.toneid,
-      required this.toneName,
-      required this.imgUrl});
-  final String toneid;
-  final String toneName;
-  final String imgUrl;
+  MyMusicBoxContent({
+    super.key,
+    required this.id,
+  });
+  final String id;
+
   final MusicBoxController con = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -33,16 +32,19 @@ class MyMusicBoxContent extends StatelessWidget {
               navList: [
                 NavigationHeaderModel(homeStr, homeRoute),
                 NavigationHeaderModel(myMusicBoxStr, myTunesRoute),
-                NavigationHeaderModel(toneName, ""),
+                NavigationHeaderModel("toneName", ""),
               ]),
           builder: (p0) {
-            return TuneCard(
-              customScreenType: CustomScreenType.musicContent,
-              tuneList: con.musicBoxList,
-              moreButton: const SizedBox(),
-              info: con.musicBoxContentList[p0],
-              bottomButtonChild: playButton(con.musicBoxContentList[p0]),
+            return CustomText(
+              title: "My Music box card here ",
             );
+            // TuneCard(
+            //   customScreenType: CustomScreenType.musicContent,
+            //   tuneList: con.musicBoxList,
+            //   moreButton: const SizedBox(),
+            //   info: con.musicBoxContentList[p0],
+            //   bottomButtonChild: playButton(con.musicBoxContentList[p0]),
+            // );
           },
         );
       },

@@ -218,16 +218,11 @@ StatefulShellBranch _musicBoxContentShell() {
         name: musicBoxContentRoute,
         path: musicBoxContentRoute,
         builder: (context, state) {
-          String type = state.uri.queryParameters['type'] ?? '';
-          String code = state.uri.queryParameters['code'] ?? '';
-          String toneName = state.uri.queryParameters['toneName'] ?? '';
-          String toneId = state.uri.queryParameters['toneId'] ?? '';
-          String imgUrl = state.uri.queryParameters['imgUrl'] ?? '';
-          cont.getMusicBoxContent(type, code);
+          String id = state.uri.queryParameters['id'] ?? '';
+
+          cont.getMusicBoxContent(id);
           return MusicBoxContentScreen(
-            toneName: toneName,
-            toneid: toneId,
-            imgUrl: imgUrl,
+            id: id,
           );
         },
       ),
@@ -243,17 +238,10 @@ StatefulShellBranch _myMusicBoxContentShell() {
         name: myMusicBoxContentRoute,
         path: myMusicBoxContentRoute,
         builder: (context, state) {
-          String type = state.uri.queryParameters['type'] ?? '';
-          String code = state.uri.queryParameters['code'] ?? '';
-          String toneName = state.uri.queryParameters['toneName'] ?? '';
-          String toneId = state.uri.queryParameters['toneId'] ?? '';
-          String imgUrl = state.uri.queryParameters['imgUrl'] ?? '';
-          cont.getMusicBoxContent(type, code);
-          return MyMusicBoxContent(
-            toneName: toneName,
-            toneid: toneId,
-            imgUrl: imgUrl,
-          );
+          String id = state.uri.queryParameters['id'] ?? '';
+
+          cont.getMusicBoxContent(id);
+          return MyMusicBoxContent(id: id);
         },
       ),
     ],
@@ -312,7 +300,7 @@ StatefulShellBranch _myTuneShell() {
           bool? isReload = state.extra as bool?;
           print(" extra = param = $isReload");
           //if (isReload ?? true) {
-            cont.makeApiCall();
+          cont.makeApiCall();
           //}
 
           return MyTuneScreen();

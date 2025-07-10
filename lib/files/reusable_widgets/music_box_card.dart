@@ -1,4 +1,5 @@
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/model/music_box_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
@@ -21,7 +22,7 @@ class MusicBoxCard extends StatelessWidget {
       this.isMyMusicBox = false,
       required this.index});
   final int index;
-  final TuneInfo info;
+  final MusicBoxList info;
   final Widget? rightButton;
   final Widget? leftButton;
   final bool isMyMusicBox;
@@ -32,11 +33,7 @@ class MusicBoxCard extends StatelessWidget {
         context.goNamed(
             isMyMusicBox ? myMusicBoxContentRoute : musicBoxContentRoute,
             queryParameters: {
-              'type': info.type,
-              'code': info.toneId,
-              'toneName': info.toneName,
-              'toneId': info.toneId,
-              'imgUrl': info.toneIdpreviewImageUrl,
+              'id': info.musicBoxId,
             });
       },
       child: Padding(
@@ -58,8 +55,8 @@ class MusicBoxCard extends StatelessWidget {
                       color: lightGrey,
                       child: customImage(
                           imageName: 'assets/pngs/music_box_$index.png',
-                          url: info.toneIdpreviewImageUrl,
-                          toneName: info.previewImageUrl ?? ''))),
+                          url: info.musicBoxIdpreviewImageUrl,
+                          toneName: info.musicBoxName ?? ''))),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -67,7 +64,7 @@ class MusicBoxCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     CustomText(
-                      title: info.toneName ?? '',
+                      title: info.musicBoxName ?? '',
                       fontName: FontName.bold,
                       fontSize: 16,
                     ),
@@ -82,24 +79,24 @@ class MusicBoxCard extends StatelessWidget {
                             splashColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () {
-                                    context.goNamed(
-                                      isMyMusicBox
-                                          ? myMusicBoxContentRoute
-                                          : musicBoxContentRoute,
-                                      queryParameters: {
-                                        'type': info.type,
-                                        'code': info.toneId,
-                                        'toneName': info.toneName,
-                                        'toneId': info.toneId,
-                                        'imgUrl': info.toneIdpreviewImageUrl,
-                                      },
-                                    );
-                                    print("view all tune in music box");
-                                  },
+                              context.goNamed(
+                                isMyMusicBox
+                                    ? myMusicBoxContentRoute
+                                    : musicBoxContentRoute,
+                                queryParameters: {
+                                  'id': info.musicBoxId,
+                                },
+                              );
+                              print("view all tune in music box");
+                            },
                             child: leftButton ??
                                 OutlinedButton.icon(
                                   onPressed: null,
-                                  icon: const Icon(Icons.visibility, size: 16, color: black,),
+                                  icon: const Icon(
+                                    Icons.visibility,
+                                    size: 16,
+                                    color: black,
+                                  ),
                                   label: CustomText(
                                     title: previewStr,
                                     //fontName: FontName.bold,
@@ -116,14 +113,20 @@ class MusicBoxCard extends StatelessWidget {
                         const SizedBox(width: 20),
                         Flexible(
                           child: SizedBox(
-                            height:36,
-                            //width: 80,
-                            child: rightButton ??
-                                buyButton(info,
-                                    isMusicBox: true,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0)),
-                          ),
+                              height: 36,
+                              //width: 80,
+                              child: rightButton ??
+                                  GenericButton(
+                                    title: "Buy",
+                                    onTap: () {
+                                      print("implemnt buy music box here ");
+                                    },
+                                  )
+                              // buyButton(info,
+                              //     isMusicBox: true,
+                              //     padding: const EdgeInsets.symmetric(
+                              //         horizontal: 0, vertical: 0)),
+                              ),
                         )
                       ],
                     ),

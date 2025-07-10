@@ -1,10 +1,10 @@
 {
     "CATEGORY_SEARCH_URL":"http://10.0.14.4:8091/selfcare/category-search",
-    
-    "GET_BANNER_LIST_URL":"http://10.0.14.4:5892/selfcare/get-banner-list",
+    "GET_CATEGORY_LIST_URL":"http://10.135.64.101:53009/selfcare/get-category-list?languageCode=en&categoryValue=4",
+    "GET_BANNER_LIST_URL":"http://10.135.64.101:53009/selfcare/get-banner-list?channelId=2&languageCode=en",
     "MUSIC_BOX_TONE_LIST_URL":"http://10.0.14.4:8091/selfcare/subscriber-management/musicbox/list-tones",
     "SETTING_URL":"http://10.0.13.19:9093/setting-service/settings",
-    "MUSIC_BOX_LIST_URL":"http://10.0.14.4:8091/selfcare/subscriber-management/musicbox/list-tones",
+    "MUSIC_BOX_LIST_URL":"http://10.0.14.4:8091/selfcare/subscriber-management/musicbox/list-musicbox",
     "BASE_URL": "http://10.0.13.19:9093",
     "AUTH_BASE_URL":"http://10.0.13.19:9092",
     

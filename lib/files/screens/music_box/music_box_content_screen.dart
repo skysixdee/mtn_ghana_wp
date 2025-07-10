@@ -2,8 +2,10 @@ import 'package:mtn_ghana_wp/files/controllers/music_box_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/custpm_screen_type.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_music_box_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/play_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_grid_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
@@ -13,14 +15,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MusicBoxContentScreen extends StatelessWidget {
-  MusicBoxContentScreen(
-      {super.key,
-      required this.toneid,
-      required this.toneName,
-      required this.imgUrl});
-  final String toneid;
-  final String toneName;
-  final String imgUrl;
+  MusicBoxContentScreen({
+    super.key,
+    required this.id,
+  });
+  final String id;
+
   final MusicBoxController con = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -29,22 +29,26 @@ class MusicBoxContentScreen extends StatelessWidget {
         return GenericScrollView(
           isLoading: con.isLoadingContent.value,
           itemCount: con.musicBoxContentList.length,
-          sliverAppBar: getNavigationView(musicBoxStr,
-              rightButton: buyButton(
-                  isMusicBox: true,
-                  TuneInfo(
-                      toneId: toneid,
-                      toneName: toneName,
-                      toneIdpreviewImageUrl: imgUrl),
-                  padding: EdgeInsets.symmetric(horizontal: 16))),
+          sliverAppBar:
+              getNavigationView(musicBoxStr, rightButton: buyMusicBoxButton()),
+          // buyButton(
+          //     isMusicBox: true,
+          //     TuneInfo(
+          //         toneId: toneid,
+          //         toneName: toneName,
+          //         toneIdpreviewImageUrl: imgUrl),
+          //     padding: EdgeInsets.symmetric(horizontal: 16))),
           builder: (p0) {
-            return TuneCard(
-              customScreenType: CustomScreenType.musicContent,
-              tuneList: con.musicBoxList,
-              moreButton: const SizedBox(),
-              info: con.musicBoxContentList[p0],
-              bottomButtonChild: playButton(con.musicBoxContentList[p0]),
+            return CustomText(
+              title: "Music box card ",
             );
+            // TuneCard(
+            //   customScreenType: CustomScreenType.musicContent,
+            //   tuneList: con.musicBoxList,
+            //   moreButton: const SizedBox(),
+            //   info: con.musicBoxContentList[p0],
+            //   bottomButtonChild: playButton(con.musicBoxContentList[p0]),
+            // );
           },
         );
       },

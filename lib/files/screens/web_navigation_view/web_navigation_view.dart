@@ -301,7 +301,7 @@ class WebNavigationView extends StatelessWidget {
     );
   }
 
- Padding categoryCard(int index) {
+  Padding categoryCard(int index) {
     return Padding(
       padding: const EdgeInsets.all(2),
       child: Container(
@@ -314,7 +314,7 @@ class WebNavigationView extends StatelessWidget {
         child: Stack(
           children: [
             customImage(
-                url: appController.categories[index].menuImagePath,
+                url: appController.categories[index].menuImage,
                 gredientColor: gredientColor),
             //     CustomText(
             //       title: appController.categories[index].categoryName ?? '',
