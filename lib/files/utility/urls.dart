@@ -7,8 +7,6 @@ String playingTuneUrl =
 
 String artistTuneSearchUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
-String deleteMyTuneUrl =
-    "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/delete-tone";
 
 String categoryMwUrl = "";
 
@@ -68,6 +66,9 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
+
+String deleteMyTuneUrl = "";
+
 String deleteDedicatedTuneUrl = "";
 
 String addToWishlistUrl = "";
