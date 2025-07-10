@@ -5,28 +5,6 @@ import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
-Future<GenericModel> addToShuffleApi(String toneId) async {
-  String url = addToneToShuffleUrl;
-  List<Map<String, dynamic>> toneIdList = [
-    {"toneId": toneId}
-  ];
-  Map<String, dynamic> data = {
-    "clientTxnId": getTransactionId(),
-    "aPartyMsisdn": StoreManager.msisdn,
-    "toneIdList": toneIdList,
-    "language": StoreManager.languageCode,
-    "activityId": "1",
-    "priority": "0",
-    "serviceId": "1",
-    "channelId": channelId
-  };
-  Map<String, dynamic> jsonResp =
-      await NetworkManager().post(url, formData: data);
-  GenericModel model = GenericModel.fromJson(jsonResp);
-  return model;
-}
-
-
 Future<GenericModel> addToShuffleScApi(String toneId) async {
   String url = addToneToShuffleScUrl;
   List<Map<String, dynamic>> toneIdList = [
@@ -34,7 +12,7 @@ Future<GenericModel> addToShuffleScApi(String toneId) async {
   ];
   Map<String, dynamic> data = {
     "transactionId": getTransactionId(),
-    "featureId" : 1,
+    "featureId": 1,
     "msisdn": StoreManager.msisdn,
     "channelId": channelId,
     "contentIdlist": toneIdList

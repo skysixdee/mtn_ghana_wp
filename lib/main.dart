@@ -102,6 +102,7 @@ Future<void> readProperties() async {
   categorySearchScUrl = data["CATEGORY_SEARCH_URL"];
   getCategoryListUrl = data['GET_CATEGORY_LIST_URL'];
   myWishistScUrl = data["MY_WISHLIST_URL"];
+  deleteDedicatedTuneUrl = data['DETETE_DEDICATED_URL'];
   addToWishlistUrl = data['Add_TO_WISHLIST_URL'];
   customPrint("base url = $baseUrl");
   return;

@@ -55,27 +55,6 @@ class MyTuneController extends GetxController {
 
     isLoading.value = false;
   }
-  // getMyTune() async {
-  //   if (isLoading.value) {
-  //     return;
-  //   }
-  //   isLoading.value = true;
-  //   if (packName.isEmpty) {
-  //     PackDetailModel packDetailModel = await getPackDetailApi();
-  //     packName = packDetailModel.responseMap?.packStatusDetails?.packName ?? '';
-  //   }
-  //   message.value = '';
-  //   MyTunesModel model = await getMyTuneApi();
-  //   if (model.statusCode == 'SC0000') {
-  //     tuneApkList.value = model.responseMap?.listToneApk ?? [];
-  //     message.value = tuneApkList.isEmpty ? listIsEmptyStr : '';
-  //   } else {
-  //     message.value = model.message ?? '';
-  //     snackBar(model.message);
-  //   }
-
-  //   isLoading.value = false;
-  // }
 
   deleteTune(TuneInfo info, int index) async {
     print("fsddgdfgfdgdfgdf");
@@ -84,7 +63,8 @@ class MyTuneController extends GetxController {
       primaryBtnTitle: confirmStr,
       secondryBtnTitle: cancelStr,
       onPrimary: () async {
-        GenericModel model = await deleteMyTuneScApi(info.toneId ?? '', packName);
+        GenericModel model =
+            await deleteMyTuneScApi(info.toneId ?? '', packName);
         if (model.statusCode == 'SC0000') {
           //tuneApkList.removeAt(index);
           print(

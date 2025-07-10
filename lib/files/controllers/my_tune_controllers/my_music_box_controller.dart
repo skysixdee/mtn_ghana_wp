@@ -21,7 +21,7 @@ class MyMusicBoxController extends GetxController {
     isLoading.value = true;
     MyMusicBoxModel model = await getMyMusicBoxApi();
     if (model.statusCode == 'SC0000') {
-      tuneList = model.responseMap?.listToneApk?? [];
+      tuneList = model.responseMap?.listToneApk ?? [];
     }
 
     isLoading.value = false;

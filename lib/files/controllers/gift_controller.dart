@@ -1,4 +1,3 @@
-import 'package:mtn_ghana_wp/files/api_calls/send_gift_api.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
@@ -26,20 +25,20 @@ class GiftController extends GetxController {
 
   sendGift(TuneInfo info) async {
     isLoading.value = true;
-    GenericModel model =
-        await sendGiftScApi(bPrtyMsisdn, info.toneId ?? '', info.toneName ?? '');
-    if (model.statusCode == 'SC0000') {
-      openAlertPopup(
-        message: model.message ?? '',
-        onPrimary: () {
-          if (onDismiss != null) {
-            onDismiss!();
-          }
-        },
-      );
-    } else {
-      messsage.value = model.message ?? someThingWentWrongStr;
-    }
+    // GenericModel model = await sendGiftScApi(
+    //     bPrtyMsisdn, info.toneId ?? '', info.toneName ?? '');
+    // if (model.statusCode == 'SC0000') {
+    //   openAlertPopup(
+    //     message: model.message ?? '',
+    //     onPrimary: () {
+    //       if (onDismiss != null) {
+    //         onDismiss!();
+    //       }
+    //     },
+    //   );
+    // } else {
+    //   messsage.value = model.message ?? someThingWentWrongStr;
+    // }
     isLoading.value = false;
   }
 

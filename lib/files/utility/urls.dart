@@ -1,26 +1,15 @@
 //$baseUrl
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 
-String addToneToShuffleUrl =
-    "$baseUrl/security/Middleware/api/adapter/v1/crbt/add-tone-to-shuffle";
-String deleteFromShuffleUrl =
-    '$baseUrl/security/Middleware/api/adapter/v1/crbt/delete-from-shuffle';
 String myTunesUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones';
 String playingTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones';
-String deleteDedicatedTuneUrl =
-    '$baseUrl/security/Middleware/api/adapter/v1/crbt/delete-dedication';
+
 String artistTuneSearchUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
 String deleteMyTuneUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/delete-tone";
-String sendGiftUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/send-gift";
-String getTonePriceUrl =
-    "$baseUrl/security/Middleware/api/adapter/v1/crbt/get-tone-price";
-String generateOtpUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/generate-otp';
-String confirmOtpUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/confirm-otp';
+
 String categoryMwUrl = "";
 
 //-------------------------couldn't find--------------------------
@@ -79,6 +68,8 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
+String deleteDedicatedTuneUrl = "";
+
 String addToWishlistUrl = "";
 
 String setToneUrl = "";
