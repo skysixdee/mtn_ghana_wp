@@ -8,7 +8,9 @@ import 'package:mtn_ghana_wp/files/api_calls/buy_music_channel_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_search_tune_list_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/otp_check_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
-import 'package:mtn_ghana_wp/files/en_de_cryptor/otp_en_de_cryptor.dart' show AesEnDeCryptor;
+import 'package:mtn_ghana_wp/files/en_de_cryptor/otp_en_de_cryptor.dart'
+    show AesEnDeCryptor;
+import 'package:mtn_ghana_wp/files/model/buy_tone_model.dart';
 import 'package:mtn_ghana_wp/files/model/confirm_otp_model.dart';
 import 'package:mtn_ghana_wp/files/model/confirm_otp_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/generate_otp_sc_model.dart';
@@ -51,7 +53,7 @@ class OtpController extends GetxController {
 
   onVerifyButtonAction(String msisdn, bool isMusicBox, bool isNewUser) async {
     this.isNewUser = isNewUser;
-    if (otp.isEmpty || otp.length<otpLength) {
+    if (otp.isEmpty || otp.length < otpLength) {
       message.value = enterOtpStr;
       return;
     }
@@ -77,7 +79,7 @@ class OtpController extends GetxController {
         onSuccess!();
         //getSecurityToken(msisdn);
       } else {
-        message.value = confirmOtpModel.message??someThingWentWrongStr;
+        message.value = confirmOtpModel.message ?? someThingWentWrongStr;
         isLoading.value = false;
       }
     }
@@ -124,9 +126,9 @@ class OtpController extends GetxController {
   }
 
   buyTune() async {
-    GenericModel model =
+    BuyToneModel model =
         await setToneApi(info?.toneId ?? '', info?.toneName ?? '');
-    if (model.statusCode == "SC0000") {
+    if (model.respCode == 0) {
       openAlertPopup(
         message: model.message ?? '',
         onPrimary: () {
@@ -175,7 +177,7 @@ class OtpController extends GetxController {
       isResendingOtp.value = true;
       enableResend.value = true;
       GenerateOtpScModel model = await generateOtpScApi(msisdn);
-      if (model.respCode ==1000) {
+      if (model.respCode == 1000) {
       } else {
         message.value = model.message ?? someThingWentWrongStr;
       }

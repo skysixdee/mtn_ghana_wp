@@ -93,7 +93,8 @@ Future<void> readProperties() async {
   faqUrl = data['FAQ_URL'];
   getMusicBoxToneListUrl = data['MUSIC_BOX_TONE_LIST_URL'];
   getMusicBoxListUrl = data["MUSIC_BOX_LIST_URL"];
-
+  getTonePriceScUrl = data["GET_TONE_PRICE_URL"];
+  setToneUrl = data['Buy_TONE_URL'];
   settingScUrl = data["SETTING_URL"];
   //categoryMwUrl = data["GET_CATEGORY_LIST_URL"];
 

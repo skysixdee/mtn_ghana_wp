@@ -5,7 +5,10 @@
     "MUSIC_BOX_TONE_LIST_URL":"http://10.0.14.4:8091/selfcare/subscriber-management/musicbox/list-tones",
     "SETTING_URL":"http://10.0.13.19:9093/setting-service/settings",
     "MUSIC_BOX_LIST_URL":"http://10.0.14.4:8091/selfcare/subscriber-management/musicbox/list-musicbox",
+    "GET_TONE_PRICE_URL":"http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price",
+    "Buy_TONE_URL":"http://10.0.13.19:9093/selfcare/subscriber-management/buy-tone",
     "BASE_URL": "http://10.0.13.19:9093",
+    
     "AUTH_BASE_URL":"http://10.0.13.19:9092",
     
     "MY_WISHLIST_URL":"http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist",

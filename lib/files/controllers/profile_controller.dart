@@ -4,6 +4,7 @@ import 'package:mtn_ghana_wp/files/api_calls/edit_profile_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_profile_detail_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
+import 'package:mtn_ghana_wp/files/model/buy_tone_model.dart';
 import 'package:mtn_ghana_wp/files/model/edit_profile_model.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
@@ -103,18 +104,18 @@ class ProfileController extends GetxController {
       selectedCetegories.add(element);
     }
   }
-  
+
   subscribeButtonAction() async {
     Get.dialog(Center(
       child: SubscriptionPlansView(
         onConfirm: (item) async {
           isSubscribing.value = true;
-          String defaultToneId = '';//default tone from setting api
-              //StoreManager.other?.defaultTone?.attribute ?? '';
+          String defaultToneId = ''; //default tone from setting api
+          //StoreManager.other?.defaultTone?.attribute ?? '';
 
-          GenericModel model =
+          BuyToneModel model =
               await setToneApi(defaultToneId, '', packName: item.title);
-          if (model.statusCode == 'SC0000') {
+          if (model.respCode == 0) {
             getProfileDetail();
           } else {
             snackBar(model.message);
@@ -134,24 +135,25 @@ class ProfileController extends GetxController {
       message: unSubscribeMessageStr,
       primaryBtnTitle: confirmStr,
       secondryBtnTitle: cancelStr,
-      onPrimary: () async{
+      onPrimary: () async {
         isSubscribing.value = true;
-    GenericModel model =
-        await deleteMyTuneApi("", packStatusDetails?.packName ?? '');
-    if (model.statusCode == 'SC0000') {
-      openAlertPopup(message: unSubscribeSuccessfulMessageStr,
-      onPrimary: () {
-        getProfileDetail();
-      },);
-      
-    } else {
-      snackBar(model.message);
-    }
+        GenericModel model =
+            await deleteMyTuneApi("", packStatusDetails?.packName ?? '');
+        if (model.statusCode == 'SC0000') {
+          openAlertPopup(
+            message: unSubscribeSuccessfulMessageStr,
+            onPrimary: () {
+              getProfileDetail();
+            },
+          );
+        } else {
+          snackBar(model.message);
+        }
 
-    isSubscribing.value = false;
+        isSubscribing.value = false;
       },
     );
-    
+
     print("unSubscribeButtonAction");
   }
 }

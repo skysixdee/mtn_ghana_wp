@@ -8,33 +8,31 @@ import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
-Future<GetTonePriceModell> getTonePriceApi(String toneId) async {
-  Map<String, dynamic> jsonData = {
-    "language": StoreManager.languageCode,
-    "serviceId": "1",
-    "clientTxnId": getTransactionId(),
-    "aPartyMsisdn": StoreManager.msisdn,
-    "bPartyMsisdnList": "",
-    "toneId": toneId,
-    "validationIdentifier": "3",
-    "channelId": channelId
-  };
-  Map<String, dynamic> jsonResp =
-      await NetworkManager().post(getTonePriceUrl, formData: jsonData);
-  return getTonePriceModellFromJson(json.encode(jsonResp));
-}
+// Future<GetTonePriceModell> getTonePriceApi(String toneId) async {
+//   Map<String, dynamic> jsonData = {
+//     "language": StoreManager.languageCode,
+//     "serviceId": "1",
+//     "clientTxnId": getTransactionId(),
+//     "aPartyMsisdn": StoreManager.msisdn,
+//     "bPartyMsisdnList": "",
+//     "toneId": toneId,
+//     "validationIdentifier": "3",
+//     "channelId": channelId
+//   };
+//   Map<String, dynamic> jsonResp =
+//       await NetworkManager().post(getTonePriceUrl, formData: jsonData);
+//   return getTonePriceModellFromJson(json.encode(jsonResp));
+// }
 
-
-Future<GetTonePriceModell> getTonePriceScApi(String toneId) async {
+Future<GetTonePriceModel> getTonePriceScApi(String toneId) async {
   Map<String, dynamic> jsonData = {
     "transactionId": getTransactionId(),
     "featureId": "1",
     "channelId": channelId,
-    "languageCode":StoreManager.languageCode,
+    "languageCode": StoreManager.languageCode,
     "msisdn": StoreManager.msisdn
-
   };
   Map<String, dynamic> jsonResp =
       await NetworkManager().post(getTonePriceScUrl, jsonData: jsonData);
-  return getTonePriceModellFromJson(json.encode(jsonResp));
+  return getTonePriceModelFromJson(json.encode(jsonResp));
 }

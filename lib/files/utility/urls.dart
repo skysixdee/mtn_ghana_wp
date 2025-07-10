@@ -73,7 +73,7 @@ String passwordValidateUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/password-validation';
 String securityTokenUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/security-token';
-String setToneUrl = "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/set-tone";
+
 String searchNameTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones';
 String getBlackListUrl =
@@ -88,6 +88,9 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
+
+String setToneUrl = "";
+
 String advancedSearchScUrl = "http://10.0.14.4:8090/advanced-search";
 String bannerDetailScUrl = "http://10.0.14.4:5892/selfcare/get-banner-details?";
 String addToneToShuffleScUrl =
@@ -110,8 +113,8 @@ String deleteMyTuneScUrl =
     "http://10.135.64.101:51012/selfcare/subscriber-management/delete-tone";
 String sendGiftScUrl =
     "http://10.135.64.101:51009/selfcare/subscriber-management/gift-tone";
-String getTonePriceScUrl =
-    "http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price";
+String getTonePriceScUrl = '';
+//"http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price";
 
 //--------------------------from old selfcare document--------------------------
 

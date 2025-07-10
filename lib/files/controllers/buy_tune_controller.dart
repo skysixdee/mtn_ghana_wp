@@ -3,6 +3,7 @@ import 'package:mtn_ghana_wp/files/api_calls/authorization/subscriber_validation
 import 'package:mtn_ghana_wp/files/api_calls/buy_music_channel_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
+import 'package:mtn_ghana_wp/files/model/buy_tone_model.dart';
 import 'package:mtn_ghana_wp/files/model/generate_otp_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
@@ -20,7 +21,7 @@ class BuyTuneController extends GetxController {
   bool isNewUser = false;
   RxBool displayOptScreen = false.obs;
   Function()? onSuccess;
-  String securityToken="";
+  String securityToken = "";
   bool isMusicBox = false;
   resetValue() {
     msisdn = '';
@@ -58,9 +59,9 @@ class BuyTuneController extends GetxController {
 
   buyTone(TuneInfo info) async {
     isLoading.value = true;
-    GenericModel model =
+    BuyToneModel model =
         await setToneApi(info.toneId ?? '', info.toneName ?? '');
-    if (model.statusCode == 'SC0000') {
+    if (model.respCode == 0) {
       openAlertPopup(
         message: model.message ?? '',
         onPrimary: () {
