@@ -1,10 +1,6 @@
 //$baseUrl
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 
-String myTunesUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones';
-String playingTuneUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones';
-
 String artistTuneSearchUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?';
 
@@ -35,8 +31,7 @@ String musicBoxUrl =
 //"https://mytune.atom.com.mm/apigw/Middleware/api/adapter/v1/crbt/music-box-search?";
 String musicBoxContextUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/music-box-contents?';
-String myMusicBoxUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/list-tones';
+
 String tuneSettingFulldayUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/time-based-setting-for-already-activated';
 String tuneSettingDedicatedUrl =
@@ -68,6 +63,12 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
+
+String myTunesUrl = '';
+
+String playingTuneUrl = '';
+
+String myMusicBoxUrl = '';
 
 String deleteMyTuneUrl = "";
 

@@ -4,18 +4,22 @@ import 'package:mtn_ghana_wp/files/model/my_playing_tunes_model.dart';
 import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<MyPlayingTunesModel> getMyPlayingTuneApi({int pageNo = 0}) async {
-  String lag = StoreManager.selectedLanguage;
-  String msisdn = StoreManager.msisdn;
-  String url =
-      "$playingTuneUrl?language=$lag&msisdn=$msisdn&startIndex=$pageNo&endIndex=$pagePerCount&rbtMode=0";
-  Map<String, dynamic> map = await NetworkManager().get(url);
-  return myPlayingTunesModelFromJson(json.encode(map));
+  Map<String, dynamic> jsonMap = {
+    "transactionId": getTransactionId(),
+    "featureId": "1",
+    "msisdn": StoreManager.msisdn,
+    "languageCode": StoreManager.languageSort,
+    "channelId": channelId,
+    "serviceId": "1"
+  };
 
-  // MyPlayingTunesModel model = MyPlayingTunesModel.fromJson(json.decode(json12));
-  // return model;
+  Map<String, dynamic> map =
+      await NetworkManager().post(playingTuneUrl, jsonData: jsonMap);
+  return myPlayingTunesModelFromJson(json.encode(map));
 }
 
 String json12 = """{
