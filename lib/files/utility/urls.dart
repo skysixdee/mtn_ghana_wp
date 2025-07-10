@@ -60,8 +60,10 @@ String createBlackListUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/add-to-black-list';
 String deleteBlacklistUrl =
     "$baseUrl/security/Middleware/api/adapter/v1/crbt/remove-from-black-list";
+
 String buyMusicChannelUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/buy-music-channel";
+
 String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
@@ -74,6 +76,9 @@ String deleteDedicatedTuneUrl = "";
 String addToWishlistUrl = "";
 
 String setToneUrl = "";
+String myWishistScUrl = "";
+String generateOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/otp';
+String confirmOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/token';
 
 String advancedSearchScUrl = "http://10.0.14.4:8090/advanced-search";
 String bannerDetailScUrl = "http://10.0.14.4:5892/selfcare/get-banner-details?";
@@ -87,8 +92,7 @@ String getBannerListScUrl = "";
 String categorySearchScUrl = "";
 String getCategoryListUrl = '';
 String getMusicBoxListUrl = "";
-String getMusicBoxToneListUrl =
-    ''; //"http://10.0.10.33:8081/selfcare/subscriber-management/list-tones";//"http://10.135.64.101:53004/selfcare/subscriber-management/list-tones";
+String getMusicBoxToneListUrl = '';
 String deleteDedicatedTuneScUrl =
     'http://10.135.64.101:51012/selfcare/subscriber-management/delete-dedication';
 String artistTuneSearchScUrl =
@@ -98,10 +102,5 @@ String deleteMyTuneScUrl =
 String sendGiftScUrl =
     "http://10.135.64.101:51009/selfcare/subscriber-management/gift-tone";
 String getTonePriceScUrl = '';
-//"http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price";
 
 //--------------------------from old selfcare document--------------------------
-
-String myWishistScUrl = "";
-String generateOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/otp';
-String confirmOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/token';
