@@ -1,9 +1,6 @@
 //$baseUrl
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 
-String bannerDetailUrl =
-    "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/banner-search?";
-String settingUrl = '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/settings';
 String addToneToShuffleUrl =
     "$baseUrl/security/Middleware/api/adapter/v1/crbt/add-tone-to-shuffle";
 String deleteFromShuffleUrl =
