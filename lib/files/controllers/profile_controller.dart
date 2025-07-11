@@ -139,7 +139,7 @@ class ProfileController extends GetxController {
         isSubscribing.value = true;
         GenericModel model =
             await deleteMyTuneScApi("", packStatusDetails?.packName ?? '');
-        if (model.statusCode == 'SC0000') {
+        if (model.respCode == 0) {
           openAlertPopup(
             message: unSubscribeSuccessfulMessageStr,
             onPrimary: () {

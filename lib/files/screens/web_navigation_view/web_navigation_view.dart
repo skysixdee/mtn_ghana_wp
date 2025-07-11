@@ -51,7 +51,7 @@ class WebNavigationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, si) {
-        return (si.isTablet || si.isMobile)
+        return (si.isMobile)
             ? const SizedBox()
             : Container(
                 height: 70,

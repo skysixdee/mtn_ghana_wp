@@ -64,7 +64,7 @@ class MyPlayingTuneController extends GetxController {
       onPrimary: () async {
         switchingShuffle.value = true;
         GenericModel model = await shuffleEnbleDisableApi(!isShuffleOn.value);
-        if (model.statusCode == "SC0000") {
+        if (model.respCode == 0) {
           isShuffleOn.value = !isShuffleOn.value;
           getPlayingTune();
         } else {
@@ -184,7 +184,7 @@ class MyPlayingTuneController extends GetxController {
   _deleteDedicatedTune(ToneDetail info) async {
     GenericModel model = await dedicatedTuneDeleteScApi(
         info.bParty ?? '', info.toneId ?? '', getTimeType(info));
-    if (model.statusCode == 'SC0000') {
+    if (model.respCode == 0) {
       tuneList.remove(info);
     } else {
       snackBar(model.message);
@@ -195,7 +195,7 @@ class MyPlayingTuneController extends GetxController {
   _deleteAllCallerTune(ToneDetail info) async {
     GenericModel model =
         await deleteFromShuffleScApi(info.toneId ?? '', getTimeType(info));
-    if (model.statusCode == 'SC0000') {
+    if (model.respCode == 0) {
       tuneList.remove(info);
     } else {
       snackBar(model.message);

@@ -87,7 +87,7 @@ class BuyTuneController extends GetxController {
   buyMusicBox(TuneInfo info) async {
     isLoading.value = true;
     GenericModel model = await buyMusicChannelApi(info.toneId ?? '');
-    if (model.statusCode == 'SC0000') {
+    if (model.respCode == 0) {
       openAlertPopup(
         message: model.message ?? '',
         onPrimary: () {

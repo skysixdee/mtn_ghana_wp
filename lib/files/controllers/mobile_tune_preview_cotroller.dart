@@ -86,7 +86,7 @@ class MobileTunePreviewCotroller extends GetxController {
     MyTuneController myCon = Get.find();
     GenericModel model =
         await deleteMyTuneScApi(currentTuneDetail.value.toneId ?? '', packName);
-    if (model.statusCode == 'SC0000') {
+    if (model.respCode == 0) {
       tuneList.contains(currentTuneDetail.value);
       for (var i = 0; i < myCon.tuneApkList.length; i++) {
         myCon.tuneApkList[i].toneDetails?.remove(currentTuneDetail.value);
@@ -100,7 +100,7 @@ class MobileTunePreviewCotroller extends GetxController {
     MyWishlistController wCont = Get.find();
 
     GenericModel model = await deleteFromWishlistApi(currentTuneDetail.value);
-    if (model.statusCode == 'SC0000') {
+    if (model.respCode == 0) {
       wCont.tuneList.remove(currentTuneDetail.value);
       tuneList.remove(currentTuneDetail.value);
     } else {

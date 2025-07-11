@@ -433,9 +433,7 @@ Widget navBuilder(context, state, navigationShell) {
       home: ResponsiveBuilder(
         builder: (context, si) {
           return Scaffold(
-            appBar: (si.isMobile || si.isTablet)
-                ? AppBar(backgroundColor: yellow)
-                : null,
+            appBar: (si.isMobile) ? AppBar(backgroundColor: yellow) : null,
             endDrawer: MobileDrawerScreen(),
             body: Material(
               child: Column(

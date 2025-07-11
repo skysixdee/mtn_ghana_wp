@@ -1,7 +1,38 @@
 // To parse this JSON data, do
 //
 //     final genericModel = genericModelFromJson(jsonString);
+// To parse this JSON data, do
+//
+//     final genericModel = genericModelFromJson(jsonString);
 
+import 'dart:convert';
+
+GenericModel genericModelFromJson(String str) =>
+    GenericModel.fromJson(json.decode(str));
+
+String genericModelToJson(GenericModel data) => json.encode(data.toJson());
+
+class GenericModel {
+  int? respCode;
+  String? message;
+
+  GenericModel({
+    this.respCode,
+    this.message,
+  });
+
+  factory GenericModel.fromJson(Map<String, dynamic> json) => GenericModel(
+        respCode: json["respCode"],
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "respCode": respCode,
+        "message": message,
+      };
+}
+
+/*
 import 'dart:convert';
 
 GenericModel genericModelFromJson(String str) =>
@@ -46,3 +77,4 @@ class ResponseMap {
 
   Map<String, dynamic> toJson() => {};
 }
+*/

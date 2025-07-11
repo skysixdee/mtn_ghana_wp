@@ -27,7 +27,7 @@ Future<void> addToWishlistApi(TuneInfo info) async {
   Map<String, dynamic> result =
       await NetworkManager().post(addToWishlistUrl, formData: map);
   GenericModel model = genericModelFromJson(json.encode(result));
-  if (model.statusCode == 'SC0000') {
+  if (model.respCode == 0) {
     String mess = "${info.toneName} is " + "${model.message}";
     snackBar(mess);
   } else {

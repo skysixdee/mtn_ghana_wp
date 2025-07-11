@@ -35,8 +35,7 @@ String tuneSettingFulldayUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/time-based-setting-for-already-activated';
 String tuneSettingDedicatedUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/dedicated-user-tone-addition-with-time-setting';
-String shuffleEnableDisableUrl =
-    '$baseUrl/security/Middleware/api/adapter/v1/crbt/shuffle-activation-deactivation';
+
 String subscriberValidationUrl =
     "http://10.135.64.104:8021/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation";
 //'$baseUrl/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation';
@@ -62,10 +61,12 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
+String shuffleEnableDisableUrl = '';
+//'$baseUrl/security/Middleware/api/adapter/v1/crbt/shuffle-activation-deactivation';
 String categoryDetailUrl = "";
 //'http://10.135.64.101:53007/selfcare/category-search';
 String myTunesUrl = '';
-
+String advanceSearchUrl = '';
 String playingTuneUrl = '';
 
 String myMusicBoxUrl = '';

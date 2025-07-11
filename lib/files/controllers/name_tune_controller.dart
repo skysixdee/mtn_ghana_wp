@@ -47,8 +47,8 @@ class NameTuneController extends GetxController {
     totalToneCount.value = 0;
     isLoading.value = true;
     SearchResultModel model = await searchNameTuneApi(key);
-    totalToneCount.value = model.responseMap?.songTotalCount ?? 0;
-    tuneList.value = model.responseMap?.songList ?? [];
+    //totalToneCount.value = model.responseMap?.songTotalCount ?? 0;
+    tuneList.value = model.responseMap?.toneList ?? [];
     isLoading.value = false;
   }
 
@@ -56,7 +56,7 @@ class NameTuneController extends GetxController {
     isLoading.value = true;
     SearchResultModel model =
         await searchNameTuneApi(searchedName, pageNo: index);
-    tuneList.value = model.responseMap?.songList ?? [];
+    tuneList.value = model.responseMap?.toneList ?? [];
 
     isLoading.value = false;
   }

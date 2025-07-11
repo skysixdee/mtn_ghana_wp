@@ -44,7 +44,7 @@ class MyMusicBoxController extends GetxController {
           GenericModel genericModel = await deleteMyTuneScApi(info.toneId ?? '',
               packDetailModel.responseMap?.packStatusDetails?.packName ?? '');
           info.isDeleting.value = false;
-          if (genericModel.statusCode == 'SC0000') {
+          if (genericModel.respCode == 0) {
             snackBar(packDetailModel.message);
             isLoading.value = true;
             await Future.delayed(const Duration(milliseconds: 10));

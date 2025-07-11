@@ -10,7 +10,7 @@ String nameTuneCategoryId = '';
 String musicBoxPrice = '';
 String tuneChargePrice = '';
 String expressMoodMessage = '';
-String fallBackCharge='';
+String fallBackCharge = '';
 String termsAndConditionUrl = '';
 String privacyPolicyUrl = '';
 int sessionLogOutTimeInMinute = 10;
@@ -18,7 +18,7 @@ String countryCode = '';
 String faqUrl = '';
 
 //=========================
-const int channelId = 4;
+int channelId = 4;
 const String versionCode = '7.0';
 const String appVersion = '1.0.6';
 const String appId =

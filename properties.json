@@ -9,7 +9,8 @@
     "GET_TONE_PRICE_URL":"http://10.135.64.101:53004/selfcare/subscriber-management/get-content-price",
     "Buy_TONE_URL":"http://10.0.13.19:9093/selfcare/subscriber-management/buy-tone",
     "BASE_URL": "http://10.0.13.19:9093",
-    
+    "ADVANCE_SEARCH_URL":"http://10.0.13.19:9093/selfcare/advanced-search",
+    "SHUFFLE_ON_OFF":"http://10.0.13.19:9093/selfcare/setting-service/shuffle",
     "AUTH_BASE_URL":"http://10.0.13.19:9092",
     
     "MY_WISHLIST_URL":"http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist",
@@ -19,6 +20,7 @@
     "FAQ_URL": "http://10.0.13.19:9093/ghana/faq/FAQ.json",
     "NAME_TUNE_CAT_ID":"115",
     "MSISDN_LENGTH":9,
+    "CHANNEL_ID":4,
     "OTP_TIME_LIMIT":30,
     "OTP_LENGTH":4,
     "SESSION_LOGOUT_TIME_IN_MINUTE":1,

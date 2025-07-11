@@ -3,13 +3,18 @@ import 'dart:convert';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<GenericModel> shuffleEnbleDisableApi(bool enable) async {
   Map<String, dynamic> formData = {
-    "aPartyMsisdn": StoreManager.msisdn,
-    "identifier": enable ? "activate" : "deactivate",
-    "language": StoreManager.languageCode
+    "transactionId": getTransactionId(),
+    'featureId': '1',
+    "msisdn": StoreManager.msisdn,
+    "languageCode": StoreManager.languageCode,
+    'channelId': channelId,
+    "mode": enable ? "0" : "1",
   };
 
   Map<String, dynamic> jsonMap =

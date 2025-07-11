@@ -15,26 +15,26 @@ class MyWishlistController extends GetxController {
       return;
     }
     isLoading.value = true;
-     try {
-    print("GOkul");
-    WishlistModel model = await getWishlistScApi();
-    print("Vivek");
+    try {
+      print("GOkul");
+      WishlistModel model = await getWishlistScApi();
+      print("Vivek");
 
-    tuneList.value = model.wishlist ?? [];
-    print("Get Wishlist============= ${tuneList.value}");
-  } catch (e, stackTrace) {
-    print("Error in getWishlist: $e");
-    print("StackTrace: $stackTrace");
-    snackBar("Something went wrong while fetching wishlist");
-  } finally {
-    isLoading.value = false;
+      tuneList.value = model.wishlist ?? [];
+      print("Get Wishlist============= ${tuneList.value}");
+    } catch (e, stackTrace) {
+      print("Error in getWishlist: $e");
+      print("StackTrace: $stackTrace");
+      snackBar("Something went wrong while fetching wishlist");
+    } finally {
+      isLoading.value = false;
+    }
   }
-}
   //   print("GOkul");
   //   WishlistModel model = await getWishlistScApi();
   //   print("Vivek");
   //   tuneList.value = model.wishlist ?? [];
-    
+
   //   print("Get Wishlist============= ${tuneList.value}");
   //   //model.responseMap?.toneDetailsList ?? [];
   //   isLoading.value = false;
@@ -43,13 +43,12 @@ class MyWishlistController extends GetxController {
   deleteFromWishlist(TuneInfo info) async {
     customPrint("delete ${info.toneName}");
     GenericModel model = await deleteFromWishlistApi(info);
-    if (model.statusCode == "SC0000") {
+    if (model.respCode == 0) {
       String ms = "${info.toneName} deleted " + "${model.message}fully";
       tuneList.remove(info);
       snackBar(ms);
     } else {
       snackBar(model.message);
     }
-    
   }
 }

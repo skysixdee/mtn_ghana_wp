@@ -34,7 +34,7 @@ class BlacklistController extends GetxController {
   _deleteApiCall(BPartyDetailsList info) async {
     info.isDeleting.value = true;
     GenericModel model = await deleteBlackListApi(info.bPartyMsisdn ?? '');
-    if (model.statusCode == 'SC0000') {
+    if (model.respCode == 0) {
       list.remove(info);
       snackBar(model.message);
     } else {

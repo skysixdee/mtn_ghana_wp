@@ -40,7 +40,7 @@ class _SearchScreenState extends State<SearchScreen> {
               child: CustomScrollView(
                 slivers: [
                   sliverNavigation(),
-                  sliverAppBar(),
+                  //sliverAppBar(),
                   SliverToBoxAdapter(
                     child: Obx(
                       () {

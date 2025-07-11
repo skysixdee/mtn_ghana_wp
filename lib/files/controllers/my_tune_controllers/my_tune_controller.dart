@@ -65,7 +65,7 @@ class MyTuneController extends GetxController {
       onPrimary: () async {
         GenericModel model =
             await deleteMyTuneScApi(info.toneId ?? '', packName);
-        if (model.statusCode == 'SC0000') {
+        if (model.respCode == 0) {
           //tuneApkList.removeAt(index);
           print(
               "deleting from list name is ${tuneApkList[index].toneDetails?.first.toneName}");

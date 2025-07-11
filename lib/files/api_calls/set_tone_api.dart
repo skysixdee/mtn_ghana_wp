@@ -19,12 +19,13 @@ Future<BuyToneModel> setToneApi(String toneId, String toneName,
     'transactionId': getTransactionId(),
     "featureId": 1,
     'msisdn': StoreManager.msisdn,
+    "offerCode": packN,
     'contentId': toneId,
     "contentType": 1,
     'languageCode': StoreManager.languageSort,
     'channelId': channelId,
     'userData': "some data",
-    'referralId': packN,
+    'referralId': '',
   };
   Map<String, dynamic> jsonResp =
       await NetworkManager().post(setToneUrl, formData: jsomData);

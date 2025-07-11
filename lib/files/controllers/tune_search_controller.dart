@@ -13,6 +13,7 @@ class TuneSearchController extends GetxController {
   RxBool isLoadingMore = false.obs;
   String _key = '';
   getResult(String key) async {
+    print('Searcing result for $key');
     _key = key;
     totalTuneCount.value = 0;
     selectedIndex.value = 0;
@@ -21,9 +22,9 @@ class TuneSearchController extends GetxController {
     }
     isLoading.value = true;
     SearchResultModel model = await getSearchedTuneListApi(key);
-    tuneList = model.responseMap?.songList ?? [];
-    totalTuneCount.value = model.responseMap?.toneTotalCount ?? 0;
-    artistList = model.responseMap?.countList?.artistDetailList ?? [];
+    tuneList = model.responseMap?.toneList ?? [];
+    // totalTuneCount.value = model.responseMap?.toneTotalCount ?? 0;
+    // artistList = model.responseMap?.countList?.artistDetailList ?? [];
     //totalTuneCount.value = model.responseMap?.countList.artistDetailList. ?? 0;
     isLoading.value = false;
   }
@@ -34,7 +35,7 @@ class TuneSearchController extends GetxController {
     }
     isLoadingMore.value = true;
     SearchResultModel model = await getSearchedTuneListApi(_key, pageNo: index);
-    tuneList = model.responseMap?.songList ?? [];
+    tuneList = model.responseMap?.toneList ?? [];
     isLoadingMore.value = false;
   }
 }

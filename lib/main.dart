@@ -96,6 +96,9 @@ Future<void> readProperties() async {
   getTonePriceScUrl = data["GET_TONE_PRICE_URL"];
   setToneUrl = data['Buy_TONE_URL'];
   settingScUrl = data["SETTING_URL"];
+  channelId = data['CHANNEL_ID'];
+  advanceSearchUrl = data['ADVANCE_SEARCH_URL'];
+  shuffleEnableDisableUrl = data['SHUFFLE_ON_OFF'];
   //categoryMwUrl = data["GET_CATEGORY_LIST_URL"];
 
   getBannerListScUrl = data["GET_BANNER_LIST_URL"];

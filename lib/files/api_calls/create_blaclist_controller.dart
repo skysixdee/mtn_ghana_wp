@@ -27,7 +27,7 @@ class CreateBlaclistController extends GetxController {
     }
     isLoading.value = true;
     GenericModel model = await createBlackListApi(memebrList);
-    if (model.statusCode == 'SC0000') {
+    if (model.respCode == 0) {
       memebrList.clear();
     }
     snackBar(model.message);
