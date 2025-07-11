@@ -10,16 +10,24 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 Future<SearchResultModel> getSearchedTuneListApi(String key,
     {int pageNo = 0}) async {
   Map<String, dynamic> jsonData = {
-    "transactionId": getTransactionId(),
-    "channelId": channelId,
-    "msisdn": StoreManager.msisdn,
+    // "transactionId": getTransactionId(),
+    // "channelId": channelId,
+    // "msisdn": StoreManager.msisdn,
+    // "sortBy": "OrderBy",
+    // "pageNo": pageNo,
+    // "perPageCount": pagePerCount,
+    // "filter": "Content",
+    // "filterPref": 'begin',
+    // "locale": StoreManager.languageSort,
+    // "searchKey": [key],
     "sortBy": "OrderBy",
     "pageNo": pageNo,
     "perPageCount": pagePerCount,
     "filter": "Content",
-    "filterPref": 'begin',
+    "filterPref": "custom",
     "locale": StoreManager.languageSort,
-    "searchKey": [key],
+    "msisdn": StoreManager.msisdn,
+    "searchKey": [key]
   };
 
   String url = advanceSearchUrl;
