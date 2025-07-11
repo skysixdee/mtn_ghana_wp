@@ -14,7 +14,7 @@ Future<MyMusicBoxModel> getMyMusicBoxApi({int pageNo = 0}) async {
     "msisdn": StoreManager.msisdn,
     "languageCode": StoreManager.languageSort,
     "channelId": channelId,
-    "serviceId": "1"
+    "serviceId": "MUSICBOX"
   };
 
   Map<String, dynamic> map =
