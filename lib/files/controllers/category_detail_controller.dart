@@ -7,17 +7,17 @@ class CategoryDetailController extends GetxController {
   RxBool isLoading = false.obs;
   List<TuneInfo> tuneList = [];
   RxInt totalTuneCount = 0.obs;
-  String _key = '';
+
   String _catId = '';
-  getCategoryDetailList(String key, String catId) async {
+  getCategoryDetailList(String catId) async {
     totalTuneCount.value = 0;
-    _key = key;
+
     _catId = catId;
     if (isLoading.value) {
       return;
     }
     isLoading.value = true;
-    CategoryDetailModel model = await getCategoryDetailApi(key, catId);
+    CategoryDetailModel model = await getCategoryDetailApi(catId);
     tuneList = model.responseMap?.toneList ?? [];
     //totalTuneCount.value = model.responseMap?.t ?? 0;
     isLoading.value = false;
@@ -26,7 +26,7 @@ class CategoryDetailController extends GetxController {
   loadMoreData(int index) async {
     isLoading.value = true;
     CategoryDetailModel model =
-        await getCategoryDetailApi(_key, _catId, pageNo: index);
+        await getCategoryDetailApi(_catId, pageNo: index);
     tuneList = model.responseMap?.toneList ?? [];
     isLoading.value = false;
   }

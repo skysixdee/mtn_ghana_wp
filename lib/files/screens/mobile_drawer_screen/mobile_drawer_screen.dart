@@ -153,13 +153,11 @@ class MobileDrawerScreen extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pop();
         CategoryDetailController con = Get.find();
-        String key = StoreManager.categories?[index].categoryName ?? '';
+
         String catId = StoreManager.categories?[index].categoryId ?? '';
-        context.goNamed(categoryDetailRoute, queryParameters: {
-          'key': key,
-          'catId': catId,
-        });
-        con.getCategoryDetailList(key, catId);
+
+        context.goNamed(categoryDetailRoute, queryParameters: {'catId': catId});
+        con.getCategoryDetailList(catId);
       },
       child: Container(
         height: 40,

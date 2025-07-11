@@ -256,12 +256,11 @@ StatefulShellBranch _categoryDetailShell() {
         name: categoryDetailRoute,
         path: categoryDetailRoute,
         builder: (context, state) {
-          String key = state.uri.queryParameters['key'] ?? '';
           String catId = state.uri.queryParameters['catId'] ?? '';
-          cont.getCategoryDetailList(key, catId);
-          menuCategoryClickEvent(catId, key);
+          cont.getCategoryDetailList(catId);
+          menuCategoryClickEvent(catId);
           return CategoryDetailScreen(
-            name: key,
+            name: catId,
           );
         },
       ),

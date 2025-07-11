@@ -6,7 +6,7 @@ import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
-Future<CategoryDetailModel> getCategoryDetailApi(String key, String catId,
+Future<CategoryDetailModel> getCategoryDetailApi(String catId,
     {int pageNo = 0}) async {
   Map<String, dynamic> reqPacket = {
     "sortBy": "OrderBy",

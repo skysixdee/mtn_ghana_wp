@@ -103,11 +103,11 @@ homePageBrowseEvent() {
   gtm.pushEvent('HomePage_Browse');
 }
 
-menuCategoryClickEvent(String catId, String catName) {
+menuCategoryClickEvent(String catId) {
   return;
   gtm.pushEvent('Menu_Category_Click', data: {
     "category_id": catId,
-    "category_name": catName,
+    //"category_name": catName,
   });
 }
 

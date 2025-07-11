@@ -281,15 +281,12 @@ class WebNavigationView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return InkWell(
                     onTap: () {
-                      String key =
-                          appController.categories[index].categoryName ?? '';
                       String catId =
                           appController.categories[index].categoryId ?? '';
-                      context.goNamed(categoryDetailRoute, queryParameters: {
-                        'key': key,
-                        'catId': catId,
-                      });
-                      con.getCategoryDetailList(key, catId);
+
+                      context.goNamed(categoryDetailRoute,
+                          queryParameters: {'catId': catId});
+                      con.getCategoryDetailList(catId);
                       Navigator.of(context).pop();
                     },
                     child: categoryCard(index));
