@@ -28,7 +28,7 @@ Future<BuyToneModel> setToneApi(String toneId, String toneName,
     'referralId': '',
   };
   Map<String, dynamic> jsonResp =
-      await NetworkManager().post(setToneUrl, formData: jsomData);
+      await NetworkManager().post(setToneUrl, jsonData: jsomData);
   return buyToneModelFromJson(
       json.encode(jsonResp)); //genericModelFromJson(json.encode(jsonResp));
 }
