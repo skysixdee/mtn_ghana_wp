@@ -43,11 +43,4 @@ Future<String> _getPackName(String toneId) async {
   } else {
     return '';
   }
-  //PackDetailModel packDetailModel = await getPackDetailApi();
-  // if (packDetailModel.statusCode == 'SC0000') {
-  //   packName = packDetailModel.responseMap?.packStatusDetails?.packName ?? '';
-  //   return packName;
-  // } else {
-  //   return '';
-  // }
 }

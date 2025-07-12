@@ -99,6 +99,7 @@ Future<void> readProperties() async {
   channelId = data['CHANNEL_ID'];
   advanceSearchUrl = data['ADVANCE_SEARCH_URL'];
   shuffleEnableDisableUrl = data['SHUFFLE_ON_OFF'];
+  getSubscriptionUrl = data['GET_SUBSCRIPTION_URL'];
   //categoryMwUrl = data["GET_CATEGORY_LIST_URL"];
 
   getBannerListScUrl = data["GET_BANNER_LIST_URL"];

@@ -24,7 +24,7 @@ class ProfileController extends GetxController {
   RxList<String> selectedCetegories = <String>[].obs;
   RxBool enableEdit = false.obs;
   GetProfileDetails? getProfileDetails;
-  PackStatusDetails? packStatusDetails;
+  Offer? packStatusDetails;
   @override
   void onInit() {
     super.onInit();
@@ -37,7 +37,7 @@ class ProfileController extends GetxController {
     }
     isLoading.value = true;
     PackDetailModel model = await getPackDetailApi();
-    packStatusDetails = model.responseMap?.packStatusDetails;
+    packStatusDetails = model.offers?.first;
     ProfileDetailModel info = await getProfileDetailApi();
     customPrint("inf111o ===== $info");
     String va = info.responseMap?.getProfileDetails?.categories ?? '';
@@ -138,7 +138,7 @@ class ProfileController extends GetxController {
       onPrimary: () async {
         isSubscribing.value = true;
         GenericModel model =
-            await deleteMyTuneScApi("", packStatusDetails?.packName ?? '');
+            await deleteMyTuneScApi("", packStatusDetails?.offerName ?? '');
         if (model.respCode == 0) {
           openAlertPopup(
             message: unSubscribeSuccessfulMessageStr,

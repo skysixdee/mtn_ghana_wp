@@ -119,7 +119,7 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget subscriptionPlanWidget() {
-    return con.packStatusDetails?.packName == null
+    return con.packStatusDetails?.offerName == null
         ? const SizedBox(height: 12)
         : Padding(
             padding: const EdgeInsets.only(bottom: 12, top: 6),
@@ -129,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 CustomText(title: "$subscriptionPlanStr : "),
                 CustomText(
-                  title: con.packStatusDetails?.packName ?? 'rwerwe',
+                  title: con.packStatusDetails?.offerName ?? 'rwerwe',
                   fontName: FontName.bold,
                 ),
               ],
@@ -148,9 +148,10 @@ class ProfileScreen extends StatelessWidget {
         ),
         //const SizedBox(height: 4),
         CustomText(
-          title:
-              con.packStatusDetails?.packName == null ? inActiveStr : activeStr,
-          color: con.packStatusDetails?.packName == null
+          title: con.packStatusDetails?.offerName == null
+              ? inActiveStr
+              : activeStr,
+          color: con.packStatusDetails?.offerName == null
               ? red
               : const Color.fromARGB(255, 14, 184, 20),
           fontName: FontName.bold,
@@ -167,13 +168,13 @@ class ProfileScreen extends StatelessWidget {
             : GenericButton(
                 width: 250,
                 padding: const EdgeInsets.symmetric(horizontal: 40),
-                title: con.packStatusDetails?.packName == null
+                title: con.packStatusDetails?.offerName == null
                     ? subscribeStr
                     : unSubscribeStr,
-                bgColor: con.packStatusDetails?.packName == null ? green : red,
+                bgColor: con.packStatusDetails?.offerName == null ? green : red,
                 textColor: white,
                 onTap: () {
-                  if (con.packStatusDetails?.packName == null) {
+                  if (con.packStatusDetails?.offerName == null) {
                     con.subscribeButtonAction();
                   } else {
                     con.unSubscribeButtonAction();

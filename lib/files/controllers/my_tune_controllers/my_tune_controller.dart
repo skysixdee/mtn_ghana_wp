@@ -26,7 +26,7 @@ class MyTuneController extends GetxController {
     isLoading.value = true;
     if (packName.isEmpty) {
       PackDetailModel packDetailModel = await getPackDetailApi();
-      packName = packDetailModel.responseMap?.packStatusDetails?.packName ?? '';
+      packName = packDetailModel.offers?.first.offerName ?? '';
     }
     if (packName.isEmpty) {
       //genericPopover(context, menuList)

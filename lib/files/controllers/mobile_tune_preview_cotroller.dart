@@ -81,8 +81,7 @@ class MobileTunePreviewCotroller extends GetxController {
 
   deleteMyTune() async {
     PackDetailModel packDetailModel = await getPackDetailApi();
-    String packName =
-        packDetailModel.responseMap?.packStatusDetails?.packName ?? '';
+    String packName = packDetailModel.offers?.first.offerName ?? '';
     MyTuneController myCon = Get.find();
     GenericModel model =
         await deleteMyTuneScApi(currentTuneDetail.value.toneId ?? '', packName);

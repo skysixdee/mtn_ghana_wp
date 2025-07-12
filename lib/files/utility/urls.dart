@@ -21,8 +21,7 @@ String profileDetailUrl =
     "$baseUrl/security/Middleware/api/adapter/v1/crbt/get-profile-details";
 String editProfileUrl =
     "$baseUrl/security/Middleware/api/adapter/v1/crbt/edit-profile";
-String packDetailUrl =
-    '$baseUrl/security/Middleware/api/adapter/v1/crbt/pack-status?';
+
 String nameTuneUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?';
 String musicBoxUrl =
@@ -61,10 +60,12 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
+String getSubscriptionUrl = "";
+//'$baseUrl/security/Middleware/api/adapter/v1/crbt/pack-status?';
 String shuffleEnableDisableUrl = '';
-//'$baseUrl/security/Middleware/api/adapter/v1/crbt/shuffle-activation-deactivation';
+
 String categoryDetailUrl = "";
-//'http://10.135.64.101:53007/selfcare/category-search';
+
 String myTunesUrl = '';
 String advanceSearchUrl = '';
 String playingTuneUrl = '';
