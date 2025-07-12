@@ -99,8 +99,8 @@ String deleteDedicatedTuneScUrl =
     'http://10.135.64.101:51012/selfcare/subscriber-management/delete-dedication';
 String artistTuneSearchScUrl =
     "http://10.135.64.101:53008/selfcare/artist-search";
-String deleteMyTuneScUrl =
-    "http://10.135.64.101:51012/selfcare/subscriber-management/delete-tone";
+// String deleteMyTuneScUrl =
+//     "http://10.135.64.101:51012/selfcare/subscriber-management/delete-tone";
 String sendGiftScUrl =
     "http://10.135.64.101:51009/selfcare/subscriber-management/gift-tone";
 String getTonePriceScUrl = '';

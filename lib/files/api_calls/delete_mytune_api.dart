@@ -31,6 +31,6 @@ Future<GenericModel> deleteMyTuneScApi(String tuneId, String packName) async {
   };
 
   Map<String, dynamic> jsonResp =
-      await NetworkManager().post(deleteMyTuneScUrl, jsonData: jsonData);
+      await NetworkManager().post(deleteMyTuneUrl, jsonData: jsonData);
   return genericModelFromJson(json.encode(jsonResp));
 }
