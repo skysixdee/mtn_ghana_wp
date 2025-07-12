@@ -13,7 +13,8 @@ class SubscriptionPlanController extends GetxController {
   }
 
   createPackList() {
-    String attributes = StoreManager.other?.privacyTermsEnglish?.attribute??'';//packnameEnglish?.attribute ?? '';
+    String attributes = StoreManager.other?.crbtPackList?.attribute ??
+        ''; //packnameEnglish?.attribute ?? '';
     List<String> packDetailList = attributes.split("|");
     for (String item in packDetailList) {
       String title = '';
