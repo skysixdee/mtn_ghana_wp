@@ -18,7 +18,7 @@ Future<MyMusicBoxModel> getMyMusicBoxApi({int pageNo = 0}) async {
   };
 
   Map<String, dynamic> map =
-      await NetworkManager().post(playingTuneUrl, jsonData: jsonMap);
+      await NetworkManager().post(myMusicBoxUrl, jsonData: jsonMap);
 
   return myMusicBoxModelFromJson(json.encode(map));
 }

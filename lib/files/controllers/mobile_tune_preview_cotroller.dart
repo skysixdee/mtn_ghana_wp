@@ -88,7 +88,7 @@ class MobileTunePreviewCotroller extends GetxController {
     if (model.respCode == 0) {
       tuneList.contains(currentTuneDetail.value);
       for (var i = 0; i < myCon.tuneApkList.length; i++) {
-        myCon.tuneApkList[i].toneDetails?.remove(currentTuneDetail.value);
+        myCon.tuneApkList.remove(currentTuneDetail.value);
       }
     } else {
       snackBar(model.message);

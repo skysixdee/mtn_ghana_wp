@@ -6,6 +6,131 @@ import 'dart:convert';
 
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 
+// To parse this JSON data, do
+//
+//     final myTunesModel = myTunesModelFromJson(jsonString);
+
+import 'dart:convert';
+
+MyTunesModel myTunesModelFromJson(String str) =>
+    MyTunesModel.fromJson(json.decode(str));
+
+String myTunesModelToJson(MyTunesModel data) => json.encode(data.toJson());
+
+class MyTunesModel {
+  int? respCode;
+  String? message;
+  List<TuneInfo>? tonelist;
+
+  MyTunesModel({
+    this.respCode,
+    this.message,
+    this.tonelist,
+  });
+
+  factory MyTunesModel.fromJson(Map<String, dynamic> json) => MyTunesModel(
+        respCode: json["respCode"],
+        message: json["message"],
+        tonelist: json["tonelist"] == null
+            ? []
+            : List<TuneInfo>.from(
+                json["tonelist"]!.map((x) => TuneInfo.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "respCode": respCode,
+        "message": message,
+        "tonelist": tonelist == null
+            ? []
+            : List<dynamic>.from(tonelist!.map((x) => x.toJson())),
+      };
+}
+/*
+class Tonelist {
+    String? contentType;
+    String? activationChannel;
+    String? albumName;
+    String? albumNameL2;
+    String? artistName;
+    String? artistNameL2;
+    DateTime? chargedDate;
+    String? contentId;
+    String? contentName;
+    String? contentNameL2;
+    String? contentPreviewImageUrl;
+    String? contentStreamingUrl;
+    DateTime? expiryDate;
+    DateTime? firstActivationDate;
+    String? isContentPackage;
+    String? languageCode;
+    String? price;
+    String? status;
+
+    Tonelist({
+        this.contentType,
+        this.activationChannel,
+        this.albumName,
+        this.albumNameL2,
+        this.artistName,
+        this.artistNameL2,
+        this.chargedDate,
+        this.contentId,
+        this.contentName,
+        this.contentNameL2,
+        this.contentPreviewImageUrl,
+        this.contentStreamingUrl,
+        this.expiryDate,
+        this.firstActivationDate,
+        this.isContentPackage,
+        this.languageCode,
+        this.price,
+        this.status,
+    });
+
+    factory Tonelist.fromJson(Map<String, dynamic> json) => Tonelist(
+        contentType: json["ContentType"],
+        activationChannel: json["activationChannel"],
+        albumName: json["albumName"],
+        albumNameL2: json["albumName_L2"],
+        artistName: json["artistName"],
+        artistNameL2: json["artistName_L2"],
+        chargedDate: json["chargedDate"] == null ? null : DateTime.parse(json["chargedDate"]),
+        contentId: json["contentId"],
+        contentName: json["contentName"],
+        contentNameL2: json["contentName_L2"],
+        contentPreviewImageUrl: json["contentPreviewImageURL"],
+        contentStreamingUrl: json["contentStreamingURL"],
+        expiryDate: json["expiryDate"] == null ? null : DateTime.parse(json["expiryDate"]),
+        firstActivationDate: json["firstActivationDate"] == null ? null : DateTime.parse(json["firstActivationDate"]),
+        isContentPackage: json["isContentPackage"],
+        languageCode: json["languageCode"],
+        price: json["price"],
+        status: json["status"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "ContentType": contentType,
+        "activationChannel": activationChannel,
+        "albumName": albumName,
+        "albumName_L2": albumNameL2,
+        "artistName": artistName,
+        "artistName_L2": artistNameL2,
+        "chargedDate": chargedDate?.toIso8601String(),
+        "contentId": contentId,
+        "contentName": contentName,
+        "contentName_L2": contentNameL2,
+        "contentPreviewImageURL": contentPreviewImageUrl,
+        "contentStreamingURL": contentStreamingUrl,
+        "expiryDate": expiryDate?.toIso8601String(),
+        "firstActivationDate": firstActivationDate?.toIso8601String(),
+        "isContentPackage": isContentPackage,
+        "languageCode": languageCode,
+        "price": price,
+        "status": status,
+    };
+}
+*/
+/*
 MyTunesModel myTunesModelFromJson(String str) =>
     MyTunesModel.fromJson(json.decode(str));
 
@@ -90,6 +215,7 @@ class ListToneApk {
         "groupId": groupId,
       };
 }
+*/
 /*
 class ToneDetail {
   String? toneId;

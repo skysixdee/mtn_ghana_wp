@@ -16,7 +16,7 @@ import '../../router/route_name.dart';
 
 class MyTuneController extends GetxController {
   RxBool isLoading = false.obs;
-  RxList<ListToneApk> tuneApkList = <ListToneApk>[].obs;
+  RxList<TuneInfo> tuneApkList = <TuneInfo>[].obs;
   RxString message = ''.obs;
   String packName = '';
   getMyTune() async {
@@ -45,8 +45,8 @@ class MyTuneController extends GetxController {
     }
     message.value = '';
     MyTunesModel model = await getMyTuneApi();
-    if (model.statusCode == 'SC0000') {
-      tuneApkList.value = model.responseMap?.listToneApk ?? [];
+    if (model.respCode == 0) {
+      tuneApkList.value = model.tonelist ?? [];
       message.value = tuneApkList.isEmpty ? listIsEmptyStr : '';
     } else {
       message.value = model.message ?? '';
@@ -67,8 +67,7 @@ class MyTuneController extends GetxController {
             await deleteMyTuneScApi(info.toneId ?? '', packName);
         if (model.respCode == 0) {
           //tuneApkList.removeAt(index);
-          print(
-              "deleting from list name is ${tuneApkList[index].toneDetails?.first.toneName}");
+          print("deleting from list name is ${tuneApkList[index].toneName}");
           //isLoading.value = true;
           tuneApkList.removeAt(index); //toneDetails?.remove(info);
           //isLoading.value = false;

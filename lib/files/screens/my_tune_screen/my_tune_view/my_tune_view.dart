@@ -35,16 +35,13 @@ class MyTuneView extends StatelessWidget {
                 padding: null,
                 builder: (p0) {
                   return TuneCard(
-                    info: con.tuneApkList[p0].toneDetails?.first ?? TuneInfo(),
-                    tuneList: con.tuneApkList[p0].toneDetails ?? [],
+                    info: con.tuneApkList[p0],
+                    tuneList: con.tuneApkList,
                     menuList: menuList,
                     bottomRightChild: settingButton(context, si, p0),
                     onMenuTap: (p2, p1) {
                       if (p2.title == deleteStr) {
-                        con.deleteTune(
-                            con.tuneApkList[p0].toneDetails?.first ??
-                                TuneInfo(),
-                            p0);
+                        con.deleteTune(con.tuneApkList[p0], p0);
                       }
                       customPrint("title is = ${p2.title} and index = $p1");
                     },
@@ -88,18 +85,15 @@ class MyTuneView extends StatelessWidget {
       fontName: si.isMobile ? FontName.regular : FontName.bold,
       padding: EdgeInsets.zero,
       title: settingStr,
-      bgColor: con.tuneApkList[index].toneDetails?.first.status == "A"
-          ? yellow
-          : lightGrey,
+      bgColor: con.tuneApkList[index].status == "A" ? yellow : lightGrey,
       leadingIcon: const Icon(
         Icons.settings,
         size: 15,
       ),
       onTap: () {
-        if (con.tuneApkList[index].toneDetails?.first.status == "A") {
+        if (con.tuneApkList[index].status == "A") {
           MyTuneSettingController settingCon = Get.find();
-          TuneInfo info =
-              con.tuneApkList[index].toneDetails?.first ?? TuneInfo();
+          TuneInfo info = con.tuneApkList[index];
 
           contex.pushNamed(
             myTunesSettingRoute,

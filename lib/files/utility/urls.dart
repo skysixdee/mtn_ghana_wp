@@ -66,12 +66,12 @@ String getSubscriptionUrl = "";
 String shuffleEnableDisableUrl = '';
 
 String categoryDetailUrl = "";
-
-String myTunesUrl = '';
-String advanceSearchUrl = '';
 String playingTuneUrl = '';
-
+String myTunesUrl = '';
 String myMusicBoxUrl = '';
+
+String advanceSearchUrl = '';
+
 String deleteMusicBoxSubscriptionUrl = '';
 String deleteMyTuneUrl = "";
 
