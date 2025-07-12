@@ -23,26 +23,37 @@ class MyTuneController extends GetxController {
     if (isLoading.value) {
       return;
     }
+
     isLoading.value = true;
     if (packName.isEmpty) {
-      PackDetailModel packDetailModel = await getPackDetailApi();
-      packName = packDetailModel.offers?.first.offerName ?? '';
-    }
-    if (packName.isEmpty) {
-      //genericPopover(context, menuList)
-      if (Get.context != null) {
-        openAlertPopup(
-          message: youAreNotAActiveSubscriberStr,
-          onPrimary: () {
-            Get.context!.goNamed(homeRoute);
-          },
-        );
-
-        //efwrwe
+      try {
+        PackDetailModel packDetailModel = await getPackDetailApi();
+        packName = packDetailModel.offers?.first.offerName ?? '';
+      } catch (e) {
+        print("error is $e");
       }
-      isLoading.value = false;
-      return;
     }
+    print("sky test");
+    try {
+      if (packName.isEmpty) {
+        //genericPopover(context, menuList)
+        if (Get.context != null) {
+          openAlertPopup(
+            message: youAreNotAActiveSubscriberStr,
+            onPrimary: () {
+              Get.context!.goNamed(homeRoute);
+            },
+          );
+
+          //efwrwe
+        }
+        isLoading.value = false;
+        return;
+      }
+    } catch (e) {
+      print("erro is ==$e");
+    }
+
     message.value = '';
     MyTunesModel model = await getMyTuneApi();
     if (model.respCode == 0) {
