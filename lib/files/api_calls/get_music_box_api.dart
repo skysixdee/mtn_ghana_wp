@@ -15,8 +15,32 @@ Future<MusicBoxScModel> getMusicBoxScApi({int pageNo = 0}) async {
     "pageNo": pageNo,
     "perPageCount": pagePerCount
   };
-  Map<String, dynamic> map = await NetworkManager().post(getMusicBoxListUrl,
-      jsonData:
-          jsonData); //mockyapi:'https://run.mocky.io/v3/3c30486a-4291-4667-b575-ce6a66e3105b'
+  Map<String, dynamic> map =
+      await NetworkManager().post(getMusicBoxListUrl, jsonData: jsonData);
   return musicBoxScModelFromJson(json.encode(map));
+  //return musicBoxScModelFromJson(_jsonResp);
 }
+
+String _jsonResp = """{
+  "respCode": 0,
+  "message": "Success",
+  "respTime": "2025-07-09 17:48:24",
+  "musicBoxList": [
+    {
+      "musicBoxId": "991",
+      "musicBoxName": "Africa",
+      "musicBoxIdpreviewImageUrl": "https://funtone.ooredoo.com.mm/stream-media/get-preview-image?fileId=fkIoInc2ZsA="
+    },
+    {
+      "musicBoxId": "991",
+      "musicBoxName": "Africa",
+      "musicBoxIdpreviewImageUrl": "https://funtone.ooredoo.com.mm/stream-media/get-preview-image?fileId=fkIoInc2ZsA="
+    },
+    {
+      "musicBoxId": "991",
+      "musicBoxName": "Africa",
+      "musicBoxIdpreviewImageUrl": "https://funtone.ooredoo.com.mm/stream-media/get-preview-image?fileId=fkIoInc2ZsA="
+    }
+  ]
+}
+""";

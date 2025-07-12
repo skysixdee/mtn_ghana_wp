@@ -18,9 +18,12 @@ class MusicBoxContentScreen extends StatelessWidget {
   MusicBoxContentScreen({
     super.key,
     required this.id,
+    required this.boxName,
+    required this.boxImage,
   });
   final String id;
-
+  final String boxName;
+  final String boxImage;
   final MusicBoxController con = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -29,26 +32,22 @@ class MusicBoxContentScreen extends StatelessWidget {
         return GenericScrollView(
           isLoading: con.isLoadingContent.value,
           itemCount: con.musicBoxContentList.length,
-          sliverAppBar:
-              getNavigationView(musicBoxStr, rightButton: buyMusicBoxButton()),
-          // buyButton(
-          //     isMusicBox: true,
-          //     TuneInfo(
-          //         toneId: toneid,
-          //         toneName: toneName,
-          //         toneIdpreviewImageUrl: imgUrl),
-          //     padding: EdgeInsets.symmetric(horizontal: 16))),
+          sliverAppBar: getNavigationView(musicBoxStr,
+              rightButton: buyButton(
+                  isMusicBox: true,
+                  TuneInfo(
+                      toneId: id, toneName: boxName, toneIdpreviewImageUrl: ""),
+                  padding: EdgeInsets.symmetric(horizontal: 16))),
+          //buyMusicBoxButton()),
+          //),
           builder: (p0) {
-            return CustomText(
-              title: "Music box card ",
+            return TuneCard(
+              customScreenType: CustomScreenType.musicContent,
+              tuneList: con.musicBoxContentList,
+              moreButton: const SizedBox(),
+              info: con.musicBoxContentList[p0],
+              bottomButtonChild: playButton(con.musicBoxContentList[p0]),
             );
-            // TuneCard(
-            //   customScreenType: CustomScreenType.musicContent,
-            //   tuneList: con.musicBoxList,
-            //   moreButton: const SizedBox(),
-            //   info: con.musicBoxContentList[p0],
-            //   bottomButtonChild: playButton(con.musicBoxContentList[p0]),
-            // );
           },
         );
       },

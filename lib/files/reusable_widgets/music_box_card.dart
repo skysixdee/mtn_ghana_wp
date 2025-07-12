@@ -34,6 +34,8 @@ class MusicBoxCard extends StatelessWidget {
             isMyMusicBox ? myMusicBoxContentRoute : musicBoxContentRoute,
             queryParameters: {
               'id': info.musicBoxId,
+              'boxName': info.musicBoxName,
+              'boxImage': info.musicBoxIdpreviewImageUrl
             });
       },
       child: Padding(
@@ -79,12 +81,16 @@ class MusicBoxCard extends StatelessWidget {
                             splashColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () {
+                              print(
+                                  "info.musicBoxName == ${info.musicBoxName}");
                               context.goNamed(
                                 isMyMusicBox
                                     ? myMusicBoxContentRoute
                                     : musicBoxContentRoute,
                                 queryParameters: {
                                   'id': info.musicBoxId,
+                                  'boxName': info.musicBoxName,
+                                  'boxImage': info.musicBoxIdpreviewImageUrl
                                 },
                               );
                               print("view all tune in music box");
@@ -113,20 +119,27 @@ class MusicBoxCard extends StatelessWidget {
                         const SizedBox(width: 20),
                         Flexible(
                           child: SizedBox(
-                              height: 36,
-                              //width: 80,
-                              child: rightButton ??
-                                  GenericButton(
-                                    title: "Buy",
-                                    onTap: () {
-                                      print("implemnt buy music box here ");
-                                    },
-                                  )
-                              // buyButton(info,
-                              //     isMusicBox: true,
-                              //     padding: const EdgeInsets.symmetric(
-                              //         horizontal: 0, vertical: 0)),
-                              ),
+                            height: 36,
+                            //width: 80,
+                            child: rightButton ??
+                                // GenericButton(
+                                //   title: "Buy",
+                                //   onTap: () {
+                                //     print("implemnt buy music box here ");
+                                //   },
+                                // )
+                                buyButton(
+                                    TuneInfo(
+                                        toneId: info.musicBoxId,
+                                        toneName: info.musicBoxName,
+                                        toneIdpreviewImageUrl:
+                                            info.musicBoxIdpreviewImageUrl,
+                                        previewImageUrl:
+                                            info.musicBoxIdpreviewImageUrl),
+                                    isMusicBox: true,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0)),
+                          ),
                         )
                       ],
                     ),

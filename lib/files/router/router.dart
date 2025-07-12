@@ -219,10 +219,13 @@ StatefulShellBranch _musicBoxContentShell() {
         path: musicBoxContentRoute,
         builder: (context, state) {
           String id = state.uri.queryParameters['id'] ?? '';
-
+          String boxName = state.uri.queryParameters['boxName'] ?? '';
+          String boxImage = state.uri.queryParameters['boxImage'] ?? '';
           cont.getMusicBoxContent(id);
           return MusicBoxContentScreen(
             id: id,
+            boxName: boxName,
+            boxImage: boxImage,
           );
         },
       ),
