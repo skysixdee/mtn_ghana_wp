@@ -7,18 +7,17 @@ import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
-Future<GenericModel> buyMusicChannelApi(String toneId) async {
+Future<GenericModel> buyMusicChannelApi(String toneId, String offerCode) async {
   Map<String, dynamic> jsonData = {
-    "clientTxnId": getTransactionId(),
-    "aPartyMsisdn": StoreManager.msisdn,
-    "toneId": toneId,
+    "transactionId": getTransactionId(),
+    "featureId": 1,
+    "msisdn": StoreManager.msisdn,
+    'offerCode': offerCode,
+    "musicBoxId": toneId,
     "channelId": channelId,
     "language": StoreManager.languageCode,
-    "serviceId": "7",
-    "priority": "0",
-    "paymentMode": ""
   };
   Map<String, dynamic> jsonResp =
-      await NetworkManager().post(buyMusicChannelUrl, formData: jsonData);
+      await NetworkManager().post(buyMusicChannelUrl, jsonData: jsonData);
   return genericModelFromJson(json.encode(jsonResp));
 }

@@ -18,6 +18,8 @@
     "DETETE_DEDICATED_URL":"http://10.135.64.101:51000/selfcare/subscriber-management/delete-dedication",
     "DETETE_TONE_URL":"http://10.135.64.101:51000/selfcare/subscriber-management/delete-tone",
     "GET_SUBSCRIPTION_URL": "http://10.135.64.101:51000/selfcare/subscription-service/get-subscription",
+    "ADD_TONE_TO_SHUFFLE_URL":"http://10.135.64.101:51000/selfcare/setting-service/add-tone-to-shufflelist",
+    "ADD_MUSIC_SUBSCRIPTION_URL":"http://10.135.64.101:51000/selfcare/subscription-service/musicbox/add-subscription",
     "FAQ_URL": "http://10.0.13.19:9093/ghana/faq/FAQ.json",
     "NAME_TUNE_CAT_ID":"115",
     "MSISDN_LENGTH":9,

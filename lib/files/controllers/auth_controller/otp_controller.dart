@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/api_calls/authorization/generate_otp_api.dart
 import 'package:mtn_ghana_wp/files/api_calls/authorization/password_validation_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/security_token_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/buy_music_channel_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_search_tune_list_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/otp_check_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
@@ -16,6 +17,7 @@ import 'package:mtn_ghana_wp/files/model/confirm_otp_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/generate_otp_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/new_user_otp_check_model.dart';
+import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/model/password_validation_model.dart';
 import 'package:mtn_ghana_wp/files/model/security_token_model.dart';
 import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
@@ -145,7 +147,8 @@ class OtpController extends GetxController {
 
   buyMusicBox(TuneInfo info) async {
     isLoading.value = true;
-    GenericModel model = await buyMusicChannelApi(info.toneId ?? '');
+    String offerCode = await getOfferCode();
+    GenericModel model = await buyMusicChannelApi(info.toneId ?? '', offerCode);
     if (model.respCode == 0) {
       openAlertPopup(
         message: model.message ?? '',
@@ -159,6 +162,21 @@ class OtpController extends GetxController {
       message.value = model.message ?? someThingWentWrongStr;
     }
     isLoading.value = false;
+  }
+
+  Future<String> getOfferCode() async {
+    PackDetailModel result = await getPackDetailApi();
+    if (result.respCode == 0) {
+      try {
+        return result.offers?.first.offerName ?? '';
+      } catch (e) {
+        print(" erorr while fetching pack name ====$e");
+        return '';
+      }
+    } else {
+      print("status code is ${result.respCode}");
+      return '';
+    }
   }
 
   onChangeOtp(String value) {
