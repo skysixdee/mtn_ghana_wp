@@ -82,7 +82,6 @@ String myWishistScUrl = "";
 String generateOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/otp';
 String confirmOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/token';
 
-String advancedSearchScUrl = "http://10.0.14.4:8090/advanced-search";
 String bannerDetailScUrl = "http://10.0.14.4:5892/selfcare/get-banner-details?";
 String addToneToShuffleScUrl =
     "http://10.135.64.101:51004/selfcare/setting-service/add-tone-to-shufflelist";
