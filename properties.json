@@ -9,7 +9,7 @@
     "GET_TONE_PRICE_URL":"http://10.135.64.101:53002/selfcare/subscriber-management/get-content-price",
     "Buy_TONE_URL":"http://10.135.64.101:51000/selfcare/subscriber-management/buy-tone",
     "BASE_URL": "http://10.135.64.104:8021",
-    "ADVANCE_SEARCH_URL":"http://10.135.64.101:53007/selfcare/advanced-search",
+    "ADVANCE_SEARCH_URL":"http://10.135.64.101:53007/advanced-search",
     "SHUFFLE_ON_OFF":"http://10.135.64.101:51021/selfcare/setting-service/shuffle",
     "AUTH_BASE_URL":"http://10.135.64.104:9092",
     
