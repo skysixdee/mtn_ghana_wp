@@ -13,8 +13,6 @@ String searchUrl =
 String myWishistUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/view-wishlist';
 
-String deleteFromWishlistUrl =
-    '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/delete-from-wishlist';
 String reGenerateTokenUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/regen-token';
 String profileDetailUrl =
@@ -57,8 +55,10 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
+String deleteFromWishlistUrl = "";
+// '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/delete-from-wishlist';
 String buyMusicChannelUrl = "";
-//"$baseUrl/apigw/Middleware/api/adapter/v1/crbt/buy-music-channel";
+
 String addToneToShuffleScUrl = "";
 
 String getSubscriptionUrl = "";
@@ -72,7 +72,7 @@ String advanceSearchUrl = '';
 String playingTuneUrl = '';
 
 String myMusicBoxUrl = '';
-
+String deleteMusicBoxSubscriptionUrl = '';
 String deleteMyTuneUrl = "";
 
 String deleteDedicatedTuneUrl = "";

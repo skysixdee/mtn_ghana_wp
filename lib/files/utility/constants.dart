@@ -16,6 +16,7 @@ String privacyPolicyUrl = '';
 int sessionLogOutTimeInMinute = 10;
 String countryCode = '';
 String faqUrl = '';
+String musicBoxOfferCode = '';
 
 //=========================
 int channelId = 4;

@@ -88,8 +88,8 @@ class BuyTuneController extends GetxController {
 
   buyMusicBox(TuneInfo info) async {
     isLoading.value = true;
-    String offerCode = await getOfferCode();
-    GenericModel model = await buyMusicChannelApi(info.toneId ?? '', offerCode);
+    //String offerCode = await getOfferCode();
+    GenericModel model = await buyMusicChannelApi(info.toneId ?? '');
     if (model.respCode == 0) {
       openAlertPopup(
         message: model.message ?? '',

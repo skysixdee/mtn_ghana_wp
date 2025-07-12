@@ -1,5 +1,6 @@
 import 'package:mtn_ghana_wp/files/api_calls/add_to_shuffle_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/add_to_wishlist_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/delete_music_box_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/delete_mytune_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_my_music_box_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
@@ -39,24 +40,23 @@ class MyMusicBoxController extends GetxController {
       onPrimary: () async {
         info.isDeleting.value = true;
         print("delete music box api perform here");
-        PackDetailModel packDetailModel = await getPackDetailApi();
-        if (packDetailModel.respCode == 0) {
-          GenericModel genericModel = await deleteMyTuneScApi(
-              info.toneId ?? '', packDetailModel.offers?.first.offerName ?? '');
-          info.isDeleting.value = false;
-          if (genericModel.respCode == 0) {
-            snackBar(packDetailModel.message);
-            isLoading.value = true;
-            await Future.delayed(const Duration(milliseconds: 10));
-            tuneList.remove(info);
-            isLoading.value = false;
-          } else {
-            snackBar(packDetailModel.message);
-          }
+        //PackDetailModel packDetailModel = await getPackDetailApi();
+        //if (packDetailModel.respCode == 0) {
+        GenericModel genericModel = await deleteMusicBoxApi(info.toneId ?? '');
+        info.isDeleting.value = false;
+        if (genericModel.respCode == 0) {
+          snackBar(genericModel.message);
+          isLoading.value = true;
+          await Future.delayed(const Duration(milliseconds: 10));
+          tuneList.remove(info);
+          isLoading.value = false;
         } else {
-          snackBar(packDetailModel.message);
-          info.isDeleting.value = false;
+          snackBar(genericModel.message);
         }
+        // } else {
+        //   snackBar(packDetailModel.message);
+        //   info.isDeleting.value = false;
+        // }
       },
     );
   }

@@ -9,28 +9,26 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<GenericModel> deleteFromWishlistApi(TuneInfo info) async {
   Map<String, dynamic> map = {
-    "identifier": "DeleteFromWishList",
-    "msisdn": StoreManager.msisdn,
-    "catagoryId": "${info.id}",
-    "language": "English",
-    "clientTxnId": getTransactionId(),
-    "wishlistType": "1",
-  };
-  Map<String, dynamic> mapJso =
-      await NetworkManager().post(deleteFromWishlistUrl, formData: map);
-  return genericModelFromJson(json.encode(mapJso));
-}
-
-
-Future<GenericModel> deleteFromWishlistScApi(TuneInfo info) async {
-  Map<String, dynamic> map = {
     "msisdn": StoreManager.msisdn,
     "contentId": "${info.id}",
-    "languageCode": "English",
-    "clientTxnId": getTransactionId(),
-    "wishlistType": "1",
+    "identifier": "DeleteFromWishList",
+    "languageCode": StoreManager.languageCode,
+    "type": "1",
   };
   Map<String, dynamic> mapJso =
-      await NetworkManager().post(deleteFromWishlistUrl, formData: map);
+      await NetworkManager().post(deleteFromWishlistUrl, jsonData: map);
   return genericModelFromJson(json.encode(mapJso));
 }
+
+// Future<GenericModel> deleteFromWishlistScApi(TuneInfo info) async {
+//   Map<String, dynamic> map = {
+//     "msisdn": StoreManager.msisdn,
+//     "contentId": "${info.id}",
+//     "languageCode": "English",
+//     "clientTxnId": getTransactionId(),
+//     "wishlistType": "1",
+//   };
+//   Map<String, dynamic> mapJso =
+//       await NetworkManager().post(deleteFromWishlistUrl, formData: map);
+//   return genericModelFromJson(json.encode(mapJso));
+// }
