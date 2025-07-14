@@ -84,7 +84,7 @@ final router = GoRouter(
     String path = state.fullPath ?? '';
     if (!StoreManager.isLoggedIn) {
       if (path == profileRoute ||
-          //path == myTunesRoute ||
+          path == myTunesRoute ||
           path == myWishlistRoute) {
         return '/';
       } else {
