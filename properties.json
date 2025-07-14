@@ -12,6 +12,7 @@
     "ADVANCE_SEARCH_URL":"http://10.0.14.4:8090/advanced-search",
     "SHUFFLE_ON_OFF":"http://10.135.64.101:51021/selfcare/setting-service/shuffle",
     "MUSIC_BOX_OFFER_CODE":"CRBT_MUSIC_BOX",
+    "LIST_SETTING_URL":"http://10.135.64.101:53002/selfcare/subscriber-management/list-settings",
     "ARTISTS_SEARCH_URL":"http://10.0.14.4:8092/selfcare/artist-search",
     "BANNER_DETAIL_URL":"http://10.0.14.4:5892/selfcare/get-banner-details?",
     "FAQ_URL": "http://10.0.13.19:9093/ghana/faq/FAQ.json",

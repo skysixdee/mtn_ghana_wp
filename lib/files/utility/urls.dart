@@ -56,7 +56,7 @@ String checkOtpNewUserUrl =
 String bannerDetailScUrl = '';
 //"http://10.0.14.4:5892/selfcare/get-banner-details?";
 String tuneSettingDedicatedUrl = '';
-
+String listSettingUrl = '';
 String deleteFromWishlistUrl = "";
 
 String buyMusicChannelUrl = "";
