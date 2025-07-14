@@ -13,6 +13,7 @@ import 'package:mtn_ghana_wp/files/screens/my_tune_screen/header_view/my_tune_he
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/my_music_box_view/my_music_box_view.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/my_tune_view/my_tune_view.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/playing_tune_view.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/playing_tune_view_new.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -70,7 +71,8 @@ class MyTuneScreen extends StatelessWidget {
         const SizedBox(height: 1),
         playingTuneHeader(si),
         SizedBox(height: si.isMobile ? 20 : 30),
-        PlayingTuneView(),
+        PlayingTuneViewNew(),
+        //PlayingTuneView(),
         const SizedBox(height: 20),
         myTuneHeader(si, activeTunezStr, howToPlaySelctedStr, () {
           openAlertPopup(

@@ -18,6 +18,7 @@ import 'package:mtn_ghana_wp/files/controllers/home_controllers/feature_controll
 import 'package:mtn_ghana_wp/files/controllers/music_box_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_music_box_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller_new.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/tune_controller.dart';
@@ -156,6 +157,7 @@ Future<void> initiateController() async {
   Get.lazyPut(() => MyPlayingTuneController());
   Get.lazyPut(() => CategoryDetailController());
   Get.lazyPut(() => CategoryDetailController());
+  Get.lazyPut(() => MyPlayingTuneControllerNew());
   return;
 }
 
