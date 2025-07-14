@@ -4,10 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/common/number_pagination.dart';
 import 'package:mtn_ghana_wp/files/controllers/artists_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
+import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
 
@@ -95,8 +97,12 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
                       child: SizedBox(
                           width: double.infinity,
                           height: double.maxFinite,
-                          child: customImage(toneName: inf.val ?? 'No Name')),
+                          child: customImage(toneName: inf.val ?? '')),
                     ),
+                  ),
+                  CustomText(
+                    fontName: FontName.bold,
+                    title: inf.val ?? '',
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(

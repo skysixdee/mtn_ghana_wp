@@ -13,7 +13,7 @@
     "SHUFFLE_ON_OFF":"http://10.135.64.101:51021/selfcare/setting-service/shuffle",
     "MUSIC_BOX_OFFER_CODE":"CRBT_MUSIC_BOX",
     "ARTISTS_SEARCH_URL":"http://10.0.14.4:8092/selfcare/artist-search",
-    "BANNER_DETAIL_URL":"http://10.0.14.4:5892/selfcare/get-banner-details?searchKey=6642212&languageCode=en",
+    "BANNER_DETAIL_URL":"http://10.0.14.4:5892/selfcare/get-banner-details?",
     "FAQ_URL": "http://10.0.13.19:9093/ghana/faq/FAQ.json",
     "TUNE_DEDICATION_SETTING":"http://10.0.13.19:9093/selfcare/subscriber-management/dedication",
     "AUTH_BASE_URL":"http://10.135.64.104:9092",

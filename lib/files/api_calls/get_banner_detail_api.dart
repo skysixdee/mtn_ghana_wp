@@ -9,8 +9,8 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<BannerDetailModel> getBannerDetailScApi(String type, String searchKey,
     {int pageNo = 0}) async {
-  String url = bannerDetailScUrl;
-  //"${bannerDetailScUrl}searchKey=$searchKey&languageCode=${StoreManager.languageSort}";
+  String url =
+      "${bannerDetailScUrl}searchKey=$searchKey&languageCode=${StoreManager.languageSort}";
   Map<String, int> header = {"transId": getTransactionId()};
   Map<String, dynamic> response =
       await NetworkManager().get(url, addInHeader: [header]);

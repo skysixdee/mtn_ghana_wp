@@ -10,7 +10,7 @@ class TuneSearchController extends GetxController {
   RxBool isLoading = false.obs;
   List<TuneInfo> tuneList = [];
   List<ArtistList> artistsList = [];
-  List<TuneInfo> tuneIdList = [];
+  //List<TuneInfo> tuneIdList = [];
 
   String searchedText = '';
   //RxInt selectedIndex = 0.obs;
@@ -44,7 +44,7 @@ class TuneSearchController extends GetxController {
     }
     isLoading.value = true;
     SearchResultModel model = await getToneCodeSearchListApi(key);
-    tuneIdList = model.responseMap?.toneList ?? [];
+    tuneList = model.responseMap?.toneList ?? [];
     isLoading.value = false;
   }
 
@@ -69,7 +69,7 @@ class TuneSearchController extends GetxController {
     isLoadingMore.value = true;
     if (searchTypeIndex.value == 2) {
       SearchResultModel model = await getToneCodeSearchListApi(_key);
-      tuneIdList = model.responseMap?.toneList ?? [];
+      tuneList = model.responseMap?.toneList ?? [];
     } else if (searchTypeIndex.value == 1) {
       ArtistsModel model = await getArtistListApi(_key);
       artistsList = model.responseMap?.artistList ?? [];
