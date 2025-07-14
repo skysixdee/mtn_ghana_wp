@@ -30,8 +30,6 @@ String musicBoxContextUrl =
 
 String tuneSettingFulldayUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/time-based-setting-for-already-activated';
-String tuneSettingDedicatedUrl =
-    '$baseUrl/security/Middleware/api/adapter/v1/crbt/dedicated-user-tone-addition-with-time-setting';
 
 String subscriberValidationUrl =
     "http://10.135.64.104:8021/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation";
@@ -55,8 +53,12 @@ String checkOtpNewUserUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/otp-check";
 
 //----------------------selfcare api url--------------------------
+String bannerDetailScUrl = '';
+//"http://10.0.14.4:5892/selfcare/get-banner-details?";
+String tuneSettingDedicatedUrl = '';
+
 String deleteFromWishlistUrl = "";
-// '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/delete-from-wishlist';
+
 String buyMusicChannelUrl = "";
 
 String addToneToShuffleScUrl = "";
@@ -69,7 +71,7 @@ String categoryDetailUrl = "";
 String playingTuneUrl = '';
 String myTunesUrl = '';
 String myMusicBoxUrl = '';
-
+String artistsSearchUrl = '';
 String advanceSearchUrl = '';
 
 String deleteMusicBoxSubscriptionUrl = '';
@@ -83,8 +85,6 @@ String setToneUrl = "";
 String myWishistScUrl = "";
 String generateOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/otp';
 String confirmOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/token';
-
-String bannerDetailScUrl = "http://10.0.14.4:5892/selfcare/get-banner-details?";
 
 String deleteFromShuffleScUrl =
     "http://10.135.64.101:51004/selfcare/setting-service/delete-tone-from-shufflelist";

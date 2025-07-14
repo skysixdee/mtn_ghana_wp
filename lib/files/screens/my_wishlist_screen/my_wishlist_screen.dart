@@ -25,9 +25,9 @@ class MyWishlistScreen extends StatelessWidget {
       () {
         return GenericScrollView(
           sliverToBoxAdapter: CustomScreenHeaderView(
-            imageName: nameTuneHeaderPng,
+            imageName: myTuneHeaderPng,
             title: wishlistStr,
-            subTitle: 'Sub title here',
+            subTitle: '',
           ),
           sliverAppBar: getNavigationView(wishlistStr),
           isLoading: con.isLoading.value,

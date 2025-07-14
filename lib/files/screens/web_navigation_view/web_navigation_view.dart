@@ -76,8 +76,8 @@ class WebNavigationView extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Flexible(child: SizedBox(width: 300, child: searchTextField(context))),
-        const SizedBox(width: 16),
+        // Flexible(child: SizedBox(width: 300, child: searchTextField(context))),
+        // const SizedBox(width: 16),
         loginButton(),
       ],
     );
@@ -195,7 +195,7 @@ class WebNavigationView extends StatelessWidget {
       },
       onSubmit: (p0) {
         con.searchedText = p0;
-        con.getResult(p0);
+        con.getSongSearchResult(p0);
         context.goNamed(searchRoute,
             queryParameters: {'search': p0}); //goNamed(searchRoute);
         customPrint("on submit $p0");

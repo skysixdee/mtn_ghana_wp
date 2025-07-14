@@ -2,7 +2,8 @@ String signInToYourAccountStr = 'Sign In to Your Account';
 String enterNumberToAuthenticateStr =
     "Please enter your mobile number in order to authenticate";
 String enterMobileNumberStr = "Enter Mobile Number";
-String doNotInclude0atTheStartMObileNoStr='Do not include 0 at the start of your mobile number.';
+String doNotInclude0atTheStartMObileNoStr =
+    'Do not include 0 at the start of your mobile number.';
 String searchPlaceHolderStr = "Search for more";
 String requestotpStr = "Request OTP";
 String enterSixDigitOtpStr = "Enter 6 digit OTP";
@@ -91,6 +92,7 @@ String specialStr = "Special";
 String homeStr = 'Home';
 String searchStr = 'Search';
 String searchedResultForStr = 'searched result for ';
+String artistsResultForStr = 'Artists ';
 String thisFeatureIsAvailableForLoggedinStr =
     "This feature is available for loggedin user";
 String statusStr = "Status";
@@ -121,11 +123,15 @@ String disableShuffleMessageStr =
     'Your shuffle will be disabled and your callers will only listen to the latest tune.Your advanced settings will remain unaffected';
 String cancelStr = "Cancel";
 String previewStr = "Preview";
+String viewStr = "View";
 String musicBoxStr = "Music Box";
 String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";
 String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
+String songStr = "Song";
+String codeStr = "Code";
+String typeToSearchStr = "Type to search";
 String artistStr = "Artist";
 String settingStr = "Setting";
 String loginStr = "Login";

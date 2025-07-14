@@ -11,8 +11,8 @@ whenPopover(
 ) {
   List<PopoverMenuModel> menuList = [
     PopoverMenuModel(fullDayStr),
-    PopoverMenuModel(selectTimeStr),
-    PopoverMenuModel(selectDateAndTimeStr)
+    // PopoverMenuModel(selectTimeStr),
+    // PopoverMenuModel(selectDateAndTimeStr)
   ];
   genericPopover(
     context,

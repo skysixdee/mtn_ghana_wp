@@ -1,4 +1,5 @@
 import 'package:mtn_ghana_wp/files/api_calls/add_to_wishlist_api.dart';
+import 'package:mtn_ghana_wp/files/common/decode_html_text.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/enums/custpm_screen_type.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
@@ -116,12 +117,13 @@ class TuneCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  title: info.toneName ?? '',
+                  title: decodeHtmlEntities(info.toneName ?? ''), //,
                   maxLine: 1,
                   fontName: FontName.bold,
                 ),
                 CustomText(
-                  title: info.artistName ?? '',
+                  title: decodeHtmlEntities(
+                      info.artistName ?? ''), //info.artistName ?? '',
                   color: grey,
                   fontName: FontName.semiBoldItalic,
                   fontSize: 12,

@@ -24,44 +24,60 @@ Widget customImage(
 
   return Stack(
     children: [
-      ClipRRect(
-        borderRadius: BorderRadius.circular(cornerRadius),
-        child: imageName != null
-            ? Center(
-                child: Image.asset(
-                  height: double.maxFinite,
-                  width: double.maxFinite,
-                  imageName,
-                  fit: BoxFit.fill,
-                ),
-              )
-            : CachedNetworkImage(
-                //imageUrl: 'https://picsum.photos/id/70/300/100',
-                imageUrl: url ?? '',
-                fit: fit ?? BoxFit.cover,
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: fit ?? BoxFit.cover,
-                    ),
-                  ),
-                ),
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => Center(
-                    child: Image.asset(defaultImagePng,
+      toneName.isEmpty
+          ? ClipRRect(
+              borderRadius: BorderRadius.circular(cornerRadius),
+              child: imageName != null
+                  ? Center(
+                      child: Image.asset(
+                        height: double.maxFinite,
+                        width: double.maxFinite,
+                        imageName,
                         fit: BoxFit.fill,
-                        height: double.infinity,
-                        width: double.infinity)
-                    //     CustomText(
-                    //   title: title,
-                    //   fontName: FontName.bold,
-                    //   fontSize: 20,
-                    // )
+                      ),
+                    )
+                  : CachedNetworkImage(
+                      //imageUrl: 'https://picsum.photos/id/70/300/100',
+                      imageUrl: url ?? '',
+                      fit: fit ?? BoxFit.cover,
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: fit ?? BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      placeholder: (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) => Center(
+                          child: Image.asset(defaultImagePng,
+                              fit: BoxFit.fill,
+                              height: double.infinity,
+                              width: double.infinity)
+                          //     CustomText(
+                          //   title: title,
+                          //   fontName: FontName.bold,
+                          //   fontSize: 20,
+                          // )
+                          ),
                     ),
+            )
+          : Container(
+              height: double.maxFinite,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: lightGrey,
               ),
-      ),
+              child: Center(
+                child: CustomText(
+                  fontName: FontName.bold,
+                  fontSize: 24,
+                  title: title.toUpperCase(),
+                ),
+              ),
+            ),
       Container(color: gredientColor)
     ],
   );

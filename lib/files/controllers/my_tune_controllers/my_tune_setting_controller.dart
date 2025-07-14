@@ -1,7 +1,9 @@
+import 'package:mtn_ghana_wp/files/api_calls/add_to_shuffle_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/tune_setting_api/tune_setting_dedicated_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/tune_setting_api/tune_setting_fullday_api.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/model/tune_setting_model.dart';
@@ -262,9 +264,10 @@ class MyTuneSettingController extends GetxController {
   fullDayAllCallerSetting() async {
     isLoading.value = true;
     String days = await getSelectedDays();
-    TuneSettingModel model = await fulldayApi(days, info.toneId ?? '');
+    //TuneSettingModel model = await fulldayApi(days, info.toneId ?? '');
+    GenericModel model = await addToShuffleScApi(info.toneId ?? '');
 
-    if (model.statusCode == "SC0000") {
+    if (model.respCode == 0) {
       onSucessApiCall();
     } else {
       snackBar(model.message);
@@ -314,9 +317,9 @@ class MyTuneSettingController extends GetxController {
   fullDayDedicatedSetting() async {
     isLoading.value = true;
     String days = await getSelectedDays();
-    TuneSettingModel model =
+    GenericModel model =
         await fulldayDedicatedApi(info.toneId ?? '', msisdn, packName, days);
-    if (model.statusCode == "SC0000") {
+    if (model.respCode == 0) {
       onSucessApiCall();
     } else {
       snackBar(model.message);

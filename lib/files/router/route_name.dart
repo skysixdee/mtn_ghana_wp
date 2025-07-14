@@ -1,5 +1,6 @@
 const String homeRoute = "/";
 const String searchRoute = "/search";
+const String artistsRoute = "/artists";
 const String bannerDetailRoute = "/bannerDetail";
 const String categoryDetailRoute = "/categoryDetail";
 const String seeMoreRoute = "/seeMore";

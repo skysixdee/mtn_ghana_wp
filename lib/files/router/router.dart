@@ -30,6 +30,7 @@ import 'package:mtn_ghana_wp/files/screens/my_tune_setting_screen/my_tune_settin
 import 'package:mtn_ghana_wp/files/screens/my_wishlist_screen/my_wishlist_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/name_tune_screen/name_tune_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/profile_screen/profile_screen.dart';
+import 'package:mtn_ghana_wp/files/screens/search_screen/artist_list_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/search_screen/artists_tune_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/search_screen/search_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/see_more_screen/see_more_screen.dart';
@@ -71,6 +72,7 @@ final router = GoRouter(
         _createBlackListShell(),
         _faqShell(),
         _termsAndConditionsShell(),
+        _artistsShell(),
         //_mobileTunePreviewShell(),
       ],
     ),
@@ -119,8 +121,33 @@ StatefulShellBranch _searchShell() {
         path: searchRoute,
         builder: (context, state) {
           String key1 = state.uri.queryParameters['search'] ?? '';
+          String index = state.uri.queryParameters['index'] ?? '';
           homePageSearchClickEvent(key1);
-          return SearchScreen(searchKey: key1);
+          return SearchScreen(
+            searchKey: key1,
+            index: index,
+          );
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _artistsShell() {
+  //TuneSearchController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: artistsRoute,
+        path: artistsRoute,
+        builder: (context, state) {
+          String key1 = state.uri.queryParameters['search'] ?? '';
+          String index = state.uri.queryParameters['index'] ?? '';
+          //homePageSearchClickEvent(key1);
+          return ArtistListScreen(
+            searchKey: key1,
+            index: index,
+          );
         },
       ),
     ],
@@ -321,6 +348,7 @@ StatefulShellBranch _artistsTuneShell() {
         path: artistTuneRoute,
         builder: (context, state) {
           String artistName = state.uri.queryParameters['artistName'] ?? '';
+
           cont.getArtistsTune(artistName);
           return ArtistsTuneScreen(artistName: artistName);
         },

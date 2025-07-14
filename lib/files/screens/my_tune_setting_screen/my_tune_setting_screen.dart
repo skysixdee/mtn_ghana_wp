@@ -1,3 +1,4 @@
+import 'package:mtn_ghana_wp/files/common/decode_html_text.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_setting_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/caller_type.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
@@ -130,11 +131,12 @@ class _MyTuneSettingScreenState extends State<MyTuneSettingScreen> {
           ),
           const SizedBox(height: 4),
           CustomText(
-            title: widget.info.toneName ?? '',
+            title: decodeHtmlEntities(widget.info.toneName ?? ''),
             fontName: FontName.bold,
           ),
           CustomText(
-            title: widget.info.albumName ?? '',
+            title: decodeHtmlEntities(
+                widget.info.albumName ?? ''), //widget.info.albumName ?? '',
             color: myTuneScreenBgColor,
           ),
         ],

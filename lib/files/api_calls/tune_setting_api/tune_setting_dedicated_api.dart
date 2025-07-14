@@ -1,35 +1,51 @@
 import 'dart:math';
 
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_setting_model.dart';
 import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-Future<TuneSettingModel> fulldayDedicatedApi(
+Future<GenericModel> fulldayDedicatedApi(
     String toneId, String bParty, String packName, String days) async {
   Random random = Random();
   var randomNumber = random.nextInt(1000000000);
 
   Map<String, dynamic> jsonData = {
-    "clientTxnId": '$randomNumber',
-    "aPartyMsisdn": StoreManager.msisdn,
-    "toneId": toneId,
-    "language": StoreManager.languageCode,
-    "priority": "0",
+    // "clientTxnId": '$randomNumber',
+    // "aPartyMsisdn": StoreManager.msisdn,
+    // "toneId": toneId,
+    // "language": StoreManager.languageCode,
+    // "priority": "0",
+    // "channelId": channelId,
+    // "bPartyMsisdn": bParty,
+    // "serviceId": "13",
+    // "activityId": "1",
+    // "packName": packName,
+    // "timeType": "2",
+    // "weeklyDays": days.isEmpty ? "0" : days,
+    // "weeklyStartTime": "00:00",
+    // "weeklyEndTime": "23:59",
+    "transactionId": getTransactionId(),
+    "featureId": 1,
+    "msisdn": StoreManager.msisdn,
+    "bmsisdn": bParty,
+    "offerCode": packName,
+    "contentId": toneId,
+    "languageCode": StoreManager.languageSort,
     "channelId": channelId,
-    "bPartyMsisdn": bParty,
-    "serviceId": "13",
-    "activityId": "1",
-    "packName": packName,
-    "timeType": "2",
-    "weeklyDays": days.isEmpty ? "0" : days,
-    "weeklyStartTime": "00:00",
-    "weeklyEndTime": "23:59",
   };
-  return await _postApi(tuneSettingDedicatedUrl, jsonData);
+
+  //String url, Map<String, dynamic> formData) async {
+  Map<String, dynamic> jsonResp =
+      await NetworkManager().post(tuneSettingDedicatedUrl, jsonData: jsonData);
+  GenericModel model = GenericModel.fromJson(jsonResp);
+
+  return model; //await _postApi(tuneSettingDedicatedUrl, jsonData);
 }
 
 Future<TuneSettingModel> fulldayTimeBaseDedicatedApi(

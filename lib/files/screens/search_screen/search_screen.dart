@@ -1,23 +1,20 @@
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
-import 'package:mtn_ghana_wp/files/router/route_name.dart';
+
 import 'package:mtn_ghana_wp/files/common/number_pagination.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/tune_card.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
+
 import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 
 class SearchScreen extends StatefulWidget {
-  SearchScreen({super.key, required this.searchKey});
+  SearchScreen({super.key, required this.searchKey, required this.index});
   final String searchKey;
+  final String index;
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
@@ -26,7 +23,14 @@ class _SearchScreenState extends State<SearchScreen> {
   final TuneSearchController controller = Get.find();
   @override
   void initState() {
-    controller.getResult(widget.searchKey);
+    if (widget.index == "2") {
+      controller.getSongCodeSearch(widget.searchKey);
+    } else if (widget.index == "1") {
+      controller.getArtistSearch(widget.searchKey);
+    } else {
+      controller.getSongSearchResult(widget.searchKey);
+    }
+
     super.initState();
   }
 
@@ -41,15 +45,15 @@ class _SearchScreenState extends State<SearchScreen> {
                 slivers: [
                   sliverNavigation(),
                   //sliverAppBar(),
-                  SliverToBoxAdapter(
-                    child: Obx(
-                      () {
-                        return controller.selectedIndex.value == 0
-                            ? grid()
-                            : artistNameList();
-                      },
-                    ),
-                  ),
+                  SliverToBoxAdapter(child: grid()
+                      // Obx(
+                      //   () {
+                      //     return controller.selectedIndex.value == 0
+                      //         ?
+                      //         : artistNameList();
+                      //   },
+                      // ),
+                      ),
                 ],
               ),
             ),
@@ -73,7 +77,6 @@ class _SearchScreenState extends State<SearchScreen> {
       flexibleSpace: Column(
         children: [
           Container(height: 1, color: white),
-          topTab(),
         ],
       ),
     );
@@ -88,9 +91,7 @@ class _SearchScreenState extends State<SearchScreen> {
               totalCount: controller.totalTuneCount.value,
               onTap: (p0) => controller.leadMoreData(p0),
             ),
-            controller.selectedIndex.value == 0
-                ? const SizedBox()
-                : Container(height: 40, color: white)
+            Container(height: 40, color: white)
           ],
         );
       },
@@ -116,7 +117,8 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget artistNameList() {
+  /*
+Widget artistNameList() {
     return ListView.builder(
       itemCount: controller.artistList.length,
       shrinkWrap: true,
@@ -190,7 +192,6 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
-
   Widget topTab() {
     return SizedBox(
       height: 40,
@@ -230,4 +231,5 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
+  */
 }

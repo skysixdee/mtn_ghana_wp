@@ -97,6 +97,8 @@ Future<void> readProperties() async {
   setToneUrl = data['Buy_TONE_URL'];
   settingScUrl = data["SETTING_URL"];
   channelId = data['CHANNEL_ID'];
+  bannerDetailScUrl = data['BANNER_DETAIL_URL'];
+  artistsSearchUrl = data['ARTISTS_SEARCH_URL'];
   advanceSearchUrl = data['ADVANCE_SEARCH_URL'];
   shuffleEnableDisableUrl = data['SHUFFLE_ON_OFF'];
   getSubscriptionUrl = data['GET_SUBSCRIPTION_URL'];
@@ -117,7 +119,7 @@ Future<void> readProperties() async {
   myTunesUrl = data["LIST_TONE_URL"];
   playingTuneUrl = data["LIST_TONE_URL"];
   myMusicBoxUrl = data["LIST_TONE_URL"];
-
+  tuneSettingDedicatedUrl = data['TUNE_DEDICATION_SETTING'];
   customPrint("base url = $baseUrl");
   return;
 }

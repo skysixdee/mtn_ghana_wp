@@ -41,6 +41,7 @@ class GenericButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        clipBehavior: Clip.hardEdge,
         height: height,
         decoration: BoxDecoration(
           border: Border.all(color: borderColor ?? transparent),
