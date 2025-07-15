@@ -16,4 +16,22 @@ Future<BannerDetailModel> getBannerDetailScApi(String type, String searchKey,
       await NetworkManager().get(url, addInHeader: [header]);
   BannerDetailModel model = BannerDetailModel.fromJson(response);
   return model;
+  //return bannerDetailModelFromJson(_json);
 }
+
+String _json = """{
+  "respCode": "SC0000",
+  "message": "Success",
+  "responseMap": {
+    "bannerDetails": [
+      {
+        "toneId": "0022206",
+        "artistName": "JACKIE N FRIENDS",
+        "albumName": "NULL",
+        "location": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=uq1WcINJSVQ=",
+        "previewImage": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=uq1WcINJSVQ="
+      }
+    ]
+  }
+}
+""";

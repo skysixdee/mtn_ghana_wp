@@ -120,14 +120,14 @@ class ResponseMap {
   });
 
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
-        bannerDetails: json["toneList"] == null
+        bannerDetails: json["bannerDetails"] == null
             ? []
             : List<TuneInfo>.from(
-                json["toneList"]!.map((x) => TuneInfo.fromJson(x))),
+                json["bannerDetails"]!.map((x) => TuneInfo.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "toneList": bannerDetails == null
+        "bannerDetails": bannerDetails == null
             ? []
             : List<dynamic>.from(bannerDetails!.map((x) => x.toJson())),
       };
