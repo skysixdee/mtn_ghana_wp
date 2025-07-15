@@ -17,6 +17,6 @@ Future<GenericModel> dedicatedTuneDeleteScApi(
     "channelId": 2
   };
   Map<String, dynamic> map =
-      await NetworkManager().post(deleteDedicatedTuneScUrl, jsonData: jsomForm);
+      await NetworkManager().post(deleteDedicatedTuneUrl, jsonData: jsomForm);
   return genericModelFromJson(json.encode(map));
 }

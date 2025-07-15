@@ -109,8 +109,9 @@ Future<void> readProperties() async {
   deleteMusicBoxSubscriptionUrl = data['DELETE_MUSIC_BOX_SUBSCRIPTION_URL'];
   deleteFromWishlistUrl = data['DELETE_FROM_WISHLIST'];
   listSettingUrl = data["LIST_SETTING_URL"];
+  sendGiftScUrl = data['GIFT_TONE_URL'];
   //categoryMwUrl = data["GET_CATEGORY_LIST_URL"];
-
+  deleteFromShuffleScUrl = data['DELETE_TUNE_FROM_SHUFFLE_URL'];
   getBannerListScUrl = data["GET_BANNER_LIST_URL"];
   categorySearchScUrl = data["CATEGORY_SEARCH_URL"];
   getCategoryListUrl = data['GET_CATEGORY_LIST_URL'];

@@ -15,27 +15,19 @@ Future<ArtistTuneListModel> getArtistTuneListApi(String key,
   return artistTuneListModelFromJson(json.encode(jsonResp));
 }
 
-
-
-Future<ArtistTuneListModel> getArtistTuneListScApi(String key, {int pageNo = 0}) async {
-  
-   Map<String, dynamic> jsonData = {
-      "sortBy": "OrderBy",
+Future<ArtistTuneListModel> getArtistTuneListScApi(String key,
+    {int pageNo = 0}) async {
+  Map<String, dynamic> jsonData = {
+    "sortBy": "OrderBy",
     "pageNo": pageNo,
     "perPageCount": pagePerCount,
     "filter": "Content",
     "filterPref": "begin",
     "locale": StoreManager.languageSort,
-    "searchKey": [
-        key
-    ]
-
-
+    "searchKey": [key]
   };
-  Map<String, dynamic> map = await NetworkManager().post(artistTuneSearchScUrl,
+  Map<String, dynamic> map = await NetworkManager().post(artistsSearchUrl,
       jsonData:
           jsonData); //mockyapi:'https://run.mocky.io/v3/3c30486a-4291-4667-b575-ce6a66e3105b'
   return artistTuneListModelFromJson(json.encode(map));
- 
-
 }
