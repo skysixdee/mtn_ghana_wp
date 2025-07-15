@@ -24,7 +24,7 @@ String musicBoxContentModelToJson(MusicBoxContentModel data) =>
 class MusicBoxContentModel {
   int? respCode;
   String? message;
-  DateTime? respTime;
+  String? respTime;
   ResponseMap? responseMap;
 
   MusicBoxContentModel({
@@ -38,8 +38,7 @@ class MusicBoxContentModel {
       MusicBoxContentModel(
         respCode: json["respCode"],
         message: json["message"],
-        respTime:
-            json["respTime"] == null ? null : DateTime.parse(json["respTime"]),
+        respTime: json["respTime"],
         responseMap: json["responseMap"] == null
             ? null
             : ResponseMap.fromJson(json["responseMap"]),
@@ -48,7 +47,7 @@ class MusicBoxContentModel {
   Map<String, dynamic> toJson() => {
         "respCode": respCode,
         "message": message,
-        "respTime": respTime?.toIso8601String(),
+        "respTime": respTime,
         "responseMap": responseMap?.toJson(),
       };
 }
@@ -61,14 +60,14 @@ class ResponseMap {
   });
 
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
-        tonelist: json["tonelist"] == null
+        tonelist: json["toneList"] == null
             ? []
             : List<TuneInfo>.from(
-                json["tonelist"]!.map((x) => TuneInfo.fromJson(x))),
+                json["toneList"]!.map((x) => TuneInfo.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "tonelist": tonelist == null
+        "toneList": tonelist == null
             ? []
             : List<dynamic>.from(tonelist!.map((x) => x.toJson())),
       };

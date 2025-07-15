@@ -21,45 +21,48 @@ Future<MusicBoxContentModel> getMusicBoxContentApi(String id,
 }
 
 String _jsonResp = """{
-    "respCode": 0,
-    "message": "Success",
-    "respTime": "2025-07-12 08:42:33",
-    "tonelist": [
-        {
-            "toneId": "3193426",
-            "toneName": "Wish me well",
-            "artistName": "Kuame Eugene",
-            "albumName": "Album",
-            "categoryId": 202,
-            "toneIdStreamingUrl": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=ieh+Uot4IAk=",
-            "toneIdpreviewImageUrl": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=ieh+Uot4IAk="
-        },
-        {
-            "toneId": "3763417",
-            "toneName": "Transformer",
-            "artistName": "Strongman",
-            "albumName": "Album",
-            "categoryId": 202,
-            "toneIdStreamingUrl": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=RefG6yw+jmM=",
-            "toneIdpreviewImageUrl": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=RefG6yw+jmM="
-        },
-        {
-            "toneId": "4943415",
-            "toneName": "Thunder",
-            "artistName": "EPHRAIM",
-            "albumName": "Album",
-            "categoryId": 202,
-            "toneIdStreamingUrl": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=dh363iHotfc=",
-            "toneIdpreviewImageUrl": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=dh363iHotfc="
-        },
-        {
-            "toneId": "7833425",
-            "toneName": "Bend Down",
-            "artistName": "Okyeame Kwame ft Edem",
-            "albumName": "Album",
-            "categoryId": 202,
-            "toneIdStreamingUrl": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=ztYGqnOEdEc=",
-            "toneIdpreviewImageUrl": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=ztYGqnOEdEc="
-        }
+  "respCode": 0,
+  "message": "Success",
+  "respTime": "2025-07-15 10:15:28",
+  "responseMap": {
+    "toneList": [
+      {
+        "toneId": "3193426",
+        "toneName": "Wish me well",
+        "artistName": "Kuame Eugene",
+        "albumName": "Album",
+        "categoryId": 202,
+        "toneIdStreamingUrl": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=ieh+Uot4IAk=",
+        "toneIdpreviewImageUrl": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=ieh+Uot4IAk="
+      },
+      {
+        "toneId": "3763417",
+        "toneName": "Transformer",
+        "artistName": "Strongman",
+        "albumName": "Album",
+        "categoryId": 202,
+        "toneIdStreamingUrl": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=RefG6yw+jmM=",
+        "toneIdpreviewImageUrl": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=RefG6yw+jmM="
+      },
+      {
+        "toneId": "4943415",
+        "toneName": "Thunder",
+        "artistName": "EPHRAIM",
+        "albumName": "Album",
+        "categoryId": 202,
+        "toneIdStreamingUrl": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=dh363iHotfc=",
+        "toneIdpreviewImageUrl": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=dh363iHotfc="
+      },
+      {
+        "toneId": "7833425",
+        "toneName": "Bend Down",
+        "artistName": "Okyeame Kwame ft Edem",
+        "albumName": "Album",
+        "categoryId": 202,
+        "toneIdStreamingUrl": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=ztYGqnOEdEc=",
+        "toneIdpreviewImageUrl": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=ztYGqnOEdEc="
+      }
     ]
-}""";
+  }
+}
+""";

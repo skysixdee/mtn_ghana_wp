@@ -86,7 +86,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
     );
   }
 
-  Padding toneDetail(Settingslist v) {
+  Padding toneDetail(SettingsList v) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
       child: Row(
@@ -123,7 +123,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
     );
   }
 
-  Widget callerTypeBuilder(Settingslist v) {
+  Widget callerTypeBuilder(SettingsList v) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -161,7 +161,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
     }
   }
 
-  String serviceName(Settingslist v) {
+  String serviceName(SettingsList v) {
     if (v.serviceName == 'Group') {
       return v.groupId ?? '';
     } else if (v.serviceName == 'AllCaller') {
@@ -173,7 +173,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
     }
   }
 
-  Widget toneImage(Settingslist info) {
+  Widget toneImage(SettingsList info) {
     TuneInfo inf = TuneInfo(
       toneIdStreamingUrl: info.contentStreamingUrl ?? "",
       toneId: info.contentId,
