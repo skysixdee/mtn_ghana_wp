@@ -256,7 +256,7 @@ class _MyTuneSettingScreenState extends State<MyTuneSettingScreen> {
                 fontSize: 12,
               ),
               const SizedBox(height: 4),
-              SelectableRepeatSectionView()
+              //SelectableRepeatSectionView()
             ],
           ),
         ],

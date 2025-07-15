@@ -10,11 +10,11 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 Future<GenericModel> shuffleEnbleDisableApi(bool enable) async {
   Map<String, dynamic> formData = {
     "transactionId": getTransactionId(),
-    'featureId': '1',
+    'featureId': 1,
     "msisdn": StoreManager.msisdn,
-    "languageCode": StoreManager.languageCode,
     'channelId': channelId,
     "mode": enable ? "0" : "1",
+    "languageCode": StoreManager.languageCode,
   };
 
   Map<String, dynamic> jsonMap =

@@ -154,6 +154,7 @@ class MyTuneSettingController extends GetxController {
   }
 
   bool checkAtLeastOneDaySelection() {
+    return true;
     if (timeType.value != TimeType.timeAndDate) {
       bool isSelected = false;
       for (var element in repeatDaysF) {

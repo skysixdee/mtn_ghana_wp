@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:mtn_ghana_wp/files/api_calls/delete_from_shuffle_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/list_setting_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/shuffle_enable_disable_api.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
@@ -26,6 +27,24 @@ class MyPlayingTuneControllerNew extends GetxController {
       settingsList.removeAt(0);
     }
     isLoading.value = false;
+  }
+
+  deleteTune(SettingsList setting) async {
+    openAlertPopup(
+      message: deletePlayingTuneMessageStr,
+      secondryBtnTitle: cancelStr,
+      onPrimary: () async {
+        print("Delete tone name ===== $setting");
+
+        GenericModel model =
+            await deleteFromShuffleScApi(setting.contentId ?? '', '1');
+        if (model.respCode == 0) {
+          settingsList.remove(setting);
+        } else {
+          snackBar(model.message);
+        }
+      },
+    );
   }
 
   enabelDispableShuffle() async {

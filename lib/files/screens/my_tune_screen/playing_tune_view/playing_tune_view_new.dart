@@ -103,17 +103,45 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
                   height: 1,
                   width: double.maxFinite,
                 ),
-                CustomText(
-                  maxLine: 1,
-                  title: decodeHtmlEntities(v.contentName ?? ''),
-                  fontName: FontName.bold,
-                ),
-                CustomText(
-                  maxLine: 1,
-                  title: decodeHtmlEntities(v.artistName ?? ''),
-                  fontName: FontName.semiBold,
-                  color: grey,
-                  fontSize: 12,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            maxLine: 1,
+                            title: decodeHtmlEntities(v.contentName ?? ''),
+                            fontName: FontName.bold,
+                          ),
+                          CustomText(
+                            maxLine: 1,
+                            title: decodeHtmlEntities(v.artistName ?? ''),
+                            fontName: FontName.semiBold,
+                            color: grey,
+                            fontSize: 12,
+                          ),
+                        ],
+                      ),
+                    ),
+                    GenericButton(
+                      height: 30,
+                      width: 30,
+                      padding: const EdgeInsets.all(0),
+                      bgColor: transparent,
+                      leadingIcon: Icon(
+                        size: 18,
+                        Icons.delete,
+                        color: red,
+                      ),
+                      onTap: () {
+                        con.deleteTune(v);
+                        print("tapped");
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
