@@ -58,7 +58,7 @@ String bannerDetailScUrl = '';
 String tuneSettingDedicatedUrl = '';
 String listSettingUrl = '';
 String deleteFromWishlistUrl = "";
-
+String sendGiftScUrl = '';
 String buyMusicChannelUrl = "";
 
 String addToneToShuffleScUrl = "";
@@ -89,7 +89,7 @@ String confirmOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/token';
 String deleteFromShuffleScUrl = '';
 //"http://10.135.64.101:51004/selfcare/setting-service/delete-tone-from-shufflelist";
 String settingScUrl = "";
-String sendGiftScUrl = '';
+
 //"http://10.135.64.101:51009/selfcare/subscriber-management/gift-tone";
 String getBannerListScUrl = "";
 String categorySearchScUrl = "";

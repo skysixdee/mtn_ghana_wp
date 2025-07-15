@@ -2,17 +2,51 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mtn_ghana_wp/files/api_calls/list_setting_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/shuffle_enable_disable_api.dart';
+import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/list_setting_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class MyPlayingTuneControllerNew extends GetxController {
   RxBool isLoading = false.obs;
-  List<SettingsList> settingsList = [];
-
+  List<Settingslist> settingsList = [];
+  Settingslist? setting;
+  RxBool switchingShuffle = false.obs;
+  RxBool isShuffleEnable = false.obs;
   getListSetting() async {
     print("making list setting  api call ");
     isLoading.value = true;
     ListSettingModel model = await listSettingApi("packName");
-    settingsList = model.settingsList ?? [];
+    settingsList = model.settingslist ?? [];
+    if (settingsList.isNotEmpty) {
+      setting = settingsList[0];
+      isShuffleEnable.value = setting?.isShuffleOn == 'false' ? false : true;
+      settingsList.removeAt(0);
+    }
     isLoading.value = false;
+  }
+
+  enabelDispableShuffle() async {
+    openAlertPopup(
+      message: isShuffleEnable.value
+          ? disableShuffleMessageStr
+          : doYouWantToEnableShuffleStr,
+      primaryBtnTitle: confirmStr,
+      secondryBtnTitle: cancelStr,
+      onPrimary: () async {
+        switchingShuffle.value = true;
+        GenericModel model =
+            await shuffleEnbleDisableApi(!isShuffleEnable.value);
+        if (model.respCode == 0) {
+          isShuffleEnable.value = !isShuffleEnable.value;
+          getListSetting();
+        } else {
+          snackBar(model.message);
+        }
+        switchingShuffle.value = false;
+      },
+    );
   }
 }

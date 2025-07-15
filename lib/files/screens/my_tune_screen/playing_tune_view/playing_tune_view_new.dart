@@ -1,4 +1,5 @@
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
@@ -15,6 +16,8 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/widgets/playing_tune_card.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class PlayingTuneViewNew extends StatefulWidget {
   const PlayingTuneViewNew({super.key});
@@ -34,69 +37,143 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return con.isLoading.value ? loadingIndicator() : listView();
-      },
-    );
-  }
-
-  Widget listView() {
-    return GridView.builder(
-      padding: EdgeInsets.all(20),
-      shrinkWrap: true,
-      itemCount: con.settingsList.length,
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          childAspectRatio: 0.9,
-          maxCrossAxisExtent: 200,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20),
-      itemBuilder: (context, index) {
-        final v = con.settingsList[index];
-        return Container(
-          decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
-            ],
-            borderRadius: BorderRadius.circular(8),
-            color: white,
-          ),
-          child: Column(
-            children: [
-              Expanded(child: toneImage(v)),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
-                child: Row(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 2,
-                      children: [
-                        CustomText(
-                          title: decodeHtmlEntities(v.contentName ?? ''),
-                          fontName: FontName.bold,
-                        ),
-                        CustomText(
-                          title: decodeHtmlEntities(v.artistName ?? ''),
-                          fontName: FontName.semiBold,
-                          color: grey,
-                          fontSize: 12,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+    return ResponsiveBuilder(
+      builder: (context, sizingInformation) {
+        return Obx(
+          () {
+            return con.isLoading.value
+                ? loadingIndicator()
+                : listView(sizingInformation);
+          },
         );
       },
     );
   }
 
-  Widget toneImage(SettingsList info) {
+  Widget listView(SizingInformation si) {
+    return Column(
+      children: [
+        playingTuneHeader(si),
+        GridView.builder(
+          padding: EdgeInsets.all(20),
+          shrinkWrap: true,
+          itemCount: con.settingsList.length,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              childAspectRatio: 0.75,
+              maxCrossAxisExtent: 220,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20),
+          itemBuilder: (context, index) {
+            final v = con.settingsList[index];
+            return Container(
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+                ],
+                borderRadius: BorderRadius.circular(8),
+                color: white,
+              ),
+              child: Column(
+                children: [
+                  Expanded(child: toneImage(v)),
+                  toneDetail(v),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Padding toneDetail(Settingslist v) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
+      child: Row(
+        children: [
+          Flexible(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 2,
+              children: [
+                callerTypeBuilder(v),
+                Container(
+                  color: lightGrey,
+                  height: 1,
+                  width: double.maxFinite,
+                ),
+                CustomText(
+                  maxLine: 1,
+                  title: decodeHtmlEntities(v.contentName ?? ''),
+                  fontName: FontName.bold,
+                ),
+                CustomText(
+                  maxLine: 1,
+                  title: decodeHtmlEntities(v.artistName ?? ''),
+                  fontName: FontName.semiBold,
+                  color: grey,
+                  fontSize: 12,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget callerTypeBuilder(Settingslist v) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomText(
+              fontName: FontName.regular,
+              color: grey,
+              title: serviceType(v.serviceName ??
+                  ''), //v.bMsisdn == null ? "Caller" : "Dedicated To",
+            ),
+            CustomText(
+              title: serviceName(v),
+            )
+          ],
+        ),
+        CustomText(
+          title: "Full\nDay",
+          textAlign: TextAlign.center,
+        )
+      ],
+    );
+  }
+
+  String serviceType(String serviceName) {
+    if (serviceName == 'Group') {
+      return serviceName;
+    } else if (serviceName == 'AllCaller') {
+      return serviceName;
+    } else if (serviceName == 'Dedication') {
+      return serviceName;
+    } else {
+      return '';
+    }
+  }
+
+  String serviceName(Settingslist v) {
+    if (v.serviceName == 'Group') {
+      return v.groupId ?? '';
+    } else if (v.serviceName == 'AllCaller') {
+      return v.serviceName ?? '';
+    } else if (v.serviceName == 'Dedication') {
+      return v.bMsisdn ?? '';
+    } else {
+      return '';
+    }
+  }
+
+  Widget toneImage(Settingslist info) {
     TuneInfo inf = TuneInfo(
       toneIdStreamingUrl: info.contentStreamingUrl ?? "",
       toneId: info.contentId,
@@ -127,6 +204,45 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
         ),
         //playButton(TuneInfo())
       ],
+    );
+  }
+
+  Widget playingTuneHeader(SizingInformation si) {
+    return Container(
+      height: 60,
+      color: lightGrey,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8.0 : 25),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomText(
+              title: cusrrentlyPlayigToStr,
+              fontName: FontName.bold,
+              fontSize: si.isMobile ? 14 : 20,
+            ),
+            Row(
+              children: [
+                CustomText(
+                  title: shuffleStr,
+                  color: grey,
+                  fontSize: si.isMobile ? 12 : 16,
+                ),
+                Obx(() {
+                  return con.switchingShuffle.value
+                      ? loadingIndicator(radius: 12, width: 60)
+                      : CupertinoSwitch(
+                          activeColor: yellow,
+                          value: con.isShuffleEnable.value,
+                          onChanged: (value) {
+                            con.enabelDispableShuffle();
+                          });
+                }),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

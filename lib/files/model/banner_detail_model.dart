@@ -64,15 +64,6 @@
 //       };
 // }
 
-
-
-
-
-
-
-
-
-
 // To parse this JSON data, do
 //
 //     final bannerDetailModel = bannerDetailModelFromJson(jsonString);
@@ -87,8 +78,6 @@
 import 'dart:convert';
 
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
-
-
 
 BannerDetailModel bannerDetailModelFromJson(String str) =>
     BannerDetailModel.fromJson(json.decode(str));
@@ -131,14 +120,14 @@ class ResponseMap {
   });
 
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
-        bannerDetails: json["bannerDetails"] == null
+        bannerDetails: json["toneList"] == null
             ? []
             : List<TuneInfo>.from(
-                json["bannerDetails"]!.map((x) => TuneInfo.fromJson(x))),
+                json["toneList"]!.map((x) => TuneInfo.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "bannerDetails": bannerDetails == null
+        "toneList": bannerDetails == null
             ? []
             : List<dynamic>.from(bannerDetails!.map((x) => x.toJson())),
       };

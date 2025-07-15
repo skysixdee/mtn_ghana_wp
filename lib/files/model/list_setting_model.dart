@@ -13,137 +13,125 @@ String listSettingModelToJson(ListSettingModel data) =>
 class ListSettingModel {
   int? respCode;
   String? message;
-  List<SettingsList>? settingsList;
+  List<Settingslist>? settingslist;
 
   ListSettingModel({
     this.respCode,
     this.message,
-    this.settingsList,
+    this.settingslist,
   });
 
   factory ListSettingModel.fromJson(Map<String, dynamic> json) =>
       ListSettingModel(
         respCode: json["respCode"],
         message: json["message"],
-        settingsList: json["settingsList"] == null
+        settingslist: json["settingslist"] == null
             ? []
-            : List<SettingsList>.from(
-                json["settingsList"]!.map((x) => SettingsList.fromJson(x))),
+            : List<Settingslist>.from(
+                json["settingslist"]!.map((x) => Settingslist.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "respCode": respCode,
         "message": message,
-        "settingsList": settingsList == null
+        "settingslist": settingslist == null
             ? []
-            : List<dynamic>.from(settingsList!.map((x) => x.toJson())),
+            : List<dynamic>.from(settingslist!.map((x) => x.toJson())),
       };
 }
 
-class SettingsList {
-  String? activationChannel;
-  String? albumName;
-  String? albumNameL2;
-  String? artistName;
-  String? artistNameL2;
-  String? contentId;
-  String? contentName;
-  String? contentNameL2;
-  String? contentPreviewImageUrl;
-  String? contentStreamingUrl;
-  String? contentType;
-  String? defaultToneSelectionType;
-  DateTime? expiryDate;
-  DateTime? firstActivationDate;
-  String? isContentPackage;
-  String? isServiceSuspended;
-  String? isShuffleOn;
-  String? price;
+class Settingslist {
   String? serviceId;
   String? serviceName;
+  String? contentId;
+  String? defaultToneSelectionType;
+  String? isShuffleOn;
+  String? isServiceSuspended;
+  String? contentName;
+  String? albumName;
+  String? artistName;
+  String? isContentPackage;
+  String? contentType;
+  String? contentStreamingUrl;
+  String? contentPreviewImageUrl;
   String? status;
-  String? isToneInShuffle;
-  String? settingsId;
+  DateTime? firstActivationDate;
+  String? price;
+  int? activationChannel;
+  DateTime? expiryDate;
+  String? bMsisdn;
+  String? groupId;
 
-  SettingsList({
-    this.activationChannel,
-    this.albumName,
-    this.albumNameL2,
-    this.artistName,
-    this.artistNameL2,
-    this.contentId,
-    this.contentName,
-    this.contentNameL2,
-    this.contentPreviewImageUrl,
-    this.contentStreamingUrl,
-    this.contentType,
-    this.defaultToneSelectionType,
-    this.expiryDate,
-    this.firstActivationDate,
-    this.isContentPackage,
-    this.isServiceSuspended,
-    this.isShuffleOn,
-    this.price,
+  Settingslist({
     this.serviceId,
     this.serviceName,
+    this.contentId,
+    this.defaultToneSelectionType,
+    this.isShuffleOn,
+    this.isServiceSuspended,
+    this.contentName,
+    this.albumName,
+    this.artistName,
+    this.isContentPackage,
+    this.contentType,
+    this.contentStreamingUrl,
+    this.contentPreviewImageUrl,
     this.status,
-    this.isToneInShuffle,
-    this.settingsId,
+    this.firstActivationDate,
+    this.price,
+    this.activationChannel,
+    this.expiryDate,
+    this.bMsisdn,
+    this.groupId,
   });
 
-  factory SettingsList.fromJson(Map<String, dynamic> json) => SettingsList(
-        activationChannel: json["activationChannel"],
-        albumName: json["albumName"],
-        albumNameL2: json["albumName_L2"],
-        artistName: json["artistName"],
-        artistNameL2: json["artistName_L2"],
+  factory Settingslist.fromJson(Map<String, dynamic> json) => Settingslist(
+        serviceId: json["serviceId"],
+        serviceName: json["serviceName"],
         contentId: json["contentId"],
-        contentName: json["contentName"],
-        contentNameL2: json["contentName_L2"],
-        contentPreviewImageUrl: json["contentPreviewImageURL"],
-        contentStreamingUrl: json["contentStreamingURL"],
-        contentType: json["contentType"],
         defaultToneSelectionType: json["defaultToneSelectionType"],
-        expiryDate: json["expiryDate"] == null
-            ? null
-            : DateTime.parse(json["expiryDate"]),
+        isShuffleOn: json["isShuffleOn"],
+        isServiceSuspended: json["isServiceSuspended"],
+        contentName: json["contentName"],
+        albumName: json["albumName"],
+        artistName: json["artistName"],
+        isContentPackage: json["isContentPackage"],
+        contentType: json["contentType"],
+        contentStreamingUrl: json["contentStreamingURL"],
+        contentPreviewImageUrl: json["contentPreviewImageURL"],
+        status: json["status"],
         firstActivationDate: json["firstActivationDate"] == null
             ? null
             : DateTime.parse(json["firstActivationDate"]),
-        isContentPackage: json["isContentPackage"],
-        isServiceSuspended: json["isServiceSuspended"],
-        isShuffleOn: json["isShuffleOn"],
         price: json["price"],
-        serviceId: json["serviceId"],
-        serviceName: json["serviceName"],
-        status: json["status"],
-        isToneInShuffle: json["isToneInShuffle"],
-        settingsId: json["settingsId"],
+        activationChannel: json["activationChannel"],
+        expiryDate: json["expiryDate"] == null
+            ? null
+            : DateTime.parse(json["expiryDate"]),
+        bMsisdn: json["bMsisdn"],
+        groupId: json["groupId"],
       );
 
   Map<String, dynamic> toJson() => {
-        "activationChannel": activationChannel,
-        "albumName": albumName,
-        "albumName_L2": albumNameL2,
-        "artistName": artistName,
-        "artistName_L2": artistNameL2,
-        "contentId": contentId,
-        "contentName": contentName,
-        "contentName_L2": contentNameL2,
-        "contentPreviewImageURL": contentPreviewImageUrl,
-        "contentStreamingURL": contentStreamingUrl,
-        "contentType": contentType,
-        "defaultToneSelectionType": defaultToneSelectionType,
-        "expiryDate": expiryDate?.toIso8601String(),
-        "firstActivationDate": firstActivationDate?.toIso8601String(),
-        "isContentPackage": isContentPackage,
-        "isServiceSuspended": isServiceSuspended,
-        "isShuffleOn": isShuffleOn,
-        "price": price,
         "serviceId": serviceId,
         "serviceName": serviceName,
+        "contentId": contentId,
+        "defaultToneSelectionType": defaultToneSelectionType,
+        "isShuffleOn": isShuffleOn,
+        "isServiceSuspended": isServiceSuspended,
+        "contentName": contentName,
+        "albumName": albumName,
+        "artistName": artistName,
+        "isContentPackage": isContentPackage,
+        "contentType": contentType,
+        "contentStreamingURL": contentStreamingUrl,
+        "contentPreviewImageURL": contentPreviewImageUrl,
         "status": status,
-        "isToneInShuffle": isToneInShuffle,
-        "settingsId": settingsId,
+        "firstActivationDate": firstActivationDate?.toIso8601String(),
+        "price": price,
+        "activationChannel": activationChannel,
+        "expiryDate": expiryDate?.toIso8601String(),
+        "bMsisdn": bMsisdn,
+        "groupId": groupId,
       };
 }

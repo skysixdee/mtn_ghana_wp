@@ -69,7 +69,7 @@ class MyTuneScreen extends StatelessWidget {
       children: [
         //getNavigationView(myTunezStr),
         const SizedBox(height: 1),
-        playingTuneHeader(si),
+        //playingTuneHeader(si),
         SizedBox(height: si.isMobile ? 20 : 30),
         PlayingTuneViewNew(),
         //PlayingTuneView(),
