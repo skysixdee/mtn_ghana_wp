@@ -11,12 +11,13 @@ Future<GenericModel> giftTuneApi(String bParty, String toneId) async {
   Map<String, dynamic> jsonRequest = {
     'transactionId': getTransactionId(),
     "featureId": 1,
-    'contentId': toneId,
-    'languageCode': StoreManager.languageCode,
-    'contentType': 1,
     'msisdn': StoreManager.msisdn,
+    'contentId': toneId,
+    'contentType': 1,
+    'languageCode': StoreManager.languageCode,
+    'channelId': channelId,
+    "userData": "selftest",
     'bmsisdn': bParty,
-    'channelId': channelId
   };
   Map<String, dynamic> jsonResp =
       await NetworkManager().post(sendGiftScUrl, jsonData: jsonRequest);

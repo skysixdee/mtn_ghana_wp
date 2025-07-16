@@ -18,15 +18,28 @@ class MyPlayingTuneControllerNew extends GetxController {
   RxBool isShuffleEnable = false.obs;
   getListSetting() async {
     print("making list setting  api call ");
+    List<SettingsList> list = [];
     isLoading.value = true;
     ListSettingModel model = await listSettingApi("packName");
-    settingsList.value = model.settingsList ?? [];
-    if (settingsList.isNotEmpty) {
-      setting = settingsList[0];
+    list = model.settingsList ?? [];
+    if (list.isNotEmpty) {
+      setting = list[0];
       isShuffleEnable.value =
           setting?.isShuffleOn?.toLowerCase() == 'true' ? true : false;
-      settingsList.removeAt(0);
+      list.removeAt(0);
     }
+
+    if (setting?.isShuffleOn?.toLowerCase() == 'true') {
+      list = list
+          .where((itm) => itm.isToneInShuffle?.toLowerCase() == 'true')
+          .toList();
+    } else {
+      list = list
+          .where((itm) => itm.isToneInShuffle?.toLowerCase() == 'false')
+          .toList();
+    }
+
+    settingsList.value = list;
     isLoading.value = false;
   }
 

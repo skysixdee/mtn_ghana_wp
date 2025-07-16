@@ -16,13 +16,174 @@ Future<ListSettingModel> listSettingApi(String packName) async {
     "languageCode": StoreManager.languageSort,
     "channelId": channelId
   };
-  //await Future.delayed(const Duration(seconds: 1));
+
   Map<String, dynamic> jsonResp =
       await NetworkManager().post(listSettingUrl, jsonData: jsonMap);
   return listSettingModelFromJson(json.encode(jsonResp));
-  //return listSettingModelFromJson(_json1);
+
+  // await Future.delayed(const Duration(seconds: 1));
+  // return listSettingModelFromJson(_json);
 }
 
+String _json = """{
+    "respCode": 0,
+    "message": "successful",
+    "settingsList": [
+        {
+            "activationChannel": "USSD",
+            "contentId": "8932",
+            "contentPreviewImageURL": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=qishc8kqVlM=",
+            "contentStreamingURL": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=qishc8kqVlM=",
+            "contentType": "1",
+            "defaultToneSelectionType": "LASTPURCHASED",
+            "expiryDate": "2025-08-10 17:42:31",
+            "firstActivationDate": "2025-07-11 17:42:23",
+            "isContentPackage": "0",
+            "isServiceSuspended": "FALSE",
+            "isShuffleOn": "true",
+            "price": "0.5",
+            "serviceId": "0",
+            "serviceName": "DefaultSettings",
+            "status": "D"
+        },
+        {
+            "activationChannel": "USSD",
+            "albumName": "&#77;&#79;&#78;&#69;&#89;",
+            "albumName_L2": "",
+            "artistName": "&#66;&#76;&#65;&#67;&#75;&#32;&#83;&#72;&#69;&#82;&#73;&#70;",
+            "artistName_L2": "",
+            "contentId": "6701601",
+            "contentName": "&#77;&#111;&#110;&#101;&#121;",
+            "contentName_L2": "",
+            "contentPreviewImageURL": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=Ts+BcZlIH+E=",
+            "contentStreamingURL": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=Ts+BcZlIH+E=",
+            "contentType": "1",
+            "expiryDate": "2025-08-15 07:32:03",
+            "firstActivationDate": "2025-07-08 10:10:31",
+            "isContentPackage": "0",
+            "isToneInShuffle": "true",
+            "price": "0.5",
+            "serviceId": "1",
+            "serviceName": "AllCaller",
+            "settingsId": "15254",
+            "status": "A"
+        },
+        {
+            "activationChannel": "WEB",
+            "contentId": "8926",
+            "contentPreviewImageURL": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=+u3WTWq+7a0=",
+            "contentStreamingURL": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=+u3WTWq+7a0=",
+            "contentType": "1",
+            "expiryDate": "2025-09-14 07:48:50",
+            "firstActivationDate": "2025-07-16 07:48:37",
+            "isContentPackage": "1",
+            "isToneInShuffle": "true",
+            "price": "0.75",
+            "serviceId": "1",
+            "serviceName": "AllCaller",
+            "settingsId": "15256",
+            "status": "A"
+        },
+        {
+            "activationChannel": "WEB",
+            "contentId": "8927",
+            "contentPreviewImageURL": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=MCDRXooJz7Q=",
+            "contentStreamingURL": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=MCDRXooJz7Q=",
+            "contentType": "1",
+            "expiryDate": "2025-09-14 07:50:11",
+            "firstActivationDate": "2025-07-16 07:49:58",
+            "isContentPackage": "1",
+            "isToneInShuffle": "true",
+            "price": "0.75",
+            "serviceId": "1",
+            "serviceName": "AllCaller",
+            "settingsId": "15257",
+            "status": "A"
+        },
+        {
+            "activationChannel": "USSD",
+            "contentId": "8932",
+            "contentPreviewImageURL": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=orjJEYrkHfI=",
+            "contentStreamingURL": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=orjJEYrkHfI=",
+            "contentType": "1",
+            "expiryDate": "2025-09-14 07:55:34",
+            "firstActivationDate": "2025-07-16 07:55:21",
+            "isContentPackage": "1",
+            "isToneInShuffle": "FALSE",
+            "price": "0.75",
+            "serviceId": "1",
+            "serviceName": "AllCaller",
+            "settingsId": "15258",
+            "status": "A"
+        },
+        {
+            "activationChannel": "WEB",
+            "albumName": "&#69;&#78;&#78;&#87;&#65;&#73;",
+            "albumName_L2": "",
+            "artistName": "&#69;&#78;&#78;&#87;&#65;&#73;",
+            "artistName_L2": "",
+            "contentId": "9942225",
+            "contentName": "&#73;&#109;&#97;&#103;&#105;&#110;&#101;",
+            "contentName_L2": "",
+            "contentPreviewImageURL": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=33uo/YSEoBI=",
+            "contentStreamingURL": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=33uo/YSEoBI=",
+            "contentType": "1",
+            "expiryDate": "2025-08-15 07:27:52",
+            "firstActivationDate": "2025-07-16 07:27:39",
+            "isContentPackage": "0",
+            "isToneInShuffle": "FALSE",
+            "price": "0.5",
+            "serviceId": "1",
+            "serviceName": "AllCaller",
+            "settingsId": "15253",
+            "status": "A"
+        },
+        {
+            "activationChannel": "USSD",
+            "albumName": "&#68;&#73;&#68;&#32;&#73;&#32;&#76;&#73;&#69;",
+            "albumName_L2": "",
+            "artistName": "&#67;&#73;&#78;&#65;&#32;&#83;&#79;&#85;&#76;",
+            "artistName_L2": "",
+            "contentId": "9942247",
+            "contentName": "&#80;&#101;&#114;&#115;&#111;&#110;&#97;&#108;",
+            "contentName_L2": "",
+            "contentPreviewImageURL": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=qishc8kqVlM=",
+            "contentStreamingURL": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=qishc8kqVlM=",
+            "contentType": "1",
+            "expiryDate": "2025-08-10 17:42:31",
+            "firstActivationDate": "2025-07-11 17:42:23",
+            "isContentPackage": "0",
+            "isToneInShuffle": "FALSE",
+            "price": "0.5",
+            "serviceId": "1",
+            "serviceName": "AllCaller",
+            "settingsId": "15227",
+            "status": "D"
+        },
+        {
+            "activationChannel": "USSD",
+            "albumName": "&#65;&#83;&#69;&#68;&#65;",
+            "albumName_L2": "",
+            "artistName": "&#66;&#82;&#65;&#32;&#65;&#68;&#74;&#69;&#73;",
+            "artistName_L2": "",
+            "contentId": "9942266",
+            "contentName": "&#79;&#78;&#89;&#65;&#77;&#69;&#32;&#66;&#65;",
+            "contentName_L2": "",
+            "contentPreviewImageURL": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=OdMnmeE+cJs=",
+            "contentStreamingURL": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=OdMnmeE+cJs=",
+            "contentType": "1",
+            "expiryDate": "2025-08-10 18:39:05",
+            "firstActivationDate": "2025-07-11 18:38:57",
+            "isContentPackage": "0",
+            "isToneInShuffle": "FALSE",
+            "price": "0.5",
+            "serviceId": "1",
+            "serviceName": "AllCaller",
+            "settingsId": "15228",
+            "status": "D"
+        }
+    ]
+}""";
 String _json1 = """{
   "respCode": 0,
   "message": "successful",
@@ -31,7 +192,7 @@ String _json1 = """{
       "contentId": "",
       "defaultToneSelectionType": "ALL",
       "isServiceSuspended": "FALSE",
-      "isShuffleOn": "TRUE",
+      "isShuffleOn": "false",
       "serviceId": "0",
       "serviceName": "DefaultSettings"
     },
