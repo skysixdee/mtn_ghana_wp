@@ -23,7 +23,8 @@ class MyPlayingTuneControllerNew extends GetxController {
     settingsList.value = model.settingsList ?? [];
     if (settingsList.isNotEmpty) {
       setting = settingsList[0];
-      isShuffleEnable.value = setting?.isShuffleOn == 'false' ? false : true;
+      isShuffleEnable.value =
+          setting?.isShuffleOn?.toLowerCase() == 'true' ? true : false;
       settingsList.removeAt(0);
     }
     isLoading.value = false;
