@@ -54,31 +54,36 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
     return Column(
       children: [
         playingTuneHeader(si),
-        GridView.builder(
-          padding: EdgeInsets.all(20),
-          shrinkWrap: true,
-          itemCount: con.settingsList.length,
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              childAspectRatio: 0.75,
-              maxCrossAxisExtent: 220,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20),
-          itemBuilder: (context, index) {
-            final v = con.settingsList[index];
-            return Container(
-              decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
-                ],
-                borderRadius: BorderRadius.circular(8),
-                color: white,
-              ),
-              child: Column(
-                children: [
-                  Expanded(child: toneImage(v)),
-                  toneDetail(v),
-                ],
-              ),
+        Obx(
+          () {
+            return GridView.builder(
+              padding: EdgeInsets.all(20),
+              shrinkWrap: true,
+              itemCount: con.settingsList.length,
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  childAspectRatio: 0.75,
+                  maxCrossAxisExtent: 220,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20),
+              itemBuilder: (context, index) {
+                final v = con.settingsList[index];
+                return Container(
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                          color: lightGrey, blurRadius: 3, spreadRadius: 1)
+                    ],
+                    borderRadius: BorderRadius.circular(8),
+                    color: white,
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(child: toneImage(v)),
+                      toneDetail(v),
+                    ],
+                  ),
+                );
+              },
             );
           },
         ),

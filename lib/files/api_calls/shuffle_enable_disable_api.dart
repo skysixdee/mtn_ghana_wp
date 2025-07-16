@@ -13,12 +13,12 @@ Future<GenericModel> shuffleEnbleDisableApi(bool enable) async {
     'featureId': 1,
     "msisdn": StoreManager.msisdn,
     'channelId': channelId,
-    "mode": enable ? "0" : "1",
+    "mode": enable ? "1" : "0",
     "languageCode": StoreManager.languageCode,
   };
 
   Map<String, dynamic> jsonMap =
-      await NetworkManager().post(shuffleEnableDisableUrl, formData: formData);
+      await NetworkManager().post(shuffleEnableDisableUrl, jsonData: formData);
   GenericModel model = GenericModel.fromJson(jsonMap);
   return model;
 }

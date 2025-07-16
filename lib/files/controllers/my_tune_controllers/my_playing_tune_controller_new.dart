@@ -12,7 +12,7 @@ import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class MyPlayingTuneControllerNew extends GetxController {
   RxBool isLoading = false.obs;
-  List<SettingsList> settingsList = [];
+  RxList<SettingsList> settingsList = <SettingsList>[].obs;
   SettingsList? setting;
   RxBool switchingShuffle = false.obs;
   RxBool isShuffleEnable = false.obs;
@@ -20,7 +20,7 @@ class MyPlayingTuneControllerNew extends GetxController {
     print("making list setting  api call ");
     isLoading.value = true;
     ListSettingModel model = await listSettingApi("packName");
-    settingsList = model.settingsList ?? [];
+    settingsList.value = model.settingsList ?? [];
     if (settingsList.isNotEmpty) {
       setting = settingsList[0];
       isShuffleEnable.value = setting?.isShuffleOn == 'false' ? false : true;
