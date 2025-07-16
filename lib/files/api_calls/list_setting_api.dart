@@ -7,12 +7,12 @@ import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
-Future<ListSettingModel> listSettingApi(String packName) async {
+Future<ListSettingModel> listSettingApi() async {
   Map<String, dynamic> jsonMap = {
     "transactionId": getTransactionId(),
     "featureId": 1,
     "msisdn": StoreManager.msisdn,
-    "offerCode": packName,
+    //"offerCode": packName,
     "languageCode": StoreManager.languageSort,
     "channelId": channelId
   };

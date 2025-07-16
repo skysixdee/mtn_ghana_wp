@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mtn_ghana_wp/files/api_calls/delete_from_shuffle_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_tone_price_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/list_setting_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/shuffle_enable_disable_api.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
@@ -20,7 +21,8 @@ class MyPlayingTuneControllerNew extends GetxController {
     print("making list setting  api call ");
     List<SettingsList> list = [];
     isLoading.value = true;
-    ListSettingModel model = await listSettingApi("packName");
+
+    ListSettingModel model = await listSettingApi();
     list = model.settingsList ?? [];
     if (list.isNotEmpty) {
       setting = list[0];
