@@ -13,7 +13,7 @@ Future<GenericModel> shuffleEnbleDisableApi(bool enable) async {
     'featureId': 1,
     "msisdn": StoreManager.msisdn,
     'channelId': channelId,
-    "mode": enable ? "1" : "0",
+    "mode": enable ? "0" : "1",
     "languageCode": StoreManager.languageCode,
   };
 
