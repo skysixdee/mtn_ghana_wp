@@ -2,6 +2,111 @@
 //
 //     final myMusicBoxModel = myMusicBoxModelFromJson(jsonString);
 
+// To parse this JSON data, do
+//
+//     final myMusicBoxModel = myMusicBoxModelFromJson(jsonString);
+
+import 'dart:convert';
+
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+
+MyMusicBoxModel myMusicBoxModelFromJson(String str) =>
+    MyMusicBoxModel.fromJson(json.decode(str));
+
+String myMusicBoxModelToJson(MyMusicBoxModel data) =>
+    json.encode(data.toJson());
+
+class MyMusicBoxModel {
+  int? respCode;
+  String? message;
+  List<TuneInfo>? tonelist;
+
+  MyMusicBoxModel({
+    this.respCode,
+    this.message,
+    this.tonelist,
+  });
+
+  factory MyMusicBoxModel.fromJson(Map<String, dynamic> json) =>
+      MyMusicBoxModel(
+        respCode: json["respCode"],
+        message: json["message"],
+        tonelist: json["tonelist"] == null
+            ? []
+            : List<TuneInfo>.from(
+                json["tonelist"]!.map((x) => TuneInfo.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "respCode": respCode,
+        "message": message,
+        "tonelist": tonelist == null
+            ? []
+            : List<dynamic>.from(tonelist!.map((x) => x.toJson())),
+      };
+}
+/*
+class Tonelist {
+  String? contentType;
+  String? activationChannel;
+  String? chargedDate;
+  String? contentId;
+  String? contentPreviewImageUrl;
+  String? contentStreamingUrl;
+  String? expiryDate;
+  String? firstActivationDate;
+  String? isContentPackage;
+  String? languageCode;
+  String? price;
+  String? status;
+
+  Tonelist({
+    this.contentType,
+    this.activationChannel,
+    this.chargedDate,
+    this.contentId,
+    this.contentPreviewImageUrl,
+    this.contentStreamingUrl,
+    this.expiryDate,
+    this.firstActivationDate,
+    this.isContentPackage,
+    this.languageCode,
+    this.price,
+    this.status,
+  });
+
+  factory Tonelist.fromJson(Map<String, dynamic> json) => Tonelist(
+        contentType: json["ContentType"],
+        activationChannel: json["activationChannel"],
+        chargedDate: json["chargedDate"],
+        contentId: json["contentId"],
+        contentPreviewImageUrl: json["contentPreviewImageURL"],
+        contentStreamingUrl: json["contentStreamingURL"],
+        expiryDate: json["expiryDate"],
+        firstActivationDate: json["firstActivationDate"],
+        isContentPackage: json["isContentPackage"],
+        languageCode: json["languageCode"],
+        price: json["price"],
+        status: json["status"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ContentType": contentType,
+        "activationChannel": activationChannel,
+        "chargedDate": chargedDate,
+        "contentId": contentId,
+        "contentPreviewImageURL": contentPreviewImageUrl,
+        "contentStreamingURL": contentStreamingUrl,
+        "expiryDate": expiryDate,
+        "firstActivationDate": firstActivationDate,
+        "isContentPackage": isContentPackage,
+        "languageCode": languageCode,
+        "price": price,
+        "status": status,
+      };
+}
+*/
+/*
 import 'dart:convert';
 
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
@@ -92,6 +197,7 @@ class ListToneApk {
         "groupId": groupId,
       };
 }
+*/
 /*
 class ToneDetail {
     String? toneId;

@@ -10,8 +10,8 @@ String categoryMwUrl = "";
 String searchUrl =
     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/specific-search-tones?";
 
-String myWishistUrl =
-    '$baseUrl/security/Middleware/api/adapter/v1/crbt/view-wishlist';
+// String myWishistUrl =
+//     '$baseUrl/security/Middleware/api/adapter/v1/crbt/view-wishlist';
 
 String reGenerateTokenUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/regen-token';

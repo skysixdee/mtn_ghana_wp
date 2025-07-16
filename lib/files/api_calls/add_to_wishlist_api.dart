@@ -25,7 +25,7 @@ Future<void> addToWishlistApi(TuneInfo info) async {
     "type": 1,
   };
   Map<String, dynamic> result =
-      await NetworkManager().post(addToWishlistUrl, formData: map);
+      await NetworkManager().post(addToWishlistUrl, jsonData: map);
   GenericModel model = genericModelFromJson(json.encode(result));
   if (model.respCode == 0) {
     String mess = "${info.toneName} is " + "${model.message}";

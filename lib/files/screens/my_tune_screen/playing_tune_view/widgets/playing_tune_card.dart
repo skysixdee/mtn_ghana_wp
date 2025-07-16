@@ -94,7 +94,7 @@ class PlayingTuneCard extends StatelessWidget {
       children: [
         Expanded(child: nameAndArtist(si)),
         const SizedBox(width: 8),
-        con.musicList.any((v) => v.toneDetails?.first.toneId == info.toneId)
+        con.musicList.any((v) => v.toneId == info.toneId)
             //info.toneId == 'MUSICCHANNEL'
             ? previewButton(context)
             : playButton(),

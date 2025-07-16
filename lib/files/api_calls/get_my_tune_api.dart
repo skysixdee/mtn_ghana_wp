@@ -13,7 +13,8 @@ Future<MyTunesModel> getMyTuneApi({int pageNo = 0}) async {
     "msisdn": StoreManager.msisdn,
     "languageCode": StoreManager.languageSort,
     "channelId": channelId,
-    "serviceId": ""
+    "serviceId": "MUSICBOX",
+    "isContentPackage": "1"
   };
 
   Map<String, dynamic> map =

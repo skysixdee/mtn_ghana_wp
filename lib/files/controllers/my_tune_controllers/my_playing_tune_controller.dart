@@ -22,7 +22,7 @@ class MyPlayingTuneController extends GetxController {
   RxString message = ''.obs;
   RxList<ToneDetail> tuneList = <ToneDetail>[].obs;
   RxBool isShuffleOn = false.obs;
-  List<ListToneApk> musicList = [];
+  List<TuneInfo> musicList = [];
   RxBool switchingShuffle = false.obs;
 
   getPlayingTune() async {
@@ -45,11 +45,11 @@ class MyPlayingTuneController extends GetxController {
     isLoading.value = false;
   }
 
-  Future<List<ListToneApk>> _getMusicBox() async {
-    List<ListToneApk> tuneList1 = [];
+  Future<List<TuneInfo>> _getMusicBox() async {
+    List<TuneInfo> tuneList1 = [];
     MyMusicBoxModel model = await getMyMusicBoxApi();
-    if (model.statusCode == 'SC0000') {
-      tuneList1 = model.responseMap?.listToneApk ?? [];
+    if (model.respCode == 0) {
+      tuneList1 = model.tonelist ?? [];
     }
     return tuneList1;
   }

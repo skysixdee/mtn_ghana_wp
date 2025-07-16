@@ -46,7 +46,7 @@ class MyMusicBoxView extends StatelessWidget {
                   //   rightButton: deleteButton(
                   //       con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
                   // ),
-                  moreButton(con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
+                  moreButton(con.tuneList[p0]),
                 ],
               );
             },
