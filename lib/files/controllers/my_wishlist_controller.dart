@@ -20,8 +20,8 @@ class MyWishlistController extends GetxController {
       WishlistModel model = await getWishlistScApi();
       print("Vivek");
 
-      tuneList.value = model.wishlist ?? [];
-      print("Get Wishlist============= ${tuneList.value}");
+      tuneList.value = model.history ?? [];
+      print("Get Wishlist============= ${tuneList}");
     } catch (e, stackTrace) {
       print("Error in getWishlist: $e");
       print("StackTrace: $stackTrace");

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mtn_ghana_wp/files/model/music_box_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
@@ -34,18 +35,20 @@ class MyMusicBoxView extends StatelessWidget {
               return Stack(
                 alignment: Alignment.topRight,
                 children: [
-                  CustomText(
-                    title: 'My Music box card',
-                  ),
-                  // MusicBoxCard(
-                  //   index: p0,
-                  //   isMyMusicBox: true,
-                  //   info: con.tuneList[p0].toneDetails?.first ?? TuneInfo(),
-                  //   leftButton: previewButton(context,
-                  //       con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
-                  //   rightButton: deleteButton(
-                  //       con.tuneList[p0].toneDetails?.first ?? TuneInfo()),
+                  // CustomText(
+                  //   title: 'My Music box card',
                   // ),
+                  MusicBoxCard(
+                    index: p0,
+                    isMyMusicBox: true,
+                    info: MusicBoxList(
+                        musicBoxId: con.tuneList[p0].toneId,
+                        musicBoxName: con.tuneList[p0].toneName,
+                        musicBoxIdpreviewImageUrl:
+                            con.tuneList[p0].toneIdpreviewImageUrl),
+                    leftButton: previewButton(context, con.tuneList[p0]),
+                    rightButton: deleteButton(con.tuneList[p0]),
+                  ),
                   moreButton(con.tuneList[p0]),
                 ],
               );

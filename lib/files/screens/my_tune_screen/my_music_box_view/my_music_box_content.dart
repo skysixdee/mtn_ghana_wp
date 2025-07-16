@@ -35,16 +35,13 @@ class MyMusicBoxContent extends StatelessWidget {
                 NavigationHeaderModel("toneName", ""),
               ]),
           builder: (p0) {
-            return CustomText(
-              title: "My Music box card here ",
+            return TuneCard(
+              customScreenType: CustomScreenType.musicContent,
+              tuneList: con.musicBoxContentList,
+              moreButton: const SizedBox(),
+              info: con.musicBoxContentList[p0],
+              bottomButtonChild: playButton(con.musicBoxContentList[p0]),
             );
-            // TuneCard(
-            //   customScreenType: CustomScreenType.musicContent,
-            //   tuneList: con.musicBoxList,
-            //   moreButton: const SizedBox(),
-            //   info: con.musicBoxContentList[p0],
-            //   bottomButtonChild: playButton(con.musicBoxContentList[p0]),
-            // );
           },
         );
       },

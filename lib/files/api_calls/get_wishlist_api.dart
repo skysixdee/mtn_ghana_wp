@@ -28,3 +28,38 @@ Future<WishlistModel> getWishlistScApi() async {
       await NetworkManager().post(myWishistScUrl, jsonData: jsonData);
   return wishlistModelFromJson(json.encode(map));
 }
+
+String _json = """{
+    "respCode": 0,
+    "message": "successful",
+    "history": [
+        {
+            "contentId": 842283321,
+            "contentPath": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=+lZjMdLUEQY=",
+            "previewImage": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=+lZjMdLUEQY=",
+            "contentName_L1": "ENNWAI",
+            "album_L1": "ENNWAI",
+            "artist_L1": "ENNWAI",
+            "contentName_L2": "ENNWAI",
+            "album_L2": "ENNWAI",
+            "artist_L2": "ENNWAI",
+            "price": "0",
+            "languageCode": "en",
+            "type": 1
+        },
+        {
+            "contentId": 842283321,
+            "contentPath": "http://10.135.64.104:8179/stream-media/get-tone-path?fileId=QmUKdpQ6edw=",
+            "previewImage": "http://10.135.64.104:8179/stream-media/get-preview-image?fileId=QmUKdpQ6edw=",
+            "contentName_L1": "Adansedie",
+            "album_L1": "OHENEBA GLORIA KESSE",
+            "artist_L1": "OHENEBA GLORIA KESSE",
+            "contentName_L2": "Adansedie",
+            "album_L2": "OHENEBA GLORIA KESSE",
+            "artist_L2": "OHENEBA GLORIA KESSE",
+            "price": "0.5",
+            "languageCode": "en",
+            "type": 1
+        }
+    ]
+}""";
