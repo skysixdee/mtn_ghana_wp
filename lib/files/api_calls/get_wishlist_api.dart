@@ -27,6 +27,7 @@ Future<WishlistModel> getWishlistScApi() async {
   Map<String, dynamic> map =
       await NetworkManager().post(myWishistScUrl, jsonData: jsonData);
   return wishlistModelFromJson(json.encode(map));
+  //return wishlistModelFromJson(_json);
 }
 
 String _json = """{

@@ -56,8 +56,12 @@ class MyTuneController extends GetxController {
 
     message.value = '';
     MyTunesModel model = await getMyTuneApi();
+
     if (model.respCode == 0) {
-      tuneApkList.value = model.tonelist ?? [];
+      final list = model.tonelist ?? [];
+
+      tuneApkList.value =
+          list.where((itm) => itm.isContentPackage == '0').toList();
       message.value = tuneApkList.isEmpty ? listIsEmptyStr : '';
     } else {
       message.value = model.message ?? '';
