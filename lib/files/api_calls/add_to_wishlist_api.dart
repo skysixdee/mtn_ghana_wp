@@ -9,7 +9,11 @@ import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<void> addToWishlistApi(TuneInfo info) async {
-  int price = int.parse(info.price ?? "0");
+  int price = 0;
+  try {
+    price = int.parse(info.price ?? "0");
+  } catch (e) {}
+
   Map<String, dynamic> map = {
     "msisdn": StoreManager.msisdn,
     "contentId": info.toneId,
