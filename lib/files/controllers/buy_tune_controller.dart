@@ -3,6 +3,7 @@ import 'package:mtn_ghana_wp/files/api_calls/authorization/subscriber_validation
 import 'package:mtn_ghana_wp/files/api_calls/buy_music_channel_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
+import 'package:mtn_ghana_wp/files/en_de_cryptor/otp_en_de_cryptor.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/model/buy_tone_model.dart';
 import 'package:mtn_ghana_wp/files/model/generate_otp_sc_model.dart';
@@ -125,6 +126,22 @@ class BuyTuneController extends GetxController {
 
   _subscriberValidation(String msisdn) async {
     isLoading.value = true;
+
+    GenerateOtpScModel genModel = await generateOtpScApi(msisdn);
+    if (genModel.respCode == 1000) {
+      displayOptScreen.value = true;
+      String? generatedOtp =
+          genModel.userData; //UserData contains the encrypted OTP
+      String? decryptedOtp =
+          AesEnDeCryptor().decryptWithAES(generatedOtp ?? '');
+      print("Decrypted Otp==============$decryptedOtp");
+      displayOptScreen.value = true;
+    } else {
+      message.value = genModel.message ?? someThingWentWrongStr;
+      isLoading.value = false;
+    }
+
+/*
     SubscriberValidationModel subsModel = await susbcriberValidationApi(msisdn);
     if (subsModel.statusCode == 'SC0000') {
       _generateOtp(msisdn);
@@ -132,6 +149,7 @@ class BuyTuneController extends GetxController {
       message.value = subsModel.message ?? someThingWentWrongStr;
       isLoading.value = false;
     }
+    */
   }
 
   _generateOtp(String msisnd) async {
