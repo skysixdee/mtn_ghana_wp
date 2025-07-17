@@ -35,7 +35,7 @@ Future<BuyToneModel> setToneApi(String toneId, String toneName,
 
 Future<String> _getPackName(String toneId) async {
   String packName = '';
-  GetTonePriceModel getTonePriceModel = await getTonePriceScApi(toneId);
+  GetTonePriceModel getTonePriceModel = await getTonePriceScApi();
   print('SKY Price is $getTonePriceModel');
   if (getTonePriceModel.respCode == 0) {
     packName = getTonePriceModel.contentDetails?.offerName ?? '';

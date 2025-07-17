@@ -57,6 +57,7 @@ String bannerDetailScUrl = '';
 //"http://10.0.14.4:5892/selfcare/get-banner-details?";
 String tuneSettingDedicatedUrl = '';
 String listSettingUrl = '';
+String deletePackUrl = '';
 String deleteFromWishlistUrl = "";
 String sendGiftScUrl = '';
 String buyMusicChannelUrl = "";
@@ -87,21 +88,14 @@ String generateOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/otp';
 String confirmOtpScUrl = '$authBaseUrl/auth-service/selfcare/auth/token';
 
 String deleteFromShuffleScUrl = '';
-//"http://10.135.64.101:51004/selfcare/setting-service/delete-tone-from-shufflelist";
+
 String settingScUrl = "";
 
-//"http://10.135.64.101:51009/selfcare/subscriber-management/gift-tone";
 String getBannerListScUrl = "";
 String categorySearchScUrl = "";
 String getCategoryListUrl = '';
 String getMusicBoxListUrl = "";
 String getMusicBoxToneListUrl = '';
-// String deleteDedicatedTuneScUrl =
-//     'http://10.135.64.101:51012/selfcare/subscriber-management/delete-dedication';
-// String artistTuneSearchScUrl =
-//     "http://10.135.64.101:53008/selfcare/artist-search";
-// String deleteMyTuneScUrl =
-//     "http://10.135.64.101:51012/selfcare/subscriber-management/delete-tone";
 
 String getTonePriceScUrl = '';
 

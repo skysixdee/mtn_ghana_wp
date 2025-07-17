@@ -98,6 +98,7 @@ Future<void> readProperties() async {
   setToneUrl = data['Buy_TONE_URL'];
   settingScUrl = data["SETTING_URL"];
   channelId = data['CHANNEL_ID'];
+  deletePackUrl = data['DELETE_PACK_URL'];
   bannerDetailScUrl = data['BANNER_DETAIL_URL'];
   artistsSearchUrl = data['ARTISTS_SEARCH_URL'];
   advanceSearchUrl = data['ADVANCE_SEARCH_URL'];

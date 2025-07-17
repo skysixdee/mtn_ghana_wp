@@ -1,12 +1,16 @@
 import 'package:flutter/widgets.dart';
+import 'package:mtn_ghana_wp/files/api_calls/activate_base_pack_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/delete_mytune_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/delete_pack_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/edit_profile_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_profile_detail_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_tone_price_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/set_tone_api.dart';
 import 'package:mtn_ghana_wp/files/model/buy_tone_model.dart';
 import 'package:mtn_ghana_wp/files/model/edit_profile_model.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
+import 'package:mtn_ghana_wp/files/model/get_tone_price_model.dart';
 import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/model/profile_detail_model.dart';
 import 'package:mtn_ghana_wp/files/popup_views/subscription_plans_view.dart';
@@ -23,8 +27,9 @@ class ProfileController extends GetxController {
   RxBool isUpdating = false.obs;
   RxList<String> selectedCetegories = <String>[].obs;
   RxBool enableEdit = false.obs;
-  GetProfileDetails? getProfileDetails;
-  Offer? packStatusDetails;
+  // GetProfileDetails? getProfileDetails;
+  // Offer? packStatusDetails;
+  String packName = '';
   @override
   void onInit() {
     super.onInit();
@@ -36,18 +41,27 @@ class ProfileController extends GetxController {
       return;
     }
     isLoading.value = true;
-    PackDetailModel model = await getPackDetailApi();
-    packStatusDetails = model.offers?.first;
-    ProfileDetailModel info = await getProfileDetailApi();
-    customPrint("inf111o ===== $info");
-    String va = info.responseMap?.getProfileDetails?.categories ?? '';
-    getProfileDetails = info.responseMap?.getProfileDetails;
-    customPrint("info ===== $info");
-    selectedCetegories.clear();
-    for (var element in va.split(',')) {
-      selectedCetegories.add(element);
-      customPrint("element ===== $element");
+
+    GetTonePriceModel getTonePriceModel = await getTonePriceScApi();
+    print('SKY Price is $getTonePriceModel');
+    if (getTonePriceModel.respCode == 0) {
+      packName = getTonePriceModel.contentDetails?.offerName ?? '';
+    } else {
+      packName = '';
     }
+
+    // PackDetailModel model = await getPackDetailApi();
+    // packStatusDetails = model.offers?.first;
+    // ProfileDetailModel info = await getProfileDetailApi();
+    // customPrint("inf111o ===== $info");
+    // String va = info.responseMap?.getProfileDetails?.categories ?? '';
+    // getProfileDetails = info.responseMap?.getProfileDetails;
+    // customPrint("info ===== $info");
+    // selectedCetegories.clear();
+    // for (var element in va.split(',')) {
+    //   selectedCetegories.add(element);
+    //   customPrint("element ===== $element");
+    // }
     isLoading.value = false;
   }
 
@@ -67,6 +81,7 @@ class ProfileController extends GetxController {
     customPrint("items are = ${selectedCetegories.length}");
   }
 
+/*
   onConfirmTapButtonAction() async {
     if (selectedCetegories.isEmpty) {
       snackBar(selectAtleastOneCategoryStr);
@@ -104,8 +119,30 @@ class ProfileController extends GetxController {
       selectedCetegories.add(element);
     }
   }
-
+*/
   subscribeButtonAction() async {
+    openAlertPopup(
+      message: subscribeMessageStr,
+      primaryBtnTitle: confirmStr,
+      secondryBtnTitle: cancelStr,
+      onPrimary: () async {
+        isSubscribing.value = true;
+        GenericModel model = await activateBasePackApi();
+        if (model.respCode == 0) {
+          openAlertPopup(
+            message: subscribeSuccessfulMessageStr,
+            onPrimary: () {
+              getProfileDetail();
+            },
+          );
+        } else {
+          snackBar(model.message);
+        }
+
+        isSubscribing.value = false;
+      },
+    );
+    return;
     Get.dialog(Center(
       child: SubscriptionPlansView(
         onConfirm: (item) async {
@@ -114,7 +151,7 @@ class ProfileController extends GetxController {
           //StoreManager.other?.defaultTone?.attribute ?? '';
 
           BuyToneModel model =
-              await setToneApi(defaultToneId, '', packName: item.title);
+              await activateBasePackApi(); //setToneApi(defaultToneId, '', packName: item.title);
           if (model.respCode == 0) {
             getProfileDetail();
           } else {
@@ -137,8 +174,7 @@ class ProfileController extends GetxController {
       secondryBtnTitle: cancelStr,
       onPrimary: () async {
         isSubscribing.value = true;
-        GenericModel model =
-            await deleteMyTuneScApi("", packStatusDetails?.offerName ?? '');
+        GenericModel model = await deletePackApi(packName);
         if (model.respCode == 0) {
           openAlertPopup(
             message: unSubscribeSuccessfulMessageStr,

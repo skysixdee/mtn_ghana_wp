@@ -119,7 +119,7 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget subscriptionPlanWidget() {
-    return con.packStatusDetails?.offerName == null
+    return con.packName.isEmpty
         ? const SizedBox(height: 12)
         : Padding(
             padding: const EdgeInsets.only(bottom: 12, top: 6),
@@ -129,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 CustomText(title: "$subscriptionPlanStr : "),
                 CustomText(
-                  title: con.packStatusDetails?.offerName ?? 'rwerwe',
+                  title: con.packName ?? '',
                   fontName: FontName.bold,
                 ),
               ],
@@ -148,10 +148,8 @@ class ProfileScreen extends StatelessWidget {
         ),
         //const SizedBox(height: 4),
         CustomText(
-          title: con.packStatusDetails?.offerName == null
-              ? inActiveStr
-              : activeStr,
-          color: con.packStatusDetails?.offerName == null
+          title: con.packName.isEmpty ? inActiveStr : activeStr,
+          color: con.packName.isEmpty
               ? red
               : const Color.fromARGB(255, 14, 184, 20),
           fontName: FontName.bold,
@@ -168,13 +166,11 @@ class ProfileScreen extends StatelessWidget {
             : GenericButton(
                 width: 250,
                 padding: const EdgeInsets.symmetric(horizontal: 40),
-                title: con.packStatusDetails?.offerName == null
-                    ? subscribeStr
-                    : unSubscribeStr,
-                bgColor: con.packStatusDetails?.offerName == null ? green : red,
+                title: con.packName.isEmpty ? subscribeStr : unSubscribeStr,
+                bgColor: con.packName.isEmpty ? green : red,
                 textColor: white,
                 onTap: () {
-                  if (con.packStatusDetails?.offerName == null) {
+                  if (con.packName.isEmpty) {
                     con.subscribeButtonAction();
                   } else {
                     con.unSubscribeButtonAction();
@@ -252,7 +248,7 @@ class ProfileScreen extends StatelessWidget {
       title: cancelStr,
       bgColor: lightGrey,
       onTap: () {
-        con.onCancelButtonAction();
+        //con.onCancelButtonAction();
       },
     );
   }
@@ -265,7 +261,7 @@ class ProfileScreen extends StatelessWidget {
           title: con.enableEdit.value ? confirmStr : editStr,
           bgColor: yellow,
           onTap: () {
-            con.onConfirmTapButtonAction();
+            //con.onConfirmTapButtonAction();
           },
         );
       },

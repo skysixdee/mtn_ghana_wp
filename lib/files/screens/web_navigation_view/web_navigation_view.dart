@@ -41,7 +41,7 @@ class WebNavigationView extends StatelessWidget {
   final AppController appController = Get.find();
   TextEditingController textEditingController = TextEditingController();
   List<PopoverMenuModel> myAccountMenuList = [
-    //PopoverMenuModel(myProfileStr),
+    PopoverMenuModel(myProfileStr),
     PopoverMenuModel(myTunezStr),
     PopoverMenuModel(myWishlistStr),
     //PopoverMenuModel(blackListStr),
