@@ -53,7 +53,16 @@ class MyMusicBoxView extends StatelessWidget {
                 ],
               );
             },
-            onTap: (p1) => {});
+            onTap: (p1) => {
+                  print("On cell tap  music box"),
+                  context.goNamed(myMusicBoxContentRoute, queryParameters: {
+                    'type': con.tuneList[p1].type,
+                    'code': con.tuneList[p1].toneId,
+                    'toneName': con.tuneList[p1].toneName,
+                    'toneId': con.tuneList[p1].toneId,
+                    'imgUrl': con.tuneList[p1].toneIdpreviewImageUrl,
+                  })
+                });
         // GenericScrollView(
         //   isLoading: con.isLoading.value,
         //   itemCount: con.tuneList.length,

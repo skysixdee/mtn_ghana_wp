@@ -12,10 +12,12 @@ Future<ListSettingModel> listSettingApi() async {
     "transactionId": getTransactionId(),
     "featureId": 1,
     "msisdn": StoreManager.msisdn,
-    //"offerCode": packName,
+    "serviceId": "1",
     "languageCode": StoreManager.languageSort,
     "channelId": channelId
   };
+
+  //{"serviceId":"1"}
 
   Map<String, dynamic> jsonResp =
       await NetworkManager().post(listSettingUrl, jsonData: jsonMap);
