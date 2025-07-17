@@ -117,10 +117,9 @@ class SocialSharingPopup extends StatelessWidget {
         //     subject: 'Look what I made!');
         Navigator.of(context).pop();
       },
-      child: Container(
+      child: SizedBox(
         height: 50,
         width: 50,
-        color: black,
         child: Image.asset(socialIconList[index]),
       ),
     );
