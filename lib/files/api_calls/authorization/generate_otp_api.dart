@@ -10,7 +10,7 @@ Future<GenerateOtpScModel> generateOtpScApi(String msisdn) async {
   Map<String, dynamic> jsonData = {
     "msisdn": msisdn, //"98987654327",
     'transactionId': getTransactionId(),
-    "type": "web", //"sms"to send otp to user // "web" to get otp in response
+    "type": "sms", //"sms"to send otp to user // "web" to get otp in response
   };
   Map<String, dynamic> map = await NetworkManager().post(generateOtpScUrl,
       jsonData:
