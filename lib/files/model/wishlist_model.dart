@@ -6,6 +6,109 @@
 //
 //     final wishlistModel = wishlistModelFromJson(jsonString);
 
+// To parse this JSON data, do
+//
+//     final wishlistModel = wishlistModelFromJson(jsonString);
+
+import 'dart:convert';
+
+import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+
+WishlistModel wishlistModelFromJson(String str) =>
+    WishlistModel.fromJson(json.decode(str));
+
+String wishlistModelToJson(WishlistModel data) => json.encode(data.toJson());
+
+class WishlistModel {
+  int? respCode;
+  String? message;
+  List<TuneInfo>? wishlist;
+
+  WishlistModel({
+    this.respCode,
+    this.message,
+    this.wishlist,
+  });
+
+  factory WishlistModel.fromJson(Map<String, dynamic> json) => WishlistModel(
+        respCode: json["respCode"],
+        message: json["message"],
+        wishlist: json["wishlist"] == null
+            ? []
+            : List<TuneInfo>.from(
+                json["wishlist"]!.map((x) => TuneInfo.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "respCode": respCode,
+        "message": message,
+        "wishlist": wishlist == null
+            ? []
+            : List<dynamic>.from(wishlist!.map((x) => x.toJson())),
+      };
+}
+/*
+class Wishlist {
+    int? contentId;
+    String? contentPath;
+    String? previewImage;
+    String? contentNameL1;
+    String? albumL1;
+    String? artistL1;
+    String? contentNameL2;
+    String? albumL2;
+    String? artistL2;
+    String? price;
+    String? languageCode;
+    int? type;
+
+    Wishlist({
+        this.contentId,
+        this.contentPath,
+        this.previewImage,
+        this.contentNameL1,
+        this.albumL1,
+        this.artistL1,
+        this.contentNameL2,
+        this.albumL2,
+        this.artistL2,
+        this.price,
+        this.languageCode,
+        this.type,
+    });
+
+    factory Wishlist.fromJson(Map<String, dynamic> json) => Wishlist(
+        contentId: json["contentId"],
+        contentPath: json["contentPath"],
+        previewImage: json["previewImage"],
+        contentNameL1: json["contentName_L1"],
+        albumL1: json["album_L1"],
+        artistL1: json["artist_L1"],
+        contentNameL2: json["contentName_L2"],
+        albumL2: json["album_L2"],
+        artistL2: json["artist_L2"],
+        price: json["price"],
+        languageCode: json["languageCode"],
+        type: json["type"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "contentId": contentId,
+        "contentPath": contentPath,
+        "previewImage": previewImage,
+        "contentName_L1": contentNameL1,
+        "album_L1": albumL1,
+        "artist_L1": artistL1,
+        "contentName_L2": contentNameL2,
+        "album_L2": albumL2,
+        "artist_L2": artistL2,
+        "price": price,
+        "languageCode": languageCode,
+        "type": type,
+    };
+}
+*/
+/*
 import 'dart:convert';
 
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
@@ -29,20 +132,21 @@ class WishlistModel {
   factory WishlistModel.fromJson(Map<String, dynamic> json) => WishlistModel(
         respCode: json["respCode"],
         message: json["message"],
-        history: json["history"] == null
+        history: json["wishlist"] == null
             ? []
             : List<TuneInfo>.from(
-                json["history"]!.map((x) => TuneInfo.fromJson(x))),
+                json["wishlist"]!.map((x) => TuneInfo.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "respCode": respCode,
         "message": message,
-        "history": history == null
+        "wishlist": history == null
             ? []
             : List<dynamic>.from(history!.map((x) => x.toJson())),
       };
 }
+*/
 /*
 class History {
     int? contentId;
