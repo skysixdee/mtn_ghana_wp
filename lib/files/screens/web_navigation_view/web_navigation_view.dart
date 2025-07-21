@@ -13,12 +13,14 @@ import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/get_tone_price_model.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/url_launcher.dart';
 
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/router/router.dart';
@@ -106,6 +108,7 @@ class WebNavigationView extends StatelessWidget {
       height: double.infinity,
       onTap: () {
         customPrint("check about");
+        //customLaunchUrl('https://callertunez.mtn.com.gh/crbt-web-portal/about');
         context.goNamed(aboutRoute);
       },
     );
@@ -172,8 +175,7 @@ class WebNavigationView extends StatelessWidget {
                 if (StoreManager.isLoggedIn) {
                   myAccountMenu(context);
                 } else {
-                  con.resetValue();
-                  Get.dialog(Obx(
+                  genericPopup(Obx(
                     () {
                       return con.displayOptScreen.value
                           ? LoginOtpPopup(

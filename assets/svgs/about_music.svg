@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>97D88788-148A-45D6-8A1D-B8BC95797061</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.000000 0 0 0 0 0.192157 0 0 0 0 0.529412 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="WEB_About-Page_Final_1" transform="translate(-402.000000, -988.000000)">
+            <g id="Group-41" transform="translate(403.000000, 989.000000)">
+                <g filter="url(#filter-1)" id="Group-32">
+                    <g transform="translate(6.500000, 0.352440)">
+                        <circle id="Oval" stroke="#979797" stroke-width="1.7" cx="7.5" cy="22.5" r="7.5"></circle>
+                        <line x1="14.9957575" y1="22.0069741" x2="14.9957575" y2="0.00697414474" id="Line-15" stroke="#979797" stroke-width="1.7" stroke-linecap="round"></line>
+                        <polygon id="Triangle" stroke="#979797" stroke-width="1.7" stroke-linejoin="round" transform="translate(19.525776, 5.000000) rotate(-270.000000) translate(-19.525776, -5.000000) " points="24.5257756 0.5 24.5257756 9.5 14.5257756 9.5"></polygon>
+                    </g>
+                </g>
+                <line x1="18" y1="0.5" x2="-5.68295411e-14" y2="0.5" id="Line" stroke="#003187" stroke-width="1.7" stroke-linecap="round"></line>
+                <line x1="18" y1="5.5" x2="-5.68295411e-14" y2="5.5" id="Line-Copy" stroke="#003187" stroke-width="1.7" stroke-linecap="round"></line>
+                <line x1="18" y1="10.5" x2="-5.68295411e-14" y2="10.5" id="Line-Copy-2" stroke="#003187" stroke-width="1.7" stroke-linecap="round"></line>
+            </g>
+        </g>
+    </g>
+</svg>

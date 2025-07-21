@@ -8,6 +8,7 @@ import 'package:mtn_ghana_wp/files/enums/custpm_screen_type.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/popup_views/gift_popup_view.dart';
 import 'package:mtn_ghana_wp/files/popup_views/social_sharing_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
@@ -148,7 +149,7 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
           color: red,
         ),
         onTap: () {
-          Get.dialog(SocialSharingPopup(info: con.currentTuneDetail.value));
+          genericPopup(SocialSharingPopup(info: con.currentTuneDetail.value));
         },
       ),
       button(
@@ -156,7 +157,7 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
         image: giftPng,
         onTap: () {
           if (StoreManager.isLoggedIn) {
-            Get.dialog(GiftPopupView(info: con.currentTuneDetail.value));
+            genericPopup(GiftPopupView(info: con.currentTuneDetail.value));
           } else {
             openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
           }
@@ -186,7 +187,7 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
           color: red,
         ),
         onTap: () {
-          Get.dialog(SocialSharingPopup(info: con.currentTuneDetail.value));
+          genericPopup(SocialSharingPopup(info: con.currentTuneDetail.value));
         },
       ),
       button(
@@ -194,7 +195,7 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
         image: giftPng,
         onTap: () {
           if (StoreManager.isLoggedIn) {
-            Get.dialog(GiftPopupView(info: con.currentTuneDetail.value));
+            genericPopup(GiftPopupView(info: con.currentTuneDetail.value));
           } else {
             openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
           }

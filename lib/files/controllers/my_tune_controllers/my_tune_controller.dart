@@ -9,6 +9,7 @@ import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/router/router.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
 
@@ -37,16 +38,16 @@ class MyTuneController extends GetxController {
     try {
       if (packName.isEmpty) {
         //genericPopover(context, menuList)
-        if (Get.context != null) {
-          openAlertPopup(
-            message: youAreNotAActiveSubscriberStr,
-            onPrimary: () {
-              Get.context!.goNamed(homeRoute);
-            },
-          );
+        //if (Get.context != null) {
+        openAlertPopup(
+          message: youAreNotAActiveSubscriberStr,
+          onPrimary: () {
+            router.goNamed(homeRoute);
+          },
+        );
 
-          //efwrwe
-        }
+        //efwrwe
+        //}
         isLoading.value = false;
         return;
       }

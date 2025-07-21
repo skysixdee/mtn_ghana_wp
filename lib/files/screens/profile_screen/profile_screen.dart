@@ -148,10 +148,8 @@ class ProfileScreen extends StatelessWidget {
         ),
         //const SizedBox(height: 4),
         CustomText(
-          title: con.packName.isEmpty ? inActiveStr : activeStr,
-          color: con.packName.isEmpty
-              ? red
-              : const Color.fromARGB(255, 14, 184, 20),
+          title: !con.isActive ? inActiveStr : activeStr,
+          color: !con.isActive ? red : const Color.fromARGB(255, 14, 184, 20),
           fontName: FontName.bold,
         )
       ],
@@ -166,11 +164,11 @@ class ProfileScreen extends StatelessWidget {
             : GenericButton(
                 width: 250,
                 padding: const EdgeInsets.symmetric(horizontal: 40),
-                title: con.packName.isEmpty ? subscribeStr : unSubscribeStr,
-                bgColor: con.packName.isEmpty ? green : red,
+                title: !con.isActive ? subscribeStr : unSubscribeStr,
+                bgColor: !con.isActive ? green : red,
                 textColor: white,
                 onTap: () {
-                  if (con.packName.isEmpty) {
+                  if (!con.isActive) {
                     con.subscribeButtonAction();
                   } else {
                     con.unSubscribeButtonAction();

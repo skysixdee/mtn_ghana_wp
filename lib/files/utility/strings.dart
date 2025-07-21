@@ -192,3 +192,8 @@ String unSubscribeSuccessfulMessageStr =
     "Sorry to see you go. Your request is being processed. You will be notified shortly via sms.";
 const sessionExpiredStr =
     'Session expired.\n You will be logged out and redirected to Home page.';
+String advancedSettingStr = "Advanced Setting";
+String startDiscoveringStr = "Start Discovering";
+String aboutTitleStr = 'Amazing Waiting Time';
+String aboutSunTitleStr =
+    "Welcome your callers in a unique way before you even say Hello! Let them listen to your favorite tunes as they wait for you to pick up. Call waiting time made amazing!";

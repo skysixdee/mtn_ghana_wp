@@ -3,6 +3,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/popup_views/buy_popup_view.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -27,12 +28,11 @@ Widget buyButton(TuneInfo info,
           bgColor: yellow,
           onTap: () {
             bCont.resetValue();
-            Get.dialog(Obx(
+            genericPopup(Obx(
               () {
                 return bCont.displayOptScreen.value
                     ? LoginOtpPopup(
-                      securityToken: bCont.securityToken,
-                      
+                        securityToken: bCont.securityToken,
                         isNewUser: bCont.isNewUser,
                         msisdn: bCont.msisdn,
                         info: info,

@@ -7,6 +7,7 @@ import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/model/tune_setting_model.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:get/get.dart';
 import 'package:mtn_ghana_wp/files/enums/time_type.dart';
@@ -174,7 +175,6 @@ class MyTuneSettingController extends GetxController {
   popupAlert(String message) {
     print("pop up alert $message");
     openAlertPopup(message: message);
-    //Get.dialog(genericPopover(context, menuList))
   }
 
   bool isValidTimeDifference() {
@@ -197,29 +197,25 @@ class MyTuneSettingController extends GetxController {
   }
 
   fromPicker() {
-    Get.dialog(
-        barrierDismissible: false,
-        TimeDatePicker(
-          dateTime: startDate,
-          onConfirm: (p0) {
-            startDate = p0;
-            startTimeStr.value = _timeAndDateInString(p0);
-          },
-          onlyTime: timeType.value == TimeType.time,
-        ));
+    genericPopup(TimeDatePicker(
+      dateTime: startDate,
+      onConfirm: (p0) {
+        startDate = p0;
+        startTimeStr.value = _timeAndDateInString(p0);
+      },
+      onlyTime: timeType.value == TimeType.time,
+    ));
   }
 
   toPicker() {
-    Get.dialog(
-        barrierDismissible: false,
-        TimeDatePicker(
-          dateTime: endDate,
-          onConfirm: (p0) {
-            endDate = p0;
-            endTimeStr.value = _timeAndDateInString(p0);
-          },
-          onlyTime: timeType.value == TimeType.time,
-        ));
+    genericPopup(TimeDatePicker(
+      dateTime: endDate,
+      onConfirm: (p0) {
+        endDate = p0;
+        endTimeStr.value = _timeAndDateInString(p0);
+      },
+      onlyTime: timeType.value == TimeType.time,
+    ));
   }
 
   String _timeAndDateInString(DateTime t) {

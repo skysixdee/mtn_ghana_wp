@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_contr
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/model/drawer_model.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
@@ -53,7 +54,7 @@ class MobileDrawerScreen extends StatelessWidget {
           //print("loginnnnnnnnnnnnnnn");
           LoginController con = Get.find();
           con.resetValue();
-          Get.dialog(Obx(
+          genericPopup(Obx(
             () {
               return con.displayOptScreen.value
                   ? LoginOtpPopup(

@@ -1,3 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
 import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
 import 'package:mtn_ghana_wp/files/controllers/artists_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/banner_detail_controller.dart';
@@ -10,9 +16,7 @@ import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
-import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/about_screen/about_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/banner_detail_screen/banner_detail_screen.dart';
@@ -22,7 +26,6 @@ import 'package:mtn_ghana_wp/files/screens/category_detail_screen/category_detai
 import 'package:mtn_ghana_wp/files/screens/faq_screen/faq_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/home_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mobile_drawer_screen/mobile_drawer_screen.dart';
-import 'package:mtn_ghana_wp/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
 import 'package:mtn_ghana_wp/files/screens/music_box/music_box_content_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/music_box/music_box_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/my_music_box_view/my_music_box_content.dart';
@@ -36,17 +39,13 @@ import 'package:mtn_ghana_wp/files/screens/search_screen/artists_tune_screen.dar
 import 'package:mtn_ghana_wp/files/screens/search_screen/search_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/see_more_screen/see_more_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/terms_and_condition_screen/terms_and_conditions_screen.dart';
+import 'package:mtn_ghana_wp/files/screens/about_screen/about_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/web_navigation_view/web_navigation_view.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
-import 'package:mtn_ghana_wp/main.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _sectionNavigatorKey = GlobalKey<NavigatorState>();
+final scaffoldKey = GlobalKey<ScaffoldState>();
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
@@ -54,456 +53,139 @@ final router = GoRouter(
   routes: <RouteBase>[
     StatefulShellRoute.indexedStack(
       builder: navBuilder,
-      branches: [
-        _homeShell(),
-        _searchShell(),
-        _bannerDetailShell(),
-        _categoryDetailShell(),
-        _seeMoreShell(),
-        _myWishlistShell(),
-        _profileShell(),
-        _myTuneShell(),
-        _nameTuneShell(),
-        _musicBoxShell(),
-        _musicBoxContentShell(),
-        _myMusicBoxContentShell(),
-        _myTuneSettingShell(),
-        _artistsTuneShell(),
-        _blackListShell(),
-        _createBlackListShell(),
-        _faqShell(),
-        _termsAndConditionsShell(),
-        _artistsShell(),
-        _aboutShell(),
-        //_mobileTunePreviewShell(),
-      ],
+      branches: _getShellBranches(),
     ),
   ],
   redirect: (context, state) {
     CustomAudioPlayer.instance.stop();
-    print("sky name = ${state.fullPath}");
-    print("sky name = ${state.name}");
-    String path = state.fullPath ?? '';
-    if (!StoreManager.isLoggedIn) {
-      if (path == profileRoute ||
-          path == myTunesRoute ||
-          path == myWishlistRoute) {
-        return '/';
-      } else {
-        return null;
-      }
+    final path = state.fullPath ?? '';
+
+    if (!StoreManager.isLoggedIn &&
+        (path == profileRoute ||
+            path == myTunesRoute ||
+            path == myWishlistRoute)) {
+      return '/';
     }
     return null;
   },
-  errorPageBuilder: (context, state) {
-    return MaterialPage(child: _errorWidget(context, state));
-  },
+  errorPageBuilder: (context, state) =>
+      MaterialPage(child: _errorWidget(context, state)),
 );
-StatefulShellBranch _homeShell() {
+
+List<StatefulShellBranch> _getShellBranches() => [
+      _createShell(homeRoute, (_) => const HomeScreen(),
+          onInit: (s) => homePageBrowseEvent()),
+      _createShell(
+          searchRoute,
+          (s) => SearchScreen(
+                searchKey: s.uri.queryParameters['search'] ?? '',
+                index: s.uri.queryParameters['index'] ?? '',
+              ),
+          onInit: (dynamic s) =>
+              homePageSearchClickEvent(s.uri.queryParameters['search'] ?? '')),
+      _createShell(
+          artistsRoute,
+          (s) => ArtistListScreen(
+                searchKey: s.uri.queryParameters['search'] ?? '',
+                index: s.uri.queryParameters['index'] ?? '',
+              )),
+      _createShell(bannerDetailRoute, (s) => BannerDetailScreen(),
+          onInit: (dynamic s) {
+        final type = s.uri.queryParameters['type'] ?? '';
+        final searchKey = s.uri.queryParameters['searchKey'] ?? '';
+        homePageBannerClickEvent(searchKey);
+        Get.find<BannerDetailController>().getBannerDetail(type, searchKey);
+      }),
+      _createShell(myWishlistRoute, (_) => MyWishlistScreen(),
+          onInit: (s) => Get.find<MyWishlistController>().getWishlist()),
+      _createShell(profileRoute, (_) => ProfileScreen(),
+          onInit: (s) => Get.find<ProfileController>().getProfileDetail()),
+      _createShell(nameTuneRoute, (_) => NameTuneScreen(),
+          onInit: (s) => Get.find<NameTuneController>().getNameTune()),
+      _createShell(musicBoxRoute, (_) => MusicBoxScreen()),
+      _createShell(musicBoxContentRoute, (s) {
+        final id = s.uri.queryParameters['id'] ?? '';
+        final boxName = s.uri.queryParameters['boxName'] ?? '';
+        final boxImage = s.uri.queryParameters['boxImage'] ?? '';
+        Get.find<MusicBoxController>().getMusicBoxContent(id);
+        return MusicBoxContentScreen(
+            id: id, boxName: boxName, boxImage: boxImage);
+      }),
+      _createShell(myMusicBoxContentRoute, (s) {
+        final id = s.uri.queryParameters['id'] ?? '';
+        Get.find<MusicBoxController>().getMusicBoxContent(id);
+        return MyMusicBoxContent(id: id);
+      }),
+      _createShell(categoryDetailRoute, (s) {
+        final catId = s.uri.queryParameters['catId'] ?? '';
+        menuCategoryClickEvent(catId);
+        Get.find<CategoryDetailController>().getCategoryDetailList(catId);
+        return CategoryDetailScreen(name: catId);
+      }),
+      _createShell(
+          seeMoreRoute,
+          (s) => SeeMoreScreen(
+                list: s.extra as List<TuneInfo>,
+                name: s.uri.queryParameters['name'] ?? '',
+              )),
+      _createShell(myTunesRoute, (_) => MyTuneScreen(),
+          onInit: (s) => Get.find<TuneController>().makeApiCall()),
+      _createShell(artistTuneRoute, (s) {
+        final artistName = s.uri.queryParameters['artistName'] ?? '';
+        Get.find<ArtistsTuneController>().getArtistsTune(artistName);
+        return ArtistsTuneScreen(artistName: artistName);
+      }),
+      _createShell(faqRoute, (_) => FaqScreen()),
+      _createShell(aboutRoute, (_) => AboutScreen()),
+      _createShell(termsAndConditionsRoute, (_) => TermsAndConditionsScreen()),
+      _createShell(myTunesSettingRoute, (s) {
+        final info = s.extra as TuneInfo;
+        final packName = s.uri.queryParameters['packName'] ?? '';
+        Get.find<MyTuneSettingController>().resetValue();
+        return MyTuneSettingScreen(info: info, packName: packName);
+      }),
+      _createShell(blackListRoute, (_) => BlacklistScreen(),
+          onInit: (s) => Get.find<BlacklistController>().getList()),
+      _createShell(createBlackListRoute, (_) => CreateBlacklistScreen()),
+    ];
+
+StatefulShellBranch _createShell(
+    String name, Widget Function(GoRouterState) builder,
+    {void Function(GoRouterState)? onInit}) {
   return StatefulShellBranch(
-    routes: <RouteBase>[
+    routes: [
       GoRoute(
-        name: homeRoute,
-        path: homeRoute,
+        name: name,
+        path: name,
         builder: (context, state) {
-          homePageBrowseEvent();
-          return const HomeScreen();
+          if (onInit != null) onInit(state);
+          return builder(state);
         },
       ),
     ],
   );
 }
-
-StatefulShellBranch _searchShell() {
-  TuneSearchController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: searchRoute,
-        path: searchRoute,
-        builder: (context, state) {
-          String key1 = state.uri.queryParameters['search'] ?? '';
-          String index = state.uri.queryParameters['index'] ?? '';
-          homePageSearchClickEvent(key1);
-          return SearchScreen(
-            searchKey: key1,
-            index: index,
-          );
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _artistsShell() {
-  //TuneSearchController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: artistsRoute,
-        path: artistsRoute,
-        builder: (context, state) {
-          String key1 = state.uri.queryParameters['search'] ?? '';
-          String index = state.uri.queryParameters['index'] ?? '';
-          //homePageSearchClickEvent(key1);
-          return ArtistListScreen(
-            searchKey: key1,
-            index: index,
-          );
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _bannerDetailShell() {
-  BannerDetailController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: bannerDetailRoute,
-        path: bannerDetailRoute,
-        builder: (context, state) {
-          String type = state.uri.queryParameters['type'] ?? '';
-          String searchKey = state.uri.queryParameters['searchKey'] ?? '';
-          homePageBannerClickEvent(searchKey);
-          cont.getBannerDetail(type, searchKey);
-          return BannerDetailScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _myWishlistShell() {
-  MyWishlistController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: myWishlistRoute,
-        path: myWishlistRoute,
-        builder: (context, state) {
-          //cont.getBannerDetail(type, searchKey);
-          cont.getWishlist();
-          return MyWishlistScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _profileShell() {
-  ProfileController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: profileRoute,
-        path: profileRoute,
-        builder: (context, state) {
-          cont.getProfileDetail();
-          return ProfileScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _nameTuneShell() {
-  NameTuneController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: nameTuneRoute,
-        path: nameTuneRoute,
-        builder: (context, state) {
-          cont.getNameTune();
-          return NameTuneScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _musicBoxShell() {
-  MusicBoxController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: musicBoxRoute,
-        path: musicBoxRoute,
-        builder: (context, state) {
-          return MusicBoxScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _musicBoxContentShell() {
-  MusicBoxController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: musicBoxContentRoute,
-        path: musicBoxContentRoute,
-        builder: (context, state) {
-          String id = state.uri.queryParameters['id'] ?? '';
-          String boxName = state.uri.queryParameters['boxName'] ?? '';
-          String boxImage = state.uri.queryParameters['boxImage'] ?? '';
-          cont.getMusicBoxContent(id);
-          return MusicBoxContentScreen(
-            id: id,
-            boxName: boxName,
-            boxImage: boxImage,
-          );
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _myMusicBoxContentShell() {
-  MusicBoxController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: myMusicBoxContentRoute,
-        path: myMusicBoxContentRoute,
-        builder: (context, state) {
-          String id = state.uri.queryParameters['id'] ?? '';
-
-          cont.getMusicBoxContent(id);
-          return MyMusicBoxContent(id: id);
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _categoryDetailShell() {
-  CategoryDetailController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: categoryDetailRoute,
-        path: categoryDetailRoute,
-        builder: (context, state) {
-          String catId = state.uri.queryParameters['catId'] ?? '';
-          cont.getCategoryDetailList(catId);
-          menuCategoryClickEvent(catId);
-          return CategoryDetailScreen(
-            name: catId,
-          );
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _seeMoreShell() {
-  //CategoryDetailController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: seeMoreRoute,
-        path: seeMoreRoute,
-        builder: (context, state) {
-          List<TuneInfo> lst = state.extra as List<TuneInfo>;
-          String name = state.uri.queryParameters['name'] ?? '';
-          return SeeMoreScreen(
-            list: lst,
-            name: name,
-          );
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _myTuneShell() {
-  TuneController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: myTunesRoute,
-        path: myTunesRoute,
-        builder: (context, state) {
-          bool? isReload = state.extra as bool?;
-          print(" extra = param = $isReload");
-          //if (isReload ?? true) {
-          cont.makeApiCall();
-          //}
-
-          return MyTuneScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _artistsTuneShell() {
-  ArtistsTuneController cont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: artistTuneRoute,
-        path: artistTuneRoute,
-        builder: (context, state) {
-          String artistName = state.uri.queryParameters['artistName'] ?? '';
-
-          cont.getArtistsTune(artistName);
-          return ArtistsTuneScreen(artistName: artistName);
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _faqShell() {
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: faqRoute,
-        path: faqRoute,
-        builder: (context, state) {
-          //menuFaqClickEvent();
-          return FaqScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _aboutShell() {
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: aboutRoute,
-        path: aboutRoute,
-        builder: (context, state) {
-          //menuFaqClickEvent();
-          return AboutScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _termsAndConditionsShell() {
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: termsAndConditionsRoute,
-        path: termsAndConditionsRoute,
-        builder: (context, state) {
-          return TermsAndConditionsScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _myTuneSettingShell() {
-  MyTuneSettingController con = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: myTunesSettingRoute,
-        path: myTunesSettingRoute,
-        builder: (context, state) {
-          TuneInfo info = state.extra as TuneInfo;
-          String packName = state.uri.queryParameters['packName'] ?? '';
-
-          con.resetValue();
-          return MyTuneSettingScreen(
-            info: info,
-            packName: packName,
-          );
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _blackListShell() {
-  BlacklistController bCont = Get.find();
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: blackListRoute,
-        path: blackListRoute,
-        builder: (context, state) {
-          bCont.getList();
-          return BlacklistScreen();
-        },
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _createBlackListShell() {
-  return StatefulShellBranch(
-    routes: <RouteBase>[
-      GoRoute(
-        name: createBlackListRoute,
-        path: createBlackListRoute,
-        builder: (context, state) {
-          return CreateBlacklistScreen();
-        },
-      ),
-    ],
-  );
-}
-
-// StatefulShellBranch _mobileTunePreviewShell() {
-//   return StatefulShellBranch(
-//     routes: <RouteBase>[
-//       GoRoute(
-//         name: mobileTunePreviewRoute,
-//         path: mobileTunePreviewRoute,
-//         builder: (context, state) {
-//           Map<String, dynamic> map = state.extra as Map<String, dynamic>;
-//           TuneInfo tuneInfo = map['tuneInfo'] as TuneInfo;
-//           List<TuneInfo> tuneList = map['tuneList'] as List<TuneInfo>;
-//           return MobileTunePreviewSceen(
-//               tuneInfo: tuneInfo, tuneList: tuneList); //(tuneInfo: TuneInfo());
-//         },
-//       ),
-//     ],
-//   );
-// }
 
 Widget navBuilder(context, state, navigationShell) {
-  globalContext = context;
-  return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ResponsiveBuilder(
-        builder: (context, si) {
-          return Scaffold(
-            appBar: (si.isMobile) ? AppBar(backgroundColor: yellow) : null,
-            endDrawer: MobileDrawerScreen(),
-            body: Material(
-              child: Column(
-                children: [
-                  WebNavigationView(),
-                  Expanded(
-                      child: Scaffold(
-                    body: navigationShell,
-                  )),
-                ],
-              ),
-            ),
-          );
-        },
-      ));
+  //globalContext = context;
+  return ResponsiveBuilder(
+    builder: (context, si) {
+      return Scaffold(
+        key: scaffoldKey,
+        appBar: si.isMobile ? AppBar(backgroundColor: yellow) : null,
+        endDrawer: MobileDrawerScreen(),
+        body: Column(
+          children: [WebNavigationView(), Expanded(child: navigationShell)],
+        ),
+      );
+    },
+  );
 }
 
 Widget _errorWidget(BuildContext context, GoRouterState state) {
   return const Scaffold(
     body: Center(
-      child: Text(
-        "Error page loading",
-      ),
+      child: Text("Error page loading"),
     ),
   );
 }

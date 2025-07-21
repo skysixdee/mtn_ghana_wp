@@ -65,7 +65,7 @@ String buyMusicChannelUrl = "";
 String addToneToShuffleScUrl = "";
 
 String getSubscriptionUrl = "";
-
+String aboutPageUrl = '';
 String shuffleEnableDisableUrl = '';
 
 String categoryDetailUrl = "";

@@ -48,7 +48,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 late SharedPreferences prefs;
 late AppController appCont;
-late BuildContext globalContext;
+//late BuildContext globalContext;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
@@ -124,6 +124,7 @@ Future<void> readProperties() async {
   playingTuneUrl = data["LIST_TONE_URL"];
   myMusicBoxUrl = data["LIST_TONE_URL"];
   tuneSettingDedicatedUrl = data['TUNE_DEDICATION_SETTING'];
+  aboutPageUrl = data['ABOUT_PAGE_URL'];
   customPrint("base url = $baseUrl");
   return;
 }
@@ -183,15 +184,18 @@ class MyApp extends StatelessWidget {
     });
     return SessionTimeoutManager(
       sessionConfig: sessionConfig,
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'mtn_ghana_wp',
+      child: GetMaterialApp.router(
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 222, 205, 18)),
           useMaterial3: true,
+          brightness: Brightness.light,
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.white,
+          // other theme properties...
         ),
-        routerConfig: router,
+        debugShowCheckedModeBanner: false,
+        routerDelegate: router.routerDelegate,
+        routeInformationParser: router.routeInformationParser,
+        routeInformationProvider: router.routeInformationProvider,
       ),
     );
   }
@@ -205,9 +209,9 @@ class MyApp extends StatelessWidget {
         onPrimary: () {
           print("Hello shiv popup");
           StoreManager.logout();
-          if (Get.context != null) {
-            Get.context!.goNamed(homeRoute);
-          }
+          //if (Get.context != null) {
+          router.goNamed(homeRoute);
+          //}
         },
       );
     }

@@ -1,4 +1,5 @@
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -16,18 +17,18 @@ openAlertPopup(
     final TextAlign? textAlign,
     Function()? onPrimary,
     Function()? onSecondry}) {
-  Get.dialog(
-      _CustomAlertPopup(
-        heading: heading,
-        message: message,
-        primaryBtnTitle: primaryBtnTitle,
-        secondryBtnTitle: secondryBtnTitle,
-        secondryTitleColor: secondryTitleColor,
-        onPrimary: onPrimary,
-        onSecondry: onSecondry,
-        textAlign: textAlign,
-      ),
-      barrierDismissible: false);
+  genericPopup(
+    _CustomAlertPopup(
+      heading: heading,
+      message: message,
+      primaryBtnTitle: primaryBtnTitle,
+      secondryBtnTitle: secondryBtnTitle,
+      secondryTitleColor: secondryTitleColor,
+      onPrimary: onPrimary,
+      onSecondry: onSecondry,
+      textAlign: textAlign,
+    ),
+  );
 }
 
 class _CustomAlertPopup extends StatelessWidget {

@@ -13,6 +13,7 @@ import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/get_tone_price_model.dart';
 import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/model/profile_detail_model.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/popup_views/subscription_plans_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
@@ -30,6 +31,7 @@ class ProfileController extends GetxController {
   // GetProfileDetails? getProfileDetails;
   // Offer? packStatusDetails;
   String packName = '';
+  bool isActive = false;
   @override
   void onInit() {
     super.onInit();
@@ -46,6 +48,8 @@ class ProfileController extends GetxController {
     print('SKY Price is $getTonePriceModel');
     if (getTonePriceModel.respCode == 0) {
       packName = getTonePriceModel.contentDetails?.offerName ?? '';
+      isActive =
+          getTonePriceModel.contentDetails?.offerStatus?.toUpperCase() == 'A';
     } else {
       packName = '';
     }
@@ -143,7 +147,8 @@ class ProfileController extends GetxController {
       },
     );
     return;
-    Get.dialog(Center(
+
+    genericPopup(Center(
       child: SubscriptionPlansView(
         onConfirm: (item) async {
           isSubscribing.value = true;

@@ -4,6 +4,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/enums/custpm_screen_type.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/popup_views/gift_popup_view.dart';
 import 'package:mtn_ghana_wp/files/popup_views/social_sharing_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
@@ -68,7 +69,7 @@ class TuneCard extends StatelessWidget {
       } else {
         return InkWell(
           onTap: () {
-            Get.dialog(
+            genericPopup(
               Material(
                 child: MobileTunePreviewSceen(
                     customScreenType: customScreenType,
@@ -184,7 +185,7 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
                   }
                 } else if (p0.title == giftStr) {
                   if (StoreManager.isLoggedIn) {
-                    Get.dialog(GiftPopupView(info: info));
+                    genericPopup(GiftPopupView(info: info));
                   } else {
                     openAlertPopup(
                         message: thisFeatureIsAvailableForLoggedinStr);
@@ -193,7 +194,7 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
                   customPrint("gift tapped");
                 } else {
                   customPrint("share tapped");
-                  Get.dialog(SocialSharingPopup(info: info));
+                  genericPopup(SocialSharingPopup(info: info));
                 }
               }
               if (onMenuTap != null) {

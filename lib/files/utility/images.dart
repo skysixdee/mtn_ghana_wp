@@ -6,7 +6,7 @@ const myTuneHeaderPng = 'assets/pngs/myTuneHeader.png';
 
 const wishlistPng = 'assets/pngs/wishListR.png';
 const giftPng = 'assets/pngs/gift.png';
-
+const aboutMainPng = "assets/pngs/about_main.png";
 const facebookPng = 'assets/pngs/facebook.png';
 const twitterPng = 'assets/pngs/twitter_icon.png';
 const defaultImagePng = 'assets/pngs/defaultImage.png';

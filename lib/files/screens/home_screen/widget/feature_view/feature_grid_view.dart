@@ -18,7 +18,7 @@ class FeatureGridView extends StatelessWidget {
         return CombinedGrid(
             isLoading: cont.isLoadingList[cont.index.value],
             itemCount:
-                cont.displayList.length > 8 ? 7 : cont.displayList.length,
+                cont.displayList.length > 8 ? 5 : cont.displayList.length,
             // cardWidth: 175,
             padding: null,
             builder: (p0) {

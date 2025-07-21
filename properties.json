@@ -30,6 +30,7 @@
     "GIFT_TONE_URL":"http://10.135.64.101:51011/selfcare/subscriber-management/gift-tone",
     "DELETE_TUNE_FROM_SHUFFLE_URL":"http://10.135.64.101:51021/selfcare/setting-service/delete-tone-from-shufflelist",
     "DELETE_PACK_URL":"http://10.0.10.33:5338/selfcare/subscriber-management/delete-pack",
+    "ABOUT_PAGE_URL":"https://callertunez.mtn.com.gh/crbt-web-portal/assets/languages/English/ABOUT.json",
     "NAME_TUNE_CAT_ID":"115",
     "MSISDN_LENGTH":9,
     "CHANNEL_ID":4,
