@@ -1,4 +1,24 @@
+# Flutter & Dart
+.dart_tool/
+.packages
+build/
+pubspec.lock
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Chrome dev and auto-generated files
+chrome_dev/
+**/chrome_dev/
+*.84507/
+
 # Miscellaneous
+
 *.class
 *.log
 *.pyc
