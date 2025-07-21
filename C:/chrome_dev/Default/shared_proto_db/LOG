@@ -1,6 +1,0 @@
-2025/07/21-12:02:34.228 685d4 Creating DB /Users/shivkumaryadav/Documents/Project/6DRepo/Flutter_exp/mtn_ghana_wp/C:/chrome_dev/Default/shared_proto_db since it was missing.
-2025/07/21-12:02:34.233 685d4 Reusing MANIFEST /Users/shivkumaryadav/Documents/Project/6DRepo/Flutter_exp/mtn_ghana_wp/C:/chrome_dev/Default/shared_proto_db/MANIFEST-000001
-2025/07/21-12:02:34.233 685d4 Recovering log #3
-2025/07/21-12:02:34.235 685d4 (ignoring error) /Users/shivkumaryadav/Documents/Project/6DRepo/Flutter_exp/mtn_ghana_wp/C:/chrome_dev/Default/shared_proto_db/000003.log: dropping 10038 bytes; Corruption: bad record length
-2025/07/21-12:02:34.236 685d4 (ignoring error) /Users/shivkumaryadav/Documents/Project/6DRepo/Flutter_exp/mtn_ghana_wp/C:/chrome_dev/Default/shared_proto_db/000003.log: dropping 309 bytes; Corruption: missing start of fragmented record(2)
-2025/07/21-12:02:34.238 685d4 Reusing old log /Users/shivkumaryadav/Documents/Project/6DRepo/Flutter_exp/mtn_ghana_wp/C:/chrome_dev/Default/shared_proto_db/000003.log 
