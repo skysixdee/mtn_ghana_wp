@@ -32,6 +32,8 @@ class ProfileController extends GetxController {
   // Offer? packStatusDetails;
   String packName = '';
   bool isActive = false;
+
+  List<PacksDetail> packsList = [];
   @override
   void onInit() {
     super.onInit();
@@ -42,17 +44,38 @@ class ProfileController extends GetxController {
     if (isLoading.value) {
       return;
     }
+    packsList.clear();
     isLoading.value = true;
+    isActive = false;
 
-    GetTonePriceModel getTonePriceModel = await getTonePriceScApi();
-    print('SKY Price is $getTonePriceModel');
-    if (getTonePriceModel.respCode == 0) {
-      packName = getTonePriceModel.contentDetails?.offerName ?? '';
-      isActive =
-          getTonePriceModel.contentDetails?.offerStatus?.toUpperCase() == 'A';
-    } else {
-      packName = '';
-    }
+    PackDetailModel packDetailModel = await getPackDetailApi();
+    print("sky ==================${packDetailModel.respCode}");
+    if (packDetailModel.respCode == 0) {
+      final offers = packDetailModel.offers ?? [];
+      for (var element in offers) {
+        var packName1 = element.offerName ?? inActiveStr;
+        var isActive1 = element.offerStatus?.toUpperCase() == 'A';
+        packsList.add(PacksDetail(isActive1, packName1));
+      }
+
+      if (offers.isNotEmpty) {
+        packName = offers.first.offerName ?? '';
+        isActive = offers.first.offerStatus?.toUpperCase() == 'A';
+      } else {
+        isActive = false;
+        packName = '';
+      }
+    } else {}
+
+    // GetTonePriceModel getTonePriceModel = await getTonePriceScApi();
+    // print('SKY Price is $getTonePriceModel');
+    // if (getTonePriceModel.respCode == 0) {
+    //   packName = getTonePriceModel.contentDetails?.offerName ?? '';
+    //   isActive =
+    //       getTonePriceModel.contentDetails?.offerStatus?.toUpperCase() == 'A';
+    // } else {
+    //   packName = '';
+    // }
 
     // PackDetailModel model = await getPackDetailApi();
     // packStatusDetails = model.offers?.first;
@@ -197,4 +220,10 @@ class ProfileController extends GetxController {
 
     print("unSubscribeButtonAction");
   }
+}
+
+class PacksDetail {
+  String packName;
+  bool isActive;
+  PacksDetail(this.isActive, this.packName);
 }

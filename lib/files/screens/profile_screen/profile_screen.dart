@@ -109,8 +109,9 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           SizedBox(width: 250, child: deskTopMainContainer(si)),
-          status(),
-          subscriptionPlanWidget(),
+          //status(),
+          table(),
+          //subscriptionPlanWidget(),
           const SizedBox(height: 8),
           subscribeAndUnSubscribeButton()
         ],
@@ -118,27 +119,89 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget subscriptionPlanWidget() {
-    return con.packName.isEmpty
-        ? const SizedBox(height: 12)
-        : Padding(
-            padding: const EdgeInsets.only(bottom: 12, top: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomText(title: "$subscriptionPlanStr : "),
-                CustomText(
-                  title: con.packName ?? '',
-                  fontName: FontName.bold,
-                ),
-              ],
+  table() {
+    return Container(
+        decoration: BoxDecoration(
+            border: Border.all(color: grey),
+            borderRadius: BorderRadius.circular(4)),
+        width: 300,
+        child: Column(
+          children: [
+            SizedBox(height: 6),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    title: subscriptionPlanStr,
+                    fontName: FontName.bold,
+                  ),
+                  CustomText(
+                    title: statusStr,
+                    fontName: FontName.bold,
+                  )
+                ],
+              ),
             ),
-          );
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Container(
+                height: 1,
+                color: grey,
+              ),
+            ),
+            ListView.builder(
+              padding: const EdgeInsets.only(left: 8, bottom: 8, right: 8),
+              shrinkWrap: true,
+              itemCount: con.packsList.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      subscriptionPlanWidget(con.packsList[index].packName),
+                      status(con.packsList[index].isActive),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
+        ));
   }
 
-  Widget status() {
-    return Row(
+  Widget subscriptionPlanWidget(String packName) {
+    return CustomText(
+      title: packName,
+      fontName: FontName.bold,
+      fontSize: 12,
+    );
+    Padding(
+      padding: const EdgeInsets.only(bottom: 12, top: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomText(title: "$subscriptionPlanStr : "),
+          CustomText(
+            title: packName,
+            fontName: FontName.bold,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget status(bool isActive) {
+    return CustomText(
+      title: !isActive ? inActiveStr : activeStr,
+      color: !isActive ? red : const Color.fromARGB(255, 14, 184, 20),
+      fontName: FontName.bold,
+      fontSize: 12,
+    );
+    Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -148,8 +211,8 @@ class ProfileScreen extends StatelessWidget {
         ),
         //const SizedBox(height: 4),
         CustomText(
-          title: !con.isActive ? inActiveStr : activeStr,
-          color: !con.isActive ? red : const Color.fromARGB(255, 14, 184, 20),
+          title: !isActive ? inActiveStr : activeStr,
+          color: !isActive ? red : const Color.fromARGB(255, 14, 184, 20),
           fontName: FontName.bold,
         )
       ],
