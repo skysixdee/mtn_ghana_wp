@@ -120,56 +120,60 @@ class ProfileScreen extends StatelessWidget {
   }
 
   table() {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: grey),
-            borderRadius: BorderRadius.circular(4)),
-        width: 300,
-        child: Column(
-          children: [
-            SizedBox(height: 6),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                    title: subscriptionPlanStr,
-                    fontName: FontName.bold,
-                  ),
-                  CustomText(
-                    title: statusStr,
-                    fontName: FontName.bold,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Container(
-                height: 1,
-                color: grey,
-              ),
-            ),
-            ListView.builder(
-              padding: const EdgeInsets.only(left: 8, bottom: 8, right: 8),
-              shrinkWrap: true,
-              itemCount: con.packsList.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+    return con.packsList.isEmpty
+        ? const CustomText(
+            title: "No Pack Active",
+          )
+        : Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: grey),
+                borderRadius: BorderRadius.circular(4)),
+            width: 300,
+            child: Column(
+              children: [
+                SizedBox(height: 6),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      subscriptionPlanWidget(con.packsList[index].packName),
-                      status(con.packsList[index].isActive),
+                      CustomText(
+                        title: subscriptionPlanStr,
+                        fontName: FontName.bold,
+                      ),
+                      CustomText(
+                        title: statusStr,
+                        fontName: FontName.bold,
+                      )
                     ],
                   ),
-                );
-              },
-            ),
-          ],
-        ));
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Container(
+                    height: 1,
+                    color: grey,
+                  ),
+                ),
+                ListView.builder(
+                  padding: const EdgeInsets.only(left: 8, bottom: 8, right: 8),
+                  shrinkWrap: true,
+                  itemCount: con.packsList.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          subscriptionPlanWidget(con.packsList[index].packName),
+                          status(con.packsList[index].isActive),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ));
   }
 
   Widget subscriptionPlanWidget(String packName) {
