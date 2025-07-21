@@ -113,6 +113,7 @@ String enterTexttoSearchStr = "Please enter text to search";
 String preferenceStr = "Preference*";
 String buyStr = "Buy";
 String faqStr = "FAQ";
+String aboutStr = "About";
 String someThingWentWrongStr = "Some thing went wrong";
 String giftStr = "Gift";
 String inActiveStr = "InActive";

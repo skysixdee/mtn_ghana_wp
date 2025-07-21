@@ -14,6 +14,7 @@ import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/files/screens/about_screen/about_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/banner_detail_screen/banner_detail_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/blacklist_screen/blacklist_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/blacklist_screen/create_blacklist_screen.dart';
@@ -73,6 +74,7 @@ final router = GoRouter(
         _faqShell(),
         _termsAndConditionsShell(),
         _artistsShell(),
+        _aboutShell(),
         //_mobileTunePreviewShell(),
       ],
     ),
@@ -366,6 +368,21 @@ StatefulShellBranch _faqShell() {
         builder: (context, state) {
           //menuFaqClickEvent();
           return FaqScreen();
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _aboutShell() {
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+        name: aboutRoute,
+        path: aboutRoute,
+        builder: (context, state) {
+          //menuFaqClickEvent();
+          return AboutScreen();
         },
       ),
     ],
