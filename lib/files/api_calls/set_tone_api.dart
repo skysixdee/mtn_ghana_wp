@@ -14,12 +14,12 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<BuyToneModel> setToneApi(String toneId, String toneName,
     {String? packName}) async {
-  String packN = packName ?? await _getPackName(toneId);
+  //String packN = packName ?? await _getPackName(toneId);
   Map<String, dynamic> jsomData = {
     'transactionId': "${getTransactionId()}",
     "featureId": 1,
     'msisdn': StoreManager.msisdn,
-    "offerCode": packN,
+    //"offerCode": packN,
     'contentId': toneId,
     "contentType": 1,
     'languageCode': StoreManager.languageSort,

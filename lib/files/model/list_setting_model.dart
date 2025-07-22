@@ -45,6 +45,8 @@ class ListSettingModel {
 }
 
 class SettingsList {
+  String? timeInfo;
+  String? lastPurchasedContent;
   String? contentId;
   String? defaultToneSelectionType;
   String? isServiceSuspended;
@@ -97,6 +99,8 @@ class SettingsList {
     this.status,
     this.bMsisdn,
     this.groupId,
+    this.lastPurchasedContent,
+    this.timeInfo,
   });
 
   factory SettingsList.fromJson(Map<String, dynamic> json) => SettingsList(
@@ -125,6 +129,8 @@ class SettingsList {
         status: json["status"],
         bMsisdn: json["bMsisdn"],
         groupId: json["groupId"],
+        lastPurchasedContent: json['lastPurchasedContent'],
+        timeInfo: json['timeInfo'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -153,5 +159,7 @@ class SettingsList {
         "status": status,
         "bMsisdn": bMsisdn,
         "groupId": groupId,
+        'lastPurchasedContent': lastPurchasedContent,
+        'timeInfo': timeInfo,
       };
 }

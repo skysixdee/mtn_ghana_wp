@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 Widget alignedGrid(
-    {double cardWidth = 180,
+    {double cardWidth = 200,
     double aspectRatio = 0.7,
     required int itemCount,
     ScrollPhysics? physics,

@@ -18,6 +18,9 @@ String countryCode = '';
 String faqUrl = '';
 String musicBoxOfferCode = '';
 
+String basePackOfferCode = '';
+String basePackContentId = '';
+
 //=========================
 int channelId = 4;
 const String versionCode = '7.0';

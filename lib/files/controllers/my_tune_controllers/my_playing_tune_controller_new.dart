@@ -24,8 +24,13 @@ class MyPlayingTuneControllerNew extends GetxController {
 
     ListSettingModel model = await listSettingApi();
     list = model.settingsList ?? [];
-    if (list.isNotEmpty) {
-      setting = list[0];
+    final defaultSetting = list
+        .where((itm) =>
+            itm.serviceName?.toLowerCase() == 'DefaultSettings'.toLowerCase())
+        .toList();
+
+    if (defaultSetting.isNotEmpty) {
+      setting = defaultSetting[0];
       isShuffleEnable.value =
           setting?.isShuffleOn?.toLowerCase() == 'true' ? true : false;
       list.removeAt(0);
@@ -37,7 +42,9 @@ class MyPlayingTuneControllerNew extends GetxController {
           .toList();
     } else {
       list = list
-          .where((itm) => itm.isToneInShuffle?.toLowerCase() == 'false')
+          .where((itm) =>
+//              itm.isToneInShuffle?.toLowerCase() == 'false' &&
+              itm.contentId == setting?.lastPurchasedContent)
           .toList();
     }
 

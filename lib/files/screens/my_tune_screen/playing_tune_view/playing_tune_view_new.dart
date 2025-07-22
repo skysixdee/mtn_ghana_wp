@@ -12,6 +12,7 @@ import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/play_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/widgets/playing_tune_card.dart';
@@ -56,38 +57,52 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
         playingTuneHeader(si),
         Obx(
           () {
-            return GridView.builder(
-              padding: EdgeInsets.all(20),
-              shrinkWrap: true,
-              itemCount: con.settingsList.length,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  childAspectRatio: 0.75,
-                  maxCrossAxisExtent: 220,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20),
-              itemBuilder: (context, index) {
-                final v = con.settingsList[index];
-                return Container(
-                  decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                          color: lightGrey, blurRadius: 3, spreadRadius: 1)
-                    ],
-                    borderRadius: BorderRadius.circular(8),
-                    color: white,
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(child: toneImage(v)),
-                      toneDetail(v),
-                    ],
-                  ),
-                );
-              },
-            );
+            return CombinedGrid(
+                itemCount: con.settingsList.length,
+                isLoading: con.isLoading.value,
+                cardWidth: 280,
+                aspectRatio: 0.6,
+                padding: null,
+                builder: (p0) {
+                  final v = con.settingsList[p0];
+                  return card(v);
+                },
+                onTap: (p1) => {});
+            // GridView.builder(
+            //   padding: const EdgeInsets.all(20),
+            //   shrinkWrap: true,
+            //   itemCount: con.settingsList.length,
+            //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            //       childAspectRatio: 0.75,
+            //       maxCrossAxisExtent: 220,
+            //       mainAxisSpacing: 20,
+            //       crossAxisSpacing: 20),
+            //   itemBuilder: (context, index) {
+            //     final v = con.settingsList[index];
+            //     return card(v);
+            //   },
+            // );
           },
         ),
       ],
+    );
+  }
+
+  Container card(SettingsList v) {
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: const [
+          BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+        ],
+        borderRadius: BorderRadius.circular(8),
+        color: white,
+      ),
+      child: Column(
+        children: [
+          Expanded(child: toneImage(v)),
+          toneDetail(v),
+        ],
+      ),
     );
   }
 
@@ -131,21 +146,22 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
                         ],
                       ),
                     ),
-                    GenericButton(
-                      height: 30,
-                      width: 30,
-                      padding: const EdgeInsets.all(0),
-                      bgColor: transparent,
-                      leadingIcon: Icon(
-                        size: 18,
-                        Icons.delete,
-                        color: red,
+                    if (con.settingsList.length > 1)
+                      GenericButton(
+                        height: 30,
+                        width: 30,
+                        padding: const EdgeInsets.all(0),
+                        bgColor: transparent,
+                        leadingIcon: const Icon(
+                          size: 18,
+                          Icons.delete,
+                          color: red,
+                        ),
+                        onTap: () {
+                          con.deleteTune(v);
+                          print("tapped");
+                        },
                       ),
-                      onTap: () {
-                        con.deleteTune(v);
-                        print("tapped");
-                      },
-                    ),
                   ],
                 ),
               ],

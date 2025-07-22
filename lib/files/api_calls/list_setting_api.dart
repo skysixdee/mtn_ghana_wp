@@ -11,20 +11,24 @@ Future<ListSettingModel> listSettingApi() async {
   Map<String, dynamic> jsonMap = {
     "transactionId": getTransactionId(),
     "featureId": 1,
-    "msisdn": StoreManager.msisdn,
+    "msisdn": StoreManager.msisdn, //
+    // "msisdn": "95000062",
+    // "offerCode": "CRBT_WEEKLY",
     "serviceId": "1",
     "languageCode": StoreManager.languageSort,
     "channelId": channelId
   };
 
   //{"serviceId":"1"}
+  // listSettingUrl =
+  //     'http://10.0.10.33:8082/selfcare/subscriber-management/list-settings';
 
   Map<String, dynamic> jsonResp =
       await NetworkManager().post(listSettingUrl, jsonData: jsonMap);
   return listSettingModelFromJson(json.encode(jsonResp));
 
   // await Future.delayed(const Duration(seconds: 1));
-  // return listSettingModelFromJson(_json);
+  // return listSettingModelFromJson(_json1);
 }
 
 String _json = """{
@@ -192,6 +196,7 @@ String _json1 = """{
   "settingsList": [
     {
       "contentId": "",
+      "lastPurchasedContent":"9942230",
       "defaultToneSelectionType": "ALL",
       "isServiceSuspended": "FALSE",
       "isShuffleOn": "false",

@@ -133,9 +133,7 @@ class _AboutScreenState extends State<AboutScreen> {
     return CarouselSlider(
         items: List.generate(section.dataList?.length ?? 0, (v) {
           String svgs = section.dataList?[v].data?.first.iconName ?? '';
-          return Flexible(
-            child: corousalCard(svgs, section, v),
-          );
+          return corousalCard(svgs, section, v);
         }),
         options: CarouselOptions(
           height: 280,

@@ -12,6 +12,8 @@ activateBasePackApi() async {
     'transactionId': "${getTransactionId()}",
     "featureId": 1,
     'msisdn': StoreManager.msisdn,
+    'offerCode': basePackOfferCode,
+    'contentId': basePackContentId,
     'channelId': channelId,
   };
   Map<String, dynamic> jsonResp =

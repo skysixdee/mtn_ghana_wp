@@ -125,6 +125,9 @@ Future<void> readProperties() async {
   myMusicBoxUrl = data["LIST_TONE_URL"];
   tuneSettingDedicatedUrl = data['TUNE_DEDICATION_SETTING'];
   aboutPageUrl = data['ABOUT_PAGE_URL'];
+  basePackContentId = data['BASE_CONTENT_ID'];
+  basePackOfferCode = data['BASE_PACK_OFFER_CODE'];
+
   customPrint("base url = $baseUrl");
   return;
 }
