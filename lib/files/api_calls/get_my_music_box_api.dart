@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:mtn_ghana_wp/files/model/my_music_box_model.dart';
+import 'package:mtn_ghana_wp/files/model/my_tunes_model.dart';
 import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
-Future<MyMusicBoxModel> getMyMusicBoxApi({int pageNo = 0}) async {
+Future<MyTunesModel> getMyMusicBoxApi({int pageNo = 0}) async {
   Map<String, dynamic> jsonMap = {
     "transactionId": getTransactionId(),
     "featureId": "1",
@@ -20,7 +21,7 @@ Future<MyMusicBoxModel> getMyMusicBoxApi({int pageNo = 0}) async {
   Map<String, dynamic> map =
       await NetworkManager().post(myMusicBoxUrl, jsonData: jsonMap);
 
-  return myMusicBoxModelFromJson(json.encode(map));
+  return myTunesModelFromJson(json.encode(map));
   // final ls = myMusicBoxModelFromJson(_jsonString);
 
   // print("l=========${ls.tonelist?.length}");

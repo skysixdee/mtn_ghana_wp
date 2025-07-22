@@ -7,6 +7,7 @@ import 'package:mtn_ghana_wp/files/enums/playing_card_type.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/my_music_box_model.dart';
 import 'package:mtn_ghana_wp/files/model/my_playing_tunes_model.dart';
+import 'package:mtn_ghana_wp/files/model/my_tunes_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
@@ -47,9 +48,9 @@ class MyPlayingTuneController extends GetxController {
 
   Future<List<TuneInfo>> _getMusicBox() async {
     List<TuneInfo> tuneList1 = [];
-    MyMusicBoxModel model = await getMyMusicBoxApi();
+    MyTunesModel model = await getMyMusicBoxApi();
     if (model.respCode == 0) {
-      tuneList1 = model.tonelist ?? [];
+      tuneList1 = model.responseMap?.tonelist ?? [];
     }
     return tuneList1;
   }

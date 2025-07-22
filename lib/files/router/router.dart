@@ -62,7 +62,7 @@ final router = GoRouter(
 
     if (!StoreManager.isLoggedIn &&
         (path == profileRoute ||
-            //path == myTunesRoute ||
+            path == myTunesRoute ||
             path == myWishlistRoute)) {
       return '/';
     }

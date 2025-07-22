@@ -10,41 +10,41 @@ import 'dart:convert';
 
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 
-MyMusicBoxModel myMusicBoxModelFromJson(String str) =>
-    MyMusicBoxModel.fromJson(json.decode(str));
+// MyMusicBoxModel myMusicBoxModelFromJson(String str) =>
+//     MyMusicBoxModel.fromJson(json.decode(str));
 
-String myMusicBoxModelToJson(MyMusicBoxModel data) =>
-    json.encode(data.toJson());
+// String myMusicBoxModelToJson(MyMusicBoxModel data) =>
+//     json.encode(data.toJson());
 
-class MyMusicBoxModel {
-  int? respCode;
-  String? message;
-  List<TuneInfo>? tonelist;
+// class MyMusicBoxModel {
+//   int? respCode;
+//   String? message;
+//   List<TuneInfo>? tonelist;
 
-  MyMusicBoxModel({
-    this.respCode,
-    this.message,
-    this.tonelist,
-  });
+//   MyMusicBoxModel({
+//     this.respCode,
+//     this.message,
+//     this.tonelist,
+//   });
 
-  factory MyMusicBoxModel.fromJson(Map<String, dynamic> json) =>
-      MyMusicBoxModel(
-        respCode: json["respCode"],
-        message: json["message"],
-        tonelist: json["tonelist"] == null
-            ? []
-            : List<TuneInfo>.from(
-                json["tonelist"]!.map((x) => TuneInfo.fromJson(x))),
-      );
+//   factory MyMusicBoxModel.fromJson(Map<String, dynamic> json) =>
+//       MyMusicBoxModel(
+//         respCode: json["respCode"],
+//         message: json["message"],
+//         tonelist: json["tonelist"] == null
+//             ? []
+//             : List<TuneInfo>.from(
+//                 json["tonelist"]!.map((x) => TuneInfo.fromJson(x))),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "respCode": respCode,
-        "message": message,
-        "tonelist": tonelist == null
-            ? []
-            : List<dynamic>.from(tonelist!.map((x) => x.toJson())),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "respCode": respCode,
+//         "message": message,
+//         "tonelist": tonelist == null
+//             ? []
+//             : List<dynamic>.from(tonelist!.map((x) => x.toJson())),
+//       };
+// }
 /*
 class Tonelist {
   String? contentType;

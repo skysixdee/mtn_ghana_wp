@@ -6,6 +6,7 @@ import 'package:mtn_ghana_wp/files/api_calls/get_my_music_box_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/my_music_box_model.dart';
+import 'package:mtn_ghana_wp/files/model/my_tunes_model.dart';
 import 'package:mtn_ghana_wp/files/model/pack_detail_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:get/get.dart';
@@ -20,9 +21,9 @@ class MyMusicBoxController extends GetxController {
   List<TuneInfo>? listToneApk;
   getMyMusicBoxTune() async {
     isLoading.value = true;
-    MyMusicBoxModel model = await getMyMusicBoxApi();
+    MyTunesModel model = await getMyMusicBoxApi();
     if (model.respCode == 0) {
-      tuneList = model.tonelist ?? [];
+      tuneList = model.responseMap?.tonelist ?? [];
     }
 
     isLoading.value = false;
