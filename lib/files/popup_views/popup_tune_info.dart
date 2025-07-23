@@ -48,9 +48,11 @@ Widget _tuneImage(
   return SizedBox(
     height: 250,
     child: customImage(
-        url: info.toneIdpreviewImageUrl,
-        cornerRadius: 8,
-        fit: BoxFit.fitHeight),
+      imageName: info.localImgName,
+      url: info.toneIdpreviewImageUrl,
+      cornerRadius: 8,
+      fit: BoxFit.fitHeight,
+    ),
   );
 }
 

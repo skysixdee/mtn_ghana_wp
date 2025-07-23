@@ -129,6 +129,8 @@ class MusicBoxCard extends StatelessWidget {
                                 // )
                                 buyButton(
                                     TuneInfo(
+                                        localImgName:
+                                            'assets/pngs/music_box_$index.png',
                                         toneId: info.musicBoxId,
                                         toneName: info.musicBoxName,
                                         toneIdpreviewImageUrl:
