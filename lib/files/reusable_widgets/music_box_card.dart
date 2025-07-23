@@ -67,52 +67,50 @@ class MusicBoxCard extends StatelessWidget {
                     CustomText(
                       title: info.musicBoxName ?? '',
                       fontName: FontName.bold,
+                      maxLine: 1,
                       fontSize: 16,
                     ),
                     const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          height: 36,
-                          child: InkWell(
-                            hoverColor: Colors.transparent,
-                            splashColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () {
-                              print(
-                                  "info.musicBoxName == ${info.musicBoxName}");
-                              context.goNamed(
-                                isMyMusicBox
-                                    ? myMusicBoxContentRoute
-                                    : musicBoxContentRoute,
-                                queryParameters: {
-                                  'id': info.musicBoxId,
-                                  'boxName': info.musicBoxName,
-                                  'boxImage': info.musicBoxIdpreviewImageUrl
-                                },
-                              );
-                              print("view all tune in music box");
-                            },
-                            child: leftButton ??
-                                OutlinedButton.icon(
-                                  onPressed: null,
-                                  icon: const Icon(
-                                    Icons.visibility,
-                                    size: 16,
-                                    color: black,
+                        Flexible(
+                          child: SizedBox(
+                            height: 36,
+                            child: InkWell(
+                              hoverColor: Colors.transparent,
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () {
+                                print(
+                                    "info.musicBoxName == ${info.musicBoxName}");
+                                context.goNamed(
+                                  isMyMusicBox
+                                      ? myMusicBoxContentRoute
+                                      : musicBoxContentRoute,
+                                  queryParameters: {
+                                    'id': info.musicBoxId,
+                                    'boxName': info.musicBoxName,
+                                    'boxImage': info.musicBoxIdpreviewImageUrl
+                                  },
+                                );
+                                print("view all tune in music box");
+                              },
+                              child: leftButton ??
+                                  OutlinedButton.icon(
+                                    onPressed: null,
+                                    label: CustomText(
+                                      title: previewStr,
+                                      //fontName: FontName.bold,
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 12, vertical: 0),
+                                      side: const BorderSide(color: black),
+                                      foregroundColor: black,
+                                    ),
                                   ),
-                                  label: CustomText(
-                                    title: previewStr,
-                                    //fontName: FontName.bold,
-                                  ),
-                                  style: OutlinedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 0),
-                                    side: const BorderSide(color: black),
-                                    foregroundColor: black,
-                                  ),
-                                ),
+                            ),
                           ),
                         ),
                         const SizedBox(width: 20),

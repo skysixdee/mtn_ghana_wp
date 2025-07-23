@@ -175,6 +175,7 @@ class WebNavigationView extends StatelessWidget {
                 if (StoreManager.isLoggedIn) {
                   myAccountMenu(context);
                 } else {
+                  con.resetValue();
                   genericPopup(Obx(
                     () {
                       return con.displayOptScreen.value
