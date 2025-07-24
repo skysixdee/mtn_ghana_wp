@@ -55,10 +55,16 @@ class LoginController extends GetxController {
     if (genModel.respCode == 1000 || genModel.respCode == 1001) {
       String? generatedOtp =
           genModel.userData; //UserData contains the encrypted OTP
-      String? decryptedOtp =
-          AesEnDeCryptor().decryptWithAES(generatedOtp ?? '');
-      print("Decrypted Otp==============$decryptedOtp");
+
       displayOptScreen.value = true;
+      try {
+        String? decryptedOtp =
+            AesEnDeCryptor().decryptWithAES(generatedOtp ?? '');
+        print("Decrypted Otp==============$decryptedOtp");
+      } catch (e) {
+        print("Error while decrypting otp $e");
+      }
+
       // } else if (genModel.respCode == 1001) {
       //   print("Sky user belongs to the operator network but is not subscribed");
       //   message.value = genModel.message ?? someThingWentWrongStr;
