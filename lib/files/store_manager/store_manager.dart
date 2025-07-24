@@ -1,8 +1,10 @@
 import 'package:mtn_ghana_wp/files/model/app_setting_model.dart';
 import 'package:mtn_ghana_wp/files/model/category_model.dart';
 import 'package:mtn_ghana_wp/files/model/category_mw_model.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/router/router.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
 import 'package:go_router/go_router.dart';
 
@@ -83,5 +85,6 @@ class StoreManager {
     setDeviceId('');
     appCont.isLoggedIn.value = false;
     scaffoldKey.currentContext?.goNamed(homeRoute);
+    snackBar(logoutSuccessfullyStr);
   }
 }

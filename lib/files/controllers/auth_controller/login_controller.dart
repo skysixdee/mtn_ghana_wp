@@ -52,17 +52,19 @@ class LoginController extends GetxController {
     // if (model.responseMap?.respCode == "SC0000") {
     GenerateOtpScModel genModel = await generateOtpScApi(msisdn);
     print("respCode is == ${genModel.respCode}");
-    if (genModel.respCode == 1000) {
+    if (genModel.respCode == 1000 || genModel.respCode == 1001) {
       String? generatedOtp =
           genModel.userData; //UserData contains the encrypted OTP
       String? decryptedOtp =
           AesEnDeCryptor().decryptWithAES(generatedOtp ?? '');
       print("Decrypted Otp==============$decryptedOtp");
       displayOptScreen.value = true;
-    } else if (genModel.respCode == 1001) {
-      print("Sky user belongs to the operator network but is not subscribed");
+      // } else if (genModel.respCode == 1001) {
+      //   print("Sky user belongs to the operator network but is not subscribed");
+      //   message.value = genModel.message ?? someThingWentWrongStr;
     } else if (genModel.respCode == 1002) {
       print("The user does not belong to the operator");
+      message.value = genModel.message ?? someThingWentWrongStr;
     } else {
       message.value = genModel.message ?? someThingWentWrongStr;
       isLoading.value = false;

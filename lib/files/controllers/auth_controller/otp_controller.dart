@@ -24,6 +24,7 @@ import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -88,6 +89,7 @@ class OtpController extends GetxController {
   }
 
   onSuccessLogin(ConfirmOtpScModel model, String msisdn) {
+    snackBar(model.message);
     StoreManager.setAccessToken(model.accessToken ?? '');
     //StoreManager.setDeviceId(model.deviceId ?? '');
     StoreManager.setRefreshToken(model.refreshToken ?? '');

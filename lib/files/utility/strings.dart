@@ -197,3 +197,4 @@ String startDiscoveringStr = "Start Discovering";
 String aboutTitleStr = 'Amazing Waiting Time';
 String aboutSunTitleStr =
     "Welcome your callers in a unique way before you even say Hello! Let them listen to your favorite tunes as they wait for you to pick up. Call waiting time made amazing!";
+String logoutSuccessfullyStr = 'Logged out successfully';

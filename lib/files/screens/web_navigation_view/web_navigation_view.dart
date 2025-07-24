@@ -20,6 +20,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/url_launcher.dart';
 
 import 'package:mtn_ghana_wp/files/router/route_name.dart';

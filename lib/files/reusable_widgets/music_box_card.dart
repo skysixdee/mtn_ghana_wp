@@ -100,6 +100,7 @@ class MusicBoxCard extends StatelessWidget {
                                   OutlinedButton.icon(
                                     onPressed: null,
                                     label: CustomText(
+                                      maxLine: 1,
                                       title: previewStr,
                                       //fontName: FontName.bold,
                                     ),

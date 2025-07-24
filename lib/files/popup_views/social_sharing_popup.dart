@@ -103,14 +103,23 @@ class SocialSharingPopup extends StatelessWidget {
         print("toneName is = ${info.toneName}");
 
         print("artistName is = ${info.artistName}");
+
+        final fullUrl = Uri.base.toString();
+
+        final uri = Uri.parse(fullUrl);
+
+        final basePath =
+            '${uri.scheme}://${uri.host}${uri.pathSegments.isNotEmpty ? '/${uri.pathSegments.first}' : ''}/';
+
+        print(basePath);
         //socialLinkList
         if (index == 1) {
           String predefinedText = 'share predefined text'.tr;
           _launchUrl(
-              "${socialLinkList[index]}https://callertunez.mtn.co.za/callertunez/search?searchKey=${info.toneId}&text=$predefinedText");
+              "${socialLinkList[index]}$basePath+search?search=${info.toneId}&index=2&text=$predefinedText");
         } else {
           _launchUrl(
-              "${socialLinkList[index]}https://callertunez.mtn.co.za/callertunez/search?searchKey=${info.toneId}");
+              "${socialLinkList[index]}$basePath+search?search=${info.toneId}&index=2");
         }
 
         // Share.share('check out my website https://example.com',
