@@ -53,10 +53,10 @@ class LoginController extends GetxController {
     GenerateOtpScModel genModel = await generateOtpScApi(msisdn);
     print("respCode is == ${genModel.respCode}");
     if (genModel.respCode == 1000 || genModel.respCode == 1001) {
+      displayOptScreen.value = true;
       String? generatedOtp =
           genModel.userData; //UserData contains the encrypted OTP
 
-      displayOptScreen.value = true;
       try {
         String? decryptedOtp =
             AesEnDeCryptor().decryptWithAES(generatedOtp ?? '');
