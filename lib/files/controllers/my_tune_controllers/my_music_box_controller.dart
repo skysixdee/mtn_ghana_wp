@@ -23,7 +23,7 @@ class MyMusicBoxController extends GetxController {
     isLoading.value = true;
     MyTunesModel model = await getMyMusicBoxApi();
     if (model.respCode == 0) {
-      tuneList = model.responseMap?.tonelist ?? [];
+      tuneList = model.responseMap?.toneList ?? [];
     }
 
     isLoading.value = false;

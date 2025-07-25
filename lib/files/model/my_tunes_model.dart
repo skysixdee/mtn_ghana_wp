@@ -6,15 +6,6 @@ import 'dart:convert';
 
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 
-// To parse this JSON data, do
-//
-//     final myTunesModel = myTunesModelFromJson(jsonString);
-// To parse this JSON data, do
-//
-//     final myTunesModel = myTunesModelFromJson(jsonString);
-
-import 'dart:convert';
-
 MyTunesModel myTunesModelFromJson(String str) =>
     MyTunesModel.fromJson(json.decode(str));
 
@@ -47,25 +38,26 @@ class MyTunesModel {
 }
 
 class ResponseMap {
-  List<TuneInfo>? tonelist;
+  List<TuneInfo>? toneList;
 
   ResponseMap({
-    this.tonelist,
+    this.toneList,
   });
 
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
-        tonelist: json["tonelist"] == null
+        toneList: json["toneList"] == null
             ? []
             : List<TuneInfo>.from(
-                json["tonelist"]!.map((x) => TuneInfo.fromJson(x))),
+                json["toneList"]!.map((x) => TuneInfo.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "tonelist": tonelist == null
+        "toneList": toneList == null
             ? []
-            : List<dynamic>.from(tonelist!.map((x) => x.toJson())),
+            : List<dynamic>.from(toneList!.map((x) => x.toJson())),
       };
 }
+
 /*
 class Tonelist {
   String? contentId;

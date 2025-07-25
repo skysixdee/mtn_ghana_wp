@@ -50,7 +50,7 @@ class MyPlayingTuneController extends GetxController {
     List<TuneInfo> tuneList1 = [];
     MyTunesModel model = await getMyMusicBoxApi();
     if (model.respCode == 0) {
-      tuneList1 = model.responseMap?.tonelist ?? [];
+      tuneList1 = model.responseMap?.toneList ?? [];
     }
     return tuneList1;
   }
