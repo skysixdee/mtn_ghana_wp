@@ -23,6 +23,7 @@ class WhenPlayButton extends StatelessWidget {
               () {
                 return InkWell(
                   onTap: () {
+                    return;
                     whenPopover(context1, con);
                   },
                   child: Container(
@@ -41,7 +42,7 @@ class WhenPlayButton extends StatelessWidget {
                             title: con.timeTypeTitle.value,
                             fontName: FontName.bold,
                           ),
-                          const Icon(Icons.arrow_drop_down_rounded)
+                          //const Icon(Icons.arrow_drop_down_rounded)
                         ],
                       ),
                     ),
@@ -56,5 +57,5 @@ class WhenPlayButton extends StatelessWidget {
   }
 }
 // Widget whenPlayButton() {
-//   return 
+//   return
 // }

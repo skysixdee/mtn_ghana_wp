@@ -187,7 +187,7 @@ class _MyTuneSettingScreenState extends State<MyTuneSettingScreen> {
                       const SizedBox(height: 8),
                       whenPlaySection(si),
                       const SizedBox(height: 20),
-                      repeatContainerView(),
+                      // repeatContainerView(),
                     ],
                   ),
                 ),

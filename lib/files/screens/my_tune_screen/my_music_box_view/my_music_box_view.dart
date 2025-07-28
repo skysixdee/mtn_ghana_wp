@@ -119,16 +119,17 @@ class MyMusicBoxView extends StatelessWidget {
       bgColor: transparent,
       title: previewStr,
       leadingIcon: const Icon(Icons.visibility),
-      onTap: () {
-        context.goNamed(myMusicBoxContentRoute, queryParameters: {
-          'type': info.type,
-          'code': info.toneId,
-          'toneName': info.toneName,
-          'toneId': info.toneId,
-          'imgUrl': info.toneIdpreviewImageUrl,
-        });
-        print("view all tune in music box");
-      },
+      // onTap: () {
+      //   context.goNamed(myMusicBoxContentRoute, queryParameters: {
+      //     'type': info.type,
+      //     'code': info.toneId,
+      //     'toneName': info.toneName,
+      //     'toneId': info.toneId,
+      //     'imgUrl': info.toneIdpreviewImageUrl,
+      //   });
+
+      //print("view all tune in music box");
+      //},
     );
   }
 
