@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/music_box_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
@@ -114,23 +115,35 @@ class MyMusicBoxView extends StatelessWidget {
   }
 
   Widget previewButton(BuildContext context, TuneInfo info) {
-    return GenericButton(
-      padding: EdgeInsets.zero,
-      bgColor: transparent,
-      title: previewStr,
-      leadingIcon: const Icon(Icons.visibility),
-      // onTap: () {
-      //   context.goNamed(myMusicBoxContentRoute, queryParameters: {
-      //     'type': info.type,
-      //     'code': info.toneId,
-      //     'toneName': info.toneName,
-      //     'toneId': info.toneId,
-      //     'imgUrl': info.toneIdpreviewImageUrl,
-      //   });
-
-      //print("view all tune in music box");
-      //},
+    return Flexible(
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            border: Border.all(color: grey, width: 0.5),
+            borderRadius: BorderRadius.circular(50)),
+        child: CustomText(
+          fontName: FontName.semiBold,
+          title: previewStr,
+        ),
+      ),
     );
+    // GenericButton(
+    //   padding: EdgeInsets.zero,
+    //   bgColor: transparent,
+    //   title: previewStr,
+    //   leadingIcon: const Icon(Icons.visibility),
+    //   onTap: () {
+    //     context.goNamed(myMusicBoxContentRoute, queryParameters: {
+    //       'type': info.type,
+    //       'code': info.toneId,
+    //       'toneName': info.toneName,
+    //       'toneId': info.toneId,
+    //       'imgUrl': info.toneIdpreviewImageUrl,
+    //     });
+
+    //     //print("view all tune in music box");
+    //   },
+    // );
   }
 
   Widget deleteButton(TuneInfo info) {
@@ -144,8 +157,9 @@ class MyMusicBoxView extends StatelessWidget {
               )))
             : GenericButton(
                 title: deleteStr,
-                leadingIcon: const Icon(Icons.delete, size: 18, color: red),
+                leadingIcon: const Icon(Icons.delete, size: 14, color: red),
                 borderColor: red,
+                fontName: FontName.semiBold,
                 textColor: red,
                 bgColor: transparent,
                 onTap: () {

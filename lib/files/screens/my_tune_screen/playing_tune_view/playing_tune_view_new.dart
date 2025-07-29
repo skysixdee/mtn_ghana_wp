@@ -60,8 +60,8 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
             return CombinedGrid(
                 itemCount: con.settingsList.length,
                 isLoading: con.isLoading.value,
-                cardWidth: 280,
-                aspectRatio: 0.6,
+                cardWidth: 220,
+                aspectRatio: 0.75,
                 padding: null,
                 builder: (p0) {
                   final v = con.settingsList[p0];

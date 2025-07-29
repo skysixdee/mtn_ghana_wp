@@ -68,7 +68,7 @@ class GenericButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(
+                  Flexible(
                       child: Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
