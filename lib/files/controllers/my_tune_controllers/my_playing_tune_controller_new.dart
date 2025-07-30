@@ -2,11 +2,13 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mtn_ghana_wp/files/api_calls/delete_from_shuffle_api.dart';
+import 'package:mtn_ghana_wp/files/api_calls/get_music_box_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_tone_price_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/list_setting_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/shuffle_enable_disable_api.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/list_setting_model.dart';
+import 'package:mtn_ghana_wp/files/model/music_box_sc_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -15,12 +17,17 @@ class MyPlayingTuneControllerNew extends GetxController {
   RxBool isLoading = false.obs;
   RxList<SettingsList> settingsList = <SettingsList>[].obs;
   SettingsList? setting;
+  List<MusicBoxList> myMusicBoxList = [];
   RxBool switchingShuffle = false.obs;
   RxBool isShuffleEnable = false.obs;
   getListSetting() async {
     print("making list setting  api call ");
     List<SettingsList> list = [];
     isLoading.value = true;
+    final myMusicBox = await getMusicBoxScApi();
+    if (myMusicBox.respCode == 0) {
+      myMusicBoxList = myMusicBox.musicBoxList ?? [];
+    }
 
     ListSettingModel model = await listSettingApi();
     list = model.settingsList ?? [];

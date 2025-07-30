@@ -125,7 +125,7 @@ class TuneCard extends StatelessWidget {
                 CustomText(
                   title: decodeHtmlEntities(
                       info.artistName ?? ''), //info.artistName ?? '',
-                  color: grey,
+                  color: black,
                   fontName: FontName.semiBoldItalic,
                   fontSize: 12,
                   maxLine: 1,

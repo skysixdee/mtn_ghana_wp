@@ -28,6 +28,7 @@ class MusicBoxCard extends StatelessWidget {
   final bool isMyMusicBox;
   @override
   Widget build(BuildContext context) {
+    String imageName = (info.musicBoxName ?? '').replaceAll(RegExp(r'\s+'), '');
     return InkWell(
       onTap: () {
         context.goNamed(
@@ -52,12 +53,7 @@ class MusicBoxCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                  child: Container(
-                      color: lightGrey,
-                      child: customImage(
-                          imageName: 'assets/pngs/music_box_$index.png',
-                          url: info.musicBoxIdpreviewImageUrl))),
+              musicBoxImage(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -102,6 +98,8 @@ class MusicBoxCard extends StatelessWidget {
                                     label: CustomText(
                                       maxLine: 1,
                                       title: previewStr,
+                                      fontName: FontName.bold,
+                                      //si.isMobile ? FontName.bold:FontName.regular :
                                       //fontName: FontName.bold,
                                     ),
                                     style: OutlinedButton.styleFrom(
@@ -129,7 +127,7 @@ class MusicBoxCard extends StatelessWidget {
                                 buyButton(
                                     TuneInfo(
                                         localImgName:
-                                            'assets/pngs/music_box_$index.png',
+                                            'assets/music_box_pngs/$imageName.png',
                                         toneId: info.musicBoxId,
                                         toneName: info.musicBoxName,
                                         toneIdpreviewImageUrl:
@@ -151,5 +149,15 @@ class MusicBoxCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Expanded musicBoxImage() {
+    String imageName = (info.musicBoxName ?? '').replaceAll(RegExp(r'\s+'), '');
+    return Expanded(
+        child: Container(
+            color: lightGrey,
+            child: customImage(
+                imageName: 'assets/music_box_pngs/$imageName.png',
+                url: info.musicBoxIdpreviewImageUrl)));
   }
 }

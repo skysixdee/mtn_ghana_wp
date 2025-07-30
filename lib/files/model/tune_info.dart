@@ -87,7 +87,10 @@ class TuneInfo {
       previewImageUrl: json['previewImageUrl'] ??
           json['contentPreviewImageURL'] ??
           json['previewImage'],
-      toneId: json['toneId'] ?? "${json['contentId']}" ?? json['toneCode'],
+      toneId: json['toneId'] ??
+          "${json['contentId']}" ??
+          json['toneCode'] ??
+          json['musicBoxId'],
       toneIdStreamingUrl: json['toneIdStreamingUrl'] ??
           json['path'] ??
           json['location'] ??
@@ -98,7 +101,7 @@ class TuneInfo {
           json['previewImage'],
       toneName: json['toneName'] ??
           json['contentName'] ??
-          json['contentName'] ??
+          json['musicBoxName'] ??
           (StoreManager.isEnglish
               ? json['contentName_L1']
               : json['contentName_L2']),

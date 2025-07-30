@@ -8,6 +8,7 @@ import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tu
 import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/list_setting_model.dart';
+import 'package:mtn_ghana_wp/files/model/music_box_sc_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/play_button.dart';
@@ -68,20 +69,6 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
                   return card(v);
                 },
                 onTap: (p1) => {});
-            // GridView.builder(
-            //   padding: const EdgeInsets.all(20),
-            //   shrinkWrap: true,
-            //   itemCount: con.settingsList.length,
-            //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            //       childAspectRatio: 0.75,
-            //       maxCrossAxisExtent: 220,
-            //       mainAxisSpacing: 20,
-            //       crossAxisSpacing: 20),
-            //   itemBuilder: (context, index) {
-            //     final v = con.settingsList[index];
-            //     return card(v);
-            //   },
-            // );
           },
         ),
       ],
@@ -89,6 +76,8 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
   }
 
   Container card(SettingsList v) {
+    bool isMusicBox = con.myMusicBoxList
+        .any((MusicBoxList inf) => inf.musicBoxId == v.contentId);
     return Container(
       decoration: BoxDecoration(
         boxShadow: const [
@@ -99,14 +88,14 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
       ),
       child: Column(
         children: [
-          Expanded(child: toneImage(v)),
-          toneDetail(v),
+          Expanded(child: toneImage(v, isMusicBox)),
+          toneDetail(v, isMusicBox),
         ],
       ),
     );
   }
 
-  Padding toneDetail(SettingsList v) {
+  Padding toneDetail(SettingsList v, bool isMisicBox) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
       child: Row(
@@ -222,7 +211,8 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
     }
   }
 
-  Widget toneImage(SettingsList info) {
+  Widget toneImage(SettingsList info, bool isMusicBox) {
+    String imageName = (info.contentName ?? '').replaceAll(RegExp(r'\s+'), '');
     TuneInfo inf = TuneInfo(
       toneIdStreamingUrl: info.contentStreamingUrl ?? "",
       toneId: info.contentId,
@@ -233,24 +223,32 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        customImage(url: info.contentPreviewImageUrl),
-        GenericButton(
-          bgColor: white,
-          borderColor: black,
-          padding: EdgeInsets.all(0),
-          width: 30,
-          height: 30,
-          leadingIcon: Icon(
-            pCont.playingToneId.value == info.contentId
-                ? Icons.pause
-                : Icons.play_arrow_rounded,
-            size: pCont.playingToneId.value == info.contentId ? 20 : 22,
-            color: black,
+        customImage(
+            url: isMusicBox ? null : info.contentPreviewImageUrl,
+            imageName:
+                isMusicBox ? 'assets/music_box_pngs/$imageName.png' : null),
+        if (isMusicBox)
+          Obx(
+            () {
+              return GenericButton(
+                bgColor: white,
+                borderColor: black,
+                padding: const EdgeInsets.all(0),
+                width: 30,
+                height: 30,
+                leadingIcon: Icon(
+                  pCont.playingToneId.value == info.contentId
+                      ? Icons.pause
+                      : Icons.play_arrow_rounded,
+                  size: pCont.playingToneId.value == info.contentId ? 20 : 22,
+                  color: black,
+                ),
+                onTap: () {
+                  pCont.playUrl(inf);
+                },
+              );
+            },
           ),
-          onTap: () {
-            pCont.playUrl(inf);
-          },
-        ),
         //playButton(TuneInfo())
       ],
     );
