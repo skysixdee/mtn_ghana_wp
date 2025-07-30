@@ -115,16 +115,15 @@ class MyMusicBoxView extends StatelessWidget {
   }
 
   Widget previewButton(BuildContext context, TuneInfo info) {
-    return Flexible(
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            border: Border.all(color: grey, width: 0.5),
-            borderRadius: BorderRadius.circular(50)),
-        child: CustomText(
-          fontName: FontName.semiBold,
-          title: previewStr,
-        ),
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          color: white,
+          border: Border.all(color: grey, width: 0.5),
+          borderRadius: BorderRadius.circular(50)),
+      child: CustomText(
+        fontName: FontName.semiBold,
+        title: previewStr,
       ),
     );
     // GenericButton(
