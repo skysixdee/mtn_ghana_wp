@@ -71,7 +71,7 @@ class MyTuneScreen extends StatelessWidget {
         const SizedBox(height: 1),
         //playingTuneHeader(si),
         SizedBox(height: si.isMobile ? 20 : 30),
-        PlayingTuneViewNew(),
+        const PlayingTuneViewNew(),
         //PlayingTuneView(),
         const SizedBox(height: 20),
         myTuneHeader(si, activeTunezStr, howToPlaySelctedStr, () {

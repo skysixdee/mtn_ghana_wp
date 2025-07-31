@@ -56,6 +56,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
     return Column(
       children: [
         playingTuneHeader(si),
+        const SizedBox(height: 20),
         Obx(
           () {
             return CombinedGrid(
@@ -76,8 +77,8 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
   }
 
   Container card(SettingsList v) {
-    bool isMusicBox = con.myMusicBoxList
-        .any((MusicBoxList inf) => inf.musicBoxId == v.contentId);
+    bool isMusicBox =
+        con.myMusicBoxList.any((TuneInfo inf) => inf.toneId == v.contentId);
     return Container(
       decoration: BoxDecoration(
         boxShadow: const [
@@ -106,7 +107,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 2,
               children: [
-                callerTypeBuilder(v),
+                callerTypeBuilder(v, isMisicBox),
                 Container(
                   color: lightGrey,
                   height: 1,
@@ -127,9 +128,11 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
                           ),
                           CustomText(
                             maxLine: 1,
-                            title: decodeHtmlEntities(v.artistName ?? ''),
+                            title: isMisicBox
+                                ? musicBoxStr
+                                : decodeHtmlEntities(v.artistName ?? ''),
                             fontName: FontName.semiBold,
-                            color: grey,
+                            color: black,
                             fontSize: 12,
                           ),
                         ],
@@ -161,7 +164,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
     );
   }
 
-  Widget callerTypeBuilder(SettingsList v) {
+  Widget callerTypeBuilder(SettingsList v, bool isMusicBox) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -227,7 +230,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
             url: isMusicBox ? null : info.contentPreviewImageUrl,
             imageName:
                 isMusicBox ? 'assets/music_box_pngs/$imageName.png' : null),
-        if (isMusicBox)
+        if (!isMusicBox)
           Obx(
             () {
               return GenericButton(

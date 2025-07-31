@@ -119,7 +119,7 @@ class MyMusicBoxView extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: white,
-          border: Border.all(color: grey, width: 0.5),
+          border: Border.all(color: black, width: 0.5),
           borderRadius: BorderRadius.circular(50)),
       child: CustomText(
         fontName: FontName.semiBold,
