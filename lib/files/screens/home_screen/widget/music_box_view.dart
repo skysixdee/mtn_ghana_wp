@@ -57,7 +57,7 @@ class _MusicBoxViewState extends State<MusicBoxView> {
                                 borderColor: grey,
                                 fontSize: si.isMobile ? 12 : 14,
                                 onTap: () {
-                                  context.pushNamed(musicBoxRoute);
+                                  context.push(musicBoxRoute);
                                 },
                               )
                             ],

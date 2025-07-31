@@ -112,7 +112,7 @@ class MusicBoxCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 20),
+                        const SizedBox(width: 16),
                         Flexible(
                           child: SizedBox(
                             height: 36,

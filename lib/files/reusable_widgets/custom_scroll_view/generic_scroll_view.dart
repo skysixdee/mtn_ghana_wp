@@ -11,7 +11,7 @@ class GenericScrollView extends StatelessWidget {
     super.key,
     required this.builder,
     required this.itemCount,
-    this.cardWidth = 180,
+    this.cardWidth = 200,
     this.onlyGrid = false,
     this.childAspectRatio,
     this.scrollDirection,
@@ -105,6 +105,7 @@ class GenericScrollView extends StatelessWidget {
 
   SliverAppBar sliverAppBarBuilder() {
     return SliverAppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: white,
       collapsedHeight: collapsedHeight,
       toolbarHeight: collapsedHeight - 1,

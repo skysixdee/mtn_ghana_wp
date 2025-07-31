@@ -71,6 +71,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   SliverAppBar sliverAppBar() {
     return SliverAppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: yellow,
       pinned: true,
       toolbarHeight: 41,

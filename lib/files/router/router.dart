@@ -172,7 +172,9 @@ Widget navBuilder(context, state, navigationShell) {
     builder: (context, si) {
       return Scaffold(
         key: scaffoldKey,
-        appBar: si.isMobile ? AppBar(backgroundColor: yellow) : null,
+        appBar: si.isMobile
+            ? AppBar(automaticallyImplyLeading: false, backgroundColor: yellow)
+            : null,
         endDrawer: si.isMobile ? MobileDrawerScreen() : null,
         body: Column(
           children: [WebNavigationView(), Expanded(child: navigationShell)],
