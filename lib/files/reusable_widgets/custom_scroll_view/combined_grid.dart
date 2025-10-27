@@ -1,6 +1,7 @@
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class CombinedGrid extends StatelessWidget {
   const CombinedGrid({
@@ -28,24 +29,39 @@ class CombinedGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return itemCount < 8
-        ? alignedGrid(
-            itemCount: itemCount,
-            cardWidth: cardWidth,
-            physics: physics,
-            builder: builder,
-            onTap: onTap,
-            isLoading: isLoading,
-            aspectRatio: aspectRatio)
-        : tuneGridView(
-            itemCount: itemCount,
-            padding: padding,
-            cardWidth: cardWidth,
-            scrollDirection: scrollDirection,
-            isLoading: isLoading,
-            physics: physics,
-            aspectRatio: aspectRatio,
-            builder: builder,
-            onTap: onTap);
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return si.isMobile
+            ? tuneGridView(
+                itemCount: itemCount,
+                padding: padding,
+                cardWidth: cardWidth,
+                scrollDirection: scrollDirection,
+                isLoading: isLoading,
+                physics: physics,
+                aspectRatio: aspectRatio,
+                builder: builder,
+                onTap: onTap)
+            : itemCount < 8
+                ? alignedGrid(
+                    itemCount: itemCount,
+                    cardWidth: cardWidth,
+                    physics: physics,
+                    builder: builder,
+                    onTap: onTap,
+                    isLoading: isLoading,
+                    aspectRatio: aspectRatio)
+                : tuneGridView(
+                    itemCount: itemCount,
+                    padding: padding,
+                    cardWidth: cardWidth,
+                    scrollDirection: scrollDirection,
+                    isLoading: isLoading,
+                    physics: physics,
+                    aspectRatio: aspectRatio,
+                    builder: builder,
+                    onTap: onTap);
+      },
+    );
   }
 }
