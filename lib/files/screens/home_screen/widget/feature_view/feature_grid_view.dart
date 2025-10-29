@@ -16,7 +16,8 @@ class FeatureGridView extends StatelessWidget {
     return Obx(
       () {
         return CombinedGrid(
-            scrollDirection: Axis.horizontal,
+            physics: const NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
             isLoading: cont.isLoadingList[cont.index.value],
             itemCount:
                 cont.displayList.length > 8 ? 7 : cont.displayList.length,

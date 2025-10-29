@@ -19,6 +19,7 @@ class GenericScrollView extends StatelessWidget {
     this.onTap,
     this.maxDisplay = 12,
     this.physics,
+    this.parentPhysics,
     this.sliverAppBarHeight = 0,
     this.sliverAppBar,
     this.sliverToBoxAdapter,
@@ -43,6 +44,7 @@ class GenericScrollView extends StatelessWidget {
   final Function(int index)? onTap;
   final int maxDisplay;
   final ScrollPhysics? physics;
+  final ScrollPhysics? parentPhysics;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class GenericScrollView extends StatelessWidget {
       builder: (context, si) {
         return CustomScrollView(
           primary: isLoading ? false : true,
-          physics: physics,
+          physics: parentPhysics,
           slivers: (sliverAppBar != null)
               ? [
                   sliverToBoxAdapterBuilder(),
@@ -131,6 +133,7 @@ class GenericScrollView extends StatelessWidget {
           ? _emptyMessage()
           : SliverToBoxAdapter(
               child: tuneGridView(
+                  physics: physics,
                   itemCount: itemCount,
                   cardWidth: cardWidth,
                   padding: padding,

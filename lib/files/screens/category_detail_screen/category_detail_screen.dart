@@ -15,6 +15,7 @@ import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:number_paginator/number_paginator.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
   CategoryDetailScreen({super.key, required this.name});
@@ -24,43 +25,51 @@ class CategoryDetailScreen extends StatelessWidget {
       NumberPaginatorController();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: white,
-      child: Column(
-        children: [
-          Expanded(
-            child: Obx(
-              () {
-                return con.isLoading.value
-                    ? loadingIndicator()
-                    : GenericScrollView(
-                        sliverAppBar: getNavigationView(name),
-                        // NavigationHeaderView(titleList: [
-                        //   NavigationHeaderModel(homeStr, homeRoute),
-                        //   NavigationHeaderModel(name, nameTuneRoute),
-                        // ]),
-                        itemCount: con.tuneList.length,
-                        builder: (p0) {
-                          return 
-                          TuneCard(
-                            info: con.tuneList[p0],
-                            tuneList: con.tuneList,
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Container(
+          color: white,
+          child: Column(
+            children: [
+              Expanded(
+                child: Obx(
+                  () {
+                    return con.isLoading.value
+                        ? loadingIndicator()
+                        : GenericScrollView(
+                            //parentPhysics: NeverScrollableScrollPhysics(),
+                            physics: NeverScrollableScrollPhysics(),
+                            //physics: NeverScrollableScrollPhysics(),
+                            sliverAppBar:
+                                si.isMobile ? null : getNavigationView(name),
+                            // NavigationHeaderView(titleList: [
+                            //   NavigationHeaderModel(homeStr, homeRoute),
+                            //   NavigationHeaderModel(name, nameTuneRoute),
+                            // ]),
+                            itemCount: con.tuneList.length,
+                            onlyGrid: si.isMobile ? true : false,
+                            builder: (p0) {
+                              return TuneCard(
+                                info: con.tuneList[p0],
+                                tuneList: con.tuneList,
+                              );
+                            },
                           );
-                        },
-                      );
-              },
-            ),
+                  },
+                ),
+              ),
+              Obx(
+                () {
+                  return numberPagination(
+                    totalCount: con.totalTuneCount.value,
+                    onTap: (p0) => con.loadMoreData(p0),
+                  );
+                },
+              )
+            ],
           ),
-          Obx(
-            () {
-              return numberPagination(
-                totalCount: con.totalTuneCount.value,
-                onTap: (p0) => con.loadMoreData(p0),
-              );
-            },
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }
