@@ -34,7 +34,12 @@ class TuneInfo {
   String? firstActivationDate;
   String? languageCode;
   String? contentType;
-
+  String? chargedValidity;
+  String? deactivationDate;
+  String? deactivationChannel;
+  String? offerType;
+  String? offerMode;
+  String? chargeType;
   TuneInfo({
     this.id,
     this.type,
@@ -62,6 +67,12 @@ class TuneInfo {
     this.firstActivationDate,
     this.languageCode,
     this.contentType,
+    this.chargedValidity,
+    this.deactivationDate,
+    this.deactivationChannel,
+    this.offerType,
+    this.offerMode,
+    this.chargeType,
   });
   factory TuneInfo.fromJson(Map<String, dynamic> json) {
     return TuneInfo(
@@ -102,18 +113,25 @@ class TuneInfo {
       toneName: json['toneName'] ??
           json['contentName'] ??
           json['musicBoxName'] ??
+          json['offerName'] ??
           (StoreManager.isEnglish
               ? json['contentName_L1']
               : json['contentName_L2']),
       toneUrl: json['toneUrl'],
-      status: json['status'],
-      price: '${json['price']}',
+      status: json['status'] ?? json['offerStatus'],
+      price: '${json['price'] ?? json['chargedAmount']}',
       expiryDate: json['expiryDate'],
       activationChannel: json['activationChannel'],
       chargedDate: json['chargedDate'],
       firstActivationDate: json['firstActivationDate'],
       languageCode: json['languageCode'],
       contentType: json['contentType'],
+      chargedValidity: json['chargedValidity'],
+      deactivationDate: json['deactivationDate'],
+      deactivationChannel: json['deactivationChannel'],
+      offerType: json['offerType'],
+      offerMode: json['offerMode'],
+      chargeType: json['chargeType'],
     );
   }
 

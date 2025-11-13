@@ -27,12 +27,16 @@ import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/router/router.dart';
+import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup.dart';
+import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_popup.dart';
 import 'package:mtn_ghana_wp/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:flutter/services.dart';
 
@@ -61,7 +65,7 @@ void main() async {
   runApp(const MyApp());
 }
 
-fetchUriData() {
+fetchUriData() async {
   var uri = Uri.parse(Uri.base.toString());
   if (uri.hasQuery) {
     uri.queryParameters.forEach((k, v) {
@@ -69,6 +73,31 @@ fetchUriData() {
         print("toekn is ");
         String decryptedMsdidn = aesDecryption(v.replaceAll(" ", "+"));
         autoLoginApi(decryptedMsdidn);
+      }
+    });
+    await Future.delayed(const Duration(milliseconds: 100));
+    uri.queryParameters.forEach((k, v) {
+      if (k == 'msisdn') {
+        LoginController loginCon = Get.find();
+        loginCon.resetValue();
+
+        appCont.headerIncrechmentMsisdn = v;
+        // loginCon.onGenerateOtpButtonAction();
+        // genericPopup(Obx(
+        //   () {
+        //     return loginCon.displayOptScreen.value
+        //         ? LoginOtpPopup(
+        //             securityToken: loginCon.securityToken,
+        //             isNewUser: loginCon.isNewUser,
+        //             msisdn: loginCon.msisdn,
+        //             isMusicBox: false,
+        //           )
+        //         : const LoginPopup();
+        //   },
+        // ));
+        print("msisdn is $v");
+      } else {
+        appCont.headerIncrechmentMsisdn = '';
       }
     });
   }

@@ -1,17 +1,13 @@
 import 'package:mtn_ghana_wp/files/api_calls/authorization/generate_otp_api.dart';
-import 'package:mtn_ghana_wp/files/api_calls/authorization/new_user_registration_api.dart';
-import 'package:mtn_ghana_wp/files/api_calls/authorization/security_token_api.dart';
-import 'package:mtn_ghana_wp/files/api_calls/authorization/subscriber_validation_api.dart';
+
 import 'package:mtn_ghana_wp/files/en_de_cryptor/otp_en_de_cryptor.dart';
 import 'package:mtn_ghana_wp/files/model/generate_otp_sc_model.dart';
-import 'package:mtn_ghana_wp/files/model/get_security_token_model.dart';
-import 'package:mtn_ghana_wp/files/model/newUserRegistrationModel.dart';
-import 'package:mtn_ghana_wp/files/model/security_token_model.dart';
-import 'package:mtn_ghana_wp/files/model/subscriber_validation_model.dart';
+
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:get/get.dart';
+import 'package:mtn_ghana_wp/main.dart';
 
 class LoginController extends GetxController {
   RxString message = ''.obs;
@@ -29,9 +25,10 @@ class LoginController extends GetxController {
   }
 
   resetValue() {
+    print(" msind ========${appCont.headerIncrechmentMsisdn}");
     isNewUser = false;
     message.value = '';
-    msisdn = '';
+    msisdn = appCont.headerIncrechmentMsisdn;
     enableButton.value = false;
     isLoading.value = false;
     displayOptScreen.value = false;
