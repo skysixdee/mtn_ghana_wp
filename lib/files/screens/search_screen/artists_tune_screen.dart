@@ -32,6 +32,8 @@ class _ArtistsTuneScreenState extends State<ArtistsTuneScreen> {
             child: Obx(
               () {
                 return GenericScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  //parentPhysics: NeverScrollableScrollPhysics(),
                   isLoading: con.isLoading.value,
                   sliverAppBar: NavigationHeaderView(titleList: [
                     NavigationHeaderModel(homeStr, homeRoute),

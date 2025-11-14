@@ -30,9 +30,16 @@ class TuneSearchController extends GetxController {
     isLoading.value = true;
     SearchResultModel model = await getSearchedTuneListApi(key);
     tuneList = model.responseMap?.toneList ?? [];
-    // totalTuneCount.value = model.responseMap?.toneTotalCount ?? 0;
-    // artistList = model.responseMap?.countList?.artistDetailList ?? [];
-    //totalTuneCount.value = model.responseMap?.countList.artistDetailList. ?? 0;
+    print("===============${model.responseMap?.resultCount}");
+
+    if (searchTypeIndex.value == 1) {
+      totalTuneCount.value = model.responseMap?.resultCount ?? 0;
+    } else {
+      totalTuneCount.value = model.responseMap?.resultCount ?? 0;
+    }
+
+    //totalTuneCount.value =
+    80; //model.responseMap?.countList.artistDetailList. ?? 0;
     isLoading.value = false;
   }
 

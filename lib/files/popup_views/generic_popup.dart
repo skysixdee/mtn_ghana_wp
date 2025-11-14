@@ -16,24 +16,26 @@ genericPopup(Widget widget) {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Material(color: transparent, child: widget
-                    // Obx(
-                    //   () {
-                    //     return con.displayOptScreen.value
-                    //         ? LoginOtpPopup(
-                    //             securityToken: con.securityToken,
-                    //             isNewUser: con.isNewUser,
-                    //             msisdn: con.msisdn,
-                    //             isMusicBox: false,
-                    //           )
-                    //         : const LoginPopup();
-                    //   },
-                    // ),
-                    ),
-              ],
+            Flexible(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Material(color: transparent, child: widget
+                      // Obx(
+                      //   () {
+                      //     return con.displayOptScreen.value
+                      //         ? LoginOtpPopup(
+                      //             securityToken: con.securityToken,
+                      //             isNewUser: con.isNewUser,
+                      //             msisdn: con.msisdn,
+                      //             isMusicBox: false,
+                      //           )
+                      //         : const LoginPopup();
+                      //   },
+                      // ),
+                      ),
+                ],
+              ),
             ),
           ],
         ),

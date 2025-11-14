@@ -45,15 +45,14 @@ class _SearchScreenState extends State<SearchScreen> {
                 slivers: [
                   sliverNavigation(),
                   //sliverAppBar(),
-                  SliverToBoxAdapter(child: grid()
-                      // Obx(
-                      //   () {
-                      //     return controller.selectedIndex.value == 0
-                      //         ?
-                      //         : artistNameList();
-                      //   },
-                      // ),
-                      ),
+                  SliverToBoxAdapter(child: grid()),
+                  // Obx(
+                  //   () {
+                  //     return controller.selectedIndex.value == 0
+                  //         ?
+                  //         : artistNameList();
+                  //   },
+                  // ),
                 ],
               ),
             ),
@@ -88,11 +87,11 @@ class _SearchScreenState extends State<SearchScreen> {
       () {
         return Stack(
           children: [
+            Container(height: 40, color: white),
             numberPagination(
               totalCount: controller.totalTuneCount.value,
               onTap: (p0) => controller.leadMoreData(p0),
             ),
-            Container(height: 40, color: white)
           ],
         );
       },
@@ -103,6 +102,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Obx(
       () {
         return tuneGridView(
+          physics: NeverScrollableScrollPhysics(),
           isLoading:
               (controller.isLoading.value || controller.isLoadingMore.value),
           itemCount: controller.tuneList.length,

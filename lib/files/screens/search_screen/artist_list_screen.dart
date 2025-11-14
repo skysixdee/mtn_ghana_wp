@@ -69,6 +69,7 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
     return Obx(
       () {
         return tuneGridView(
+          physics: NeverScrollableScrollPhysics(),
           cardWidth: 130,
           aspectRatio: 0.8,
           isLoading:
@@ -135,18 +136,23 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
   }
 
   Widget _loadMore() {
-    return Obx(
-      () {
-        return Stack(
-          children: [
-            numberPagination(
+    return Stack(
+      children: [
+        Container(height: 40, color: white),
+        Obx(
+          () {
+            return numberPagination(
               totalCount: controller.totalTuneCount.value,
               onTap: (p0) => controller.leadMoreData(p0),
-            ),
-            Container(height: 40, color: white)
-          ],
-        );
-      },
+            );
+          },
+        ),
+      ],
     );
+    // Obx(
+    //   () {
+    //     return
+    //   },
+    // );
   }
 }

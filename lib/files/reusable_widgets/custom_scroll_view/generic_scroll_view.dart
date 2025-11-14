@@ -56,7 +56,7 @@ class GenericScrollView extends StatelessWidget {
           slivers: (sliverAppBar != null)
               ? [
                   sliverToBoxAdapterBuilder(),
-                  sliverAppBarBuilder(),
+                  if (!si.isMobile) sliverAppBarBuilder(),
                   isLoading ? _loadingIndicator() : checkListType(context, si),
                 ]
               : [

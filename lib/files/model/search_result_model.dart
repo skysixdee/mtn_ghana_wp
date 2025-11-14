@@ -49,8 +49,10 @@ class SearchResultModel {
 class ResponseMap {
   List<TuneInfo>? toneList;
   List<ArtistDetailList>? artistDetailList;
+  int? resultCount;
   ResponseMap({
     this.toneList,
+    this.resultCount,
   });
 
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
@@ -58,6 +60,7 @@ class ResponseMap {
             ? []
             : List<TuneInfo>.from(
                 json["toneList"]!.map((x) => TuneInfo.fromJson(x))),
+        resultCount: json["resultCount"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -79,7 +82,7 @@ class ArtistDetailList {
   factory ArtistDetailList.fromJson(Map<String, dynamic> json) =>
       ArtistDetailList(
         matchedParam: json["matchedParam"],
-        count: json["count"],
+        count: json["count"] ?? json['resultCount'],
       );
 
   Map<String, dynamic> toJson() => {
