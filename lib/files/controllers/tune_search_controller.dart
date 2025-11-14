@@ -32,11 +32,11 @@ class TuneSearchController extends GetxController {
     tuneList = model.responseMap?.toneList ?? [];
     print("===============${model.responseMap?.resultCount}");
 
-    if (searchTypeIndex.value == 1) {
-      totalTuneCount.value = model.responseMap?.resultCount ?? 0;
-    } else {
-      totalTuneCount.value = model.responseMap?.resultCount ?? 0;
-    }
+    //if (searchTypeIndex.value == 1) {
+    totalTuneCount.value = model.responseMap?.resultCount ?? 0;
+    // } else {
+    //   totalTuneCount.value = model.responseMap?.resultCount ?? 0;
+    // }
 
     //totalTuneCount.value =
     80; //model.responseMap?.countList.artistDetailList. ?? 0;
@@ -64,6 +64,7 @@ class TuneSearchController extends GetxController {
     isLoading.value = true;
     ArtistsModel model = await getArtistListApi(key);
     artistsList = model.responseMap?.artistList ?? [];
+    totalTuneCount.value = model.responseMap?.resultCount ?? 0;
     print("hello ==============${artistsList.length}");
     isLoading.value = false;
   }

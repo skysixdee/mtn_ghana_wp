@@ -138,7 +138,7 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
   Widget _loadMore() {
     return Stack(
       children: [
-        Container(height: 40, color: white),
+        //Container(height: 40, color: red),
         Obx(
           () {
             return numberPagination(

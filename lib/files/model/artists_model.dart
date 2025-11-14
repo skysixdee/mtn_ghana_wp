@@ -41,9 +41,10 @@ class ArtistsModel {
 
 class ResponseMap {
   List<ArtistList>? artistList;
-
+  int? resultCount;
   ResponseMap({
     this.artistList,
+    this.resultCount,
   });
 
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
@@ -51,6 +52,7 @@ class ResponseMap {
             ? []
             : List<ArtistList>.from(
                 json["artistList"]!.map((x) => ArtistList.fromJson(x))),
+        resultCount: json['resultCount'],
       );
 
   Map<String, dynamic> toJson() => {

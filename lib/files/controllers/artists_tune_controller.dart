@@ -18,7 +18,7 @@ class ArtistsTuneController extends GetxController {
     isLoading.value = true;
     SearchResultModel model = await getArtistTuneListScApi(key);
     tuneList = model.responseMap?.toneList ?? [];
-    //totalToneCount.value = model.responseMap?.totalCount ?? 0;
+    totalToneCount.value = model.responseMap?.resultCount ?? 0;
     isLoading.value = false;
   }
 
