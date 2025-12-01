@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
@@ -74,6 +75,8 @@ final router = GoRouter(
 
 List<StatefulShellBranch> _getShellBranches() => [
       _createShell(homeRoute, (_) => const HomeScreen(),
+          onInit: (s) => homePageBrowseEvent()),
+      _createShell(mainRoute, (_) => const HomeScreen(),
           onInit: (s) => homePageBrowseEvent()),
       _createShell(
           searchRoute,
@@ -187,7 +190,7 @@ Widget navBuilder(context, state, navigationShell) {
 Widget _errorWidget(BuildContext context, GoRouterState state) {
   return const Scaffold(
     body: Center(
-      child: Text("Error page loading"),
+      child: CustomText(title: "Error page loading"),
     ),
   );
 }

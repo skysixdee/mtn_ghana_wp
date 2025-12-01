@@ -46,7 +46,7 @@ Widget _tuneImage(
   TuneInfo info,
 ) {
   return SizedBox(
-    height: 250,
+    height: 180,
     child: customImage(
       imageName: info.localImgName,
       url: info.toneIdpreviewImageUrl,
