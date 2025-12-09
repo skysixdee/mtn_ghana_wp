@@ -69,14 +69,21 @@ class TuneCard extends StatelessWidget {
       } else {
         return InkWell(
           onTap: () {
-            genericPopup(
-              Material(
-                child: MobileTunePreviewSceen(
-                    customScreenType: customScreenType,
-                    tuneInfo: info,
-                    tuneList: tuneList),
-              ),
-            );
+            Get.dialog(Material(
+              child: MobileTunePreviewSceen(
+                  customScreenType: customScreenType,
+                  tuneInfo: info,
+                  tuneList: tuneList),
+            ));
+            // genericPopup(
+            //   Material(
+            //     child:
+            // MobileTunePreviewSceen(
+            //         customScreenType: customScreenType,
+            //         tuneInfo: info,
+            //         tuneList: tuneList),
+            //   ),
+            // );
           },
           child: mainContainer(si),
         );

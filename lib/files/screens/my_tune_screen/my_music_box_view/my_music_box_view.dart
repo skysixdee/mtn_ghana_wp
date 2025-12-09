@@ -32,6 +32,7 @@ class MyMusicBoxView extends StatelessWidget {
             itemCount: con.tuneList.length,
             cardWidth: 220,
             padding: null,
+            physics: NeverScrollableScrollPhysics(),
             builder: (p0) {
               return Stack(
                 alignment: Alignment.topRight,

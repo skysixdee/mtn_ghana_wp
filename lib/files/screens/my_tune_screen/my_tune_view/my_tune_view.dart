@@ -31,6 +31,7 @@ class MyTuneView extends StatelessWidget {
             return CombinedGrid(
                 isLoading: con.isLoading.value,
                 itemCount: con.tuneApkList.length,
+                physics: NeverScrollableScrollPhysics(),
                 //cardWidth: 200,
                 padding: null,
                 builder: (p0) {

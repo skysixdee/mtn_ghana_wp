@@ -45,7 +45,7 @@ import 'package:mtn_ghana_wp/files/screens/web_navigation_view/web_navigation_vi
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _rootNavigatorKey = Get.key; //GlobalKey<NavigatorState>();
 final scaffoldKey = GlobalKey<ScaffoldState>();
 
 final router = GoRouter(

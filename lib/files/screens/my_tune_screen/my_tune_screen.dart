@@ -65,6 +65,7 @@ class MyTuneScreen extends StatelessWidget {
 
   ListView listView(SizingInformation si) {
     return ListView(
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       primary: true,
       children: [

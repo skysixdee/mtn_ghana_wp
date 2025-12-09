@@ -60,6 +60,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
         Obx(
           () {
             return CombinedGrid(
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: con.settingsList.length,
                 isLoading: con.isLoading.value,
                 cardWidth: 220,

@@ -1,6 +1,7 @@
 import 'package:mtn_ghana_wp/files/api_calls/add_to_wishlist_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/delete_from_wishlist_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/delete_mytune_api.dart';
+import 'package:mtn_ghana_wp/files/common/decode_html_text.dart';
 import 'package:mtn_ghana_wp/files/controllers/mobile_tune_preview_cotroller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
@@ -67,29 +68,33 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
         return Container(
           color: white,
           child: Center(
-            child: Column(
-              children: [
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.45,
-                    child: Stack(
-                      alignment: Alignment.topRight,
-                      children: [
-                        Obx(() {
-                          return customImage(
-                              url: con.imageName.value,
-                              gredientColor: gredientColor);
-                        }),
-                        closeButton(context)
-                      ],
-                    )),
-                Expanded(child: tuneInfoBuilder()),
-                SizedBox(height: 150, child: bottomBuilder()),
-                bottomButtons(),
-              ],
-            ),
+            child: mainColumn(context),
           ),
         );
       },
+    );
+  }
+
+  Column mainColumn(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+            height: MediaQuery.of(context).size.height * 0.45,
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Obx(() {
+                  return customImage(
+                      url: con.imageName.value, gredientColor: gredientColor);
+                }),
+                closeButton(context)
+              ],
+            )),
+        Flexible(child: tuneInfoBuilder()),
+        //tuneInfoBuilder(),
+        SizedBox(height: 150, child: bottomBuilder()),
+        bottomButtons(),
+      ],
     );
   }
 
@@ -297,13 +302,13 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
-                title: con.tuneName.value,
+                title: decodeHtmlEntities(con.tuneName.value),
                 fontName: FontName.bold,
                 fontSize: 18,
                 textAlign: TextAlign.center,
               ),
               CustomText(
-                title: con.artistName.value,
+                title: decodeHtmlEntities(con.artistName.value),
                 textAlign: TextAlign.center,
                 fontName: FontName.regular,
                 color: grey,
