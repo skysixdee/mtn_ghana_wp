@@ -39,12 +39,13 @@ class TuneCard extends StatelessWidget {
     this.menuList,
     this.onMenuTap,
     required this.tuneList,
+    this.isMoreAlwaysVisible = false,
     this.customScreenType = CustomScreenType.normal,
   });
 
   final TuneInfo info;
   final CustomScreenType customScreenType;
-
+  final bool isMoreAlwaysVisible;
   final List<TuneInfo> tuneList;
   final Widget? bottomLeftChild;
   final Widget? bottomRightChild;
@@ -113,7 +114,9 @@ class TuneCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: moreButton ??
                     (si.isMobile
-                        ? SizedBox()
+                        ? isMoreAlwaysVisible
+                            ? _moreButton(menuList, info, onMenuTap)
+                            : const SizedBox()
                         : _moreButton(menuList, info, onMenuTap)),
               ),
             ],

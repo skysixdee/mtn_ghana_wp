@@ -9,6 +9,7 @@ import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class SeeMoreScreen extends StatelessWidget {
   const SeeMoreScreen({super.key, required this.list, required this.name});
@@ -16,24 +17,29 @@ class SeeMoreScreen extends StatelessWidget {
   final String name;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: white,
-      child: Column(
-        children: [
-          getNavigationView(name),
-          Expanded(
-            child: GenericScrollView(
-              itemCount: list.length,
-              builder: (index) {
-                return TuneCard(
-                  info: list[index],
-                  tuneList: list,
-                );
-              },
-            ),
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Container(
+          color: white,
+          child: Column(
+            children: [
+              getNavigationView(name),
+              Expanded(
+                child: GenericScrollView(
+                  onlyGrid: si.isMobile ? true : false,
+                  itemCount: list.length,
+                  builder: (index) {
+                    return TuneCard(
+                      info: list[index],
+                      tuneList: list,
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

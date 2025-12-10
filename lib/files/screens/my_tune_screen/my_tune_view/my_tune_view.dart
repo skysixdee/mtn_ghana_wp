@@ -31,14 +31,16 @@ class MyTuneView extends StatelessWidget {
             return CombinedGrid(
                 isLoading: con.isLoading.value,
                 itemCount: con.tuneApkList.length,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 //cardWidth: 200,
                 padding: null,
                 builder: (p0) {
-                  return TuneCard(
+                  return //Text('${con.tuneApkList[p0].toneName}');
+                      TuneCard(
                     info: con.tuneApkList[p0],
                     tuneList: con.tuneApkList,
                     menuList: menuList,
+                    isMoreAlwaysVisible: true,
                     bottomRightChild: settingButton(context, si, p0),
                     onMenuTap: (p2, p1) {
                       if (p2.title == deleteStr) {

@@ -25,6 +25,7 @@ class FeatureGridView extends StatelessWidget {
             padding: null,
             builder: (p0) {
               return TuneCard(
+                isMoreAlwaysVisible: true,
                 tuneList: cont.displayList,
                 info: cont.displayList[p0],
               );
