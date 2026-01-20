@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
@@ -138,6 +139,7 @@ List<StatefulShellBranch> _getShellBranches() => [
         Get.find<ArtistsTuneController>().getArtistsTune(artistName);
         return ArtistsTuneScreen(artistName: artistName);
       }),
+      _createShell(rewardPointRoute, (_) => RewardPointScreen()),
       _createShell(faqRoute, (_) => FaqScreen()),
       _createShell(aboutRoute, (_) => AboutScreen()),
       _createShell(termsAndConditionsRoute, (_) => TermsAndConditionsScreen()),

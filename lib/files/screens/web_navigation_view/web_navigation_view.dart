@@ -97,6 +97,8 @@ class WebNavigationView extends StatelessWidget {
         faqButton(context),
         const SizedBox(width: 20),
         aboutPageButton(context),
+        const SizedBox(width: 20),
+        rewardPointButton(context),
       ],
     );
   }
@@ -111,6 +113,26 @@ class WebNavigationView extends StatelessWidget {
         customPrint("check about");
         //customLaunchUrl('https://callertunez.mtn.com.gh/crbt-web-portal/about');
         context.goNamed(aboutRoute);
+      },
+    );
+  }
+
+  Widget rewardPointButton(BuildContext context) {
+    return Obx(
+      () {
+        return Visibility(
+            visible: !appController.isLoggedIn.value,
+            child: GenericButton(
+              title: rewardPointStr,
+              padding: EdgeInsets.zero,
+              bgColor: transparent,
+              height: double.infinity,
+              onTap: () {
+                customPrint("check about");
+                //customLaunchUrl('https://callertunez.mtn.com.gh/crbt-web-portal/about');
+                context.goNamed(rewardPointRoute);
+              },
+            ));
       },
     );
   }

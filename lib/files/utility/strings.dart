@@ -132,6 +132,7 @@ String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
 String songStr = "Song";
 String codeStr = "Code";
+String rewardPointStr = "Reward point";
 String typeToSearchStr = "Type to search";
 String artistStr = "Artist";
 String settingStr = "Setting";

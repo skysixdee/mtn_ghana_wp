@@ -8,6 +8,8 @@ import 'package:responsive_builder/responsive_builder.dart';
 class CustomScreenHeaderView extends StatelessWidget {
   CustomScreenHeaderView(
       {super.key,
+      this.descFontSize,
+      this.titleFontSize,
       this.height = 280,
       required this.imageName,
       required this.title,
@@ -16,6 +18,8 @@ class CustomScreenHeaderView extends StatelessWidget {
   final String title;
   final String subTitle;
   final double height;
+  final double? titleFontSize;
+  final double? descFontSize;
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
@@ -57,11 +61,11 @@ class CustomScreenHeaderView extends StatelessWidget {
                 CustomText(
                   title: title,
                   fontName: FontName.bold,
-                  fontSize: 22,
+                  fontSize: titleFontSize ?? 22,
                 ),
                 CustomText(
                   title: subTitle,
-                  fontSize: 16,
+                  fontSize: descFontSize ?? 16,
                 )
               ],
             ),

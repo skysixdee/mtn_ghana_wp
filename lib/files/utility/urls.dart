@@ -81,6 +81,7 @@ String deleteMyTuneUrl = "";
 String deleteDedicatedTuneUrl = "";
 
 String addToWishlistUrl = "";
+String getRewardPointsUrl = "";
 
 String setToneUrl = "";
 String myWishistScUrl = "";
