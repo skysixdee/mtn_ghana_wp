@@ -11,7 +11,7 @@ class CustomDrawerController extends GetxController {
     DrawerModel(myWishlistStr, myWishlistRoute),
     DrawerModel(tunezStr, '', isContainSubMenu: true),
     // DrawerModel(nameTuneStr, nameTuneRoute),
-    // DrawerModel(blackListStr, blackListRoute),
+    DrawerModel(rewardPointStr, rewardPointRoute),
     DrawerModel(faqStr, faqRoute),
     DrawerModel(logoutStr, logoutStr),
   ];
@@ -19,6 +19,7 @@ class CustomDrawerController extends GetxController {
     DrawerModel(homeStr, homeRoute),
     DrawerModel(tunezStr, tunezStr, isContainSubMenu: true),
     //DrawerModel(nameTuneStr, nameTuneRoute),
+    DrawerModel(rewardPointStr, rewardPointRoute),
     DrawerModel(faqStr, faqRoute),
     DrawerModel(loginStr, loginStr),
   ];

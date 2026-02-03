@@ -1,4 +1,5 @@
 import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/reward_point_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/category_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
@@ -19,10 +20,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final TextEditingController editingController = TextEditingController();
+
   ProfileController con = Get.find();
+  late RewardPointController rewardCon;
+  @override
+  void initState() {
+    Get.lazyPut(() => RewardPointController());
+    rewardCon = Get.find();
+    rewardCon.getRewardPoint();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -72,6 +89,25 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
+  Widget rewardPointWiddget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomText(title: rewardPointStr + " : ", fontName: FontName.bold),
+        Obx(
+          () {
+            return rewardCon.isLoading.value
+                ? loadingIndicator(radius: 12)
+                : CustomText(
+                    title: "${rewardCon.resp.value.rewardPoints}",
+                    fontName: FontName.regular);
+          },
+        )
+      ],
+    );
+  }
+
   Row deskTopLeftWidgt(SizingInformation si) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -110,8 +146,12 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 20),
           SizedBox(width: 250, child: deskTopMainContainer(si)),
           //status(),
+
+          rewardPointWiddget(),
+          const SizedBox(height: 8),
           table(),
           //subscriptionPlanWidget(),
+
           const SizedBox(height: 8),
           subscribeAndUnSubscribeButton()
         ],

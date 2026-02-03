@@ -150,6 +150,7 @@ Future<void> readProperties() async {
   deleteMyTuneUrl = data['DETETE_TONE_URL'];
   addToWishlistUrl = data['ADD_TO_WISHLIST_URL'];
   getRewardPointsUrl = data['GET_REWARD_POINTS'];
+  getTopLeaderBoardUrl = data['GET_TOP_LEADER_BOARD_URL'];
   myTunesUrl = data["LIST_TONE_URL"];
   playingTuneUrl = data["LIST_TONE_URL"];
   myMusicBoxUrl = data["LIST_TONE_URL"];

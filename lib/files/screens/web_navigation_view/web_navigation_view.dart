@@ -1,34 +1,24 @@
-import 'package:mtn_ghana_wp/files/api_calls/get_search_tune_list_api.dart';
-import 'package:mtn_ghana_wp/files/api_calls/get_tone_price_api.dart';
 import 'package:mtn_ghana_wp/files/controllers/app_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/blacklist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/category_detail_controller.dart';
-import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/reward_point_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
-import 'package:mtn_ghana_wp/files/enums/fonts.dart';
-import 'package:mtn_ghana_wp/files/model/get_tone_price_model.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/url_launcher.dart';
-
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
-import 'package:mtn_ghana_wp/files/router/router.dart';
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_popup.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
-
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -118,23 +108,29 @@ class WebNavigationView extends StatelessWidget {
   }
 
   Widget rewardPointButton(BuildContext context) {
-    return Obx(
-      () {
-        return Visibility(
-            visible: !appController.isLoggedIn.value,
-            child: GenericButton(
-              title: rewardPointStr,
-              padding: EdgeInsets.zero,
-              bgColor: transparent,
-              height: double.infinity,
-              onTap: () {
-                customPrint("check about");
-                //customLaunchUrl('https://callertunez.mtn.com.gh/crbt-web-portal/about');
-                context.goNamed(rewardPointRoute);
-              },
-            ));
+    return GenericButton(
+      title: rewardPointStr,
+      padding: EdgeInsets.zero,
+      bgColor: transparent,
+      height: double.infinity,
+      onTap: () {
+        Get.lazyPut(() => RewardPointController());
+        RewardPointController con = Get.find();
+        con.getRewardPoint();
+        con.getLeaderBoard();
+
+        customPrint("check about");
+        //customLaunchUrl('https://callertunez.mtn.com.gh/crbt-web-portal/about');
+        context.goNamed(rewardPointRoute);
       },
     );
+    // Obx(
+    //   () {
+    //     return Visibility(
+    //         visible: !appController.isLoggedIn.value,
+    //         child: );
+    //   },
+    // );
   }
 
   GenericButton faqButton(BuildContext context) {

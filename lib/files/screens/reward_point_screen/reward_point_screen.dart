@@ -9,12 +9,15 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart'
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_screen_header_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/empty_list_widget.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
+
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class RewardPointScreen extends StatefulWidget {
@@ -34,6 +37,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
     super.initState();
   }
 
+  final double height = 250;
   @override
   void dispose() {
     Get.delete<RewardPointController>();
@@ -50,71 +54,116 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
         ]),
         ResponsiveBuilder(
           builder: (context, si) {
-            return CustomScreenHeaderView(
-              descFontSize: si.isMobile ? 12 : 14,
-              titleFontSize: si.isMobile ? 14 : 16,
-              height: 250,
-              imageName: nameTuneHeaderPng,
-              title: "Your Callertune Just Got More Rewarding",
-              subTitle:
-                  "Earn reward points on every CRBT subscription, tune download, and  renewals.",
+            return Stack(
+              alignment: Alignment.centerLeft,
+              children: [
+                CustomScreenHeaderView(
+                  descFontSize: si.isMobile ? 12 : 14,
+                  titleFontSize: si.isMobile ? 14 : 16,
+                  height: height,
+                  imageName: nameTuneHeaderPng,
+                  title: "Callertunez Rewards",
+                  subTitle:
+                      "Earn reward points on every CRBT subscription, tune download, and renewals.",
+                ),
+
+                //leaderBoadrdWidget(height)
+              ],
             );
           },
         ),
-        Expanded(
-          child: Obx(
-            () {
-              return con.isLoading.value
-                  ? loadingIndicator()
-                  : ((con.resp.value.rewardPoints ?? 0) <= 0)
-                      ? userHasNoRewardPoints(
-                          context,
-                        )
-                      : userHasRewardPoints(
-                          context, "${con.resp.value.rewardPoints ?? 0}");
-            },
-          ),
-        ),
+        //leaderBoadrdWidget(120, isHorizontal: true),
+        Obx(
+          () {
+            return appCont.isLoggedIn.value
+                ? rewardDescriptionWidget(context)
+                : emptyListWidget(
+                    message: thisFeatureIsAvailableForLoggedinStr, height: 300);
+          },
+        )
       ],
     );
   }
 
+  Expanded rewardDescriptionWidget(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Obx(
+          () {
+            return con.isLoading.value
+                ? loadingIndicator()
+                : ((con.resp.value.rewardPoints ?? 0) <= 0)
+                    ? userHasNoRewardPoints(
+                        context,
+                      )
+                    : userHasRewardPoints(
+                        context, "${con.resp.value.rewardPoints ?? 0}");
+          },
+        ),
+      ),
+    );
+  }
+
   Widget userHasRewardPoints(BuildContext context, String rewardPoint) {
+    double mSize = 13;
+    double tSize = 15;
     return ResponsiveBuilder(
       builder: (context, si) {
         return Column(
+          spacing: 6,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomText(
-              fontSize: si.isMobile ? 14 : 18,
+              fontSize: si.isMobile ? mSize : tSize,
+              textAlign: TextAlign.center,
+              title: "Great going! You're already earning points. ",
+            ),
+            Row(
+              spacing: 4,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomText(
+                    fontSize: si.isMobile ? mSize : tSize,
+                    textAlign: TextAlign.center,
+                    title: """You have accumulated """),
+                CustomText(
+                  fontSize: si.isMobile ? mSize : tSize,
+                  textAlign: TextAlign.center,
+                  fontName: FontName.bold,
+                  title: rewardPoint,
+                ),
+                CustomText(
+                    fontSize: si.isMobile ? mSize : tSize,
+                    textAlign: TextAlign.center,
+                    title: 'points'),
+              ],
+            ),
+            CustomText(
+              fontSize: si.isMobile ? mSize : tSize,
               textAlign: TextAlign.center,
               title:
-                  "Great going! You’re already earning rewards.\nYour rewards balance is ${rewardPoint} points",
+                  'Keep exploring new tunes and stay subscribed to keep earning more points.\nCustomers with the highest accumulated points will receive awesome cash rewards.\nTerms & conditions apply',
             ),
-            CustomText(
-                fontSize: si.isMobile ? 14 : 18,
-                textAlign: TextAlign.center,
-                title:
-                    'Keep exploring new tunes, stay subscribed, and boost your reward points.'),
-            CustomText(
-              fontSize: si.isMobile ? 14 : 18,
-              textAlign: TextAlign.center,
-              title:
-                  'The more you engage, the closer you get to exciting rewards.',
-            ),
-            CustomText(
-              fontSize: si.isMobile ? 14 : 18,
-              textAlign: TextAlign.center,
-              title: 'Do more. Earn more. Win more.',
-              fontName: FontName.bold,
-            ),
-            CustomText(
-              fontSize: si.isMobile ? 14 : 18,
-              textAlign: TextAlign.center,
-              title:
-                  'Top rewarded customers stand a chance to win attractive prizes.',
-            ),
+            // Row(
+            //   spacing: 4,
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     CustomText(
+            //         fontSize: si.isMobile ? mSize : tSize,
+            //         textAlign: TextAlign.center,
+            //         title: 'Top rewarded customers stand a chance to win'),
+            //     CustomText(
+            //         fontSize: si.isMobile ? mSize : tSize,
+            //         textAlign: TextAlign.center,
+            //         fontName: FontName.bold,
+            //         title: 'attractive prizes.'),
+            //   ],
+            // ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,7 +173,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                   child: GenericButton(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     bgColor: yellow,
-                    title: 'explorore more',
+                    title: 'Explore Callertunez',
                     onTap: () {
                       context.goNamed(homeRoute);
                     },
@@ -139,60 +188,256 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
     );
   }
 
+  Widget leaderBoadrdWidget(double heigh, {bool isHorizontal = false}) {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Padding(
+          padding: isHorizontal
+              ? const EdgeInsets.only(top: 20.0)
+              : const EdgeInsets.all(0.0),
+          child: Container(
+            height: isHorizontal ? null : heigh - 4,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(0),
+              color: isHorizontal ? white : yellow,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: isHorizontal
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      leaderBoardImage3,
+                      height: si.isMobile ? 40 : 50,
+                    ),
+                    CustomText(
+                      title: "Leaderboard".toUpperCase(),
+                      fontSize: si.isMobile ? 14 : 18,
+                      fontName: FontName.bold,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: isHorizontal ? 60 : null,
+                  width: isHorizontal
+                      ? null
+                      : si.isMobile
+                          ? 150
+                          : 200,
+                  child: leaderBoardList(isHorizontal, si),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget leaderBoardList(bool isHorizontal, SizingInformation si) {
+    return Obx(
+      () {
+        return con.isLoadingLeaderBoard.value
+            ? loadingIndicator(height: 150)
+            : con.leaderBoardList.isEmpty
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: SizedBox(
+                          height: 150,
+                          child: Center(
+                            child: CustomText(
+                              textAlign: TextAlign.center,
+                              title: checkBackSoonStr,
+                              fontName: FontName.regular,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : ListView.builder(
+                    scrollDirection:
+                        isHorizontal ? Axis.horizontal : Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: con.leaderBoardList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 8),
+                        child: Container(
+                          width:
+                              isHorizontal ? (si.isMobile ? 150 : 200) : null,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: isHorizontal ? yellow : white,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.all(si.isMobile
+                                        ? (isHorizontal ? 4 : 2)
+                                        : 4.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: isHorizontal ? white : yellow,
+                                          borderRadius:
+                                              BorderRadius.circular(60)),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(si.isMobile
+                                            ? (isHorizontal ? 6 : 8)
+                                            : 6.0),
+                                        child: Icon(
+                                          Icons.person,
+                                          size: si.isMobile
+                                              ? (isHorizontal ? 14 : 16)
+                                              : 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  CustomText(
+                                    title: '81******1${index * 4}',
+                                    fontName: FontName.semiBold,
+                                    fontSize: si.isMobile ? 10 : 12,
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 18.0),
+                                child: CustomText(
+                                  fontName: FontName.semiBold,
+                                  fontSize: si.isMobile ? 10 : 12,
+                                  title: "0${index + 1}",
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+      },
+    );
+  }
+
+  Widget ovalShape(SizingInformation si) {
+    double height = si.screenSize.height * 0.20;
+
+    return ClipOval(
+      child: Container(
+        width: si.isMobile ? height * 1.3 : height * 1.8,
+        height: si.isMobile ? (height * 0.9) : height * 1.2,
+        color: yellow,
+        child: Padding(
+          padding: EdgeInsets.only(left: (height * 0.3) + 14, right: 28),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // CustomText(
+              //   title: "Ranking",
+              //   textAlign: TextAlign.center,
+              //   fontName: FontName.bold,
+              //   fontSize: si.isMobile ? 14 : 16,
+              // ),
+
+              CustomText(
+                title: "8123812512 : 1",
+                fontName: FontName.regular,
+                fontSize: si.isMobile ? 14 : 16,
+              ),
+              CustomText(
+                title: "8123812511 : 2",
+                fontName: FontName.regular,
+                fontSize: si.isMobile ? 14 : 16,
+              ),
+              // CustomText(
+              //   title: "subTitle ",
+              //   fontSize: 16,
+              // )
+            ],
+          ),
+        ),
+      ),
+    );
+    // Positioned(
+    //   right: -(height * 0.4),
+    //   child:
+    // );
+  }
+
   Widget userHasNoRewardPoints(BuildContext context) {
+    double mSize = 13;
+    double tSize = 15;
     return ResponsiveBuilder(
       builder: (context, si) {
         return Column(
+          spacing: 6,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomText(
-              fontSize: si.isMobile ? 14 : 18,
+              fontSize: si.isMobile ? mSize : tSize,
               textAlign: TextAlign.center,
               fontName: FontName.bold,
               title:
                   "You haven’t earned reward points yet—but you can start anytime.",
             ),
             CustomText(
-                fontSize: si.isMobile ? 14 : 18,
+                fontSize: si.isMobile ? mSize : tSize,
                 textAlign: TextAlign.center,
                 title:
                     'Our Callertunez Rewards Program lets you earn points on every subscription, tune download, and  renewals.'),
             CustomText(
-              fontSize: si.isMobile ? 14 : 18,
+              fontSize: si.isMobile ? mSize : tSize,
               textAlign: TextAlign.center,
               title: 'Just download your favorite tunes and stay subscribed.',
             ),
             CustomText(
-              fontSize: si.isMobile ? 14 : 18,
+              fontSize: si.isMobile ? mSize : tSize,
               textAlign: TextAlign.center,
               title:
                   'Points add up automatically—and more points mean bigger rewards.',
             ),
             CustomText(
-              fontSize: si.isMobile ? 14 : 18,
+              fontSize: si.isMobile ? mSize : tSize,
               textAlign: TextAlign.center,
               title:
                   'Start earning today and become one of our top rewarded customers.',
               fontName: FontName.bold,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomText(
-                  fontSize: si.isMobile ? 14 : 18,
-                  textAlign: TextAlign.center,
-                  title: 'Earn more points and win',
-                ),
-                CustomText(
-                  fontSize: si.isMobile ? 14 : 18,
-                  textAlign: TextAlign.center,
-                  fontName: FontName.bold,
-                  title: 'attractive prizes',
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     CustomText(
+            //       fontSize: si.isMobile ? mSize : tSize,
+            //       textAlign: TextAlign.center,
+            //       title: 'Earn more points and win',
+            //     ),
+            //     CustomText(
+            //       fontSize: si.isMobile ? mSize : tSize,
+            //       textAlign: TextAlign.center,
+            //       fontName: FontName.bold,
+            //       title: 'attractive prizes',
+            //     ),
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -202,7 +447,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                   child: GenericButton(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     bgColor: yellow,
-                    title: 'explorore more',
+                    title: 'Explore our tune catalog now',
                     onTap: () {
                       context.goNamed(homeRoute);
                     },

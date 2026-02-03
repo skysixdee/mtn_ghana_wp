@@ -90,6 +90,9 @@ class MobileDrawerScreen extends StatelessWidget {
           context.goNamed(myWishlistRoute);
         } else if (menuList[index].title == blackListStr) {
           context.goNamed(blackListRoute);
+        } else {
+          print('else called');
+          context.goNamed(menuList[index].routeName);
         }
       },
       child: Container(

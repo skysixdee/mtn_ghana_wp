@@ -10,3 +10,8 @@ const aboutMainPng = "assets/pngs/about_main.png";
 const facebookPng = 'assets/pngs/facebook.png';
 const twitterPng = 'assets/pngs/twitter_icon.png';
 const defaultImagePng = 'assets/pngs/defaultImage.png';
+
+const leaderBoardImage1 = 'assets/pngs/leader_board_1.png';
+const leaderBoardImage2 = 'assets/pngs/leader_board_2.png';
+const leaderBoardImage3 = 'assets/pngs/leader_board_3.png';
+const leaderBoardImage4 = 'assets/pngs/leader_board_4.png';
