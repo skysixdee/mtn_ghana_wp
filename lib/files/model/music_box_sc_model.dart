@@ -11,7 +11,7 @@ String musicBoxScModelToJson(MusicBoxScModel data) =>
     json.encode(data.toJson());
 
 class MusicBoxScModel {
-  int? respCode;
+  String? respCode;
   String? message;
   DateTime? respTime;
   List<MusicBoxList>? musicBoxList;
@@ -25,7 +25,7 @@ class MusicBoxScModel {
 
   factory MusicBoxScModel.fromJson(Map<String, dynamic> json) =>
       MusicBoxScModel(
-        respCode: json["respCode"],
+        respCode: "${json["respCode"]}",
         message: json["message"],
         respTime:
             json["respTime"] == null ? null : DateTime.parse(json["respTime"]),

@@ -6,7 +6,7 @@ import 'package:mtn_ghana_wp/files/model/get_top_leader_board_model.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 
 class RewardPointController extends GetxController {
-  RxBool isLoading = true.obs;
+  RxBool isLoading = false.obs;
   RxBool isLoadingLeaderBoard = false.obs;
   Rx<GetRewardPointModel> resp = GetRewardPointModel().obs;
   RxList leaderBoardList = <PointsList>[].obs;
@@ -46,9 +46,14 @@ class RewardPointController extends GetxController {
       print("Already loading leaderboard data");
       return;
     }
+    if (leaderBoardList.isNotEmpty) {
+      print("Leader board data is already loaded");
+      return;
+    }
     isLoadingLeaderBoard.value = true;
 
     GetLeaderBoardModel model = await getTopLeaderBoardApi();
+    print(" Leader board model ${model.pointsList}");
     leaderBoardList.value = model.pointsList ?? [];
     isLoadingLeaderBoard.value = false;
   }

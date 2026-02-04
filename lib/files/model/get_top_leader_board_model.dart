@@ -42,8 +42,8 @@ class GetLeaderBoardModel {
 
 class PointsList {
   String? msisdn;
-  int? rewardPoints;
-  int? rank;
+  String? rewardPoints;
+  String? rank;
 
   PointsList({
     this.msisdn,

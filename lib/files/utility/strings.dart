@@ -94,7 +94,7 @@ String searchStr = 'Search';
 String searchedResultForStr = 'searched result for ';
 String artistsResultForStr = 'Artists ';
 String thisFeatureIsAvailableForLoggedinStr =
-    "This feature is available for loggedin user";
+    "This feature is available for logged in users";
 String statusStr = "Status";
 String callerStr = "Callers";
 String playAtStr = "Play at";

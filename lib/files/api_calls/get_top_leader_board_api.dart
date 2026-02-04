@@ -4,12 +4,9 @@ import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<GetLeaderBoardModel> getTopLeaderBoardApi() async {
-  String url = getTopLeaderBoardUrl;
   //return getLeaderBoardModelFromJson(_jsonResp);
-  Map<String, dynamic> reps =
-      await NetworkManager().get(getTopLeaderBoardUrl, addInHeader: [
-    {'transactionId': getTransactionId()}
-  ]);
+  String url = "$getTopLeaderBoardUrl?transactionId=${getTransactionId()}";
+  Map<String, dynamic> reps = await NetworkManager().get(url);
   GetLeaderBoardModel model = GetLeaderBoardModel.fromJson(reps);
   return model;
 }

@@ -66,8 +66,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                   subTitle:
                       "Earn reward points on every CRBT subscription, tune download, and renewals.",
                 ),
-
-                //leaderBoadrdWidget(height)
+                leaderBoadrdWidget(height)
               ],
             );
           },
@@ -77,8 +76,14 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
           () {
             return appCont.isLoggedIn.value
                 ? rewardDescriptionWidget(context)
-                : emptyListWidget(
-                    message: thisFeatureIsAvailableForLoggedinStr, height: 300);
+                : ListView(
+                    shrinkWrap: true,
+                    children: [
+                      emptyListWidget(
+                          message: thisFeatureIsAvailableForLoggedinStr,
+                          height: 300)
+                    ],
+                  );
           },
         )
       ],
@@ -311,7 +316,8 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                     ),
                                   ),
                                   CustomText(
-                                    title: '81******1${index * 4}',
+                                    title:
+                                        con.leaderBoardList[index].msisdn ?? '',
                                     fontName: FontName.semiBold,
                                     fontSize: si.isMobile ? 10 : 12,
                                   )
@@ -322,7 +328,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                 child: CustomText(
                                   fontName: FontName.semiBold,
                                   fontSize: si.isMobile ? 10 : 12,
-                                  title: "0${index + 1}",
+                                  title: con.leaderBoardList[index].rank ?? '',
                                 ),
                               )
                             ],

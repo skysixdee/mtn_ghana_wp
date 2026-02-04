@@ -55,7 +55,8 @@ class WebNavigationView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(child: leftWidget(context)),
-                      Flexible(child: rightWidget(context)),
+                      rightWidget(context)
+                      //Flexible(child: rightWidget(context)),
                     ],
                   ),
                 ),
