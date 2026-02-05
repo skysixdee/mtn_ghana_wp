@@ -4,7 +4,7 @@ import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<GetLeaderBoardModel> getTopLeaderBoardApi() async {
-  //return getLeaderBoardModelFromJson(_jsonResp);
+  return getLeaderBoardModelFromJson(_jsonResp);
   String url = "$getTopLeaderBoardUrl?transactionId=${getTransactionId()}";
   Map<String, dynamic> reps = await NetworkManager().get(url);
   GetLeaderBoardModel model = GetLeaderBoardModel.fromJson(reps);
@@ -17,14 +17,20 @@ String _jsonResp = """{
   "pointsList": [
     {
       "msisdn": "98****52",
-      "rewardPoints": "100456565654",
+      "rewardPoints": "665654",
       "rank": "1"
     },
     {
       "msisdn": "98****32",
       "rewardPoints": "50",
       "rank": "2"
+    },
+    {
+      "msisdn": "98****52",
+      "rewardPoints": "565654",
+      "rank": "1"
     }
+    
   ]
 }""";
 

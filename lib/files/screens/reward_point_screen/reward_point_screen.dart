@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
@@ -46,66 +48,79 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        NavigationHeaderView(titleList: [
-          NavigationHeaderModel(homeStr, homeRoute),
-          NavigationHeaderModel(rewardPointStr, rewardPointRoute),
-        ]),
-        ResponsiveBuilder(
-          builder: (context, si) {
-            return Stack(
-              alignment: Alignment.centerLeft,
-              children: [
-                CustomScreenHeaderView(
-                  descFontSize: si.isMobile ? 12 : 14,
-                  titleFontSize: si.isMobile ? 14 : 16,
-                  height: height,
-                  imageName: nameTuneHeaderPng,
-                  title: "Callertunez Rewards",
-                  subTitle:
-                      "Earn reward points on every CRBT subscription, tune download, and renewals.",
-                ),
-                leaderBoadrdWidget(height)
-              ],
-            );
-          },
-        ),
-        //leaderBoadrdWidget(120, isHorizontal: true),
-        Obx(
-          () {
-            return appCont.isLoggedIn.value
-                ? rewardDescriptionWidget(context)
-                : ListView(
-                    shrinkWrap: true,
+    return ResponsiveBuilder(
+      builder: (context, sizingInformation) {
+        return Column(
+          children: [
+            NavigationHeaderView(titleList: [
+              NavigationHeaderModel(homeStr, homeRoute),
+              NavigationHeaderModel(rewardPointStr, rewardPointRoute),
+            ]),
+            if (!sizingInformation.isMobile)
+              ResponsiveBuilder(
+                builder: (context, si) {
+                  return Stack(
+                    alignment: Alignment.centerLeft,
                     children: [
-                      emptyListWidget(
-                          message: thisFeatureIsAvailableForLoggedinStr,
-                          height: 300)
+                      CustomScreenHeaderView(
+                        descFontSize: si.isMobile ? 12 : 14,
+                        titleFontSize: si.isMobile ? 14 : 16,
+                        height: height,
+                        imageName: nameTuneHeaderPng,
+                        title: rewarPointOvalTitleStr,
+                        subTitle: rewarPointOvalSubTitleStr,
+                      ),
+                      if (!si.isMobile)
+                        leaderBoadrdWidget(si.isMobile ? (height + 50) : height)
                     ],
                   );
-          },
-        )
-      ],
+                },
+              ),
+            //leaderBoadrdWidget(120, isHorizontal: true),
+            if (sizingInformation.isMobile)
+              leaderBoadrdWidget(
+                  sizingInformation.isMobile ? (height + 50) : height),
+            Expanded(
+              child: Obx(
+                () {
+                  return appCont.isLoggedIn.value
+                      ? Center(
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: [rewardDescriptionWidget(context)],
+                          ),
+                        )
+                      : ListView(
+                          shrinkWrap: true,
+                          children: [
+                            emptyListWidget(
+                                message: thisFeatureIsAvailableForLoggedinStr,
+                                height: 300)
+                          ],
+                        );
+                },
+              ),
+            )
+          ],
+        );
+      },
     );
   }
 
-  Expanded rewardDescriptionWidget(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Obx(
-          () {
-            return con.isLoading.value
-                ? loadingIndicator()
-                : ((con.resp.value.rewardPoints ?? 0) <= 0)
-                    ? userHasNoRewardPoints(
-                        context,
-                      )
-                    : userHasRewardPoints(
-                        context, "${con.resp.value.rewardPoints ?? 0}");
-          },
-        ),
+  Widget rewardDescriptionWidget(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Obx(
+        () {
+          return con.isLoading.value
+              ? loadingIndicator()
+              : ((con.resp.value.rewardPoints ?? 0) <= 0)
+                  ? userHasNoRewardPoints(
+                      context,
+                    )
+                  : userHasRewardPoints(
+                      context, "${con.resp.value.rewardPoints ?? 0}");
+        },
       ),
     );
   }
@@ -201,7 +216,11 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
               ? const EdgeInsets.only(top: 20.0)
               : const EdgeInsets.all(0.0),
           child: Container(
-            height: isHorizontal ? null : heigh - 4,
+            height: isHorizontal
+                ? null
+                : si.isMobile
+                    ? null
+                    : heigh - 4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
               color: isHorizontal ? white : yellow,
@@ -213,6 +232,33 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                   ? CrossAxisAlignment.start
                   : CrossAxisAlignment.center,
               children: [
+                if (si.isMobile)
+                  Column(
+                    children: [
+                      Container(
+                        height: 1,
+                        color: white,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 28.0, right: 28.0, bottom: 10, top: 12),
+                        child: Column(
+                          children: [
+                            CustomText(
+                              title: rewarPointOvalTitleStr,
+                              fontSize: 16,
+                              fontName: FontName.semiBold,
+                            ),
+                            CustomText(
+                              title: rewarPointOvalSubTitleStr,
+                              fontName: FontName.regular,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -229,14 +275,24 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: isHorizontal ? 60 : null,
+                Container(
+                  color: yellow,
                   width: isHorizontal
                       ? null
                       : si.isMobile
-                          ? 150
+                          ? double.infinity
                           : 260,
-                  child: leaderBoardList(isHorizontal, si),
+                  child: Center(
+                    child: SizedBox(
+                      height: isHorizontal ? 60 : null,
+                      width: isHorizontal
+                          ? null
+                          : si.isMobile
+                              ? 250
+                              : 260,
+                      child: leaderBoardList(isHorizontal, si),
+                    ),
+                  ),
                 )
               ],
             ),
@@ -272,6 +328,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                     ],
                   )
                 : ListView.builder(
+                    padding: EdgeInsets.only(bottom: 20),
                     scrollDirection:
                         isHorizontal ? Axis.horizontal : Axis.vertical,
                     physics: const NeverScrollableScrollPhysics(),
@@ -323,20 +380,40 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                   )
                                 ],
                               ),
-                              CustomText(
-                                title:
-                                    con.leaderBoardList[index].rewardPoints ??
+                              Column(
+                                children: [
+                                  CustomText(
+                                    title: rewarPointDetailStr,
+                                    fontName: FontName.semiBold,
+                                    color: black,
+                                    fontSize: si.isMobile ? 10 : 12,
+                                  ),
+                                  CustomText(
+                                    title: con.leaderBoardList[index]
+                                            .rewardPoints ??
                                         '',
-                                fontName: FontName.semiBold,
-                                color: green,
-                                fontSize: si.isMobile ? 10 : 12,
+                                    fontName: FontName.semiBold,
+                                    color: green,
+                                    fontSize: si.isMobile ? 10 : 12,
+                                  )
+                                ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 18.0),
-                                child: CustomText(
-                                  fontName: FontName.semiBold,
-                                  fontSize: si.isMobile ? 10 : 12,
-                                  title: con.leaderBoardList[index].rank ?? '',
+                                child: Column(
+                                  children: [
+                                    CustomText(
+                                      fontName: FontName.semiBold,
+                                      fontSize: si.isMobile ? 10 : 12,
+                                      title: rankStr,
+                                    ),
+                                    CustomText(
+                                      fontName: FontName.semiBold,
+                                      fontSize: si.isMobile ? 10 : 12,
+                                      title:
+                                          con.leaderBoardList[index].rank ?? '',
+                                    ),
+                                  ],
                                 ),
                               )
                             ],
