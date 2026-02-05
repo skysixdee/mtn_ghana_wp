@@ -17,7 +17,7 @@ String _jsonResp = """{
   "pointsList": [
     {
       "msisdn": "98****52",
-      "rewardPoints": "100",
+      "rewardPoints": "100456565654",
       "rank": "1"
     },
     {

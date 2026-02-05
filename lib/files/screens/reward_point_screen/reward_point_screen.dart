@@ -235,7 +235,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                       ? null
                       : si.isMobile
                           ? 150
-                          : 200,
+                          : 260,
                   child: leaderBoardList(isHorizontal, si),
                 )
               ],
