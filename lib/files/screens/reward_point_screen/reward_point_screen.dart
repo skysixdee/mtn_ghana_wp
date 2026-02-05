@@ -323,6 +323,14 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                   )
                                 ],
                               ),
+                              CustomText(
+                                title:
+                                    con.leaderBoardList[index].rewardPoints ??
+                                        '',
+                                fontName: FontName.semiBold,
+                                color: green,
+                                fontSize: si.isMobile ? 10 : 12,
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 18.0),
                                 child: CustomText(

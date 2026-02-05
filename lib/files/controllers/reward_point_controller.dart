@@ -51,7 +51,7 @@ class RewardPointController extends GetxController {
       return;
     }
     isLoadingLeaderBoard.value = true;
-
+    print(" Leader board model  loading...");
     GetLeaderBoardModel model = await getTopLeaderBoardApi();
     print(" Leader board model ${model.pointsList}");
     leaderBoardList.value = model.pointsList ?? [];

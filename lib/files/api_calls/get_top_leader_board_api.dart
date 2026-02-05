@@ -17,13 +17,13 @@ String _jsonResp = """{
   "pointsList": [
     {
       "msisdn": "98****52",
-      "rewardPoints": 100,
-      "rank": 1
+      "rewardPoints": "100",
+      "rank": "1"
     },
     {
       "msisdn": "98****32",
-      "rewardPoints": 50,
-      "rank": 2
+      "rewardPoints": "50",
+      "rank": "2"
     }
   ]
 }""";
