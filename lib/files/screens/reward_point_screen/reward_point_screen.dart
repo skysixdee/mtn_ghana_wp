@@ -327,100 +327,130 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                       ),
                     ],
                   )
-                : ListView.builder(
-                    padding: EdgeInsets.only(bottom: 20),
-                    scrollDirection:
-                        isHorizontal ? Axis.horizontal : Axis.vertical,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: con.leaderBoardList.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                            left: 8.0, right: 8.0, top: 8),
-                        child: Container(
-                          width:
-                              isHorizontal ? (si.isMobile ? 150 : 200) : null,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: isHorizontal ? yellow : white,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
+                : Column(
+                    children: [
+                      // Padding(
+                      //   padding: const EdgeInsets.only(right: 18.0, left: 50),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       CustomText(
+                      //         title: 'MSISDN',
+                      //         fontName: FontName.bold,
+                      //       ),
+                      //       CustomText(
+                      //         title: rewarPointDetailStr,
+                      //         fontName: FontName.bold,
+                      //       ),
+                      //       CustomText(
+                      //         title: rankStr,
+                      //         fontName: FontName.bold,
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      ListView.builder(
+                        padding: EdgeInsets.only(bottom: 20),
+                        scrollDirection:
+                            isHorizontal ? Axis.horizontal : Axis.vertical,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: con.leaderBoardList.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, right: 8.0, top: 8),
+                            child: Container(
+                              width: isHorizontal
+                                  ? (si.isMobile ? 150 : 200)
+                                  : null,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: isHorizontal ? yellow : white,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(si.isMobile
-                                        ? (isHorizontal ? 4 : 2)
-                                        : 4.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: isHorizontal ? white : yellow,
-                                          borderRadius:
-                                              BorderRadius.circular(60)),
-                                      child: Padding(
+                                  Row(
+                                    children: [
+                                      Padding(
                                         padding: EdgeInsets.all(si.isMobile
-                                            ? (isHorizontal ? 6 : 8)
-                                            : 6.0),
-                                        child: Icon(
-                                          Icons.person,
-                                          size: si.isMobile
-                                              ? (isHorizontal ? 14 : 16)
-                                              : 20,
+                                            ? (isHorizontal ? 4 : 2)
+                                            : 4.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  isHorizontal ? white : yellow,
+                                              borderRadius:
+                                                  BorderRadius.circular(60)),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(si.isMobile
+                                                ? (isHorizontal ? 6 : 8)
+                                                : 6.0),
+                                            child: Icon(
+                                              Icons.person,
+                                              size: si.isMobile
+                                                  ? (isHorizontal ? 14 : 16)
+                                                  : 20,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                      CustomText(
+                                        title:
+                                            con.leaderBoardList[index].msisdn ??
+                                                '',
+                                        fontName: FontName.semiBold,
+                                        fontSize: si.isMobile ? 10 : 12,
+                                      )
+                                    ],
                                   ),
-                                  CustomText(
-                                    title:
-                                        con.leaderBoardList[index].msisdn ?? '',
-                                    fontName: FontName.semiBold,
-                                    fontSize: si.isMobile ? 10 : 12,
+                                  Column(
+                                    children: [
+                                      CustomText(
+                                        title: rewarPointDetailStr,
+                                        fontName: FontName.semiBold,
+                                        color: black,
+                                        fontSize: si.isMobile ? 10 : 12,
+                                      ),
+                                      CustomText(
+                                        title: con.leaderBoardList[index]
+                                                .rewardPoints ??
+                                            '',
+                                        fontName: FontName.semiBold,
+                                        color: green,
+                                        fontSize: si.isMobile ? 10 : 12,
+                                      )
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 18.0),
+                                    child: Column(
+                                      children: [
+                                        CustomText(
+                                          fontName: FontName.semiBold,
+                                          fontSize: si.isMobile ? 10 : 12,
+                                          title: rankStr,
+                                        ),
+                                        CustomText(
+                                          fontName: FontName.semiBold,
+                                          fontSize: si.isMobile ? 10 : 12,
+                                          color: green,
+                                          title:
+                                              con.leaderBoardList[index].rank ??
+                                                  '',
+                                        ),
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
-                              Column(
-                                children: [
-                                  CustomText(
-                                    title: rewarPointDetailStr,
-                                    fontName: FontName.semiBold,
-                                    color: black,
-                                    fontSize: si.isMobile ? 10 : 12,
-                                  ),
-                                  CustomText(
-                                    title: con.leaderBoardList[index]
-                                            .rewardPoints ??
-                                        '',
-                                    fontName: FontName.semiBold,
-                                    color: green,
-                                    fontSize: si.isMobile ? 10 : 12,
-                                  )
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 18.0),
-                                child: Column(
-                                  children: [
-                                    CustomText(
-                                      fontName: FontName.semiBold,
-                                      fontSize: si.isMobile ? 10 : 12,
-                                      title: rankStr,
-                                    ),
-                                    CustomText(
-                                      fontName: FontName.semiBold,
-                                      fontSize: si.isMobile ? 10 : 12,
-                                      title:
-                                          con.leaderBoardList[index].rank ?? '',
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   );
       },
     );
