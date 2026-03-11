@@ -6,6 +6,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class SideMenuView extends StatefulWidget {
   const SideMenuView({super.key});
@@ -35,17 +36,31 @@ class _SideMenuViewState extends State<SideMenuView> {
     return Container(
       width: sideMenuWidth,
       decoration: decoration(),
-      child: ListView.builder(
-        padding: const EdgeInsets.only(top: 12, bottom: 12),
-        itemCount: cont.sideMenuList.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 12, right: 12, bottom: 10),
-            child: cont.sideMenuList[index].isContainSubMenu
-                ? subMenuCard(context, cont.sideMenuList[index])
-                : menuCard(context, cont.sideMenuList[index]),
-          );
-        },
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 12, bottom: 12),
+              itemCount: cont.sideMenuList.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.only(left: 12, right: 12, bottom: 10),
+                  child:
+                      // cont.sideMenuList[index].isContainSubMenu
+                      //     ? subMenuCard(context, cont.sideMenuList[index]):
+                      menuCard(context, cont.sideMenuList[index]),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomText(
+              title: "@${DateTime.now().year} " + copyrightStr,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -54,11 +69,11 @@ class _SideMenuViewState extends State<SideMenuView> {
     return InkWell(
       onTap: () {
         cont.selectedCard.value = info;
-        if (info.isContainSubMenu) {
-          isSubMenuOpen.value = !isSubMenuOpen.value;
-        } else {
-          isSubMenuOpen.value = false;
-        }
+        // if (info.isContainSubMenu) {
+        //   isSubMenuOpen.value = !isSubMenuOpen.value;
+        // } else {
+        //   isSubMenuOpen.value = false;
+        // }
         if (info.routeName.isNotEmpty) {
           //Get.toNamed(info.routeName);
           context.goNamed(info.routeName);
@@ -112,51 +127,51 @@ class _SideMenuViewState extends State<SideMenuView> {
     );
   }
 
-  Widget subMenuCard(BuildContext context, SideMenuModel info) {
-    return Obx(() => Container(
-          // Added Obx so the 'if' actually works
-          decoration: BoxDecoration(
-              color: lightYellow, borderRadius: BorderRadius.circular(4)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Main Card
-              Row(
-                children: [
-                  Expanded(child: menuCard(context, info, color: transparent)),
-                ],
-              ),
+  // Widget subMenuCard(BuildContext context, SideMenuModel info) {
+  //   return Obx(() => Container(
+  //         // Added Obx so the 'if' actually works
+  //         decoration: BoxDecoration(
+  //             color: lightYellow, borderRadius: BorderRadius.circular(4)),
+  //         child: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             // Main Card
+  //             Row(
+  //               children: [
+  //                 Expanded(child: menuCard(context, info, color: transparent)),
+  //               ],
+  //             ),
 
-              // Sub Menu Items
-              (isSubMenuOpen.value) ? subMenuList(context) : const SizedBox()
-            ],
-          ),
-        ));
-  }
+  //             // Sub Menu Items
+  //             (isSubMenuOpen.value) ? subMenuList(context) : const SizedBox()
+  //           ],
+  //         ),
+  //       ));
+  // }
 
-  Widget subMenuList(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
-      child: Container(
-        decoration: BoxDecoration(
-            color: transparent, borderRadius: BorderRadius.circular(4)),
-        child: ListView.builder(
-          shrinkWrap: true, // Crucial for use inside a Column
-          physics:
-              const NeverScrollableScrollPhysics(), // Let the parent scroll
-          itemCount: 10, // Use dynamic data
-          itemBuilder: (context, index) {
-            //final subItem = info.subItems![index];
-            return Padding(
-              padding: const EdgeInsets.only(left: 16.0), // Indent sub-items
-              child: CustomText(
-                title: "title",
-                // Add onTap logic here for sub-items
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
+  // Widget subMenuList(BuildContext context) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //           color: transparent, borderRadius: BorderRadius.circular(4)),
+  //       child: ListView.builder(
+  //         shrinkWrap: true, // Crucial for use inside a Column
+  //         physics:
+  //             const NeverScrollableScrollPhysics(), // Let the parent scroll
+  //         itemCount: 10, // Use dynamic data
+  //         itemBuilder: (context, index) {
+  //           //final subItem = info.subItems![index];
+  //           return Padding(
+  //             padding: const EdgeInsets.only(left: 16.0), // Indent sub-items
+  //             child: CustomText(
+  //               title: "title",
+  //               // Add onTap logic here for sub-items
+  //             ),
+  //           );
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 }

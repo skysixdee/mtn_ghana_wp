@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class SideMenuController extends GetxController {
   Rx<SideMenuModel> selectedCard = SideMenuModel(homeStr, homeRoute).obs;
   List<SideMenuModel> sideMenuList = [
     SideMenuModel(homeStr, homeRoute, leadingIconData: CupertinoIcons.home),
-    SideMenuModel(myTunezStr, "",
-        isContainSubMenu: true,
-        leadingIconData: CupertinoIcons.music_note_list),
+    // SideMenuModel(myTunezStr, "",
+    //     isContainSubMenu: true,
+    //     leadingIconData: CupertinoIcons.music_note_list),
     SideMenuModel(faqCStr, faqRoute,
         leadingIconData: CupertinoIcons.question_circle),
     SideMenuModel(aboutStr, aboutRoute,
