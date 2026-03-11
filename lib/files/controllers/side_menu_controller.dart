@@ -17,6 +17,7 @@ class SideMenuController extends GetxController {
         leadingIconData: CupertinoIcons.info_circle),
     SideMenuModel(rewardPointStr, rewardPointRoute,
         leadingIconData: CupertinoIcons.gift),
+    SideMenuModel(darkModeStr, "", leadingIconData: CupertinoIcons.gift),
   ];
 }
 

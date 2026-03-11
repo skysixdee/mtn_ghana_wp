@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
@@ -63,7 +64,8 @@ final router = GoRouter(
   redirect: (context, state) {
     CustomAudioPlayer.instance.stop();
     final path = state.fullPath ?? '';
-
+    SideMenuController appCon = Get.find<SideMenuController>();
+    appCon.selectedCard.value = SideMenuModel('', path);
     if (!StoreManager.isLoggedIn &&
         (path == profileRoute ||
             path == myTunesRoute ||

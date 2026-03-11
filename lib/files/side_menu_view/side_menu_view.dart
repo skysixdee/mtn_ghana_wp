@@ -7,6 +7,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/main.dart';
 
 class SideMenuView extends StatefulWidget {
   const SideMenuView({super.key});
@@ -16,18 +17,16 @@ class SideMenuView extends StatefulWidget {
 }
 
 class _SideMenuViewState extends State<SideMenuView> {
-  late SideMenuController cont;
   RxBool isSubMenuOpen = false.obs;
   @override
   initState() {
-    Get.put(SideMenuController());
-    cont = Get.find<SideMenuController>();
+    // Get.put(SideMenuController());
+    // cont = Get.find<SideMenuController>();
     super.initState();
   }
 
   @override
   void dispose() {
-    Get.delete<SideMenuController>();
     super.dispose();
   }
 
@@ -41,7 +40,7 @@ class _SideMenuViewState extends State<SideMenuView> {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.only(top: 12, bottom: 12),
-              itemCount: cont.sideMenuList.length,
+              itemCount: sideMenuCont.sideMenuList.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding:
@@ -49,7 +48,7 @@ class _SideMenuViewState extends State<SideMenuView> {
                   child:
                       // cont.sideMenuList[index].isContainSubMenu
                       //     ? subMenuCard(context, cont.sideMenuList[index]):
-                      menuCard(context, cont.sideMenuList[index]),
+                      menuCard(context, sideMenuCont.sideMenuList[index]),
                 );
               },
             ),
@@ -68,21 +67,20 @@ class _SideMenuViewState extends State<SideMenuView> {
   Widget menuCard(BuildContext context, SideMenuModel info, {Color? color}) {
     return InkWell(
       onTap: () {
-        cont.selectedCard.value = info;
-        // if (info.isContainSubMenu) {
-        //   isSubMenuOpen.value = !isSubMenuOpen.value;
-        // } else {
-        //   isSubMenuOpen.value = false;
-        // }
+        if (info.title == darkModeStr) {
+          return;
+        }
+        sideMenuCont.selectedCard.value = info;
+
         if (info.routeName.isNotEmpty) {
-          //Get.toNamed(info.routeName);
           context.goNamed(info.routeName);
         }
       },
       child: Obx(() {
+        print("info route name: ${info.routeName}");
         return Container(
           decoration: BoxDecoration(
-              color: cont.selectedCard.value.title == info.title
+              color: sideMenuCont.selectedCard.value.routeName == info.routeName
                   ? color ?? lightYellow
                   : lightGrey,
               borderRadius: BorderRadius.circular(4)),
@@ -93,7 +91,8 @@ class _SideMenuViewState extends State<SideMenuView> {
                 Expanded(
                   child: CustomText(
                     title: info.title,
-                    fontName: cont.selectedCard.value.title == info.title
+                    fontName: sideMenuCont.selectedCard.value.routeName ==
+                            info.routeName
                         ? FontName.semiBold
                         : FontName.regular,
                   ),

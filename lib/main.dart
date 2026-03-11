@@ -26,6 +26,7 @@ import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
@@ -52,6 +53,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 late SharedPreferences prefs;
 late AppController appCont;
+late SideMenuController sideMenuCont;
 //late BuildContext globalContext;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -158,7 +160,6 @@ Future<void> readProperties() async {
   aboutPageUrl = data['ABOUT_PAGE_URL'];
   basePackContentId = data['BASE_CONTENT_ID'];
   basePackOfferCode = data['BASE_PACK_OFFER_CODE'];
-
   customPrint("base url = $baseUrl");
   return;
 }
@@ -168,7 +169,8 @@ Future<void> initiateController() async {
   appCont = Get.find(); //put(AppController());
 //Get.lazyPut(() => PlayerController());
   PlayerController _playCon = Get.put(PlayerController());
-
+  //Get.lazyPut(() => SideMenuController());
+  sideMenuCont = Get.put(SideMenuController());
   Get.lazyPut(() => GiftController());
   Get.lazyPut(() => BuyTuneController());
   Get.lazyPut(() => TuneController());

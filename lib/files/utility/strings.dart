@@ -116,6 +116,9 @@ String faqStr = "FAQ";
 String aboutStr = "About";
 String someThingWentWrongStr = "Some thing went wrong";
 String giftStr = "Gift";
+
+String darkModeStr = "Dark Mode";
+String lightModeStr = "Light Mode";
 String inActiveStr = "InActive";
 String confirmStr = "Confirm";
 String editStr = "Edit";
