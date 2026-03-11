@@ -26,13 +26,13 @@ class WebFooterView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-               // Row(children: [privacyPolicyButton()]),
+                // Row(children: [privacyPolicyButton()]),
                 Row(children: [termsAndConditionButton(context)]),
                 const SizedBox(height: 8),
                 Container(height: 1, color: white),
                 const SizedBox(height: 8),
                 CustomText(
-                  title: copyrightStr,
+                  title: "@${DateTime.now().year} " + copyrightStr,
                   color: white,
                 )
               ],

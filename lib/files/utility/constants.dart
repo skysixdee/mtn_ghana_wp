@@ -1,4 +1,5 @@
 const double popupWidth = 400;
+const double sideMenuWidth = 220;
 int msisdnLength = 9; //10;
 int otpTimeLimit = 30;
 int otpLength = 4; //6;
