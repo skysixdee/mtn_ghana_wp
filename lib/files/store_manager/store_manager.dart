@@ -14,6 +14,7 @@ const String _deviceId = 'device_id';
 const String _msisdn = 'msisdn';
 const String _language = 'language';
 const String _isLoggedIn = 'is_logged_in';
+const String _isDarkMode = 'is_dark_mode';
 
 class StoreManager {
   static AppSettingModel? other;
@@ -28,7 +29,7 @@ class StoreManager {
   static String accessToken = "";
   static String refreshToken = "";
   static String deviceId = '0191212';
-
+  static bool isDarkMode = true;
   static initValues() {
     msisdn = prefs.getString(_msisdn) ?? '0';
     isLoggedIn = prefs.getBool(_isLoggedIn) ?? false;
@@ -40,11 +41,18 @@ class StoreManager {
     appCont.isLoggedIn.value = isLoggedIn;
     languageCode = isEnglish ? '2' : '1';
     languageSort = isEnglish ? 'en' : 'br';
+    isDarkMode = prefs.getBool(_isDarkMode) ?? true;
+    print("is dark mode: sky ${StoreManager.isDarkMode}");
   }
 
   static setMsisdn(String value) {
     prefs.setString(_msisdn, value);
     msisdn = value;
+  }
+
+  static setDarkMode(bool value) {
+    prefs.setBool(_isDarkMode, value);
+    isDarkMode = value;
   }
 
   static setLoggedIn(bool value) {

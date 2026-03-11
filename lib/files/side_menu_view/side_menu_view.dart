@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -67,7 +68,21 @@ class _SideMenuViewState extends State<SideMenuView> {
   Widget menuCard(BuildContext context, SideMenuModel info, {Color? color}) {
     return InkWell(
       onTap: () {
-        if ((info.title == darkModeStr) || (info.title == logoutStr)) {
+        if (info.title == darkModeStr) {
+          Get.isDarkMode
+              ? Get.changeThemeMode(ThemeMode.light)
+              : Get.changeThemeMode(ThemeMode.dark);
+          StoreManager.setDarkMode(!Get.isDarkMode);
+          print(
+              "dark mode value: ${StoreManager.isDarkMode} \n get dark mode value: ${Get.isDarkMode}");
+          //if (Get.isDarkMode) {
+
+          // } else {
+          //   StoreManager.setDarkMode(false);
+          // }
+          return;
+        }
+        if (info.title == logoutStr) {
           return;
         }
         sideMenuCont.selectedCard.value = info;

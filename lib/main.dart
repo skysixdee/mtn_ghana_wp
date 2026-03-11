@@ -165,6 +165,9 @@ Future<void> readProperties() async {
 }
 
 Future<void> initiateController() async {
+  // StoreManager.isDarkMode
+  //     ? Get.changeThemeMode(ThemeMode.dark)
+  //     : Get.changeThemeMode(ThemeMode.light);
   Get.lazyPut(() => AppController());
   appCont = Get.find(); //put(AppController());
 //Get.lazyPut(() => PlayerController());
@@ -222,12 +225,31 @@ class MyApp extends StatelessWidget {
       sessionConfig: sessionConfig,
       child: GetMaterialApp.router(
         theme: ThemeData(
-          useMaterial3: true,
           brightness: Brightness.light,
-          primarySwatch: Colors.blue,
+          primaryColor: Colors.blue,
           scaffoldBackgroundColor: Colors.white,
-          // other theme properties...
+          iconTheme: const IconThemeData(
+            color: Colors.black,
+          ),
         ),
+
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Colors.blue,
+          scaffoldBackgroundColor: Colors.black,
+          iconTheme: const IconThemeData(
+            color: Colors.black,
+          ),
+        ),
+
+        themeMode: StoreManager.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+        // theme: ThemeData(
+        //   useMaterial3: true,
+        //   brightness: Brightness.light,
+        //   primarySwatch: Colors.blue,
+        //   scaffoldBackgroundColor: Colors.white,
+        //   // other theme properties...
+        // ),
         debugShowCheckedModeBanner: false,
         routerDelegate: router.routerDelegate,
         routeInformationParser: router.routeInformationParser,
