@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/screens/login_screen/login_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
 import 'package:mtn_ghana_wp/files/side_menu_view/side_menu_view.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -66,12 +67,12 @@ final router = GoRouter(
     final path = state.fullPath ?? '';
     SideMenuController appCon = Get.find<SideMenuController>();
     appCon.selectedCard.value = SideMenuModel('', path);
-    if (!StoreManager.isLoggedIn &&
-        (path == profileRoute ||
-            path == myTunesRoute ||
-            path == myWishlistRoute)) {
-      return '/';
-    }
+    // if (!StoreManager.isLoggedIn &&
+    //     (path == profileRoute ||
+    //         path == myTunesRoute ||
+    //         path == myWishlistRoute)) {
+    //   return "/";
+    // }
     return null;
   },
   errorPageBuilder: (context, state) =>
@@ -104,10 +105,16 @@ List<StatefulShellBranch> _getShellBranches() => [
         homePageBannerClickEvent(searchKey);
         Get.find<BannerDetailController>().getBannerDetail(type, searchKey);
       }),
-      _createShell(myWishlistRoute, (_) => MyWishlistScreen(),
-          onInit: (s) => Get.find<MyWishlistController>().getWishlist()),
-      _createShell(profileRoute, (_) => ProfileScreen(),
-          onInit: (s) => Get.find<ProfileController>().getProfileDetail()),
+      _createShell(myWishlistRoute,
+          (_) => StoreManager.isLoggedIn ? MyWishlistScreen() : LoginScreen(),
+          onInit: (s) => StoreManager.isLoggedIn
+              ? (Get.find<MyWishlistController>().getWishlist())
+              : null),
+      _createShell(profileRoute,
+          (_) => StoreManager.isLoggedIn ? ProfileScreen() : LoginScreen(),
+          onInit: (s) => StoreManager.isLoggedIn
+              ? (Get.find<ProfileController>().getProfileDetail())
+              : null),
       _createShell(nameTuneRoute, (_) => NameTuneScreen(),
           onInit: (s) => Get.find<NameTuneController>().getNameTune()),
       _createShell(musicBoxRoute, (_) => MusicBoxScreen()),
@@ -136,8 +143,11 @@ List<StatefulShellBranch> _getShellBranches() => [
                 list: s.extra as List<TuneInfo>,
                 name: s.uri.queryParameters['name'] ?? '',
               )),
-      _createShell(myTunesRoute, (_) => MyTuneScreen(),
-          onInit: (s) => Get.find<TuneController>().makeApiCall()),
+      _createShell(myTunesRoute,
+          (_) => StoreManager.isLoggedIn ? MyTuneScreen() : LoginScreen(),
+          onInit: (s) => StoreManager.isLoggedIn
+              ? (Get.find<TuneController>().makeApiCall())
+              : null),
       _createShell(artistTuneRoute, (s) {
         final artistName = s.uri.queryParameters['artistName'] ?? '';
         Get.find<ArtistsTuneController>().getArtistsTune(artistName);

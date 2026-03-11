@@ -8,16 +8,18 @@ class SideMenuController extends GetxController {
   Rx<SideMenuModel> selectedCard = SideMenuModel(homeStr, homeRoute).obs;
   List<SideMenuModel> sideMenuList = [
     SideMenuModel(homeStr, homeRoute, leadingIconData: CupertinoIcons.home),
-    // SideMenuModel(myTunezStr, "",
-    //     isContainSubMenu: true,
-    //     leadingIconData: CupertinoIcons.music_note_list),
-    SideMenuModel(faqCStr, faqRoute,
+    SideMenuModel(myProfileStr, profileRoute,
+        leadingIconData: CupertinoIcons.home),
+    SideMenuModel(myTunezStr, myTunesRoute,
+        leadingIconData: CupertinoIcons.home),
+    SideMenuModel(myWishlistStr, myWishlistRoute,
         leadingIconData: CupertinoIcons.question_circle),
     SideMenuModel(aboutStr, aboutRoute,
         leadingIconData: CupertinoIcons.info_circle),
     SideMenuModel(rewardPointStr, rewardPointRoute,
         leadingIconData: CupertinoIcons.gift),
     SideMenuModel(darkModeStr, "", leadingIconData: CupertinoIcons.gift),
+    SideMenuModel(logoutStr, "", leadingIconData: CupertinoIcons.gift),
   ];
 }
 

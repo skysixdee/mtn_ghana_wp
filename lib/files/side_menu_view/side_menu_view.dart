@@ -67,7 +67,7 @@ class _SideMenuViewState extends State<SideMenuView> {
   Widget menuCard(BuildContext context, SideMenuModel info, {Color? color}) {
     return InkWell(
       onTap: () {
-        if (info.title == darkModeStr) {
+        if ((info.title == darkModeStr) || (info.title == logoutStr)) {
           return;
         }
         sideMenuCont.selectedCard.value = info;
