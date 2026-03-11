@@ -32,7 +32,7 @@ class WebFooterView extends StatelessWidget {
                 Container(height: 1, color: white),
                 const SizedBox(height: 8),
                 CustomText(
-                  title: "@${DateTime.now().year} " + copyrightStr,
+                  title: "@${DateTime.now().year} $copyrightStr",
                   color: white,
                 )
               ],

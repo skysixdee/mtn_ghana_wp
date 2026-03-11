@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
-import 'package:mtn_ghana_wp/files/side_menu_view/side_menu_view.dart';
-import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
@@ -184,22 +182,7 @@ Widget navBuilder(context, state, navigationShell) {
             : null,
         endDrawer: si.isMobile ? MobileDrawerScreen() : null,
         body: Column(
-          children: [
-            WebNavigationView(),
-            Expanded(
-              child: Stack(
-                children: [
-                  Row(
-                    children: [
-                      const SizedBox(width: sideMenuWidth),
-                      Expanded(child: navigationShell)
-                    ],
-                  ),
-                  SideMenuView(),
-                ],
-              ),
-            )
-          ],
+          children: [WebNavigationView(), Expanded(child: navigationShell)],
         ),
       );
     },
