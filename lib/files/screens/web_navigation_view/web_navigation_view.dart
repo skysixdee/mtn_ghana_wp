@@ -82,8 +82,8 @@ class WebNavigationView extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         logoButton(context),
-        const SizedBox(width: 10),
-        categoryButton(),
+        // const SizedBox(width: 10),
+        // categoryButton(),
         // const SizedBox(width: 20),
         // faqButton(context),
         // const SizedBox(width: 20),

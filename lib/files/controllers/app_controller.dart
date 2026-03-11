@@ -29,6 +29,7 @@ class AppController extends GetxController {
     super.onInit();
     getAppSettingApi();
     CategoryModel categoryModel = await getCategoryScApi();
+    //await Future.delayed(const Duration(seconds: 5));
     StoreManager.categories = categoryModel.responseMap?.categoryList ?? [];
     print("SKY list =${StoreManager.categories?.length}");
     categories.value = categoryModel.responseMap?.categoryList ?? [];

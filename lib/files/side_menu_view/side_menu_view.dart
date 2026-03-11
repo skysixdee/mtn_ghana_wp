@@ -55,7 +55,7 @@ class _SideMenuViewState extends State<SideMenuView> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12.0),
             child: CustomText(
               title: "@${DateTime.now().year} " + copyrightStr,
             ),
