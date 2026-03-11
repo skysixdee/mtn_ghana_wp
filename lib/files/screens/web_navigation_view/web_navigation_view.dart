@@ -84,12 +84,12 @@ class WebNavigationView extends StatelessWidget {
         logoButton(context),
         const SizedBox(width: 10),
         categoryButton(),
-        const SizedBox(width: 20),
-        faqButton(context),
-        const SizedBox(width: 20),
-        aboutPageButton(context),
-        const SizedBox(width: 20),
-        rewardPointButton(context),
+        // const SizedBox(width: 20),
+        // faqButton(context),
+        // const SizedBox(width: 20),
+        // aboutPageButton(context),
+        // const SizedBox(width: 20),
+        // rewardPointButton(context),
       ],
     );
   }
