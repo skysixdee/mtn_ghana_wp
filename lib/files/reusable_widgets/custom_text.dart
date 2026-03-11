@@ -28,7 +28,8 @@ class CustomText extends StatelessWidget {
             maxLines: maxLine,
             textAlign: textAlign,
             style: TextStyle(
-              color: color,
+              color:
+                  Theme.of(context).brightness == Brightness.dark ? red : color,
               fontSize: fontSize,
               fontFamily: fontName.name,
             ),

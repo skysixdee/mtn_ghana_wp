@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 const blue = Color.fromRGBO(0, 49, 135, 1);
 const black = Colors.black;
+Color blackD = const Color.fromRGBO(51, 51, 51, 1);
+
 Color gredientColor = Colors.black.withOpacity(0.3);
 const yellow = Color.fromRGBO(255, 204, 0, 1);
+const yellowD = Color.fromRGBO(200, 160, 2, 1);
 const lightYellow = Color.fromRGBO(255, 204, 0, 0.4);
 const red = Colors.red;
 const green = Color.fromARGB(255, 11, 130, 15);
@@ -14,4 +17,5 @@ const myTuneScreenBgColor = Color.fromRGBO(210, 208, 208, 1);
 const lightGrey = Color.fromARGB(255, 233, 233, 233);
 const transparent = Colors.transparent;
 const white = Colors.white;
+const whiteD = Color.fromARGB(255, 210, 209, 209);
 const pink = Colors.pink;
