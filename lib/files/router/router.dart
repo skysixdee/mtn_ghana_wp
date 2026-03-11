@@ -8,6 +8,7 @@ import 'package:mtn_ghana_wp/files/screens/login_screen/login_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
 import 'package:mtn_ghana_wp/files/side_menu_view/side_menu_view.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
@@ -105,13 +106,23 @@ List<StatefulShellBranch> _getShellBranches() => [
         homePageBannerClickEvent(searchKey);
         Get.find<BannerDetailController>().getBannerDetail(type, searchKey);
       }),
-      _createShell(myWishlistRoute,
-          (_) => StoreManager.isLoggedIn ? MyWishlistScreen() : LoginScreen(),
+      _createShell(
+          myWishlistRoute,
+          (_) => StoreManager.isLoggedIn
+              ? MyWishlistScreen()
+              : LoginScreen(
+                  title: myWishlistStr,
+                ),
           onInit: (s) => StoreManager.isLoggedIn
               ? (Get.find<MyWishlistController>().getWishlist())
               : null),
-      _createShell(profileRoute,
-          (_) => StoreManager.isLoggedIn ? ProfileScreen() : LoginScreen(),
+      _createShell(
+          profileRoute,
+          (_) => StoreManager.isLoggedIn
+              ? ProfileScreen()
+              : LoginScreen(
+                  title: profileStr,
+                ),
           onInit: (s) => StoreManager.isLoggedIn
               ? (Get.find<ProfileController>().getProfileDetail())
               : null),
@@ -143,8 +154,13 @@ List<StatefulShellBranch> _getShellBranches() => [
                 list: s.extra as List<TuneInfo>,
                 name: s.uri.queryParameters['name'] ?? '',
               )),
-      _createShell(myTunesRoute,
-          (_) => StoreManager.isLoggedIn ? MyTuneScreen() : LoginScreen(),
+      _createShell(
+          myTunesRoute,
+          (_) => StoreManager.isLoggedIn
+              ? MyTuneScreen()
+              : LoginScreen(
+                  title: myTunezStr,
+                ),
           onInit: (s) => StoreManager.isLoggedIn
               ? (Get.find<TuneController>().makeApiCall())
               : null),
