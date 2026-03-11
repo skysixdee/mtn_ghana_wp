@@ -15,9 +15,12 @@ class FeatureTabView extends StatelessWidget {
   FeatureController featureController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
+    return Container(
+      decoration: BoxDecoration(
+          color: lightGrey, borderRadius: BorderRadius.circular(10)),
+      height: 65,
       child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
         scrollDirection: Axis.horizontal,
         itemCount: featureController.tabList.length,
         shrinkWrap: true,
@@ -31,44 +34,55 @@ class FeatureTabView extends StatelessWidget {
   Padding tabCell(int index) {
     return Padding(
         padding: const EdgeInsets.only(right: 14, top: 8, bottom: 8),
-        child: Container(
-          color: transparent,
-          child: InkWell(
-            onTap: () {
-              featureController.updateTabIndex(index);
-            },
-            child: IntrinsicWidth(child: Obx(
-              () {
-                return Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomText(
-                      title: featureController.tabList[index].name,
-                      fontName: featureController.index.value == index
-                          ? FontName.bold
-                          : FontName.regular,
-                      color: featureController.index.value == index
-                          ?black //yellow
-                          :darkGrey,// black,
-                      fontSize: 20,
-                    ),
-                    featureController.index.value == index? Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(1.5),
-                        color: black
+        child: Obx(() {
+          return Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(80),
+                color: featureController.index.value == index
+                    ? yellow
+                    : grey.withOpacity(0.3)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              child: InkWell(
+                onTap: () {
+                  featureController.updateTabIndex(index);
+                },
+                child: IntrinsicWidth(child: Obx(
+                  () {
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomText(
+                          title: featureController.tabList[index].name,
+                          fontName: featureController.index.value == index
+                              ? FontName.bold
+                              : FontName.regular,
+                          color: featureController.index.value == index
+                              ? black //yellow
+                              : darkGrey, // black,
+                          fontSize: 20,
+                        ),
                         // featureController.index.value == index
-                        //     ? black//yellow
-                        //     : grey//transparent,
-                      ),
-                      height: 3,
-                    ):const SizedBox()
-                  ],
-                );
-              },
-            )),
-          ),
-        ));
+                        //     ? Container(
+                        //         decoration: BoxDecoration(
+                        //             borderRadius: BorderRadius.circular(1.5),
+                        //             color: black
+                        //             // featureController.index.value == index
+                        //             //     ? black//yellow
+                        //             //     : grey//transparent,
+                        //             ),
+                        //         height: 3,
+                        //       )
+                        //     : const SizedBox()
+                      ],
+                    );
+                  },
+                )),
+              ),
+            ),
+          );
+        }));
   }
 }
