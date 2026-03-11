@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -35,7 +36,7 @@ class _SideMenuViewState extends State<SideMenuView> {
   Widget build(BuildContext context) {
     return Container(
       width: sideMenuWidth,
-      decoration: decoration(),
+      decoration: decoration(context),
       child: Column(
         children: [
           Expanded(
@@ -97,7 +98,9 @@ class _SideMenuViewState extends State<SideMenuView> {
           decoration: BoxDecoration(
               color: sideMenuCont.selectedCard.value.routeName == info.routeName
                   ? color ?? lightYellow
-                  : lightGrey,
+                  : isDarkTheme(context)
+                      ? blackD
+                      : lightGrey,
               borderRadius: BorderRadius.circular(4)),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
@@ -132,9 +135,9 @@ class _SideMenuViewState extends State<SideMenuView> {
     );
   }
 
-  BoxDecoration decoration() {
+  BoxDecoration decoration(BuildContext context) {
     return BoxDecoration(
-      color: white,
+      color: isDarkTheme(context) ? blackD : white,
       boxShadow: [
         BoxShadow(
           color: black.withOpacity(0.4),

@@ -4,6 +4,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_grid_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/music_box_card.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/tune_card.dart';
@@ -31,7 +32,7 @@ class _MusicBoxViewState extends State<MusicBoxView> {
     return ResponsiveBuilder(
       builder: (context, si) {
         return Container(
-          color: white,
+          color: isDarkTheme(context) ? blackD : white,
           child: Obx(
             () {
               return con.isLoadingList.value

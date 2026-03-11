@@ -1,5 +1,6 @@
 import 'package:mtn_ghana_wp/files/model/navigation_header_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/music_box_card.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class NavigationHeaderView extends StatelessWidget {
         return si.isMobile
             ? const SizedBox()
             : Container(
-                color: lightGrey,
+                color: isDarkTheme(context) ? blackD : lightGrey,
                 height: 50,
                 child: Padding(
                   padding: EdgeInsets.only(left: si.isMobile ? 8.0 : 30),

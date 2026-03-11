@@ -1,5 +1,6 @@
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class CustomScreenHeaderView extends StatelessWidget {
                 imageName,
                 fit: BoxFit.fill,
               ),
-              ovalShape(sizingInformation),
+              ovalShape(context, sizingInformation),
             ],
           ),
         );
@@ -44,14 +45,14 @@ class CustomScreenHeaderView extends StatelessWidget {
     );
   }
 
-  Widget ovalShape(SizingInformation si) {
+  Widget ovalShape(BuildContext context, SizingInformation si) {
     return Positioned(
       right: -(height * 0.4),
       child: ClipOval(
         child: Container(
           width: si.isMobile ? height * 1.3 : height * 1.5,
           height: si.isMobile ? (height * 0.7) : height * 0.8,
-          color: yellow,
+          color: isDarkTheme(context) ? yellowD : yellow,
           child: Padding(
             padding: EdgeInsets.only(left: 28.0, right: (height * 0.4) + 4),
             child: Column(

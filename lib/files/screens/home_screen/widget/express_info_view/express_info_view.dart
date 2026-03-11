@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
@@ -14,7 +15,7 @@ class ExpressInfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: yellow,
+        color: isDarkTheme(context) ? yellowD : yellow,
         child: ResponsiveBuilder(
           builder: (context, si) {
             return Padding(

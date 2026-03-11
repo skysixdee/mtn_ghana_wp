@@ -28,12 +28,23 @@ class CustomText extends StatelessWidget {
             maxLines: maxLine,
             textAlign: textAlign,
             style: TextStyle(
-              color:
-                  Theme.of(context).brightness == Brightness.dark ? red : color,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? checkColur(context, color)
+                  : color,
               fontSize: fontSize,
               fontFamily: fontName.name,
             ),
           );
+  }
+
+  Color checkColur(BuildContext context, Color col) {
+    if (col == black) {
+      return whiteD;
+    } else if (col == yellow) {
+      return yellowD;
+    } else {
+      return black;
+    }
   }
 }
 /*

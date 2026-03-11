@@ -12,6 +12,7 @@ import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
@@ -48,7 +49,7 @@ class WebNavigationView extends StatelessWidget {
             ? const SizedBox()
             : Container(
                 height: 70,
-                color: yellow,
+                color: isDarkTheme(context) ? yellowD : yellow,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(

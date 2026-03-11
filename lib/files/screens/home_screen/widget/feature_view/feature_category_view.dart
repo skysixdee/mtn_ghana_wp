@@ -1,5 +1,6 @@
 import 'package:mtn_ghana_wp/files/controllers/home_controllers/feature_controller.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
@@ -34,7 +35,7 @@ class _FeatureCategoryViewState extends State<FeatureCategoryView> {
     return ResponsiveBuilder(
       builder: (context, si) {
         return Container(
-          color: white,
+          color: isDarkTheme(context) ? blackD : white,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 25),
             child: Obx(
@@ -70,7 +71,7 @@ class _FeatureCategoryViewState extends State<FeatureCategoryView> {
           textColor: black,
           title: seeMoreStr,
           bgColor: Colors.transparent,
-          borderColor:  grey,
+          borderColor: grey,
           onTap: () {
             context.pushNamed(seeMoreRoute,
                 queryParameters: {

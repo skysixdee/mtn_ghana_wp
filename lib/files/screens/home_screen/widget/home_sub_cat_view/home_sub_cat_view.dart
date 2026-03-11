@@ -4,6 +4,7 @@ import 'package:mtn_ghana_wp/files/controllers/app_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 
 class HomeSubCatView extends StatelessWidget {
@@ -11,7 +12,8 @@ class HomeSubCatView extends StatelessWidget {
   AppController appController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+        color: isDarkTheme(context) ? blackD : white,
         height: 100,
         child: Obx(() {
           return ListView.builder(

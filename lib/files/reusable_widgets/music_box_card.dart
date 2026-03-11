@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -46,14 +47,14 @@ class MusicBoxCard extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              color: white,
+              color: isDarkTheme(context) ? blackD : white,
               boxShadow: const [
                 BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
               ]),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              musicBoxImage(),
+              musicBoxImage(context),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -151,12 +152,14 @@ class MusicBoxCard extends StatelessWidget {
     );
   }
 
-  Expanded musicBoxImage() {
+  Expanded musicBoxImage(BuildContext context) {
     String imageName = (info.musicBoxName ?? '').replaceAll(RegExp(r'\s+'), '');
     return Expanded(
         child: Container(
-            color: lightGrey,
+            //color: isDarkTheme(context) ? blackD : transparent,
             child: customImage(
+                gredientColor:
+                    isDarkTheme(context) ? gredientColor : transparent,
                 imageName: 'assets/music_box_pngs/$imageName.png',
                 url: info.musicBoxIdpreviewImageUrl)));
   }

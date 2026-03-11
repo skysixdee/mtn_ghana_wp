@@ -6,6 +6,7 @@ import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -20,7 +21,7 @@ class HomeSearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: lightGrey,
+      color: isDarkTheme(context) ? blackD : lightGrey,
       child: Padding(
         padding:
             const EdgeInsets.only(left: 20, top: 40.0, bottom: 20, right: 20),
@@ -94,6 +95,7 @@ class HomeSearchView extends StatelessWidget {
 
   GenericButton songSearchBuilder() {
     return GenericButton(
+      bgColor: transparent,
       title: tunesStr,
       fontName: FontName.regular,
       leadingIcon: Obx(
@@ -114,6 +116,7 @@ class HomeSearchView extends StatelessWidget {
 
   GenericButton artistSearchBuilder() {
     return GenericButton(
+      bgColor: transparent,
       title: artistStr,
       fontName: FontName.regular,
       leadingIcon: Obx(
@@ -137,6 +140,7 @@ class HomeSearchView extends StatelessWidget {
       () {
         return GenericButton(
           title: codeStr,
+          bgColor: transparent,
           fontName: FontName.regular,
           leadingIcon: Icon(
             con.searchTypeIndex.value == 2

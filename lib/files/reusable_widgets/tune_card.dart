@@ -12,6 +12,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart'
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/play_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
@@ -58,15 +59,15 @@ class TuneCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, si) {
-        return laodWidget(si);
+        return laodWidget(context, si);
       },
     );
   }
 
-  Widget laodWidget(SizingInformation si) {
+  Widget laodWidget(BuildContext context, SizingInformation si) {
     if (si.isMobile) {
       if (customScreenType == CustomScreenType.musicContent) {
-        return mainContainer(si);
+        return mainContainer(context, si);
       } else {
         return InkWell(
           onTap: () {
@@ -86,20 +87,20 @@ class TuneCard extends StatelessWidget {
             //   ),
             // );
           },
-          child: mainContainer(si),
+          child: mainContainer(context, si),
         );
       }
     } else {
-      return mainContainer(si);
+      return mainContainer(context, si);
     }
   }
 
-  Widget mainContainer(SizingInformation si) {
+  Widget mainContainer(BuildContext context, SizingInformation si) {
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color: white,
+          color: isDarkTheme(context) ? blackD : white,
           boxShadow: const [
             BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
           ]),
@@ -109,7 +110,10 @@ class TuneCard extends StatelessWidget {
               child: Stack(
             alignment: Alignment.topRight,
             children: [
-              customImage(url: info.toneIdpreviewImageUrl),
+              customImage(
+                  url: info.toneIdpreviewImageUrl,
+                  gredientColor:
+                      isDarkTheme(context) ? gredientColor : transparent),
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: moreButton ??

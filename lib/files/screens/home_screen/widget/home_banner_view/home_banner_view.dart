@@ -1,6 +1,7 @@
 import 'package:mtn_ghana_wp/files/controllers/banner_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/banner_detail_controller.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
@@ -17,7 +18,7 @@ import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 class HomeBannerView extends StatelessWidget {
   HomeBannerView({super.key});
   final BannerController cont = Get.find();
-  
+
   CarouselSliderController carouselSliderController =
       CarouselSliderController();
   @override
@@ -32,7 +33,7 @@ class HomeBannerView extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     children: [
                       Container(
-                        color: white,
+                        color: isDarkTheme(context) ? blackD : white,
                         child: widgetList(si, context),
                       ),
                       indicatorView(),
@@ -48,7 +49,8 @@ class HomeBannerView extends StatelessWidget {
     BannerDetailController bannerDetailController = Get.find();
     return CarouselSlider(
       controller: carouselSliderController,
-      items: cont.banners.map((banner) {  //cont.banners.map((banner) {
+      items: cont.banners.map((banner) {
+        //cont.banners.map((banner) {
         return InkWell(
           onTap: () {
             bannerDetailController.getBannerDetail(
@@ -61,7 +63,10 @@ class HomeBannerView extends StatelessWidget {
           },
           child: Container(
               decoration: const BoxDecoration(color: lightGrey),
-              child: customImage(url: banner.bannerPath)),
+              child: customImage(
+                  url: banner.bannerPath,
+                  gredientColor:
+                      isDarkTheme(context) ? gredientColor : transparent)),
         );
       }).toList(),
       options: carousalOption(si, context),
@@ -95,7 +100,7 @@ class HomeBannerView extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount:cont.banners.length,
+        itemCount: cont.banners.length,
         itemBuilder: (context, index) {
           return Center(
             child: Padding(

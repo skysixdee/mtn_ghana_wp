@@ -12,6 +12,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_screen_header_view.da
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/empty_list_widget.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
 
@@ -71,7 +72,8 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                         subTitle: rewarPointOvalSubTitleStr,
                       ),
                       if (!si.isMobile)
-                        leaderBoadrdWidget(si.isMobile ? (height + 50) : height)
+                        leaderBoadrdWidget(
+                            context, si.isMobile ? (height + 50) : height)
                     ],
                   );
                 },
@@ -79,7 +81,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
             //leaderBoadrdWidget(120, isHorizontal: true),
             if (sizingInformation.isMobile)
               leaderBoadrdWidget(
-                  sizingInformation.isMobile ? (height + 50) : height),
+                  context, sizingInformation.isMobile ? (height + 50) : height),
             Expanded(
               child: Obx(
                 () {
@@ -208,7 +210,8 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
     );
   }
 
-  Widget leaderBoadrdWidget(double heigh, {bool isHorizontal = false}) {
+  Widget leaderBoadrdWidget(BuildContext context, double heigh,
+      {bool isHorizontal = false}) {
     return ResponsiveBuilder(
       builder: (context, si) {
         return Padding(
@@ -223,7 +226,11 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                     : heigh - 4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
-              color: isHorizontal ? white : yellow,
+              color: isHorizontal
+                  ? white
+                  : isDarkTheme(context)
+                      ? yellowD
+                      : yellow,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -276,7 +283,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                   ],
                 ),
                 Container(
-                  color: yellow,
+                  color: isDarkTheme(context) ? yellowD : yellow,
                   width: isHorizontal
                       ? null
                       : si.isMobile
