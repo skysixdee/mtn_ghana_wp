@@ -93,8 +93,12 @@ class _SideMenuViewState extends State<SideMenuView> {
                     title: info.title,
                     fontName: sideMenuCont.selectedCard.value.routeName ==
                             info.routeName
-                        ? FontName.semiBold
+                        ? FontName.bold
                         : FontName.regular,
+                    // fontSize: sideMenuCont.selectedCard.value.routeName ==
+                    //         info.routeName
+                    //     ? 16
+                    //     : 14,
                   ),
                 ),
                 info.isContainSubMenu
