@@ -3,6 +3,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 import 'package:flutter/foundation.dart';
@@ -17,21 +18,24 @@ class FeatureTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: lightGrey, borderRadius: BorderRadius.circular(10)),
-      height: 65,
+          border:
+              Border.all(color: isDarkTheme(context) ? whiteD : transparent),
+          color: isDarkTheme(context) ? blackD : lightGrey,
+          borderRadius: BorderRadius.circular(10)),
+      height: 67,
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
         scrollDirection: Axis.horizontal,
         itemCount: featureController.tabList.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return tabCell(index);
+          return tabCell(context, index);
         },
       ),
     );
   }
 
-  Padding tabCell(int index) {
+  Padding tabCell(BuildContext context, int index) {
     return Padding(
         padding: const EdgeInsets.only(right: 14, top: 8, bottom: 8),
         child: Obx(() {
@@ -39,7 +43,9 @@ class FeatureTabView extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(80),
                 color: featureController.index.value == index
-                    ? yellow
+                    ? isDarkTheme(context)
+                        ? yellowD
+                        : yellow
                     : grey.withOpacity(0.3)),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -60,6 +66,9 @@ class FeatureTabView extends StatelessWidget {
                           fontName: featureController.index.value == index
                               ? FontName.bold
                               : FontName.regular,
+                          colorD: featureController.index.value == index
+                              ? blackD
+                              : whiteD,
                           color: featureController.index.value == index
                               ? black //yellow
                               : darkGrey, // black,

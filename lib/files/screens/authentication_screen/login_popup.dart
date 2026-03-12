@@ -4,6 +4,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart'
 import 'package:mtn_ghana_wp/files/reusable_widgets/country_code.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup.dart';
@@ -44,7 +45,9 @@ class _LoginPopupState extends State<LoginPopup> {
             width: popupWidth,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              color: white,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? blackD
+                  : white,
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -64,10 +67,13 @@ class _LoginPopupState extends State<LoginPopup> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             GenericButton(
-              bgColor: transparent,
+              bgColor: Theme.of(context).brightness == Brightness.dark
+                  ? blackD
+                  : transparent,
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              trailingIcon: const Icon(
+              trailingIcon: Icon(
                 Icons.close,
+                color: isDarkTheme(context) ? whiteD : black,
               ),
               onTap: () {
                 Navigator.of(context).pop();
@@ -126,7 +132,13 @@ class _LoginPopupState extends State<LoginPopup> {
             return cont.isLoading.value
                 ? loadingIndicator(width: 150)
                 : GenericButton(
-                    bgColor: cont.enableButton.value ? yellow : lightGrey,
+                    bgColor: cont.enableButton.value
+                        ? isDarkTheme(context)
+                            ? yellowD
+                            : yellow
+                        : isDarkTheme(context)
+                            ? whiteD
+                            : lightGrey,
                     title: requestotpStr,
                     onTap: () {
                       cont.onGenerateOtpButtonAction();
@@ -183,6 +195,7 @@ class _LoginPopupState extends State<LoginPopup> {
         logoImage,
         height: 40,
         fit: BoxFit.cover,
+        color: isDarkTheme(context) ? whiteD : black,
       ),
     );
   }

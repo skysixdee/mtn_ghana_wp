@@ -9,6 +9,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart'
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 
 import 'package:mtn_ghana_wp/files/reusable_widgets/music_box_card.dart';
@@ -120,7 +121,8 @@ class MyMusicBoxView extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: white,
-          border: Border.all(color: black, width: 0.5),
+          border: Border.all(
+              color: isDarkTheme(context) ? whiteD : black, width: 0.5),
           borderRadius: BorderRadius.circular(50)),
       child: CustomText(
         isSelectable: false,

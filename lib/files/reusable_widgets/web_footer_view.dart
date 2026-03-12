@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/url_launcher.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -29,7 +30,8 @@ class WebFooterView extends StatelessWidget {
                 // Row(children: [privacyPolicyButton()]),
                 Row(children: [termsAndConditionButton(context)]),
                 const SizedBox(height: 8),
-                Container(height: 1, color: white),
+                Container(
+                    height: 1, color: isDarkTheme(context) ? whiteD : white),
                 const SizedBox(height: 8),
                 CustomText(
                   title: "@${DateTime.now().year} $copyrightStr",
@@ -63,8 +65,9 @@ class WebFooterView extends StatelessWidget {
       height: 22,
       fontName: FontName.regular,
       bgColor: transparent,
-      title: termsAndConditions,
-      textColor: white,
+      title: termsAndConditionsStr,
+      textColorD: whiteD,
+      textColor: isDarkTheme(context) ? whiteD : white,
       onTap: () {
         context.goNamed(termsAndConditionsRoute);
         //customLaunchUrl(termsAndConditionUrl);

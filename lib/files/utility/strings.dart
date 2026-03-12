@@ -163,7 +163,7 @@ String pleaseEnterYourMobileNumberStr = "Please enter your mobile number";
 String enterFriendMobileNumberStr = "Enter Friend's Mobile Number";
 
 String privacyPolicyStr = "Privacy Policy";
-String termsAndConditions = "Terms and conditions";
+
 String copyrightStr = "copyRight. All rights reserved";
 String myMusicBoxPopupMessageStr =
     'Enble the shuffle button to add musicbox in playlist.';

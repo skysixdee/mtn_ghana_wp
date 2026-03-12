@@ -107,7 +107,10 @@ class MusicBoxCard extends StatelessWidget {
                                     style: OutlinedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 12, vertical: 0),
-                                      side: const BorderSide(color: black),
+                                      side: BorderSide(
+                                          color: isDarkTheme(context)
+                                              ? whiteD
+                                              : black),
                                       foregroundColor: black,
                                     ),
                                   ),

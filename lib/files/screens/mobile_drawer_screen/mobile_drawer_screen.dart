@@ -8,6 +8,7 @@ import 'package:mtn_ghana_wp/files/model/drawer_model.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup.dart';
@@ -32,7 +33,7 @@ class MobileDrawerScreen extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
       child: Container(
-        color: lightGrey,
+        color: isDarkTheme(context) ? blackD : lightGrey,
         child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           itemCount: menuList.length,
@@ -114,7 +115,7 @@ class MobileDrawerScreen extends StatelessWidget {
             ),
             Container(
               height: 1,
-              color: white,
+              color: isDarkTheme(context) ? whiteD : white,
             )
           ],
         ),

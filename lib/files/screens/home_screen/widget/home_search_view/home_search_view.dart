@@ -99,6 +99,7 @@ class HomeSearchView extends StatelessWidget {
       title: tunesStr,
       fontName: FontName.regular,
       textColor: isDarkTheme(context) ? whiteD : black,
+      textColorD: whiteD,
       leadingIcon: Obx(
         () {
           return Icon(
@@ -121,6 +122,7 @@ class HomeSearchView extends StatelessWidget {
       bgColor: transparent,
       title: artistStr,
       textColor: isDarkTheme(context) ? whiteD : black,
+      textColorD: whiteD,
       fontName: FontName.regular,
       leadingIcon: Obx(
         () {
@@ -146,6 +148,7 @@ class HomeSearchView extends StatelessWidget {
           title: codeStr,
           bgColor: transparent,
           textColor: isDarkTheme(context) ? whiteD : black,
+          textColorD: whiteD,
           fontName: FontName.regular,
           leadingIcon: Icon(
             color: isDarkTheme(context) ? whiteD : black,

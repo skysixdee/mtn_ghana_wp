@@ -50,7 +50,9 @@ class _BuyPopupViewState extends State<BuyPopupView> {
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
-                    color: white,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? blackD
+                        : white,
                   ),
                   width: popupWidth,
                   child: ListView(
@@ -151,6 +153,8 @@ class _BuyPopupViewState extends State<BuyPopupView> {
     return GenericButton(
       title: cancelStr,
       borderColor: grey,
+      bgColor:
+          Theme.of(context).brightness == Brightness.dark ? whiteD : lightGrey,
       onTap: () {
         Navigator.of(context).pop();
 
@@ -166,7 +170,8 @@ class _BuyPopupViewState extends State<BuyPopupView> {
   Widget confirmButton() {
     return GenericButton(
       title: confirmStr,
-      bgColor: yellow,
+      bgColor:
+          Theme.of(context).brightness == Brightness.dark ? yellowD : yellow,
       onTap: () {
         con.onConfirmButtonAction(widget.info, isMusicBox: widget.isMusicBox);
         con.onSuccess = () {
@@ -178,7 +183,8 @@ class _BuyPopupViewState extends State<BuyPopupView> {
 
   Widget headerView() {
     return Container(
-      color: lightGrey,
+      color:
+          Theme.of(context).brightness == Brightness.dark ? blackD : lightGrey,
       child: Padding(
         padding: const EdgeInsets.only(left: 12, right: 2, top: 2, bottom: 2),
         child: Row(
@@ -193,7 +199,12 @@ class _BuyPopupViewState extends State<BuyPopupView> {
               height: 35,
               width: 30,
               bgColor: transparent,
-              leadingIcon: const Icon(Icons.close),
+              leadingIcon: Icon(
+                Icons.close,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? whiteD
+                    : black,
+              ),
               onTap: () {
                 Navigator.of(context).pop();
                 if (StoreManager.isLoggedIn) {

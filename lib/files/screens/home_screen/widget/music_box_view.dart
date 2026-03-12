@@ -55,6 +55,7 @@ class _MusicBoxViewState extends State<MusicBoxView> {
                                 textColor:
                                     isDarkTheme(context) ? whiteD : black,
                                 title: seeMoreStr,
+                                textColorD: whiteD,
                                 bgColor: Colors.transparent,
                                 borderColor: grey,
                                 fontSize: si.isMobile ? 12 : 14,

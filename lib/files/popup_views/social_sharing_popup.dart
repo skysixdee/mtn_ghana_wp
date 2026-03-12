@@ -1,6 +1,7 @@
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -29,7 +30,8 @@ class SocialSharingPopup extends StatelessWidget {
           child: Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4), color: Colors.white),
+                borderRadius: BorderRadius.circular(4),
+                color: isDarkTheme(context) ? blackD : white),
             height: 200,
             child: listContainerView(context),
           ),
@@ -41,7 +43,7 @@ class SocialSharingPopup extends StatelessWidget {
   Widget headerView(BuildContext context) {
     return Container(
       height: 40,
-      color: lightGrey,
+      color: isDarkTheme(context) ? yellowD : yellow,
       child: Padding(
         padding: const EdgeInsets.only(left: 12),
         child: Row(
@@ -50,6 +52,7 @@ class SocialSharingPopup extends StatelessWidget {
             CustomText(
               isSelectable: false,
               title: shareOnStr,
+              colorD: blackD,
               fontName: FontName.bold,
             ),
             InkWell(

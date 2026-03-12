@@ -7,6 +7,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_addtowishlist_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_next_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_play_pause_button.dart';
@@ -43,7 +44,7 @@ class _MaximizedMobileViewState extends State<MaximizedMobileView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: white,
+      color: isDarkTheme(context) ? blackD : white,
       child: Stack(
         alignment: Alignment.topRight,
         children: [
@@ -127,7 +128,10 @@ class _MaximizedMobileViewState extends State<MaximizedMobileView> {
   Widget playerControls() {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4), color: lightGrey),
+          borderRadius: BorderRadius.circular(4),
+          border:
+              Border.all(color: isDarkTheme(context) ? whiteD : transparent),
+          color: isDarkTheme(context) ? blackD : lightGrey),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(
@@ -158,7 +162,10 @@ class _MaximizedMobileViewState extends State<MaximizedMobileView> {
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4), color: lightGrey),
+                      border: Border.all(
+                          color: isDarkTheme(context) ? whiteD : transparent),
+                      borderRadius: BorderRadius.circular(4),
+                      color: isDarkTheme(context) ? blackD : lightGrey),
                   child: pleayerTuneCard(con, con.list[index], index)),
             );
           },
@@ -181,7 +188,7 @@ class _MaximizedMobileViewState extends State<MaximizedMobileView> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
-                    color: yellow,
+                    color: isDarkTheme(context) ? yellowD : yellow,
                   ),
                   child: artistCard(context, index),
                 ),
@@ -231,6 +238,7 @@ class _MaximizedMobileViewState extends State<MaximizedMobileView> {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Center(
           child: CustomText(
+            colorD: blackD,
             isSelectable: false,
             fontName: FontName.semiBold,
             title: con.artistList[index],

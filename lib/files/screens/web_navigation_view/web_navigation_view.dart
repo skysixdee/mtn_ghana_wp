@@ -183,7 +183,7 @@ class WebNavigationView extends StatelessWidget {
         return Obx(
           () {
             return GenericButton(
-              bgColor: white,
+              bgColor: isDarkTheme(context) ? whiteD : white,
               leadingIcon: const Padding(
                 padding: EdgeInsets.only(right: 4),
                 child: Icon(
@@ -194,7 +194,7 @@ class WebNavigationView extends StatelessWidget {
               title: appCont.isLoggedIn.value ? myAccountStr : loginStr,
               onTap: () {
                 if (StoreManager.isLoggedIn) {
-                  myAccountMenu(context);
+                  //myAccountMenu(context);
                 } else {
                   con.resetValue();
                   genericPopup(Obx(

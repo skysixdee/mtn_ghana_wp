@@ -11,6 +11,7 @@ class GenericButton extends StatelessWidget {
     this.title,
     this.bgColor = lightGrey,
     this.textColor = black,
+    this.textColorD,
     this.padding,
     this.width,
     this.height = 40,
@@ -32,6 +33,7 @@ class GenericButton extends StatelessWidget {
   final Color bgColor;
   final Color? borderColor;
   final Color textColor;
+  final Color? textColorD;
   final double? width;
   final double height;
   final double? radius;
@@ -87,7 +89,7 @@ class GenericButton extends StatelessWidget {
                           isSelectable: false,
                           title: title ?? '',
                           color: textColor,
-                          colorD: textColor,
+                          colorD: textColorD ?? blackD,
                           fontName: fontName,
                           fontSize: fontSize,
                         ),

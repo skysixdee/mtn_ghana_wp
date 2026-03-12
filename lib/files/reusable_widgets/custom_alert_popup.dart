@@ -2,6 +2,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -62,7 +63,7 @@ class _CustomAlertPopup extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              color: white,
+              color: isDarkTheme(context) ? blackD : white,
             ),
             width: popupWidth,
             child: Column(
@@ -107,6 +108,7 @@ class _CustomAlertPopup extends StatelessWidget {
             radius: 0,
             height: 45,
             fontSize: 16,
+            textColorD: whiteD,
             bgColor: transparent,
             title: primaryBtnTitle ?? okCStr,
             onTap: () {
@@ -123,6 +125,7 @@ class _CustomAlertPopup extends StatelessWidget {
                 Expanded(
                   child: GenericButton(
                     fontSize: 16,
+                    textColorD: whiteD,
                     textColor: secondryTitleColor ?? red,
                     title: secondryBtnTitle,
                     bgColor: transparent,
@@ -147,6 +150,7 @@ class _CustomAlertPopup extends StatelessWidget {
                 Expanded(
                   child: GenericButton(
                     fontSize: 16,
+                    textColorD: whiteD,
                     title: primaryBtnTitle ?? okCStr,
                     bgColor: transparent,
                     onTap: () {
@@ -164,7 +168,7 @@ class _CustomAlertPopup extends StatelessWidget {
 
   Widget header(BuildContext context) {
     return Container(
-      color: yellow,
+      color: isDarkTheme(context) ? yellowD : yellow,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

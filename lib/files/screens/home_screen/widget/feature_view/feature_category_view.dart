@@ -70,6 +70,7 @@ class _FeatureCategoryViewState extends State<FeatureCategoryView> {
         GenericButton(
           textColor: isDarkTheme(context) ? whiteD : black,
           title: seeMoreStr,
+          textColorD: whiteD,
           bgColor: Colors.transparent,
           borderColor: grey,
           onTap: () {

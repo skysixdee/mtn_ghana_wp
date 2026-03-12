@@ -7,6 +7,7 @@ import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/minimized_player_view.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -173,7 +174,7 @@ Widget pleayerTuneCard(PlayerController controller, TuneInfo info, int index) {
                   children: [
                     customImage(
                         cornerRadius: 4, url: info.toneIdpreviewImageUrl),
-                    _playingOverLayIndicator(controller, info)
+                    _playingOverLayIndicator(context, controller, info)
                   ],
                 ),
               ),
@@ -187,7 +188,8 @@ Widget pleayerTuneCard(PlayerController controller, TuneInfo info, int index) {
   ));
 }
 
-Obx _playingOverLayIndicator(PlayerController controller, TuneInfo info) {
+Obx _playingOverLayIndicator(
+    BuildContext context, PlayerController controller, TuneInfo info) {
   return Obx(
     () {
       return (controller.info.value.toneId == info.toneId)
@@ -204,7 +206,7 @@ Obx _playingOverLayIndicator(PlayerController controller, TuneInfo info) {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  color: yellow,
+                  color: isDarkTheme(context) ? yellowD : yellow,
                 ),
                 child: Center(child: Obx(
                   () {
@@ -236,6 +238,7 @@ Widget _toneInfo(TuneInfo info) {
             isSelectable: false,
             title: info.toneName,
             color: black,
+            colorD: si.isMobile ? whiteD : black,
             maxLine: 1,
             fontSize: si.isMobile ? 12 : null,
             fontName: si.isMobile ? FontName.semiBold : FontName.bold,
@@ -244,6 +247,7 @@ Widget _toneInfo(TuneInfo info) {
             isSelectable: false,
             maxLine: 1,
             color: black,
+            colorD: si.isMobile ? whiteD : black,
             title: info.artistName,
             fontSize: si.isMobile ? 11 : null,
             fontName: FontName.regular,

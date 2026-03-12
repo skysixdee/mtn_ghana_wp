@@ -7,6 +7,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_addtowishlist_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_next_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_play_pause_button.dart';
@@ -38,7 +39,7 @@ class MaxLeftView extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      color: white,
+                      color: isDarkTheme(context) ? blackD : white,
                     ),
                     width: 260,
                     child: Column(
@@ -112,6 +113,7 @@ class MaxLeftView extends StatelessWidget {
                 fontName: FontName.bold,
                 fontSize: 18,
                 color: black,
+                colorD: blackD,
               ),
               const SizedBox(height: 8),
               // Row(
@@ -170,6 +172,7 @@ class MaxLeftView extends StatelessWidget {
                       title: playerController.artistList[index],
                       fontName: FontName.regular,
                       color: black,
+                      colorD: blackD,
                       //fontSize: 12,
                     ),
                   )),

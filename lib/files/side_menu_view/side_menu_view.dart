@@ -106,6 +106,11 @@ class _SideMenuViewState extends State<SideMenuView> {
         //print("info route name: ${info.routeName}");
         return Container(
           decoration: BoxDecoration(
+              border: Border.all(
+                  color: sideMenuCont.selectedCard.value.routeName ==
+                          info.routeName
+                      ? transparent
+                      : lightYellow),
               color: sideMenuCont.selectedCard.value.routeName == info.routeName
                   ? color ?? lightYellow
                   : isDarkTheme(context)
@@ -151,7 +156,9 @@ class _SideMenuViewState extends State<SideMenuView> {
       color: isDarkTheme(context) ? blackD : white,
       boxShadow: [
         BoxShadow(
-          color: black.withOpacity(0.4),
+          color: isDarkTheme(context)
+              ? whiteD.withOpacity(0.4)
+              : black.withOpacity(0.4),
           blurRadius: 4,
           offset: const Offset(0, 4),
         )

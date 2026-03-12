@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
@@ -71,7 +72,9 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
               width: popupWidth,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
-                color: white,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? blackD
+                    : white,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -110,8 +113,13 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
             ? loadingIndicator(width: 200)
             : GenericButton(
                 width: 200,
-                bgColor:
-                    otpController.enableVerifyButton.value ? yellow : lightGrey,
+                bgColor: otpController.enableVerifyButton.value
+                    ? Theme.of(context).brightness == Brightness.dark
+                        ? yellowD
+                        : yellow
+                    : Theme.of(context).brightness == Brightness.dark
+                        ? whiteD
+                        : lightGrey,
                 title: verifyOtpStr,
                 onTap: () {
                   otpController.onVerifyButtonAction(
@@ -182,9 +190,12 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
             },
             bgColor: transparent,
             padding: const EdgeInsets.only(left: 6, right: 8),
-            leadingIcon: Icon(otpController.secureOtp.value
-                ? Icons.visibility
-                : Icons.visibility_off),
+            leadingIcon: Icon(
+              otpController.secureOtp.value
+                  ? Icons.visibility
+                  : Icons.visibility_off,
+              color: isDarkTheme(context) ? whiteD : black,
+            ),
           ), // ,
           obscureText: otpController.secureOtp.value,
           width: 340,
@@ -221,8 +232,11 @@ class _LoginOtpPopupState extends State<LoginOtpPopup> {
           GenericButton(
             bgColor: transparent,
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            trailingIcon: const Icon(
+            trailingIcon: Icon(
               Icons.close,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? whiteD
+                  : black,
             ),
             onTap: () {
               Navigator.of(context).pop();

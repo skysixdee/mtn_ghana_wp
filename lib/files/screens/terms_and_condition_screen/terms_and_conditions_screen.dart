@@ -24,7 +24,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
             children: [
               Center(
                 child: CustomText(
-                  title: termsAndConditions,
+                  title: termsAndConditionsStr,
                   color: black,
                   fontSize: si.isMobile ? 30 : 55,
                 ),

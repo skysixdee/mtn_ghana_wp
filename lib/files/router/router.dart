@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/player_view.dart';
 import 'package:mtn_ghana_wp/files/screens/login_screen/login_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mobile_bottom_nav_view/mobile_bottom_nav_view.dart';
@@ -213,7 +214,12 @@ Widget navBuilder(context, state, navigationShell) {
           key: scaffoldKey,
           appBar: si.isMobile
               ? AppBar(
-                  automaticallyImplyLeading: false, backgroundColor: yellow)
+                  iconTheme: IconThemeData(
+                    color:
+                        isDarkTheme(context) ? white : black, // your icon color
+                  ),
+                  automaticallyImplyLeading: false,
+                  backgroundColor: isDarkTheme(context) ? yellowD : yellow)
               : null,
           endDrawer: si.isMobile ? MobileDrawerScreen() : null,
           bottomNavigationBar: si.isMobile ? MobileBottomNavView() : null,

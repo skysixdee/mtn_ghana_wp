@@ -65,7 +65,7 @@ class CustomTextfield extends StatelessWidget {
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(radius ?? 20),
-        border: Border.all(color: borderColor),
+        border: Border.all(color: isDarkTheme(context) ? whiteD : borderColor),
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: 16),

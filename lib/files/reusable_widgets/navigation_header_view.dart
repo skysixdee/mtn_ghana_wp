@@ -33,6 +33,7 @@ class NavigationHeaderView extends StatelessWidget {
                           shrinkWrap: false,
                           itemBuilder: (context, index) {
                             return GenericButton(
+                              textColorD: whiteD,
                               padding: const EdgeInsets.only(right: 4),
                               bgColor: transparent,
                               textColor: index == (titleList.length - 1)
