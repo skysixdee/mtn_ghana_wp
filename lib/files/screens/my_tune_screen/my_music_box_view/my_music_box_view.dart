@@ -123,6 +123,7 @@ class MyMusicBoxView extends StatelessWidget {
           border: Border.all(color: black, width: 0.5),
           borderRadius: BorderRadius.circular(50)),
       child: CustomText(
+        isSelectable: false,
         fontName: FontName.semiBold,
         title: previewStr,
       ),

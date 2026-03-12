@@ -12,6 +12,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_n
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_play_pause_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_previous_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_share_button.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -152,6 +153,9 @@ class MaxLeftView extends StatelessWidget {
                     cont.isPlayerMaxSize.value = false;
                     await Future.delayed(const Duration(milliseconds: 100));
                     print("navigating to artist page");
+                    context.goNamed(artistTuneRoute, queryParameters: {
+                      'artistName': playerController.info.value.artistName ?? ''
+                    });
                     //if (Get.context != null) {
                     // context.goNamed(artistTuneRoute, queryParameters: {
                     //   'artistName': playerController.artistList[index]

@@ -13,6 +13,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_p
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_previous_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/buttons/player_share_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/max_widgets/max_right_view.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
@@ -220,6 +221,8 @@ class _MaximizedMobileViewState extends State<MaximizedMobileView> {
 
         print(
             "move to artist tune view with artist name ${cont.artistList[index]}");
+        ctx.goNamed(artistTuneRoute,
+            queryParameters: {'artistName': con.info.value.artistName ?? ''});
         //if (Get.context != null) {
         // ctx.goNamed(artistTuneRoute,
         //     queryParameters: {'artistName': cont.artistList[index]});

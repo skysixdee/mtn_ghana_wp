@@ -103,7 +103,7 @@ class _SideMenuViewState extends State<SideMenuView> {
         }
       },
       child: Obx(() {
-        print("info route name: ${info.routeName}");
+        //print("info route name: ${info.routeName}");
         return Container(
           decoration: BoxDecoration(
               color: sideMenuCont.selectedCard.value.routeName == info.routeName
