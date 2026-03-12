@@ -48,6 +48,7 @@ class SocialSharingPopup extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomText(
+              isSelectable: false,
               title: shareOnStr,
               fontName: FontName.bold,
             ),

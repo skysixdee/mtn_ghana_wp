@@ -24,7 +24,8 @@ import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_setti
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
-import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
+
 import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';

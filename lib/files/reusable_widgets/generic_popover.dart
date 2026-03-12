@@ -60,6 +60,7 @@ genericPopover(BuildContext context, List<PopoverMenuModel> menuList,
                                         : const SizedBox(),
                                     Flexible(
                                       child: CustomText(
+                                        isSelectable: false,
                                         title: menuList[index].title,
                                         fontName: FontName.regular,
                                       ),

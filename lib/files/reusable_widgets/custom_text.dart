@@ -10,6 +10,7 @@ class CustomText extends StatelessWidget {
   final Color color;
   final TextAlign? textAlign;
   final FontName fontName;
+  final bool isSelectable;
   const CustomText({
     super.key,
     this.title,
@@ -18,23 +19,36 @@ class CustomText extends StatelessWidget {
     this.fontSize,
     this.fontName = FontName.regular,
     this.textAlign = TextAlign.left,
+    this.isSelectable = true,
   });
   @override
   Widget build(BuildContext context) {
     return title == null
         ? const SizedBox()
-        : Text(
-            title ?? '',
-            maxLines: maxLine,
-            textAlign: textAlign,
-            style: TextStyle(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? checkColur(context, color)
-                  : color,
-              fontSize: fontSize,
-              fontFamily: fontName.name,
-            ),
-          );
+        : isSelectable
+            ? SelectionArea(
+                child: Text(
+                title ?? '',
+                maxLines: maxLine,
+                textAlign: textAlign,
+                style: TextStyle(
+                  color: color,
+                  fontSize: fontSize,
+                  fontFamily: fontName.name,
+                ),
+              ))
+            : Text(
+                title ?? '',
+                maxLines: maxLine,
+                textAlign: textAlign,
+                style: TextStyle(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? checkColur(context, color)
+                      : color,
+                  fontSize: fontSize,
+                  fontFamily: fontName.name,
+                ),
+              );
   }
 
   Color checkColur(BuildContext context, Color col) {

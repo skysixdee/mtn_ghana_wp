@@ -5,7 +5,8 @@ import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:mtn_ghana_wp/files/common/decode_html_text.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller_new.dart';
-import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
+
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/list_setting_model.dart';
 import 'package:mtn_ghana_wp/files/model/music_box_sc_model.dart';
@@ -240,15 +241,15 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
                 padding: const EdgeInsets.all(0),
                 width: 30,
                 height: 30,
-                leadingIcon: Icon(
-                  pCont.playingToneId.value == info.contentId
-                      ? Icons.pause
-                      : Icons.play_arrow_rounded,
-                  size: pCont.playingToneId.value == info.contentId ? 20 : 22,
-                  color: black,
-                ),
+                // leadingIcon: Icon(
+                //   pCont.playingToneId.value == info.contentId
+                //       ? Icons.pause
+                //       : Icons.play_arrow_rounded,
+                //   size: pCont.playingToneId.value == info.contentId ? 20 : 22,
+                //   color: black,
+                // ),
                 onTap: () {
-                  pCont.playUrl(inf);
+                  //pCont.playUrl(inf);
                 },
               );
             },

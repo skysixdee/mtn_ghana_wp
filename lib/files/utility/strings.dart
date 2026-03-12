@@ -105,6 +105,8 @@ String myProfileStr = "My Profile";
 
 String myWishlistStr = "My Wishlist";
 String wishlistStr = "Wishlist";
+String viewMoreStr = "View more";
+String playListStr = "Playlist";
 String addToShuffleStr = "Add to shuffle";
 String blackListStr = "Black List";
 String logoutStr = "Logout";
@@ -116,7 +118,10 @@ String faqStr = "FAQ";
 String aboutStr = "About";
 String someThingWentWrongStr = "Some thing went wrong";
 String giftStr = "Gift";
-
+String artistsStr = "Artists";
+String upNextStr = "Up Next";
+String youMisghtLikeStr = "You might like";
+String addToWishlistStr = "Add to wishlist";
 String darkModeStr = "Dark Mode";
 String lightModeStr = "Light Mode";
 String inActiveStr = "InActive";

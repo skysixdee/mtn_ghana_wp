@@ -61,7 +61,7 @@ dependencies:
   local_session_timeout: ^3.2.0
   html_unescape: ^2.0.0
   flutter_svg: ^2.2.0
-  
+  glossy: ^0.0.5
   
 
 dev_dependencies:

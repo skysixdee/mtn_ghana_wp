@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
-import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
+
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/enums/playing_card_type.dart';
 import 'package:mtn_ghana_wp/files/model/my_playing_tunes_model.dart';
@@ -141,13 +142,13 @@ class PlayingTuneCard extends StatelessWidget {
           height: 34,
           width: 34,
           radius: 17,
-          leadingIcon: Icon(
-            pCont.playingToneId.value == info.toneId
-                ? Icons.pause
-                : Icons.play_arrow_rounded,
-            size: pCont.playingToneId.value == info.toneId ? 20 : 22,
-            color: white,
-          ),
+          // leadingIcon: Icon(
+          //   pCont.playingToneId.value == info.toneId
+          //       ? Icons.pause
+          //       : Icons.play_arrow_rounded,
+          //   size: pCont.playingToneId.value == info.toneId ? 20 : 22,
+          //   color: white,
+          // ),
           onTap: () {
             TuneInfo inf = TuneInfo(
               toneIdStreamingUrl: info.toneIdStreamingUrl ?? "",
@@ -158,7 +159,7 @@ class PlayingTuneCard extends StatelessWidget {
             );
             print("info.toneUrl ${inf.toneUrl}");
             print("info.toneIdStreamingUrl ${inf.toneIdStreamingUrl}");
-            pCont.playUrl(inf);
+            //pCont.playUrl(inf);
           },
         );
       },

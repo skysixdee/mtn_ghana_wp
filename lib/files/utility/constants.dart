@@ -1,5 +1,7 @@
 const double popupWidth = 400;
 const double sideMenuWidth = 220;
+const double webNavHeight = 70;
+const double minPlayerHeight = 60;
 //const double bottomNavViewHeight = 70;
 int msisdnLength = 9; //10;
 int otpTimeLimit = 30;

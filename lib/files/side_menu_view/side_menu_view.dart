@@ -59,6 +59,7 @@ class _SideMenuViewState extends State<SideMenuView> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: CustomText(
+              isSelectable: false,
               title: "@${DateTime.now().year} " + copyrightStr,
             ),
           )
@@ -117,6 +118,7 @@ class _SideMenuViewState extends State<SideMenuView> {
               children: [
                 Expanded(
                   child: CustomText(
+                    isSelectable: false,
                     title: info.title,
                     fontName: sideMenuCont.selectedCard.value.routeName ==
                             info.routeName

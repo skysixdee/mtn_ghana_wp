@@ -75,6 +75,7 @@ class GenericButton extends StatelessWidget {
                       children: [
                         leadingIcon ?? const SizedBox(),
                         CustomText(
+                          isSelectable: false,
                           title: title ?? '',
                           color: textColor,
                           fontName: fontName,

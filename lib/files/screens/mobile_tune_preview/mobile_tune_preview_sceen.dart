@@ -4,7 +4,8 @@ import 'package:mtn_ghana_wp/files/api_calls/delete_mytune_api.dart';
 import 'package:mtn_ghana_wp/files/common/decode_html_text.dart';
 import 'package:mtn_ghana_wp/files/controllers/mobile_tune_preview_cotroller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
-import 'package:mtn_ghana_wp/files/controllers/player_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
+
 import 'package:mtn_ghana_wp/files/enums/custpm_screen_type.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
@@ -254,20 +255,20 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
           width: 55,
           borderColor: black,
           padding: EdgeInsets.zero,
-          leadingIcon: Obx(
-            () {
-              return Icon(
-                pCont.playingToneId.value == con.currentTuneDetail.value.toneId
-                    ? Icons.pause
-                    : Icons.play_arrow_rounded,
-                color: yellow,
-              );
-            },
-          ),
+          // leadingIcon: Obx(
+          //   () {
+          //     return Icon(
+          //       pCont.playingToneId.value == con.currentTuneDetail.value.toneId
+          //           ? Icons.pause
+          //           : Icons.play_arrow_rounded,
+          //       color: yellow,
+          //     );
+          //   },
+          // ),
           onTap: () {
             print("playing index is $playingIndex");
             con.isPlaying.value = !con.isPlaying.value;
-            pCont.playUrl(con.currentTuneDetail.value);
+            //pCont.playUrl(con.currentTuneDetail.value);
           },
         ),
         Obx(
