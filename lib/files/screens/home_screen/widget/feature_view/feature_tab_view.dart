@@ -55,6 +55,7 @@ class FeatureTabView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomText(
+                          isSelectable: false,
                           title: featureController.tabList[index].name,
                           fontName: featureController.index.value == index
                               ? FontName.bold
