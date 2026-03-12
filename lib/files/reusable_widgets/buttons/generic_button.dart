@@ -45,14 +45,18 @@ class GenericButton extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         height: height,
         decoration: BoxDecoration(
-          border: Border.all(color: borderColor ?? transparent),
-          borderRadius: BorderRadius.circular(radius ?? height / 2),
-          color: bgColor == yellow
-              ? isDarkTheme(context)
-                  ? yellowD
-                  : yellow
-              : bgColor, //to avoid light yellow in dark mode
-        ),
+            border: Border.all(color: borderColor ?? transparent),
+            borderRadius: BorderRadius.circular(radius ?? height / 2),
+            color: bgColor
+            // color: Theme.of(context).brightness == Brightness.dark
+            //     ? checkColur(bgColor, title ?? '')
+            //     : bgColor,
+            // bgColor == yellow
+            //     ? isDarkTheme(context)
+            //         ? yellowD
+            //         : yellow
+            //     : bgColor, //to avoid light yellow in dark mode
+            ),
         width: width,
         child: InkWell(
           onTap: () {
@@ -83,6 +87,7 @@ class GenericButton extends StatelessWidget {
                           isSelectable: false,
                           title: title ?? '',
                           color: textColor,
+                          colorD: textColor,
                           fontName: fontName,
                           fontSize: fontSize,
                         ),
@@ -93,5 +98,16 @@ class GenericButton extends StatelessWidget {
                 ],
               )),
         ));
+  }
+
+  Color checkColur(Color col, String title) {
+    print("$title colot is $col");
+    if (col == black) {
+      return whiteD;
+    } else if (col == yellow) {
+      return yellowD;
+    } else {
+      return black;
+    }
   }
 }

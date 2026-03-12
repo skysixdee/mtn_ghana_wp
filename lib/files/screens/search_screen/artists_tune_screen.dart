@@ -3,6 +3,7 @@ import 'package:mtn_ghana_wp/files/controllers/artists_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/model/navigation_header_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_grid_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/tune_card.dart';
@@ -25,7 +26,7 @@ class _ArtistsTuneScreenState extends State<ArtistsTuneScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: white,
+      color: isDarkTheme(context) ? blackD : white,
       child: Column(
         children: [
           Expanded(

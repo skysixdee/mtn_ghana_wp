@@ -172,7 +172,7 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
     builder: (context, si) {
       return GenericButton(
         borderColor: black,
-        bgColor: white,
+        bgColor: isDarkTheme(context) ? whiteD : white,
         width: 30,
         height: 30,
         padding: EdgeInsets.zero,

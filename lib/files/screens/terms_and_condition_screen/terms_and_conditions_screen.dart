@@ -4,12 +4,14 @@ import 'package:mtn_ghana_wp/files/controllers/terms_and_conditions_controller.d
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/terms_and_conditions_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class TermsAndConditionsScreen extends StatelessWidget {
-  final TermsAndConditionsController termsController = Get.put(TermsAndConditionsController());
+  final TermsAndConditionsController termsController =
+      Get.put(TermsAndConditionsController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +24,14 @@ class TermsAndConditionsScreen extends StatelessWidget {
             children: [
               Center(
                 child: CustomText(
-                  title: "Terms & Conditions",
+                  title: termsAndConditions,
                   color: black,
                   fontSize: si.isMobile ? 30 : 55,
                 ),
               ),
               Center(
                 child: CustomText(
-                  title: "Please read the following terms carefully.",
+                  title: pleaseReadFollwingStr,
                   color: grey,
                   fontSize: si.isMobile ? 16 : 20,
                 ),
@@ -39,12 +41,16 @@ class TermsAndConditionsScreen extends StatelessWidget {
                 if (termsController.isLoading.value) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (termsController.hasError.value) {
-                  return const Center(child: CustomText(title: "Failed to load terms & conditions"));
+                  return Center(
+                      child:
+                          CustomText(title: failedToLoadTermsAndConditionsStr));
                 } else {
                   return ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: termsController.termsData.value.termsconditionsList?.length ?? 0,
+                    itemCount: termsController
+                            .termsData.value.termsconditionsList?.length ??
+                        0,
                     itemBuilder: (context, index) {
                       return termsItemWidget(index);
                     },
@@ -60,7 +66,8 @@ class TermsAndConditionsScreen extends StatelessWidget {
 }
 
 Widget termsItemWidget(int index) {
-  final TermsAndConditionsController termsController = Get.find<TermsAndConditionsController>();
+  final TermsAndConditionsController termsController =
+      Get.find<TermsAndConditionsController>();
   final termsItem = termsController.termsData.value.termsconditionsList![index];
 
   return ResponsiveBuilder(
@@ -68,8 +75,16 @@ Widget termsItemWidget(int index) {
       return Obx(() {
         return Card(
           elevation: 0,
-          color: white,
-          margin: EdgeInsets.symmetric(vertical: 8, horizontal: si.isMobile ? 2 : 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(
+              color: grey, // your color
+              width: 1,
+            ),
+          ),
+          color: isDarkTheme(context) ? blackD : white,
+          margin: EdgeInsets.symmetric(
+              vertical: 8, horizontal: si.isMobile ? 2 : 16),
           child: Column(
             children: [
               ListTile(
@@ -81,14 +96,16 @@ Widget termsItemWidget(int index) {
                       child: Text(
                         termsItem.question ?? '',
                         style: TextStyle(
-                          fontFamily: FontName.regular.name,
-                          fontWeight: FontWeight.bold,
-                          fontSize: si.isMobile ? 13 : 18,
-                        ),
+                            fontFamily: FontName.regular.name,
+                            fontWeight: FontWeight.bold,
+                            fontSize: si.isMobile ? 13 : 18,
+                            color: isDarkTheme(context) ? whiteD : black),
                       ),
                     ),
                     Icon(
-                      termsController.isExpanded[index] == true ? Icons.remove : Icons.add,
+                      termsController.isExpanded[index] == true
+                          ? Icons.remove
+                          : Icons.add,
                       size: si.isMobile ? 18 : 22,
                     ),
                   ],
@@ -108,31 +125,36 @@ Widget termsItemWidget(int index) {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: CustomText(
-                              title: answer.header!,
-                              fontSize: 15,
-                            ),
+                                title: answer.header!,
+                                fontSize: 15,
+                                color: isDarkTheme(context) ? whiteD : black),
                           ),
                         Padding(
-                          padding: answer.header != null && answer.header!.isNotEmpty
-                              ? const EdgeInsets.only(left: 25, bottom: 25)
-                              : const EdgeInsets.only(left: 0, bottom: 25),
+                          padding:
+                              answer.header != null && answer.header!.isNotEmpty
+                                  ? const EdgeInsets.only(left: 25, bottom: 25)
+                                  : const EdgeInsets.only(left: 0, bottom: 25),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: answer.dataList!.map((dataList) {
-                              List<TextSpan> combinedTextSpans = dataList.data!.map((datum) {
+                              List<TextSpan> combinedTextSpans =
+                                  dataList.data!.map((datum) {
                                 return TextSpan(
                                   text: datum.text ?? '',
                                   style: TextStyle(
-                                    fontFamily: datum.style?.fontStyle == 'italic'
-                                        ? FontName.regular.name
-                                        : FontName.regular.name,
+                                    fontFamily:
+                                        datum.style?.fontStyle == 'italic'
+                                            ? FontName.regular.name
+                                            : FontName.regular.name,
                                     fontWeight: datum.style?.fontWeight == 900
                                         ? FontWeight.bold
                                         : FontWeight.normal,
-                                    decoration: datum.style?.textDecoration == 'underline'
+                                    decoration: datum.style?.textDecoration ==
+                                            'underline'
                                         ? TextDecoration.underline
                                         : TextDecoration.none,
-                                    color: Colors.black,
+                                    color:
+                                        isDarkTheme(context) ? whiteD : black,
                                     fontSize: si.isMobile ? 14 : 16,
                                   ),
                                 );
@@ -148,7 +170,9 @@ Widget termsItemWidget(int index) {
                                           text: '• ',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.black,
+                                            color: isDarkTheme(context)
+                                                ? whiteD
+                                                : black,
                                             fontSize: si.isMobile ? 15 : 20,
                                           ),
                                         ),

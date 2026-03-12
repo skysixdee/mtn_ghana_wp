@@ -1,5 +1,6 @@
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -74,8 +75,8 @@ class CustomTextfield extends StatelessWidget {
           children: [
             leadingChild ?? const SizedBox(),
             Expanded(child: textField()),
-            clearButton(),
-            trailingChild ?? searchIcons()
+            clearButton(context),
+            trailingChild ?? searchIcons(context)
           ],
         ),
       ),
@@ -87,13 +88,13 @@ class CustomTextfield extends StatelessWidget {
     // );
   }
 
-  Widget searchIcons() {
+  Widget searchIcons(BuildContext context) {
     return addSearchIcon
         ? Padding(
             padding: const EdgeInsets.all(1.0),
             child: GenericButton(
               width: 38,
-              bgColor: white,
+              bgColor: isDarkTheme(context) ? whiteD : white,
               padding: EdgeInsets.zero,
               leadingIcon: const Icon(
                 Icons.search,
@@ -110,7 +111,7 @@ class CustomTextfield extends StatelessWidget {
         : const SizedBox(width: 4);
   }
 
-  Widget clearButton() {
+  Widget clearButton(BuildContext context) {
     return clearIcon ??
         Obx(
           () {
@@ -131,7 +132,11 @@ class CustomTextfield extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 8, bottom: 8, top: 8, right: 8),
                     child: Icon(
-                      color: enabled! ? null : grey,
+                      color: enabled!
+                          ? isDarkTheme(context)
+                              ? whiteD
+                              : null
+                          : grey,
                       Icons.close,
                       size: 14,
                     ),

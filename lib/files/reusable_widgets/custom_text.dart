@@ -8,6 +8,7 @@ class CustomText extends StatelessWidget {
   final double? fontSize;
   final int? maxLine;
   final Color color;
+  final Color? colorD;
   final TextAlign? textAlign;
   final FontName fontName;
   final bool isSelectable;
@@ -16,6 +17,7 @@ class CustomText extends StatelessWidget {
     this.title,
     this.maxLine,
     this.color = black,
+    this.colorD,
     this.fontSize,
     this.fontName = FontName.regular,
     this.textAlign = TextAlign.left,
@@ -32,7 +34,9 @@ class CustomText extends StatelessWidget {
                 maxLines: maxLine,
                 textAlign: textAlign,
                 style: TextStyle(
-                  color: color,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? colorD ?? checkColur(color)
+                      : color,
                   fontSize: fontSize,
                   fontFamily: fontName.name,
                 ),
@@ -43,7 +47,7 @@ class CustomText extends StatelessWidget {
                 textAlign: textAlign,
                 style: TextStyle(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? checkColur(context, color)
+                      ? colorD ?? checkColur(color)
                       : color,
                   fontSize: fontSize,
                   fontFamily: fontName.name,
@@ -51,13 +55,13 @@ class CustomText extends StatelessWidget {
               );
   }
 
-  Color checkColur(BuildContext context, Color col) {
+  Color checkColur(Color col) {
     if (col == black) {
       return whiteD;
     } else if (col == yellow) {
       return yellowD;
     } else {
-      return black;
+      return whiteD;
     }
   }
 }

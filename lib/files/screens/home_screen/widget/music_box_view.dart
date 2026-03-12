@@ -52,7 +52,8 @@ class _MusicBoxViewState extends State<MusicBoxView> {
                                 fontSize: si.isMobile ? 16 : 20,
                               ),
                               GenericButton(
-                                textColor: black,
+                                textColor:
+                                    isDarkTheme(context) ? whiteD : black,
                                 title: seeMoreStr,
                                 bgColor: Colors.transparent,
                                 borderColor: grey,

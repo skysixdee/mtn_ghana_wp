@@ -9,6 +9,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/about_page_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
@@ -77,7 +78,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     const SizedBox(height: 10),
                     //horizintalList(section),
                     colrousal(section, sectionIndex),
-                    if (sectionIndex == 0) startDiscovering(),
+                    if (sectionIndex == 0) startDiscovering(context),
                     const SizedBox(height: 20),
                   ],
                 );
@@ -102,13 +103,16 @@ class _AboutScreenState extends State<AboutScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomText(
+                    isSelectable: true,
                     textAlign: TextAlign.center,
                     title: aboutTitleStr,
                     fontName: FontName.extraBold,
                     fontSize: 30,
+                    color: black,
                   ),
                   const SizedBox(height: 8),
                   CustomText(
+                    isSelectable: true,
                     textAlign: TextAlign.center,
                     title: aboutSunTitleStr,
                     fontName: FontName.semiBold,
@@ -133,7 +137,7 @@ class _AboutScreenState extends State<AboutScreen> {
     return CarouselSlider(
         items: List.generate(section.dataList?.length ?? 0, (v) {
           String svgs = section.dataList?[v].data?.first.iconName ?? '';
-          return corousalCard(svgs, section, v);
+          return corousalCard(svgs, section, v, sectionIndex);
         }),
         options: CarouselOptions(
           height: 280,
@@ -154,7 +158,7 @@ class _AboutScreenState extends State<AboutScreen> {
         ));
   }
 
-  Column corousalCard(String svgs, AboutList section, int v) {
+  Column corousalCard(String svgs, AboutList section, int v, int sectionIndex) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -164,14 +168,18 @@ class _AboutScreenState extends State<AboutScreen> {
           height: 60,
           width: 60,
           'assets/svgs/$svgs.svg',
-          colorFilter: const ColorFilter.mode(
-            Color.fromARGB(255, 17, 98, 237),
-            BlendMode.dst,
-          ),
+          colorFilter: isDarkTheme(context)
+              ? ColorFilter.mode(
+                  whiteD, sectionIndex == 1 ? BlendMode.dst : BlendMode.srcIn)
+              : const ColorFilter.mode(
+                  Color.fromARGB(255, 17, 98, 237),
+                  BlendMode.dst,
+                ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: CustomText(
+            isSelectable: true,
             title: section.dataList?[v].data?.first.iconTitle,
             fontName: FontName.extraBold,
             fontSize: 18,
@@ -179,6 +187,7 @@ class _AboutScreenState extends State<AboutScreen> {
         ),
         Flexible(
           child: CustomText(
+            isSelectable: true,
             title: section.dataList?[v].data?.first.text,
             fontName: FontName.semiBold,
             textAlign: TextAlign.center,
@@ -188,7 +197,7 @@ class _AboutScreenState extends State<AboutScreen> {
     );
   }
 
-  Widget startDiscovering() {
+  Widget startDiscovering(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30.0),
       child: Row(
@@ -198,7 +207,7 @@ class _AboutScreenState extends State<AboutScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             title: startDiscoveringStr,
             textColor: black,
-            bgColor: yellow,
+            bgColor: isDarkTheme(context) ? yellowD : yellow,
             onTap: () {
               context.goNamed(homeRoute);
               print("tapped");
@@ -216,6 +225,7 @@ class _AboutScreenState extends State<AboutScreen> {
           'assets/svgs/about_settings.svg',
         ),
         CustomText(
+          isSelectable: true,
           title: advancedSettingStr,
           fontName: FontName.extraBold,
           fontSize: 22,

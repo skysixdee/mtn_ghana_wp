@@ -68,7 +68,7 @@ class _FeatureCategoryViewState extends State<FeatureCategoryView> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         GenericButton(
-          textColor: black,
+          textColor: isDarkTheme(context) ? whiteD : black,
           title: seeMoreStr,
           bgColor: Colors.transparent,
           borderColor: grey,

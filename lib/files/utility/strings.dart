@@ -182,6 +182,8 @@ String faqFailerStr = 'Failed to load FAQ';
 
 String failedToLoadTermsAndConditionsStr =
     'Failed to load terms and conditions';
+String pleaseReadFollwingStr = "Please read the following terms carefully.";
+
 String failedToLoadTermsAndConditionsWithStatusCodeStr =
     "Failed to load terms with status code:";
 String termsAndConditionsStr = 'Terms and Conditions';

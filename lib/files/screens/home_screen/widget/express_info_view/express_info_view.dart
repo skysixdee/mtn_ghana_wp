@@ -64,6 +64,7 @@ class ExpressInfoView extends StatelessWidget {
 
     for (var i = 0; i < expressLines.length; i++) {
       list.add(CustomText(
+        colorD: blackD,
         title: expressLines[i],
         fontName: i == 0 ? FontName.bold : FontName.regular,
         fontSize: i == 0 ? (si.isMobile ? 18 : 25) : (si.isMobile ? 14 : 20),
@@ -76,6 +77,7 @@ class ExpressInfoView extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: si.isMobile ? 12 : 20),
           child: CustomText(
+            colorD: blackD,
             title: fallbackLines[i].trim(),
             fontName: FontName.regular,
             fontSize: si.isMobile ? 10 : 15,

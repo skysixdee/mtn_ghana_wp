@@ -33,7 +33,7 @@ class HomeSearchView extends StatelessWidget {
                 CustomTextfield(
                   addSearchIcon: true,
                   hintColor: grey,
-                  bgColor: white,
+                  bgColor: isDarkTheme(context) ? blackD : white,
                   hintText: typeToSearchStr,
                   controller: textEditingController,
                   borderColor: white,
@@ -48,7 +48,7 @@ class HomeSearchView extends StatelessWidget {
                     customPrint("on submit $p0");
                   },
                 ),
-                searchTypeBuilder(),
+                searchTypeBuilder(context),
               ],
             ),
           ),
@@ -80,27 +80,29 @@ class HomeSearchView extends StatelessWidget {
     }
   }
 
-  Widget searchTypeBuilder() {
+  Widget searchTypeBuilder(BuildContext context) {
     return Row(
       spacing: 12,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        songSearchBuilder(),
-        artistSearchBuilder(),
-        codeSearchBuilder()
+        songSearchBuilder(context),
+        artistSearchBuilder(context),
+        codeSearchBuilder(context)
       ],
     );
   }
 
-  GenericButton songSearchBuilder() {
+  GenericButton songSearchBuilder(BuildContext context) {
     return GenericButton(
       bgColor: transparent,
       title: tunesStr,
       fontName: FontName.regular,
+      textColor: isDarkTheme(context) ? whiteD : black,
       leadingIcon: Obx(
         () {
           return Icon(
+              color: isDarkTheme(context) ? whiteD : black,
               con.searchTypeIndex.value == 0
                   ? Icons.radio_button_checked
                   : Icons.radio_button_unchecked,
@@ -114,14 +116,16 @@ class HomeSearchView extends StatelessWidget {
     );
   }
 
-  GenericButton artistSearchBuilder() {
+  GenericButton artistSearchBuilder(BuildContext context) {
     return GenericButton(
       bgColor: transparent,
       title: artistStr,
+      textColor: isDarkTheme(context) ? whiteD : black,
       fontName: FontName.regular,
       leadingIcon: Obx(
         () {
           return Icon(
+              color: isDarkTheme(context) ? whiteD : black,
               con.searchTypeIndex.value == 1
                   ? Icons.radio_button_checked
                   : Icons.radio_button_unchecked,
@@ -135,14 +139,16 @@ class HomeSearchView extends StatelessWidget {
     );
   }
 
-  Widget codeSearchBuilder() {
+  Widget codeSearchBuilder(BuildContext context) {
     return Obx(
       () {
         return GenericButton(
           title: codeStr,
           bgColor: transparent,
+          textColor: isDarkTheme(context) ? whiteD : black,
           fontName: FontName.regular,
           leadingIcon: Icon(
+            color: isDarkTheme(context) ? whiteD : black,
             con.searchTypeIndex.value == 2
                 ? Icons.radio_button_checked
                 : Icons.radio_button_unchecked,

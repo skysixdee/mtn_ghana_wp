@@ -1,6 +1,7 @@
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -37,7 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: white,
+        color: isDarkTheme(context) ? blackD : white,
         child: Column(
           children: [
             Expanded(
@@ -87,7 +88,7 @@ class _SearchScreenState extends State<SearchScreen> {
       () {
         return Stack(
           children: [
-            Container(height: 40, color: white),
+            Container(height: 40, color: isDarkTheme(context) ? blackD : white),
             numberPagination(
               totalCount: controller.totalTuneCount.value,
               onTap: (p0) => controller.leadMoreData(p0),

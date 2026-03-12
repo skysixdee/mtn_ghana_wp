@@ -1,4 +1,5 @@
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -49,7 +50,7 @@ class _NumberPaginationState extends State<_NumberPagination> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: yellow,
+      color: isDarkTheme(context) ? yellowD : yellow,
       child: NumberPaginator(
         config: NumberPaginatorUIConfig(
           height: 40,
