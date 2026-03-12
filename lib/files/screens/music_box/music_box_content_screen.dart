@@ -46,7 +46,9 @@ class MusicBoxContentScreen extends StatelessWidget {
               tuneList: con.musicBoxContentList,
               moreButton: const SizedBox(),
               info: con.musicBoxContentList[p0],
-              bottomButtonChild: playButton(con.musicBoxContentList[p0]),
+              bottomButtonChild: playButton(
+                  con.musicBoxContentList[p0], con.musicBoxContentList,
+                  isHideBuyButton: false),
             );
           },
         );

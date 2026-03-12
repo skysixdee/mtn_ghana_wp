@@ -148,7 +148,10 @@ class TuneCard extends StatelessWidget {
                 (bottomButtonChild == null)
                     ? Row(
                         children: [
-                          Expanded(child: bottomLeftChild ?? playButton(info)),
+                          Expanded(
+                              child: bottomLeftChild ??
+                                  playButton(info, tuneList,
+                                      isHideBuyButton: false)),
                           const SizedBox(width: 12),
                           Expanded(child: bottomRightChild ?? buyButton(info)),
                         ],
