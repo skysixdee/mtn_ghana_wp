@@ -58,7 +58,7 @@ class GenericButton extends StatelessWidget {
               onTap!();
             }
             if (!isStopPlay) {
-              CustomAudioPlayer.instance.stop();
+              // CustomAudioPlayer.instance.stop();
             }
           },
           child: Padding(
