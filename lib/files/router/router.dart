@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/screens/login_screen/login_screen.dart';
+import 'package:mtn_ghana_wp/files/screens/mobile_bottom_nav_view/mobile_bottom_nav_view.dart';
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
 import 'package:mtn_ghana_wp/files/side_menu_view/side_menu_view.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -211,6 +212,7 @@ Widget navBuilder(context, state, navigationShell) {
             ? AppBar(automaticallyImplyLeading: false, backgroundColor: yellow)
             : null,
         endDrawer: si.isMobile ? MobileDrawerScreen() : null,
+        bottomNavigationBar: si.isMobile ? MobileBottomNavView() : null,
         body: Column(
           children: [
             WebNavigationView(),

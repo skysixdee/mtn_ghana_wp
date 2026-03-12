@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -76,13 +77,21 @@ class _SideMenuViewState extends State<SideMenuView> {
           StoreManager.setDarkMode(!Get.isDarkMode);
           print(
               "dark mode value: ${StoreManager.isDarkMode} \n get dark mode value: ${Get.isDarkMode}");
-          //if (Get.isDarkMode) {
 
-          // } else {
-          //   StoreManager.setDarkMode(false);
-          // }
           return;
         }
+        if (info.title == homeRoute) {
+          appCont.mobileBottomNavIndex.value = 0;
+        } else if (info.title == searchRoute) {
+          appCont.mobileBottomNavIndex.value = 0;
+        } else if (info.title == musicBoxRoute) {
+          appCont.mobileBottomNavIndex.value = 2;
+        } else if (info.title == myWishlistRoute) {
+          appCont.mobileBottomNavIndex.value = 3;
+        } else if (info.title == myTunesRoute) {
+          appCont.mobileBottomNavIndex.value = 4;
+        }
+
         if (info.title == logoutStr) {
           return;
         }

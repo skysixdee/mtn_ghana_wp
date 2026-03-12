@@ -24,6 +24,7 @@ class AppController extends GetxController {
   RxList<Category> categories = <Category>[].obs;
   RxBool isLoggedIn = false.obs;
   String headerIncrechmentMsisdn = "";
+  RxInt mobileBottomNavIndex = 0.obs;
   @override
   void onInit() async {
     super.onInit();
