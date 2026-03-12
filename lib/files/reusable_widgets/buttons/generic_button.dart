@@ -1,6 +1,7 @@
 import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,11 @@ class GenericButton extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: borderColor ?? transparent),
           borderRadius: BorderRadius.circular(radius ?? height / 2),
-          color: bgColor,
+          color: bgColor == yellow
+              ? isDarkTheme(context)
+                  ? yellowD
+                  : yellow
+              : bgColor, //to avoid light yellow in dark mode
         ),
         width: width,
         child: InkWell(

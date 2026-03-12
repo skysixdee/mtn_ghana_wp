@@ -7,6 +7,7 @@ import 'package:mtn_ghana_wp/files/enums/my_player_state.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/popup_views/social_sharing_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
@@ -132,9 +133,11 @@ class MinimizedPlayerView extends StatelessWidget {
                 color: white,
               ),
               if (!cont.isHideBuyButton.value)
-                CustomText(
-                  title: "Add buy button here",
-                )
+                buyButton(cont.info.value,
+                    padding: const EdgeInsets.symmetric(horizontal: 12))
+              // CustomText(
+              //   title: "Add buy button here",
+              // )
               // buyButton(cont.info.value,
               //     padding: EdgeInsets.symmetric(horizontal: 20))
             ],

@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/popup_views/buy_popup_view.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -25,7 +26,7 @@ Widget buyButton(TuneInfo info,
           title: buyStr,
           fontName: si.isMobile ? FontName.regular : FontName.bold,
           leadingIcon: const Icon(Icons.card_travel, size: 16),
-          bgColor: yellow,
+          bgColor: isDarkTheme(context) ? yellowD : yellow,
           onTap: () {
             bCont.resetValue();
             genericPopup(Obx(

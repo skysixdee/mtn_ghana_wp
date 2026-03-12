@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
@@ -66,7 +67,7 @@ final router = GoRouter(
     ),
   ],
   redirect: (context, state) {
-    CustomAudioPlayer.instance.stop();
+    //CustomAudioPlayer.instance.stop();
     final path = state.fullPath ?? '';
     SideMenuController appCon = Get.find<SideMenuController>();
     appCon.selectedCard.value = SideMenuModel('', path);
@@ -204,6 +205,7 @@ StatefulShellBranch _createShell(
 }
 
 Widget navBuilder(context, state, navigationShell) {
+  PlayerController pCont = Get.find();
   //globalContext = context;
   return ResponsiveBuilder(
     builder: (context, si) {
@@ -215,30 +217,37 @@ Widget navBuilder(context, state, navigationShell) {
               : null,
           endDrawer: si.isMobile ? MobileDrawerScreen() : null,
           bottomNavigationBar: si.isMobile ? MobileBottomNavView() : null,
-          body: Stack(
-            children: [
-              Column(
-                children: [
-                  WebNavigationView(),
-                  Expanded(
+          body: Obx(() {
+            return Stack(
+              children: [
+                Column(
+                  children: [
+                    WebNavigationView(),
+                    Expanded(
                       child: Stack(
-                    children: [
-                      Row(
                         children: [
-                          si.isMobile
-                              ? const SizedBox()
-                              : const SizedBox(width: sideMenuWidth),
-                          Expanded(child: navigationShell)
+                          Row(
+                            children: [
+                              si.isMobile
+                                  ? const SizedBox()
+                                  : const SizedBox(width: sideMenuWidth),
+                              Expanded(child: navigationShell)
+                            ],
+                          ),
+                          si.isMobile ? const SizedBox() : const SideMenuView()
                         ],
                       ),
-                      si.isMobile ? const SizedBox() : const SideMenuView()
-                    ],
-                  ))
-                ],
-              ),
-              PlayerView()
-            ],
-          ));
+                    ),
+                    if (pCont.isPlayerVisible.value)
+                      SizedBox(
+                        height: minPlayerHeight,
+                      )
+                  ],
+                ),
+                PlayerView()
+              ],
+            );
+          }));
     },
   );
 }
