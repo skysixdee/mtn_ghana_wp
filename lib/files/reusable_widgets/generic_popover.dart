@@ -2,6 +2,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_on_hover.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -42,7 +43,13 @@ genericPopover(BuildContext context, List<PopoverMenuModel> menuList,
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            color: isHovered ? yellow : white,
+                            color: isHovered
+                                ? isDarkTheme(context)
+                                    ? yellowD
+                                    : yellow
+                                : isDarkTheme(context)
+                                    ? whiteD
+                                    : white,
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -60,6 +67,7 @@ genericPopover(BuildContext context, List<PopoverMenuModel> menuList,
                                         : const SizedBox(),
                                     Flexible(
                                       child: CustomText(
+                                        colorD: blackD,
                                         isSelectable: false,
                                         title: menuList[index].title,
                                         fontName: FontName.regular,
