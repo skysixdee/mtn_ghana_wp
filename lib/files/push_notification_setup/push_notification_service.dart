@@ -136,20 +136,9 @@ class PushNotificationService {
         return;
       }
 
-      // Check if app tab is visible or minimized
-      final isVisible = web.document.visibilityState == 'visible';
-      debugPrint('🌐 [PushService] Document visible: $isVisible');
-
-      if (isVisible) {
-        // App is MAXIMIZED — use direct Notification API
-        debugPrint(
-            '🌐 [PushService] App foreground — using direct Notification API');
-        _showForegroundNotification(title, body);
-      } else {
-        // App is MINIMIZED — use ServiceWorker
-        debugPrint('🌐 [PushService] App minimized — using ServiceWorker');
-        await _showBackgroundNotification(title, body);
-      }
+      // ✅ Always use SW — works for BOTH foreground & background on web
+      // Direct Notification API is blocked by Chrome without user gesture
+      await _showBackgroundNotification(title, body);
     } catch (e, stack) {
       debugPrint('💥 [PushService] _showBrowserNotification error: $e');
       debugPrint('💥 [PushService] Stack: $stack');

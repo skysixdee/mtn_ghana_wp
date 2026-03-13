@@ -21,7 +21,7 @@
 <base href="/crbt-web-portal/">  // this for release
 -->
   <!-- Base href for Flutter routing -->
-  <base href="/crbt-web-portal/">
+  <base href="$FLUTTER_BASE_HREF">
 
   <title>MTN_ghana</title>
   <link rel="manifest" href="manifest.json">
@@ -71,6 +71,8 @@
   <script src="flutter_bootstrap.js" async></script>
 </body>
 <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
 <script>
   firebase.initializeApp({
     apiKey: 'AIzaSyDnY55cFvXqQ3HpuCQJn1FFWWKyyLUdpUc',
