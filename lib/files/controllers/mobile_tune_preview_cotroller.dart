@@ -3,7 +3,7 @@ import 'package:mtn_ghana_wp/files/api_calls/delete_mytune_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_pack_detail_api.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
-import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
+import 'package:mtn_ghana_wp/files/player_view/new_player_controller.dart';
 
 import 'package:mtn_ghana_wp/files/model/generic_model.dart';
 import 'package:mtn_ghana_wp/files/model/my_music_box_model.dart';

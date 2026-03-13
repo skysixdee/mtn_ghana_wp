@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
-import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
+import 'package:mtn_ghana_wp/files/player_view/new_player_controller.dart';
 
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/enums/playing_card_type.dart';

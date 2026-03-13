@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
+import 'package:mtn_ghana_wp/files/player_view/new_player_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/enums/my_player_state.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
@@ -8,7 +8,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart'
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/minimized_player_view.dart';
+import 'package:mtn_ghana_wp/files/player_view/minimized_player_view.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 

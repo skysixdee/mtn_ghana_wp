@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mtn_ghana_wp/files/api_calls/add_to_wishlist_api.dart';
-import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
+import 'package:mtn_ghana_wp/files/player_view/new_player_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/enums/my_player_state.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';

@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
+import 'package:mtn_ghana_wp/files/player_view/custom_audio_player.dart';
 import 'package:mtn_ghana_wp/files/enums/my_player_state.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 

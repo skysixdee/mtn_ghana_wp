@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mtn_ghana_wp/files/controllers/new_player_controller.dart';
+import 'package:mtn_ghana_wp/files/player_view/new_player_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
-import 'package:mtn_ghana_wp/files/reusable_widgets/player_view/player_view.dart';
+import 'package:mtn_ghana_wp/files/player_view/player_view.dart';
 import 'package:mtn_ghana_wp/files/screens/login_screen/login_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mobile_bottom_nav_view/mobile_bottom_nav_view.dart';
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
@@ -15,7 +15,7 @@ import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import 'package:mtn_ghana_wp/files/common/custom_audio_player.dart';
+import 'package:mtn_ghana_wp/files/player_view/custom_audio_player.dart';
 import 'package:mtn_ghana_wp/files/controllers/artists_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/banner_detail_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/blacklist_controller.dart';
