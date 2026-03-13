@@ -73,20 +73,20 @@
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
-
 <script>
-  // Your Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyDnY55cFvXqQ3HpuCQJn1FFWWKyyLUdpUc",
-    authDomain: "mtnhost-65a8b.firebaseapp.com",
-    projectId: "mtnhost-65a8b",
-    storageBucket: "mtnhost-65a8b.firebasestorage.app",
-    messagingSenderId: "608854775651",
-    appId: "1:608854775651:web:40e3732249dc02c5eee556",
+  firebase.initializeApp({ /* your config */ });
 
-  };
-
-  firebase.initializeApp(firebaseConfig);
+  // ✅ Called by Flutter via JS interop for foreground notifications
+  function showNotification(title, body) {
+    if (Notification.permission === 'granted') {
+      navigator.serviceWorker.ready.then((registration) => {
+        registration.showNotification(title, {
+          body: body,
+          icon: '/icons/Icon-192.png',
+        });
+      });
+    }
+  }
 </script>
 
 </html>

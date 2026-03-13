@@ -10,25 +10,49 @@ firebase.initializeApp({
     appId: "1:608854775651:web:40e3732249dc02c5eee556",
 });
 
+
 const messaging = firebase.messaging();
 
-// Handle background messages
+// ✅ BACKGROUND: Tab hidden or closed — service worker handles this
 messaging.onBackgroundMessage((payload) => {
-    console.log('Background message received:', payload);
+    console.log('[SW] Background message:', payload);
 
-    const { title, body, icon } = payload.notification;
-
-    self.registration.showNotification(title, {
-        body: body,
-        icon: icon || '/icons/Icon-192.png',
-        badge: '/icons/Icon-192.png',
-        data: payload.data,
-    });
+    // Browser auto-shows this notification
+    self.registration.showNotification(
+        payload.notification?.title ?? 'New Message',
+        {
+            body: payload.notification?.body ?? '',
+            icon: '/icons/Icon-192.png',
+            badge: '/icons/Icon-192.png',
+            data: payload.data ?? {},
+            // Optional: actions buttons on notification
+            actions: [
+                { action: 'open', title: 'Open App' },
+                { action: 'dismiss', title: 'Dismiss' }
+            ]
+        }
+    );
 });
 
-// Handle notification click
+// ✅ Handle notification click — bring app to focus
 self.addEventListener('notificationclick', (event) => {
     event.notification.close();
-    const url = event.notification.data?.url || '/';
-    event.waitUntil(clients.openWindow(url));
+
+    if (event.action === 'dismiss') return;
+
+    const urlToOpen = event.notification.data?.url ?? '/';
+
+    event.waitUntil(
+        clients.matchAll({ type: 'window', includeUncontrolled: true })
+            .then((windowClients) => {
+                // If app tab already open, focus it
+                for (const client of windowClients) {
+                    if (client.url === urlToOpen && 'focus' in client) {
+                        return client.focus();
+                    }
+                }
+                // Otherwise open new tab
+                return clients.openWindow(urlToOpen);
+            })
+    );
 });

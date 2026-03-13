@@ -1,67 +1,221 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:js' as js;
 
-// Top-level background handler (required to be top-level)
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  debugPrint('Background message: ${message.messageId}');
+  debugPrint('🔔 [BGHandler] Background message received');
+  debugPrint('🔔 [BGHandler] Message ID: ${message.messageId}');
+  debugPrint('🔔 [BGHandler] Title: ${message.notification?.title}');
+  debugPrint('🔔 [BGHandler] Body: ${message.notification?.body}');
+  debugPrint('🔔 [BGHandler] Data: ${message.data}');
+  debugPrint('🔔 [BGHandler] Sent time: ${message.sentTime}');
 }
 
 class PushNotificationService {
-  static final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  static const _vapidKey =
+      'BBYI-UFHWBx06L_cnhO9rO5ue_VDF6p-__XBdsHCxR-qkLBIDSBIUEZ2J4VtiDVenmKRLSHRpEY1KFSQTgMAs6c';
 
+  // ─────────────────────────────────────────
+  // INITIALIZE
+  // ─────────────────────────────────────────
   static Future<void> initialize() async {
-    // Register background handler
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    debugPrint('🚀 [PushService] initialize() called');
 
-    // Request permissions (web shows browser prompt)
-    final settings = await _messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-      provisional: false,
-    );
+    try {
+      debugPrint('📋 [PushService] Registering background message handler...');
+      FirebaseMessaging.onBackgroundMessage(
+          _firebaseMessagingBackgroundHandler);
+      debugPrint('✅ [PushService] Background handler registered');
 
-    debugPrint('Permission status: ${settings.authorizationStatus}');
+      debugPrint('🙏 [PushService] Requesting notification permission...');
+      final settings = await FirebaseMessaging.instance.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      await _getAndPrintToken();
-      _setupMessageHandlers();
+      debugPrint(
+          '📊 [PushService] Permission result: ${settings.authorizationStatus}');
+      debugPrint('📊 [PushService] Alert: ${settings.alert}');
+      debugPrint('📊 [PushService] Badge: ${settings.badge}');
+      debugPrint('📊 [PushService] Sound: ${settings.sound}');
+
+      if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+        debugPrint(
+            '✅ [PushService] Permission GRANTED — proceeding with token fetch & handlers');
+        await _getToken();
+        _setupHandlers();
+      } else if (settings.authorizationStatus ==
+          AuthorizationStatus.provisional) {
+        debugPrint(
+            '⚠️ [PushService] Permission PROVISIONAL — limited notifications allowed');
+        await _getToken();
+        _setupHandlers();
+      } else {
+        debugPrint(
+            '❌ [PushService] Permission DENIED — notifications will not work');
+        debugPrint('❌ [PushService] Status: ${settings.authorizationStatus}');
+      }
+    } catch (e, stack) {
+      debugPrint('💥 [PushService] initialize() threw an error: $e');
+      debugPrint('💥 [PushService] StackTrace: $stack');
+    }
+
+    debugPrint('🏁 [PushService] initialize() completed');
+  }
+
+  // ─────────────────────────────────────────
+  // GET TOKEN
+  // ─────────────────────────────────────────
+  static Future<String?> _getToken() async {
+    debugPrint('🔑 [PushService] _getToken() called');
+    debugPrint('🔑 [PushService] Platform is web: $kIsWeb');
+
+    try {
+      if (kIsWeb) {
+        debugPrint('🔑 [PushService] Using VAPID key for web token...');
+        debugPrint(
+            '🔑 [PushService] VAPID key (first 10 chars): ${_vapidKey.substring(0, 10)}...');
+      }
+
+      final token = kIsWeb
+          ? await FirebaseMessaging.instance.getToken(vapidKey: _vapidKey)
+          : await FirebaseMessaging.instance.getToken();
+
+      if (token != null) {
+        debugPrint('✅ [PushService] FCM Token obtained successfully');
+        debugPrint(
+            '✅ [PushService] Token (first 20 chars): ${token.substring(0, 20)}...');
+        debugPrint('✅ [PushService] Full Token: $token');
+        // TODO: Send token to your backend here
+        debugPrint('📤 [PushService] TODO: Send token to backend');
+      } else {
+        debugPrint(
+            '❌ [PushService] Token is NULL — check VAPID key and Firebase config');
+      }
+
+      return token;
+    } catch (e, stack) {
+      debugPrint('💥 [PushService] _getToken() threw an error: $e');
+      debugPrint('💥 [PushService] StackTrace: $stack');
+      return null;
     }
   }
 
-  static Future<String?> _getAndPrintToken() async {
-    // Replace with your actual VAPID key from Firebase Console
-    const vapidKey =
-        'BBYI-UFHWBx06L_cnhO9rO5ue_VDF6p-__XBdsHCxR-qkLBIDSBIUEZ2J4VtiDVenmKRLSHRpEY1KFSQTgMAs6c';
+  // ─────────────────────────────────────────
+  // SETUP HANDLERS
+  // ─────────────────────────────────────────
+  static void _setupHandlers() {
+    debugPrint(
+        '🎧 [PushService] _setupHandlers() called — attaching listeners');
 
-    final token = kIsWeb
-        ? await _messaging.getToken(vapidKey: vapidKey)
-        : await _messaging.getToken();
+    // FOREGROUND
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage message) {
+        debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        debugPrint('📱 [PushService] FOREGROUND message received');
+        debugPrint('📱 [PushService] Message ID: ${message.messageId}');
+        debugPrint('📱 [PushService] Title: ${message.notification?.title}');
+        debugPrint('📱 [PushService] Body: ${message.notification?.body}');
+        debugPrint('📱 [PushService] Data: ${message.data}');
+        debugPrint('📱 [PushService] Sent time: ${message.sentTime}');
+        debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        _showInAppBanner(message);
+      },
+      onError: (e) {
+        debugPrint('💥 [PushService] onMessage stream error: $e');
+      },
+    );
+    debugPrint('✅ [PushService] onMessage listener attached');
 
-    debugPrint('FCM Token: $token');
-    // TODO: Send this token to your backend server
-    return token;
+    // BACKGROUND → APP OPENED
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (RemoteMessage message) {
+        debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        debugPrint('👆 [PushService] App OPENED from notification tap');
+        debugPrint('👆 [PushService] Message ID: ${message.messageId}');
+        debugPrint('👆 [PushService] Title: ${message.notification?.title}');
+        debugPrint('👆 [PushService] Body: ${message.notification?.body}');
+        debugPrint('👆 [PushService] Data payload: ${message.data}');
+        debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        _handleNavigation(message.data);
+      },
+      onError: (e) {
+        debugPrint('💥 [PushService] onMessageOpenedApp stream error: $e');
+      },
+    );
+    debugPrint('✅ [PushService] onMessageOpenedApp listener attached');
+
+    debugPrint(
+        '🏁 [PushService] _setupHandlers() completed — all listeners active');
   }
 
-  static void _setupMessageHandlers() {
-    // App in FOREGROUND
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      debugPrint('Foreground message: ${message.notification?.title}');
-      // Show in-app notification/snackbar here
-    });
+  // ─────────────────────────────────────────
+  // SHOW IN-APP BANNER
+  // ─────────────────────────────────────────
+  static void _showInAppBanner(RemoteMessage message) {
+    debugPrint('🖼️ [PushService] _showInAppBanner() called');
+    debugPrint('🖼️ [PushService] Title: ${message.notification?.title}');
+    debugPrint('🖼️ [PushService] Body: ${message.notification?.body}');
 
-    // App opened FROM a notification (background → foreground)
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      debugPrint('Opened from notification: ${message.data}');
-      // Handle navigation based on message.data
-    });
+    if (kIsWeb) {
+      debugPrint(
+          '🌐 [PushService] Web platform — calling JS showNotification()');
+      _showBrowserNotification(
+        message.notification?.title ?? '',
+        message.notification?.body ?? '',
+      );
+    } else {
+      debugPrint(
+          '📲 [PushService] Mobile platform — show snackbar/dialog here');
+      // TODO: Show Flutter snackbar or overlay
+    }
   }
 
-  // Call on app start to check if launched from a notification
-  static Future<RemoteMessage?> getInitialMessage() async {
-    return await _messaging.getInitialMessage();
+  // ─────────────────────────────────────────
+  // SHOW BROWSER NOTIFICATION (JS interop)
+  // ─────────────────────────────────────────
+  static void _showBrowserNotification(String title, String body) {
+    debugPrint('🌐 [PushService] _showBrowserNotification() called');
+    debugPrint('🌐 [PushService] Title: $title');
+    debugPrint('🌐 [PushService] Body: $body');
+
+    try {
+      debugPrint('🌐 [PushService] Calling JS showNotification()...');
+      js.context.callMethod('showNotification', [title, body]);
+      debugPrint('✅ [PushService] JS showNotification() called successfully');
+    } catch (e, stack) {
+      debugPrint('💥 [PushService] JS interop failed: $e');
+      debugPrint(
+          '💥 [PushService] Is showNotification() defined in index.html?');
+      debugPrint('💥 [PushService] StackTrace: $stack');
+    }
+  }
+
+  // ─────────────────────────────────────────
+  // HANDLE NAVIGATION
+  // ─────────────────────────────────────────
+  static void _handleNavigation(Map<String, dynamic> data) {
+    debugPrint('🧭 [PushService] _handleNavigation() called');
+    debugPrint('🧭 [PushService] Data payload: $data');
+
+    if (data.isEmpty) {
+      debugPrint(
+          '⚠️ [PushService] Data payload is empty — no navigation action');
+      return;
+    }
+
+    final route = data['route'];
+    debugPrint('🧭 [PushService] Route from payload: $route');
+
+    if (route != null) {
+      debugPrint('🧭 [PushService] Navigating to route: $route');
+      // TODO: context.go(route) or Navigator.pushNamed(context, route)
+      debugPrint('⚠️ [PushService] TODO: Implement navigation to $route');
+    } else {
+      debugPrint('⚠️ [PushService] No "route" key found in data payload');
+      debugPrint('⚠️ [PushService] Available keys: ${data.keys.toList()}');
+    }
   }
 }
