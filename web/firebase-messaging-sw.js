@@ -10,49 +10,50 @@ firebase.initializeApp({
     appId: "1:608854775651:web:40e3732249dc02c5eee556",
 });
 
-
 const messaging = firebase.messaging();
 
-// ✅ BACKGROUND: Tab hidden or closed — service worker handles this
 messaging.onBackgroundMessage((payload) => {
     console.log('[SW] Background message:', payload);
 
-    // Browser auto-shows this notification
-    self.registration.showNotification(
-        payload.notification?.title ?? 'New Message',
-        {
-            body: payload.notification?.body ?? '',
-            icon: '/icons/Icon-192.png',
-            badge: '/icons/Icon-192.png',
-            data: payload.data ?? {},
-            // Optional: actions buttons on notification
-            actions: [
-                { action: 'open', title: 'Open App' },
-                { action: 'dismiss', title: 'Dismiss' }
-            ]
+    self.clients.matchAll({
+        type: 'window',
+        includeUncontrolled: true
+    }).then((clients) => {
+
+        const appIsVisible = clients.some(c => c.visibilityState === 'visible');
+        console.log('[SW] App visible:', appIsVisible);
+
+        if (appIsVisible) {
+            // ✅ App is open — Flutter onMessage handles it, skip SW notification
+            console.log('[SW] Skipping — Flutter will handle foreground notification');
+            return;
         }
-    );
+
+        // App is minimized/closed — SW shows it
+        return self.registration.showNotification(
+            payload.notification?.title ?? 'New Message',
+            {
+                body: payload.notification?.body ?? '',
+                icon: '/icons/Icon-192.png',
+                badge: '/icons/Icon-192.png',
+                data: payload.data ?? {},
+            }
+        );
+    });
 });
 
-// ✅ Handle notification click — bring app to focus
 self.addEventListener('notificationclick', (event) => {
+    console.log('[SW] Notification clicked:', event);
     event.notification.close();
 
-    if (event.action === 'dismiss') return;
-
-    const urlToOpen = event.notification.data?.url ?? '/';
-
+    const url = event.notification.data?.url ?? '/';
     event.waitUntil(
-        clients.matchAll({ type: 'window', includeUncontrolled: true })
-            .then((windowClients) => {
-                // If app tab already open, focus it
-                for (const client of windowClients) {
-                    if (client.url === urlToOpen && 'focus' in client) {
-                        return client.focus();
-                    }
+        self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+            .then((clients) => {
+                for (const client of clients) {
+                    if ('focus' in client) return client.focus();
                 }
-                // Otherwise open new tab
-                return clients.openWindow(urlToOpen);
+                return self.clients.openWindow(url);
             })
     );
 });

@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:js' as js;
+import 'dart:js_interop';
+import 'package:web/web.dart' as web;
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -21,47 +22,30 @@ class PushNotificationService {
   // ─────────────────────────────────────────
   static Future<void> initialize() async {
     debugPrint('🚀 [PushService] initialize() called');
-
     try {
-      debugPrint('📋 [PushService] Registering background message handler...');
       FirebaseMessaging.onBackgroundMessage(
           _firebaseMessagingBackgroundHandler);
       debugPrint('✅ [PushService] Background handler registered');
 
-      debugPrint('🙏 [PushService] Requesting notification permission...');
       final settings = await FirebaseMessaging.instance.requestPermission(
         alert: true,
         badge: true,
         sound: true,
       );
-
       debugPrint(
-          '📊 [PushService] Permission result: ${settings.authorizationStatus}');
-      debugPrint('📊 [PushService] Alert: ${settings.alert}');
-      debugPrint('📊 [PushService] Badge: ${settings.badge}');
-      debugPrint('📊 [PushService] Sound: ${settings.sound}');
+          '📊 [PushService] Permission: ${settings.authorizationStatus}');
 
-      if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-        debugPrint(
-            '✅ [PushService] Permission GRANTED — proceeding with token fetch & handlers');
-        await _getToken();
-        _setupHandlers();
-      } else if (settings.authorizationStatus ==
-          AuthorizationStatus.provisional) {
-        debugPrint(
-            '⚠️ [PushService] Permission PROVISIONAL — limited notifications allowed');
+      if (settings.authorizationStatus == AuthorizationStatus.authorized ||
+          settings.authorizationStatus == AuthorizationStatus.provisional) {
         await _getToken();
         _setupHandlers();
       } else {
-        debugPrint(
-            '❌ [PushService] Permission DENIED — notifications will not work');
-        debugPrint('❌ [PushService] Status: ${settings.authorizationStatus}');
+        debugPrint('❌ [PushService] Permission DENIED');
       }
     } catch (e, stack) {
-      debugPrint('💥 [PushService] initialize() threw an error: $e');
+      debugPrint('💥 [PushService] initialize() error: $e');
       debugPrint('💥 [PushService] StackTrace: $stack');
     }
-
     debugPrint('🏁 [PushService] initialize() completed');
   }
 
@@ -70,34 +54,19 @@ class PushNotificationService {
   // ─────────────────────────────────────────
   static Future<String?> _getToken() async {
     debugPrint('🔑 [PushService] _getToken() called');
-    debugPrint('🔑 [PushService] Platform is web: $kIsWeb');
-
     try {
-      if (kIsWeb) {
-        debugPrint('🔑 [PushService] Using VAPID key for web token...');
-        debugPrint(
-            '🔑 [PushService] VAPID key (first 10 chars): ${_vapidKey.substring(0, 10)}...');
-      }
-
       final token = kIsWeb
           ? await FirebaseMessaging.instance.getToken(vapidKey: _vapidKey)
           : await FirebaseMessaging.instance.getToken();
 
       if (token != null) {
-        debugPrint('✅ [PushService] FCM Token obtained successfully');
-        debugPrint(
-            '✅ [PushService] Token (first 20 chars): ${token.substring(0, 20)}...');
         debugPrint('✅ [PushService] Full Token: $token');
-        // TODO: Send token to your backend here
-        debugPrint('📤 [PushService] TODO: Send token to backend');
       } else {
-        debugPrint(
-            '❌ [PushService] Token is NULL — check VAPID key and Firebase config');
+        debugPrint('❌ [PushService] Token is NULL');
       }
-
       return token;
     } catch (e, stack) {
-      debugPrint('💥 [PushService] _getToken() threw an error: $e');
+      debugPrint('💥 [PushService] _getToken() error: $e');
       debugPrint('💥 [PushService] StackTrace: $stack');
       return null;
     }
@@ -107,48 +76,34 @@ class PushNotificationService {
   // SETUP HANDLERS
   // ─────────────────────────────────────────
   static void _setupHandlers() {
-    debugPrint(
-        '🎧 [PushService] _setupHandlers() called — attaching listeners');
+    debugPrint('🎧 [PushService] _setupHandlers() called');
 
     // FOREGROUND
     FirebaseMessaging.onMessage.listen(
       (RemoteMessage message) {
         debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
         debugPrint('📱 [PushService] FOREGROUND message received');
-        debugPrint('📱 [PushService] Message ID: ${message.messageId}');
         debugPrint('📱 [PushService] Title: ${message.notification?.title}');
         debugPrint('📱 [PushService] Body: ${message.notification?.body}');
         debugPrint('📱 [PushService] Data: ${message.data}');
-        debugPrint('📱 [PushService] Sent time: ${message.sentTime}');
         debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
         _showInAppBanner(message);
       },
-      onError: (e) {
-        debugPrint('💥 [PushService] onMessage stream error: $e');
-      },
+      onError: (e) => debugPrint('💥 [PushService] onMessage error: $e'),
     );
-    debugPrint('✅ [PushService] onMessage listener attached');
 
     // BACKGROUND → APP OPENED
     FirebaseMessaging.onMessageOpenedApp.listen(
       (RemoteMessage message) {
-        debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        debugPrint('👆 [PushService] App OPENED from notification tap');
-        debugPrint('👆 [PushService] Message ID: ${message.messageId}');
-        debugPrint('👆 [PushService] Title: ${message.notification?.title}');
-        debugPrint('👆 [PushService] Body: ${message.notification?.body}');
-        debugPrint('👆 [PushService] Data payload: ${message.data}');
-        debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        debugPrint('👆 [PushService] App OPENED from notification');
+        debugPrint('👆 [PushService] Data: ${message.data}');
         _handleNavigation(message.data);
       },
-      onError: (e) {
-        debugPrint('💥 [PushService] onMessageOpenedApp stream error: $e');
-      },
+      onError: (e) =>
+          debugPrint('💥 [PushService] onMessageOpenedApp error: $e'),
     );
-    debugPrint('✅ [PushService] onMessageOpenedApp listener attached');
 
-    debugPrint(
-        '🏁 [PushService] _setupHandlers() completed — all listeners active');
+    debugPrint('✅ [PushService] All listeners attached');
   }
 
   // ─────────────────────────────────────────
@@ -156,40 +111,104 @@ class PushNotificationService {
   // ─────────────────────────────────────────
   static void _showInAppBanner(RemoteMessage message) {
     debugPrint('🖼️ [PushService] _showInAppBanner() called');
-    debugPrint('🖼️ [PushService] Title: ${message.notification?.title}');
-    debugPrint('🖼️ [PushService] Body: ${message.notification?.body}');
-
     if (kIsWeb) {
-      debugPrint(
-          '🌐 [PushService] Web platform — calling JS showNotification()');
       _showBrowserNotification(
         message.notification?.title ?? '',
         message.notification?.body ?? '',
       );
     } else {
-      debugPrint(
-          '📲 [PushService] Mobile platform — show snackbar/dialog here');
-      // TODO: Show Flutter snackbar or overlay
+      debugPrint('📲 [PushService] Mobile — show snackbar here');
     }
   }
 
   // ─────────────────────────────────────────
-  // SHOW BROWSER NOTIFICATION (JS interop)
+  // SHOW BROWSER NOTIFICATION (router)
   // ─────────────────────────────────────────
-  static void _showBrowserNotification(String title, String body) {
+  static Future<void> _showBrowserNotification(
+      String title, String body) async {
     debugPrint('🌐 [PushService] _showBrowserNotification() called');
-    debugPrint('🌐 [PushService] Title: $title');
-    debugPrint('🌐 [PushService] Body: $body');
-
     try {
-      debugPrint('🌐 [PushService] Calling JS showNotification()...');
-      js.context.callMethod('showNotification', [title, body]);
-      debugPrint('✅ [PushService] JS showNotification() called successfully');
+      final permission = web.Notification.permission;
+      debugPrint('🌐 [PushService] Permission: $permission');
+
+      if (permission != 'granted') {
+        debugPrint('❌ [PushService] Permission not granted');
+        return;
+      }
+
+      // Check if app tab is visible or minimized
+      final isVisible = web.document.visibilityState == 'visible';
+      debugPrint('🌐 [PushService] Document visible: $isVisible');
+
+      if (isVisible) {
+        // App is MAXIMIZED — use direct Notification API
+        debugPrint(
+            '🌐 [PushService] App foreground — using direct Notification API');
+        _showForegroundNotification(title, body);
+      } else {
+        // App is MINIMIZED — use ServiceWorker
+        debugPrint('🌐 [PushService] App minimized — using ServiceWorker');
+        await _showBackgroundNotification(title, body);
+      }
     } catch (e, stack) {
-      debugPrint('💥 [PushService] JS interop failed: $e');
-      debugPrint(
-          '💥 [PushService] Is showNotification() defined in index.html?');
-      debugPrint('💥 [PushService] StackTrace: $stack');
+      debugPrint('💥 [PushService] _showBrowserNotification error: $e');
+      debugPrint('💥 [PushService] Stack: $stack');
+    }
+  }
+
+  // ─────────────────────────────────────────
+  // FOREGROUND NOTIFICATION (direct API)
+  // ─────────────────────────────────────────
+  static void _showForegroundNotification(String title, String body) {
+    try {
+      debugPrint('📢 [PushService] Showing FOREGROUND notification');
+      web.Notification(
+        title,
+        web.NotificationOptions(
+          body: body,
+          icon: '/icons/Icon-192.png',
+          requireInteraction: false,
+          silent: false,
+        ),
+      );
+      debugPrint('✅ [PushService] Foreground notification shown');
+    } catch (e) {
+      debugPrint('💥 [PushService] Foreground notification failed: $e');
+    }
+  }
+
+  // ─────────────────────────────────────────
+  // BACKGROUND NOTIFICATION (ServiceWorker)
+  // ─────────────────────────────────────────
+  static Future<void> _showBackgroundNotification(
+      String title, String body) async {
+    try {
+      debugPrint('📢 [PushService] Showing BACKGROUND notification via SW');
+
+      final registration =
+          await web.window.navigator.serviceWorker.ready.toDart.timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          debugPrint('❌ [PushService] SW ready timeout');
+          throw Exception('SW timeout');
+        },
+      );
+
+      registration.showNotification(
+        title,
+        web.NotificationOptions(
+          body: body,
+          icon: '/icons/Icon-192.png',
+          badge: '/icons/Icon-192.png',
+          requireInteraction: false,
+          silent: false,
+        ),
+      );
+      debugPrint('✅ [PushService] Background notification shown via SW');
+    } catch (e) {
+      debugPrint('💥 [PushService] SW notification failed: $e');
+      debugPrint('🔄 [PushService] Falling back to direct API');
+      _showForegroundNotification(title, body); // fallback
     }
   }
 
@@ -198,24 +217,18 @@ class PushNotificationService {
   // ─────────────────────────────────────────
   static void _handleNavigation(Map<String, dynamic> data) {
     debugPrint('🧭 [PushService] _handleNavigation() called');
-    debugPrint('🧭 [PushService] Data payload: $data');
+    debugPrint('🧭 [PushService] Data: $data');
 
     if (data.isEmpty) {
-      debugPrint(
-          '⚠️ [PushService] Data payload is empty — no navigation action');
+      debugPrint('⚠️ [PushService] No data payload');
       return;
     }
 
     final route = data['route'];
-    debugPrint('🧭 [PushService] Route from payload: $route');
-
     if (route != null) {
-      debugPrint('🧭 [PushService] Navigating to route: $route');
-      // TODO: context.go(route) or Navigator.pushNamed(context, route)
-      debugPrint('⚠️ [PushService] TODO: Implement navigation to $route');
+      debugPrint('🧭 [PushService] TODO: Navigate to $route');
     } else {
-      debugPrint('⚠️ [PushService] No "route" key found in data payload');
-      debugPrint('⚠️ [PushService] Available keys: ${data.keys.toList()}');
+      debugPrint('⚠️ [PushService] No route key. Keys: ${data.keys.toList()}');
     }
   }
 }
