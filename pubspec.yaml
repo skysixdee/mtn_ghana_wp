@@ -62,6 +62,8 @@ dependencies:
   html_unescape: ^2.0.0
   flutter_svg: ^2.2.0
   glossy: ^0.0.5
+  firebase_core: ^4.5.0
+  firebase_messaging: ^16.1.2
   
 
 dev_dependencies:

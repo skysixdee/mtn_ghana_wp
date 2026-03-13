@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/auto_login_api.dart';
@@ -30,6 +31,7 @@ import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
+import 'package:mtn_ghana_wp/files/push_notification_setup/push_notification_service.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
@@ -49,6 +51,7 @@ import 'package:mtn_ghana_wp/files/controllers/auth_controller/otp_controller.da
 import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
+import 'package:mtn_ghana_wp/files/push_notification_setup/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -58,6 +61,14 @@ late SideMenuController sideMenuCont;
 //late BuildContext globalContext;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options:
+        DefaultFirebaseOptions.currentPlatform, // from flutterfire configure
+  );
+
+  PushNotificationService.initialize();
+
   setPathUrlStrategy();
   await readProperties();
   prefs = await SharedPreferences.getInstance();
