@@ -94,5 +94,14 @@ class StoreManager {
     appCont.isLoggedIn.value = false;
     scaffoldKey.currentContext?.goNamed(homeRoute);
     snackBar(logoutSuccessfullyStr);
+    _clearApiCache();
+  }
+
+  static _clearApiCache() async {
+    final keys = prefs.getKeys().where((key) => key.startsWith('cache_'));
+    for (final key in keys) {
+      await prefs.remove(key);
+    }
+    print('[Cache] All API cache cleared');
   }
 }

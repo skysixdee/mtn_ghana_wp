@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -13,6 +14,8 @@ class NetworkManager {
   final client = HttpClient();
   Future<Map<String, dynamic>> get(String url,
       {List<Map<String, dynamic>>? addInHeader}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final cacheKey = 'cache_$url'; // ✅ URL as key
     try {
       HttpClientRequest clientRequests = await client.getUrl(Uri.parse(url));
       if (addInHeader != null) {
@@ -40,6 +43,7 @@ class NetworkManager {
         final stringData = await response.transform(utf8.decoder).join();
         customPrint("resp code is $url \n ${response.statusCode}\n");
         try {
+          prefs.setString(cacheKey, stringData);
           Map<String, dynamic> valueMap = json.decode(stringData);
           return valueMap;
         } catch (e) {
@@ -48,7 +52,13 @@ class NetworkManager {
         }
       } catch (e) {
         customPrint("error4 is = ${e.toString()}");
-        return catchError(message: e.toString());
+        try {
+          String cached = prefs.getString(cacheKey) ?? '';
+          Map<String, dynamic> valueMap = json.decode(cached);
+          return valueMap;
+        } catch (e) {
+          return catchError(message: e.toString());
+        }
       }
     } on SocketException catch (e) {
       customPrint("error3 is = ${e.toString()}");
@@ -68,6 +78,8 @@ class NetworkManager {
     Map<String, dynamic>? jsonData,
     List<Map<String, dynamic>>? addInHeader,
   }) async {
+    final prefs = await SharedPreferences.getInstance();
+    final cacheKey = 'cache_$url'; // ✅ URL as key
     try {
       HttpClientRequest clientRequests = await client.postUrl(Uri.parse(url));
 //addInHeader
@@ -119,6 +131,7 @@ class NetworkManager {
         final stringData = await response.transform(utf8.decoder).join();
         customPrint("resp code is $url \n ${response.statusCode}\n");
         try {
+          prefs.setString(cacheKey, stringData);
           Map<String, dynamic> valueMap = json.decode(stringData);
           return valueMap;
         } catch (e) {
@@ -127,7 +140,15 @@ class NetworkManager {
         }
       } catch (e) {
         customPrint("error4 is = ${e.toString()}");
-        return catchError(message: e.toString());
+        try {
+          String cached = prefs.getString(cacheKey) ?? '';
+          Map<String, dynamic> valueMap = json.decode(cached);
+          return valueMap;
+        } catch (e) {
+          return catchError(message: e.toString());
+        }
+        // customPrint("error4 is = ${e.toString()}");
+        // return catchError(message: e.toString());
       }
     } on SocketException catch (e) {
       customPrint("error3 is = ${e.toString()}");
