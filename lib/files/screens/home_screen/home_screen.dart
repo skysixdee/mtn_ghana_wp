@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_search_view/home_search_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_sub_cat_view/home_sub_cat_view.dart';
+import 'package:mtn_ghana_wp/files/screens/home_screen/widget/new_feature_view/new_feature_view.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/playing_tune_view_new.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/controllers/music_box_controller.dart';
@@ -58,8 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
               HomeSubCatView(),
               const SizedBox(height: 20),
               const MusicBoxView(),
-              const SizedBox(height: 30),
-              FeatureCategoryView(key: widget.key),
+              const SizedBox(height: 50),
+              //FeatureCategoryView(key: widget.key),
+              NewFeatureView(),
               const SizedBox(height: 30),
               const ExpressInfoView(),
               const WebFooterView(),

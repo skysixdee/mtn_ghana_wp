@@ -32,7 +32,7 @@ class _MusicBoxViewState extends State<MusicBoxView> {
     return ResponsiveBuilder(
       builder: (context, si) {
         return Container(
-          color: isDarkTheme(context) ? blackD : white,
+          //color: isDarkTheme(context) ? whiteD : lightGrey,
           child: Obx(
             () {
               return con.isLoadingList.value

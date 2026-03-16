@@ -9,7 +9,7 @@ Future<AdvancedSearchModal> categorySearchApi(String categoryId,
   Map<String, dynamic> jsonRequest = {
     "sortBy": "OrderBy",
     "pageNo": pageNo,
-    "perPageCount": pagePerCount,
+    "perPageCount": 50,
     "locale": StoreManager.languageSort, //"${LANGUAGE_ID}",
     "categoryId": [categoryId],
   };

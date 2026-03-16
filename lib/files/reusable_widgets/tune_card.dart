@@ -103,6 +103,7 @@ class TuneCard extends StatelessWidget {
             children: [
               customImage(
                   url: info.toneIdpreviewImageUrl,
+                  fit: BoxFit.fill,
                   gredientColor:
                       isDarkTheme(context) ? gredientColor : transparent),
               Padding(
