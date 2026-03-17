@@ -67,15 +67,19 @@ class _MusicBoxViewState extends State<MusicBoxView> {
                           ),
                           const SizedBox(height: 10),
                           SizedBox(
-                              height: 280,
+                              height: si.isMobile ? 200 : 280,
                               child: ListView.builder(
                                 itemCount: con.musicBoxList.length,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.only(right: 12.0),
+                                    padding: EdgeInsets.only(
+                                        left: index == 0 ? 6.0 : 0,
+                                        right: 16.0,
+                                        top: 6),
                                     child: MusicBoxCard(
+                                      width: si.isMobile ? 160 : null,
                                       info: con.musicBoxList[index],
                                       index: index,
                                     ),

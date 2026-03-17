@@ -16,6 +16,7 @@ import 'package:mtn_ghana_wp/files/screens/home_screen/widget/music_box_view.dar
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/feature_view/feature_category_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/express_info_view/express_info_view.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -43,32 +44,36 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget customScroll() {
-    return CustomScrollView(
-      primary: true,
-      slivers: [
-        SliverToBoxAdapter(
-          child: ListView(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              const SizedBox(height: 8),
-              HomeBannerView(key: widget.key),
-              const SizedBox(height: 20),
-              HomeSearchView(),
-              const SizedBox(height: 20),
-              HomeSubCatView(),
-              const SizedBox(height: 20),
-              const MusicBoxView(),
-              const SizedBox(height: 50),
-              //FeatureCategoryView(key: widget.key),
-              NewFeatureView(),
-              const SizedBox(height: 30),
-              const ExpressInfoView(),
-              const WebFooterView(),
-            ],
-          ),
-        ),
-      ],
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return CustomScrollView(
+          primary: true,
+          slivers: [
+            SliverToBoxAdapter(
+              child: ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  const SizedBox(height: 8),
+                  HomeBannerView(key: widget.key),
+                  SizedBox(height: si.isMobile ? 10 : 20),
+                  HomeSearchView(),
+                  SizedBox(height: si.isMobile ? 10 : 20),
+                  HomeSubCatView(),
+                  SizedBox(height: si.isMobile ? 10 : 20),
+                  const MusicBoxView(),
+                  SizedBox(height: si.isMobile ? 10 : 50),
+                  //FeatureCategoryView(key: widget.key),
+                  NewFeatureView(),
+                  SizedBox(height: si.isMobile ? 10 : 30),
+                  const ExpressInfoView(),
+                  const WebFooterView(),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

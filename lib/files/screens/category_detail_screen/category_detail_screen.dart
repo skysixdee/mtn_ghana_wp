@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/model/navigation_header_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_grid_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
 
@@ -28,7 +29,7 @@ class CategoryDetailScreen extends StatelessWidget {
     return ResponsiveBuilder(
       builder: (context, si) {
         return Container(
-          color: white,
+          color: isDarkTheme(context) ? blackD : white,
           child: Column(
             children: [
               Expanded(
@@ -38,7 +39,7 @@ class CategoryDetailScreen extends StatelessWidget {
                         ? loadingIndicator()
                         : GenericScrollView(
                             //parentPhysics: NeverScrollableScrollPhysics(),
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             //physics: NeverScrollableScrollPhysics(),
                             sliverAppBar:
                                 si.isMobile ? null : getNavigationView(name),

@@ -20,6 +20,7 @@ class MusicBoxCard extends StatelessWidget {
       required this.info,
       this.rightButton,
       this.leftButton,
+      this.width,
       this.isMyMusicBox = false,
       required this.index});
   final int index;
@@ -27,6 +28,7 @@ class MusicBoxCard extends StatelessWidget {
   final Widget? rightButton;
   final Widget? leftButton;
   final bool isMyMusicBox;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     String imageName = (info.musicBoxName ?? '').replaceAll(RegExp(r'\s+'), '');
@@ -43,7 +45,7 @@ class MusicBoxCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: Container(
-          width: 240,
+          width: width ?? 240,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
