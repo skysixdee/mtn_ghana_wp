@@ -16,6 +16,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/play_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/combined_grid.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/widgets/playing_tune_card.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -262,7 +263,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
   Widget playingTuneHeader(SizingInformation si) {
     return Container(
       height: 60,
-      color: lightGrey,
+      color: isDarkTheme(context) ? blackTest : lightGrey,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8.0 : 25),
         child: Row(

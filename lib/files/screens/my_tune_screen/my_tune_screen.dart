@@ -6,11 +6,13 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_screen_header_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/header_view/my_tune_header_view.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/my_music_box_view/my_music_box_view.dart';
+import 'package:mtn_ghana_wp/files/screens/my_tune_screen/my_subscription_view.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/my_tune_view/my_tune_view.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/playing_tune_view.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/playing_tune_view_new.dart';
@@ -54,7 +56,10 @@ class MyTuneScreen extends StatelessWidget {
                 flexibleSpace: getNavigationView(myTunezStr),
               ),
               SliverToBoxAdapter(
-                child: listView(si),
+                child: MySubscriptionView(),
+              ),
+              SliverToBoxAdapter(
+                child: listView(context, si),
               ),
             ],
           ); //listView(si);
@@ -63,7 +68,7 @@ class MyTuneScreen extends StatelessWidget {
     );
   }
 
-  ListView listView(SizingInformation si) {
+  ListView listView(BuildContext context, SizingInformation si) {
     return ListView(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -76,14 +81,14 @@ class MyTuneScreen extends StatelessWidget {
         const PlayingTuneViewNew(),
         //PlayingTuneView(),
         const SizedBox(height: 20),
-        myTuneHeader(si, activeTunezStr, howToPlaySelctedStr, () {
+        myTuneHeader(context, si, activeTunezStr, howToPlaySelctedStr, () {
           openAlertPopup(
               message: myTunePopupMessageStr, textAlign: TextAlign.left);
         }),
         SizedBox(height: si.isMobile ? 20 : 30),
         MyTuneView(),
         const SizedBox(height: 20),
-        myTuneHeader(si, myMusicBoxStr, howToPlayMusicBixStr, () {
+        myTuneHeader(context, si, myMusicBoxStr, howToPlayMusicBixStr, () {
           openAlertPopup(
             message: myMusicBoxPopupMessageStr,
           );
@@ -134,10 +139,10 @@ class MyTuneScreen extends StatelessWidget {
     );
   }
 
-  Widget myTuneHeader(
-      SizingInformation si, String heading, String message, Function() onTap) {
+  Widget myTuneHeader(BuildContext context, SizingInformation si,
+      String heading, String message, Function() onTap) {
     return Container(
-      color: lightGrey,
+      color: isDarkTheme(context) ? blackTest : lightGrey,
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: si.isMobile ? 8 : 25, vertical: 12),
@@ -169,7 +174,8 @@ class MyTuneScreen extends StatelessWidget {
                   title: learnMoreStr,
                   fontSize: si.isMobile ? 10 : 14,
                   fontName: FontName.regular,
-                  textColor: yellow,
+                  textColor: isDarkTheme(context) ? yellow : yellow,
+                  textColorD: yellowD,
                   onTap: () {
                     onTap();
                   },

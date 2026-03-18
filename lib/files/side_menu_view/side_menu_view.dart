@@ -41,19 +41,28 @@ class _SideMenuViewState extends State<SideMenuView> {
       child: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.only(top: 12, bottom: 12),
-              itemCount: sideMenuCont.sideMenuList.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding:
-                      const EdgeInsets.only(left: 12, right: 12, bottom: 10),
-                  child:
-                      // cont.sideMenuList[index].isContainSubMenu
-                      //     ? subMenuCard(context, cont.sideMenuList[index]):
-                      menuCard(context, sideMenuCont.sideMenuList[index]),
-                );
-              },
+            child: ScrollConfiguration(
+              behavior: ScrollConfiguration.of(context).copyWith(
+                scrollbars: false,
+                overscroll: false,
+              ),
+              child: ListView.builder(
+                padding: const EdgeInsets.only(top: 20, bottom: 12),
+                itemCount: sideMenuCont.sideMenuList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(left: 12, right: 12, bottom: 10),
+                    child:
+                        // cont.sideMenuList[index].isContainSubMenu
+                        //     ? subMenuCard(context, cont.sideMenuList[index]):
+                        sideMenuCont.sideMenuList[index].isdivider
+                            ? divider()
+                            : menuCard(
+                                context, sideMenuCont.sideMenuList[index]),
+                  );
+                },
+              ),
             ),
           ),
           Padding(
@@ -64,6 +73,16 @@ class _SideMenuViewState extends State<SideMenuView> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget divider() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Container(
+        height: 1,
+        color: isDarkTheme(context) ? whiteD : grey,
       ),
     );
   }
@@ -106,15 +125,15 @@ class _SideMenuViewState extends State<SideMenuView> {
         //print("info route name: ${info.routeName}");
         return Container(
           decoration: BoxDecoration(
-              border: Border.all(
-                  color: sideMenuCont.selectedCard.value.routeName ==
-                          info.routeName
-                      ? transparent
-                      : lightYellow),
+              // border: Border.all(
+              //     color: sideMenuCont.selectedCard.value.routeName ==
+              //             info.routeName
+              //         ? transparent
+              //         : lightYellow),
               color: sideMenuCont.selectedCard.value.routeName == info.routeName
                   ? color ?? lightYellow
                   : isDarkTheme(context)
-                      ? blackD
+                      ? blackTest
                       : lightGrey,
               borderRadius: BorderRadius.circular(4)),
           child: Padding(

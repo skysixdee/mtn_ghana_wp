@@ -113,7 +113,7 @@ class FaqItem extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: FontName.regular.name,
                           fontWeight: FontWeight.bold,
-                          fontSize: si.isMobile ? 13 : 18,
+                          fontSize: si.isMobile ? 12 : 15,
                           color: isDarkTheme(context) ? whiteD : black,
                         ),
                       ),
@@ -123,7 +123,7 @@ class FaqItem extends StatelessWidget {
                           ? Icons.remove
                           : Icons.add,
                       color: isDarkTheme(context) ? whiteD : black,
-                      size: si.isMobile ? 18 : 22,
+                      size: si.isMobile ? 12 : 15,
                     ),
                   ],
                 ),
@@ -141,7 +141,7 @@ class FaqItem extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: CustomText(
                             title: answer.header!,
-                            fontSize: 15,
+                            fontSize: si.isMobile ? 12 : 15,
                             colorD: whiteD,
                           ),
                         ),
@@ -171,7 +171,7 @@ class FaqItem extends StatelessWidget {
                                   color: isDarkTheme(context)
                                       ? whiteD
                                       : Colors.black,
-                                  fontSize: si.isMobile ? 14 : 16,
+                                  fontSize: si.isMobile ? 12 : 15,
                                 ),
                               );
                             }).toList();
@@ -185,13 +185,13 @@ class FaqItem extends StatelessWidget {
                                       TextSpan(
                                         text: '• ',
                                         style: TextStyle(
-
-                                            //  fontFamily: FontName.bold.name,
-                                            fontWeight: FontWeight.bold,
-                                            color: isDarkTheme(context)
-                                                ? whiteD
-                                                : Colors.black,
-                                            fontSize: si.isMobile ? 15 : 20),
+                                          //  fontFamily: FontName.bold.name,
+                                          fontWeight: FontWeight.bold,
+                                          color: isDarkTheme(context)
+                                              ? whiteD
+                                              : Colors.black,
+                                          fontSize: si.isMobile ? 12 : 15,
+                                        ),
                                       ),
                                       TextSpan(
                                         children: combinedTextSpans,

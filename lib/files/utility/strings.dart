@@ -136,6 +136,7 @@ String cancelStr = "Cancel";
 String previewStr = "Preview";
 String viewStr = "View";
 String musicBoxStr = "Music Box";
+
 String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";
 String nameTuneStr = "Name Tune";
@@ -217,3 +218,8 @@ String rewarPointOvalSubTitleStr =
     "Earn reward points on every CRBT subscription, tune download, and renewals.";
 String rewarPointDetailStr = "Points";
 String rankStr = "Rank";
+String mySubscriptionPlanStr = "My subscription plan";
+String autorenewStr = "Autorenew";
+
+String subscriptionDescriptionStr =
+    "You are subscribing the Ghana service from DATE.Please note that PRICE will be charged after BILLING_CYCLE days starting from the date you have subscribe.";
