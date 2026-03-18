@@ -29,23 +29,28 @@ class MinimizedPlayerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Column(
-          children: [
-            Container(
-              width: double.infinity,
-              height: 8,
-              color: white.withValues(alpha: 0.85),
-            ),
-            Container(
-              color: black.withValues(alpha: 0.6),
-              height: minPlayerHeight,
-              width: double.maxFinite,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Center(child: mainContainer()),
+        InkWell(
+          onTap: () {
+            cont.isPlayerMaxSize.value = !cont.isPlayerMaxSize.value;
+          },
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 8,
+                color: white.withValues(alpha: 0.85),
               ),
-            ),
-          ],
+              Container(
+                color: black.withValues(alpha: 0.6),
+                height: minPlayerHeight,
+                width: double.maxFinite,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Center(child: mainContainer()),
+                ),
+              ),
+            ],
+          ),
         ),
         sliderTheme(context),
       ],

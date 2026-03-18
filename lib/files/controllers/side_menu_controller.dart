@@ -14,6 +14,8 @@ class SideMenuController extends GetxController {
         leadingIconData: CupertinoIcons.home),
     SideMenuModel(myWishlistStr, myWishlistRoute,
         leadingIconData: CupertinoIcons.question_circle),
+    SideMenuModel(faqCStr, faqRoute,
+        leadingIconData: CupertinoIcons.info_circle),
     SideMenuModel(aboutStr, aboutRoute,
         leadingIconData: CupertinoIcons.info_circle),
     SideMenuModel(rewardPointStr, rewardPointRoute,

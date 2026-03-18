@@ -11,6 +11,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_textfield.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_grid_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
@@ -43,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: white,
+      color: isDarkTheme(context) ? blackTest : white,
       child: ResponsiveBuilder(
         builder: (context, si) {
           return Obx(
@@ -137,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
-              color: yellow,
+              color: isDarkTheme(context) ? yellowD : yellow,
             ),
             height: 100,
             width: 100,

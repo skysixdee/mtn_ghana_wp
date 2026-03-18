@@ -18,33 +18,36 @@ class HomeSubCatView extends StatelessWidget {
     return ResponsiveBuilder(
       builder: (context, si) {
         return Container(
-            color: isDarkTheme(context) ? blackD : white,
-            height: si.isMobile ? 60 : 100,
-            child: Obx(() {
-              return ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: appController.categories.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      print("tapped");
-                      String catId =
-                          appController.categories[index].categoryId ?? '';
+            color: isDarkTheme(context) ? blackTest : lightGreyTest,
+            height: si.isMobile ? 100 : 140,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Obx(() {
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: appController.categories.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        print("tapped");
+                        String catId =
+                            appController.categories[index].categoryId ?? '';
 
-                      context.goNamed(categoryDetailRoute,
-                          queryParameters: {'catId': catId});
-                      //con.getCategoryDetailList(catId);
-                    },
-                    child: card(index, si),
-                  );
-                },
-              );
-            }));
+                        context.goNamed(categoryDetailRoute,
+                            queryParameters: {'catId': catId});
+                        //con.getCategoryDetailList(catId);
+                      },
+                      child: card(context, index, si),
+                    );
+                  },
+                );
+              }),
+            ));
       },
     );
   }
 
-  Padding card(int index, SizingInformation si) {
+  Padding card(BuildContext context, int index, SizingInformation si) {
     return Padding(
       padding: EdgeInsets.only(
           right: 14.0,
@@ -57,6 +60,7 @@ class HomeSubCatView extends StatelessWidget {
         width: si.isMobile ? 140 : 220,
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
+            color: isDarkTheme(context) ? blackD : white,
             borderRadius: BorderRadius.circular(8),
             boxShadow: const [
               BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)

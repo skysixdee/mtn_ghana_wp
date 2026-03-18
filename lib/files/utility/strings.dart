@@ -81,6 +81,8 @@ String startTimeStr = "Start Time";
 String endTimeStr = "End Time";
 
 String noneStr = "None";
+
+String topArtistsStr = "Top Artists";
 String monthlyStr = "Monthly";
 String yearlyStr = "Yearly";
 String customTimeStr = "Custom Time";

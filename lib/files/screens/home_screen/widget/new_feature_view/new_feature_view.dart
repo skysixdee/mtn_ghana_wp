@@ -34,7 +34,7 @@ class _NewFeatureViewState extends State<NewFeatureView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //color: isDarkTheme(context) ? whiteD : lightGrey,
+      color: isDarkTheme(context) ? blackTest : lightGreyTest,
       child: titleListView(),
     );
     // Obx(() {
@@ -56,38 +56,43 @@ class _NewFeatureViewState extends State<NewFeatureView> {
   Widget titleListView() {
     return ResponsiveBuilder(
       builder: (context, si) {
-        return ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 10 : 30.0),
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: cont.categories.length,
-          itemBuilder: (context, index) {
-            final category = cont.categories[index];
+        return Obx(
+          () {
+            return ListView.builder(
+              padding:
+                  EdgeInsets.symmetric(horizontal: si.isMobile ? 10 : 30.0),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: cont.categories.length,
+              itemBuilder: (context, index) {
+                final category = cont.categories[index];
 
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10),
-                  CustomText(
-                    title: category.title,
-                    fontName: FontName.bold,
-                    fontSize: 20,
-                  ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    height: si.isMobile ? 220 : 260,
-                    child: Obx(() {
-                      if (category.isLoading.value) {
-                        return loadingIndicator();
-                      }
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //SizedBox(height: 10),
+                      CustomText(
+                        title: category.title,
+                        fontName: FontName.bold,
+                        fontSize: 20,
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: si.isMobile ? 220 : 260,
+                        child: Obx(() {
+                          if (category.isLoading.value) {
+                            return loadingIndicator();
+                          }
 
-                      return tuneList(category);
-                    }),
+                          return tuneList(category);
+                        }),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             );
           },
         );

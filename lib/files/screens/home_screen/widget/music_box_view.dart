@@ -32,14 +32,14 @@ class _MusicBoxViewState extends State<MusicBoxView> {
     return ResponsiveBuilder(
       builder: (context, si) {
         return Container(
-          //color: isDarkTheme(context) ? whiteD : lightGrey,
+          color: isDarkTheme(context) ? blackTest : lightGreyTest,
           child: Obx(
             () {
               return con.isLoadingList.value
                   ? loadingIndicator()
                   : Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: si.isMobile ? 8.0 : 25),
+                          horizontal: si.isMobile ? 8.0 : 25, vertical: 20),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [

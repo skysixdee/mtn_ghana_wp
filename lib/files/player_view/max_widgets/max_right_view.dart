@@ -23,14 +23,14 @@ class MaxRightView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        toggle(),
+        toggle(context),
         SizedBox(height: 8),
         Flexible(child: listView()),
       ],
     );
   }
 
-  Widget toggle() {
+  Widget toggle(BuildContext context) {
     return Column(
       children: [
         Row(
@@ -59,8 +59,9 @@ class MaxRightView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Container(
-                          color:
-                              selectedIndex.value == 0 ? yellow : transparent,
+                          color: selectedIndex.value == 0
+                              ? (isDarkTheme(context) ? yellowD : yellow)
+                              : transparent,
                           height: 4,
                         ),
                       ),
@@ -104,6 +105,7 @@ class MaxRightView extends StatelessWidget {
       () {
         return GenericButton(
           radius: 2,
+          fontSize: 18,
           title: upNextStr,
           fontName: selectedIndex.value == 0 ? FontName.bold : FontName.regular,
           bgColor: transparent,

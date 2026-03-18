@@ -109,7 +109,7 @@ class MaxLeftView extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               CustomText(
-                title: artistsStr,
+                title: topArtistsStr,
                 fontName: FontName.bold,
                 fontSize: 18,
                 color: black,

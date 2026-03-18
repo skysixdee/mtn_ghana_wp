@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 const blue = Color.fromRGBO(0, 49, 135, 1);
 const black = Colors.black;
-Color blackD = const Color.fromRGBO(51, 51, 51, 1);
-
+Color blackD = Colors.black; // const Color.fromRGBO(51, 51, 51, 1);
+Color blackTest = const Color.fromARGB(255, 36, 36, 36); //Colors.black; //
+const lightGreyTest = Color.fromARGB(255, 243, 243, 243);
 Color gredientColor = Colors.black.withOpacity(0.3);
 const yellow = Color.fromRGBO(255, 204, 0, 1);
 const yellowD = Color.fromRGBO(200, 160, 2, 1);

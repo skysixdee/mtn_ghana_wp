@@ -4,6 +4,7 @@ import 'package:mtn_ghana_wp/files/controllers/faq_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/model/faq_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -75,19 +76,19 @@ class FaqItem extends StatelessWidget {
     final faqItem = faqController.faqData.value.faqList![index];
     return ResponsiveBuilder(
       builder: (context, si) {
-        return cards(faqItem, si);
+        return cards(context, faqItem, si);
       },
     );
   }
 
-  Obx cards(FaqList faqItem, SizingInformation si) {
+  Obx cards(BuildContext context, FaqList faqItem, SizingInformation si) {
     return Obx(() {
       return Card(
         elevation: 4, // Increased elevation for visible shadow
         shadowColor: const Color.fromARGB(255, 188, 186, 186)
             .withOpacity(0.3), // Optional: tweak shadow color and opacity
 
-        color: white,
+        color: isDarkTheme(context) ? blackTest : white,
         margin:
             EdgeInsets.symmetric(vertical: 8, horizontal: si.isMobile ? 2 : 16),
         child: Column(
@@ -113,6 +114,7 @@ class FaqItem extends StatelessWidget {
                           fontFamily: FontName.regular.name,
                           fontWeight: FontWeight.bold,
                           fontSize: si.isMobile ? 13 : 18,
+                          color: isDarkTheme(context) ? whiteD : black,
                         ),
                       ),
                     ),
@@ -120,6 +122,7 @@ class FaqItem extends StatelessWidget {
                       faqController.isExpanded[index] == true
                           ? Icons.remove
                           : Icons.add,
+                      color: isDarkTheme(context) ? whiteD : black,
                       size: si.isMobile ? 18 : 22,
                     ),
                   ],
@@ -139,6 +142,7 @@ class FaqItem extends StatelessWidget {
                           child: CustomText(
                             title: answer.header!,
                             fontSize: 15,
+                            colorD: whiteD,
                           ),
                         ),
                       Padding(
@@ -164,7 +168,9 @@ class FaqItem extends StatelessWidget {
                                       datum.style?.textDecoration == 'underline'
                                           ? TextDecoration.underline
                                           : TextDecoration.none,
-                                  color: Colors.black,
+                                  color: isDarkTheme(context)
+                                      ? whiteD
+                                      : Colors.black,
                                   fontSize: si.isMobile ? 14 : 16,
                                 ),
                               );
@@ -182,7 +188,9 @@ class FaqItem extends StatelessWidget {
 
                                             //  fontFamily: FontName.bold.name,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.black,
+                                            color: isDarkTheme(context)
+                                                ? whiteD
+                                                : Colors.black,
                                             fontSize: si.isMobile ? 15 : 20),
                                       ),
                                       TextSpan(

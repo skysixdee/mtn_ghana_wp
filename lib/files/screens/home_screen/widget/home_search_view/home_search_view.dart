@@ -21,7 +21,7 @@ class HomeSearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: isDarkTheme(context) ? blackD : lightGrey,
+      color: isDarkTheme(context) ? blackTest : lightGreyTest,
       child: Padding(
         padding:
             const EdgeInsets.only(left: 20, top: 40.0, bottom: 20, right: 20),

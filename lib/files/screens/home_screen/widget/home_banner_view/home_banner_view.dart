@@ -75,9 +75,9 @@ class HomeBannerView extends StatelessWidget {
 
   CarouselOptions carousalOption(SizingInformation si, BuildContext context) {
     return CarouselOptions(
-      height: si.isMobile ? 160 : (MediaQuery.of(context).size.width * 0.35),
+      height: si.isMobile ? 160 : (MediaQuery.of(context).size.width * 0.17),
       aspectRatio: 16 / 9,
-      viewportFraction: 0.90,
+      viewportFraction: si.isMobile ? 0.9 : 0.333,
       initialPage: cont.selectedIndex.value,
       enableInfiniteScroll: true,
       reverse: false,
@@ -86,7 +86,7 @@ class HomeBannerView extends StatelessWidget {
       autoPlayAnimationDuration: const Duration(milliseconds: 800),
       autoPlayCurve: Curves.fastOutSlowIn,
       enlargeCenterPage: true,
-      enlargeFactor: 0.1,
+      enlargeFactor: 0.2,
       onPageChanged: (index, reason) {
         cont.updatedSelectedIndex(index);
       },
