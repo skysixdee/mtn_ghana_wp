@@ -84,8 +84,11 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
         con.myMusicBoxList.any((TuneInfo inf) => inf.toneId == v.contentId);
     return Container(
       decoration: BoxDecoration(
-        boxShadow: const [
-          BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+        boxShadow: [
+          BoxShadow(
+              color: isDarkTheme(context) ? darkGrey : lightGrey,
+              blurRadius: 3,
+              spreadRadius: 1)
         ],
         borderRadius: BorderRadius.circular(8),
         color: white,

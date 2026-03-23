@@ -50,8 +50,11 @@ class MusicBoxCard extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
               color: isDarkTheme(context) ? blackD : white,
-              boxShadow: const [
-                BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+              boxShadow: [
+                BoxShadow(
+                    color: isDarkTheme(context) ? darkGrey : lightGrey,
+                    blurRadius: 3,
+                    spreadRadius: 1)
               ]),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

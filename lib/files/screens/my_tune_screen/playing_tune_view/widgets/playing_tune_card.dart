@@ -9,6 +9,7 @@ import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/widgets/day_repeat_view.dart';
 import 'package:mtn_ghana_wp/files/screens/my_tune_screen/playing_tune_view/widgets/monthly_repeat_view.dart';
@@ -32,8 +33,11 @@ class PlayingTuneCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: white,
           borderRadius: BorderRadius.circular(4),
-          boxShadow: const [
-            BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+          boxShadow: [
+            BoxShadow(
+                color: isDarkTheme(context) ? darkGrey : lightGrey,
+                blurRadius: 3,
+                spreadRadius: 1)
           ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

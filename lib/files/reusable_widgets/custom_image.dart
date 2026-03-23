@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/route_manager.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
@@ -68,7 +70,11 @@ Widget customImage(
               width: double.maxFinite,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                color: lightGrey,
+                color: Get.context == null
+                    ? lightGrey
+                    : isDarkTheme(Get.context!)
+                        ? darkGrey
+                        : lightGrey,
               ),
               child: Center(
                 child: CustomText(

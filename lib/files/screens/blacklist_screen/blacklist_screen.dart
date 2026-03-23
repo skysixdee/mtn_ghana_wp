@@ -8,6 +8,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_grid_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/generic_scroll_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -47,7 +48,7 @@ class BlacklistScreen extends StatelessWidget {
                   cardWidth: 200,
                   itemCount: con.list.length,
                   builder: (p0) {
-                    return blackListCard(con.list[p0], si);
+                    return blackListCard(context, con.list[p0], si);
                   },
                 );
               },
@@ -120,7 +121,8 @@ class BlacklistScreen extends StatelessWidget {
     );
   }
 
-  Widget blackListCard(BPartyDetailsList info, SizingInformation si) {
+  Widget blackListCard(
+      BuildContext context, BPartyDetailsList info, SizingInformation si) {
     List<String> ls = (info.bPartyName ?? '').split(" ");
     String title = '';
     for (var i = 0; i < ls.length; i++) {
@@ -131,8 +133,11 @@ class BlacklistScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        boxShadow: const [
-          BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+        boxShadow: [
+          BoxShadow(
+              color: isDarkTheme(context) ? darkGrey : lightGrey,
+              blurRadius: 3,
+              spreadRadius: 1)
         ],
         color: white,
       ),

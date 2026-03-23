@@ -62,15 +62,18 @@ class HomeSubCatView extends StatelessWidget {
         decoration: BoxDecoration(
             color: isDarkTheme(context) ? blackD : white,
             borderRadius: BorderRadius.circular(8),
-            boxShadow: const [
-              BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+            boxShadow: [
+              BoxShadow(
+                  color: isDarkTheme(context) ? darkGrey : lightGrey,
+                  blurRadius: 3,
+                  spreadRadius: 1)
             ]),
         child: Stack(
           alignment: Alignment.center,
           children: [
             customImage(
-                url: appController.categories[index].menuImage ?? "",
-                gredientColor: gredientColor),
+              url: appController.categories[index].menuImage ?? "",
+            ),
             // CustomText(
             //   title: appController.categories[index].categoryName,
             //   fontName: FontName.bold,

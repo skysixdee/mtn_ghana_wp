@@ -12,6 +12,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -41,7 +42,7 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: isDarkTheme(context) ? blackTest : white,
       body: Column(
         children: [
           Expanded(
@@ -60,8 +61,9 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
 
   SliverToBoxAdapter sliverNavigation() {
     return SliverToBoxAdapter(
-      child: getNavigationView(
-          "$artistsResultForStr -> ${(widget.searchKey).toUpperCase()}"),
+      child: getNavigationView(widget.searchKey.isEmpty
+          ? ("$artistsResultForStr ${(widget.searchKey).toUpperCase()}")
+          : ("$artistsResultForStr -> ${(widget.searchKey).toUpperCase()}")),
     );
   }
 
@@ -84,18 +86,21 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
             final inf = controller.artistsList[p0];
             return Container(
               decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(color: lightGrey, blurRadius: 3, spreadRadius: 1)
+                boxShadow: [
+                  BoxShadow(
+                      color: isDarkTheme(context) ? darkGrey : lightGrey,
+                      blurRadius: 3,
+                      spreadRadius: 1)
                 ],
                 borderRadius: BorderRadius.circular(4),
-                color: white,
+                color: isDarkTheme(context) ? blackTest : white,
               ),
               child: Column(
                 children: [
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: SizedBox(
+                      child: Container(
                           width: double.infinity,
                           height: double.maxFinite,
                           child: customImage(toneName: inf.val ?? '')),
@@ -110,7 +115,7 @@ class _ArtistListScreenState extends State<ArtistListScreen> {
                         horizontal: 12.0, vertical: 12),
                     child: GenericButton(
                       title: viewStr,
-                      bgColor: yellow,
+                      bgColor: isDarkTheme(context) ? yellowD : yellow,
                       onTap: () {
                         onSearchAction(inf.val ?? '');
                         print("tapped");
