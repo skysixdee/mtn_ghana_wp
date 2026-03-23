@@ -47,7 +47,7 @@ class SideMenuController extends GetxController {
           musicBoxSideMenuIcon,
           color: grey,
         )),
-    SideMenuModel(artistStr, artistsRoute,
+    SideMenuModel(artistStr, topArtistsRoute,
         leading: Icon(
           color: grey,
           Icons.mic_external_on,

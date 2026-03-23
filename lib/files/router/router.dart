@@ -10,6 +10,7 @@ import 'package:mtn_ghana_wp/files/player_view/player_view.dart';
 import 'package:mtn_ghana_wp/files/screens/login_screen/login_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mobile_bottom_nav_view/mobile_bottom_nav_view.dart';
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
+import 'package:mtn_ghana_wp/files/screens/top_artist_screen/top_artist_screen.dart';
 import 'package:mtn_ghana_wp/files/side_menu_view/side_menu_view.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -132,6 +133,15 @@ List<StatefulShellBranch> _getShellBranches() => [
               : null),
       _createShell(nameTuneRoute, (_) => NameTuneScreen(),
           onInit: (s) => Get.find<NameTuneController>().getNameTune()),
+
+//
+
+      _createShell(
+        topArtistsRoute,
+        (_) => TopArtistScreen(),
+      ),
+      //onInit: (s) => Get.find<NameTuneController>().getNameTune()),
+
       _createShell(musicBoxRoute, (_) => MusicBoxScreen()),
       _createShell(musicBoxContentRoute, (s) {
         final id = s.uri.queryParameters['id'] ?? '';

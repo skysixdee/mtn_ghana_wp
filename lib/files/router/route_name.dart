@@ -16,6 +16,9 @@ const String createBlackListRoute = "/createBlackList";
 const String faqRoute = "/faq";
 const String rewardPointRoute = "/rewardPoint";
 const String aboutRoute = "/about";
+
+const String topArtistsRoute = "/topArtists";
+
 const String musicBoxRoute = "/musicBox";
 const String musicBoxContentRoute = "/musicBoxContent";
 const String myMusicBoxContentRoute = "/myMusicBoxContent";
