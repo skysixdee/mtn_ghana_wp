@@ -10,13 +10,14 @@ class CustomDrawerController extends GetxController {
     DrawerModel(myTunezStr, myTunesRoute),
     DrawerModel(myWishlistStr, myWishlistRoute),
     DrawerModel(rewardPointStr, rewardPointRoute),
+    DrawerModel("", "", isDevider: true),
     DrawerModel(musicBoxStr, musicBoxRoute),
     DrawerModel(artistStr, topArtistsRoute),
     //DrawerModel(tunezStr, '', isContainSubMenu: true),
     // DrawerModel(nameTuneStr, nameTuneRoute),
     DrawerModel(faqStr, faqRoute),
     DrawerModel(aboutStr, aboutRoute),
-
+    DrawerModel("", "", isDevider: true),
     DrawerModel(darkModeStr, ''),
     DrawerModel(logoutStr, logoutStr),
   ];

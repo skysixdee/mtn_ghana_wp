@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/router.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 
@@ -11,6 +13,11 @@ genericPopup(Widget widget) {
     context: scaffoldKey.currentContext!,
     barrierDismissible: false,
     barrierLabel: 'Dismiss',
+    barrierColor: Get.context == null
+        ? black.withOpacity(0.6)
+        : (isDarkTheme(Get.context!)
+            ? white.withOpacity(0.4)
+            : black.withOpacity(0.6)),
     pageBuilder: (_, __, ___) => Center(
       child: Center(
         child: Row(

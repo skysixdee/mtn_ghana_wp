@@ -73,6 +73,9 @@ class MobileDrawerScreen extends StatelessWidget {
   Widget mainListCard(BuildContext context, int index) {
     return InkWell(
       onTap: () {
+        if (menuList[index].isDevider) {
+          return;
+        }
         Navigator.of(context).pop();
         if (menuList[index].routeName == loginStr) {
           //print("loginnnnnnnnnnnnnnn");
@@ -146,33 +149,38 @@ class MobileDrawerScreen extends StatelessWidget {
           context.goNamed(menuList[index].routeName);
         }
       },
-      child: Container(
-        height: 50,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Row(
+      child: menuList[index].isDevider
+          ? Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
+              child: Container(
+                height: 1,
+                color: isDarkTheme(context) ? whiteD : white,
+              ),
+            )
+          : Container(
+              height: 50,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(width: 25),
-                  CustomText(
-                    isSelectable: false,
-                    title: menuList[index].title == logoutStr
-                        ? (StoreManager.isLoggedIn ? logoutStr : loginStr)
-                        : menuList[index].title,
-                    fontSize: 16,
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 25),
+                        CustomText(
+                          isSelectable: false,
+                          title: menuList[index].title == logoutStr
+                              ? (StoreManager.isLoggedIn ? logoutStr : loginStr)
+                              : menuList[index].title,
+                          fontSize: 16,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            Container(
-              height: 1,
-              color: isDarkTheme(context) ? whiteD : white,
-            )
-          ],
-        ),
-      ),
     );
   }
 
