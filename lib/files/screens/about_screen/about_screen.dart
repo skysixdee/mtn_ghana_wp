@@ -14,6 +14,7 @@ import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -44,96 +45,104 @@ class _AboutScreenState extends State<AboutScreen> {
     controller.getPageDeatil();
 
     return Scaffold(
-      //appBar: AppBar(title: const Text("About Page")),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
+        //appBar: AppBar(title: const Text("About Page")),
+        body: ResponsiveBuilder(
+      builder: (context, si) {
+        return Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-        if (controller.aboutList.isEmpty) {
-          return const Center(child: Text("No data found"));
-        }
+          if (controller.aboutList.isEmpty) {
+            return const Center(child: Text("No data found"));
+          }
 
-        return ListView(
-          shrinkWrap: true,
-          children: [
-            SizedBox(height: 40),
-            aboutTopSection(),
-            SizedBox(height: 40),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(16),
-              itemCount: controller.aboutList.length,
-              itemBuilder: (context, sectionIndex) {
-                final section = controller.aboutList[sectionIndex];
+          return ListView(
+            shrinkWrap: true,
+            children: [
+              SizedBox(height: 40),
+              aboutTopSection(si),
+              SizedBox(height: 40),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(16),
+                itemCount: controller.aboutList.length,
+                itemBuilder: (context, sectionIndex) {
+                  final section = controller.aboutList[sectionIndex];
 
-                return Column(
-                  spacing: 20,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    headerText(section, sectionIndex),
-                    if (sectionIndex == 1) advancedSetting(),
-                    const SizedBox(height: 10),
-                    //horizintalList(section),
-                    colrousal(section, sectionIndex),
-                    if (sectionIndex == 0) startDiscovering(context),
-                    const SizedBox(height: 20),
-                  ],
-                );
-              },
-            ),
-          ],
-        );
-      }),
-    );
+                  return Column(
+                    spacing: 20,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      headerText(si, section, sectionIndex),
+                      if (sectionIndex == 1) advancedSetting(si),
+                      const SizedBox(height: 10),
+                      //horizintalList(section),
+                      colrousal(si, section, sectionIndex),
+                      if (sectionIndex == 0) startDiscovering(context),
+                      const SizedBox(height: 20),
+                    ],
+                  );
+                },
+              ),
+            ],
+          );
+        });
+      },
+    ));
   }
 
-  Widget aboutTopSection() {
+  Widget aboutTopSection(SizingInformation si) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Column(
-          children: [
-            SizedBox(
-              width: 500,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomText(
-                    isSelectable: true,
-                    textAlign: TextAlign.center,
-                    title: aboutTitleStr,
-                    fontName: FontName.extraBold,
-                    fontSize: 30,
-                    color: black,
+        Flexible(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: SizedBox(
+                  width: 500,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomText(
+                        isSelectable: true,
+                        textAlign: TextAlign.center,
+                        title: aboutTitleStr,
+                        fontName: FontName.extraBold,
+                        fontSize: si.isMobile ? 16 : 20,
+                        color: black,
+                      ),
+                      const SizedBox(height: 8),
+                      CustomText(
+                        isSelectable: true,
+                        textAlign: TextAlign.center,
+                        title: aboutSunTitleStr,
+                        fontName: FontName.semiBold,
+                        color: greyDark,
+                        fontSize: 14,
+                      ),
+                      const SizedBox(height: 16),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  CustomText(
-                    isSelectable: true,
-                    textAlign: TextAlign.center,
-                    title: aboutSunTitleStr,
-                    fontName: FontName.semiBold,
-                    color: greyDark,
-                    fontSize: 14,
-                  ),
-                  const SizedBox(height: 16),
-                ],
+                ),
               ),
-            ),
-            Image.asset(
-              aboutMainPng,
-              fit: BoxFit.fill,
-            ),
-          ],
+              Image.asset(
+                aboutMainPng,
+                fit: BoxFit.fill,
+              ),
+            ],
+          ),
         ),
       ],
     );
   }
 
-  Widget colrousal(AboutList section, int sectionIndex) {
+  Widget colrousal(SizingInformation si, AboutList section, int sectionIndex) {
     return CarouselSlider(
         items: List.generate(section.dataList?.length ?? 0, (v) {
           String svgs = section.dataList?[v].data?.first.iconName ?? '';
@@ -143,7 +152,7 @@ class _AboutScreenState extends State<AboutScreen> {
           height: 280,
           aspectRatio: sectionIndex == 2 ? 16 / 1 : 16 / 9,
 
-          viewportFraction: sectionIndex == 2 ? 0.2 : 0.3,
+          viewportFraction: si.isMobile ? 0.6 : (sectionIndex == 2 ? 0.2 : 0.3),
           initialPage: 0,
           enableInfiniteScroll: true,
           reverse: false,
@@ -152,7 +161,7 @@ class _AboutScreenState extends State<AboutScreen> {
           autoPlayAnimationDuration: Duration(milliseconds: 800),
           autoPlayCurve: Curves.fastOutSlowIn,
           enlargeCenterPage: true,
-          enlargeFactor: sectionIndex == 2 ? 0.0 : 0.3,
+          enlargeFactor: si.isMobile ? 0.6 : (sectionIndex == 2 ? 0.0 : 0.3),
           //onPageChanged: callbackFunction,
           scrollDirection: Axis.horizontal,
         ));
@@ -218,7 +227,7 @@ class _AboutScreenState extends State<AboutScreen> {
     );
   }
 
-  Row advancedSetting() {
+  Row advancedSetting(SizingInformation si) {
     return Row(
       children: [
         SvgPicture.asset(
@@ -228,20 +237,21 @@ class _AboutScreenState extends State<AboutScreen> {
           isSelectable: true,
           title: advancedSettingStr,
           fontName: FontName.extraBold,
-          fontSize: 22,
+          fontSize: si.isMobile ? 14 : 18,
         )
       ],
     );
   }
 
-  Padding headerText(AboutList section, int sectionIndex) {
+  Padding headerText(
+      SizingInformation si, AboutList section, int sectionIndex) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 28.0),
       child: CustomText(
         title: section.header ?? '',
         color: sectionIndex == 0 ? greyDark : black,
         fontName: FontName.extraBold,
-        fontSize: 24,
+        fontSize: si.isMobile ? 16 : 20,
       ),
     );
   }
