@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup.dart';
+import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_popup.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -21,6 +25,7 @@ class SideMenuView extends StatefulWidget {
 
 class _SideMenuViewState extends State<SideMenuView> {
   RxBool isSubMenuOpen = false.obs;
+  LoginController con = Get.find();
   @override
   initState() {
     // Get.put(SideMenuController());
@@ -113,6 +118,23 @@ class _SideMenuViewState extends State<SideMenuView> {
         }
 
         if (info.title == logoutStr) {
+          if (StoreManager.isLoggedIn) {
+            StoreManager.logout();
+          } else {
+            con.resetValue();
+            genericPopup(Obx(
+              () {
+                return con.displayOptScreen.value
+                    ? LoginOtpPopup(
+                        securityToken: con.securityToken,
+                        isNewUser: con.isNewUser,
+                        msisdn: con.msisdn,
+                        isMusicBox: false,
+                      )
+                    : const LoginPopup();
+              },
+            ));
+          }
           return;
         }
         sideMenuCont.selectedCard.value = info;
@@ -147,20 +169,24 @@ class _SideMenuViewState extends State<SideMenuView> {
                       child: info.leading!,
                     ),
                   ),
-                Expanded(
-                  child: CustomText(
-                    isSelectable: false,
-                    title: info.title,
-                    fontName: sideMenuCont.selectedCard.value.routeName ==
-                            info.routeName
-                        ? FontName.bold
-                        : FontName.regular,
-                    // fontSize: sideMenuCont.selectedCard.value.routeName ==
-                    //         info.routeName
-                    //     ? 16
-                    //     : 14,
-                  ),
-                ),
+                Expanded(child: Obx(
+                  () {
+                    return CustomText(
+                      isSelectable: false,
+                      title: info.title == logoutStr
+                          ? (appCont.isLoggedIn.value ? logoutStr : loginStr)
+                          : info.title,
+                      fontName: sideMenuCont.selectedCard.value.routeName ==
+                              info.routeName
+                          ? FontName.bold
+                          : FontName.regular,
+                      // fontSize: sideMenuCont.selectedCard.value.routeName ==
+                      //         info.routeName
+                      //     ? 16
+                      //     : 14,
+                    );
+                  },
+                )),
                 info.isContainSubMenu
                     ? Icon(
                         isSubMenuOpen.value

@@ -15,6 +15,7 @@ import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_popup.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
 import 'package:flutter/material.dart';
@@ -34,14 +35,35 @@ class MobileDrawerScreen extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.8,
       child: Container(
         color: isDarkTheme(context) ? blackD : lightGrey,
-        child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: menuList.length,
-          itemBuilder: (context, index) {
-            return menuList[index].isContainSubMenu
-                ? subMenuList(menuList[index].title)
-                : mainListCard(context, index);
-          },
+        child: Column(
+          children: [
+            Container(
+              height: 60,
+              color: isDarkTheme(context) ? yellowD : yellow,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(width: 16),
+                  Image.asset(
+                    logoImage,
+                    height: 40,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: menuList.length,
+                itemBuilder: (context, index) {
+                  return menuList[index].isContainSubMenu
+                      ? subMenuList(menuList[index].title)
+                      : mainListCard(context, index);
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
