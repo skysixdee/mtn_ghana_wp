@@ -28,9 +28,10 @@ class MobileDrawerScreen extends StatelessWidget {
   List<DrawerModel> menuList = [];
   @override
   Widget build(BuildContext context) {
-    menuList = StoreManager.isLoggedIn
-        ? dCont.loggedInDrawerMenu
-        : dCont.nonLoggedInDrawerMenu;
+    menuList = dCont.loggedInDrawerMenu;
+    // StoreManager.isLoggedIn
+    //     ? dCont.loggedInDrawerMenu
+    //: dCont.nonLoggedInDrawerMenu;
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
       child: Container(
@@ -91,7 +92,24 @@ class MobileDrawerScreen extends StatelessWidget {
           ));
         } else if (menuList[index].title == logoutStr) {
           //print("logoutttttttttttttttttttttttttttttt");
-          StoreManager.logout();
+          if (StoreManager.isLoggedIn) {
+            StoreManager.logout();
+          } else {
+            LoginController con = Get.find();
+            con.resetValue();
+            genericPopup(Obx(
+              () {
+                return con.displayOptScreen.value
+                    ? LoginOtpPopup(
+                        securityToken: con.securityToken,
+                        isNewUser: con.isNewUser,
+                        msisdn: con.msisdn,
+                        isMusicBox: false,
+                      )
+                    : const LoginPopup();
+              },
+            ));
+          }
           //context.goNamed(homeRoute);
           // context.goNamed(menuList[index].routeName);
         } else if (menuList[index].title == homeStr) {
@@ -113,6 +131,16 @@ class MobileDrawerScreen extends StatelessWidget {
           context.goNamed(myWishlistRoute);
         } else if (menuList[index].title == blackListStr) {
           context.goNamed(blackListRoute);
+        } else if (menuList[index].title == darkModeStr) {
+          Get.isDarkMode
+              ? Get.changeThemeMode(ThemeMode.light)
+              : Get.changeThemeMode(ThemeMode.dark);
+          StoreManager.setDarkMode(!Get.isDarkMode);
+          return;
+        } else if (menuList[index].title == musicBoxStr) {
+          context.goNamed(musicBoxRoute);
+        } else if (menuList[index].title == artistStr) {
+          context.goNamed(topArtistsRoute);
         } else {
           print('else called');
           context.goNamed(menuList[index].routeName);
@@ -129,7 +157,10 @@ class MobileDrawerScreen extends StatelessWidget {
                 children: [
                   const SizedBox(width: 25),
                   CustomText(
-                    title: menuList[index].title,
+                    isSelectable: false,
+                    title: menuList[index].title == logoutStr
+                        ? (StoreManager.isLoggedIn ? logoutStr : loginStr)
+                        : menuList[index].title,
                     fontSize: 16,
                   ),
                 ],
@@ -196,6 +227,7 @@ class MobileDrawerScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomText(
+                    isSelectable: false,
                     title: '${StoreManager.categories?[index].categoryName}',
                     fontSize: 16,
                   ),
@@ -230,6 +262,7 @@ class MobileDrawerScreen extends StatelessWidget {
                           !dCont.isSubMenuOpened.value;
                     },
                     child: CustomText(
+                      isSelectable: false,
                       fontSize: 16,
                       title: title,
                     ),

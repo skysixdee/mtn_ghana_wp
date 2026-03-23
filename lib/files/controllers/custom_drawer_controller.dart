@@ -6,13 +6,18 @@ import 'package:get/get.dart';
 class CustomDrawerController extends GetxController {
   List<DrawerModel> loggedInDrawerMenu = [
     DrawerModel(homeStr, homeRoute),
-    DrawerModel(profileStr, profileRoute),
+    //DrawerModel(profileStr, profileRoute),
     DrawerModel(myTunezStr, myTunesRoute),
     DrawerModel(myWishlistStr, myWishlistRoute),
-    DrawerModel(tunezStr, '', isContainSubMenu: true),
-    // DrawerModel(nameTuneStr, nameTuneRoute),
     DrawerModel(rewardPointStr, rewardPointRoute),
+    DrawerModel(musicBoxStr, musicBoxRoute),
+    DrawerModel(artistStr, topArtistsRoute),
+    //DrawerModel(tunezStr, '', isContainSubMenu: true),
+    // DrawerModel(nameTuneStr, nameTuneRoute),
     DrawerModel(faqStr, faqRoute),
+    DrawerModel(aboutStr, aboutRoute),
+
+    DrawerModel(darkModeStr, ''),
     DrawerModel(logoutStr, logoutStr),
   ];
   List<DrawerModel> nonLoggedInDrawerMenu = [
