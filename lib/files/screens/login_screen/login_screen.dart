@@ -9,21 +9,25 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CustomText(
-            title: title,
-            fontName: FontName.bold,
-            fontSize: 18,
-          ),
-          SizedBox(height: 12),
-          CustomText(
-            title: thisFeatureIsAvailableForLoggedinStr,
-            fontName: FontName.bold,
-            fontSize: 18,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomText(
+              title: title,
+              fontName: FontName.bold,
+              fontSize: 18,
+            ),
+            SizedBox(height: 12),
+            CustomText(
+              title: thisFeatureIsAvailableForLoggedinStr,
+              fontName: FontName.bold,
+              textAlign: TextAlign.center,
+              fontSize: 18,
+            ),
+          ],
+        ),
       ),
     );
   }

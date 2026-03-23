@@ -143,7 +143,10 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
               con.deleteTuneFromWishlist();
             }
           } else {
-            openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+            openAlertPopup(
+              message: thisFeatureIsAvailableForLoggedinStr,
+              textAlign: TextAlign.center,
+            );
           }
         },
       ),
@@ -165,7 +168,10 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
           if (StoreManager.isLoggedIn) {
             genericPopup(GiftPopupView(info: con.currentTuneDetail.value));
           } else {
-            openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+            openAlertPopup(
+              message: thisFeatureIsAvailableForLoggedinStr,
+              textAlign: TextAlign.center,
+            );
           }
         },
       ),
@@ -181,7 +187,10 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
           if (StoreManager.isLoggedIn) {
             addToWishlistApi(con.currentTuneDetail.value);
           } else {
-            openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+            openAlertPopup(
+              message: thisFeatureIsAvailableForLoggedinStr,
+              textAlign: TextAlign.center,
+            );
           }
         },
       ),
@@ -203,7 +212,10 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
           if (StoreManager.isLoggedIn) {
             genericPopup(GiftPopupView(info: con.currentTuneDetail.value));
           } else {
-            openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+            openAlertPopup(
+              message: thisFeatureIsAvailableForLoggedinStr,
+              textAlign: TextAlign.center,
+            );
           }
         },
       ),

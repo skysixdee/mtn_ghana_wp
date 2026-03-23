@@ -193,6 +193,7 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
                     addToWishlistApi(info);
                   } else {
                     openAlertPopup(
+                        textAlign: TextAlign.center,
                         message: thisFeatureIsAvailableForLoggedinStr);
                   }
                 } else if (p0.title == giftStr) {
@@ -200,6 +201,7 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
                     genericPopup(GiftPopupView(info: info));
                   } else {
                     openAlertPopup(
+                        textAlign: TextAlign.center,
                         message: thisFeatureIsAvailableForLoggedinStr);
                   }
 

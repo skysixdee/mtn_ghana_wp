@@ -345,6 +345,7 @@ class MinimizedPlayerView extends StatelessWidget {
                     addToWishlistApi(cont.info.value);
                   } else {
                     openAlertPopup(
+                        textAlign: TextAlign.center,
                         message: thisFeatureIsAvailableForLoggedinStr);
                   }
                   //addToWishlistApi(cont.info.value);

@@ -21,7 +21,10 @@ playerAddToWishListButton() {
       if (StoreManager.isLoggedIn) {
         addToWishlistApi(con.info.value);
       } else {
-        openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+        openAlertPopup(
+          message: thisFeatureIsAvailableForLoggedinStr,
+          textAlign: TextAlign.center,
+        );
       }
 
       print("add to wishlist api call here");
