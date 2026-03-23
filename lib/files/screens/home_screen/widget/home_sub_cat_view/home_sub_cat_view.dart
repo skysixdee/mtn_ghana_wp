@@ -73,6 +73,7 @@ class HomeSubCatView extends StatelessWidget {
           children: [
             customImage(
               url: appController.categories[index].menuImage ?? "",
+              gredientColor: isDarkTheme(context) ? gredientColor : transparent,
             ),
             // CustomText(
             //   title: appController.categories[index].categoryName,

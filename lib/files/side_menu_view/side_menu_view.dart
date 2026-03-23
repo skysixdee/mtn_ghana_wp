@@ -140,6 +140,13 @@ class _SideMenuViewState extends State<SideMenuView> {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
             child: Row(
               children: [
+                if (info.leading != null)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6.0),
+                    child: SizedBox(
+                      child: info.leading!,
+                    ),
+                  ),
                 Expanded(
                   child: CustomText(
                     isSelectable: false,
