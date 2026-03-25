@@ -6,6 +6,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/web_footer_view.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_pop_banner_view/home_pop_banner_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_search_view/home_search_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_sub_cat_view/home_sub_cat_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/new_feature_view/new_feature_view.dart';
@@ -16,6 +17,8 @@ import 'package:mtn_ghana_wp/files/screens/home_screen/widget/music_box_view.dar
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_banner_view/home_banner_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/feature_view/feature_category_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/express_info_view/express_info_view.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -39,7 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return //MyTuneScreen();
         Material(
       color: isDarkTheme(context) ? blackD : white,
-      child: customScroll(),
+      child: Stack(
+        children: [
+          customScroll(),
+          HomePopBannerView(),
+        ],
+      ),
     );
   }
 
@@ -54,6 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
+                  Obx(() {
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      height: appCont.isShowHomePopBanner.value
+                          ? homePopBannerHeight + 12
+                          : 0,
+                    );
+                  }),
                   const SizedBox(height: 8),
                   HomeBannerView(key: widget.key),
                   //SizedBox(height: si.isMobile ? 10 : 20),

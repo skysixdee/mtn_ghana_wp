@@ -25,6 +25,7 @@ class AppController extends GetxController {
   RxBool isLoggedIn = false.obs;
   String headerIncrechmentMsisdn = "";
   RxInt mobileBottomNavIndex = 0.obs;
+  RxBool isShowHomePopBanner = true.obs;
   @override
   void onInit() async {
     super.onInit();
