@@ -20,6 +20,9 @@ const shareIcon = 'assets/pngs/share.png';
 const playlistIcon = 'assets/pngs/playlist.png';
 const likeIcon = 'assets/pngs/like.png';
 const moreIcon = 'assets/pngs/more.png';
+const moodEmojiIcon = 'assets/pngs/mood_icon.png';
+
+const sideMenuMoodIcon = "assets/pngs/side_menu_mood_icon.png";
 
 const artistSideMenuIcon = 'assets/svgs/artist_svg.svg';
 const faqSideMenuIcon = 'assets/svgs/faq_svg.svg';
@@ -29,3 +32,5 @@ const logoutSideMenuIcon = 'assets/svgs/logout_svg.svg';
 const myTuneSideMenuIcon = 'assets/svgs/my_tone_svg.svg';
 const wishlistSideMenuIcon = 'assets/svgs/wishlist_svg.svg';
 const musicBoxSideMenuIcon = 'assets/svgs/music_box_svg.svg';
+
+const moodEmojiSvg = 'assets/svgs/mood_emoji.svg';

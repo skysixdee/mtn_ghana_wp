@@ -42,12 +42,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return //MyTuneScreen();
         Material(
       color: isDarkTheme(context) ? blackD : white,
-      child: Stack(
-        children: [
-          customScroll(),
-          HomePopBannerView(),
-        ],
-      ),
+      child: customScroll(),
+      // Stack(
+      //   children: [
+      //     customScroll(),
+      //     HomePopBannerView(),
+      //   ],
+      // ),
     );
   }
 
@@ -62,14 +63,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  Obx(() {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      height: appCont.isShowHomePopBanner.value
-                          ? homePopBannerHeight + 12
-                          : 0,
-                    );
-                  }),
+                  // Obx(() {
+                  //   return AnimatedContainer(
+                  //     duration: const Duration(milliseconds: 300),
+                  //     height: appCont.isShowHomePopBanner.value
+                  //         ? homePopBannerHeight + 12
+                  //         : 0,
+                  //   );
+                  // }),
                   const SizedBox(height: 8),
                   HomeBannerView(key: widget.key),
                   //SizedBox(height: si.isMobile ? 10 : 20),

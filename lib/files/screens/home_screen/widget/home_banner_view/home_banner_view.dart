@@ -62,8 +62,9 @@ class HomeBannerView extends StatelessWidget {
             //carouselSliderController.animateToPage(i);
           },
           child: Container(
-              decoration: const BoxDecoration(color: lightGrey),
+              decoration: const BoxDecoration(color: transparent),
               child: customImage(
+                  cornerRadius: 8,
                   url: banner.bannerPath,
                   gredientColor:
                       isDarkTheme(context) ? gredientColor : transparent)),

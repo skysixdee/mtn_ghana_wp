@@ -136,6 +136,7 @@ String cancelStr = "Cancel";
 String previewStr = "Preview";
 String viewStr = "View";
 String musicBoxStr = "Music Box";
+String moodDetectStr = "Mood Detection";
 
 String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";

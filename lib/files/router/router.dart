@@ -7,8 +7,10 @@ import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/player_view/player_view.dart';
+import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_pop_banner_view/home_pop_banner_view.dart';
 import 'package:mtn_ghana_wp/files/screens/login_screen/login_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mobile_bottom_nav_view/mobile_bottom_nav_view.dart';
+import 'package:mtn_ghana_wp/files/screens/mood_screen/mood_detection_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/top_artist_screen/top_artist_screen.dart';
 import 'package:mtn_ghana_wp/files/side_menu_view/side_menu_view.dart';
@@ -143,6 +145,7 @@ List<StatefulShellBranch> _getShellBranches() => [
       //onInit: (s) => Get.find<NameTuneController>().getNameTune()),
 
       _createShell(musicBoxRoute, (_) => MusicBoxScreen()),
+      _createShell(moodDetectRoute, (_) => MoodDetectionScreen()),
       _createShell(musicBoxContentRoute, (s) {
         final id = s.uri.queryParameters['id'] ?? '';
         final boxName = s.uri.queryParameters['boxName'] ?? '';
@@ -239,6 +242,7 @@ Widget navBuilder(context, state, navigationShell) {
                 Column(
                   children: [
                     WebNavigationView(),
+                    HomePopBannerView(),
                     Expanded(
                       child: Stack(
                         children: [
