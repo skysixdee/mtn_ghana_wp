@@ -14,6 +14,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/open_login.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -344,9 +345,21 @@ class MinimizedPlayerView extends StatelessWidget {
                   if (StoreManager.isLoggedIn) {
                     addToWishlistApi(cont.info.value);
                   } else {
+                    // openAlertPopup(
+                    //     textAlign: TextAlign.center,
+                    //     message: thisFeatureIsAvailableForLoggedinStr);
                     openAlertPopup(
-                        textAlign: TextAlign.center,
-                        message: thisFeatureIsAvailableForLoggedinStr);
+                      message: thisFeatureIsAvailableForLoggedinStr,
+                      textAlign: TextAlign.center,
+                      primaryBtnTitle: cancelStr, //loginStr,
+                      secondryBtnTitle: loginStr, //cancelStr,
+                      secondryTitleColor: black,
+                      onSecondry: () async {
+                        print("login tapped");
+                        await Future.delayed(Duration(milliseconds: 100));
+                        openLogin();
+                      },
+                    );
                   }
                   //addToWishlistApi(cont.info.value);
                   print("Add to wishlist api call here");

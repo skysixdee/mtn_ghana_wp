@@ -13,6 +13,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/play_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/open_login.dart';
 
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
@@ -192,17 +193,41 @@ _moreButton(List<PopoverMenuModel>? menuList, TuneInfo info,
                   if (StoreManager.isLoggedIn) {
                     addToWishlistApi(info);
                   } else {
+                    // openAlertPopup(
+                    //     textAlign: TextAlign.center,
+                    //     message: thisFeatureIsAvailableForLoggedinStr);
                     openAlertPopup(
-                        textAlign: TextAlign.center,
-                        message: thisFeatureIsAvailableForLoggedinStr);
+                      message: thisFeatureIsAvailableForLoggedinStr,
+                      textAlign: TextAlign.center,
+                      primaryBtnTitle: cancelStr, //loginStr,
+                      secondryBtnTitle: loginStr, //cancelStr,
+                      secondryTitleColor: black,
+                      onSecondry: () async {
+                        print("login tapped");
+                        await Future.delayed(Duration(milliseconds: 100));
+                        openLogin();
+                      },
+                    );
                   }
                 } else if (p0.title == giftStr) {
                   if (StoreManager.isLoggedIn) {
                     genericPopup(GiftPopupView(info: info));
                   } else {
+                    // openAlertPopup(
+                    //     textAlign: TextAlign.center,
+                    //     message: thisFeatureIsAvailableForLoggedinStr);
                     openAlertPopup(
-                        textAlign: TextAlign.center,
-                        message: thisFeatureIsAvailableForLoggedinStr);
+                      message: thisFeatureIsAvailableForLoggedinStr,
+                      textAlign: TextAlign.center,
+                      primaryBtnTitle: cancelStr, //loginStr,
+                      secondryBtnTitle: loginStr, //cancelStr,
+                      secondryTitleColor: black,
+                      onSecondry: () async {
+                        print("login tapped");
+                        await Future.delayed(Duration(milliseconds: 100));
+                        openLogin();
+                      },
+                    );
                   }
 
                   customPrint("gift tapped");

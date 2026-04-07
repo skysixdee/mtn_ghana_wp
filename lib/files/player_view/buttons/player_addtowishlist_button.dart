@@ -4,6 +4,7 @@ import 'package:mtn_ghana_wp/files/api_calls/add_to_wishlist_api.dart';
 import 'package:mtn_ghana_wp/files/player_view/new_player_controller.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/open_login.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
@@ -24,6 +25,14 @@ playerAddToWishListButton() {
         openAlertPopup(
           message: thisFeatureIsAvailableForLoggedinStr,
           textAlign: TextAlign.center,
+          primaryBtnTitle: cancelStr, //loginStr,
+          secondryBtnTitle: loginStr, //cancelStr,
+          secondryTitleColor: black,
+          onSecondry: () async {
+            print("login tapped");
+            await Future.delayed(Duration(milliseconds: 100));
+            openLogin();
+          },
         );
       }
 

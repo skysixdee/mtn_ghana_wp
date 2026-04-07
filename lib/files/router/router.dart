@@ -16,6 +16,7 @@ import 'package:mtn_ghana_wp/files/screens/top_artist_screen/top_artist_screen.d
 import 'package:mtn_ghana_wp/files/side_menu_view/side_menu_view.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'package:mtn_ghana_wp/files/player_view/custom_audio_player.dart';
@@ -242,7 +243,6 @@ Widget navBuilder(context, state, navigationShell) {
                 Column(
                   children: [
                     WebNavigationView(),
-                    HomePopBannerView(),
                     Expanded(
                       child: Stack(
                         children: [
@@ -251,7 +251,28 @@ Widget navBuilder(context, state, navigationShell) {
                               si.isMobile
                                   ? const SizedBox()
                                   : const SizedBox(width: sideMenuWidth),
-                              Expanded(child: navigationShell)
+                              Expanded(
+                                  child: Stack(
+                                children: [
+                                  // Column(
+                                  //   children: [
+                                  //     Obx(
+                                  //       () {
+                                  //         return Visibility(
+                                  //             visible: appCont
+                                  //                 .isShowHomePopBanner.value,
+                                  //             child: SizedBox(
+                                  //               height: homePopBannerHeight,
+                                  //             ));
+                                  //       },
+                                  //     ),
+                                  //     navigationShell,
+                                  //   ],
+                                  // ),
+                                  navigationShell,
+                                  HomePopBannerView()
+                                ],
+                              ))
                             ],
                           ),
                           si.isMobile ? const SizedBox() : const SideMenuView()

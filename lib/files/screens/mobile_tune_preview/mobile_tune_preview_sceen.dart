@@ -17,6 +17,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/open_login.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
@@ -143,9 +144,21 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
               con.deleteTuneFromWishlist();
             }
           } else {
+            // openAlertPopup(
+            //   message: thisFeatureIsAvailableForLoggedinStr,
+            //   textAlign: TextAlign.center,
+            // );
             openAlertPopup(
               message: thisFeatureIsAvailableForLoggedinStr,
               textAlign: TextAlign.center,
+              primaryBtnTitle: cancelStr, //loginStr,
+              secondryBtnTitle: loginStr, //cancelStr,
+              secondryTitleColor: black,
+              onSecondry: () async {
+                print("login tapped");
+                await Future.delayed(Duration(milliseconds: 100));
+                openLogin();
+              },
             );
           }
         },
@@ -168,9 +181,21 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
           if (StoreManager.isLoggedIn) {
             genericPopup(GiftPopupView(info: con.currentTuneDetail.value));
           } else {
+            // openAlertPopup(
+            //   message: thisFeatureIsAvailableForLoggedinStr,
+            //   textAlign: TextAlign.center,
+            // );
             openAlertPopup(
               message: thisFeatureIsAvailableForLoggedinStr,
               textAlign: TextAlign.center,
+              primaryBtnTitle: cancelStr, //loginStr,
+              secondryBtnTitle: loginStr, //cancelStr,
+              secondryTitleColor: black,
+              onSecondry: () async {
+                print("login tapped");
+                await Future.delayed(Duration(milliseconds: 100));
+                openLogin();
+              },
             );
           }
         },
@@ -187,9 +212,21 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
           if (StoreManager.isLoggedIn) {
             addToWishlistApi(con.currentTuneDetail.value);
           } else {
+            // openAlertPopup(
+            //   message: thisFeatureIsAvailableForLoggedinStr,
+            //   textAlign: TextAlign.center,
+            // );
             openAlertPopup(
               message: thisFeatureIsAvailableForLoggedinStr,
               textAlign: TextAlign.center,
+              primaryBtnTitle: cancelStr, //loginStr,
+              secondryBtnTitle: loginStr, //cancelStr,
+              secondryTitleColor: black,
+              onSecondry: () async {
+                print("login tapped");
+                await Future.delayed(Duration(milliseconds: 100));
+                openLogin();
+              },
             );
           }
         },
@@ -212,9 +249,21 @@ class _MobileTunePreviewSceenState extends State<MobileTunePreviewSceen> {
           if (StoreManager.isLoggedIn) {
             genericPopup(GiftPopupView(info: con.currentTuneDetail.value));
           } else {
+            // openAlertPopup(
+            //   message: thisFeatureIsAvailableForLoggedinStr,
+            //   textAlign: TextAlign.center,
+            // );
             openAlertPopup(
               message: thisFeatureIsAvailableForLoggedinStr,
               textAlign: TextAlign.center,
+              primaryBtnTitle: cancelStr, //loginStr,
+              secondryBtnTitle: loginStr, //cancelStr,
+              secondryTitleColor: black,
+              onSecondry: () async {
+                print("login tapped");
+                await Future.delayed(Duration(milliseconds: 100));
+                openLogin();
+              },
             );
           }
         },
