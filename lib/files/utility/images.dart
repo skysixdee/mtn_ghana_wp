@@ -21,6 +21,7 @@ const playlistIcon = 'assets/pngs/playlist.png';
 const likeIcon = 'assets/pngs/like.png';
 const moreIcon = 'assets/pngs/more.png';
 const moodEmojiIcon = 'assets/pngs/mood_icon.png';
+const ribbonIcon = 'assets/pngs/ribbon.png';
 
 const sideMenuMoodIcon = "assets/pngs/side_menu_mood_icon.png";
 
