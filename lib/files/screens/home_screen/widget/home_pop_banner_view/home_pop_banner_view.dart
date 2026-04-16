@@ -19,7 +19,8 @@ class HomePopBannerView extends StatelessWidget {
   AppController con = Get.find<AppController>();
   @override
   Widget build(BuildContext context) {
-    return ResponsiveBuilder(
+    return SizedBox();
+    ResponsiveBuilder(
       builder: (context, si) {
         return Obx(() {
           return Padding(

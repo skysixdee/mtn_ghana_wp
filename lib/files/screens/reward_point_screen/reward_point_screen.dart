@@ -15,6 +15,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/empty_list_widget.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/open_login.dart';
 
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -95,11 +96,42 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                       : ListView(
                           shrinkWrap: true,
                           children: [
-                            emptyListWidget(
-                                message: loginToCheckYourStr.replaceAll(
-                                    "FEATURE_NAME",
-                                    rewardPointStr.toUpperCase()),
-                                height: 300)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 80.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  GenericButton(
+                                    textDecoration: TextDecoration.underline,
+                                    bgColor: transparent,
+                                    padding: EdgeInsets.zero,
+                                    title: loginStr,
+                                    textColor: black,
+                                    textColorD: whiteD,
+                                    fontName: FontName.bold,
+                                    fontSize: 18,
+                                    onTap: () {
+                                      openLogin();
+                                    },
+                                  ),
+                                  CustomText(
+                                    title: loginToCheckYourStr.replaceAll(
+                                        "FEATURE_NAME",
+                                        rewardPointStr.toUpperCase()),
+                                    fontName: FontName.bold,
+                                    textAlign: TextAlign.center,
+                                    fontSize: 18,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // emptyListWidget(
+                            //     message: loginToCheckYourStr.replaceAll(
+                            //         "FEATURE_NAME",
+                            //         rewardPointStr.toUpperCase()),
+                            //     height: 300)
                           ],
                         );
                 },

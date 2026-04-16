@@ -12,6 +12,7 @@ class CustomText extends StatelessWidget {
   final TextAlign? textAlign;
   final FontName fontName;
   final bool isSelectable;
+  final TextDecoration? decoration;
   const CustomText({
     super.key,
     this.title,
@@ -22,6 +23,7 @@ class CustomText extends StatelessWidget {
     this.fontName = FontName.regular,
     this.textAlign = TextAlign.left,
     this.isSelectable = true,
+    this.decoration,
   });
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,8 @@ class CustomText extends StatelessWidget {
                 maxLines: maxLine,
                 textAlign: textAlign,
                 style: TextStyle(
+                  decorationThickness: 2,
+                  decoration: decoration ?? TextDecoration.none,
                   color: Theme.of(context).brightness == Brightness.dark
                       ? colorD ?? checkColur(color)
                       : color,
@@ -46,6 +50,8 @@ class CustomText extends StatelessWidget {
                 maxLines: maxLine,
                 textAlign: textAlign,
                 style: TextStyle(
+                  decoration: decoration ?? TextDecoration.none,
+                  decorationThickness: 2,
                   color: Theme.of(context).brightness == Brightness.dark
                       ? colorD ?? checkColur(color)
                       : color,

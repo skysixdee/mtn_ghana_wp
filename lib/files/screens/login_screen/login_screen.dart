@@ -29,9 +29,12 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GenericButton(
+                  textDecoration: TextDecoration.underline,
                   bgColor: transparent,
                   padding: EdgeInsets.zero,
                   title: loginStr,
+                  textColor: black,
+                  textColorD: whiteD,
                   fontName: FontName.bold,
                   fontSize: 18,
                   onTap: () {
