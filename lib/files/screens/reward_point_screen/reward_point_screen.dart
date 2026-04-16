@@ -96,7 +96,9 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                           shrinkWrap: true,
                           children: [
                             emptyListWidget(
-                                message: thisFeatureIsAvailableForLoggedinStr,
+                                message: loginToCheckYourStr.replaceAll(
+                                    "FEATURE_NAME",
+                                    rewardPointStr.toUpperCase()),
                                 height: 300)
                           ],
                         );

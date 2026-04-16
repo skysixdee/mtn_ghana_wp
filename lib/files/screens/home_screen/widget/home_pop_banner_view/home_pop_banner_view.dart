@@ -196,7 +196,7 @@ class _SlidingBannerState extends State<SlidingBanner>
         children: [
           InkWell(
             onTap: () {
-              context.goNamed("moodDetectRoute"); // your route
+              context.goNamed(moodDetectRoute); // your route
               closeBanner();
             },
             child: Stack(
@@ -212,12 +212,14 @@ class _SlidingBannerState extends State<SlidingBanner>
                     ),
                     const Padding(
                       padding: EdgeInsets.only(bottom: 8.0, right: 8),
-                      child: Text(
-                        "Detect Your Mood",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      child: CustomText(
+                        title: "Detect Your Mood",
+                        color: white,
+                        fontName: FontName.semiBold,
+                        // style: TextStyle(
+                        //   color: Colors.white,
+                        //   fontWeight: FontWeight.w600,
+                        // ),
                       ),
                     )
                   ],

@@ -98,6 +98,7 @@ String artistsResultForStr = 'Artists ';
 String thisFeatureIsAvailableForLoggedinStr =
     "This feature is available for logged in users";
 String statusStr = "Status";
+String loginToCheckYourStr = " to check your FEATURE_NAME";
 String callerStr = "Callers";
 String playAtStr = "Play at";
 
