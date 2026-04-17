@@ -6,6 +6,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 Widget customImage(
     {String? url,
@@ -77,10 +78,14 @@ Widget customImage(
                         : lightGrey,
               ),
               child: Center(
-                child: CustomText(
-                  fontName: FontName.bold,
-                  fontSize: 24,
-                  title: title.toUpperCase(),
+                child: ResponsiveBuilder(
+                  builder: (context, si) {
+                    return CustomText(
+                      fontName: si.isMobile ? FontName.semiBold : FontName.bold,
+                      fontSize: si.isMobile ? 18 : 24,
+                      title: title.toUpperCase(),
+                    );
+                  },
                 ),
               ),
             ),

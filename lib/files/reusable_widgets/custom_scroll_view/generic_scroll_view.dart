@@ -1,6 +1,9 @@
+import 'package:get/route_manager.dart';
+import 'package:get/utils.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/aligned_grid.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_scroll_view/tune_grid_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/empty_list_widget.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +29,13 @@ class GenericScrollView extends StatelessWidget {
     this.pinnedAppBar = true,
     this.collapsedHeight = 51,
     this.isLoading = false,
+    this.extraWidegt,
+    this.extraWidgetToolBarHeight,
   });
 
   final double? sliverAppBarHeight;
   final Widget? sliverAppBar;
+  final Widget? extraWidegt;
   final Widget? sliverToBoxAdapter;
   final double cardWidth;
   final double collapsedHeight;
@@ -45,6 +51,7 @@ class GenericScrollView extends StatelessWidget {
   final int maxDisplay;
   final ScrollPhysics? physics;
   final ScrollPhysics? parentPhysics;
+  final double? extraWidgetToolBarHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +64,12 @@ class GenericScrollView extends StatelessWidget {
               ? [
                   sliverToBoxAdapterBuilder(),
                   if (!si.isMobile) sliverAppBarBuilder(),
+                  if (extraWidegt != null) extraSliverWidgetBuilder(),
                   isLoading ? _loadingIndicator() : checkListType(context, si),
                 ]
               : [
                   sliverToBoxAdapterBuilder(),
+                  if (extraWidegt != null) extraSliverWidgetBuilder(),
                   isLoading ? _loadingIndicator() : checkListType(context, si),
                 ],
         );
@@ -114,6 +123,19 @@ class GenericScrollView extends StatelessWidget {
       pinned: pinnedAppBar,
       expandedHeight: (sliverAppBar != null) ? sliverAppBarHeight : 0,
       flexibleSpace: (sliverAppBar != null) ? sliverAppBar : const SizedBox(),
+    );
+  }
+
+  SliverAppBar extraSliverWidgetBuilder() {
+    return SliverAppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: isDarkTheme(Get.context!) ? blackD : white,
+      actions: const [],
+      // collapsedHeight: collapsedHeight,
+      toolbarHeight: extraWidgetToolBarHeight ?? 50, //collapsedHeight - 1,
+      pinned: pinnedAppBar,
+      //expandedHeight: 10, //(sliverAppBar != null) ? sliverAppBarHeight : 0,
+      flexibleSpace: (sliverAppBar != null) ? extraWidegt : const SizedBox(),
     );
   }
 
