@@ -93,7 +93,7 @@ class PlayerController extends GetxController {
 
       print("list of artist is ${artistList.length}");
       print("list of artist is1 ${artistList.toSet().toList().length}");
-
+      artistList.clear();
       artistList.value = list
           .map((v) {
             if (v.artistName?.isEmpty ?? true) {
@@ -104,6 +104,8 @@ class PlayerController extends GetxController {
           })
           .toSet()
           .toList();
+
+      print("length of artistList ${artistList.length}");
       playingUrl.value = info.value.toneIdStreamingUrl ?? '';
       CustomAudioPlayer.instance.playUrl(playingUrl.value);
       //isPlaying.value = true;
