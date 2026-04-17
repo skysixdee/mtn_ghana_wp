@@ -126,17 +126,21 @@ class GenericScrollView extends StatelessWidget {
     );
   }
 
-  SliverAppBar extraSliverWidgetBuilder() {
-    return SliverAppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: isDarkTheme(Get.context!) ? blackD : white,
-      actions: const [],
-      // collapsedHeight: collapsedHeight,
-      toolbarHeight: extraWidgetToolBarHeight ?? 50, //collapsedHeight - 1,
-      pinned: pinnedAppBar,
-      //expandedHeight: 10, //(sliverAppBar != null) ? sliverAppBarHeight : 0,
-      flexibleSpace: (sliverAppBar != null) ? extraWidegt : const SizedBox(),
-    );
+  Widget extraSliverWidgetBuilder() {
+    return SliverToBoxAdapter(
+        child: SizedBox(
+      height: extraWidgetToolBarHeight,
+      child: extraWidegt ?? const SizedBox(),
+    ) //extraWidegt ?? SizedBox(),
+        );
+    // SliverAppBar(
+    //   automaticallyImplyLeading: false,
+    //   backgroundColor: isDarkTheme(Get.context!) ? blackD : white,
+    //   actions: const [],
+    //   toolbarHeight: extraWidgetToolBarHeight ?? 50,
+    //   pinned: pinnedAppBar,
+    //   flexibleSpace: extraWidegt ?? const SizedBox(),
+    // );
   }
 
   SliverToBoxAdapter sliverToBoxAdapterBuilder() {
