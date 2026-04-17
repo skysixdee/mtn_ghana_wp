@@ -29,19 +29,51 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
   List<ArtistList> artistList = [];
   RxBool isLoading = false.obs;
   int totalCount = 0;
-  getArtist({int page = 0}) async {
+  RxString selectedTab = 'ALL'.obs;
+  getArtist({String? selectedTab, int page = 0}) async {
     isLoading.value = true;
 
-    ArtistsModel model = await getArtistListApi("", pageNo: page);
+    ArtistsModel model =
+        await getArtistListApi(selectedTab ?? "", pageNo: page);
     artistList = model.responseMap?.artistList ?? [];
     totalCount = model.responseMap?.resultCount ?? 0;
     isLoading.value = false;
   }
 
+  List<String> tabList = [
+    "ALL",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z"
+  ];
+
   @override
   void initState() {
     // TODO: implement initState
-    getArtist();
+    getArtist(selectedTab: "");
     super.initState();
   }
 
@@ -58,6 +90,7 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
         () {
           return Column(
             children: [
+              artistSearchTabView(),
               Expanded(
                 child: GenericScrollView(
                   sliverAppBar:
@@ -125,6 +158,50 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
         },
       ),
     );
+  }
+
+  Container artistSearchTabView() {
+    return Container(
+        //color: white,
+        height: 40,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: tabList.length,
+          itemBuilder: (context, index) {
+            return Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Obx(
+                      () {
+                        return GenericButton(
+                          borderColor: grey,
+                          bgColor: selectedTab.value == tabList[index]
+                              ? isDarkTheme(context)
+                                  ? yellowD
+                                  : yellow
+                              : isDarkTheme(context)
+                                  ? whiteD
+                                  : white,
+                          height: 20,
+                          title: tabList[index],
+                          onTap: () {
+                            selectedTab.value = tabList[index];
+                            getArtist(
+                                selectedTab: selectedTab.value == "ALL"
+                                    ? ""
+                                    : selectedTab.value);
+                            print("object");
+                          },
+                        );
+                      },
+                    ))
+                // CustomText(
+                //   title: tabList[index],
+                // ),
+                );
+          },
+        ));
   }
 
   onSearchAction(String key) {
