@@ -456,9 +456,11 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                         fontSize: si.isMobile ? 10 : 12,
                                       ),
                                       CustomText(
-                                        title: con.leaderBoardList[index]
-                                                .rewardPoints ??
-                                            '',
+                                        title: double.parse(con
+                                                    .leaderBoardList[index]
+                                                    .rewardPoints ??
+                                                "0")
+                                            .toStringAsFixed(2),
                                         fontName: FontName.semiBold,
                                         color: green,
                                         fontSize: si.isMobile ? 10 : 12,

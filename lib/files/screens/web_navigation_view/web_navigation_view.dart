@@ -320,9 +320,12 @@ class WebNavigationView extends StatelessWidget {
                     onTap: () {
                       String catId =
                           appController.categories[index].categoryId ?? '';
-
-                      context.goNamed(categoryDetailRoute,
-                          queryParameters: {'catId': catId});
+                      String catName =
+                          appController.categories[index].categoryName ?? '';
+                      context.goNamed(categoryDetailRoute, queryParameters: {
+                        'catId': catId,
+                        'catName': catName
+                      });
                       con.getCategoryDetailList(catId);
                       Navigator.of(context).pop();
                     },

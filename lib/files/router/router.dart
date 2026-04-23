@@ -162,9 +162,13 @@ List<StatefulShellBranch> _getShellBranches() => [
       }),
       _createShell(categoryDetailRoute, (s) {
         final catId = s.uri.queryParameters['catId'] ?? '';
+        final catName = s.uri.queryParameters['catName'] ?? '';
         menuCategoryClickEvent(catId);
         Get.find<CategoryDetailController>().getCategoryDetailList(catId);
-        return CategoryDetailScreen(name: catId);
+        return CategoryDetailScreen(
+          catName: catName,
+          catId: catId,
+        );
       }),
       _createShell(
           seeMoreRoute,
