@@ -313,6 +313,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                       title: "Leaderboard".toUpperCase(),
                       fontSize: si.isMobile ? 14 : 18,
                       fontName: FontName.bold,
+                      colorD: black,
                     ),
                   ],
                 ),
@@ -370,26 +371,6 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                   )
                 : Column(
                     children: [
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 18.0, left: 50),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: [
-                      //       CustomText(
-                      //         title: 'MSISDN',
-                      //         fontName: FontName.bold,
-                      //       ),
-                      //       CustomText(
-                      //         title: rewarPointDetailStr,
-                      //         fontName: FontName.bold,
-                      //       ),
-                      //       CustomText(
-                      //         title: rankStr,
-                      //         fontName: FontName.bold,
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       ListView.builder(
                         padding: EdgeInsets.only(bottom: 20),
                         scrollDirection:
@@ -407,7 +388,13 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                   : null,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                                color: isHorizontal ? yellow : white,
+                                color: isHorizontal
+                                    ? isDarkTheme(context)
+                                        ? yellowD
+                                        : yellow
+                                    : isDarkTheme(context)
+                                        ? whiteD
+                                        : white,
                               ),
                               child: Row(
                                 mainAxisAlignment:
@@ -421,8 +408,11 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                             : 4.0),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color:
-                                                  isHorizontal ? white : yellow,
+                                              color: isHorizontal
+                                                  ? white
+                                                  : isDarkTheme(context)
+                                                      ? yellowD
+                                                      : yellow,
                                               borderRadius:
                                                   BorderRadius.circular(60)),
                                           child: Padding(
@@ -443,6 +433,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                             con.leaderBoardList[index].msisdn ??
                                                 '',
                                         fontName: FontName.semiBold,
+                                        colorD: black,
                                         fontSize: si.isMobile ? 10 : 12,
                                       )
                                     ],
@@ -453,6 +444,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                         title: rewarPointDetailStr,
                                         fontName: FontName.semiBold,
                                         color: black,
+                                        colorD: black,
                                         fontSize: si.isMobile ? 10 : 12,
                                       ),
                                       CustomText(
@@ -463,6 +455,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                             .toStringAsFixed(2),
                                         fontName: FontName.semiBold,
                                         color: green,
+                                        colorD: green,
                                         fontSize: si.isMobile ? 10 : 12,
                                       )
                                     ],
@@ -475,10 +468,12 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                           fontName: FontName.semiBold,
                                           fontSize: si.isMobile ? 10 : 12,
                                           title: rankStr,
+                                          colorD: black,
                                         ),
                                         CustomText(
                                           fontName: FontName.semiBold,
                                           fontSize: si.isMobile ? 10 : 12,
+                                          colorD: green,
                                           color: green,
                                           title:
                                               con.leaderBoardList[index].rank ??

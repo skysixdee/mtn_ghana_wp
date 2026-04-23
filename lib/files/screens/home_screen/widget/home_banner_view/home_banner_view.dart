@@ -75,10 +75,23 @@ class HomeBannerView extends StatelessWidget {
   }
 
   CarouselOptions carousalOption(SizingInformation si, BuildContext context) {
+    // 1. Get the available width
+    double width = MediaQuery.of(context).size.width;
+
+    // 2. Determine the multiplier based on viewportFraction
+    // On mobile, the card takes up 90% of the screen width.
+    // On desktop, it takes up roughly 33.3%.
+    double visibleWidthFactor = si.isMobile ? 0.9 : 0.433;
+
+    // 3. Calculate height based on the 16/9 ratio
+    // We calculate the width of a single card, then divide by the ratio (1.77)
+    double calculatedHeight = (width * visibleWidthFactor) / (16 / 9);
+
     return CarouselOptions(
-      height: si.isMobile ? 160 : (MediaQuery.of(context).size.width * 0.17),
+      height: calculatedHeight.clamp(
+          150.0, 400.0), // Dynamic height maintains the ratio
       aspectRatio: 16 / 9,
-      viewportFraction: si.isMobile ? 0.9 : 0.333,
+      viewportFraction: visibleWidthFactor,
       initialPage: cont.selectedIndex.value,
       enableInfiniteScroll: true,
       reverse: false,
@@ -87,7 +100,7 @@ class HomeBannerView extends StatelessWidget {
       autoPlayAnimationDuration: const Duration(milliseconds: 800),
       autoPlayCurve: Curves.fastOutSlowIn,
       enlargeCenterPage: true,
-      enlargeFactor: 0.2,
+      enlargeFactor: 0.25,
       onPageChanged: (index, reason) {
         cont.updatedSelectedIndex(index);
       },
