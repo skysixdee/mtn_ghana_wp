@@ -2,6 +2,7 @@ import 'package:mtn_ghana_wp/files/api_calls/shuffle_enable_disable_api.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/predictive_search/predictive_search.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/snack_bar.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/web_footer_view.dart';
 import 'package:get/get.dart';
@@ -76,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //SizedBox(height: si.isMobile ? 10 : 20),
                   SizedBox(height: si.isMobile ? 20 : 40),
                   HomeSearchView(),
+                  PredictiveSearch(),
                   //SizedBox(height: si.isMobile ? 10 : 20),
                   SizedBox(height: si.isMobile ? 20 : 40),
                   HomeSubCatView(),
