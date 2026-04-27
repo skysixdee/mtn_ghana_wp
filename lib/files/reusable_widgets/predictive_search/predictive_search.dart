@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 
 class PredictiveSearch extends StatelessWidget {
@@ -9,7 +11,7 @@ class PredictiveSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(border: Border.all(color: white)),
-        child: SizedBox(height: 400, child: SearchScreen()));
+        child: SizedBox(height: 100, child: SearchScreen()));
   }
 }
 
@@ -54,13 +56,15 @@ class _SearchScreenState extends State<SearchScreen> {
     RenderBox box = context.findRenderObject() as RenderBox;
 
     return OverlayEntry(
+      opaque: false,
       builder: (context) => Stack(
         children: [
           // 👇 Tap outside to close
           GestureDetector(
             onTap: _hideOverlay,
             behavior: HitTestBehavior.translucent,
-            child: Container(color: Colors.transparent),
+            child: Container(
+                color: isDarkTheme(context) ? Colors.white30 : Colors.black12),
           ),
 
           Positioned(
@@ -75,7 +79,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 400,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    //color: Colors.white,
+                    color: isDarkTheme(context) ? blackD : white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: SingleChildScrollView(
@@ -153,9 +158,11 @@ class _SearchScreenState extends State<SearchScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.grey)),
+        CustomText(
+          title: title,
+          color: black,
+          colorD: whiteD,
+        ),
         if (showViewAll)
           Text("View All", style: TextStyle(color: Colors.grey.shade600)),
       ],
@@ -212,8 +219,16 @@ class _SearchScreenState extends State<SearchScreen> {
           borderRadius: BorderRadius.circular(6),
         ),
       ),
-      title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
-      subtitle: Text(subtitle, maxLines: 1, overflow: TextOverflow.ellipsis),
+      title: CustomText(
+        title: title,
+        color: black,
+        colorD: black,
+      ), //Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,),
+      subtitle: CustomText(
+        title: subtitle,
+        color: darkGrey,
+        colorD: whiteD,
+      ),
       onTap: () {
         _controller.text = title;
         _hideOverlay();
