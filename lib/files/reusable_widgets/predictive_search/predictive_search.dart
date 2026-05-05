@@ -68,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
 
           Positioned(
-            width: box.size.width - 32,
+            //width: box.size.width - 32,
             child: CompositedTransformFollower(
               link: _layerLink,
               offset: const Offset(0, 60),
@@ -83,41 +83,46 @@ class _SearchScreenState extends State<SearchScreen> {
                     color: isDarkTheme(context) ? blackD : white,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        // 🔝 TOP RESULT
-                        _sectionHeader("TOP RESULT"),
-                        _listItem(
-                          "Headlights (feat. KIDDO)",
-                          "English Song • Alan Walker",
-                        ),
-
-                        const SizedBox(height: 20),
-
-                        // 🎶 3 COLUMN LAYOUT
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(child: _albums()),
-                            const SizedBox(width: 16),
-                            Expanded(child: _songs()),
-                            const SizedBox(width: 16),
-                            Expanded(child: _artists()),
-                          ],
-                        ),
-
-                        const SizedBox(height: 20),
-
-                        // 🎵 PLAYLIST
-                        _sectionHeader("PLAYLISTS", showViewAll: true),
-                        _listItem(
-                          "Hey Maa Durge",
-                          "Hindi Playlist • 25 Songs",
-                        ),
-                      ],
-                    ),
+                  child: Wrap(
+                    spacing: 10,
+                    children: [
+                      //Flexible(child: _albums()),
+                      SizedBox(width: 300, child: _albums()),
+                      const SizedBox(width: 16),
+                      //Flexible(child: _songs()),
+                      SizedBox(width: 300, child: _songs()),
+                      const SizedBox(width: 16),
+                      //Flexible(child: _artists()),
+                      SizedBox(width: 300, child: _artists()),
+                    ],
                   ),
+                  // SingleChildScrollView(
+                  //   child: Column(
+                  //     children: [
+                  //       // 🔝 TOP RESULT
+                  //       // _sectionHeader("TOP RESULT"),
+                  //       // _listItem(
+                  //       //   "Headlights (feat. KIDDO)",
+                  //       //   "English Song • Alan Walker",
+                  //       // ),
+
+                  //       // const SizedBox(height: 20),
+
+                  //       // 🎶 3 COLUMN LAYOUT
+                  //       Row(
+                  //         spacing: 10,
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Expanded(child: _albums()),
+                  //           const SizedBox(width: 16),
+                  //           Expanded(child: _songs()),
+                  //           const SizedBox(width: 16),
+                  //           Expanded(child: _artists()),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ),
               ),
             ),

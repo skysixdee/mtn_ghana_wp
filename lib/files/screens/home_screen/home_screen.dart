@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //SizedBox(height: si.isMobile ? 10 : 20),
                   SizedBox(height: si.isMobile ? 20 : 40),
                   HomeSearchView(),
-                  //PredictiveSearch(),
+                  PredictiveSearch(),
                   //SizedBox(height: si.isMobile ? 10 : 20),
                   SizedBox(height: si.isMobile ? 20 : 40),
                   HomeSubCatView(),
