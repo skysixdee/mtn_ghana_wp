@@ -9,7 +9,7 @@
           "--web-browser-flag",
           "--disable-web-security",
           "--web-browser-flag",
-          "--user-data-dir=C:/chrome_dev"
+          "--user-data-dir=C:/chrome_dev_temp"
         ]
       }
     ]

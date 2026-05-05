@@ -15,8 +15,6 @@ import 'package:mtn_ghana_wp/files/side_menu_view/side_menu_view.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-
-import 'package:mtn_ghana_wp/files/player_view/custom_audio_player.dart';
 import 'package:mtn_ghana_wp/files/controllers/artists_tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/banner_detail_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/blacklist_controller.dart';
@@ -56,11 +54,11 @@ import 'package:mtn_ghana_wp/files/screens/web_navigation_view/web_navigation_vi
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 
-final _rootNavigatorKey = Get.key; //GlobalKey<NavigatorState>();
+final rootNavigatorKey = Get.key; //GlobalKey<NavigatorState>();
 final scaffoldKey = GlobalKey<ScaffoldState>();
 
 final router = GoRouter(
-  navigatorKey: _rootNavigatorKey,
+  navigatorKey: rootNavigatorKey,
   initialLocation: homeRoute,
   routes: <RouteBase>[
     StatefulShellRoute.indexedStack(
@@ -180,8 +178,11 @@ List<StatefulShellBranch> _getShellBranches() => [
               : null),
       _createShell(artistTuneRoute, (s) {
         final artistName = s.uri.queryParameters['artistName'] ?? '';
+        final fromChatbot =
+              s.uri.queryParameters['fromChatbot'] == 'true';
+
         Get.find<ArtistsTuneController>().getArtistsTune(artistName);
-        return ArtistsTuneScreen(artistName: artistName);
+        return ArtistsTuneScreen(artistName: artistName, fromChatbot: fromChatbot,);
       }),
       _createShell(rewardPointRoute, (_) => RewardPointScreen()),
       _createShell(faqRoute, (_) => FaqScreen()),

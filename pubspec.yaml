@@ -28,59 +28,47 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter:
-    sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  
-  
-  get: ^4.6.6
-  popover: ^0.3.1
-  go_router: ^14.2.3
-  universal_io: ^2.2.2
-  cupertino_icons: ^1.0.8
-  shared_preferences: ^2.3.2
-  responsive_builder: ^0.7.1
-  carousel_slider_plus: ^7.0.0
-  cached_network_image: ^3.4.1
-  url_launcher: ^6.3.0
-  url_strategy: ^0.3.0
-  
-  syncfusion_flutter_calendar: 29.1.38
-  numberpicker: ^2.1.2
-  intl: ^0.19.0
-  rsa_encrypt: ^2.0.0
   basic_utils: ^5.7.0
-  pointycastle: ^3.9.1
+  cached_network_image: ^3.4.1
+  carousel_slider_plus: ^7.0.0
+  cupertino_icons: ^1.0.8
   encrypt: ^5.0.3
-  just_audio: ^0.9.37
-  number_paginator: ^0.4.1
-  google_tag_manager: ^0.1.0
-  local_session_timeout: ^3.2.0
-  html_unescape: ^2.0.0
-  flutter_svg: ^2.2.0
-  glossy: ^0.0.5
   firebase_core: ^4.5.0
   firebase_messaging: ^16.1.2
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.2.0
+  flutter_tts: ^4.2.5
+  get: ^4.6.6
+  glossy: ^0.0.5
+  go_router: ^14.2.3
+  google_tag_manager: ^0.1.0
+  html_unescape: ^2.0.0
+  intl: ^0.19.0
+  just_audio: ^0.9.37
+  local_session_timeout: ^3.2.0
+  number_paginator: ^0.4.1
+  numberpicker: ^2.1.2
+  pointycastle: ^3.9.1
+  popover: ^0.3.1
+  responsive_builder: ^0.7.1
+  rsa_encrypt: ^2.0.0
+  shared_preferences: ^2.3.2
+  showcaseview: ^4.0.1
+  syncfusion_flutter_calendar: 29.1.38
+  universal_io: ^2.2.2
+  url_launcher: ^6.3.0
+  url_strategy: ^0.3.0
+  video_player: ^2.10.1
   web: ^1.1.1
-  
 
 dev_dependencies:
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^4.0.0
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -95,13 +83,12 @@ flutter:
     - assets/svgs/
     - assets/music_box_pngs/
     - properties.json
+    - assets/videos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -122,10 +109,10 @@ flutter:
         - asset: assets/fonts/MTNBrighterSans-ExtraBoldItalic.ttf
     - family: extraLight
       fonts:
-        - asset: assets/fonts/MTNBrighterSans-ExtraLight.ttf    
+        - asset: assets/fonts/MTNBrighterSans-ExtraLight.ttf
     - family: extraLightItalic
       fonts:
-        - asset: assets/fonts/MTNBrighterSans-ExtraLightItalic.ttf    
+        - asset: assets/fonts/MTNBrighterSans-ExtraLightItalic.ttf
     - family: light
       fonts:
         - asset: assets/fonts/MTNBrighterSans-Light.ttf
@@ -143,7 +130,6 @@ flutter:
         - asset: assets/fonts/MTNBrighterSans-Regular.ttf
     - family: regularItalic
       fonts:
-        - asset: assets/fonts/MTNBrighterSans-RegularItalic.ttf  
-  #
+        - asset: assets/fonts/MTNBrighterSans-RegularItalic.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

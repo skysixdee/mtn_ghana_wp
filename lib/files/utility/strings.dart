@@ -223,3 +223,39 @@ String autorenewStr = "Autorenew";
 
 String subscriptionDescriptionStr =
     "You are subscribing the Ghana service from DATE.Please note that PRICE will be charged after BILLING_CYCLE days starting from the date you have subscribe.";
+String helpStr = "Help";
+String clearChatStr = "Clear Chat";
+String closeStr = "Close";
+const String helloThereStr = "Hello there!";
+const String iamAiAgentYourCallerTuneAssistantStr =
+    "I'm AiAgent, your CallerTunez Assistant!";
+const String youCanSearchTonesBrowseArtistStr =
+    "You can search tones, browse artists or categories, and complete purchases seamlessly within this chat.";
+const String howCanIHelpYouTodayStr = "How can I help you today?";
+const String topSongsByMichaelJacksonStr = "Top songs by Michael Jackson";
+const String showTuneCategoriesStr = "Show Tune categories";
+const String goToNameTunesStr = "Go to Name tunes";
+const String buyAToneStr = "Buy a tone";
+const String youCanTryPurchasingToneAgainSimplyStr =
+    "You can try purchasing the tone again using the options below.";
+const String byToneNameStr = "By Tone Name";
+const String byArtistStr = "By Artist";
+const String byCategoriesStr = "By Categories";
+const String alrightPlsTellMeTheToneNameYouWantToBuyStr =
+    "Alright! Please tell me the tone name you want to buy.";
+const String gotItPleaseTellMeTheArtistNameWhoseTonesYouWantToBuyStr =
+    "Got it! Please tell me the artist name whose tones you want to buy.";
+const String sureTakingYouToTheTuneCategoriesYouCanExploreStr =
+    "Sure! Taking you to the tune categories. You can explore the available categories and purchase a tone by clicking the Buy button.";
+const String pleaseTryExploringAnotherToneNameOrStr =
+    "Please try exploring another tone name or searching by artist.";
+const String sorrySomethingWentWrongWhileFetchingTunesPleaseTryExploringStr =
+    "Sorry, something went wrong while fetching tunes. Please try exploring another tone name or searching by artist.";
+const String thereAreNoTunesAvailableForThisToneNamePleaseTryExploringStr =
+    "There are no tunes available for this tone name. Please try exploring another tone name or searching by artist.";
+const String sorrySomethingWentWrongWhileFetchingTunesPleaseTryAgainLaterStr =
+    "Sorry, something went wrong while fetching tunes. Please try again later.";
+const String iCanHelpYouBuyAToneStr="I can help you to buy a tone, explore artists or open any section like Music Box, Profile, or My Tunes!";
+const String sureShowingYouTheTuneCategoriesStr="Sure! Showing you the tune categories.";
+const String sorryIamUnableToReachTheServerRightNowStr="Sorry, I'm unable to reach the server right now. Please try again in a moment.";
+const String itLooksLikeYouAreOfflineStr="It looks like you're offline. Please check your internet connection and try again.";

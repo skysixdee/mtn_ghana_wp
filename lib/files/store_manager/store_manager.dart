@@ -30,6 +30,22 @@ class StoreManager {
   static String refreshToken = "";
   static String deviceId = '0191212';
   static bool isDarkMode = true;
+
+  static bool isBuyToneFromChatbot = false;
+  static const String _failedBuyToneMsg = 'failed_buy_tone_message';
+
+  static void setFailedBuyToneMessage(String value) {
+    prefs.setString(_failedBuyToneMsg, value);
+  }
+
+  static String? getFailedBuyToneMessage() {
+    return prefs.getString(_failedBuyToneMsg);
+  }
+
+  static void clearFailedBuyToneMessage() {
+    prefs.remove(_failedBuyToneMsg);
+  }
+
   static initValues() {
     msisdn = prefs.getString(_msisdn) ?? '0';
     isLoggedIn = prefs.getBool(_isLoggedIn) ?? false;
