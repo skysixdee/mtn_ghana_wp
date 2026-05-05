@@ -144,11 +144,15 @@ String noChangeToUpdateStr = "No change found to update";
 String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
 String songStr = "Song";
+String songsStr = "Songs";
+String albumsStr = "Albums";
 String codeStr = "Code";
+String searchForSongArtistCodeStr = "Search for song, artist or code";
 String rewardPointStr = "Reward points";
 String checkBackSoonStr = "Check back soon";
 String typeToSearchStr = "Type to search";
 String artistStr = "Artist";
+
 String settingStr = "Setting";
 String loginStr = "Login";
 String buyTuneStr = "Buy Tune";

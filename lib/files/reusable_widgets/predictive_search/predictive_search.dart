@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:get/get.dart';
+import 'package:mtn_ghana_wp/files/controllers/predictive_search_controller.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class PredictiveSearch extends StatelessWidget {
   const PredictiveSearch({super.key});
@@ -40,6 +45,13 @@ class _SearchScreenState extends State<SearchScreen> {
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
   final TextEditingController _controller = TextEditingController();
+  late PredictiveSearchController cont;
+  @override
+  void initState() {
+    Get.lazyPut(() => PredictiveSearchController());
+    cont = Get.find<PredictiveSearchController>();
+    super.initState();
+  }
 
   void _showOverlay() {
     if (_overlayEntry != null) return;
@@ -76,27 +88,34 @@ class _SearchScreenState extends State<SearchScreen> {
                 elevation: 10,
                 borderRadius: BorderRadius.circular(12),
                 child: Container(
-                  height: 400,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    //color: Colors.white,
-                    color: isDarkTheme(context) ? blackD : white,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Wrap(
-                    spacing: 10,
-                    children: [
-                      //Flexible(child: _albums()),
-                      SizedBox(width: 300, child: _albums()),
-                      const SizedBox(width: 16),
-                      //Flexible(child: _songs()),
-                      SizedBox(width: 300, child: _songs()),
-                      const SizedBox(width: 16),
-                      //Flexible(child: _artists()),
-                      SizedBox(width: 300, child: _artists()),
-                    ],
-                  ),
-                ),
+                    //height: 400,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      //color: Colors.white,
+                      color: isDarkTheme(context) ? blackD : white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Obx(
+                      () {
+                        return Wrap(
+                          spacing: 10,
+                          children: [
+                            //Flexible(child: _albums()),
+                            cont.isLoadingSong.value
+                                ? loadingIndicator(width: 300)
+                                : SizedBox(width: 300, child: _songs()),
+                            const SizedBox(width: 16),
+                            //Flexible(child: _songs()),
+                            cont.isLoadingArtist.value
+                                ? loadingIndicator(width: 300)
+                                : SizedBox(width: 300, child: _artists()),
+                            // const SizedBox(width: 16),
+                            // //Flexible(child: _artists()),
+                            // SizedBox(width: 300, child: _artists()),
+                          ],
+                        );
+                      },
+                    )),
               ),
             ),
           ),
@@ -116,10 +135,11 @@ class _SearchScreenState extends State<SearchScreen> {
             controller: _controller,
             onTap: _showOverlay,
             onChanged: (value) {
+              cont.getResultFor(value);
               if (_overlayEntry == null) _showOverlay();
             },
             decoration: InputDecoration(
-              hintText: "Search...",
+              hintText: searchForSongArtistCodeStr,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -142,7 +162,7 @@ class _SearchScreenState extends State<SearchScreen> {
           colorD: whiteD,
         ),
         if (showViewAll)
-          Text("View All", style: TextStyle(color: Colors.grey.shade600)),
+          Text(viewMoreStr, style: TextStyle(color: Colors.grey.shade600)),
       ],
     );
   }
@@ -151,11 +171,21 @@ class _SearchScreenState extends State<SearchScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionHeader("ALBUMS", showViewAll: true),
+        _sectionHeader(albumsStr.toUpperCase(), showViewAll: true),
         const SizedBox(height: 10),
-        _listItem("Mere Jeevan Saathi", "Hindi Album • 1972"),
-        _listItem("Hela Ki Prema", "Odia Album • 2021"),
-        _listItem("Heera Panna", "Hindi Album • 1973"),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: cont.artistList.length > 5 ? 5 : cont.artistList.length,
+          itemBuilder: (context, index) {
+            return CustomText(
+              title: "${cont.artistList[index].val}",
+            );
+          },
+        )
+
+        // _listItem("Mere Jeevan Saathi", "Hindi Album • 1972"),
+        // _listItem("Hela Ki Prema", "Odia Album • 2021"),
+        // _listItem("Heera Panna", "Hindi Album • 1973"),
       ],
     );
   }
@@ -164,11 +194,38 @@ class _SearchScreenState extends State<SearchScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionHeader("SONGS", showViewAll: true),
+        _sectionHeader(songsStr.toUpperCase(), showViewAll: true),
         const SizedBox(height: 10),
-        _listItem("HE", "Haryanvi Song"),
-        _listItem("Heeriye (feat. Arijit Singh)", "Hindi Song"),
-        _listItem("Headlights (feat. KIDDO)", "English Song"),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: cont.toneList.length > 6 ? 6 : cont.toneList.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Row(
+                spacing: 4,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: customImage(
+                        url: cont.toneList[index].previewImageUrl,
+                        cornerRadius: 5),
+                  ),
+                  Flexible(
+                    child: CustomText(
+                      title: "${cont.toneList[index].toneName}",
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        )
+        // _listItem("HE", "Haryanvi Song"),
+        // _listItem("Heeriye (feat. Arijit Singh)", "Hindi Song"),
+        // _listItem("Headlights (feat. KIDDO)", "English Song"),
       ],
     );
   }
@@ -177,11 +234,20 @@ class _SearchScreenState extends State<SearchScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionHeader("ARTISTS", showViewAll: true),
+        _sectionHeader(artistsStr.toUpperCase(), showViewAll: true),
         const SizedBox(height: 10),
-        _listItem("Hema Malini", "Artist"),
-        _listItem("Hesham Abdul Wahab", "Artist"),
-        _listItem("Heavy Rain Sounds for Sleep", "Artist"),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: cont.artistList.length > 6 ? 6 : cont.artistList.length,
+          itemBuilder: (context, index) {
+            return CustomText(
+              title: "${cont.artistList[index].val}",
+            );
+          },
+        )
+        // _listItem("Hema Malini", "Artist"),
+        // _listItem("Hesham Abdul Wahab", "Artist"),
+        // _listItem("Heavy Rain Sounds for Sleep", "Artist"),
       ],
     );
   }
