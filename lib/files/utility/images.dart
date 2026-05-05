@@ -16,6 +16,9 @@ const leaderBoardImage2 = 'assets/pngs/leader_board_2.png';
 const leaderBoardImage3 = 'assets/pngs/leader_board_3.png';
 const leaderBoardImage4 = 'assets/pngs/leader_board_4.png';
 
+const artistIconPng = 'assets/pngs/ArtistsIcon.png';
+const tuneIconPng = 'assets/pngs/tuneIcon.png';
+
 const shareIcon = 'assets/pngs/share.png';
 const playlistIcon = 'assets/pngs/playlist.png';
 const likeIcon = 'assets/pngs/like.png';

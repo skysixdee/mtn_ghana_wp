@@ -53,8 +53,8 @@ Future<ArtistsModel> getArtistListApi(String key, {int pageNo = 0}) async {
       await NetworkManager().post(url, jsonData: jsonData);
   return artistsModelFromJson(json.encode(map));
 
-  //await Future.delayed(Duration(seconds: 2));
-  //return artistsModelFromJson(_json);
+  await Future.delayed(Duration(seconds: 2));
+  return artistsModelFromJson(_json);
 }
 
 String _json = """{

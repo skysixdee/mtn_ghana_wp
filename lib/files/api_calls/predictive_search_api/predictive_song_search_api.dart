@@ -1,4 +1,5 @@
-import 'dart:convert';
+import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
+import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 import 'package:mtn_ghana_wp/files/model/predictive_search_model.dart';
 
@@ -7,16 +8,16 @@ Future<List<String>> predictiveSongSearchApi(String query) async {
     List<String> stringList = [];
     String url =
         "$predictiveSearchUrl/selfcare/predictive/english-content-search/autocomplete/contentname?q=$query";
-    // Map<String, dynamic> jsonMap =
-    //     await NetworkManager().get(url, addInHeader: [
-    //   {'Authorization': predictiveAuthorization}
-    // ]);
-
-    // PredictSearchModel model =
-    //     PredictSearchModel.fromJson(jsonMap, query.replaceAll(" ", "\\"));
+    Map<String, dynamic> jsonMap =
+        await NetworkManager().get(url, addInHeader: [
+      {'Authorization': predictiveAuthorization}
+    ]);
 
     PredictSearchModel model =
-        PredictSearchModel.fromJson(json.decode(_jsonData), "s");
+        PredictSearchModel.fromJson(jsonMap, query.replaceAll(" ", "\\"));
+
+    // PredictSearchModel model =
+    //     PredictSearchModel.fromJson(json.decode(_jsonData), "s");
 
     for (Suggestion itm
         in model.suggest?.autoCompleteSuggester?.searchKey?.suggestions ?? []) {

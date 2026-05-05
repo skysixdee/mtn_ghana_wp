@@ -11,15 +11,15 @@ Future<List<String>> predictiveArtistSearchApi(String query) async {
     final encodedQuery = Uri.encodeQueryComponent(query);
     String url =
         "$predictiveSearchUrl/selfcare/predictive/english-artist-search/autocomplete/artist?q=$encodedQuery";
-    // Map<String, dynamic> jsonMap =
-    //     await NetworkManager().get(url, addInHeader: [
-    //   {'Authorization': predictiveAuthorization}
-    // ]);
+    Map<String, dynamic> jsonMap =
+        await NetworkManager().get(url, addInHeader: [
+      {'Authorization': predictiveAuthorization}
+    ]);
 
-    // PredictSearchModel model =
-    //     PredictSearchModel.fromJson(jsonMap, query.replaceAll(" ", "\\"));
     PredictSearchModel model =
-        PredictSearchModel.fromJson(json.decode(_jsonData), "s");
+        PredictSearchModel.fromJson(jsonMap, query.replaceAll(" ", "\\"));
+    // PredictSearchModel model =
+    //     PredictSearchModel.fromJson(json.decode(_jsonData), "s");
 
     for (Suggestion itm
         in model.suggest?.autoCompleteSuggester?.searchKey?.suggestions ?? []) {

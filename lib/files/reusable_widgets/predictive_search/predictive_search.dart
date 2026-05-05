@@ -11,6 +11,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class PredictiveSearch extends StatelessWidget {
@@ -19,8 +20,8 @@ class PredictiveSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(border: Border.all(color: white)),
-        child: SizedBox(height: 100, child: SearchScreen()));
+        color: isDarkTheme(context) ? blackTest : lightGreyTest,
+        child: SizedBox(height: 120, child: SearchScreen()));
   }
 }
 
@@ -119,7 +120,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           spacing: 20,
                           runSpacing: 20,
                           children: [
-                            cont.isLoadingSong.value
+                            cont.isLoadingSongName.value
                                 ? loadingIndicator(width: 300)
                                 : SizedBox(width: 300, child: _songs()),
                             buildArtistSection(),
@@ -140,11 +141,11 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget buildArtistSection() {
-    if (cont.isLoadingArtist.value) {
+    if (cont.isLoadingArtistName.value) {
       return loadingIndicator(width: 300);
     }
 
-    if (cont.artistList.isNotEmpty) {
+    if (cont.artistNameList.isNotEmpty) {
       return SizedBox(width: 300, child: _artists());
     }
 
@@ -161,6 +162,13 @@ class _SearchScreenState extends State<SearchScreen> {
           child: TextField(
             controller: _controller,
             onTap: _showOverlay,
+            onSubmitted: (value) {
+              if (value.isEmpty) return;
+              var isNumeric = isValidNumeric(value);
+              cont.consolidatedResults(value, selectedIndex: isNumeric ? 2 : 0);
+
+              context.goNamed(searchConsolidatedRoute);
+            },
             onChanged: (value) {
               if (value.isNotEmpty) {
                 cont.getResultFor(value);
@@ -180,19 +188,36 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  bool isValidNumeric(String value) {
+    if (value.length <= 4) return false;
+    return RegExp(r'^[0-9]+$').hasMatch(value);
+  }
+
   // ================= UI =================
 
-  Widget _sectionHeader(String title, {bool showViewAll = false}) {
+  Widget _sectionHeader(String title,
+      {String? imageName, bool showViewAll = false}) {
     return Padding(
       padding:
           const EdgeInsets.only(bottom: 8.0), // ✅ Added spacing below header
       child: Row(
+        spacing: 8,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CustomText(
-            title: title,
-            color: black,
-            colorD: whiteD,
+          SizedBox(
+              width: 30,
+              height: 30,
+              child: ClipRRect(
+                  borderRadius: BorderRadiusGeometry.circular(3),
+                  child: Image.asset(
+                    imageName ?? "",
+                  ))),
+          Expanded(
+            child: CustomText(
+              title: title,
+              color: black,
+              colorD: whiteD,
+            ),
           ),
         ],
       ),
@@ -207,7 +232,8 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _sectionHeader(codeStr.toUpperCase(), showViewAll: true),
+            _sectionHeader(codeStr.toUpperCase(),
+                imageName: tuneIconPng, showViewAll: true),
             const SizedBox(height: 4), // ✅ Added spacing
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -254,19 +280,21 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _sectionHeader(songsStr.toUpperCase(), showViewAll: true),
+            _sectionHeader(songsStr.toUpperCase(),
+                imageName: tuneIconPng, showViewAll: true),
             const SizedBox(height: 4), // ✅ Added spacing
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: cont.toneList.length > 6 ? 6 : cont.toneList.length,
+              itemCount:
+                  cont.toneNameList.length > 6 ? 6 : cont.toneNameList.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
                     _tuneSearchController
-                        .getSongCodeSearch(cont.toneList[index]);
+                        .getSongCodeSearch(cont.toneNameList[index]);
                     context.goNamed(searchRoute, queryParameters: {
-                      'search': cont.toneList[index],
+                      'search': cont.toneNameList[index],
                       'index': "0"
                     });
                   },
@@ -275,7 +303,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         vertical: 6.0), // ✅ Increased vertical padding
                     child: CustomText(
                       isSelectable: false,
-                      title: cont.toneList[index],
+                      title: cont.toneNameList[index],
                     ),
                   ),
                 );
@@ -295,20 +323,22 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _sectionHeader(artistsStr.toUpperCase(), showViewAll: true),
+            _sectionHeader(artistsStr.toUpperCase(),
+                imageName: artistIconPng, showViewAll: true),
             const SizedBox(height: 4), // ✅ Added spacing
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount:
-                  cont.artistList.length > 6 ? 6 : cont.artistList.length,
+              itemCount: cont.artistNameList.length > 6
+                  ? 6
+                  : cont.artistNameList.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
                     _tuneSearchController
-                        .getArtistSearch(cont.artistList[index]);
+                        .getArtistSearch(cont.artistNameList[index]);
                     context.goNamed(artistsRoute, queryParameters: {
-                      'search': cont.artistList[index],
+                      'search': cont.artistNameList[index],
                       'index': "1"
                     });
                   },
@@ -317,7 +347,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         vertical: 6.0), // ✅ Increased vertical padding
                     child: CustomText(
                       isSelectable: false,
-                      title: cont.artistList[index],
+                      title: cont.artistNameList[index],
                     ),
                   ),
                 );

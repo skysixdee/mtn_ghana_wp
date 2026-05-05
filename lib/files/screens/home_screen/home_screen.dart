@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomeBannerView(key: widget.key),
                   //SizedBox(height: si.isMobile ? 10 : 20),
                   SizedBox(height: si.isMobile ? 20 : 40),
-                  HomeSearchView(),
+                  //HomeSearchView(),
                   PredictiveSearch(),
                   //SizedBox(height: si.isMobile ? 10 : 20),
                   SizedBox(height: si.isMobile ? 20 : 40),
