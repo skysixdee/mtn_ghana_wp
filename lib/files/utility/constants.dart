@@ -10,6 +10,7 @@ int otpLength = 4; //6;
 const int timeOutDuration = 20;
 const int pagePerCount = 20;
 String baseUrl = '';
+String predictiveAuthorization = 'Basic c29scjpTb2xyUm9ja3M=';
 String authBaseUrl = '';
 String nameTuneCategoryId = '';
 String musicBoxPrice = '';

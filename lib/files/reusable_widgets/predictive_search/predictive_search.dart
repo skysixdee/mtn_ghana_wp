@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/predictive_search_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
@@ -47,6 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
   OverlayEntry? _overlayEntry;
   final TextEditingController _controller = TextEditingController();
   late PredictiveSearchController cont;
+  final TuneSearchController _tuneSearchController = Get.find();
   @override
   void initState() {
     Get.lazyPut(() => PredictiveSearchController());
@@ -99,19 +103,19 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Obx(
                       () {
                         return Wrap(
-                          spacing: 10,
+                          spacing: 20,
+                          runSpacing: 20,
                           children: [
-                            //Flexible(child: _albums()),
                             cont.isLoadingSong.value
                                 ? loadingIndicator(width: 300)
                                 : SizedBox(width: 300, child: _songs()),
-                            const SizedBox(width: 16),
+                            //const SizedBox(width: 16),
                             //Flexible(child: _songs()),
                             buildArtistSection(),
-                            const SizedBox(width: 16),
+                            //const SizedBox(width: 16),
                             //Flexible(child: _artists()),
                             if (cont.codeList.isNotEmpty)
-                              SizedBox(width: 300, child: _albums()),
+                              SizedBox(width: 300, child: _songCode()),
                           ],
                         );
                       },
@@ -147,7 +151,10 @@ class _SearchScreenState extends State<SearchScreen> {
             controller: _controller,
             onTap: _showOverlay,
             onChanged: (value) {
-              cont.getResultFor(value);
+              if (value.isNotEmpty) {
+                cont.getResultFor(value);
+              }
+
               if (_overlayEntry == null) _showOverlay();
             },
             decoration: InputDecoration(
@@ -184,93 +191,129 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget _albums() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _sectionHeader(codeStr.toUpperCase(), showViewAll: true),
-        const SizedBox(height: 10),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: cont.codeList.length > 5 ? 5 : cont.codeList.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
-              child: Row(
-                spacing: 4,
-                children: [
-                  SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: customImage(
-                        url: cont.codeList[index].previewImageUrl,
-                        cornerRadius: 5),
+  Widget _songCode() {
+    return Container(
+      decoration: containerDeco(),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _sectionHeader(codeStr.toUpperCase(), showViewAll: true),
+            const SizedBox(height: 10),
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: cont.codeList.length > 5 ? 5 : cont.codeList.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    _tuneSearchController
+                        .getSongCodeSearch(cont.codeList[index].toneId ?? '');
+                    context.goNamed(searchRoute, queryParameters: {
+                      'search': cont.codeList[index].toneId,
+                      'index': "2"
+                    }); //goNamed(searchRoute);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 4.0),
+                    child: CustomText(
+                      isSelectable: false,
+                      title: "${cont.codeList[index].toneId}",
+                    ),
                   ),
-                  CustomText(
-                    title: "${cont.codeList[index].toneId}",
-                  ),
-                ],
-              ),
-            );
-          },
-        )
-      ],
+                );
+              },
+            )
+          ],
+        ),
+      ),
     );
   }
 
+  BoxDecoration containerDeco() {
+    return BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: isDarkTheme(context) ? blackTest : whiteD);
+  }
+
   Widget _songs() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _sectionHeader(songsStr.toUpperCase(), showViewAll: true),
-        const SizedBox(height: 10),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: cont.toneList.length > 6 ? 6 : cont.toneList.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Row(
-                spacing: 4,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: customImage(
-                        url: cont.toneList[index].previewImageUrl,
-                        cornerRadius: 5),
-                  ),
-                  Flexible(
+    return Container(
+      decoration: containerDeco(),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _sectionHeader(songsStr.toUpperCase(), showViewAll: true),
+            const SizedBox(height: 10),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: cont.toneList.length > 6 ? 6 : cont.toneList.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    _tuneSearchController
+                        .getSongCodeSearch(cont.toneList[index]);
+                    context.goNamed(searchRoute, queryParameters: {
+                      'search': cont.toneList[index],
+                      'index': "0"
+                    }); //goNamed(searchRoute);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
                     child: CustomText(
-                      title: "${cont.toneList[index].toneName}",
+                      isSelectable: false,
+                      title: cont.toneList[index],
                     ),
-                  )
-                ],
-              ),
-            );
-          },
-        )
-      ],
+                  ),
+                );
+              },
+            )
+          ],
+        ),
+      ),
     );
   }
 
   Widget _artists() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _sectionHeader(artistsStr.toUpperCase(), showViewAll: true),
-        const SizedBox(height: 10),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: cont.artistList.length > 6 ? 6 : cont.artistList.length,
-          itemBuilder: (context, index) {
-            return CustomText(
-              title: "${cont.artistList[index].val}",
-            );
-          },
-        )
-      ],
+    return Container(
+      decoration: containerDeco(),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _sectionHeader(artistsStr.toUpperCase(), showViewAll: true),
+            const SizedBox(height: 10),
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount:
+                  cont.artistList.length > 6 ? 6 : cont.artistList.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    _tuneSearchController
+                        .getArtistSearch(cont.artistList[index]);
+                    context.goNamed(artistsRoute, queryParameters: {
+                      'search': cont.artistList[index],
+                      'index': "1"
+                    }); //goNamed(searchRoute);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: CustomText(
+                      isSelectable: false,
+                      title: cont.artistList[index],
+                    ),
+                  ),
+                );
+              },
+            )
+          ],
+        ),
+      ),
     );
   }
 }
