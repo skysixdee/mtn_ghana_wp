@@ -32,9 +32,12 @@ class HomeBannerView extends StatelessWidget {
                 : Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
-                      Container(
-                        color: isDarkTheme(context) ? blackD : white,
-                        child: widgetList(si, context),
+                      AspectRatio(
+                        aspectRatio: 3.5,
+                        child: Container(
+                          color: isDarkTheme(context) ? blackD : white,
+                          child: widgetList(si, context),
+                        ),
                       ),
                       indicatorView(),
                     ],
@@ -76,22 +79,23 @@ class HomeBannerView extends StatelessWidget {
 
   CarouselOptions carousalOption(SizingInformation si, BuildContext context) {
     // 1. Get the available width
-    double width = MediaQuery.of(context).size.width;
+    //double width = MediaQuery.of(context).size.width;
 
     // 2. Determine the multiplier based on viewportFraction
     // On mobile, the card takes up 90% of the screen width.
     // On desktop, it takes up roughly 33.3%.
-    double visibleWidthFactor = si.isMobile ? 0.9 : 0.433;
+    //double visibleWidthFactor = si.isMobile ? 0.9 : 0.433;
 
     // 3. Calculate height based on the 16/9 ratio
     // We calculate the width of a single card, then divide by the ratio (1.77)
-    double calculatedHeight = (width * visibleWidthFactor) / (16 / 9);
+    //double calculatedHeight = (width * visibleWidthFactor) / (16 / 9);
 
     return CarouselOptions(
-      height: calculatedHeight.clamp(
-          150.0, 400.0), // Dynamic height maintains the ratio
+      // height: si.isMobile
+      //     ? width / 3.5
+      //     : width / 4.5, // Dynamic height maintains the ratio
       aspectRatio: 16 / 9,
-      viewportFraction: visibleWidthFactor,
+      //viewportFraction: visibleWidthFactor,
       initialPage: cont.selectedIndex.value,
       enableInfiniteScroll: true,
       reverse: false,

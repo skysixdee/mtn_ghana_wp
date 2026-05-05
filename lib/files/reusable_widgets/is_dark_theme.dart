@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mtn_ghana_wp/main.dart';
 
 bool isDarkTheme(BuildContext context) {
-  return Theme.of(context).brightness == Brightness.dark;
+  bool isDark = Theme.of(context).brightness == Brightness.dark;
+  appCont.isDarkTheme.value = isDark;
+  return isDark;
 }
