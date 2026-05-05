@@ -33,6 +33,7 @@
     "ABOUT_PAGE_URL": "https://callertunez.mtn.com.gh/crbt-web-portal/about/ABOUT.json",
     "GET_REWARD_POINTS": "https://callertunez.mtn.com.gh/selfcare-olp/get-reward-points",
     "GET_TOP_LEADER_BOARD_URL": "https://callertunez.mtn.com.gh/selfcare-olp/get-top-reward-points",
+    "PREDICTIVE_SEARCH_URL": "https://callertunez.mtn.com.gh",
     "BASE_PACK_OFFER_CODE": "CRBT_BASE_PACK",
     "BASE_CONTENT_ID": "136",
     "NAME_TUNE_CAT_ID": "115",

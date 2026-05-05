@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:mtn_ghana_wp/files/controllers/predictive_search_controller.dart';
+import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
@@ -106,12 +107,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                 : SizedBox(width: 300, child: _songs()),
                             const SizedBox(width: 16),
                             //Flexible(child: _songs()),
-                            cont.isLoadingArtist.value
-                                ? loadingIndicator(width: 300)
-                                : SizedBox(width: 300, child: _artists()),
-                            // const SizedBox(width: 16),
-                            // //Flexible(child: _artists()),
-                            // SizedBox(width: 300, child: _artists()),
+                            buildArtistSection(),
+                            const SizedBox(width: 16),
+                            //Flexible(child: _artists()),
+                            if (cont.codeList.isNotEmpty)
+                              SizedBox(width: 300, child: _albums()),
                           ],
                         );
                       },
@@ -122,6 +122,18 @@ class _SearchScreenState extends State<SearchScreen> {
         ],
       ),
     );
+  }
+
+  Widget buildArtistSection() {
+    if (cont.isLoadingArtist.value) {
+      return loadingIndicator(width: 300);
+    }
+
+    if (cont.artistList.isNotEmpty) {
+      return SizedBox(width: 300, child: _artists());
+    }
+
+    return const SizedBox();
   }
 
   @override
@@ -161,8 +173,13 @@ class _SearchScreenState extends State<SearchScreen> {
           color: black,
           colorD: whiteD,
         ),
-        if (showViewAll)
-          Text(viewMoreStr, style: TextStyle(color: Colors.grey.shade600)),
+        // if (showViewAll)
+        //   CustomText(
+        //     title: viewMoreStr,
+        //     fontName: FontName.regular,
+        //     color: black,
+        //     colorD: whiteD,
+        //   ),
       ],
     );
   }
@@ -171,21 +188,32 @@ class _SearchScreenState extends State<SearchScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionHeader(albumsStr.toUpperCase(), showViewAll: true),
+        _sectionHeader(codeStr.toUpperCase(), showViewAll: true),
         const SizedBox(height: 10),
         ListView.builder(
           shrinkWrap: true,
-          itemCount: cont.artistList.length > 5 ? 5 : cont.artistList.length,
+          itemCount: cont.codeList.length > 5 ? 5 : cont.codeList.length,
           itemBuilder: (context, index) {
-            return CustomText(
-              title: "${cont.artistList[index].val}",
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
+              child: Row(
+                spacing: 4,
+                children: [
+                  SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: customImage(
+                        url: cont.codeList[index].previewImageUrl,
+                        cornerRadius: 5),
+                  ),
+                  CustomText(
+                    title: "${cont.codeList[index].toneId}",
+                  ),
+                ],
+              ),
             );
           },
         )
-
-        // _listItem("Mere Jeevan Saathi", "Hindi Album • 1972"),
-        // _listItem("Hela Ki Prema", "Odia Album • 2021"),
-        // _listItem("Heera Panna", "Hindi Album • 1973"),
       ],
     );
   }
@@ -223,9 +251,6 @@ class _SearchScreenState extends State<SearchScreen> {
             );
           },
         )
-        // _listItem("HE", "Haryanvi Song"),
-        // _listItem("Heeriye (feat. Arijit Singh)", "Hindi Song"),
-        // _listItem("Headlights (feat. KIDDO)", "English Song"),
       ],
     );
   }
@@ -245,38 +270,7 @@ class _SearchScreenState extends State<SearchScreen> {
             );
           },
         )
-        // _listItem("Hema Malini", "Artist"),
-        // _listItem("Hesham Abdul Wahab", "Artist"),
-        // _listItem("Heavy Rain Sounds for Sleep", "Artist"),
       ],
-    );
-  }
-
-  Widget _listItem(String title, String subtitle) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          color: Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(6),
-        ),
-      ),
-      title: CustomText(
-        title: title,
-        color: black,
-        colorD: black,
-      ), //Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,),
-      subtitle: CustomText(
-        title: subtitle,
-        color: darkGrey,
-        colorD: whiteD,
-      ),
-      onTap: () {
-        _controller.text = title;
-        _hideOverlay();
-      },
     );
   }
 }
