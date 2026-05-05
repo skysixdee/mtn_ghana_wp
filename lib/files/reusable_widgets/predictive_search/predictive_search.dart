@@ -96,33 +96,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       SizedBox(width: 300, child: _artists()),
                     ],
                   ),
-                  // SingleChildScrollView(
-                  //   child: Column(
-                  //     children: [
-                  //       // 🔝 TOP RESULT
-                  //       // _sectionHeader("TOP RESULT"),
-                  //       // _listItem(
-                  //       //   "Headlights (feat. KIDDO)",
-                  //       //   "English Song • Alan Walker",
-                  //       // ),
-
-                  //       // const SizedBox(height: 20),
-
-                  //       // 🎶 3 COLUMN LAYOUT
-                  //       Row(
-                  //         spacing: 10,
-                  //         crossAxisAlignment: CrossAxisAlignment.start,
-                  //         children: [
-                  //           Expanded(child: _albums()),
-                  //           const SizedBox(width: 16),
-                  //           Expanded(child: _songs()),
-                  //           const SizedBox(width: 16),
-                  //           Expanded(child: _artists()),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                 ),
               ),
             ),
