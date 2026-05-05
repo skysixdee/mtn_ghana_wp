@@ -51,6 +51,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _controller = TextEditingController();
   late PredictiveSearchController cont;
   final TuneSearchController _tuneSearchController = Get.find();
+
   @override
   void initState() {
     Get.lazyPut(() => PredictiveSearchController());
@@ -71,6 +72,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
   OverlayEntry _createOverlay() {
     RenderBox box = context.findRenderObject() as RenderBox;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final offset = box.localToGlobal(Offset.zero);
+
+    // Calculate available space below the TextField
+    final availableHeight = screenHeight - (offset.dy + box.size.height + 16);
 
     return OverlayEntry(
       opaque: false,
@@ -84,44 +91,46 @@ class _SearchScreenState extends State<SearchScreen> {
                 color: isDarkTheme(context) ? Colors.white30 : Colors.black12),
           ),
 
-          Positioned(
-            //width: box.size.width - 32,
-            child: CompositedTransformFollower(
-              link: _layerLink,
-              offset: const Offset(0, 60),
+          CompositedTransformFollower(
+            link: _layerLink,
+            showWhenUnlinked: false,
+            offset: Offset(0, box.size.height + 8), // 8px gap below TextField
+            child: Align(
+              alignment: Alignment.topLeft,
               child: Material(
                 elevation: 10,
                 borderRadius: BorderRadius.circular(12),
                 child: Container(
-                    //height: 400,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      //color: Colors.white,
-                      color: isDarkTheme(context) ? blackD : white,
-                      borderRadius: BorderRadius.circular(12),
+                  width: box.size.width, // Match TextField width
+                  constraints: BoxConstraints(
+                    maxHeight:
+                        availableHeight > 450 ? 450 : availableHeight - 20,
+                    maxWidth: 1000,
+                  ),
+                  padding: const EdgeInsets.all(20), // ✅ Added proper padding
+                  decoration: BoxDecoration(
+                    color: isDarkTheme(context) ? blackD : white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Obx(
+                      () {
+                        return Wrap(
+                          spacing: 20,
+                          runSpacing: 20,
+                          children: [
+                            cont.isLoadingSong.value
+                                ? loadingIndicator(width: 300)
+                                : SizedBox(width: 300, child: _songs()),
+                            buildArtistSection(),
+                            if (cont.codeList.isNotEmpty)
+                              SizedBox(width: 300, child: _songCode()),
+                          ],
+                        );
+                      },
                     ),
-                    child: SingleChildScrollView(
-                      child: Obx(
-                        () {
-                          return Wrap(
-                            spacing: 20,
-                            runSpacing: 20,
-                            children: [
-                              cont.isLoadingSong.value
-                                  ? loadingIndicator(width: 300)
-                                  : SizedBox(width: 300, child: _songs()),
-                              //const SizedBox(width: 16),
-                              //Flexible(child: _songs()),
-                              buildArtistSection(),
-                              //const SizedBox(width: 16),
-                              //Flexible(child: _artists()),
-                              if (cont.codeList.isNotEmpty)
-                                SizedBox(width: 300, child: _songCode()),
-                            ],
-                          );
-                        },
-                      ),
-                    )),
+                  ),
+                ),
               ),
             ),
           ),
@@ -174,22 +183,19 @@ class _SearchScreenState extends State<SearchScreen> {
   // ================= UI =================
 
   Widget _sectionHeader(String title, {bool showViewAll = false}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CustomText(
-          title: title,
-          color: black,
-          colorD: whiteD,
-        ),
-        // if (showViewAll)
-        //   CustomText(
-        //     title: viewMoreStr,
-        //     fontName: FontName.regular,
-        //     color: black,
-        //     colorD: whiteD,
-        //   ),
-      ],
+    return Padding(
+      padding:
+          const EdgeInsets.only(bottom: 8.0), // ✅ Added spacing below header
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomText(
+            title: title,
+            color: black,
+            colorD: whiteD,
+          ),
+        ],
+      ),
     );
   }
 
@@ -197,12 +203,12 @@ class _SearchScreenState extends State<SearchScreen> {
     return Container(
       decoration: containerDeco(),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0), // ✅ Increased padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _sectionHeader(codeStr.toUpperCase(), showViewAll: true),
-            const SizedBox(height: 10),
+            const SizedBox(height: 4), // ✅ Added spacing
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -215,10 +221,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     context.goNamed(searchRoute, queryParameters: {
                       'search': cont.codeList[index].toneId,
                       'index': "2"
-                    }); //goNamed(searchRoute);
+                    });
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 6.0), // ✅ Increased vertical padding
                     child: CustomText(
                       isSelectable: false,
                       title: "${cont.codeList[index].toneId}",
@@ -235,7 +242,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   BoxDecoration containerDeco() {
     return BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(8), // ✅ Slightly larger radius
         color: isDarkTheme(context) ? blackTest : whiteD);
   }
 
@@ -243,12 +250,12 @@ class _SearchScreenState extends State<SearchScreen> {
     return Container(
       decoration: containerDeco(),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0), // ✅ Increased padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _sectionHeader(songsStr.toUpperCase(), showViewAll: true),
-            const SizedBox(height: 10),
+            const SizedBox(height: 4), // ✅ Added spacing
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -261,10 +268,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     context.goNamed(searchRoute, queryParameters: {
                       'search': cont.toneList[index],
                       'index': "0"
-                    }); //goNamed(searchRoute);
+                    });
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 6.0), // ✅ Increased vertical padding
                     child: CustomText(
                       isSelectable: false,
                       title: cont.toneList[index],
@@ -283,12 +291,12 @@ class _SearchScreenState extends State<SearchScreen> {
     return Container(
       decoration: containerDeco(),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0), // ✅ Increased padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _sectionHeader(artistsStr.toUpperCase(), showViewAll: true),
-            const SizedBox(height: 10),
+            const SizedBox(height: 4), // ✅ Added spacing
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -302,10 +310,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     context.goNamed(artistsRoute, queryParameters: {
                       'search': cont.artistList[index],
                       'index': "1"
-                    }); //goNamed(searchRoute);
+                    });
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 6.0), // ✅ Increased vertical padding
                     child: CustomText(
                       isSelectable: false,
                       title: cont.artistList[index],
