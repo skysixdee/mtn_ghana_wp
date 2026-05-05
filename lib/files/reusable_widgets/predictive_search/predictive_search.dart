@@ -100,25 +100,27 @@ class _SearchScreenState extends State<SearchScreen> {
                       color: isDarkTheme(context) ? blackD : white,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Obx(
-                      () {
-                        return Wrap(
-                          spacing: 20,
-                          runSpacing: 20,
-                          children: [
-                            cont.isLoadingSong.value
-                                ? loadingIndicator(width: 300)
-                                : SizedBox(width: 300, child: _songs()),
-                            //const SizedBox(width: 16),
-                            //Flexible(child: _songs()),
-                            buildArtistSection(),
-                            //const SizedBox(width: 16),
-                            //Flexible(child: _artists()),
-                            if (cont.codeList.isNotEmpty)
-                              SizedBox(width: 300, child: _songCode()),
-                          ],
-                        );
-                      },
+                    child: SingleChildScrollView(
+                      child: Obx(
+                        () {
+                          return Wrap(
+                            spacing: 20,
+                            runSpacing: 20,
+                            children: [
+                              cont.isLoadingSong.value
+                                  ? loadingIndicator(width: 300)
+                                  : SizedBox(width: 300, child: _songs()),
+                              //const SizedBox(width: 16),
+                              //Flexible(child: _songs()),
+                              buildArtistSection(),
+                              //const SizedBox(width: 16),
+                              //Flexible(child: _artists()),
+                              if (cont.codeList.isNotEmpty)
+                                SizedBox(width: 300, child: _songCode()),
+                            ],
+                          );
+                        },
+                      ),
                     )),
               ),
             ),
@@ -248,6 +250,7 @@ class _SearchScreenState extends State<SearchScreen> {
             _sectionHeader(songsStr.toUpperCase(), showViewAll: true),
             const SizedBox(height: 10),
             ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: cont.toneList.length > 6 ? 6 : cont.toneList.length,
               itemBuilder: (context, index) {
