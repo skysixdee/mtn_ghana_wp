@@ -19,8 +19,9 @@ import 'package:number_paginator/number_paginator.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
-  CategoryDetailScreen({super.key, required this.name});
-  final String name;
+  CategoryDetailScreen({super.key, required this.catName, required this.catId});
+  final String catName;
+  final String catId;
   final CategoryDetailController con = Get.find();
   NumberPaginatorController numberPaginatorController =
       NumberPaginatorController();
@@ -42,7 +43,7 @@ class CategoryDetailScreen extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             //physics: NeverScrollableScrollPhysics(),
                             sliverAppBar:
-                                si.isMobile ? null : getNavigationView(name),
+                                si.isMobile ? null : getNavigationView(catName),
                             // NavigationHeaderView(titleList: [
                             //   NavigationHeaderModel(homeStr, homeRoute),
                             //   NavigationHeaderModel(name, nameTuneRoute),

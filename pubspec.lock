@@ -275,14 +275,16 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_tts:
+
+  flutter_typeahead:
     dependency: "direct main"
     description:
-      name: flutter_tts
-      sha256: ce5eb209b40e95f2f4a1397116c87ab2fcdff32257d04ed7a764e75894c03775
+      name: flutter_typeahead
+      sha256: "7b3f84e0bff51c544f4d1382c00413c36c1714328a6a89600865e497437d29d2"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.5"
+    version: "6.0.0"
+
   flutter_web_plugins:
     dependency: transitive
     description: flutter

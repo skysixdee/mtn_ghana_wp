@@ -68,10 +68,10 @@ class MobileBottomNavView extends StatelessWidget {
               icon: const Icon(Icons.home),
               label: homeStr,
             ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.emoji_events),
-              label: rewardPointStr,
-            ),
+            // BottomNavigationBarItem(
+            //   icon: const Icon(Icons.emoji_events),
+            //   label: rewardPointStr,
+            // ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.my_library_music),
               label: musicBoxStr,

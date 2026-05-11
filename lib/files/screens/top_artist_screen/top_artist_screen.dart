@@ -17,6 +17,7 @@ import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class TopArtistScreen extends StatefulWidget {
   const TopArtistScreen({super.key});
@@ -29,19 +30,51 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
   List<ArtistList> artistList = [];
   RxBool isLoading = false.obs;
   int totalCount = 0;
-  getArtist({int page = 0}) async {
+  RxString selectedTab = 'ALL'.obs;
+  getArtist({String? selectedTab, int page = 0}) async {
     isLoading.value = true;
 
-    ArtistsModel model = await getArtistListApi("", pageNo: page);
+    ArtistsModel model =
+        await getArtistListApi(selectedTab ?? "", pageNo: page);
     artistList = model.responseMap?.artistList ?? [];
     totalCount = model.responseMap?.resultCount ?? 0;
     isLoading.value = false;
   }
 
+  List<String> tabList = [
+    "ALL",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z"
+  ];
+
   @override
   void initState() {
     // TODO: implement initState
-    getArtist();
+    getArtist(selectedTab: "");
     super.initState();
   }
 
@@ -53,78 +86,139 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Obx(
-        () {
-          return Column(
-            children: [
-              Expanded(
-                child: GenericScrollView(
-                  sliverAppBar:
-                      getNavigationView(artistStr), //sliverNavigation(),
-                  isLoading: isLoading.value,
-                  cardWidth: 100,
-                  onlyGrid: true,
-                  childAspectRatio: 1.3,
-                  itemCount: artistList.length,
-                  builder: (p0) {
-                    ArtistList inf = artistList[p0];
-                    return Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color:
-                                  isDarkTheme(context) ? darkGrey : lightGrey,
-                              blurRadius: 3,
-                              spreadRadius: 1)
-                        ],
-                        borderRadius: BorderRadius.circular(4),
-                        color: isDarkTheme(context) ? blackTest : white,
-                      ),
-                      child: Column(
-                        children: [
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Container(
-                                  width: double.infinity,
-                                  height: double.maxFinite,
-                                  child: customImage(toneName: inf.val ?? '')),
-                            ),
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Center(
+          child: Obx(
+            () {
+              return Column(
+                children: [
+                  //artistSearchTabView(),
+                  Expanded(
+                    child: GenericScrollView(
+                      sliverAppBar:
+                          getNavigationView(artistStr), //sliverNavigation(),
+                      isLoading: isLoading.value,
+                      extraWidgetToolBarHeight: 40,
+                      extraWidegt: artistSearchTabView(si),
+                      cardWidth: 100,
+                      onlyGrid: true,
+                      childAspectRatio: 1.3,
+                      itemCount: artistList.length,
+                      builder: (p0) {
+                        ArtistList inf = artistList[p0];
+                        return Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: isDarkTheme(context)
+                                      ? darkGrey
+                                      : lightGrey,
+                                  blurRadius: 3,
+                                  spreadRadius: 1)
+                            ],
+                            borderRadius: BorderRadius.circular(4),
+                            color: isDarkTheme(context) ? blackTest : white,
                           ),
-                          CustomText(
-                            fontName: FontName.bold,
-                            title: inf.val ?? '',
+                          child: Column(
+                            children: [
+                              Flexible(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Container(
+                                      width: double.infinity,
+                                      height: double.maxFinite,
+                                      child:
+                                          customImage(toneName: inf.val ?? '')),
+                                ),
+                              ),
+                              CustomText(
+                                fontName: FontName.bold,
+                                title: inf.val ?? '',
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 12),
+                                child: GenericButton(
+                                  title: viewStr,
+                                  bgColor:
+                                      isDarkTheme(context) ? yellowD : yellow,
+                                  onTap: () {
+                                    onSearchAction(inf.val ?? '');
+                                    print("tapped");
+                                  },
+                                ),
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 12),
-                            child: GenericButton(
-                              title: viewStr,
-                              bgColor: isDarkTheme(context) ? yellowD : yellow,
-                              onTap: () {
-                                onSearchAction(inf.val ?? '');
-                                print("tapped");
-                              },
-                            ),
-                          )
-                        ],
-                      ),
+                        );
+                      },
+                    ),
+                  ),
+                  if (totalCount > pagePerCount)
+                    numberPagination(
+                        totalCount: totalCount,
+                        onTap: (v) {
+                          getArtist(
+                              selectedTab: selectedTab.value == "ALL"
+                                  ? ""
+                                  : selectedTab.value,
+                              page: v);
+                        })
+                ],
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget artistSearchTabView(SizingInformation si) {
+    return SizedBox(
+        //color: white,
+        //height: 40,
+        child: ListView.builder(
+      padding: EdgeInsets.only(left: si.isMobile ? 12 : 30),
+      scrollDirection: Axis.horizontal,
+      itemCount: tabList.length,
+      itemBuilder: (context, index) {
+        return Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Obx(
+                  () {
+                    return GenericButton(
+                      fontName: si.isMobile ? FontName.semiBold : FontName.bold,
+                      fontSize: si.isMobile ? 12 : 14,
+                      borderColor: grey,
+                      bgColor: selectedTab.value == tabList[index]
+                          ? isDarkTheme(context)
+                              ? yellowD
+                              : yellow
+                          : isDarkTheme(context)
+                              ? whiteD
+                              : white,
+                      height: 20,
+                      title: tabList[index],
+                      onTap: () {
+                        selectedTab.value = tabList[index];
+                        getArtist(
+                            selectedTab: selectedTab.value == "ALL"
+                                ? ""
+                                : selectedTab.value);
+                        print("object");
+                      },
                     );
                   },
-                ),
-              ),
-              if (totalCount > pagePerCount)
-                numberPagination(
-                    totalCount: totalCount,
-                    onTap: (v) {
-                      getArtist(page: v);
-                    })
-            ],
-          );
-        },
-      ),
-    );
+                ))
+            // CustomText(
+            //   title: tabList[index],
+            // ),
+            );
+      },
+    ));
   }
 
   onSearchAction(String key) {

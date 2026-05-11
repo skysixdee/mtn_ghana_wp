@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/open_login.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -14,17 +17,38 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CustomText(
-              title: title,
-              fontName: FontName.bold,
-              fontSize: 18,
-            ),
-            SizedBox(height: 12),
-            CustomText(
-              title: thisFeatureIsAvailableForLoggedinStr,
-              fontName: FontName.bold,
-              textAlign: TextAlign.center,
-              fontSize: 18,
+            // CustomText(
+            //   title: title,
+            //   fontName: FontName.bold,
+            //   fontSize: 18,
+            // ),
+            // SizedBox(height: 12),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GenericButton(
+                  textDecoration: TextDecoration.underline,
+                  bgColor: transparent,
+                  padding: EdgeInsets.zero,
+                  title: loginStr,
+                  textColor: black,
+                  textColorD: whiteD,
+                  fontName: FontName.bold,
+                  fontSize: 18,
+                  onTap: () {
+                    openLogin();
+                  },
+                ),
+                CustomText(
+                  title: loginToCheckYourStr.replaceAll(
+                      "FEATURE_NAME", title.toUpperCase()),
+                  fontName: FontName.bold,
+                  textAlign: TextAlign.center,
+                  fontSize: 18,
+                ),
+              ],
             ),
           ],
         ),

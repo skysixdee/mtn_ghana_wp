@@ -32,9 +32,13 @@ class HomeSubCatView extends StatelessWidget {
                         print("tapped");
                         String catId =
                             appController.categories[index].categoryId ?? '';
+                        String catName =
+                            appController.categories[index].categoryName ?? '';
 
-                        context.goNamed(categoryDetailRoute,
-                            queryParameters: {'catId': catId});
+                        context.goNamed(categoryDetailRoute, queryParameters: {
+                          'catId': catId,
+                          'catName': catName
+                        });
                         //con.getCategoryDetailList(catId);
                       },
                       child: card(context, index, si),

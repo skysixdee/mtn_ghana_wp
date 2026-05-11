@@ -98,6 +98,7 @@ String artistsResultForStr = 'Artists ';
 String thisFeatureIsAvailableForLoggedinStr =
     "This feature is available for logged in users";
 String statusStr = "Status";
+String loginToCheckYourStr = " to check your FEATURE_NAME";
 String callerStr = "Callers";
 String playAtStr = "Play at";
 
@@ -136,17 +137,22 @@ String cancelStr = "Cancel";
 String previewStr = "Preview";
 String viewStr = "View";
 String musicBoxStr = "Music Box";
+String moodDetectStr = "Mood Detection";
 
 String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";
 String nameTuneStr = "Name Tune";
 String tunesStr = "Tunes";
 String songStr = "Song";
+String songsStr = "Songs";
+String albumsStr = "Albums";
 String codeStr = "Code";
+String searchForSongArtistCodeStr = "Search for song, artist or code";
 String rewardPointStr = "Reward points";
 String checkBackSoonStr = "Check back soon";
 String typeToSearchStr = "Type to search";
 String artistStr = "Artist";
+
 String settingStr = "Setting";
 String loginStr = "Login";
 String buyTuneStr = "Buy Tune";

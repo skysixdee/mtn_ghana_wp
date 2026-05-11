@@ -23,8 +23,10 @@ import 'package:get/get.dart';
 class AppController extends GetxController {
   RxList<Category> categories = <Category>[].obs;
   RxBool isLoggedIn = false.obs;
+  RxBool isDarkTheme = false.obs;
   String headerIncrechmentMsisdn = "";
   RxInt mobileBottomNavIndex = 0.obs;
+  RxBool isShowHomePopBanner = true.obs;
   @override
   void onInit() async {
     super.onInit();

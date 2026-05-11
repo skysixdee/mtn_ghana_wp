@@ -24,6 +24,7 @@ class GenericButton extends StatelessWidget {
     this.fontSize,
     this.isStopPlay = false,
     this.enable = true,
+    this.textDecoration,
   });
   final bool isStopPlay;
   final bool enable;
@@ -41,6 +42,7 @@ class GenericButton extends StatelessWidget {
   final double? fontSize;
   final EdgeInsetsGeometry? padding;
   final Function()? onTap;
+  final TextDecoration? textDecoration;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,6 +88,7 @@ class GenericButton extends StatelessWidget {
                       children: [
                         leadingIcon ?? const SizedBox(),
                         CustomText(
+                          decoration: textDecoration,
                           isSelectable: false,
                           title: title ?? '',
                           color: textColor,

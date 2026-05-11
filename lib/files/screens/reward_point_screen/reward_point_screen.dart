@@ -15,6 +15,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/empty_list_widget.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/navigation_header_view.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/open_login.dart';
 
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
@@ -95,9 +96,42 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                       : ListView(
                           shrinkWrap: true,
                           children: [
-                            emptyListWidget(
-                                message: thisFeatureIsAvailableForLoggedinStr,
-                                height: 300)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 80.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  GenericButton(
+                                    textDecoration: TextDecoration.underline,
+                                    bgColor: transparent,
+                                    padding: EdgeInsets.zero,
+                                    title: loginStr,
+                                    textColor: black,
+                                    textColorD: whiteD,
+                                    fontName: FontName.bold,
+                                    fontSize: 18,
+                                    onTap: () {
+                                      openLogin();
+                                    },
+                                  ),
+                                  CustomText(
+                                    title: loginToCheckYourStr.replaceAll(
+                                        "FEATURE_NAME",
+                                        rewardPointStr.toUpperCase()),
+                                    fontName: FontName.bold,
+                                    textAlign: TextAlign.center,
+                                    fontSize: 18,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // emptyListWidget(
+                            //     message: loginToCheckYourStr.replaceAll(
+                            //         "FEATURE_NAME",
+                            //         rewardPointStr.toUpperCase()),
+                            //     height: 300)
                           ],
                         );
                 },
@@ -279,6 +313,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                       title: "Leaderboard".toUpperCase(),
                       fontSize: si.isMobile ? 14 : 18,
                       fontName: FontName.bold,
+                      colorD: black,
                     ),
                   ],
                 ),
@@ -336,26 +371,6 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                   )
                 : Column(
                     children: [
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 18.0, left: 50),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: [
-                      //       CustomText(
-                      //         title: 'MSISDN',
-                      //         fontName: FontName.bold,
-                      //       ),
-                      //       CustomText(
-                      //         title: rewarPointDetailStr,
-                      //         fontName: FontName.bold,
-                      //       ),
-                      //       CustomText(
-                      //         title: rankStr,
-                      //         fontName: FontName.bold,
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       ListView.builder(
                         padding: EdgeInsets.only(bottom: 20),
                         scrollDirection:
@@ -373,7 +388,13 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                   : null,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                                color: isHorizontal ? yellow : white,
+                                color: isHorizontal
+                                    ? isDarkTheme(context)
+                                        ? yellowD
+                                        : yellow
+                                    : isDarkTheme(context)
+                                        ? whiteD
+                                        : white,
                               ),
                               child: Row(
                                 mainAxisAlignment:
@@ -387,8 +408,11 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                             : 4.0),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color:
-                                                  isHorizontal ? white : yellow,
+                                              color: isHorizontal
+                                                  ? white
+                                                  : isDarkTheme(context)
+                                                      ? yellowD
+                                                      : yellow,
                                               borderRadius:
                                                   BorderRadius.circular(60)),
                                           child: Padding(
@@ -409,6 +433,7 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                             con.leaderBoardList[index].msisdn ??
                                                 '',
                                         fontName: FontName.semiBold,
+                                        colorD: black,
                                         fontSize: si.isMobile ? 10 : 12,
                                       )
                                     ],
@@ -419,14 +444,18 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                         title: rewarPointDetailStr,
                                         fontName: FontName.semiBold,
                                         color: black,
+                                        colorD: black,
                                         fontSize: si.isMobile ? 10 : 12,
                                       ),
                                       CustomText(
-                                        title: con.leaderBoardList[index]
-                                                .rewardPoints ??
-                                            '',
+                                        title: double.parse(con
+                                                    .leaderBoardList[index]
+                                                    .rewardPoints ??
+                                                "0")
+                                            .toStringAsFixed(2),
                                         fontName: FontName.semiBold,
                                         color: green,
+                                        colorD: green,
                                         fontSize: si.isMobile ? 10 : 12,
                                       )
                                     ],
@@ -439,10 +468,12 @@ class _RewardPointScreenState extends State<RewardPointScreen> {
                                           fontName: FontName.semiBold,
                                           fontSize: si.isMobile ? 10 : 12,
                                           title: rankStr,
+                                          colorD: black,
                                         ),
                                         CustomText(
                                           fontName: FontName.semiBold,
                                           fontSize: si.isMobile ? 10 : 12,
+                                          colorD: green,
                                           color: green,
                                           title:
                                               con.leaderBoardList[index].rank ??

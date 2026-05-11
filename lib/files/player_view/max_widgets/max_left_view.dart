@@ -154,9 +154,11 @@ class MaxLeftView extends StatelessWidget {
                     final PlayerController cont = Get.find();
                     cont.isPlayerMaxSize.value = false;
                     await Future.delayed(const Duration(milliseconds: 100));
-                    print("navigating to artist page");
+                    print(
+                        "navigating to artist page ${playerController.artistList[index]}");
                     context.goNamed(artistTuneRoute, queryParameters: {
-                      'artistName': playerController.info.value.artistName ?? ''
+                      'artistName': playerController.artistList[
+                          index], //playerController.info.value.artistName ?? ''
                     });
                     //if (Get.context != null) {
                     // context.goNamed(artistTuneRoute, queryParameters: {

@@ -32,15 +32,23 @@ class SideMenuController extends GetxController {
     //   height: 18,
     // )
 
-    SideMenuModel(rewardPointStr, rewardPointRoute,
-        leading: Icon(
-          color: grey,
-          Icons.emoji_events_outlined,
-          size: 18,
-        )),
+    // SideMenuModel(rewardPointStr, rewardPointRoute,
+    //     leading: Icon(
+    //       color: grey,
+    //       Icons.emoji_events_outlined,
+    //       size: 18,
+    //     )),
 
     SideMenuModel("", "",
         leadingIconData: CupertinoIcons.gift, isdivider: true),
+
+    SideMenuModel(moodDetectStr, moodDetectRoute,
+        leading: Image.asset(
+          sideMenuMoodIcon,
+          color: grey,
+          width: 20,
+          height: 20,
+        )),
 
     SideMenuModel(musicBoxStr, musicBoxRoute,
         leading: SvgPicture.asset(

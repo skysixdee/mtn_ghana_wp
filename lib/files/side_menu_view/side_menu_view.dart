@@ -163,19 +163,31 @@ class _SideMenuViewState extends State<SideMenuView> {
             child: Row(
               children: [
                 if (info.leading != null)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 6.0),
-                    child: SizedBox(
-                      child: info.leading!,
-                    ),
-                  ),
+                  (info.title == darkModeStr)
+                      ? Icon(
+                          appCont.isDarkTheme.value
+                              ? Icons.light_mode
+                              : Icons.dark_mode,
+                          color: isDarkTheme(context) ? white : black,
+                          size: 20,
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.only(right: 6.0),
+                          child: SizedBox(
+                            child: info.leading!,
+                          ),
+                        ),
                 Expanded(child: Obx(
                   () {
                     return CustomText(
                       isSelectable: false,
                       title: info.title == logoutStr
                           ? (appCont.isLoggedIn.value ? logoutStr : loginStr)
-                          : info.title,
+                          : (info.title == darkModeStr)
+                              ? (appCont.isDarkTheme.value
+                                  ? lightModeStr
+                                  : darkModeStr)
+                              : info.title,
                       fontName: sideMenuCont.selectedCard.value.routeName ==
                               info.routeName
                           ? FontName.bold

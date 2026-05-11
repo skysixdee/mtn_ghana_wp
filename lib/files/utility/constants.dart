@@ -1,6 +1,7 @@
 const double popupWidth = 400;
 const double sideMenuWidth = 220;
 const double webNavHeight = 70;
+const double homePopBannerHeight = 50;
 const double minPlayerHeight = 60;
 //const double bottomNavViewHeight = 70;
 int msisdnLength = 9; //10;
@@ -9,6 +10,7 @@ int otpLength = 4; //6;
 const int timeOutDuration = 20;
 const int pagePerCount = 20;
 String baseUrl = '';
+String predictiveAuthorization = 'Basic c29scjpTb2xyUm9ja3M=';
 String authBaseUrl = '';
 String nameTuneCategoryId = '';
 String musicBoxPrice = '';
