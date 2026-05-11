@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:js' as js;
 import 'dart:html' as html;
@@ -45,7 +44,7 @@ class _FaceRecognitionScreenState extends State<FaceRecognitionScreen> {
       final data = event.data;
       if (data == null) return;
 
-      final type = data['type']?.toString(); 
+      final type = data['type']?.toString();
 
       if (type == 'uploadStarted') {
         appCont.isUploading.value = true;
@@ -56,13 +55,14 @@ class _FaceRecognitionScreenState extends State<FaceRecognitionScreen> {
         final expression = data['expression']?.toString();
         final source = data['source']?.toString();
 
-        if (base64Image != null && expression != null && mounted) { // 👈 mounted check
-    _isDetecting.value = false;
-    _timer?.cancel();
+        if (base64Image != null && expression != null && mounted) {
+          // 👈 mounted check
+          _isDetecting.value = false;
+          _timer?.cancel();
 
-    if (!mounted) return; //
+          if (!mounted) return; //
 
-     //   if (base64Image != null && expression != null) {
+          //   if (base64Image != null && expression != null) {
           // Navigator.push(
           //   context,
           //   MaterialPageRoute(
@@ -75,35 +75,35 @@ class _FaceRecognitionScreenState extends State<FaceRecognitionScreen> {
           //   ),
           // );
           // In FaceRecognitionScreen, where you build ExpressionResultScreen
-Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (_) => ExpressionResultScreen(
-      base64Image: base64Image,
-      expression: expression,
-      source: source ?? "live",
-      onRecapture: () {
-        Navigator.pop(context); // 👈 pop result screen first
-        startDetection();
-      },
-      onCancel: () {
-        Navigator.pop(context); // 👈 just pop back cleanly
-      },
-    ),
-  ),
-);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => ExpressionResultScreen(
+                base64Image: base64Image,
+                expression: expression,
+                source: source ?? "live",
+                onRecapture: () {
+                  Navigator.pop(context); // 👈 pop result screen first
+                  startDetection();
+                },
+                onCancel: () {
+                  Navigator.pop(context); // 👈 just pop back cleanly
+                },
+              ),
+            ),
+          );
         }
       }
     });
   }
 
   void _resetState() {
-  _expression.value = 'Unknown';
-  _isDetecting.value = false;
-  appCont.isUploading.value = false;
-  _timer?.cancel();
-  _captureListener?.cancel();
-}
+    _expression.value = 'Unknown';
+    _isDetecting.value = false;
+    appCont.isUploading.value = false;
+    _timer?.cancel();
+    _captureListener?.cancel();
+  }
 
   void startDetection() {
     _isDetecting.value = true;
@@ -118,7 +118,7 @@ Navigator.push(
     });
 
     _captureListener?.cancel();
-   
+
     _captureListener =
         const html.EventStreamProvider<html.CustomEvent>('expressionCaptured')
             .forTarget(html.window)
@@ -134,7 +134,7 @@ Navigator.push(
   void dispose() {
     _timer?.cancel();
     _captureListener?.cancel();
-    _messageListener?.cancel(); 
+    _messageListener?.cancel();
     super.dispose();
   }
 

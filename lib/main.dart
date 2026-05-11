@@ -149,6 +149,7 @@ Future<void> readProperties() async {
   bannerDetailScUrl = data['BANNER_DETAIL_URL'];
   artistsSearchUrl = data['ARTISTS_SEARCH_URL'];
   advanceSearchUrl = data['ADVANCE_SEARCH_URL'];
+  categoryDetailUrl = data['CATEGORY_DETAIL_URL'];
   predictiveSearchUrl = data['PREDICTIVE_SEARCH_URL'];
   parseNlpUrl = data['PARSE_NLP_URL'];
   shuffleEnableDisableUrl = data['SHUFFLE_ON_OFF'];

@@ -9,6 +9,7 @@
     "GET_TONE_PRICE_URL": "https://callertunez.mtn.com.gh/selfcare/subscriber-management/get-content-price",
     "Buy_TONE_URL": "https://callertunez.mtn.com.gh/selfcare/subscriber-management/buy-tone",
     "BASE_URL": "https://callertunez.mtn.com.gh",
+    "CATEGORY_DETAIL_URL": "https://callertunez.mtn.com.gh",
     "ADVANCE_SEARCH_URL": "https://callertunez.mtn.com.gh/advanced-search",
     "SHUFFLE_ON_OFF": "https://callertunez.mtn.com.gh/selfcare/setting-service/shuffle",
     "MUSIC_BOX_OFFER_CODE": "CRBT_MUSIC_BOX",

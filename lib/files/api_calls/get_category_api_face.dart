@@ -11,7 +11,7 @@ Future<CategoryDetailModel> getCategoryDetailApi1(String key, String catId,
   String lang = StoreManager.languageSort;
 
   String url =
-      '${categoryDetailUrl}language=$lang&sortBy=Order_By&alignBy=ASC&searchLanguage=$lang?searchKey=$key&genreDetailUrl&perPageCount=$pagePerCount&categoryId=$catId&pageNo=$pageNo';
+      '$categoryDetailUrl?language=$lang&sortBy=Order_By&alignBy=ASC&searchLanguage=$lang?searchKey=$key&genreDetailUrl&perPageCount=$pagePerCount&categoryId=$catId&pageNo=$pageNo';
   Map<String, dynamic> map = await NetworkManager().get(url);
   return categoryDetailModelFromJson(json.encode(map));
 }

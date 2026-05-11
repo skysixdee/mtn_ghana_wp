@@ -29,7 +29,7 @@ class ExpressionResultScreen extends StatelessWidget {
   final String expression;
   final String source;
   final VoidCallback onRecapture;
-   final VoidCallback onCancel; 
+  final VoidCallback onCancel;
 
   const ExpressionResultScreen({
     super.key,
@@ -192,10 +192,9 @@ class ExpressionResultScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           
             //  getNavigationView("Expression Result: $expression"),
             const SizedBox(height: 12),
-            
+
             // Obx(() => Text(
             //       'Detected Expression: $expression',
             //       style: TextStyle(
@@ -243,7 +242,6 @@ class ExpressionResultScreen extends StatelessWidget {
     );
   }
 
-
   // Widget actionButton(BuildContext context) {
   //   if (source == "live") {
   //     return recaptureButton();
@@ -273,16 +271,13 @@ class ExpressionResultScreen extends StatelessWidget {
     );
   }
 
-Widget cancelButton(BuildContext context) {
+  Widget cancelButton(BuildContext context) {
     return gradientButton(
       title: "Cancel",
       isLoading: false,
-      onPressed: onCancel, 
+      onPressed: onCancel,
     );
   }
- 
-
- 
 
   Widget recaptureButton() {
     return gradientButton(
