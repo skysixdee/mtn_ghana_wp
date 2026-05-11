@@ -43,11 +43,35 @@ class CategoryDetailModel {
       };
 }
 
+// class ResponseMap {
+//   List<TuneInfo>? toneList;
+
+
+//   ResponseMap({
+//     this.toneList,
+//   });
+
+//   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
+//         toneList: json["toneList"] == null
+//             ? []
+//             : List<TuneInfo>.from(
+//                 json["toneList"]!.map((x) => TuneInfo.fromJson(x))),
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "toneList": toneList == null
+//             ? []
+//             : List<dynamic>.from(toneList!.map((x) => x.toJson())),
+//       };
 class ResponseMap {
   List<TuneInfo>? toneList;
+  List<TuneInfo>? searchList; // 👈 added
+  int? totalCount;
 
   ResponseMap({
     this.toneList,
+    this.searchList, // 👈 added
+    this.totalCount,
   });
 
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
@@ -55,14 +79,24 @@ class ResponseMap {
             ? []
             : List<TuneInfo>.from(
                 json["toneList"]!.map((x) => TuneInfo.fromJson(x))),
+        searchList: json["searchList"] == null // 👈 added
+            ? []
+            : List<TuneInfo>.from(
+                json["searchList"]!.map((x) => TuneInfo.fromJson(x))),
+        totalCount: json["totalCount"],
       );
 
   Map<String, dynamic> toJson() => {
         "toneList": toneList == null
             ? []
             : List<dynamic>.from(toneList!.map((x) => x.toJson())),
+        "searchList": searchList == null // 👈 added
+            ? []
+            : List<dynamic>.from(searchList!.map((x) => x.toJson())),
+        "totalCount": totalCount,
       };
 }
+
 /*
 class ToneList {
   String? toneId;

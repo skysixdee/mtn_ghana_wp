@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
+//import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/predictive_search_controller.dart';

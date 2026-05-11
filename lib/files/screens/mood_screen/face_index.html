@@ -1,45 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <!-- ✅ Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <title>mtn_sa_wp with Face Overlay</title>
+
+  <!-- ✅ GTM -->
   <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WD3DPF7J');
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start': new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-WD3DPF7J');
   </script>
 
   <!-- ✅ Face API -->
-  <script src="face-api.min.js"></script>
+  <script defer src="face-api.min.js"></script>
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="mtn_ghana_wp">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <!-- Base href for Flutter routing -->
-  <base href="/crbt-web-portal/">
-
-  <title>MTN_ghana</title>
-  <link rel="manifest" href="manifest.json">
-
-  <!-- NLP & Speech -->
-  <script src="js/nlp_bridge.js"></script>
-  <script src="js/speech.js"></script>
-  <script async src="https://unpkg.com/compromise@14.1.0/builds/compromise.min.js"></script>
-
+  <!-- ✅ Styles -->
   <style>
-    body, html {
+    body,
+    html {
       margin: 0;
       padding: 0;
     }
@@ -48,10 +31,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      height: 100vh;
     }
 
     .loader {
@@ -67,11 +47,15 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
-    /* ✅ Face UI Styles */
     #face-ui {
       display: none;
       position: fixed;
@@ -96,7 +80,8 @@
       z-index: 0;
     }
 
-    #video, #snapshot {
+    #video,
+    #snapshot {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -106,6 +91,7 @@
       display: none;
     }
 
+    /* ✅ Canvas overlay */
     #camera-container canvas {
       position: absolute;
       top: 0;
@@ -156,50 +142,51 @@
 </head>
 
 <body>
-  <!-- ✅ Google Tag Manager (noscript fallback) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WD3DPF7J"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WD3DPF7J" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="loading">
     <div class="loader"></div>
   </div>
 
-  <!-- ✅ Face Recognition UI -->
   <div id="face-ui">
     <div id="close-btn">&times;</div>
     <div style="display:flex; flex-direction:column; align-items:center;">
-      <div style="
-          margin-bottom: 10px;
-          font-size: 22px;
-          font-weight: bold;
-          font-family: Arial, sans-serif;">
-        Face Recognition ...
-      </div>
-      <div id="camera-container">
-        <video id="video" autoplay muted></video>
-        <img id="snapshot" />
-      </div>
-      <div id="confirm-modal">
-        <div id="confirm-modal-content">
-          <p id="confirm-text"></p>
-          <button id="yes-btn">Yes</button>
-          <button id="no-btn">No</button>
-        </div>
+  
+    <div style="
+        margin-bottom: 10px; 
+        font-size: 22px; 
+        font-weight: bold; 
+       
+        font-family: Arial, sans-serif;">
+      Face Recognition ...
+    </div>
+    <div id="camera-container">
+      <video id="video" autoplay muted></video>
+      <img id="snapshot" />
+     
+    </div>
+    <div id="confirm-modal">
+      <div id="confirm-modal-content">
+        <p id="confirm-text"></p>
+        <button id="yes-btn">Yes</button>
+        <button id="no-btn">No</button>
       </div>
     </div>
   </div>
+ <input type="file" id="upload-input" accept="image/*" style="display:none" />
 
- 
-  <input type="file" id="upload-input" accept="image/*" style="display:none" />
 
- 
+
   <script src="flutter_bootstrap.js" async></script>
+  
+  <button id="upload-btn">Upload Pichghgfghdfgdhture</button>
+<input type="file" id="upload-input" accept="image/*" style="display:none" />
 
 
- 
   <script>
     window.detectFace = async function () {
-      await faceApiReady;
       document.getElementById('snapshot').src = '';
       document.getElementById('snapshot').style.display = 'none';
       document.getElementById('video').style.display = 'block';
@@ -214,12 +201,14 @@
 
     async function startFaceDetection() {
       const video = document.getElementById('video');
+      const snapshot = document.getElementById('snapshot');
       const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
       video.srcObject = stream;
       await video.play();
-
+  
       const oldCanvas = document.querySelector('#camera-container canvas');
       if (oldCanvas) oldCanvas.remove();
+
 
       const canvas = faceapi.createCanvasFromMedia(video);
       document.getElementById('camera-container').appendChild(canvas);
@@ -235,6 +224,7 @@
           .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
           .withFaceExpressions();
 
+        // ✅ Draw detections & expressions
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -275,15 +265,13 @@
         document.getElementById('face-ui').style.display = 'none';
         const event = new CustomEvent('expressionCaptured', { detail: 'closed' });
         window.dispatchEvent(event);
-
-        window.parent.postMessage({ type: "uploadFinished" }, "*");
         window.parent.postMessage(
           { type: 'expressionConfirmed', image: base64Data, expression: expression },
           '*'
         );
-        event.target.value = "";
         stopVideoStream();
 
+       
         const oldCanvas = document.querySelector('#camera-container canvas');
         if (oldCanvas) oldCanvas.remove();
 
@@ -295,12 +283,14 @@
         document.getElementById('snapshot').style.display = 'none';
         document.getElementById('video').style.display = 'block';
 
+        // ✅ Remove old canvas before retry
         const oldCanvas = document.querySelector('#camera-container canvas');
         if (oldCanvas) oldCanvas.remove();
 
         startFaceDetection();
       };
     }
+    
 
     function stopVideoStream() {
       const video = document.getElementById('video');
@@ -314,6 +304,7 @@
     document.getElementById('close-btn').onclick = () => {
       stopVideoStream();
 
+    
       const oldCanvas = document.querySelector('#camera-container canvas');
       if (oldCanvas) oldCanvas.remove();
 
@@ -322,104 +313,58 @@
       window.dispatchEvent(event);
     };
   </script>
-
-  <!-- ✅ Upload & Detect from Image -->
   <script>
-    // Guard: resolves when faceapi is confirmed available
-    const faceApiReady = new Promise((resolve) => {
-      const check = () => (typeof faceapi !== 'undefined' ? resolve() : setTimeout(check, 50));
-      check();
-    });
-
-    document.getElementById("upload-input").onchange = async (event) => {
-      await faceApiReady;
-      const file = event.target.files[0];
-      if (!file) return;
-
-      window.parent.postMessage({ type: "uploadStarted" }, "*");
-
-      const img = await faceapi.bufferToImage(file);
-      await faceapi.nets.tinyFaceDetector.loadFromUri('models');
-      await faceapi.nets.faceExpressionNet.loadFromUri('models');
-
-      const detections = await faceapi
-        .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
-        .withFaceExpressions();
-
-      if (!detections) {
-        window.parent.postMessage({ type: "uploadFinished" }, "*");
-        alert("No face detected!");
-        event.target.value = "";
-        return;
-      }
-
-      const emotion = Object.entries(detections.expressions)
-        .reduce((a, b) => (a[1] > b[1] ? a : b))[0];
-
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      canvas.getContext("2d").drawImage(img, 0, 0);
-      const base64Data = canvas.toDataURL("image/png");
-
-      window.parent.postMessage({ type: "uploadFinished" }, "*");
-
-      window.parent.postMessage(
-        { type: "expressionConfirmed", image: base64Data, expression: emotion, source: "upload" },
-        "*"
-      );
-    };
-  </script>
-
-  <!-- compromise.js from CDN -->
-  <script src="https://unpkg.com/compromise@14.1.0/builds/compromise.min.js"></script>
-
-  <!-- your NLP bridge -->
-  <script src="js/nlp_bridge.js"></script>
-  <script src="js/speech.js"></script>
-
-</body>
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
-<script>
-  firebase.initializeApp({
-    apiKey: 'AIzaSyDnY55cFvXqQ3HpuCQJn1FFWWKyyLUdpUc',
-    appId: '1:608854775651:web:40e3732249dc02c5eee556',
-    messagingSenderId: '608854775651',
-    projectId: 'mtnhost-65a8b',
-    authDomain: 'mtnhost-65a8b.firebaseapp.com',
-    storageBucket: 'mtnhost-65a8b.firebasestorage.app',
-    measurementId: 'G-YE9FLP6Z6G',
-  });
 
  
-  function showNotification(title, body) {
-    console.log(' showNotification() called:', title, body);
+document.getElementById("upload-input").onchange = async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
 
-    if (!("Notification" in window)) {
-      console.log(' Browser does not support notifications');
-      return;
-    }
+  const img = await faceapi.bufferToImage(file);
 
-    if (Notification.permission === 'granted') {
-      navigator.serviceWorker.ready.then((registration) => {
-        console.log(' Showing notification via SW');
-        registration.showNotification(title, {
-          body: body,
-          icon: '/icons/Icon-192.png',
-          badge: '/icons/Icon-192.png',
-          requireInteraction: false,
-        });
-      }).catch((err) => {
-        console.log(' SW not ready:', err);
-        new Notification(title, { body: body });
-      });
-    } else {
-      console.log('Notification permission:', Notification.permission);
-    }
+  await faceapi.nets.tinyFaceDetector.loadFromUri('models');
+  await faceapi.nets.faceExpressionNet.loadFromUri('models');
+
+  const detections = await faceapi
+    .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
+    .withFaceExpressions();
+
+  if (!detections) {
+    alert("No face detected!");
+    return;
   }
+
+  const emotion = Object.entries(detections.expressions)
+    .reduce((a, b) => (a[1] > b[1] ? a : b))[0];
+
+  const canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  canvas.getContext("2d").drawImage(img, 0, 0);
+  const base64Data = canvas.toDataURL("image/png");
+
+  // window.parent.postMessage(
+  //   { type: "expressionConfirmed", image: base64Data, expression: emotion, source: "upload" },
+  //   "*"
+  // );
+
+  window.parent.postMessage(
+  { 
+    type: "expressionConfirmed", 
+    image: base64Data, 
+    expression: emotion,
+    source: "upload"   
+  },
+  "*"
+);
+
+};
+
 </script>
+
+
+  
+
+</body>
 
 </html>
