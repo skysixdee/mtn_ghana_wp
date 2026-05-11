@@ -15,8 +15,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ArtistsTuneScreen extends StatefulWidget {
-  const ArtistsTuneScreen({super.key, required this.artistName});
+  const ArtistsTuneScreen({super.key, required this.artistName, this.fromChatbot=true});
   final String artistName;
+  final bool fromChatbot;
+
   @override
   State<ArtistsTuneScreen> createState() => _ArtistsTuneScreenState();
 }
@@ -38,6 +40,7 @@ class _ArtistsTuneScreenState extends State<ArtistsTuneScreen> {
                   isLoading: con.isLoading.value,
                   sliverAppBar: NavigationHeaderView(titleList: [
                     NavigationHeaderModel(homeStr, homeRoute),
+                    if (!widget.fromChatbot)
                     NavigationHeaderModel(searchStr, searchRoute),
                     NavigationHeaderModel(widget.artistName, homeRoute)
                   ]),
