@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:local_session_timeout/local_session_timeout.dart';
+import 'package:mtn_ghana_wp/app_wrapper.dart';
 import 'package:mtn_ghana_wp/files/api_calls/authorization/auto_login_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/create_blaclist_controller.dart';
 import 'package:mtn_ghana_wp/files/common/aes_enc_dec.dart';
@@ -16,6 +16,7 @@ import 'package:mtn_ghana_wp/files/controllers/category_detail_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/custom_drawer_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/gift_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/home_controllers/feature_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/home_controllers/home_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/music_box_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_music_box_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
@@ -53,6 +54,7 @@ import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 import 'package:mtn_ghana_wp/files/push_notification_setup/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 late SharedPreferences prefs;
@@ -76,7 +78,9 @@ void main() async {
   await initiateController();
   StoreManager.initValues();
   fetchUriData();
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 fetchUriData() async {
@@ -146,6 +150,7 @@ Future<void> readProperties() async {
   artistsSearchUrl = data['ARTISTS_SEARCH_URL'];
   advanceSearchUrl = data['ADVANCE_SEARCH_URL'];
   predictiveSearchUrl = data['PREDICTIVE_SEARCH_URL'];
+  parseNlpUrl = data['PARSE_NLP_URL'];
   shuffleEnableDisableUrl = data['SHUFFLE_ON_OFF'];
   getSubscriptionUrl = data['GET_SUBSCRIPTION_URL'];
   addToneToShuffleScUrl = data['ADD_TONE_TO_SHUFFLE_URL'];
@@ -188,6 +193,7 @@ Future<void> initiateController() async {
   //Get.lazyPut(() => SideMenuController());
   sideMenuCont = Get.put(SideMenuController());
   Get.lazyPut(() => GiftController());
+  Get.lazyPut(() => HomeController());
   Get.lazyPut(() => BuyTuneController());
   Get.lazyPut(() => TuneController());
   Get.lazyPut(() => OtpController());
@@ -235,40 +241,35 @@ class MyApp extends StatelessWidget {
       }
     });
     return SessionTimeoutManager(
-      sessionConfig: sessionConfig,
-      child: GetMaterialApp.router(
-        theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: Colors.blue,
-          scaffoldBackgroundColor: Colors.white,
-          iconTheme: const IconThemeData(
-            color: Colors.black,
+        sessionConfig: sessionConfig,
+        child: GetMaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            brightness: Brightness.light,
+            primaryColor: Colors.blue,
+            scaffoldBackgroundColor: Colors.white,
+            iconTheme: const IconThemeData(
+              color: Colors.black,
+            ),
           ),
-        ),
-
-        darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Colors.blue,
-          scaffoldBackgroundColor: blackD,
-          iconTheme: const IconThemeData(
-            color: Colors.black,
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            primaryColor: Colors.blue,
+            scaffoldBackgroundColor: blackD,
+            iconTheme: const IconThemeData(
+              color: Colors.black,
+            ),
           ),
-        ),
-
-        themeMode: StoreManager.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-        // theme: ThemeData(
-        //   useMaterial3: true,
-        //   brightness: Brightness.light,
-        //   primarySwatch: Colors.blue,
-        //   scaffoldBackgroundColor: Colors.white,
-        //   // other theme properties...
-        // ),
-        debugShowCheckedModeBanner: false,
-        routerDelegate: router.routerDelegate,
-        routeInformationParser: router.routeInformationParser,
-        routeInformationProvider: router.routeInformationProvider,
-      ),
-    );
+          themeMode: StoreManager.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          routerDelegate: router.routerDelegate,
+          routeInformationParser: router.routeInformationParser,
+          routeInformationProvider: router.routeInformationProvider,
+          builder: (context, child) {
+            return AppWrapper(
+              child: child!,
+            );
+          },
+        ));
   }
 
   void sessionLogoutTime() {
