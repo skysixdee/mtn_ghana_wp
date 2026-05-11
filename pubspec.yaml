@@ -47,6 +47,7 @@ dependencies:
   cached_network_image: ^3.4.1
   url_launcher: ^6.3.0
   url_strategy: ^0.3.0
+  js: ^0.6.7
   
   syncfusion_flutter_calendar: 29.1.38
   numberpicker: ^2.1.2
@@ -66,6 +67,7 @@ dependencies:
   firebase_messaging: ^16.1.2
   web: ^1.1.1
   flutter_typeahead: ^6.0.0
+  skeletonizer: ^2.0.1
   
 
 dev_dependencies:

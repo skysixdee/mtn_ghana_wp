@@ -149,7 +149,7 @@ List<StatefulShellBranch> _getShellBranches() => [
       _createShell(musicBoxRoute, (_) => MusicBoxScreen()),
       _createShell(searchConsolidatedRoute, (_) => ConsolidatedSearchScreen()),
       //
-      _createShell(moodDetectRoute, (_) => MoodDetectionScreen()),
+      _createShell(moodDetectRoute, (_) => FaceRecognitionScreen()),
       _createShell(musicBoxContentRoute, (s) {
         final id = s.uri.queryParameters['id'] ?? '';
         final boxName = s.uri.queryParameters['boxName'] ?? '';
