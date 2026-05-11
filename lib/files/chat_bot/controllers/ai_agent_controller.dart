@@ -20,6 +20,7 @@ import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/router/router.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 part 'chat_nlp_handler.dart';
 
@@ -320,16 +321,15 @@ class AiAgentController extends GetxController with ChatNlpHandler {
 
       // ── Network / Server Errors ──
       if (intent == 'no_internet') {
-        const botResponse =itLooksLikeYouAreOfflineStr;
-            
+        const botResponse = itLooksLikeYouAreOfflineStr;
+
         _addBotMessage(botResponse);
         speakQueued(botResponse);
         return;
       }
 
       if (intent == 'server_error') {
-        const botResponse =
-            sorryIamUnableToReachTheServerRightNowStr;
+        const botResponse = sorryIamUnableToReachTheServerRightNowStr;
         _addBotMessage(botResponse);
         speakQueued(botResponse);
         return;

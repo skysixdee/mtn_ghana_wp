@@ -150,6 +150,7 @@ Future<void> readProperties() async {
   artistsSearchUrl = data['ARTISTS_SEARCH_URL'];
   advanceSearchUrl = data['ADVANCE_SEARCH_URL'];
   predictiveSearchUrl = data['PREDICTIVE_SEARCH_URL'];
+  parseNlpUrl = data['PARSE_NLP_URL'];
   shuffleEnableDisableUrl = data['SHUFFLE_ON_OFF'];
   getSubscriptionUrl = data['GET_SUBSCRIPTION_URL'];
   addToneToShuffleScUrl = data['ADD_TONE_TO_SHUFFLE_URL'];

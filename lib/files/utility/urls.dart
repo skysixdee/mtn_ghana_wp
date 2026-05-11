@@ -67,6 +67,8 @@ String addToneToShuffleScUrl = "";
 String getSubscriptionUrl = "";
 String predictiveSearchUrl = "";
 String aboutPageUrl = '';
+String parseNlpUrl = '';
+//_parseApiUrl
 String shuffleEnableDisableUrl = '';
 
 String categoryDetailUrl = "";

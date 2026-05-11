@@ -2,7 +2,8 @@ part of 'ai_agent_controller.dart';
 
 mixin ChatNlpHandler {
   // ── Change this URL to your deployed server URL in production ──────────
-  static const String _parseApiUrl = 'http://127.0.0.1:8000/parse';
+  static final String _parseApiUrl =
+      parseNlpUrl; //'http://127.0.0.1:8000/parse';
 
   /// Calls the unified /parse endpoint.
   ///
