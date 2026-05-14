@@ -11,6 +11,7 @@ class CustomDrawerController extends GetxController {
     DrawerModel(myWishlistStr, myWishlistRoute),
     //DrawerModel(rewardPointStr, rewardPointRoute),
     DrawerModel("", "", isDevider: true),
+    DrawerModel(moodDetectStr, moodDetectRoute),
     DrawerModel(musicBoxStr, musicBoxRoute),
     DrawerModel(artistStr, topArtistsRoute),
     //DrawerModel(tunezStr, '', isContainSubMenu: true),

@@ -150,6 +150,7 @@ class _ConsolidatedSearchScreenState extends State<ConsolidatedSearchScreen> {
         return cont.isLoadingArtistList.value
             ? loadingIndicator()
             : GenericScrollView(
+                onlyGrid: true,
                 cardWidth: 140,
                 builder: (p0) {
                   return InkWell(
@@ -185,6 +186,7 @@ class _ConsolidatedSearchScreenState extends State<ConsolidatedSearchScreen> {
                                 child: Center(
                                   child: CustomText(
                                     isSelectable: false,
+                                    colorD: black,
                                     fontName: FontName.bold,
                                     fontSize: si.isMobile ? 18 : 25,
                                     title: getInitials(

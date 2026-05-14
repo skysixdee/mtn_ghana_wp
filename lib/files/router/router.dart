@@ -189,11 +189,13 @@ List<StatefulShellBranch> _getShellBranches() => [
               : null),
       _createShell(artistTuneRoute, (s) {
         final artistName = s.uri.queryParameters['artistName'] ?? '';
-        final fromChatbot =
-              s.uri.queryParameters['fromChatbot'] == 'true';
+        final fromChatbot = s.uri.queryParameters['fromChatbot'] == 'true';
 
         Get.find<ArtistsTuneController>().getArtistsTune(artistName);
-        return ArtistsTuneScreen(artistName: artistName, fromChatbot: fromChatbot,);
+        return ArtistsTuneScreen(
+          artistName: artistName,
+          fromChatbot: fromChatbot,
+        );
       }),
       _createShell(rewardPointRoute, (_) => RewardPointScreen()),
       _createShell(faqRoute, (_) => FaqScreen()),

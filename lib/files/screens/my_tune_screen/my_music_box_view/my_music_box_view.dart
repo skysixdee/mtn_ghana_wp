@@ -125,6 +125,7 @@ class MyMusicBoxView extends StatelessWidget {
               color: isDarkTheme(context) ? whiteD : black, width: 0.5),
           borderRadius: BorderRadius.circular(50)),
       child: CustomText(
+        colorD: blackD,
         isSelectable: false,
         fontName: FontName.semiBold,
         title: previewStr,
@@ -164,6 +165,7 @@ class MyMusicBoxView extends StatelessWidget {
                 borderColor: red,
                 fontName: FontName.semiBold,
                 textColor: red,
+                textColorD: whiteD,
                 bgColor: transparent,
                 onTap: () {
                   con.deleteMyMusicBox(info);
