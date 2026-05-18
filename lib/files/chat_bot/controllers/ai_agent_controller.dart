@@ -244,7 +244,7 @@ class AiAgentController extends GetxController with ChatNlpHandler {
     if (buyToneMode == "artist") {
       final artistName = text.trim();
       if (artistName.isNotEmpty) {
-        final botResponse = "Checking available tunes for $artistName...";
+        final botResponse = "Checking available tunes for $artistName....";
         _addBotMessage(botResponse);
         speakQueued(botResponse);
         try {
