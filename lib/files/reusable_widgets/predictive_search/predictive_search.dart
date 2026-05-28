@@ -55,9 +55,58 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
+    super.initState();
     Get.lazyPut(() => PredictiveSearchController());
     cont = Get.find<PredictiveSearchController>();
-    super.initState();
+
+    // Add a post-frame callback to start listening after the widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Create a combined worker that listens to all three observables
+      ever(cont.isLoadingSongName, (_) {
+        // When loading state changes, check if we should show/hide overlay
+        if (!cont.isLoadingSongName.value && !cont.isLoadingArtistName.value) {
+          _updateOverlayVisibility();
+        }
+      });
+
+      ever(cont.isLoadingArtistName, (_) {
+        // When loading state changes, check if we should show/hide overlay
+        if (!cont.isLoadingSongName.value && !cont.isLoadingArtistName.value) {
+          _updateOverlayVisibility();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _hideOverlay();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  bool _hasData() {
+    return cont.artistNameList.isNotEmpty ||
+        cont.toneNameList.isNotEmpty ||
+        cont.codeList.isNotEmpty;
+  }
+
+  void _updateOverlayVisibility() {
+    // Use a short delay to ensure the UI has updated
+    Future.microtask(() {
+      if (!mounted) return;
+
+      if (_hasData() && _controller.text.isNotEmpty) {
+        if (_overlayEntry == null) {
+          _showOverlay();
+        } else {
+          // Rebuild the overlay with new data
+          _overlayEntry?.markNeedsBuild();
+        }
+      } else {
+        _hideOverlay();
+      }
+    });
   }
 
   void _showOverlay() {
@@ -108,7 +157,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         availableHeight > 450 ? 450 : availableHeight - 20,
                     maxWidth: 1000,
                   ),
-                  padding: const EdgeInsets.all(20), // ✅ Added proper padding
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: isDarkTheme(context) ? blackD : white,
                     borderRadius: BorderRadius.circular(12),
@@ -116,13 +165,20 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: SingleChildScrollView(
                     child: Obx(
                       () {
+                        // Trigger overlay visibility check whenever observed values change
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          _updateOverlayVisibility();
+                        });
+
                         return Wrap(
                           spacing: 20,
                           runSpacing: 20,
                           children: [
                             cont.isLoadingSongName.value
                                 ? loadingIndicator(width: 300)
-                                : SizedBox(width: 300, child: _songs()),
+                                : cont.toneNameList.isNotEmpty
+                                    ? SizedBox(width: 300, child: _songs())
+                                    : const SizedBox.shrink(),
                             buildArtistSection(),
                             if (cont.codeList.isNotEmpty)
                               SizedBox(width: 300, child: _songCode()),
@@ -149,7 +205,7 @@ class _SearchScreenState extends State<SearchScreen> {
       return SizedBox(width: 300, child: _artists());
     }
 
-    return const SizedBox();
+    return const SizedBox.shrink();
   }
 
   @override
@@ -161,9 +217,15 @@ class _SearchScreenState extends State<SearchScreen> {
           link: _layerLink,
           child: TextField(
             controller: _controller,
-            onTap: _showOverlay,
+            onTap: () {
+              // Only show overlay if there's data
+              if (_hasData()) {
+                _showOverlay();
+              }
+            },
             onSubmitted: (value) {
               if (value.isEmpty) return;
+              _hideOverlay();
               var isNumeric = isValidNumeric(value);
               cont.consolidatedResults(value, selectedIndex: isNumeric ? 2 : 0);
 
@@ -172,9 +234,10 @@ class _SearchScreenState extends State<SearchScreen> {
             onChanged: (value) {
               if (value.isNotEmpty) {
                 cont.getResultFor(value);
+              } else {
+                // Hide overlay when search is cleared
+                _hideOverlay();
               }
-
-              if (_overlayEntry == null) _showOverlay();
             },
             decoration: InputDecoration(
               hintText: searchForSongArtistCodeStr,
@@ -198,8 +261,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget _sectionHeader(String title,
       {String? imageName, bool showViewAll = false}) {
     return Padding(
-      padding:
-          const EdgeInsets.only(bottom: 8.0), // ✅ Added spacing below header
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         spacing: 8,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -228,13 +290,13 @@ class _SearchScreenState extends State<SearchScreen> {
     return Container(
       decoration: containerDeco(),
       child: Padding(
-        padding: const EdgeInsets.all(12.0), // ✅ Increased padding
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _sectionHeader(codeStr.toUpperCase(),
                 imageName: tuneIconPng, showViewAll: true),
-            const SizedBox(height: 4), // ✅ Added spacing
+            const SizedBox(height: 4),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -242,6 +304,7 @@ class _SearchScreenState extends State<SearchScreen> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
+                    _hideOverlay();
                     _tuneSearchController
                         .getSongCodeSearch(cont.codeList[index].toneId ?? '');
                     context.goNamed(searchRoute, queryParameters: {
@@ -250,8 +313,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     });
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0), // ✅ Increased vertical padding
+                    padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: CustomText(
                       isSelectable: false,
                       title: "${cont.codeList[index].toneId}",
@@ -268,7 +330,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   BoxDecoration containerDeco() {
     return BoxDecoration(
-        borderRadius: BorderRadius.circular(8), // ✅ Slightly larger radius
+        borderRadius: BorderRadius.circular(8),
         color: isDarkTheme(context) ? blackTest : whiteD);
   }
 
@@ -276,13 +338,13 @@ class _SearchScreenState extends State<SearchScreen> {
     return Container(
       decoration: containerDeco(),
       child: Padding(
-        padding: const EdgeInsets.all(12.0), // ✅ Increased padding
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _sectionHeader(songsStr.toUpperCase(),
                 imageName: tuneIconPng, showViewAll: true),
-            const SizedBox(height: 4), // ✅ Added spacing
+            const SizedBox(height: 4),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -291,6 +353,7 @@ class _SearchScreenState extends State<SearchScreen> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
+                    _hideOverlay();
                     _tuneSearchController
                         .getSongCodeSearch(cont.toneNameList[index]);
                     context.goNamed(searchRoute, queryParameters: {
@@ -299,8 +362,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     });
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0), // ✅ Increased vertical padding
+                    padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: CustomText(
                       isSelectable: false,
                       title: cont.toneNameList[index],
@@ -319,13 +381,13 @@ class _SearchScreenState extends State<SearchScreen> {
     return Container(
       decoration: containerDeco(),
       child: Padding(
-        padding: const EdgeInsets.all(12.0), // ✅ Increased padding
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _sectionHeader(artistsStr.toUpperCase(),
                 imageName: artistIconPng, showViewAll: true),
-            const SizedBox(height: 4), // ✅ Added spacing
+            const SizedBox(height: 4),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -335,6 +397,7 @@ class _SearchScreenState extends State<SearchScreen> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
+                    _hideOverlay();
                     _tuneSearchController
                         .getArtistSearch(cont.artistNameList[index]);
                     context.goNamed(artistsRoute, queryParameters: {
@@ -343,8 +406,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     });
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0), // ✅ Increased vertical padding
+                    padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: CustomText(
                       isSelectable: false,
                       title: cont.artistNameList[index],

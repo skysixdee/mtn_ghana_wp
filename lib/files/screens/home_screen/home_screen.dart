@@ -1,4 +1,4 @@
-
+import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/api_calls/shuffle_enable_disable_api.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:mtn_ghana_wp/files/controllers/home_controllers/home_controller.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_pop_banner_view/home_pop_banner_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_search_view/home_search_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_sub_cat_view/home_sub_cat_view.dart';
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _categoryKey = GlobalKey();
   DateTime p0 = DateTime.now();
-  
+
   @override
   void initState() {
     musicBoxController.getMusicBoxx();
@@ -53,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _scrollController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +82,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
+                  GenericButton(
+                    title: "Mood list",
+                    onTap: () {
+                      context.goNamed(moodListRoute);
+                    },
+                  ),
                   // Obx(() {
                   //   return AnimatedContainer(
                   //     duration: const Duration(milliseconds: 300),

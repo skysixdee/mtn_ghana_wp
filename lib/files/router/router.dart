@@ -10,6 +10,7 @@ import 'package:mtn_ghana_wp/files/player_view/player_view.dart';
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_pop_banner_view/home_pop_banner_view.dart';
 import 'package:mtn_ghana_wp/files/screens/login_screen/login_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mobile_bottom_nav_view/mobile_bottom_nav_view.dart';
+import 'package:mtn_ghana_wp/files/screens/mood_list_screen/mood_list_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mood_screen/mood_detection_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/search_screen/consolidated_search_screen.dart';
@@ -145,6 +146,7 @@ List<StatefulShellBranch> _getShellBranches() => [
       //onInit: (s) => Get.find<NameTuneController>().getNameTune()),
 
       _createShell(musicBoxRoute, (_) => MusicBoxScreen()),
+      _createShell(moodListRoute, (_) => MoodListScreen()),
       _createShell(searchConsolidatedRoute, (_) => ConsolidatedSearchScreen()),
       //
       _createShell(moodDetectRoute, (_) => FaceRecognitionScreen()),

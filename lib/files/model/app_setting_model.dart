@@ -492,6 +492,8 @@ class AppSettingModel {
   AppShareLink? crbtSubscriptionPacksEng;
   AppShareLink? crbtSubscriptionPacksArabic;
   AppShareLink? crbtPackList; //CRBT_PACK_LIST
+  AppShareLink? moodListArabic;
+  AppShareLink? moodListEnglish;
 
   AppSettingModel({
     this.contactUs,
@@ -511,6 +513,8 @@ class AppSettingModel {
     this.crbtSubscriptionPacksEng,
     this.crbtSubscriptionPacksArabic,
     this.crbtPackList,
+    this.moodListArabic,
+    this.moodListEnglish,
   });
 
   factory AppSettingModel.fromJson(Map<String, dynamic> json) =>
@@ -567,6 +571,12 @@ class AppSettingModel {
         crbtPackList: json["CRBT_PACK_LIST"] == null
             ? null
             : AppShareLink.fromJson(json["CRBT_PACK_LIST"]),
+        moodListArabic: json["MOOD_LIST_ARABIC"] == null
+            ? null
+            : AppShareLink.fromJson(json["MOOD_LIST_ARABIC"]),
+        moodListEnglish: json["MOOD_LIST_ENGLISH"] == null
+            ? null
+            : AppShareLink.fromJson(json["MOOD_LIST_ENGLISH"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -587,6 +597,8 @@ class AppSettingModel {
         "CRBT_SUBSCRIPTION_PACKS_ENG": crbtSubscriptionPacksEng?.toJson(),
         "CRBT_SUBSCRIPTION_PACKS_ARABIC": crbtSubscriptionPacksArabic?.toJson(),
         "CRBT_PACK_LIST": crbtPackList?.toJson(),
+        "MOOD_LIST_ARABIC": moodListArabic?.toJson(),
+        "MOOD_LIST_ENGLISH": moodListEnglish?.toJson(),
       };
 }
 

@@ -20,6 +20,7 @@ const String aboutRoute = "/about";
 const String topArtistsRoute = "/topArtists";
 
 const String musicBoxRoute = "/musicBox";
+const String moodListRoute = "/moodList";
 const String searchConsolidatedRoute = "/searchConsolidated";
 const String moodDetectRoute = "/moodDetect";
 const String musicBoxContentRoute = "/musicBoxContent";
