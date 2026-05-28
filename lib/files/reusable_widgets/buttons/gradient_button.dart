@@ -4,7 +4,6 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 
-
 Widget gradientButton({
   required String title,
   required bool isLoading,
@@ -14,19 +13,13 @@ Widget gradientButton({
     height: 35,
     width: 140,
     decoration: BoxDecoration(
-      gradient: isLoading
-          ? null
-          : LinearGradient(
-              colors: [Color(0xFF4B8FD4), Color(0xFFE8B84B)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(15),
-        bottomLeft: Radius.circular(2),
-        topRight: Radius.circular(2),
-        bottomRight: Radius.circular(15),
-      ),
+      gradient: isLoading ? null : null,
+      // borderRadius: BorderRadius.only(
+      //   topLeft: Radius.circular(15),
+      //   bottomLeft: Radius.circular(2),
+      //   topRight: Radius.circular(2),
+      //   bottomRight: Radius.circular(15),
+      // ),
     ),
     child: isLoading
         ? Center(child: loadingIndicator(height: 20, width: 20, radius: 10))
@@ -35,7 +28,8 @@ Widget gradientButton({
               backgroundColor: WidgetStateProperty.all(transparent),
               shadowColor: WidgetStateProperty.all(transparent),
               elevation: WidgetStateProperty.all(0),
-              padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 12)),
+              padding:
+                  WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 12)),
               shape: WidgetStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),

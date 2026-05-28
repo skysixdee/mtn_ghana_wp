@@ -270,3 +270,7 @@ const String sorryIamUnableToReachTheServerRightNowStr =
     "Sorry, I'm unable to reach the server right now. Please try again in a moment.";
 const String itLooksLikeYouAreOfflineStr =
     "It looks like you're offline. Please check your internet connection and try again.";
+String startDetectionStr = "Start Detection";
+String uploadPictureStr = "Upload Picture";
+String faceRecognitionStr = "Face Recognition";
+String detectFaceExpressionsStr = "Detect your face expressions";
