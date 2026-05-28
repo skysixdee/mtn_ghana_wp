@@ -25,59 +25,62 @@ class _MoodListScreenState extends State<MoodListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: con.moods.length,
-          itemBuilder: (context, index) {
-            return Column(
-              spacing: 20,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                  title: con.moods[index].title,
-                  fontSize: 18,
-                  fontName: FontName.bold,
-                ),
-                moodDetailList(con.moods[index], index)
-              ],
-            );
-          },
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 8 : 20),
+      child: Obx(() {
+        return CustomScrollView(
+          slivers: [
+            SliverList.builder(
+              itemCount: con.moods.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.only(bottom: isMobile ? 8 : 20.0),
+                  child: Column(
+                    spacing: isMobile ? 6 : 12,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        title: con.moods[index].title,
+                        fontSize: isMobile ? 18 : 22,
+                        fontName: FontName.bold,
+                      ),
+                      moodDetailList(con.moods[index], index, isMobile),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
         );
-      },
+      }),
     );
   }
 
-  Widget moodDetailList(MoodCategory mood, int indx) {
-    return ResponsiveBuilder(
-      builder: (context, si) {
-        return SizedBox(
-          height: si.isMobile ? 220 : 260,
-          child: Obx(
-            () {
-              return mood.isLoading.value
-                  ? loadingIndicator()
-                  : ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: mood.tunes.length,
-                      itemBuilder: (context, index) {
-                        return AspectRatio(
-                            aspectRatio: 0.75,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: TuneCard(
-                                  info: mood.tunes[index],
-                                  tuneList: mood.tunes),
-                            ));
-                      },
+  Widget moodDetailList(MoodCategory mood, int indx, bool isMobile) {
+    return SizedBox(
+      height: isMobile ? 220 : 260,
+      child: Obx(
+        () {
+          return mood.isLoading.value
+              ? loadingIndicator()
+              : ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: mood.tunes.length,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: isMobile ? 165 : 195, // 220 * 0.75 = 165
+                      child: Padding(
+                        padding: EdgeInsets.all(isMobile ? 6 : 10.0),
+                        child: TuneCard(
+                            info: mood.tunes[index], tuneList: mood.tunes),
+                      ),
                     );
-            },
-          ),
-        );
-      },
+                  },
+                );
+        },
+      ),
     );
   }
 }
