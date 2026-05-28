@@ -137,6 +137,7 @@ String cancelStr = "Cancel";
 String previewStr = "Preview";
 String viewStr = "View";
 String musicBoxStr = "Music Box";
+String moodListStr = "Mood List";
 String moodDetectStr = "Mood Detection";
 
 String selectAtleastOneCategoryStr = "Select atleast one category";
@@ -261,7 +262,11 @@ const String thereAreNoTunesAvailableForThisToneNamePleaseTryExploringStr =
     "There are no tunes available for this tone name. Please try exploring another tone name or searching by artist.";
 const String sorrySomethingWentWrongWhileFetchingTunesPleaseTryAgainLaterStr =
     "Sorry, something went wrong while fetching tunes. Please try again later.";
-const String iCanHelpYouBuyAToneStr="I can help you to buy a tone, explore artists or open any section like Music Box, Profile, or My Tunes!";
-const String sureShowingYouTheTuneCategoriesStr="Sure! Showing you the tune categories.";
-const String sorryIamUnableToReachTheServerRightNowStr="Sorry, I'm unable to reach the server right now. Please try again in a moment.";
-const String itLooksLikeYouAreOfflineStr="It looks like you're offline. Please check your internet connection and try again.";
+const String iCanHelpYouBuyAToneStr =
+    "I can help you to buy a tone, explore artists or open any section like Music Box, Profile, or My Tunes!";
+const String sureShowingYouTheTuneCategoriesStr =
+    "Sure! Showing you the tune categories.";
+const String sorryIamUnableToReachTheServerRightNowStr =
+    "Sorry, I'm unable to reach the server right now. Please try again in a moment.";
+const String itLooksLikeYouAreOfflineStr =
+    "It looks like you're offline. Please check your internet connection and try again.";

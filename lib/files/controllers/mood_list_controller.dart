@@ -42,7 +42,7 @@ class MoodListController extends GetxController {
   }
 
   Future<void> getTabDetail(String id, MoodCategory cat) async {
-    AdvancedSearchModal model = await categorySearchApi("169", pageNo: 1);
+    AdvancedSearchModal model = await categorySearchApi(id, pageNo: 1);
     List<TuneInfo> toneList = model.responseMap?.toneList ?? [];
     cat.tunes.assignAll(toneList);
     cat.isLoading.value = false;

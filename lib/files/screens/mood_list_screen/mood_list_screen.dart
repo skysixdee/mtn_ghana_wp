@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mtn_ghana_wp/files/controllers/mood_list_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_screen_header_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/tune_card.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/images.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class MoodListScreen extends StatefulWidget {
@@ -31,6 +36,14 @@ class _MoodListScreenState extends State<MoodListScreen> {
       child: Obx(() {
         return CustomScrollView(
           slivers: [
+            //SliverToBoxAdapter(child: getNavigationView(musicBoxStr)
+            sliverAppBarBuilder(),
+            // CustomScreenHeaderView(
+            //   imageName: nameTuneHeaderPng,
+            //   title: blackListStr,
+            //   subTitle: createBlacklistStr,
+            // ),
+            //),
             SliverList.builder(
               itemCount: con.moods.length,
               itemBuilder: (context, index) {
@@ -55,6 +68,18 @@ class _MoodListScreenState extends State<MoodListScreen> {
           ],
         );
       }),
+    );
+  }
+
+  SliverAppBar sliverAppBarBuilder() {
+    return SliverAppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: white,
+      collapsedHeight: 50,
+      toolbarHeight: 50 - 1,
+      pinned: true,
+      expandedHeight: 50 + 1,
+      flexibleSpace: getNavigationView(moodListStr),
     );
   }
 

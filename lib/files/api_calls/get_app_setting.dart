@@ -7,8 +7,8 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 getAppSettingApi() async {
   Map<String, dynamic> map = await NetworkManager().get(settingScUrl);
-  // AppSettingModel appSettingModel = appSettingModelFromJson(json.encode(map));
-  AppSettingModel appSettingModel = appSettingModelFromJson(_settingResp);
+  AppSettingModel appSettingModel = appSettingModelFromJson(json.encode(map));
+  //AppSettingModel appSettingModel = appSettingModelFromJson(_settingResp);
   StoreManager.other =
       appSettingModel; //appSettingModel.responseMap?.settings?.others;
   print(
