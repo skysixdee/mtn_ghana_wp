@@ -82,12 +82,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  GenericButton(
-                    title: "Mood list",
-                    onTap: () {
-                      context.goNamed(moodListRoute);
-                    },
-                  ),
+                  // GenericButton(
+                  //   title: "Mood list",
+                  //   onTap: () {
+                  //     context.goNamed(moodListRoute);
+                  //   },
+                  // ),
                   // Obx(() {
                   //   return AnimatedContainer(
                   //     duration: const Duration(milliseconds: 300),
