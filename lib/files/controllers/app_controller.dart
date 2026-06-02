@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/model/category_mw_model.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 
 import 'package:get/get.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 // class AppController extends GetxController {
 //   RxList<Category> categories = <Category>[].obs;
@@ -24,7 +25,7 @@ class AppController extends GetxController {
   RxList<Category> categories = <Category>[].obs;
   RxBool isLoggedIn = false.obs;
   RxBool isDarkTheme = false.obs;
-   RxBool isUploading = false.obs;
+  RxBool isUploading = false.obs;
   String headerIncrechmentMsisdn = "";
   RxInt mobileBottomNavIndex = 0.obs;
   RxBool isShowHomePopBanner = true.obs;
@@ -37,5 +38,6 @@ class AppController extends GetxController {
     StoreManager.categories = categoryModel.responseMap?.categoryList ?? [];
     print("SKY list =${StoreManager.categories?.length}");
     categories.value = categoryModel.responseMap?.categoryList ?? [];
+    categories.insert(0, Category(categoryId: "0", categoryName: moodsStr));
   }
 }

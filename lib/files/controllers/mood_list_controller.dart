@@ -10,7 +10,7 @@ class MoodListController extends GetxController {
   RxBool isLoading = false.obs;
   @override
   void onInit() {
-    getMoodTabList();
+    //getMoodTabList();
     super.onInit();
   }
 

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/app_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/mood_list_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class HomeSubCatView extends StatelessWidget {
@@ -29,16 +31,28 @@ class HomeSubCatView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        print("tapped");
-                        String catId =
-                            appController.categories[index].categoryId ?? '';
-                        String catName =
-                            appController.categories[index].categoryName ?? '';
+                        if (appController.categories[index].categoryName ==
+                            moodsStr) {
+                          context.goNamed(moodListRoute);
+                          print("mood list tapped");
+                          Get.lazyPut(() => MoodListController());
+                          var moodCon = Get.find<MoodListController>();
+                          moodCon.getMoodTabList();
+                        } else {
+                          String catId =
+                              appController.categories[index].categoryId ?? '';
+                          String catName =
+                              appController.categories[index].categoryName ??
+                                  '';
 
-                        context.goNamed(categoryDetailRoute, queryParameters: {
-                          'catId': catId,
-                          'catName': catName
-                        });
+                          context.goNamed(categoryDetailRoute,
+                              queryParameters: {
+                                'catId': catId,
+                                'catName': catName
+                              });
+                        }
+                        print("tapped");
+
                         //con.getCategoryDetailList(catId);
                       },
                       child: card(context, index, si),
@@ -79,11 +93,14 @@ class HomeSubCatView extends StatelessWidget {
               url: appController.categories[index].menuImage ?? "",
               gredientColor: isDarkTheme(context) ? gredientColor : transparent,
             ),
-            // CustomText(
-            //   title: appController.categories[index].categoryName,
-            //   fontName: FontName.bold,
-            //   color: white,
-            // ),
+            if (appController.categories[index].categoryName == moodsStr)
+              CustomText(
+                isSelectable: false,
+                title: appController.categories[index].categoryName,
+                fontName: FontName.bold,
+                fontSize: 16,
+                color: white,
+              ),
           ],
         ),
       ),

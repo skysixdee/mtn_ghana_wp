@@ -273,4 +273,5 @@ const String itLooksLikeYouAreOfflineStr =
 String startDetectionStr = "Start Detection";
 String uploadPictureStr = "Upload Picture";
 String faceRecognitionStr = "Face Recognition";
+String moodsStr = "Moods";
 String detectFaceExpressionsStr = "Detect your face expressions";
