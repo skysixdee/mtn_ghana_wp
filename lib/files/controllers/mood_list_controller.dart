@@ -23,7 +23,8 @@ class MoodListController extends GetxController {
 
     List<String> featureTabCount =
         ((StoreManager.other?.moodListEnglish?.attribute) ?? '').split("|");
-
+    print("featureTabCount = $featureTabCount");
+    print("featureTabCount = ${featureTabCount.length}");
     for (var element in featureTabCount) {
       if (element.trim().isEmpty) continue;
 
