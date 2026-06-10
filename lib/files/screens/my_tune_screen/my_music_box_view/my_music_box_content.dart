@@ -10,6 +10,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/tune_card.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/files/screens/music_player/widgets/mp_play_button.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 
 class MyMusicBoxContent extends StatelessWidget {
@@ -36,14 +37,17 @@ class MyMusicBoxContent extends StatelessWidget {
               ]),
           builder: (p0) {
             return TuneCard(
-              customScreenType: CustomScreenType.musicContent,
-              tuneList: con.musicBoxContentList,
-              moreButton: const SizedBox(),
-              info: con.musicBoxContentList[p0],
-              bottomButtonChild: playButton(
-                  con.musicBoxContentList[p0], con.musicBoxContentList,
-                  isHideBuyButton: true),
-            );
+                customScreenType: CustomScreenType.musicContent,
+                tuneList: con.musicBoxContentList,
+                moreButton: const SizedBox(),
+                info: con.musicBoxContentList[p0],
+                bottomButtonChild: MpPlayButton(
+                    tuneList: con.musicBoxContentList,
+                    tuneInfo: con.musicBoxContentList[p0])
+                // playButton(
+                //     con.musicBoxContentList[p0], con.musicBoxContentList,
+                //     isHideBuyButton: true),
+                );
           },
         );
       },

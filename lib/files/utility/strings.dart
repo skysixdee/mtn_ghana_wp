@@ -304,5 +304,7 @@ String getMusicMatchStr = "Get music matched to your mood";
 String detectYrMoodToPersonalizeStr =
     "Detect your mood to get a personalised playlist just for you";
 String startDetectStr = "Start Detect";
-
+String errorPlayingTuneStr = "Error playing this tune. Please try again later.";
 String moodStr = "mood";
+String upcomingStr = "Up Coming";
+String detectYourMoodStr = "Detect Your Mood";

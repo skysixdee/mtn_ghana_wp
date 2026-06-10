@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_playing_tune_controller.dart';
-import 'package:mtn_ghana_wp/files/player_view/new_player_controller.dart';
 
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/enums/playing_card_type.dart';
@@ -24,7 +23,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 class PlayingTuneCard extends StatelessWidget {
   PlayingTuneCard({super.key, required this.info});
   final MyPlayingTuneController con = Get.find();
-  PlayerController pCont = Get.find();
+
   final ToneDetail info;
   @override
   Widget build(BuildContext context) {

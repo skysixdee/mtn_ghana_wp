@@ -11,6 +11,7 @@ import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -210,10 +211,11 @@ class _SlidingBannerState extends State<SlidingBanner>
                       ribbonIcon, // your ribbon image
                       height: 60,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 8.0, right: 8),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0, right: 8),
                       child: CustomText(
-                        title: "Detect Your Mood",
+                        isSelectable: false,
+                        title: detectYourMoodStr,
                         color: white,
                         fontName: FontName.semiBold,
                         // style: TextStyle(

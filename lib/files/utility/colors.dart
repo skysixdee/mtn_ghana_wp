@@ -10,6 +10,7 @@ const yellow = Color.fromRGBO(255, 204, 0, 1);
 const yellowD = Color.fromRGBO(200, 160, 2, 1);
 const lightYellow = Color.fromRGBO(255, 204, 0, 0.4);
 const red = Colors.red;
+const offWhite = Color.fromARGB(255, 208, 208, 208);
 const green = Color.fromARGB(255, 11, 130, 15);
 const grey = Colors.grey;
 const greyDark = Color.fromARGB(255, 84, 84, 84);

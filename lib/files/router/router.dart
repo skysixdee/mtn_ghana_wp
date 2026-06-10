@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mtn_ghana_wp/files/player_view/new_player_controller.dart';
+
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/google_tag_manager/google_tag_manager.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
-import 'package:mtn_ghana_wp/files/player_view/player_view.dart';
+
 import 'package:mtn_ghana_wp/files/screens/home_screen/widget/home_pop_banner_view/home_pop_banner_view.dart';
 import 'package:mtn_ghana_wp/files/screens/login_screen/login_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mobile_bottom_nav_view/mobile_bottom_nav_view.dart';
 import 'package:mtn_ghana_wp/files/screens/mood_detect/mood_detection_screen/mood_detect_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mood_list_screen/mood_list_screen.dart';
+import 'package:mtn_ghana_wp/files/screens/music_player/widgets/bottom_mp_view.dart';
 
 import 'package:mtn_ghana_wp/files/screens/reward_point_screen/reward_point_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/search_screen/consolidated_search_screen.dart';
@@ -233,7 +234,6 @@ StatefulShellBranch _createShell(
 }
 
 Widget navBuilder(context, state, navigationShell) {
-  PlayerController pCont = Get.find();
   //globalContext = context;
   return ResponsiveBuilder(
     builder: (context, si) {
@@ -252,6 +252,7 @@ Widget navBuilder(context, state, navigationShell) {
           bottomNavigationBar: si.isMobile ? MobileBottomNavView() : null,
           body: Obx(() {
             return Stack(
+              alignment: AlignmentGeometry.bottomCenter,
               children: [
                 Column(
                   children: [
@@ -292,13 +293,18 @@ Widget navBuilder(context, state, navigationShell) {
                         ],
                       ),
                     ),
-                    if (pCont.isPlayerVisible.value)
+                    if (pCont.isMusicPlayerOpen.value)
                       SizedBox(
-                        height: minPlayerHeight,
+                        height: bottomMusicPlayerHeight +
+                            (pCont.isPlaying.value ? 12 : 0),
                       )
+                    // if (pCont.isPlayerVisible.value)
+                    //   SizedBox(
+                    //     height: minPlayerHeight,
+                    //   )
                   ],
                 ),
-                PlayerView()
+                if (pCont.isMusicPlayerOpen.value) BottomMpView()
               ],
             );
           }));

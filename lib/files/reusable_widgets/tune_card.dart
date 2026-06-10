@@ -18,8 +18,8 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/open_login.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
+import 'package:mtn_ghana_wp/files/screens/music_player/widgets/mp_play_button.dart';
 
-import 'package:mtn_ghana_wp/files/screens/mobile_tune_preview/mobile_tune_preview_sceen.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
@@ -146,8 +146,8 @@ class TuneCard extends StatelessWidget {
                         children: [
                           Expanded(
                               child: bottomLeftChild ??
-                                  playButton(info, tuneList,
-                                      isHideBuyButton: false)),
+                                  MpPlayButton(
+                                      tuneList: tuneList, tuneInfo: info)),
                           const SizedBox(width: 12),
                           Expanded(child: bottomRightChild ?? buyButton(info)),
                         ],

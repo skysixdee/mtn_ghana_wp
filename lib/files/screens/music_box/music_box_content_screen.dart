@@ -10,6 +10,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/generic_grid_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/get_navigation_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/tune_card.dart';
+import 'package:mtn_ghana_wp/files/screens/music_player/widgets/mp_play_button.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,9 +53,10 @@ class MusicBoxContentScreen extends StatelessWidget {
                   tuneList: con.musicBoxContentList,
                   moreButton: const SizedBox(),
                   info: con.musicBoxContentList[p0],
-                  bottomButtonChild: playButton(
-                      con.musicBoxContentList[p0], con.musicBoxContentList,
-                      isHideBuyButton: false),
+                  bottomButtonChild: MpPlayButton(
+                    tuneList: con.musicBoxContentList,
+                    tuneInfo: con.musicBoxContentList[p0],
+                  ),
                 );
               },
             );

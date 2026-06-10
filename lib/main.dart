@@ -26,7 +26,6 @@ import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_setti
 import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/tune_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/name_tune_controller.dart';
-import 'package:mtn_ghana_wp/files/player_view/new_player_controller.dart';
 
 import 'package:mtn_ghana_wp/files/controllers/profile_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
@@ -41,6 +40,7 @@ import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_popup.dart';
 import 'package:mtn_ghana_wp/files/screens/category_detail_screen/category_detail_screen.dart';
 import 'package:mtn_ghana_wp/files/screens/mood_detect/moods_controller.dart';
+import 'package:mtn_ghana_wp/files/screens/music_player/controller/mp_controller.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -61,6 +61,7 @@ import 'package:url_strategy/url_strategy.dart';
 late SharedPreferences prefs;
 late AppController appCont;
 late SideMenuController sideMenuCont;
+late MpController pCont;
 //late BuildContext globalContext;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -191,7 +192,9 @@ Future<void> initiateController() async {
   Get.lazyPut(() => AppController());
   appCont = Get.find(); //put(AppController());
 //Get.lazyPut(() => PlayerController());
-  PlayerController _playCon = Get.put(PlayerController());
+
+  Get.lazyPut(() => MpController());
+  pCont = Get.find();
   //Get.lazyPut(() => SideMenuController());
   sideMenuCont = Get.put(SideMenuController());
   Get.lazyPut(() => GiftController());
@@ -201,7 +204,7 @@ Future<void> initiateController() async {
   Get.lazyPut(() => TuneController());
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => LoginController());
-  Get.lazyPut(() => PlayerController());
+  Get.lazyPut(() => MpController());
   Get.lazyPut(() => MyTuneController());
   Get.lazyPut(() => BannerController());
   Get.lazyPut(() => FeatureController());

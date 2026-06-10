@@ -26,6 +26,7 @@ String musicBoxOfferCode = '';
 
 String basePackOfferCode = '';
 String basePackContentId = '';
+double bottomMusicPlayerHeight = 60;
 
 //=========================
 int channelId = 4;
