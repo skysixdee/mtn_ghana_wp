@@ -4,11 +4,14 @@
 <head>
   <!-- ✅ Google Tag Manager -->
   <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WD3DPF7J');
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-WD3DPF7J');
   </script>
 
   <!-- ✅ Face API -->
@@ -39,7 +42,8 @@
   <script async src="https://unpkg.com/compromise@14.1.0/builds/compromise.min.js"></script>
 
   <style>
-    body, html {
+    body,
+    html {
       margin: 0;
       padding: 0;
     }
@@ -67,8 +71,13 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     /* ✅ Face UI Styles */
@@ -96,7 +105,8 @@
       z-index: 0;
     }
 
-    #video, #snapshot {
+    #video,
+    #snapshot {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -155,221 +165,25 @@
   </style>
 </head>
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Detector</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  <script src="flutter_bootstrap.js" async></script>
+</head>
+
 <body>
   <!-- ✅ Google Tag Manager (noscript fallback) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WD3DPF7J"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WD3DPF7J" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="loading">
     <div class="loader"></div>
   </div>
-
-  <!-- ✅ Face Recognition UI -->
-  <div id="face-ui">
-    <div id="close-btn">&times;</div>
-    <div style="display:flex; flex-direction:column; align-items:center;">
-      <div style="
-          margin-bottom: 10px;
-          font-size: 22px;
-          font-weight: bold;
-          font-family: Arial, sans-serif;">
-        Face Recognition ...
-      </div>
-      <div id="camera-container">
-        <video id="video" autoplay muted></video>
-        <img id="snapshot" />
-      </div>
-      <div id="confirm-modal">
-        <div id="confirm-modal-content">
-          <p id="confirm-text"></p>
-          <button id="yes-btn">Yes</button>
-          <button id="no-btn">No</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
- 
-  <input type="file" id="upload-input" accept="image/*" style="display:none" />
-
- 
   <script src="flutter_bootstrap.js" async></script>
 
 
- 
-  <script>
-    window.detectFace = async function () {
-      await faceApiReady;
-      document.getElementById('snapshot').src = '';
-      document.getElementById('snapshot').style.display = 'none';
-      document.getElementById('video').style.display = 'block';
-      document.getElementById('confirm-text').textContent = '';
-      document.getElementById('confirm-modal').style.display = 'none';
-      document.getElementById('face-ui').style.display = 'flex';
-
-      await faceapi.nets.tinyFaceDetector.loadFromUri('models');
-      await faceapi.nets.faceExpressionNet.loadFromUri('models');
-      startFaceDetection();
-    };
-
-    async function startFaceDetection() {
-      const video = document.getElementById('video');
-      const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
-      video.srcObject = stream;
-      await video.play();
-
-      const oldCanvas = document.querySelector('#camera-container canvas');
-      if (oldCanvas) oldCanvas.remove();
-
-      const canvas = faceapi.createCanvasFromMedia(video);
-      document.getElementById('camera-container').appendChild(canvas);
-
-      const displaySize = { width: video.videoWidth, height: video.videoHeight };
-      faceapi.matchDimensions(canvas, displaySize);
-
-      let last = null, lastTime = null, captured = false;
-      const interval = setInterval(async () => {
-        if (captured) return;
-
-        const detections = await faceapi
-          .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-          .withFaceExpressions();
-
-        const resizedDetections = faceapi.resizeResults(detections, displaySize);
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        faceapi.draw.drawDetections(canvas, resizedDetections);
-        faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-
-        if (!detections.length) return;
-
-        const emotion = Object.entries(detections[0].expressions)
-          .reduce((a, b) => a[1] > b[1] ? a : b)[0];
-
-        const now = Date.now();
-        if (emotion !== last) {
-          last = emotion;
-          lastTime = now;
-        } else if (now - lastTime >= 3000) {
-          captured = true;
-          captureSnapshot(video, emotion);
-          clearInterval(interval);
-        }
-      }, 300);
-    }
-
-    function captureSnapshot(video, emotion) {
-      const canvas = document.createElement('canvas');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas.getContext('2d').drawImage(video, 0, 0);
-      document.getElementById('snapshot').src = canvas.toDataURL('image/png');
-      document.getElementById('video').style.display = 'none';
-      document.getElementById('snapshot').style.display = 'block';
-      document.getElementById('confirm-text').textContent = `Expression: ${emotion}. Confirm?`;
-      document.getElementById('confirm-modal').style.display = 'flex';
-
-      document.getElementById('yes-btn').onclick = () => {
-        const base64Data = document.getElementById('snapshot').src;
-        const expression = emotion;
-        document.getElementById('face-ui').style.display = 'none';
-        const event = new CustomEvent('expressionCaptured', { detail: 'closed' });
-        window.dispatchEvent(event);
-
-        window.parent.postMessage({ type: "uploadFinished" }, "*");
-        window.parent.postMessage(
-          { type: 'expressionConfirmed', image: base64Data, expression: expression },
-          '*'
-        );
-        event.target.value = "";
-        stopVideoStream();
-
-        const oldCanvas = document.querySelector('#camera-container canvas');
-        if (oldCanvas) oldCanvas.remove();
-
-        document.getElementById('confirm-modal').style.display = 'none';
-      };
-
-      document.getElementById('no-btn').onclick = () => {
-        document.getElementById('confirm-modal').style.display = 'none';
-        document.getElementById('snapshot').style.display = 'none';
-        document.getElementById('video').style.display = 'block';
-
-        const oldCanvas = document.querySelector('#camera-container canvas');
-        if (oldCanvas) oldCanvas.remove();
-
-        startFaceDetection();
-      };
-    }
-
-    function stopVideoStream() {
-      const video = document.getElementById('video');
-      const stream = video.srcObject;
-      if (stream) {
-        stream.getTracks().forEach(track => track.stop());
-      }
-      video.srcObject = null;
-    }
-
-    document.getElementById('close-btn').onclick = () => {
-      stopVideoStream();
-
-      const oldCanvas = document.querySelector('#camera-container canvas');
-      if (oldCanvas) oldCanvas.remove();
-
-      document.getElementById('face-ui').style.display = 'none';
-      const event = new CustomEvent('expressionCaptured', { detail: 'closed' });
-      window.dispatchEvent(event);
-    };
-  </script>
-
-  <!-- ✅ Upload & Detect from Image -->
-  <script>
-    // Guard: resolves when faceapi is confirmed available
-    const faceApiReady = new Promise((resolve) => {
-      const check = () => (typeof faceapi !== 'undefined' ? resolve() : setTimeout(check, 50));
-      check();
-    });
-
-    document.getElementById("upload-input").onchange = async (event) => {
-      await faceApiReady;
-      const file = event.target.files[0];
-      if (!file) return;
-
-      window.parent.postMessage({ type: "uploadStarted" }, "*");
-
-      const img = await faceapi.bufferToImage(file);
-      await faceapi.nets.tinyFaceDetector.loadFromUri('models');
-      await faceapi.nets.faceExpressionNet.loadFromUri('models');
-
-      const detections = await faceapi
-        .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
-        .withFaceExpressions();
-
-      if (!detections) {
-        window.parent.postMessage({ type: "uploadFinished" }, "*");
-        alert("No face detected!");
-        event.target.value = "";
-        return;
-      }
-
-      const emotion = Object.entries(detections.expressions)
-        .reduce((a, b) => (a[1] > b[1] ? a : b))[0];
-
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      canvas.getContext("2d").drawImage(img, 0, 0);
-      const base64Data = canvas.toDataURL("image/png");
-
-      window.parent.postMessage({ type: "uploadFinished" }, "*");
-
-      window.parent.postMessage(
-        { type: "expressionConfirmed", image: base64Data, expression: emotion, source: "upload" },
-        "*"
-      );
-    };
-  </script>
 
   <!-- compromise.js from CDN -->
   <script src="https://unpkg.com/compromise@14.1.0/builds/compromise.min.js"></script>
@@ -394,7 +208,7 @@
     measurementId: 'G-YE9FLP6Z6G',
   });
 
- 
+
   function showNotification(title, body) {
     console.log(' showNotification() called:', title, body);
 

@@ -275,3 +275,34 @@ String uploadPictureStr = "Upload Picture";
 String faceRecognitionStr = "Face Recognition";
 String moodsStr = "Moods";
 String detectFaceExpressionsStr = "Detect your face expressions";
+String youAreLookingTodatyStr = "You are looking MOOD today";
+String loadingFaceModelsStr = "Loading face models...";
+String modelLoadFailedStr = "Model load failed:";
+String retryStr = "Retry";
+String detectMyMoodStr = "Detect my mood";
+String noPlayListYetStr = "No playlist yet";
+String onceWeDetectYrMoodStr =
+    "Once we detect your mood, we'll curate a playlist that perfectly matches how you're feeling right now.";
+String orPickManuallyStr = "Or pick a mood manually";
+String selectMoodChipStr =
+    "Selecting a mood chip instantly loads your playlist";
+String yourPhotoProcessedStr =
+    "Your photo is processed locally and never stored on our servers";
+String yourPlaylistStr = "Your mood playlist";
+String detectYourMoodToFillStr =
+    "Detect your mood to fill this space with music";
+String noFaceYetStr = "No face yet";
+String moodDetectedStr = "MOOD detected";
+String youAreLookindStr =
+    "You are looking MOOD today \n Here's music to keep you company";
+String numberTrackCuratedStr = "NUMBER tracks • curated for you";
+String clearStr = "Clear";
+String unlimeitedTonesStr = "Unlimited Tones";
+String allowCamOrUploadPhotoStr = "Allow camera or upload a photo";
+String weAnalizeYrFacialStr = "We analyse your facial expression";
+String getMusicMatchStr = "Get music matched to your mood";
+String detectYrMoodToPersonalizeStr =
+    "Detect your mood to get a personalised playlist just for you";
+String startDetectStr = "Start Detect";
+
+String moodStr = "mood";

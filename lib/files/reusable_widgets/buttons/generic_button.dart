@@ -9,7 +9,7 @@ class GenericButton extends StatelessWidget {
   const GenericButton({
     super.key,
     this.title,
-    this.bgColor = lightGrey,
+    this.bgColor,
     this.textColor = black,
     this.textColorD,
     this.padding,
@@ -31,7 +31,7 @@ class GenericButton extends StatelessWidget {
   final Widget? leadingIcon;
   final Widget? trailingIcon;
   final String? title;
-  final Color bgColor;
+  final Color? bgColor;
   final Color? borderColor;
   final Color textColor;
   final Color? textColorD;
@@ -51,7 +51,7 @@ class GenericButton extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border.all(color: borderColor ?? transparent),
             borderRadius: BorderRadius.circular(radius ?? height / 2),
-            color: bgColor
+            color: bgColor ?? lightGrey
             // color: Theme.of(context).brightness == Brightness.dark
             //     ? checkColur(bgColor, title ?? '')
             //     : bgColor,

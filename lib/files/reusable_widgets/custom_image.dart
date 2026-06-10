@@ -14,7 +14,9 @@ Widget customImage(
     Color gredientColor = transparent,
     double cornerRadius = 0,
     BoxFit? fit,
-    String toneName = ""}) {
+    String toneName = "",
+    double? height,
+    double? width}) {
   String title = '';
   if (toneName.isNotEmpty) {
     List<String> ls = toneName.split(" ");
@@ -40,6 +42,8 @@ Widget customImage(
                       ),
                     )
                   : CachedNetworkImage(
+                      height: height,
+                      width: width,
                       //imageUrl: 'https://picsum.photos/id/70/300/100',
                       imageUrl: url ?? '',
                       fit: fit ?? BoxFit.cover,

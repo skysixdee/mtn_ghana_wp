@@ -40,6 +40,7 @@ import 'package:mtn_ghana_wp/files/router/router.dart';
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_otp_popup.dart';
 import 'package:mtn_ghana_wp/files/screens/authentication_screen/login_popup.dart';
 import 'package:mtn_ghana_wp/files/screens/category_detail_screen/category_detail_screen.dart';
+import 'package:mtn_ghana_wp/files/screens/mood_detect/moods_controller.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
@@ -195,6 +196,7 @@ Future<void> initiateController() async {
   sideMenuCont = Get.put(SideMenuController());
   Get.lazyPut(() => GiftController());
   Get.lazyPut(() => HomeController());
+  Get.lazyPut(() => MoodsController());
   Get.lazyPut(() => BuyTuneController());
   Get.lazyPut(() => TuneController());
   Get.lazyPut(() => OtpController());

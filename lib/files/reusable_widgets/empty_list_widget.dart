@@ -3,7 +3,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/material.dart';
 
-Widget emptyListWidget({String? message, double? height}) {
+Widget emptyListWidget({String? message, double? height, double? fontSize}) {
   return SizedBox(
     height: height,
     child: Center(
@@ -12,9 +12,9 @@ Widget emptyListWidget({String? message, double? height}) {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomText(
-            title: message ??listIsEmptyStr,
+            title: message ?? listIsEmptyStr,
             fontName: FontName.bold,
-            fontSize: 18,
+            fontSize: fontSize ?? 18,
           ),
         ],
       ),
