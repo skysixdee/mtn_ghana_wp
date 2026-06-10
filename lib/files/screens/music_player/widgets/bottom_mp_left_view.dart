@@ -38,12 +38,14 @@ class BottomMpLeftView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
+                    isSelectable: false,
                     title: pCont.toneinfo.value.toneName,
                     color: white,
                     fontName: FontName.semiBold,
                     fontSize: 12,
                   ),
                   CustomText(
+                    isSelectable: false,
                     title: pCont.toneinfo.value.artistName,
                     color: offWhite,
                     fontName: FontName.regular,
