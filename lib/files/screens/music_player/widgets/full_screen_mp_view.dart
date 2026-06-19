@@ -4,10 +4,13 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mtn_ghana_wp/files/api_calls/add_to_wishlist_api.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
+import 'package:mtn_ghana_wp/files/popup_views/gift_popup_view.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/open_login.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/music_player/widgets/mp_play_button.dart';
 import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
@@ -266,6 +269,7 @@ class FullScreenMpView extends StatelessWidget {
                     children: [
                       Flexible(
                         child: CustomText(
+                          isSelectable: false,
                           colorD: whiteD,
                           title: uniqueArtists[index],
                         ),
@@ -333,6 +337,7 @@ class FullScreenMpView extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CustomText(
+                              isSelectable: false,
                               title: uniqueArtists[index],
                               color: white,
                               colorD: blackD,
@@ -404,6 +409,7 @@ class FullScreenMpView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               //shareButton(),
+              giftButton(),
               previousButton(),
               playButtonButton(),
               nextButton(),
@@ -426,6 +432,36 @@ class FullScreenMpView extends StatelessWidget {
       ),
       onTap: () {
         print("object");
+      },
+    );
+  }
+
+  Widget giftButton() {
+    return GenericButton(
+      width: 40,
+      bgColor: transparent,
+      padding: EdgeInsets.zero,
+      leadingIcon: const Icon(
+        Icons.card_giftcard,
+        size: 16,
+      ),
+      onTap: () {
+        if (StoreManager.isLoggedIn) {
+          genericPopup(GiftPopupView(info: pCont.toneinfo.value));
+        } else {
+          openAlertPopup(
+            message: thisFeatureIsAvailableForLoggedinStr,
+            textAlign: TextAlign.center,
+            primaryBtnTitle: cancelStr,
+            secondryBtnTitle: loginStr,
+            secondryTitleColor: black,
+            onSecondry: () async {
+              await Future.delayed(const Duration(milliseconds: 100));
+              openLogin();
+            },
+          );
+        }
+        print("Gift tapped");
       },
     );
   }

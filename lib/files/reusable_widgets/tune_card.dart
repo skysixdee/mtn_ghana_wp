@@ -201,7 +201,7 @@ class _MoreButtonWidget extends StatelessWidget {
             [
               PopoverMenuModel(wishlistStr),
               PopoverMenuModel(giftStr),
-              PopoverMenuModel(shareStr),
+              //PopoverMenuModel(shareStr),
             ];
 
         genericPopover(
