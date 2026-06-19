@@ -22,71 +22,74 @@ class FullScreenMpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentGeometry.topRight,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 28.0),
-          child: ResponsiveBuilder(
-            builder: (context, si) {
-              return si.isMobile
-                  ? ListView(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      shrinkWrap: true,
-                      children: [
-                        playerView(true),
-                        playingTitleWidget(si),
-                        const SizedBox(height: 20),
-                        upcomingList(si),
-                        artistListMobileView(si),
-                        SizedBox(height: 20),
-                      ],
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: ListView(
-                            children: [
-                              Wrap(
-                                spacing: 20,
-                                // spacing: 10,
-                                // mainAxisAlignment: MainAxisAlignment.start,
-                                // crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                      width: 300, child: playerView(false)),
-                                  artistListDesktopView(si),
-                                ],
-                              ),
-                            ],
+    return Container(
+      color: appCont.isDarkTheme.value ? blackTest : whiteD,
+      child: Stack(
+        alignment: AlignmentGeometry.topRight,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 28.0),
+            child: ResponsiveBuilder(
+              builder: (context, si) {
+                return si.isMobile
+                    ? ListView(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        shrinkWrap: true,
+                        children: [
+                          playerView(true),
+                          playingTitleWidget(si),
+                          const SizedBox(height: 20),
+                          upcomingList(si),
+                          artistListMobileView(si),
+                          SizedBox(height: 20),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            child: ListView(
+                              children: [
+                                Wrap(
+                                  spacing: 20,
+                                  // spacing: 10,
+                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                        width: 300, child: playerView(false)),
+                                    artistListDesktopView(si),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Flexible(child: upcomingList(si))
-                      ],
-                    );
-            },
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GenericButton(
-                padding: EdgeInsets.zero,
-                width: 40,
-                leadingIcon: Icon(Icons.fullscreen_exit),
-                onTap: () {
-                  pCont.isMusicPlayerFullScreen.value = false;
-                },
-              ),
+                          Flexible(child: upcomingList(si))
+                        ],
+                      );
+              },
             ),
-          ],
-        )
-      ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GenericButton(
+                  padding: EdgeInsets.zero,
+                  width: 40,
+                  leadingIcon: Icon(Icons.fullscreen_exit),
+                  onTap: () {
+                    pCont.isMusicPlayerFullScreen.value = false;
+                  },
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -99,6 +102,7 @@ class FullScreenMpView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomText(
+            colorD: whiteD,
             title: upcomingStr,
             fontName: FontName.bold,
             fontSize: si.isMobile ? 16 : 20,
@@ -117,7 +121,7 @@ class FullScreenMpView extends StatelessWidget {
                         border: Border.all(
                             color:
                                 appCont.isDarkTheme.value ? grey : transparent),
-                        color: appCont.isDarkTheme.value ? blackD : lightGrey,
+                        color: appCont.isDarkTheme.value ? whiteD : lightGrey,
                         borderRadius: BorderRadius.circular(4)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -170,18 +174,47 @@ class FullScreenMpView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomText(
-                                  colorD: offWhite,
+                                  colorD: black,
                                   fontName: FontName.semiBold,
                                   fontSize: 12,
                                   title: pCont.tuneList[index].toneName ?? "",
                                 ),
                                 CustomText(
-                                  colorD: offWhite,
+                                  colorD: black,
                                   fontName: FontName.regular,
                                   fontSize: 10,
                                   title: pCont.tuneList[index].artistName ?? "",
                                 )
                               ],
+                            ),
+                            const Spacer(),
+                            GenericButton(
+                              bgColor: transparent,
+                              width: 30,
+                              padding: const EdgeInsets.all(0),
+                              leadingIcon: const Icon(
+                                Icons.play_arrow_rounded,
+                              ),
+                              onTap: () {
+                                pCont.playUrl(pCont.tuneList[index]);
+                              },
+                            ),
+                            GenericButton(
+                              bgColor: transparent,
+                              width: 30,
+                              padding: const EdgeInsets.all(0),
+                              leadingIcon: const Icon(
+                                Icons.favorite_border,
+                              ),
+                              onTap: () {
+                                if (StoreManager.isLoggedIn) {
+                                  addToWishlistApi(pCont.toneinfo.value);
+                                } else {
+                                  openAlertPopup(
+                                      message:
+                                          thisFeatureIsAvailableForLoggedinStr);
+                                }
+                              },
                             )
                           ],
                         ),
@@ -208,6 +241,7 @@ class FullScreenMpView extends StatelessWidget {
         playingTitleWidget(si),
         SizedBox(height: 20),
         CustomText(
+          colorD: whiteD,
           fontName: FontName.bold,
           fontSize: 16,
           title: artistsStr,
@@ -232,6 +266,7 @@ class FullScreenMpView extends StatelessWidget {
                     children: [
                       Flexible(
                         child: CustomText(
+                          colorD: whiteD,
                           title: uniqueArtists[index],
                         ),
                       ),
@@ -262,6 +297,7 @@ class FullScreenMpView extends StatelessWidget {
         //playingTitleWidget(),
         SizedBox(height: 20),
         CustomText(
+          colorD: whiteD,
           fontName: FontName.bold,
           fontSize: si.isMobile ? 14 : 16,
           title: artistsStr,
@@ -299,6 +335,7 @@ class FullScreenMpView extends StatelessWidget {
                             child: CustomText(
                               title: uniqueArtists[index],
                               color: white,
+                              colorD: blackD,
                               fontSize: 12,
                               fontName: FontName.semiBold,
                               textAlign: TextAlign.center,
@@ -323,6 +360,7 @@ class FullScreenMpView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(
+              colorD: whiteD,
               fontName: FontName.bold,
               fontSize: si.isMobile ? 13 : 16,
               title: pCont.toneinfo.value.toneName,
@@ -331,6 +369,7 @@ class FullScreenMpView extends StatelessWidget {
               fontName: FontName.regular,
               title: pCont.toneinfo.value.artistName,
               color: black,
+              colorD: whiteD,
               fontSize: si.isMobile ? 12 : null,
             )
           ],
@@ -364,7 +403,7 @@ class FullScreenMpView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              shareButton(),
+              //shareButton(),
               previousButton(),
               playButtonButton(),
               nextButton(),

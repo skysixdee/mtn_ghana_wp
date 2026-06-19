@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:mtn_ghana_wp/files/api_calls/add_to_wishlist_api.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/generic_popover.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
 
 import 'package:responsive_builder/responsive_builder.dart';
@@ -33,19 +39,34 @@ class BottomMpRightView extends StatelessWidget {
   }
 
   Widget menuButton() {
-    return GenericButton(
-      fontName: FontName.semiBold,
-      fontSize: 12,
-      bgColor: transparent,
-      padding: const EdgeInsets.symmetric(horizontal: 0),
-      width: 40,
-      leadingIcon: Icon(
-        Icons.more_horiz,
-        color: white,
-        size: 18,
-      ),
-      onTap: () {
-        print("tapped menu button");
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return GenericButton(
+          fontName: FontName.semiBold,
+          fontSize: 12,
+          bgColor: transparent,
+          padding: const EdgeInsets.symmetric(horizontal: 0),
+          width: 40,
+          leadingIcon: const Icon(
+            Icons.more_horiz,
+            color: white,
+            size: 18,
+          ),
+          onTap: () {
+            genericPopover(
+              context,
+              [PopoverMenuModel(addToWishlistStr)],
+              onTap: (p0, p1) {
+                if (StoreManager.isLoggedIn) {
+                  addToWishlistApi(pCont.toneinfo.value);
+                } else {
+                  openAlertPopup(message: thisFeatureIsAvailableForLoggedinStr);
+                }
+              },
+            );
+            print("tapped menu button");
+          },
+        );
       },
     );
   }
