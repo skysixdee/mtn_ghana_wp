@@ -11,6 +11,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/empty_list_widget.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/screens/mood_detect/mood_chip_model.dart';
 import 'package:mtn_ghana_wp/files/screens/mood_detect/moods_controller.dart';
+import 'package:mtn_ghana_wp/files/screens/music_player/widgets/mp_play_button.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
@@ -73,61 +74,91 @@ class MdTuneListSection extends StatelessWidget {
       padding: const EdgeInsets.only(
         bottom: 12.0,
       ),
-      child: Container(
-        decoration: BoxDecoration(
-            color: appCont.isDarkTheme.value ? blackD : white,
-            borderRadius: BorderRadius.circular(4),
-            boxShadow: [
-              BoxShadow(
-                  color: appCont.isDarkTheme.value
-                      ? white.withValues(alpha: 0.2)
-                      : black.withValues(alpha: 0.2),
-                  spreadRadius: 1,
-                  blurRadius: 2)
-            ]),
-        child: Row(
-          spacing: 4,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Stack(
-                alignment: AlignmentGeometry.center,
-                children: [
-                  customImage(
-                      height: 50,
-                      width: 50,
-                      cornerRadius: 4,
-                      url: item.toneIdpreviewImageUrl),
-                  // MpPlayButton(
-                  //     padding: const EdgeInsets.all(0),
-                  //     radius: 2,
-                  //     width: 50,
-                  //     playColor: white,
-                  //     bgColor: black.withValues(alpha: 0.4),
-                  //     tuneList: cont.moodList,
-                  //     tuneInfo: cont.moodList[index])
-                ],
-              ),
-            ),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    title: item.toneName,
-                    fontName: FontName.bold,
-                    fontSize: 12,
+      child: Obx(
+        () {
+          return Container(
+            decoration: BoxDecoration(
+                color: appCont.isDarkTheme.value ? blackD : white,
+                borderRadius: BorderRadius.circular(4),
+                boxShadow: [
+                  BoxShadow(
+                      color: appCont.isDarkTheme.value
+                          ? white.withValues(alpha: 0.2)
+                          : black.withValues(alpha: 0.2),
+                      spreadRadius: 1,
+                      blurRadius: 2)
+                ]),
+            child: Row(
+              spacing: 4,
+              children: [
+                Expanded(
+                  child: Row(
+                    spacing: 4,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: customImage(
+                            height: 50,
+                            width: 50,
+                            cornerRadius: 4,
+                            url: item.toneIdpreviewImageUrl),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            title: item.toneName,
+                            fontName: FontName.bold,
+                            fontSize: 12,
+                          ),
+                          CustomText(
+                            title: item.artistName,
+                            fontName: FontName.regular,
+                            fontSize: 10,
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                  CustomText(
-                    title: item.artistName,
-                    fontName: FontName.regular,
-                    fontSize: 10,
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+                Row(
+                  children: [
+                    MpPlayButton(
+                        padding: EdgeInsets.all(0),
+                        width: 45,
+                        bgColor:
+                            transparent, //appCont.isDarkTheme.value ? grey : null,
+                        tuneList: cont.moodList,
+                        playColor: appCont.isDarkTheme.value ? white : black,
+                        tuneInfo: item),
+                    GenericButton(
+                      bgColor: transparent,
+                      width: 40,
+                      padding: EdgeInsets.all(0),
+                      leadingIcon: Icon(
+                        size: 16,
+                        Icons.favorite_border,
+                        color: appCont.isDarkTheme.value ? white : black,
+                      ),
+                      onTap: () {},
+                    ),
+                    GenericButton(
+                      bgColor: transparent,
+                      width: 40,
+                      padding: EdgeInsets.all(0),
+                      leadingIcon: Icon(
+                        size: 16,
+                        Icons.card_giftcard,
+                        color: appCont.isDarkTheme.value ? white : black,
+                      ),
+                      onTap: () {},
+                    )
+                  ],
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
