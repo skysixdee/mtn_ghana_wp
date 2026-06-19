@@ -55,7 +55,8 @@ class _NewFeatureViewState extends State<NewFeatureView> {
                 final category = cont.categories[index];
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 18.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: si.isMobile ? 8 : 18.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

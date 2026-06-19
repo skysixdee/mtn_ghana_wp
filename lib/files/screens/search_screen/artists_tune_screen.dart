@@ -15,7 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ArtistsTuneScreen extends StatefulWidget {
-  const ArtistsTuneScreen({super.key, required this.artistName, this.fromChatbot=true});
+  const ArtistsTuneScreen(
+      {super.key, required this.artistName, this.fromChatbot = true});
   final String artistName;
   final bool fromChatbot;
 
@@ -38,10 +39,11 @@ class _ArtistsTuneScreenState extends State<ArtistsTuneScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   //parentPhysics: NeverScrollableScrollPhysics(),
                   isLoading: con.isLoading.value,
+                  onlyGrid: MediaQuery.of(context).size.width < 600,
                   sliverAppBar: NavigationHeaderView(titleList: [
                     NavigationHeaderModel(homeStr, homeRoute),
                     if (!widget.fromChatbot)
-                    NavigationHeaderModel(searchStr, searchRoute),
+                      NavigationHeaderModel(searchStr, searchRoute),
                     NavigationHeaderModel(widget.artistName, homeRoute)
                   ]),
                   itemCount: con.tuneList.length,

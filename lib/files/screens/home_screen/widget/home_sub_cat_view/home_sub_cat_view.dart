@@ -9,6 +9,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
+import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -93,19 +94,27 @@ class HomeSubCatView extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              customImage(
-                url: appController.categories[index].menuImage ?? "",
-                gredientColor:
-                    isDarkTheme(context) ? gredientColor : transparent,
-              ),
               if (appController.categories[index].categoryName == moodsStr)
-                CustomText(
-                  isSelectable: false,
-                  title: appController.categories[index].categoryName,
-                  fontName: FontName.bold,
-                  fontSize: 16,
-                  color: white,
+                customImage(
+                  imageName: moodCatBluePng,
+                  url: appController.categories[index].menuImage ?? "",
+                  gredientColor:
+                      isDarkTheme(context) ? gredientColor : transparent,
                 ),
+              if (appController.categories[index].categoryName != moodsStr)
+                customImage(
+                  url: appController.categories[index].menuImage ?? "",
+                  gredientColor:
+                      isDarkTheme(context) ? gredientColor : transparent,
+                ),
+              // if (appController.categories[index].categoryName == moodsStr)
+              //   CustomText(
+              //     isSelectable: false,
+              //     title: appController.categories[index].categoryName,
+              //     fontName: FontName.bold,
+              //     fontSize: 16,
+              //     color: white,
+              //   ),
             ],
           ),
         ),
