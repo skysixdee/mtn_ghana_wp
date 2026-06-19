@@ -244,39 +244,45 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: CompositedTransformTarget(
-          link: _layerLink,
-          child: TextField(
-            controller: _controller,
-            onTap: () {
-              // Only show overlay if there's data
-              if (_hasData()) {
-                _showOverlay();
-              }
-            },
-            onSubmitted: (value) {
-              if (value.isEmpty) return;
-              _hideOverlay();
-              var isNumeric = isValidNumeric(value);
-              cont.consolidatedResults(value, selectedIndex: isNumeric ? 2 : 0);
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Center(
+        child: SizedBox(
+          width: 500,
+          child: Center(
+            child: CompositedTransformTarget(
+              link: _layerLink,
+              child: TextField(
+                controller: _controller,
+                onTap: () {
+                  // Only show overlay if there's data
+                  if (_hasData()) {
+                    _showOverlay();
+                  }
+                },
+                onSubmitted: (value) {
+                  if (value.isEmpty) return;
+                  _hideOverlay();
+                  var isNumeric = isValidNumeric(value);
+                  cont.consolidatedResults(value,
+                      selectedIndex: isNumeric ? 2 : 0);
 
-              context.goNamed(searchConsolidatedRoute);
-            },
-            onChanged: (value) {
-              if (value.isNotEmpty) {
-                cont.getResultFor(value);
-              } else {
-                // Hide overlay when search is cleared
-                _hideOverlay();
-              }
-            },
-            decoration: InputDecoration(
-              hintText: searchForSongArtistCodeStr,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                  context.goNamed(searchConsolidatedRoute);
+                },
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    cont.getResultFor(value);
+                  } else {
+                    // Hide overlay when search is cleared
+                    _hideOverlay();
+                  }
+                },
+                decoration: InputDecoration(
+                  hintText: searchForSongArtistCodeStr,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
             ),
           ),
