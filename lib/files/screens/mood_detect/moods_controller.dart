@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mtn_ghana_wp/files/api_calls/category_search_api.dart';
 import 'package:mtn_ghana_wp/files/api_calls/get_app_setting.dart';
+import 'package:mtn_ghana_wp/files/model/advanced_search_model.dart';
 import 'package:mtn_ghana_wp/files/model/tune_info.dart';
 import 'package:mtn_ghana_wp/files/network_manager/network_manager.dart';
 import 'package:mtn_ghana_wp/files/screens/mood_detect/mood_chip_model.dart';
@@ -58,19 +60,21 @@ class MoodsController extends GetxController {
     moodChipList.assignAll(moodChipListTemp);
   }
 
-  getMoodListOnChipTap(String mood, {String catId = "46"}) async {
+  getMoodListOnChipTap(String mood, String catId) async {
     isMoodTapped.value = true;
-    getMoodToneList(mood);
+    getMoodToneList(mood, catId: catId);
   }
 
   getMoodToneList(String mood, {String catId = "46"}) async {
     moodList.clear();
     isLoadingTunes.value = true;
-    String url =
-        "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?language=English&sortBy=Order_By&alignBy=ASC&searchLanguage=English?searchKey=$mood&genreDetailUrl&perPageCount=20&categoryId=$catId&pageNo=0";
-    Map<String, dynamic> jsonResp = await NetworkManager().get(url);
-    MoodsListModel model = MoodsListModel.fromJson(jsonResp);
-    moodList.assignAll(model.responseMap?.searchList ?? []);
+    // String url =
+    //     "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/search-tone?language=English&sortBy=Order_By&alignBy=ASC&searchLanguage=English?searchKey=$mood&genreDetailUrl&perPageCount=20&categoryId=$catId&pageNo=0";
+    // Map<String, dynamic> jsonResp = await NetworkManager().get(url);
+//MoodsListModel model = MoodsListModel.fromJson(jsonResp);
+    AdvancedSearchModal model = await categorySearchApi(catId);
+
+    moodList.assignAll(model.responseMap?.toneList ?? []);
     isLoadingTunes.value = false;
   }
 

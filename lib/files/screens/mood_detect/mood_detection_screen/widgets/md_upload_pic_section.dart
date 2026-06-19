@@ -166,7 +166,7 @@ class MdUploadPicSection extends StatelessWidget {
           onTap: () {
             print("taped at ${moodChipModel.title}");
             //con.getMoodToneList(moodChipModel.title);
-            con.getMoodListOnChipTap(moodChipModel.title);
+            con.getMoodListOnChipTap(moodChipModel.title, moodChipModel.id);
           },
           title: moodChipModel.title,
         ),

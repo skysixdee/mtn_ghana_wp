@@ -253,11 +253,12 @@ class MdTuneListSection extends StatelessWidget {
                   child:
                       customImage(url: moodChipModel.image, cornerRadius: 8))),
           onTap: () {
-            print("taped at ${moodChipModel.title}");
+            print(
+                "taped at ${moodChipModel.title} and id is ${moodChipModel.id}");
             //cont.getMoodToneList(moodChipModel.title);
 
             cont.mood.value = moodChipModel.title;
-            cont.getMoodListOnChipTap(moodChipModel.title);
+            cont.getMoodListOnChipTap(moodChipModel.title, moodChipModel.id);
           },
           title: moodChipModel.title,
         ),
