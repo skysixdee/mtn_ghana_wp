@@ -20,7 +20,7 @@ class PredictiveSearchController {
   List<String> toneNameList = [];
   List<TuneInfo> codeList = [];
   List<ArtistList> artistList = [];
-  List<TuneInfo> songList = [];
+  RxList<TuneInfo> songList = <TuneInfo>[].obs;
   _getToneList(String key) async {
     isLoadingSongName.value = true;
     toneNameList = await predictiveSongSearchApi(key);
@@ -65,22 +65,26 @@ class PredictiveSearchController {
 
   Future<void> _toneCodeList(String key) async {
     isLoadingSongList.value = true;
+    codeList.assignAll(List.generate(5, (v) => TuneInfo()));
     SearchResultModel toneCodeResults = await getToneCodeSearchListApi(key);
-    codeList = toneCodeResults.responseMap?.toneList ?? [];
+    codeList.assignAll(toneCodeResults.responseMap?.toneList ?? []);
     isLoadingSongList.value = false;
   }
 
   Future<void> _artistListSearch(String key) async {
     isLoadingArtistList.value = true;
+    artistList.assignAll(List.generate(5, (v) => ArtistList()));
     ArtistsModel artistsModel = await getArtistListApi(key);
-    artistList = artistsModel.responseMap?.artistList ?? [];
+    artistList.assignAll(artistsModel.responseMap?.artistList ?? []);
     isLoadingArtistList.value = false;
   }
 
   Future<void> _songListSearch(String key) async {
     isLoadingSongList.value = true;
+    songList.assignAll(List.generate(5, (v) => TuneInfo()));
     SearchResultModel searchResults = await getSearchedTuneListApi(key);
-    songList = searchResults.responseMap?.toneList ?? [];
+    songList.assignAll(searchResults.responseMap?.toneList ?? []);
+
     print("song list length is ${songList.length}");
     isLoadingSongList.value = false;
   }

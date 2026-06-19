@@ -15,6 +15,7 @@ import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ConsolidatedSearchScreen extends StatefulWidget {
   ConsolidatedSearchScreen({super.key});
@@ -113,35 +114,60 @@ class _ConsolidatedSearchScreenState extends State<ConsolidatedSearchScreen> {
   Widget songListViewBuilder() {
     return Obx(
       () {
-        return cont.isLoadingSongList.value
-            ? loadingIndicator()
-            : cont.songList.isEmpty
-                ? emptyListWidget()
-                : GenericScrollView(
-                    builder: (p0) {
-                      return TuneCard(
-                          info: cont.songList[p0], tuneList: cont.songList);
-                    },
-                    itemCount: cont.songList.length);
+        return GenericScrollView(
+            builder: (p0) {
+              return Skeletonizer(
+                  enabled: cont.isLoadingSongList.value,
+                  child: TuneCard(
+                      info: cont.songList[p0], tuneList: cont.songList));
+            },
+            itemCount: cont.songList.length);
       },
     );
+    // Obx(
+    //   () {
+    //     return cont.isLoadingSongList.value
+    //         ? loadingIndicator()
+    //         : cont.songList.isEmpty
+    //             ? emptyListWidget()
+    //             : GenericScrollView(
+    //                 builder: (p0) {
+    //                   return
+    // TuneCard(
+    //                       info: cont.songList[p0], tuneList: cont.songList);
+    //                 },
+    //                 itemCount: cont.songList.length);
+    //   },
+    // );
   }
 
   Widget songCodeListViewBuilder() {
     return Obx(
       () {
-        return cont.isLoadingCode.value
-            ? loadingIndicator()
-            : cont.codeList.isEmpty
-                ? emptyListWidget()
-                : GenericScrollView(
-                    builder: (p0) {
-                      return TuneCard(
-                          info: cont.codeList[p0], tuneList: cont.codeList);
-                    },
-                    itemCount: cont.codeList.length);
+        return GenericScrollView(
+            builder: (p0) {
+              return Skeletonizer(
+                  enabled: cont.isLoadingCode.value,
+                  child: TuneCard(
+                      info: cont.codeList[p0], tuneList: cont.codeList));
+            },
+            itemCount: cont.codeList.length);
       },
     );
+    // Obx(
+    //   () {
+    //     return cont.isLoadingCode.value
+    //         ? loadingIndicator()
+    //         : cont.codeList.isEmpty
+    //             ? emptyListWidget()
+    //             : GenericScrollView(r
+    //                 builder: (p0) {
+    //                   return TuneCard(
+    //                       info: cont.codeList[p0], tuneList: cont.codeList);
+    //                 },
+    //                 itemCount: cont.codeList.length);
+    //   },
+    // );
   }
 
   Widget artistListViewBuilder(BuildContext context, SizingInformation si) {

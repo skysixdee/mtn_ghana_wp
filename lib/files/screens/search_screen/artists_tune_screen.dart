@@ -35,17 +35,20 @@ class _ArtistsTuneScreenState extends State<ArtistsTuneScreen> {
           Expanded(
             child: Obx(
               () {
+                bool isMobile = MediaQuery.of(context).size.width < 600;
                 return GenericScrollView(
                   physics: const NeverScrollableScrollPhysics(),
                   //parentPhysics: NeverScrollableScrollPhysics(),
                   isLoading: con.isLoading.value,
-                  onlyGrid: MediaQuery.of(context).size.width < 600,
-                  sliverAppBar: NavigationHeaderView(titleList: [
-                    NavigationHeaderModel(homeStr, homeRoute),
-                    if (!widget.fromChatbot)
-                      NavigationHeaderModel(searchStr, searchRoute),
-                    NavigationHeaderModel(widget.artistName, homeRoute)
-                  ]),
+                  onlyGrid: isMobile,
+                  sliverAppBar: isMobile
+                      ? null
+                      : NavigationHeaderView(titleList: [
+                          NavigationHeaderModel(homeStr, homeRoute),
+                          if (!widget.fromChatbot)
+                            NavigationHeaderModel(searchStr, searchRoute),
+                          NavigationHeaderModel(widget.artistName, homeRoute)
+                        ]),
                   itemCount: con.tuneList.length,
                   builder: (p0) {
                     return TuneCard(
