@@ -13,6 +13,7 @@ import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/main.dart';
 
 class PredictiveSearch extends StatelessWidget {
   const PredictiveSearch({super.key});
@@ -122,71 +123,93 @@ class _SearchScreenState extends State<SearchScreen> {
 
   OverlayEntry _createOverlay() {
     RenderBox box = context.findRenderObject() as RenderBox;
-    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     final offset = box.localToGlobal(Offset.zero);
 
     // Calculate available space below the TextField
     final availableHeight = screenHeight - (offset.dy + box.size.height + 16);
 
+    // Calculate max safe width for the overlay based on screen bounds
+    final maxSafeWidth = screenWidth - (offset.dx * 2);
+
     return OverlayEntry(
       opaque: false,
       builder: (context) => Stack(
         children: [
-          // 👇 Tap outside to close
+          // Tap outside to close overlay
           GestureDetector(
-            onTap: _hideOverlay,
+            onTap: () {
+              if (mounted) _hideOverlay();
+            },
             behavior: HitTestBehavior.translucent,
             child: Container(
-                color: isDarkTheme(context) ? Colors.white30 : Colors.black12),
+              color:
+                  appCont.isDarkTheme.value ? Colors.white30 : Colors.black12,
+            ),
           ),
 
           CompositedTransformFollower(
             link: _layerLink,
             showWhenUnlinked: false,
-            offset: Offset(0, box.size.height + 8), // 8px gap below TextField
+            offset: Offset(0, box.size.height - 40),
             child: Align(
               alignment: Alignment.topLeft,
               child: Material(
-                elevation: 10,
+                color: transparent,
                 borderRadius: BorderRadius.circular(12),
-                child: Container(
-                  width: box.size.width, // Match TextField width
-                  constraints: BoxConstraints(
-                    maxHeight:
-                        availableHeight > 450 ? 450 : availableHeight - 20,
-                    maxWidth: 1000,
-                  ),
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: isDarkTheme(context) ? blackD : white,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Obx(
-                      () {
-                        // Trigger overlay visibility check whenever observed values change
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          _updateOverlayVisibility();
-                        });
-
-                        return Wrap(
-                          spacing: 20,
-                          runSpacing: 20,
-                          children: [
-                            cont.isLoadingSongName.value
-                                ? loadingIndicator(width: 300)
-                                : cont.toneNameList.isNotEmpty
-                                    ? SizedBox(width: 300, child: _songs())
-                                    : const SizedBox.shrink(),
-                            buildArtistSection(),
-                            if (cont.codeList.isNotEmpty)
-                              SizedBox(width: 300, child: _songCode()),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
+                child: Obx(
+                  () {
+                    return Container(
+                      constraints: BoxConstraints(
+                        maxHeight:
+                            availableHeight > 450 ? 450 : availableHeight - 20,
+                        // This prevents the container from ever exceeding screen width
+                        maxWidth: maxSafeWidth > 1000 ? 1000 : maxSafeWidth,
+                      ),
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: appCont.isDarkTheme.value ? black : white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      // We use LayoutBuilder to dynamically sizing the width down
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return SingleChildScrollView(
+                            child: Wrap(
+                              spacing: 20,
+                              runSpacing: 20,
+                              // Standardizes child sizing if screen size gets too narrow
+                              children: [
+                                cont.isLoadingSongName.value
+                                    ? loadingIndicator(
+                                        width: constraints.maxWidth < 300
+                                            ? constraints.maxWidth
+                                            : 300)
+                                    : cont.toneNameList.isNotEmpty
+                                        ? SizedBox(
+                                            width: constraints.maxWidth < 300
+                                                ? constraints.maxWidth
+                                                : 300,
+                                            child: _songs(),
+                                          )
+                                        : const SizedBox.shrink(),
+                                _buildArtistSectionResponsive(
+                                    constraints.maxWidth),
+                                if (cont.codeList.isNotEmpty)
+                                  SizedBox(
+                                    width: constraints.maxWidth < 300
+                                        ? constraints.maxWidth
+                                        : 300,
+                                    child: _songCode(),
+                                  ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -194,6 +217,17 @@ class _SearchScreenState extends State<SearchScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildArtistSectionResponsive(double maxWidth) {
+    final targetWidth = (maxWidth < 300 ? maxWidth : 300).toDouble();
+    if (cont.isLoadingArtistName.value) {
+      return loadingIndicator(width: targetWidth);
+    }
+    if (cont.artistNameList.isNotEmpty) {
+      return SizedBox(width: targetWidth, child: _artists());
+    }
+    return const SizedBox.shrink();
   }
 
   Widget buildArtistSection() {
