@@ -22,6 +22,7 @@ import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mtn_ghana_wp/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class MyTuneScreen extends StatelessWidget {
@@ -30,7 +31,7 @@ class MyTuneScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: white,
+      color: appCont.isDarkTheme.value ? blackD : white,
       child: ResponsiveBuilder(
         builder: (context, si) {
           return CustomScrollView(

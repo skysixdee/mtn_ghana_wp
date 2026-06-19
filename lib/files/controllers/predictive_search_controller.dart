@@ -30,6 +30,7 @@ class PredictiveSearchController {
   _getArtistList(String key) async {
     isLoadingArtistName.value = true;
     artistNameList = await predictiveArtistSearchApi(key);
+    artistNameList = artistNameList.where((v) => v.isNotEmpty).toList();
     isLoadingArtistName.value = false;
   }
 

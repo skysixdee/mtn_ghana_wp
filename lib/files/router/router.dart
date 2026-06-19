@@ -19,6 +19,7 @@ import 'package:mtn_ghana_wp/files/screens/search_screen/consolidated_search_scr
 import 'package:mtn_ghana_wp/files/screens/top_artist_screen/top_artist_screen.dart';
 import 'package:mtn_ghana_wp/files/side_menu_view/side_menu_view.dart';
 import 'package:mtn_ghana_wp/files/utility/constants.dart';
+import 'package:mtn_ghana_wp/files/utility/images.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -241,6 +242,13 @@ Widget navBuilder(context, state, navigationShell) {
           key: scaffoldKey,
           appBar: si.isMobile
               ? AppBar(
+                  leading: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Image.asset(
+                      logoImage,
+                      height: 40,
+                    ),
+                  ),
                   iconTheme: IconThemeData(
                     color:
                         isDarkTheme(context) ? white : black, // your icon color

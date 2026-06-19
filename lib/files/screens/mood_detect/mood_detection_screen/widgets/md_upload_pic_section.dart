@@ -336,7 +336,7 @@ class MdUploadPicSection extends StatelessWidget {
             : SizedBox(
                 width: 300,
                 child: CustomText(
-                  title: detectYrMoodToPersonalizeStr,
+                  title: tuneYourEmotionIntoStr,
                   colorD: whiteD,
                   textAlign: TextAlign.center,
                   fontName: FontName.semiBold,

@@ -16,20 +16,24 @@ void snackBar(String? message) {
     behavior: SnackBarBehavior.floating,
     backgroundColor: Colors.transparent,
     elevation: 0,
-    content: Center(
-      child: Container(
-        width: 400,
-        constraints: const BoxConstraints(maxWidth: 400),
-        decoration: BoxDecoration(
-          color: yellow, // your custom color
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Center(
-          child: CustomText(
-            title: message ?? someThingWentWrongStr,
-            textAlign: TextAlign.center,
-            fontName: FontName.bold,
+    content: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Center(
+        child: Container(
+          width: 400,
+          constraints: const BoxConstraints(maxWidth: 400),
+          decoration: BoxDecoration(
+            color: yellow, // your custom color
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Center(
+            child: CustomText(
+              title: message ?? someThingWentWrongStr,
+              textAlign: TextAlign.center,
+              fontName: FontName.bold,
+              fontSize: 12,
+            ),
           ),
         ),
       ),

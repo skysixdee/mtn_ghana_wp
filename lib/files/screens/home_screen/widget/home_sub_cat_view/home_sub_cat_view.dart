@@ -69,39 +69,45 @@ class HomeSubCatView extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
           right: 14.0,
-          left: index == 0 ? (si.isMobile ? 8 : 30) : 0,
+          left: index == 0
+              ? (si.isMobile ? 8 : 30)
+              : si.isMobile
+                  ? 0
+                  : 3,
           top: 4,
           bottom: 4), //const EdgeInsets.only(right: 12.0),
-      child: Container(
-        //height: 140,
-
-        width: si.isMobile ? 140 : 220,
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-            color: isDarkTheme(context) ? blackD : white,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                  color: isDarkTheme(context) ? darkGrey : lightGrey,
-                  blurRadius: 3,
-                  spreadRadius: 1)
-            ]),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            customImage(
-              url: appController.categories[index].menuImage ?? "",
-              gredientColor: isDarkTheme(context) ? gredientColor : transparent,
-            ),
-            if (appController.categories[index].categoryName == moodsStr)
-              CustomText(
-                isSelectable: false,
-                title: appController.categories[index].categoryName,
-                fontName: FontName.bold,
-                fontSize: 16,
-                color: white,
+      child: AspectRatio(
+        aspectRatio: 2.5,
+        child: Container(
+          //width: si.isMobile ? 140 : 220,
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+              color: isDarkTheme(context) ? blackD : white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                    color: isDarkTheme(context) ? darkGrey : lightGrey,
+                    blurRadius: 3,
+                    spreadRadius: 1)
+              ]),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              customImage(
+                url: appController.categories[index].menuImage ?? "",
+                gredientColor:
+                    isDarkTheme(context) ? gredientColor : transparent,
               ),
-          ],
+              if (appController.categories[index].categoryName == moodsStr)
+                CustomText(
+                  isSelectable: false,
+                  title: appController.categories[index].categoryName,
+                  fontName: FontName.bold,
+                  fontSize: 16,
+                  color: white,
+                ),
+            ],
+          ),
         ),
       ),
     );

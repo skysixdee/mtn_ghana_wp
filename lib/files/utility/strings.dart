@@ -138,7 +138,7 @@ String previewStr = "Preview";
 String viewStr = "View";
 String musicBoxStr = "Music Box";
 String moodListStr = "Mood List";
-String moodDetectStr = "Mood Detection";
+String moodDetectStr = "AI Mood Detection";
 
 String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";
@@ -301,8 +301,8 @@ String unlimeitedTonesStr = "Unlimited Tones";
 String allowCamOrUploadPhotoStr = "Allow camera or upload a photo";
 String weAnalizeYrFacialStr = "We analyse your facial expression";
 String getMusicMatchStr = "Get music matched to your mood";
-String detectYrMoodToPersonalizeStr =
-    "Detect your mood to get a personalised playlist just for you";
+String tuneYourEmotionIntoStr =
+    "Turn your emotions into music. Let AI discover your mood and match it with the perfect tunes.";
 String startDetectStr = "Start Detect";
 String errorPlayingTuneStr = "Error playing this tune. Please try again later.";
 String moodStr = "mood";

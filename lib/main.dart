@@ -271,9 +271,10 @@ class MyApp extends StatelessWidget {
           routeInformationParser: router.routeInformationParser,
           routeInformationProvider: router.routeInformationProvider,
           builder: (context, child) {
-            return AppWrapper(
-              child: child!,
-            );
+            return child!;
+            // AppWrapper(
+            //   child: child!,
+            // );
           },
         ));
   }
