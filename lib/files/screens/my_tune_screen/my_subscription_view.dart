@@ -83,11 +83,14 @@ class _MySubscriptionViewState extends State<MySubscriptionView> {
 
   Widget packDetailWidget(SizingInformation si) {
     return Container(
-        constraints: BoxConstraints(minHeight: 200, maxHeight: 250),
+        constraints: const BoxConstraints(minHeight: 200, maxHeight: 250),
         padding: EdgeInsets.symmetric(
             horizontal: si.isMobile ? 10 : 20, vertical: 10),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
           itemCount: offers.length,
           itemBuilder: (context, index) {
             var offer = offers[index];

@@ -10,6 +10,7 @@ import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/loading_indicator.dart';
 import 'package:mtn_ghana_wp/files/screens/mood_detect/mood_service.dart';
 import 'package:mtn_ghana_wp/files/screens/mood_detect/moods_controller.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
@@ -168,9 +169,39 @@ class _CameraScreenState extends State<CameraScreen> {
   GenericButton searchButton(SizingInformation si) {
     return GenericButton(
       onTap: () {
-        print("object");
-        Get.back();
-        moodsController.getMoodToneList(moodsController.mood.value);
+        List<String> moods =
+            StoreManager.other?.moodListEnglish?.attribute?.split("|") ?? [];
+        String foundId = '';
+        if (moods.isNotEmpty) {
+          String targetMood = moodsController.mood.value.toLowerCase();
+
+          // 2. Loop and find the match safely in one go
+          for (var element in moods) {
+            var parts = element.split(",");
+
+            // Ensure the string actually has both an ID and a Name
+            if (parts.length >= 2) {
+              String currentId = parts[0].trim();
+              String currentName = parts[1].trim();
+
+              // Case-insensitive comparison
+              if (currentName.toLowerCase() == targetMood) {
+                foundId = currentId;
+                print("found id  $currentId");
+                break; // Match found, stop looping
+              }
+            }
+          }
+        }
+
+        Navigator.of(context).pop();
+        if (foundId.isNotEmpty) {
+          moodsController.getMoodToneList(moodsController.mood.value,
+              catId: foundId);
+        } else {
+          print(
+              "we didn't found matching category id in setting api mood list  of ${moodsController.mood.value}");
+        }
       },
       fontName:
           FontName.semiBold, //si.isMobile ? FontName.bold : FontName.bold,

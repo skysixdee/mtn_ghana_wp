@@ -94,6 +94,9 @@ class _NewFeatureViewState extends State<NewFeatureView> {
         : ListView.builder(
             padding: const EdgeInsets.only(bottom: 8.0, top: 4),
             scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
             itemCount: category.tunes.length,
             itemBuilder: (context, tuneIndex) {
               final tune = category.tunes[tuneIndex];

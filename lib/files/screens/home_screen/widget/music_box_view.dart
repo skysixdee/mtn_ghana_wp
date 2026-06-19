@@ -72,6 +72,9 @@ class _MusicBoxViewState extends State<MusicBoxView> {
                                 itemCount: con.musicBoxList.length,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
+                                physics: const BouncingScrollPhysics(
+                                  parent: AlwaysScrollableScrollPhysics(),
+                                ),
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: EdgeInsets.only(

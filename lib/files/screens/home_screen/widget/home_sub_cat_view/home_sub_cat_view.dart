@@ -28,6 +28,9 @@ class HomeSubCatView extends StatelessWidget {
               child: Obx(() {
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
                   itemCount: appController.categories.length,
                   itemBuilder: (context, index) {
                     return InkWell(

@@ -82,6 +82,9 @@ class SocialSharingPopup extends StatelessWidget {
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
                   itemCount: socialIconList.length,
                   itemBuilder: (context, index) {
                     return Padding(

@@ -86,12 +86,50 @@ class MoodsController extends GetxController {
       imageQuality: 80, // optional compression
     );
     print("image $image");
+    // if (image != null) {
+    //   final Uint8List bytes = await image.readAsBytes();
+    //   imageBytes.value = bytes;
+    //   final result = await MoodService.detectMood(bytes);
+    //   mood.value = result['mood'] ?? 'unknown';
+    //   getMoodToneList(mood.value);
+    // }
     if (image != null) {
       final Uint8List bytes = await image.readAsBytes();
       imageBytes.value = bytes;
       final result = await MoodService.detectMood(bytes);
       mood.value = result['mood'] ?? 'unknown';
-      getMoodToneList(mood.value);
+
+      List<String> moods =
+          StoreManager.other?.moodListEnglish?.attribute?.split("|") ?? [];
+      String foundId = '';
+      if (moods.isNotEmpty) {
+        String targetMood = mood.value.toLowerCase();
+
+        // 2. Loop and find the match safely in one go
+        for (var element in moods) {
+          var parts = element.split(",");
+
+          // Ensure the string actually has both an ID and a Name
+          if (parts.length >= 2) {
+            String currentId = parts[0].trim();
+            String currentName = parts[1].trim();
+
+            // Case-insensitive comparison
+            if (currentName.toLowerCase() == targetMood) {
+              foundId = currentId;
+              print("found id  $currentId");
+              break; // Match found, stop looping
+            }
+          }
+        }
+      }
+      if (foundId.isNotEmpty) {
+        getMoodToneList(mood.value, catId: foundId);
+      } else {
+        moodList.clear();
+        print(
+            "we didn't found matching category id in setting api mood list  of ${mood.value}");
+      }
     }
   }
 }

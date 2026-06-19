@@ -113,6 +113,9 @@ class _SubscriptionPlansViewState extends State<SubscriptionPlansView> {
           itemCount: con.packList.length,
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(right: 12.0),

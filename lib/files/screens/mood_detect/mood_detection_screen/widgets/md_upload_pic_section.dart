@@ -64,7 +64,7 @@ class MdUploadPicSection extends StatelessWidget {
                 )
               : Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: mainColumn(si),
+                  child: SingleChildScrollView(child: mainColumn(si)),
                 );
         },
       ),
@@ -103,8 +103,32 @@ class MdUploadPicSection extends StatelessWidget {
                     )
                   : const SizedBox.shrink();
             },
-          )
+          ),
       ],
+    );
+  }
+
+  Widget selectedMoodChipInstantWidget() {
+    return Container(
+      decoration: BoxDecoration(
+          color: lightGrey, borderRadius: BorderRadius.circular(4)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: CustomText(
+                title: selectMoodChipStr,
+                colorD: black,
+                color: black,
+                fontName: FontName.semiBold,
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -114,6 +138,10 @@ class MdUploadPicSection extends StatelessWidget {
       children: [
         orPicWidget(si),
         moodListWidget(),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: selectedMoodChipInstantWidget(),
+        ),
       ],
     );
   }

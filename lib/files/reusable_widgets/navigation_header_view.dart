@@ -30,6 +30,9 @@ class NavigationHeaderView extends StatelessWidget {
                         child: ListView.builder(
                           itemCount: titleList.length,
                           scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics(),
+                          ),
                           shrinkWrap: false,
                           itemBuilder: (context, index) {
                             return GenericButton(

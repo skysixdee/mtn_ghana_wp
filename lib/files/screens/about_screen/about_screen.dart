@@ -164,6 +164,9 @@ class _AboutScreenState extends State<AboutScreen> {
           enlargeFactor: si.isMobile ? 0.6 : (sectionIndex == 2 ? 0.0 : 0.3),
           //onPageChanged: callbackFunction,
           scrollDirection: Axis.horizontal,
+          scrollPhysics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
         ));
   }
 

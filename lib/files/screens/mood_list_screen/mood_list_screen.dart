@@ -92,6 +92,9 @@ class _MoodListScreenState extends State<MoodListScreen> {
               ? loadingIndicator()
               : ListView.builder(
                   scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
                   itemCount: mood.tunes.length,
                   itemBuilder: (context, index) {
                     return SizedBox(
