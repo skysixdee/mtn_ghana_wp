@@ -60,65 +60,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return //MyTuneScreen();
         Material(
       color: isDarkTheme(context) ? blackD : white,
-      child: customScroll(),
-      // Stack(
-      //   children: [
-      //     customScroll(),
-      //     HomePopBannerView(),
-      //   ],
-      // ),
-    );
-  }
-
-  Widget customScroll() {
-    return ResponsiveBuilder(
-      builder: (context, si) {
-        return CustomScrollView(
-          controller: _scrollController,
-          primary: false,
-          slivers: [
-            SliverToBoxAdapter(
-              child: ListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  // GenericButton(
-                  //   title: "Mood list",
-                  //   onTap: () {
-                  //     context.goNamed(moodListRoute);
-                  //   },
-                  // ),
-                  // Obx(() {
-                  //   return AnimatedContainer(
-                  //     duration: const Duration(milliseconds: 300),
-                  //     height: appCont.isShowHomePopBanner.value
-                  //         ? homePopBannerHeight + 12
-                  //         : 0,
-                  //   );
-                  // }),
-                  const SizedBox(height: 8),
-                  HomeBannerView(key: widget.key),
-                  //SizedBox(height: si.isMobile ? 10 : 20),
-                  SizedBox(height: si.isMobile ? 20 : 40),
-                  //HomeSearchView(),
-                  PredictiveSearch(),
-                  //SizedBox(height: si.isMobile ? 10 : 20),
-                  SizedBox(height: si.isMobile ? 20 : 40),
-                  HomeSubCatView(key: _categoryKey),
-                  // SizedBox(height: si.isMobile ? 20 : 40),
-                  // const MusicBoxView(),
-                  SizedBox(height: si.isMobile ? 20 : 50),
-                  //FeatureCategoryView(key: widget.key),
-                  NewFeatureView(),
-                  SizedBox(height: si.isMobile ? 20 : 30),
-                  const ExpressInfoView(),
-                  const WebFooterView(),
-                ],
-              ),
-            ),
-          ],
-        );
-      },
+      child: ResponsiveBuilder(
+        builder: (context, si) {
+          return ListView(
+            shrinkWrap: true,
+            children: [
+              const SizedBox(height: 8),
+              HomeBannerView(key: widget.key),
+              SizedBox(height: si.isMobile ? 20 : 40),
+              const PredictiveSearch(),
+              SizedBox(height: si.isMobile ? 20 : 40),
+              HomeSubCatView(key: _categoryKey),
+              SizedBox(height: si.isMobile ? 20 : 50),
+              const NewFeatureView(),
+              SizedBox(height: si.isMobile ? 20 : 30),
+              const ExpressInfoView(),
+              const WebFooterView(),
+            ],
+          );
+        },
+      ),
     );
   }
 }

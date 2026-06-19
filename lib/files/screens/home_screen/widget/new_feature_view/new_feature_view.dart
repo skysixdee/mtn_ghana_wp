@@ -38,20 +38,6 @@ class _NewFeatureViewState extends State<NewFeatureView> {
       color: isDarkTheme(context) ? blackTest : lightGreyTest,
       child: titleListView(),
     );
-    // Obx(() {
-    //   return Padding(
-    //     padding: const EdgeInsets.symmetric(horizontal: 30.0),
-    //     child: Container(
-    //       decoration: BoxDecoration(
-    //         color: lightGrey,
-    //         //color: isDarkTheme(context) ? blackD : white,
-    //         borderRadius: BorderRadius.circular(12),
-    //         border: Border.all(color: greyDark, width: 1),
-    //       ),
-    //       child: titleListView(),
-    //     ),
-    //   );
-    // });
   }
 
   Widget titleListView() {
@@ -121,18 +107,7 @@ class _NewFeatureViewState extends State<NewFeatureView> {
                     child: Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: TuneCard(info: tune, tuneList: category.tunes),
-                    )
-                    // Container(
-                    //   decoration: BoxDecoration(
-                    //     color: white,
-                    //     borderRadius: BorderRadius.circular(12),
-                    //   ),
-                    //   child: CustomText(
-                    //       title: tune.toneName ?? '',
-                    //       fontName: FontName.semiBold,
-                    //       fontSize: 14),
-                    // ),
-                    ),
+                    )),
               );
             },
           );

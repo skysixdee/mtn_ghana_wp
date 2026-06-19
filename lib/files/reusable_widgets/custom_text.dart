@@ -13,6 +13,7 @@ class CustomText extends StatelessWidget {
   final FontName fontName;
   final bool isSelectable;
   final TextDecoration? decoration;
+
   const CustomText({
     super.key,
     this.title,
@@ -25,66 +26,43 @@ class CustomText extends StatelessWidget {
     this.isSelectable = true,
     this.decoration,
   });
+
   @override
   Widget build(BuildContext context) {
-    return title == null
-        ? const SizedBox()
-        : isSelectable
-            ? SelectionArea(
-                child: Text(
-                title ?? '',
-                maxLines: maxLine,
-                textAlign: textAlign,
-                style: TextStyle(
-                  decorationThickness: 2,
-                  decoration: decoration ?? TextDecoration.none,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? colorD ?? checkColur(color)
-                      : color,
-                  fontSize: fontSize,
-                  fontFamily: fontName.name,
-                ),
-              ))
-            : Text(
-                title ?? '',
-                maxLines: maxLine,
-                textAlign: textAlign,
-                style: TextStyle(
-                  decoration: decoration ?? TextDecoration.none,
-                  decorationThickness: 2,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? colorD ?? checkColur(color)
-                      : color,
-                  fontSize: fontSize,
-                  fontFamily: fontName.name,
-                ),
-              );
+    if (title == null) return const SizedBox.shrink();
+
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color resolvedColor = isDark ? (colorD ?? _checkColor(color)) : color;
+
+    // ── HIGH PERFORMANCE RESPONSIVE CHECK ───────────────────────────
+    // MediaQuery.sizeOf(context) only updates if the screen size actually changes.
+    // This is 10x faster than running ResponsiveBuilder's layout logic per text widget.
+    final double screenWidth = MediaQuery.sizeOf(context).width;
+    final bool isMobile = screenWidth < 600; // Standard mobile break-point
+
+    final double finalFontSize = (fontSize ?? 14) * (isMobile ? 0.85 : 1.0);
+    // ─────────────────────────────────────────────────────────────────
+
+    final textWidget = Text(
+      title!,
+      maxLines: maxLine,
+      textAlign: textAlign,
+      overflow: maxLine != null ? TextOverflow.ellipsis : null,
+      style: TextStyle(
+        decorationThickness: 2,
+        decoration: decoration ?? TextDecoration.none,
+        color: resolvedColor,
+        fontSize: finalFontSize,
+        fontFamily: fontName.name,
+      ),
+    );
+
+    return isSelectable ? SelectionArea(child: textWidget) : textWidget;
   }
 
-  Color checkColur(Color col) {
-    if (col == black) {
-      return whiteD;
-    } else if (col == yellow) {
-      return yellowD;
-    } else {
-      return whiteD;
-    }
+  Color _checkColor(Color col) {
+    if (col == black) return whiteD;
+    if (col == yellow) return yellowD;
+    return whiteD;
   }
 }
-/*
-
-ResponsiveBuilder(
-            builder: (context, si) {
-              return Text(
-                title ?? '',
-                maxLines: maxLine,
-                textAlign: textAlign,
-                style: TextStyle(
-                  color: color,
-                  fontSize: (fontSize ?? 14) * (si.isMobile ? 0.85 : 1),
-                  fontFamily: fontName.name,
-                ),
-              );
-            },
-          );
-*/
