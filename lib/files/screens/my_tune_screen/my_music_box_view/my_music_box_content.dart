@@ -42,6 +42,7 @@ class MyMusicBoxContent extends StatelessWidget {
                 moreButton: const SizedBox(),
                 info: con.musicBoxContentList[p0],
                 bottomButtonChild: MpPlayButton(
+                    isMusicBox: true,
                     tuneList: con.musicBoxContentList,
                     tuneInfo: con.musicBoxContentList[p0])
                 // playButton(

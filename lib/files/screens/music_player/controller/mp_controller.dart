@@ -12,7 +12,7 @@ class MpController extends GetxController {
   RxBool isPaused = false.obs;
   RxBool isLoading = false.obs;
   RxString playingUrl = ''.obs;
-
+  RxBool isMusicBox = false.obs;
   RxBool isMusicPlayerOpen = false.obs;
   RxBool isMusicPlayerFullScreen = false.obs;
   RxDouble sliderValue = 0.0.obs;

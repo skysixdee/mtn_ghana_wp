@@ -16,6 +16,7 @@ class MpPlayButton extends StatelessWidget {
     this.width,
     this.padding,
     this.radius,
+    this.isMusicBox,
   });
   final List<TuneInfo> tuneList;
   final TuneInfo tuneInfo;
@@ -23,6 +24,7 @@ class MpPlayButton extends StatelessWidget {
   final Color? playColor;
   final double? width;
   final double? radius;
+  final bool? isMusicBox;
   final EdgeInsetsGeometry? padding;
 
   @override
@@ -36,6 +38,11 @@ class MpPlayButton extends StatelessWidget {
           bgColor: bgColor ?? lightGrey,
           leadingIcon: isPlayingThis(),
           onTap: () {
+            if (isMusicBox != null) {
+              pCont.isMusicBox.value = isMusicBox!;
+            } else {
+              pCont.isMusicBox.value = false;
+            }
             final isThisSong =
                 pCont.playingUrl.value == tuneInfo.toneIdStreamingUrl;
 
