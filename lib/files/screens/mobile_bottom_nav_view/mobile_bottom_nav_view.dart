@@ -72,10 +72,10 @@ class MobileBottomNavView extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.face),
-              label: moodDetectRoute,
+              label: moodDetectStr,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.music_note),
+              icon: const Icon(Icons.favorite_outline),
               label: myWishlistStr,
             ),
             BottomNavigationBarItem(

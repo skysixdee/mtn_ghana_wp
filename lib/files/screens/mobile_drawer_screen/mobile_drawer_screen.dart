@@ -55,7 +55,7 @@ class MobileDrawerScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                //physics: NeverScrollableScrollPhysics(),
                 itemCount: menuList.length,
                 itemBuilder: (context, index) {
                   return menuList[index].isContainSubMenu

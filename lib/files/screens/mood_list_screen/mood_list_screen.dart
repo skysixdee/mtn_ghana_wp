@@ -38,11 +38,14 @@ class _MoodListScreenState extends State<MoodListScreen> {
           slivers: [
             //SliverToBoxAdapter(child: getNavigationView(musicBoxStr)
             sliverAppBarBuilder(),
-            // CustomScreenHeaderView(
-            //   imageName: nameTuneHeaderPng,
-            //   title: blackListStr,
-            //   subTitle: createBlacklistStr,
-            // ),
+            SliverToBoxAdapter(
+              child: CustomScreenHeaderView(
+                height: 200,
+                imageName: nameTuneHeaderPng,
+                title: moodsStr,
+                subTitle: createBlacklistStr,
+              ),
+            ),
             //),
             SliverList.builder(
               itemCount: con.moods.length,

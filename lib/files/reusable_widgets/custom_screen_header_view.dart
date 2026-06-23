@@ -60,11 +60,13 @@ class CustomScreenHeaderView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
+                  colorD: black,
                   title: title,
                   fontName: FontName.bold,
                   fontSize: titleFontSize ?? 22,
                 ),
                 CustomText(
+                  colorD: black,
                   title: subTitle,
                   fontSize: descFontSize ?? 16,
                 )
