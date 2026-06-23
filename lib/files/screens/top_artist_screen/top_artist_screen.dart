@@ -29,15 +29,15 @@ class TopArtistScreen extends StatefulWidget {
 class _TopArtistScreenState extends State<TopArtistScreen> {
   List<ArtistList> artistList = [];
   RxBool isLoading = false.obs;
-  int totalCount = 0;
+  RxInt totalCount = 0.obs;
   RxString selectedTab = 'ALL'.obs;
   getArtist({String? selectedTab, int page = 0}) async {
     isLoading.value = true;
-
+    totalCount.value = 0;
     ArtistsModel model =
         await getArtistListApi(selectedTab ?? "", pageNo: page);
     artistList = model.responseMap?.artistList ?? [];
-    totalCount = model.responseMap?.resultCount ?? 0;
+    totalCount.value = model.responseMap?.resultCount ?? 0;
     isLoading.value = false;
   }
 
@@ -156,15 +156,19 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
                     ),
                   ),
                   if (totalCount > pagePerCount)
-                    numberPagination(
-                        totalCount: totalCount,
-                        onTap: (v) {
-                          getArtist(
-                              selectedTab: selectedTab.value == "ALL"
-                                  ? ""
-                                  : selectedTab.value,
-                              page: v);
-                        })
+                    Obx(
+                      () {
+                        return numberPagination(
+                            totalCount: totalCount.value,
+                            onTap: (v) {
+                              getArtist(
+                                  selectedTab: selectedTab.value == "ALL"
+                                      ? ""
+                                      : selectedTab.value,
+                                  page: v);
+                            });
+                      },
+                    )
                 ],
               );
             },

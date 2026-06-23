@@ -138,7 +138,7 @@ String previewStr = "Preview";
 String viewStr = "View";
 String musicBoxStr = "Music Box";
 String moodListStr = "Mood List";
-String moodDetectStr = "AI Mood Detection";
+String moodDetectStr = "AI Mood Tunes";
 
 String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";

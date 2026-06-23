@@ -29,11 +29,9 @@ class MobileBottomNavView extends StatelessWidget {
     if (index == 0) {
       context.goNamed(homeRoute);
     } else if (index == 1) {
-      context.goNamed(rewardPointRoute);
-    } else if (index == 2) {
-      sideMenuCont.selectedCard =
-          SideMenuModel(rewardPointStr, rewardPointRoute).obs;
       context.goNamed(musicBoxRoute);
+    } else if (index == 2) {
+      context.goNamed(moodDetectRoute);
     } else if (index == 3) {
       sideMenuCont.selectedCard =
           SideMenuModel(myWishlistStr, myWishlistRoute).obs;
@@ -68,13 +66,13 @@ class MobileBottomNavView extends StatelessWidget {
               icon: const Icon(Icons.home),
               label: homeStr,
             ),
-            // BottomNavigationBarItem(
-            //   icon: const Icon(Icons.emoji_events),
-            //   label: rewardPointStr,
-            // ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.my_library_music),
               label: musicBoxStr,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.face),
+              label: moodDetectRoute,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.music_note),
