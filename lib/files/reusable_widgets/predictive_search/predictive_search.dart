@@ -257,7 +257,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 onTap: () {
                   // Only show overlay if there's data
                   if (_hasData()) {
-                    _showOverlay();
+                    //_showOverlay();
                   }
                 },
                 onSubmitted: (value) {
