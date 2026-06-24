@@ -10,12 +10,14 @@ import 'package:number_paginator/number_paginator.dart';
 Widget numberPagination(
     {required int totalCount,
     NumberPaginatorController? numberPaginatorController,
+    int? currentPage,
     required Function(int) onTap}) {
   return Visibility(
     visible: (totalCount > pagePerCount),
     child: _NumberPagination(
       numberPaginatorController: numberPaginatorController,
       totalItem: totalCount,
+      currentPage: currentPage,
       tappedIndex: (index) {
         onTap(index * pagePerCount);
       },
@@ -28,8 +30,10 @@ class _NumberPagination extends StatefulWidget {
       {super.key,
       required this.totalItem,
       required this.tappedIndex,
-      this.numberPaginatorController});
+      this.numberPaginatorController,
+      this.currentPage});
   final int totalItem;
+  final int? currentPage;
   final Function(int) tappedIndex;
   final NumberPaginatorController?
       numberPaginatorController; // = NumberPaginatorController();
@@ -44,6 +48,7 @@ class _NumberPaginationState extends State<_NumberPagination> {
   void initState() {
     var anc = (widget.totalItem / pagePerCount).ceil(); //.floor(); //
     _numPages = anc;
+
     super.initState();
   }
 
@@ -52,6 +57,7 @@ class _NumberPaginationState extends State<_NumberPagination> {
     return Container(
       color: isDarkTheme(context) ? yellowD : yellow,
       child: NumberPaginator(
+        initialPage: widget.currentPage ?? 0,
         config: NumberPaginatorUIConfig(
           height: 40,
           buttonPadding: const EdgeInsets.all(0),

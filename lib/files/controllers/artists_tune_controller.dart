@@ -9,9 +9,11 @@ class ArtistsTuneController extends GetxController {
   List<TuneInfo> tuneList = <TuneInfo>[].obs;
   RxInt totalToneCount = 0.obs;
   String _key = '';
+
   getArtistsTune(String key) async {
     _key = key;
     totalToneCount.value = 0;
+
     if (isLoading.value) {
       return;
     }
@@ -26,6 +28,7 @@ class ArtistsTuneController extends GetxController {
     isLoading.value = true;
     SearchResultModel model = await getArtistTuneListScApi(_key, pageNo: index);
     tuneList = model.responseMap?.toneList ?? [];
+
     isLoading.value = false;
   }
 }

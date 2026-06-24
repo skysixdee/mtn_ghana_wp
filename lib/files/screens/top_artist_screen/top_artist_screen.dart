@@ -30,6 +30,7 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
   List<ArtistList> artistList = [];
   RxBool isLoading = false.obs;
   RxInt totalCount = 0.obs;
+  int? currentPage;
   RxString selectedTab = 'ALL'.obs;
   getArtist({String? selectedTab, int page = 0}) async {
     isLoading.value = true;
@@ -159,8 +160,11 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
                     Obx(
                       () {
                         return numberPagination(
+                            currentPage: currentPage,
                             totalCount: totalCount.value,
                             onTap: (v) {
+                              currentPage = (v ~/ pagePerCount);
+                              print("===========${v}");
                               getArtist(
                                   selectedTab: selectedTab.value == "ALL"
                                       ? ""
@@ -207,6 +211,7 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
                       height: 20,
                       title: tabList[index],
                       onTap: () {
+                        currentPage = 0;
                         selectedTab.value = tabList[index];
                         getArtist(
                             selectedTab: selectedTab.value == "ALL"
