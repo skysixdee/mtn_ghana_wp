@@ -307,4 +307,4 @@ String startDetectStr = "Start Detect";
 String errorPlayingTuneStr = "Error playing this tune. Please try again later.";
 String moodStr = "mood";
 String upcomingStr = "Up Coming";
-String detectYourMoodStr = "Detect Your Mood";
+String detectYourMoodStr = "AI mood picker";
