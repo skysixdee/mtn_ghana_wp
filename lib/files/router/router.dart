@@ -182,13 +182,17 @@ List<StatefulShellBranch> _getShellBranches() => [
                 list: s.extra as List<TuneInfo>,
                 name: s.uri.queryParameters['name'] ?? '',
               )),
-      _createShell(
-          myTunesRoute,
-          (_) => StoreManager.isLoggedIn
-              ? MyTuneScreen()
-              : LoginScreen(
-                  title: myTunezStr,
-                ),
+      _createShell(myTunesRoute, (_) {
+        return Obx(
+          () {
+            return appCont.isLoggedIn.value
+                ? MyTuneScreen()
+                : LoginScreen(
+                    title: myTunezStr,
+                  );
+          },
+        );
+      },
           onInit: (s) => StoreManager.isLoggedIn
               ? (Get.find<TuneController>().makeApiCall())
               : null),

@@ -24,6 +24,7 @@ class MyWishlistScreen extends StatelessWidget {
     return Obx(
       () {
         return GenericScrollView(
+          onlyGrid: MediaQuery.of(context).size.width < 600,
           sliverToBoxAdapter: CustomScreenHeaderView(
             imageName: myTuneHeaderPng,
             title: wishlistStr,

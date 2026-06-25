@@ -90,7 +90,7 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
               spreadRadius: 1)
         ],
         borderRadius: BorderRadius.circular(8),
-        color: white,
+        color: isDarkTheme(context) ? black : white,
       ),
       child: Column(
         children: [
@@ -236,27 +236,28 @@ class _PlayingTuneViewNewState extends State<PlayingTuneViewNew> {
             imageName:
                 isMusicBox ? 'assets/music_box_pngs/$imageName.png' : null),
         if (!isMusicBox)
-          Obx(
-            () {
-              return GenericButton(
-                bgColor: white,
-                borderColor: black,
-                padding: const EdgeInsets.all(0),
-                width: 30,
-                height: 30,
-                // leadingIcon: Icon(
-                //   pCont.playingToneId.value == info.contentId
-                //       ? Icons.pause
-                //       : Icons.play_arrow_rounded,
-                //   size: pCont.playingToneId.value == info.contentId ? 20 : 22,
-                //   color: black,
-                // ),
-                onTap: () {
-                  //pCont.playUrl(inf);
-                },
-              );
+          GenericButton(
+            bgColor: white,
+            borderColor: black,
+            padding: const EdgeInsets.all(0),
+            width: 30,
+            height: 30,
+            // leadingIcon: Icon(
+            //   pCont.playingToneId.value == info.contentId
+            //       ? Icons.pause
+            //       : Icons.play_arrow_rounded,
+            //   size: pCont.playingToneId.value == info.contentId ? 20 : 22,
+            //   color: black,
+            // ),
+            onTap: () {
+              //pCont.playUrl(inf);
             },
-          ),
+          )
+        // Obx(
+        //   () {
+        //     return
+        //   },
+        // ),
         //playButton(TuneInfo())
       ],
     );

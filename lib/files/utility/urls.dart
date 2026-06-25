@@ -32,8 +32,12 @@ String tuneSettingFulldayUrl =
     '$baseUrl/security/Middleware/api/adapter/v1/crbt/time-based-setting-for-already-activated';
 
 String subscriberValidationUrl =
-    "http://10.135.64.104:8021/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation";
+    "$baseUrl/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation";
+
 //'$baseUrl/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation';
+//'$baseUrl/apigw/Middleware/api/adapter/v1/crbt/subscriber-validation';
+
+//$baseUrl/apigw/Middleware/api/adapter/v1/crbt/password-validation
 
 String passwordValidateUrl =
     '$baseUrl/apigw/Middleware/api/adapter/v1/crbt/password-validation';

@@ -25,9 +25,27 @@ import 'package:get/get.dart';
 import 'package:mtn_ghana_wp/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class MyTuneScreen extends StatelessWidget {
+class MyTuneScreen extends StatefulWidget {
   MyTuneScreen({super.key});
+
+  @override
+  State<MyTuneScreen> createState() => _MyTuneScreenState();
+}
+
+class _MyTuneScreenState extends State<MyTuneScreen> {
   final MyPlayingTuneController playingTuneController = Get.find();
+  @override
+  void initState() {
+    // TODO: implement initState
+    loadingIndicator();
+    super.initState();
+  }
+
+  loadFirstTime() async {
+    await Future.delayed(Duration(milliseconds: 200));
+    playingTuneController.getPlayingTune();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
