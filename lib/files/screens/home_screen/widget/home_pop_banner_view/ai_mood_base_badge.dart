@@ -2,8 +2,11 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
+import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
+import 'package:mtn_ghana_wp/main.dart';
 
 // ── Mood data ─────────────────────────────────────────────────────────────────
 class _Mood {
@@ -150,14 +153,16 @@ class _AiMoodTunesBadgeState extends State<AiMoodTunesBadge>
             clipBehavior: Clip.none,
             children: [
               // ── Pulse rings ──────────────────────────────────────────────
-              _PulseRing(controller: _pulse1Ctrl, color: mood.primary),
-              _PulseRing(controller: _pulse2Ctrl, color: mood.primary),
+              // _PulseRing(controller: _pulse1Ctrl, color: mood.primary),
+              // _PulseRing(controller: _pulse2Ctrl, color: mood.primary),
 
               // ── Badge body ───────────────────────────────────────────────
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF0f0d1e),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      bottomLeft: Radius.circular(8)), //circular(8),
                   border:
                       Border.all(color: const Color(0xFF3C3489), width: 0.5),
                 ),
@@ -171,6 +176,7 @@ class _AiMoodTunesBadgeState extends State<AiMoodTunesBadge>
                     FadeTransition(
                         opacity: _textOpacity,
                         child: CustomText(
+                          isSelectable: false,
                           title: mood.emoji,
                           fontSize: 20,
                         )),
@@ -196,6 +202,7 @@ class _AiMoodTunesBadgeState extends State<AiMoodTunesBadge>
                             ),
                             const SizedBox(width: 5),
                             CustomText(
+                              isSelectable: false,
                               title: aiMoodPickerStr,
                               fontSize: 10,
                               color: Color(0xFF9FE1CB),
@@ -213,6 +220,7 @@ class _AiMoodTunesBadgeState extends State<AiMoodTunesBadge>
                               child: SlideTransition(
                                   position: _textSlide,
                                   child: CustomText(
+                                    isSelectable: false,
                                     title: mood.label,
                                     fontSize: 14,
                                     fontName: FontName.semiBold,
@@ -261,12 +269,29 @@ class _AiMoodTunesBadgeState extends State<AiMoodTunesBadge>
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CustomText(
-                          title: playYourMoodStr,
-                          fontName: FontName.regular,
-                          fontSize: 10,
-                          color: Color(0xFF888780),
-                        )
+                        Row(
+                          spacing: 8,
+                          children: [
+                            CustomText(
+                              isSelectable: false,
+                              title: playYourMoodStr,
+                              fontName: FontName.regular,
+                              fontSize: 10,
+                              color: Color(0xFF888780),
+                            ),
+                            GenericButton(
+                              leadingIcon: Icon(
+                                Icons.close,
+                                size: 20,
+                                color: white,
+                              ),
+                              bgColor: transparent,
+                              padding: EdgeInsets.all(0),
+                              onTap: () =>
+                                  appCont.isShowHomePopBanner.value = false,
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ],

@@ -23,11 +23,30 @@ class HomePopBannerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, si) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            SizedBox(width: 230, child: AiMoodTunesBadge()),
-          ],
+        return Obx(
+          () {
+            return appCont.isShowHomePopBanner.value
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(boxShadow: [
+                            BoxShadow(
+                                color: white.withValues(alpha: 0.6),
+                                spreadRadius: 1,
+                                blurRadius: 12)
+                          ]),
+                          width: 230,
+                          child: AiMoodTunesBadge(
+                            onTap: () {
+                              context.goNamed(moodDetectRoute);
+                              appCont.isShowHomePopBanner.value = false;
+                            },
+                          )),
+                    ],
+                  )
+                : const SizedBox.shrink();
+          },
         );
         // Obx(() {
         //   return Padding(

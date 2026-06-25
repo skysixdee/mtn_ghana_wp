@@ -65,7 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
           return ListView(
             shrinkWrap: true,
             children: [
-              const SizedBox(height: 8),
+              Obx(
+                () {
+                  return SizedBox(
+                      height: appCont.isShowHomePopBanner.value ? 80 : 8);
+                },
+              ),
               HomeBannerView(key: widget.key),
               SizedBox(height: si.isMobile ? 20 : 40),
               const PredictiveSearch(),
