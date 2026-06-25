@@ -36,13 +36,12 @@ class _MyTuneScreenState extends State<MyTuneScreen> {
   final MyPlayingTuneController playingTuneController = Get.find();
   @override
   void initState() {
-    // TODO: implement initState
-    loadingIndicator();
+    loadFirstTime();
     super.initState();
   }
 
   loadFirstTime() async {
-    await Future.delayed(Duration(milliseconds: 200));
+    await Future.delayed(const Duration(milliseconds: 200));
     playingTuneController.getPlayingTune();
   }
 
