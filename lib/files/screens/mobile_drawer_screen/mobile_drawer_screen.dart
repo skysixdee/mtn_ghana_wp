@@ -172,7 +172,11 @@ class MobileDrawerScreen extends StatelessWidget {
                           isSelectable: false,
                           title: menuList[index].title == logoutStr
                               ? (StoreManager.isLoggedIn ? logoutStr : loginStr)
-                              : menuList[index].title,
+                              : (menuList[index].title == darkModeStr)
+                                  ? (appCont.isDarkTheme.value
+                                      ? lightModeStr
+                                      : darkModeStr)
+                                  : menuList[index].title,
                           fontSize: 16,
                         ),
                       ],

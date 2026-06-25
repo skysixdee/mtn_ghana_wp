@@ -14,10 +14,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:mtn_ghana_wp/files/controllers/music_box_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_tune_controllers/my_tune_controller.dart';
+import 'package:mtn_ghana_wp/files/controllers/my_wishlist_controller.dart';
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
+import 'package:mtn_ghana_wp/files/screens/music_box/music_box_content_screen.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
@@ -29,14 +33,28 @@ class MobileBottomNavView extends StatelessWidget {
     if (index == 0) {
       context.goNamed(homeRoute);
     } else if (index == 1) {
+      MusicBoxController con = Get.find();
+      if (con.musicBoxList.isEmpty) {
+        con.getMusicBoxx();
+      }
       context.goNamed(musicBoxRoute);
     } else if (index == 2) {
       context.goNamed(moodDetectRoute);
     } else if (index == 3) {
       sideMenuCont.selectedCard =
           SideMenuModel(myWishlistStr, myWishlistRoute).obs;
+      print("wish list tapped");
+      MyWishlistController con = Get.find();
+      if (con.tuneList.isEmpty) {
+        con.getWishlist();
+      }
       context.goNamed(myWishlistRoute);
     } else if (index == 4) {
+      MyTuneController con = Get.find();
+      if (con.tuneApkList.isEmpty) {
+        con.getMyTune();
+      }
+
       sideMenuCont.selectedCard = SideMenuModel(myTunezStr, myTunesRoute).obs;
       context.goNamed(myTunesRoute);
     } else {
