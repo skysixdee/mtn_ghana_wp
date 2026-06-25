@@ -12,7 +12,7 @@ Future<ArtistsModel> getArtistListApi(String key, {int pageNo = 0}) async {
     "sortBy": "OrderBy",
     "pageNo": pageNo,
     "perPageCount": pagePerCount,
-    "filter": "Artist",
+    "filter": "ArtistStartWith", //"Artist",
     "filterPref": "begin",
     "locale": StoreManager.languageSort,
     "searchKey": key.isEmpty
