@@ -42,6 +42,7 @@ class _MyTuneScreenState extends State<MyTuneScreen> {
 
   loadFirstTime() async {
     await Future.delayed(const Duration(milliseconds: 200));
+
     playingTuneController.getPlayingTune();
   }
 
