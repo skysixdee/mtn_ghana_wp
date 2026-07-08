@@ -16,13 +16,17 @@ import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
 
 class PredictiveSearch extends StatelessWidget {
-  const PredictiveSearch({super.key});
-
+  const PredictiveSearch({super.key, this.focusNode});
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return Container(
         color: isDarkTheme(context) ? blackTest : lightGreyTest,
-        child: SizedBox(height: 120, child: SearchScreen()));
+        child: SizedBox(
+            height: 120,
+            child: SearchScreen(
+              focusNode: focusNode,
+            )));
   }
 }
 
@@ -41,8 +45,8 @@ class SearchItem {
 }
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
-
+  const SearchScreen({super.key, this.focusNode});
+  final FocusNode? focusNode;
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
@@ -253,6 +257,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: CompositedTransformTarget(
               link: _layerLink,
               child: TextField(
+                focusNode: widget.focusNode,
                 controller: _controller,
                 onTap: () {
                   // Only show overlay if there's data

@@ -40,17 +40,41 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _categoryKey = GlobalKey();
   DateTime p0 = DateTime.now();
+  final GlobalKey searchKey = GlobalKey();
+  final FocusNode searchFocusNode = FocusNode();
 
   @override
   void initState() {
     musicBoxController.getMusicBoxx();
     homeController.attachScrollController(_scrollController, _categoryKey);
+    searchFocusNode.addListener(_handleFocusChange);
     super.initState();
+  }
+
+  void _handleFocusChange() {
+    if (searchFocusNode.hasFocus) {
+      // Small post-frame delay ensures the layout coordinates are stable if a keyboard is resizing the viewport
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToSearch());
+    }
+  }
+
+  void _scrollToSearch() {
+    if (searchKey.currentContext != null) {
+      Scrollable.ensureVisible(
+        searchKey.currentContext!,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+        alignment: 0.0, // Moves it seamlessly right to the top edge
+      );
+    }
   }
 
   @override
   void dispose() {
+    // FIX: Clean up focus nodes to prevent unexpected memory leaks
     homeController.detachScrollController(_scrollController);
+    searchFocusNode.removeListener(_handleFocusChange);
+    searchFocusNode.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -73,7 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               HomeBannerView(key: widget.key),
               SizedBox(height: si.isMobile ? 20 : 40),
-              const PredictiveSearch(),
+              PredictiveSearch(
+                key: searchKey,
+                focusNode: searchFocusNode,
+              ),
               SizedBox(height: si.isMobile ? 20 : 40),
               HomeSubCatView(key: _categoryKey),
               SizedBox(height: si.isMobile ? 20 : 50),

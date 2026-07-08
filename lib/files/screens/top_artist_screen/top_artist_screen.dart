@@ -134,8 +134,10 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
                                 ),
                               ),
                               CustomText(
-                                fontName: FontName.bold,
+                                fontName: FontName.semiBold,
                                 title: inf.val ?? '',
+                                fontSize: 12,
+                                textAlign: TextAlign.center,
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(

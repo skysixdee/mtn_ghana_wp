@@ -27,8 +27,8 @@ class SideMenuController extends GetxController {
         )),
     SideMenuModel(myWishlistStr, myWishlistRoute,
         leading: const Icon(Icons.favorite_outline, size: 18, color: grey)),
-    SideMenuModel(rewardPointStr, rewardPointRoute,
-        leading: const Icon(Icons.leaderboard, size: 18, color: grey)),
+    // SideMenuModel(rewardPointStr, rewardPointRoute,
+    //     leading: const Icon(Icons.leaderboard, size: 18, color: grey)),
 
     // leading: SvgPicture.asset(
     //   wishlistSideMenuIcon,

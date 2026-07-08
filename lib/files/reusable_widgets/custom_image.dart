@@ -85,6 +85,7 @@ Widget customImage(
                 child: ResponsiveBuilder(
                   builder: (context, si) {
                     return CustomText(
+                      textAlign: TextAlign.center,
                       fontName: si.isMobile ? FontName.semiBold : FontName.bold,
                       fontSize: si.isMobile ? 18 : 24,
                       title: title.toUpperCase(),
