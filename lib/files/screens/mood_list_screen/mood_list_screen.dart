@@ -37,7 +37,7 @@ class _MoodListScreenState extends State<MoodListScreen> {
         return CustomScrollView(
           slivers: [
             //SliverToBoxAdapter(child: getNavigationView(musicBoxStr)
-            sliverAppBarBuilder(),
+            //sliverAppBarBuilder(),
             SliverToBoxAdapter(
               child: CustomScreenHeaderView(
                 height: 200,

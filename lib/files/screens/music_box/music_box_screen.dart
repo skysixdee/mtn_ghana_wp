@@ -22,7 +22,8 @@ class MusicBoxScreen extends StatelessWidget {
             return GenericScrollView(
               physics: NeverScrollableScrollPhysics(),
               onlyGrid: si.isMobile,
-              sliverAppBar: getNavigationView(musicBoxStr),
+              //sliverAppBar: getNavigationView(musicBoxStr),
+              sliverToBoxAdapter: getNavigationView(musicBoxStr),
               isLoading: con.isLoadingList.value,
               itemCount: con.musicBoxList.length,
               builder: (p0) {

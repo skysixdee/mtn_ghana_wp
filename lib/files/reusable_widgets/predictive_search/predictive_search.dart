@@ -400,7 +400,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   onTap: () {
                     _hideOverlay();
                     _tuneSearchController
-                        .getSongCodeSearch(cont.toneNameList[index]);
+                        .getSongSearchResult(cont.toneNameList[index]);
                     context.goNamed(searchRoute, queryParameters: {
                       'search': cont.toneNameList[index],
                       'index': "0"

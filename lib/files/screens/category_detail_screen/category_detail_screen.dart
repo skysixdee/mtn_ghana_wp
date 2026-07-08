@@ -42,12 +42,11 @@ class CategoryDetailScreen extends StatelessWidget {
                             //parentPhysics: NeverScrollableScrollPhysics(),
                             physics: const NeverScrollableScrollPhysics(),
                             //physics: NeverScrollableScrollPhysics(),
-                            sliverAppBar:
-                                si.isMobile ? null : getNavigationView(catName),
-                            // NavigationHeaderView(titleList: [
-                            //   NavigationHeaderModel(homeStr, homeRoute),
-                            //   NavigationHeaderModel(name, nameTuneRoute),
-                            // ]),
+                            //sliverAppBar: getNavigationView(catName),
+                            sliverToBoxAdapter: SizedBox(
+                              height: 40,
+                              child: getNavigationView(catName),
+                            ),
                             itemCount: con.tuneList.length,
                             onlyGrid: si.isMobile ? true : false,
                             builder: (p0) {

@@ -97,7 +97,7 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
                   //artistSearchTabView(),
                   Expanded(
                     child: GenericScrollView(
-                      sliverAppBar:
+                      sliverToBoxAdapter:
                           getNavigationView(artistStr), //sliverNavigation(),
                       isLoading: isLoading.value,
                       extraWidgetToolBarHeight: 40,

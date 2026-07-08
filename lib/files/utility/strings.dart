@@ -137,6 +137,7 @@ String cancelStr = "Cancel";
 String previewStr = "Preview";
 String viewStr = "View";
 String musicBoxStr = "Music Box";
+String bannersStr = "Banner";
 String moodListStr = "Mood List";
 String moodDetectStr = "AI Mood Tunes";
 

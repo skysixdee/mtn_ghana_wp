@@ -8,13 +8,13 @@ import 'package:mtn_ghana_wp/files/utility/get_transaction_id.dart';
 import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<SearchResultModel> getSearchedTuneListApi(String key,
-    {int pageNo = 0}) async {
+    {bool isPredictiveSearch = false, int pageNo = 0}) async {
   Map<String, dynamic> jsonData = {
     "sortBy": "OrderBy",
     "pageNo": pageNo,
     "perPageCount": pagePerCount,
     "filter": "Content",
-    "filterPref": "custom",
+    "filterPref": isPredictiveSearch ? "none" : "custom",
     "locale": StoreManager.languageSort,
     "msisdn": StoreManager.msisdn,
     "searchKey": [key]

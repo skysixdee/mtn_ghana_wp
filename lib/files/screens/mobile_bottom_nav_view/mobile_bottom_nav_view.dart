@@ -22,6 +22,7 @@ import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
 import 'package:mtn_ghana_wp/files/screens/music_box/music_box_content_screen.dart';
+import 'package:mtn_ghana_wp/files/store_manager/store_manager.dart';
 import 'package:mtn_ghana_wp/files/utility/colors.dart';
 import 'package:mtn_ghana_wp/files/utility/strings.dart';
 import 'package:mtn_ghana_wp/main.dart';
@@ -50,9 +51,11 @@ class MobileBottomNavView extends StatelessWidget {
       }
       context.goNamed(myWishlistRoute);
     } else if (index == 4) {
-      MyTuneController con = Get.find();
-      if (con.tuneApkList.isEmpty) {
-        con.getMyTune();
+      if (StoreManager.isLoggedIn) {
+        MyTuneController con = Get.find();
+        if (con.tuneApkList.isEmpty) {
+          con.getMyTune();
+        }
       }
 
       sideMenuCont.selectedCard = SideMenuModel(myTunezStr, myTunesRoute).obs;

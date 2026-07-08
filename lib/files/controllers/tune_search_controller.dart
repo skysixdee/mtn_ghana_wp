@@ -18,7 +18,7 @@ class TuneSearchController extends GetxController {
   RxInt totalTuneCount = 0.obs;
   RxBool isLoadingMore = false.obs;
   String _key = '';
-  getSongSearchResult(String key) async {
+  getSongSearchResult(String key, {bool isPredictiveSearch = false}) async {
     print('Searcing result for $key');
     //this.searchTypeIndex.value = searchTypeIndex;
     _key = key;
@@ -28,7 +28,8 @@ class TuneSearchController extends GetxController {
       return;
     }
     isLoading.value = true;
-    SearchResultModel model = await getSearchedTuneListApi(key);
+    SearchResultModel model = await getSearchedTuneListApi(key,
+        isPredictiveSearch: isPredictiveSearch);
     tuneList = model.responseMap?.toneList ?? [];
     print("===============${model.responseMap?.resultCount}");
 
