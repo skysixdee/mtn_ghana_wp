@@ -147,7 +147,7 @@ class _SlidingBannerState extends State<SlidingBanner>
                       padding: const EdgeInsets.only(bottom: 8.0, right: 8),
                       child: CustomText(
                         isSelectable: false,
-                        title: aiMoodPickerStr,
+                        title: moodDetectStr, //aiMoodPickerStr,
                         color: white,
                         fontName: FontName.semiBold,
                         // style: TextStyle(

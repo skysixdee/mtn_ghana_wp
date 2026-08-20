@@ -18,12 +18,24 @@ Widget customImage(
     double? height,
     double? width}) {
   String title = '';
-  if (toneName.isNotEmpty) {
-    List<String> ls = toneName.split(" ");
-    for (var i = 0; i < ls.length; i++) {
-      if (i < 2) {
-        title += ls[i][0];
-      }
+  // if (toneName.isNotEmpty) {
+  //   List<String> ls = toneName.split(" ");
+  //   for (var i = 0; i < ls.length; i++) {
+  //     if (i < 2) {
+  //       title += ls[i][0];
+  //     }
+  //   }
+  // }
+  if (toneName.trim().isNotEmpty) {
+    // Split by whitespace and ignore empty elements caused by extra spaces
+    List<String> words = toneName
+        .trim()
+        .split(RegExp(r'\s+')) // Matches 1 or more space characters
+        .where((word) => word.isNotEmpty)
+        .toList();
+
+    for (var i = 0; i < words.length && i < 2; i++) {
+      title += words[i][0];
     }
   }
 

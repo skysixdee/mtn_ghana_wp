@@ -37,7 +37,8 @@ class _TopArtistScreenState extends State<TopArtistScreen> {
     totalCount.value = 0;
     ArtistsModel model =
         await getArtistListApi(selectedTab ?? "", pageNo: page);
-    artistList = model.responseMap?.artistList ?? [];
+    var ls = model.responseMap?.artistList ?? [];
+    artistList.assignAll(ls);
     totalCount.value = model.responseMap?.resultCount ?? 0;
     isLoading.value = false;
   }

@@ -157,25 +157,38 @@ class _MySubscriptionViewState extends State<MySubscriptionView> {
                                         CustomText(
                                           fontSize: 12,
                                           title:
-                                              "${autorenewStr} ${formatDate(offer.expiryDate ?? '')}",
+                                              "$autorenewStr ${formatDate(offer.expiryDate ?? '')}",
                                         )
                                       ],
                                     ),
                                   )
                                 ],
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12.0),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 12.0),
                                 child: Divider(),
                               ),
-                              Text(subscriptionDescriptionStr
-                                  .replaceAll("DATE",
-                                      formatDate(offer.chargedDate ?? ''))
-                                  .replaceAll(
-                                      "PRICE", offer.chargedAmount ?? '')
-                                  .replaceAll("BILLING_CYCLE",
-                                      offer.chargedValidity ?? '')),
+                              (offer.offerName == "CRBT_MUSIC_BOX")
+                                  ? CustomText(
+                                      title: subscriptionMusicBoxDescriptionStr
+                                          .replaceAll(
+                                              "DATE",
+                                              formatDate(
+                                                  offer.chargedDate ?? ''))
+                                          .replaceAll("PRICE",
+                                              offer.chargedAmount ?? '')
+                                          .replaceAll("BILLING_CYCLE",
+                                              offer.chargedValidity ?? ''))
+                                  : CustomText(
+                                      title: subscriptionTonesDescriptionStr
+                                          .replaceAll(
+                                              "DATE",
+                                              formatDate(
+                                                  offer.chargedDate ?? ''))
+                                          .replaceAll("PRICE",
+                                              offer.chargedAmount ?? '')
+                                          .replaceAll("BILLING_CYCLE",
+                                              offer.chargedValidity ?? '')),
                             ],
                           ),
                         ),

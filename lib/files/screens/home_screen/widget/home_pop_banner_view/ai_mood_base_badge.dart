@@ -203,7 +203,7 @@ class _AiMoodTunesBadgeState extends State<AiMoodTunesBadge>
                             const SizedBox(width: 5),
                             CustomText(
                               isSelectable: false,
-                              title: aiMoodPickerStr,
+                              title: moodDetectStr, //aiMoodPickerStr,
                               fontSize: 10,
                               color: Color(0xFF9FE1CB),
                               fontName: FontName.semiBold,

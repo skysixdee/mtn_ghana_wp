@@ -15,6 +15,7 @@
     "MUSIC_BOX_OFFER_CODE": "CRBT_MUSIC_BOX",
     "LIST_SETTING_URL": "https://callertunez.mtn.com.gh/selfcare/subscriber-management/list-settings",
     "ARTISTS_SEARCH_URL": "https://callertunez.mtn.com.gh/selfcare/artist-search",
+    "ARTISTS_SEARCH_NEW_URL": "https://callertunez.mtn.com.gh/selfcare/artist-web",
     "BANNER_DETAIL_URL": "https://callertunez.mtn.com.gh/selfcare/get-banner-details?",
     "FAQ_URL": "https://callertunez.mtn.com.gh/crbt-web-portal/faq/FAQ.json",
     "TUNE_DEDICATION_SETTING": "https://callertunez.mtn.com.gh/selfcare/subscriber-management/dedication",

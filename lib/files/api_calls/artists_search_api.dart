@@ -9,10 +9,63 @@ import 'package:mtn_ghana_wp/files/utility/urls.dart';
 
 Future<ArtistsModel> getArtistListApi(String key, {int pageNo = 0}) async {
   Map<String, dynamic> jsonData = {
-    "sortBy": "OrderBy",
+    "sortBy": "ContentArtist", //"OrderBy",
     "pageNo": pageNo,
     "perPageCount": pagePerCount,
-    "filter": key.isEmpty ? "Artist" : "ArtistStartWith", //"Artist",
+    "filter":
+        "ContentArtist", //key.isEmpty ? "Artist" : "ArtistStartWith", //"Artist",
+    "filterPref": "begin",
+    "locale": StoreManager.languageSort,
+    "searchKey": key.isEmpty
+        ? [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z"
+          ]
+        : [key]
+  };
+//https://callertunez.mtn.com.gh/selfcare/artist-web
+  String url = artistsSearchNewUrl;
+  //"https://callertunez.mtn.com.gh/selfcare/artist-web"; //artistsSearchUrl;
+
+  Map<String, dynamic> map =
+      await NetworkManager().post(url, jsonData: jsonData);
+  return artistsModelFromJson(json.encode(map));
+
+  await Future.delayed(Duration(seconds: 2));
+  return artistsModelFromJson(_json);
+}
+
+Future<ArtistsModel> getArtistListNewApi(String key, {int pageNo = 0}) async {
+  Map<String, dynamic> jsonData = {
+    "sortBy": "OrderBy", // "ContentArtist", //
+    "pageNo": pageNo,
+    "perPageCount": pagePerCount,
+    "filter": "Artist",
+    //"ContentArtist", //key.isEmpty ? "Artist" : "ArtistStartWith", //"Artist",
     "filterPref": "begin",
     "locale": StoreManager.languageSort,
     "searchKey": key.isEmpty

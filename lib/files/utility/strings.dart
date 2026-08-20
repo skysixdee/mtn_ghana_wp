@@ -139,7 +139,7 @@ String viewStr = "View";
 String musicBoxStr = "Music Box";
 String bannersStr = "Banner";
 String moodListStr = "Mood List";
-String moodDetectStr = "AI Mood Tunes";
+String moodDetectStr = "Mood Matcher"; //"Match Your Mood";
 
 String selectAtleastOneCategoryStr = "Select atleast one category";
 String noChangeToUpdateStr = "No change found to update";
@@ -229,8 +229,12 @@ String rankStr = "Rank";
 String mySubscriptionPlanStr = "My subscription plan";
 String autorenewStr = "Autorenew";
 
-String subscriptionDescriptionStr =
-    "You are subscribing the Ghana service from DATE.Please note that PRICE will be charged after BILLING_CYCLE days starting from the date you have subscribe.";
+String subscriptionTonesDescriptionStr =
+    "You are subscribed to MTN Callertunez service at GHC PRICE per month. Your subscription will be automatically renewed in BILLING_CYCLE days.";
+//"You are subscribing the Ghana service from DATE.Please note that PRICE will be charged after BILLING_CYCLE days starting from the date you have subscribe.";
+String subscriptionMusicBoxDescriptionStr =
+    "You are subscribed to MTN Callertunez Music Box at GHC PRICE per month. Your subscription will be automatically renewed in BILLING_CYCLE days.";
+//"You are subscribing the Ghana service from DATE.Please note that PRICE will be charged after BILLING_CYCLE days starting from the date you have subscribe.";
 String helpStr = "Help";
 String clearChatStr = "Clear Chat";
 String closeStr = "Close";
@@ -308,5 +312,5 @@ String startDetectStr = "Start Detect";
 String errorPlayingTuneStr = "Error playing this tune. Please try again later.";
 String moodStr = "mood";
 String upcomingStr = "Up Coming";
-String aiMoodPickerStr = "AI mood picker";
+//String aiMoodPickerStr = "AI mood picker";
 String playYourMoodStr = "play\nyour\nmood";

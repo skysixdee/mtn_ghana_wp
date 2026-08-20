@@ -86,6 +86,7 @@ void main() async {
 }
 
 fetchUriData() async {
+  //aesEncryption("531342979");
   var uri = Uri.parse(Uri.base.toString());
   if (uri.hasQuery) {
     uri.queryParameters.forEach((k, v) {
@@ -150,6 +151,7 @@ Future<void> readProperties() async {
   deletePackUrl = data['DELETE_PACK_URL'];
   bannerDetailScUrl = data['BANNER_DETAIL_URL'];
   artistsSearchUrl = data['ARTISTS_SEARCH_URL'];
+  artistsSearchNewUrl = data['ARTISTS_SEARCH_NEW_URL'];
   advanceSearchUrl = data['ADVANCE_SEARCH_URL'];
   categoryDetailUrl = data['CATEGORY_DETAIL_URL'];
   predictiveSearchUrl = data['PREDICTIVE_SEARCH_URL'];

@@ -80,6 +80,7 @@ String playingTuneUrl = '';
 String myTunesUrl = '';
 String myMusicBoxUrl = '';
 String artistsSearchUrl = '';
+String artistsSearchNewUrl = '';
 String advanceSearchUrl = '';
 
 String deleteMusicBoxSubscriptionUrl = '';

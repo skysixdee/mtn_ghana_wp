@@ -74,7 +74,7 @@ class PredictiveSearchController {
   Future<void> _artistListSearch(String key) async {
     isLoadingArtistList.value = true;
     artistList.assignAll(List.generate(5, (v) => ArtistList()));
-    ArtistsModel artistsModel = await getArtistListApi(key);
+    ArtistsModel artistsModel = await getArtistListNewApi(key);
     artistList.assignAll(artistsModel.responseMap?.artistList ?? []);
     isLoadingArtistList.value = false;
   }
