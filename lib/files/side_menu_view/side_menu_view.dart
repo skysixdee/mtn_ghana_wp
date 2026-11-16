@@ -5,6 +5,7 @@ import 'package:mtn_ghana_wp/files/controllers/auth_controller/login_controller.
 import 'package:mtn_ghana_wp/files/controllers/side_menu_controller.dart';
 import 'package:mtn_ghana_wp/files/enums/fonts.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_text.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/router/route_name.dart';
@@ -119,7 +120,14 @@ class _SideMenuViewState extends State<SideMenuView> {
 
         if (info.title == logoutStr) {
           if (StoreManager.isLoggedIn) {
-            StoreManager.logout();
+            //genericPopup(widget)
+            openAlertPopup(
+                message: areYouSureYouWantToLogoutStr,
+                onPrimary: () {
+                  StoreManager.logout();
+                },
+                primaryBtnTitle: confirmStr,
+                secondryBtnTitle: cancelStr);
           } else {
             con.resetValue();
             genericPopup(Obx(

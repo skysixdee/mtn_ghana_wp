@@ -314,3 +314,7 @@ String moodStr = "mood";
 String upcomingStr = "Up Coming";
 //String aiMoodPickerStr = "AI mood picker";
 String playYourMoodStr = "play\nyour\nmood";
+String goldStr = "Gold";
+String silverStr = "Silver";
+String bronzeStr = "Bronze";
+String areYouSureYouWantToLogoutStr = "Are you sure you want to logout?";

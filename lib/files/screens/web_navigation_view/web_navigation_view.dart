@@ -11,6 +11,7 @@ import 'package:mtn_ghana_wp/files/controllers/tune_search_controller.dart';
 import 'package:mtn_ghana_wp/files/model/popover_menu_model.dart';
 import 'package:mtn_ghana_wp/files/popup_views/generic_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/buttons/generic_button.dart';
+import 'package:mtn_ghana_wp/files/reusable_widgets/custom_alert_popup.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/custom_image.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/is_dark_theme.dart';
 import 'package:mtn_ghana_wp/files/reusable_widgets/print_custom.dart';
@@ -191,9 +192,18 @@ class WebNavigationView extends StatelessWidget {
                   size: 18,
                 ),
               ),
-              title: appCont.isLoggedIn.value ? myAccountStr : loginStr,
+              title: appCont.isLoggedIn.value
+                  ? "${StoreManager.msisdn}"
+                  : loginStr,
               onTap: () {
                 if (StoreManager.isLoggedIn) {
+                  openAlertPopup(
+                      message: areYouSureYouWantToLogoutStr,
+                      onPrimary: () {
+                        StoreManager.logout();
+                      },
+                      primaryBtnTitle: confirmStr,
+                      secondryBtnTitle: cancelStr);
                   //myAccountMenu(context);
                 } else {
                   con.resetValue();
